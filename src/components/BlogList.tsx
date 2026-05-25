@@ -4,8 +4,9 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { urlFor } from "@/sanity/image";
-import { Calendar } from "lucide-react";
+import { Calendar, Clock } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { readingTime } from "@/lib/readingTime";
 
 interface Article {
   _id: string;
@@ -15,6 +16,7 @@ interface Article {
   excerpt?: string;
   mainImage?: { _type: string; asset: { _ref: string } } | null;
   category?: string;
+  body?: Array<{ _type: string; children?: Array<{ text?: string }> }>;
 }
 
 interface Props {
@@ -88,7 +90,7 @@ export default function BlogList({ articles, locale, categoryLabels }: Props) {
                 </div>
               )}
               <div className="p-6 bg-primary">
-                <div className="flex items-center gap-2 text-white/50 text-xs mb-3">
+                <div className="flex items-center flex-wrap gap-2 text-white/50 text-xs mb-3">
                   <Calendar size={12} />
                   <span>
                     {article.publishedAt
@@ -97,6 +99,9 @@ export default function BlogList({ articles, locale, categoryLabels }: Props) {
                         )
                       : ""}
                   </span>
+                  <span>·</span>
+                  <Clock size={12} />
+                  <span>{readingTime(article.body)} λεπτά</span>
                   {article.category && categoryLabels[article.category] && (
                     <>
                       <span>·</span>
