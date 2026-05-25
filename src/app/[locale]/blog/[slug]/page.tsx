@@ -18,22 +18,34 @@ export async function generateMetadata({
 }: {
   params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const article = await getArticle(slug);
   if (!article) return {};
+
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.ioannnispapaioannou.lawyer";
+  const articleUrl = `${siteUrl}/${locale}/blog/${slug}`;
   const description = article.excerpt || article.title;
   const ogImage = article.mainImage
     ? urlFor(article.mainImage).width(1200).height(630).url()
-    : undefined;
+    : `${siteUrl}/δικηγορος.png`;
+
   return {
     title: article.title,
     description,
+    alternates: { canonical: articleUrl },
     openGraph: {
       title: article.title,
       description,
+      url: articleUrl,
       type: "article",
       publishedTime: article.publishedAt,
-      images: ogImage ? [{ url: ogImage, width: 1200, height: 630 }] : undefined,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: article.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description,
+      images: [ogImage],
     },
   };
 }
