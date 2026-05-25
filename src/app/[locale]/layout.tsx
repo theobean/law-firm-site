@@ -110,12 +110,12 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={`${inter.variable} ${jost.variable}`}>
       <head>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-4J60MD3JC8" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-HFKWE6YF77" />
         <script dangerouslySetInnerHTML={{ __html: `
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'G-4J60MD3JC8');
+          gtag('config', 'G-HFKWE6YF77');
         `}} />
       </head>
       <body className="min-h-screen flex flex-col font-sans antialiased">
