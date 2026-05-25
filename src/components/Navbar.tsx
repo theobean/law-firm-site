@@ -98,15 +98,29 @@ export default function Navbar() {
 
       {/* Main nav */}
       <nav className="max-w-6xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
-        {/* Logo */}
-        <Link href={`/${locale}`} className="flex items-center gap-2 text-white shrink-0">
-          <Scale size={22} className="text-accent shrink-0" />
-          <div className="w-px h-6 bg-accent/60 shrink-0" />
-          <div className="leading-tight">
-            <p className="font-playfair font-bold text-sm md:text-base uppercase tracking-wide whitespace-nowrap">{t("about.name")}</p>
-            <p className="text-[9px] md:text-[10px] text-white/60 tracking-widest uppercase">{t("common.firmTagline")}</p>
-          </div>
-        </Link>
+        {/* Logo — scroll to top on home, navigate home on other pages */}
+        {pathname === `/${locale}` ? (
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="flex items-center gap-2 text-white shrink-0"
+          >
+            <Scale size={22} className="text-accent shrink-0" />
+            <div className="w-px h-6 bg-accent/60 shrink-0" />
+            <div className="leading-tight text-left">
+              <p className="font-playfair font-bold text-sm md:text-base uppercase tracking-wide whitespace-nowrap">{t("about.name")}</p>
+              <p className="text-[9px] md:text-[10px] text-white/60 tracking-widest uppercase">{t("common.firmTagline")}</p>
+            </div>
+          </button>
+        ) : (
+          <Link href={`/${locale}`} className="flex items-center gap-2 text-white shrink-0">
+            <Scale size={22} className="text-accent shrink-0" />
+            <div className="w-px h-6 bg-accent/60 shrink-0" />
+            <div className="leading-tight">
+              <p className="font-playfair font-bold text-sm md:text-base uppercase tracking-wide whitespace-nowrap">{t("about.name")}</p>
+              <p className="text-[9px] md:text-[10px] text-white/60 tracking-widest uppercase">{t("common.firmTagline")}</p>
+            </div>
+          </Link>
+        )}
 
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-4 lg:gap-6">
