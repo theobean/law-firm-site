@@ -28,7 +28,9 @@ export default function middleware(request: NextRequest) {
 
   if (!hasLocale && !pref) {
     // First visit on a non-locale path — detect geo and redirect
-    const locale = geoLocale(request.geo?.country);
+    // Vercel sets x-vercel-ip-country on edge; request.geo was removed in newer Next.js types
+    const country = request.headers.get("x-vercel-ip-country") ?? undefined;
+    const locale = geoLocale(country);
     const url = request.nextUrl.clone();
     url.pathname = `/${locale}${pathname === "/" ? "" : pathname}`;
     const res = NextResponse.redirect(url);
