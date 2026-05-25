@@ -77,7 +77,7 @@ export default function BlogList({ articles, locale, categoryLabels }: Props) {
             <Link
               key={article._id}
               href={`/${locale}/blog/${article.slug.current}`}
-              className="group block border border-gray-100 rounded-sm overflow-hidden hover:shadow-lg transition-shadow bg-primary"
+              className="group block border border-gray-100 rounded-sm overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-primary"
             >
               {article.mainImage && (
                 <div className="relative h-48 overflow-hidden">
