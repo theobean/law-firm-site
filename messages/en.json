@@ -1,0 +1,295 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "practiceAreas": "Practice Areas",
+    "blog": "Articles",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "navigation": "Navigation"
+  },
+  "blog": {
+    "title": "Articles & News",
+    "subtitle": "Legal updates from our firm",
+    "empty": "No articles yet.",
+    "readingTime": "{minutes} min read",
+    "share": "Share this article",
+    "relatedTitle": "Related articles",
+    "categoryAll": "All",
+    "byAuthor": "By",
+    "copyLink": "Copy link",
+    "linkCopied": "Copied!"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Answers to the most common questions we receive",
+    "q1": "How can I book an appointment?",
+    "a1": "You can contact us by phone at +30 2310 545 261, by email at iopapaio@gmail.com, or by filling out the contact form on the website. We will respond within 24 hours to schedule a meeting.",
+    "q2": "Is the first consultation free?",
+    "a2": "The initial contact to evaluate your case is free of charge. Fees for detailed legal advice or case representation are agreed upon in writing in advance.",
+    "q3": "What areas of law do you specialize in?",
+    "a3": "We handle Civil, Criminal, Commercial, Labor, Administrative, Inheritance and Tax Law cases, as well as Real Estate matters. You can see all areas in detail on the «Practice Areas» page.",
+    "q4": "Do you handle cases outside Thessaloniki?",
+    "a4": "Yes, we handle cases throughout Greece. For cases outside Thessaloniki, collaboration with a local lawyer or additional travel expenses may be required, agreed upon in advance.",
+    "q5": "How are your fees calculated?",
+    "a5": "Fees depend on the nature and complexity of the case. We follow the provisions of the Greek Code of Lawyers and propose a written fee agreement before undertaking any case, ensuring full transparency.",
+    "q6": "How long does it take to resolve a case?",
+    "a6": "The duration depends on the type of case, jurisdiction and court schedules. At our first meeting we will provide a realistic time estimate based on our experience with similar cases.",
+    "q7": "Is the information I share confidential?",
+    "a7": "Absolutely. We are bound by professional confidentiality as provided by the Greek Code of Lawyers. Any information you share with us — whether in meetings, by email or by phone — remains strictly confidential.",
+    "q8": "Can I contact you by email for updates?",
+    "a8": "Of course. We provide continuous updates on the progress of your case via email, phone or in-person meetings, according to your preferences."
+  },
+  "common": {
+    "firmTagline": "Law Office",
+    "mapTitle": "Office location map"
+  },
+  "seo": {
+    "siteName": "Ioannis Papaioannou | Law Office",
+    "defaultTitle": "Ioannis Papaioannou — Lawyer in Thessaloniki",
+    "defaultDescription": "Law office in Thessaloniki with 20+ years of experience in Civil, Criminal, Commercial, Labor and Tax Law.",
+    "homeTitle": "Home",
+    "aboutTitle": "About Us",
+    "aboutDescription": "Meet lawyer Ioannis Papaioannou and our firm. 20+ years of experience serving individuals and businesses.",
+    "practiceAreasTitle": "Practice Areas",
+    "practiceAreasDescription": "Comprehensive legal coverage in Civil, Criminal, Commercial, Real Estate, Labor, Administrative, Inheritance and Tax Law.",
+    "contactTitle": "Contact",
+    "contactDescription": "Contact our law office in Thessaloniki. 12 Leontos tou Sofou St., tel. +30 2310 545 261.",
+    "blogTitle": "Articles & Legal Updates",
+    "blogDescription": "Articles and legal updates from our firm across all areas of law.",
+    "faqTitle": "Frequently Asked Questions",
+    "faqDescription": "Answers to the most common questions about our services, fees and how to get in touch with our firm.",
+    "privacyTitle": "Privacy Policy",
+    "termsTitle": "Terms of Use"
+  },
+  "cookies": {
+    "message": "We use cookies to ensure the best experience on our website. By continuing to browse, you accept their use.",
+    "accept": "Accept",
+    "learnMore": "Learn more"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "message": "The page you are looking for does not exist or has been moved.",
+    "cta": "Back to home"
+  },
+  "hero": {
+    "tagline": "Just",
+    "tagline2": "Representation",
+    "subtitle": "We provide comprehensive legal services, tailored to the modern needs of individuals and businesses.",
+    "cta": "Contact Us",
+    "ctaSecondary": "Learn More",
+    "whyUs": "Why Us",
+    "why1": "Personal attention to every case",
+    "why2": "Direct communication and continuous updates",
+    "why3": "20+ years of proven experience",
+    "why4": "Absolute adherence to professional ethics"
+  },
+  "stats": {
+    "experience": "Years of experience",
+    "cases": "Cases handled",
+    "clients": "Satisfied clients",
+    "areas": "Areas of law",
+    "cta": "Contact Us"
+  },
+  "practiceAreas": {
+    "title": "Comprehensive legal support",
+    "subtitle": "with a strategic edge",
+    "viewAll": "All practice areas",
+    "servicesTitle": "What we handle",
+    "approachTitle": "Our approach",
+    "ctaTitle": "Need legal assistance?",
+    "ctaText": "Contact us to discuss your case with discretion and professionalism.",
+    "backToAll": "Back to all practice areas",
+    "areas": {
+      "civil": {
+        "title": "Civil Law",
+        "desc": "Contracts, torts, property law and family matters.",
+        "longDesc": "Civil Law forms the foundation of everyday relationships between individuals and legal entities. It covers a broad range of matters relating to contracts, family, property disputes and damages. Our firm provides comprehensive legal support across all branches of Civil Law, with particular emphasis on building a personal relationship of trust with our clients.",
+        "approach": "In every case we first seek an amicable solution where feasible. When court action is required, we prepare it with scientific rigor and strategic thinking.",
+        "services": [
+          "Drafting and reviewing contracts of all kinds",
+          "Divorce, alimony and child custody matters",
+          "Damages claims arising from torts (traffic accidents, medical malpractice)",
+          "Real action lawsuits (rei vindicatio, possessory, negatory)",
+          "Condominium and neighbor law disputes",
+          "Out-of-court dispute resolution and mediation"
+        ]
+      },
+      "criminal": {
+        "title": "Criminal Law",
+        "desc": "Defense in criminal cases at all levels of jurisdiction.",
+        "longDesc": "Criminal prosecution can dramatically alter someone's life. Proper defense from the very first moment — even before the apologia — is critical to the outcome of the case. We handle criminal cases at all levels, with knowledge of case law and flexibility in strategy.",
+        "approach": "We meticulously study the case file, identify procedural gaps and build the defense strategy that best serves our client — whether that means acquittal, mitigating circumstances or a postponement.",
+        "services": [
+          "Defense of defendants at all stages of preliminary and main proceedings",
+          "Representation of victims as civil claimants",
+          "Appeals and cassation",
+          "Financial crimes and press offenses",
+          "Cases against life, bodily integrity and property",
+          "Applications for suspension, conversion and postponement of sentence execution"
+        ]
+      },
+      "commercial": {
+        "title": "Commercial Law",
+        "desc": "Corporate transactions, contracts and commercial disputes.",
+        "longDesc": "Businesses operate in a complex legal environment that requires constant attention. We provide comprehensive legal support to businesses of all sizes, from incorporation and organization to contract management and resolution of commercial disputes.",
+        "approach": "We combine legal expertise with an understanding of business needs, so that the solutions we propose are not only legally sound but also practically applicable.",
+        "services": [
+          "Incorporation of companies (SA, LLC, IKE, OE, EE) and amendments to articles of association",
+          "Drafting and negotiating commercial contracts",
+          "Legal due diligence in acquisitions and mergers",
+          "Unfair competition and intellectual property cases",
+          "Debt collection and payment orders",
+          "Disputes between partners and shareholders"
+        ]
+      },
+      "realEstate": {
+        "title": "Real Estate Law",
+        "desc": "Property transactions, leases and land registry matters.",
+        "longDesc": "Buying or selling property is one of the most important financial decisions in a person's life. A thorough legal review of titles and proper drafting of contracts are essential to avoid future problems.",
+        "approach": "We perform a full title check at the land registry and cadastre, monitor the entire process through to registration and ensure that our client is fully protected.",
+        "services": [
+          "Title and encumbrance checks",
+          "Drafting and reviewing purchase agreements",
+          "Lease agreements (residential and commercial)",
+          "Tenant — landlord disputes, evictions",
+          "Declarations and corrections in the National Cadastre",
+          "Adverse possession and possessory cases"
+        ]
+      },
+      "labor": {
+        "title": "Labor Law",
+        "desc": "Employment relations, dismissals and compensation claims.",
+        "longDesc": "Labor disputes require swift and effective handling, as they concern people's livelihood. We represent both employees and employers, aiming to protect their legitimate interests.",
+        "approach": "We first seek out-of-court resolution through the Labor Inspectorate, and where this is not possible, we prepare the court claim with all necessary evidence.",
+        "services": [
+          "Dismissal complaints and severance claims",
+          "Claims for unpaid wages and overtime",
+          "Workplace accidents and compensation",
+          "Employment contracts and company agreements",
+          "Representation before the Labor Inspectorate",
+          "Pension cases and EFKA matters"
+        ]
+      },
+      "administrative": {
+        "title": "Administrative Law",
+        "desc": "Appeals against administrative acts and licensing procedures.",
+        "longDesc": "The relationship of citizens and businesses with public administration is often complex. We provide legal support in cases involving challenges to administrative acts, licensing and state decisions.",
+        "approach": "We carefully examine every administrative act for legality and constitutionality, and use all available legal remedies to defend our client's rights.",
+        "services": [
+          "Appeals before administrative courts",
+          "Annulment applications to the Council of State",
+          "Licensing (urban planning, environmental, sanitary)",
+          "Disputes with Municipalities, Regions and Ministries",
+          "Disciplinary cases of civil servants",
+          "Damages claims against the State"
+        ]
+      },
+      "inheritance": {
+        "title": "Inheritance Law",
+        "desc": "Wills, inheritance disputes and estate renunciation.",
+        "longDesc": "Inheritance cases are often emotionally charged and technically complex. We provide discretion, sensitivity and precise legal advice to protect the rights of all heirs.",
+        "approach": "We seek to avoid intra-family conflicts through amicable solutions, while when court action is unavoidable, we defend our client's interests decisively.",
+        "services": [
+          "Drafting of holographic and public wills",
+          "Publication and probate of wills",
+          "Acceptance and renunciation of inheritance",
+          "Distribution of estate assets",
+          "Inheritance and forced share lawsuits",
+          "Inheritance tax — declarations and exemptions"
+        ]
+      },
+      "tax": {
+        "title": "Tax Law",
+        "desc": "Tax compliance, disputes with tax authorities and exemptions.",
+        "longDesc": "The tax system in Greece is particularly complex and changes frequently. We provide specialized legal support in tax matters, aiming to protect our clients from abusive acts of the administration.",
+        "approach": "We work with specialized accountants and tax advisors so that legal strategy is combined with sound tax practices, providing a holistic solution.",
+        "services": [
+          "Administrative appeals and appeals to administrative courts",
+          "Tax planning for individuals and businesses",
+          "VAT, income tax and ENFIA matters",
+          "Claims for refund of overpaid amounts",
+          "Disciplinary and criminal tax evasion cases",
+          "Debt arrangements and installment plans"
+        ]
+      }
+    }
+  },
+  "about": {
+    "title": "Our Firm",
+    "name": "Ioannis Papaioannou",
+    "role": "Attorney at Law",
+    "bio1": "With more than 20 years of experience, we represent individuals and businesses across a wide range of legal matters. Our philosophy is built on client dedication, transparency and achieving the best possible outcomes.",
+    "bio2": "We approach every case with full commitment, combining in-depth knowledge of the law with a practical approach to problem solving.",
+    "education": "Education",
+    "edu1": "Faculty of Law, Democritus University of Thrace, Komotini",
+    "edu2": "LL.M. Postgraduate Studies, Ludwig Maximilian University of Munich",
+    "memberships": "Memberships",
+    "member1": "Thessaloniki Bar Association",
+    "cta": "Contact",
+    "teaser": "Meet our firm",
+    "teaserSub": "Over 20 years of experience at your service.",
+    "teaserCta": "Learn More",
+    "value1Title": "Ethics",
+    "value1Desc": "Strict adherence to professional ethics in every case we handle.",
+    "value2Title": "Direct Contact",
+    "value2Desc": "Personal communication and immediate updates on every development.",
+    "value3Title": "Expertise",
+    "value3Desc": "Continuous professional training and close monitoring of case law."
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "We are at your disposal for any legal matter.",
+    "name": "Full Name",
+    "email": "Email",
+    "phone": "Phone",
+    "message": "Message",
+    "send": "Send",
+    "sending": "Sending...",
+    "success": "Your message has been sent successfully!",
+    "successDetail": "Thank you for reaching out. We will get back to you as soon as possible at the email address you provided.",
+    "address": "Address",
+    "addressLine1": "12 Leontos tou Sofou St.",
+    "addressLine2": "54625, Thessaloniki, Greece",
+    "hours": "Operating Hours",
+    "hoursValue": "Monday - Friday: 9:00 AM - 7:00 PM",
+    "required": "This field is required",
+    "invalidEmail": "Invalid email address"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "social": "Social Media",
+    "description": "Comprehensive legal services with professionalism, integrity and dedication to the client."
+  },
+  "legal": {
+    "lastUpdated": "Last updated",
+    "privacyTitle": "Privacy Policy",
+    "privacyIntro": "This Privacy Policy describes how the law office of Ioannis Papaioannou collects, uses and protects your personal data when you visit our website, in accordance with the General Data Protection Regulation (GDPR — EU Regulation 2016/679).",
+    "privacySection1Title": "1. Data Controller",
+    "privacySection1": "The data controller for your personal data is the law office of Ioannis Papaioannou, located at 12 Leontos tou Sofou St., 54625 Thessaloniki, Greece. For any inquiries regarding data protection, you may contact us at iopapaio@gmail.com.",
+    "privacySection2Title": "2. Data we collect",
+    "privacySection2": "Through the contact form we collect: full name, email address, phone number (optional) and the content of your message. We also automatically collect browsing data (IP address, browser type, pages visited) for statistical purposes and to improve the website.",
+    "privacySection3Title": "3. Purpose of processing",
+    "privacySection3": "The data you provide is used exclusively to respond to your request, provide legal services (where a relevant agreement is established) and comply with our legal obligations. We do not transfer your data to third parties for commercial purposes.",
+    "privacySection4Title": "4. Retention period",
+    "privacySection4": "Contact form data is retained for as long as necessary to address your request and fulfill our legal obligations. In the event of case representation, the specific deadlines of the Greek Code of Lawyers apply.",
+    "privacySection5Title": "5. Your rights",
+    "privacySection5": "You have the right to access, rectify, erase, restrict processing, data portability and object to the processing of your data. You may exercise these rights by contacting us at iopapaio@gmail.com. You also have the right to lodge a complaint with the Hellenic Data Protection Authority (www.dpa.gr).",
+    "privacySection6Title": "6. Cookies",
+    "privacySection6": "The website uses technically necessary cookies for its basic operation. We do not use third-party tracking cookies without your consent.",
+    "termsTitle": "Terms of Use",
+    "termsIntro": "The use of this website is governed by the following terms. By browsing this website, you unconditionally accept them.",
+    "termsSection1Title": "1. Informational nature",
+    "termsSection1": "The content of the website is purely informational. It does not constitute legal advice and does not create an attorney-client relationship between the user and the firm. Any legal matter requires personal communication and case engagement by mutual agreement.",
+    "termsSection2Title": "2. Intellectual property rights",
+    "termsSection2": "All text, graphics, logos and images on the website are the intellectual property of the law office of Ioannis Papaioannou and are protected by Greek and international law. Reproduction without prior written permission is prohibited.",
+    "termsSection3Title": "3. Third-party links",
+    "termsSection3": "The website may contain links to other websites. We are not responsible for the content, privacy practices or availability of these websites.",
+    "termsSection4Title": "4. Limitation of liability",
+    "termsSection4": "We make every effort to ensure the accuracy and timeliness of the content; however, we do not guarantee that it is always complete or error-free. Use of the website is at the user's sole responsibility.",
+    "termsSection5Title": "5. Governing law",
+    "termsSection5": "These terms are governed by Greek law. The courts of Thessaloniki have exclusive jurisdiction over any disputes."
+  }
+}
