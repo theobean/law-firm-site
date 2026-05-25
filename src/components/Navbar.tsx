@@ -175,7 +175,7 @@ export default function Navbar() {
       {/* Mobile menu */}
       <div
         className={`md:hidden bg-primary border-t border-white/10 overflow-hidden transition-all duration-300 ease-in-out ${
-          open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          open ? "max-h-[32rem] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="max-w-6xl mx-auto px-6 pt-4 pb-8 flex flex-col gap-4">
