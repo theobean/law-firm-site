@@ -26,14 +26,14 @@ export default function PracticeAreasGrid({ preview = false }: Props) {
   const areas = preview ? areaKeys.slice(0, 5) : areaKeys;
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-primary">
       <div className="max-w-6xl mx-auto px-6">
         {preview && (
           <div className="mb-12 border-l-4 border-accent pl-6">
-            <h2 className="text-3xl md:text-4xl font-playfair font-bold text-primary">
+            <h2 className="text-3xl md:text-4xl font-playfair font-bold text-white">
               {t("title")}
             </h2>
-            <p className="text-gray-500 text-xl mt-1">{t("subtitle")}</p>
+            <p className="text-white/60 text-xl mt-1">{t("subtitle")}</p>
           </div>
         )}
 
@@ -67,7 +67,7 @@ export default function PracticeAreasGrid({ preview = false }: Props) {
           <div className="mt-10 text-center">
             <Link
               href={`/${locale}/practice-areas`}
-              className="inline-flex items-center gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold px-8 py-3 rounded-sm transition-colors"
+              className="inline-flex items-center gap-2 border-2 border-accent text-accent hover:bg-accent hover:text-white font-semibold px-8 py-3 rounded-sm transition-colors"
             >
               {t("viewAll")} <ArrowRight size={16} />
             </Link>
