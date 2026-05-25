@@ -33,11 +33,14 @@ function AnimatedCard({ article, locale, categoryLabels, index }: {
   categoryLabels: Record<string, string>;
   index: number;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [hovered, setHovered] = useState(false);
 
+  // Scroll reveal
   useEffect(() => {
-    const el = ref.current;
+    const el = wrapperRef.current;
     if (!el) return;
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect(); } },
@@ -47,70 +50,94 @@ function AnimatedCard({ article, locale, categoryLabels, index }: {
     return () => observer.disconnect();
   }, []);
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    setTilt({ x: y * -9, y: x * 9 });
+  };
+
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 });
+    setHovered(false);
+  };
+
   const delay = (index % PAGE_SIZE) * 0.07;
 
   return (
     <div
-      ref={ref}
+      ref={wrapperRef}
       style={
         visible
           ? { animation: `reveal-up 0.5s cubic-bezier(0.4,0,0.2,1) ${delay}s both` }
           : { opacity: 0 }
       }
-      className="relative group"
     >
-      <Link
-        href={`/${locale}/blog/${article.slug.current}`}
-        className="block border border-gray-100 rounded-sm overflow-hidden bg-primary
-          transition-all duration-300 ease-out
-          hover:scale-[1.04] hover:shadow-2xl hover:z-10 hover:border-accent/40
-          active:scale-[1.01]
-          relative"
+      <div
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          transform: hovered
+            ? `perspective(700px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale(1.04)`
+            : "perspective(700px) rotateX(0deg) rotateY(0deg) scale(1)",
+          transition: hovered ? "transform 0.08s ease-out" : "transform 0.4s ease-out",
+          willChange: "transform",
+        }}
+        className="group relative h-full"
       >
-        {article.mainImage && (
-          <div className="relative h-44 overflow-hidden">
-            <Image
-              src={urlFor(article.mainImage).width(600).height(400).url()}
-              alt={article.title}
-              fill
-              className="object-cover transition-transform duration-500 group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent" />
-          </div>
-        )}
-        <div className="p-5">
-          <div className="flex items-center flex-wrap gap-2 text-white/50 text-xs mb-3">
-            <Calendar size={11} />
-            <span>
-              {article.publishedAt
-                ? new Date(article.publishedAt).toLocaleDateString(
-                    locale === "el" ? "el-GR" : "en-US"
-                  )
-                : ""}
-            </span>
-            <span>·</span>
-            <Clock size={11} />
-            <span>{readingTime(article.body)} λεπτά</span>
-            {article.category && categoryLabels[article.category] && (
-              <>
-                <span>·</span>
-                <span className="text-accent font-medium">{categoryLabels[article.category]}</span>
-              </>
-            )}
-          </div>
-          <h2 className="text-white font-bold text-base mb-2 border-b border-accent/60 pb-2 leading-snug line-clamp-2">
-            {article.title}
-          </h2>
-          {article.excerpt && (
-            <p className="text-white/55 text-sm leading-relaxed line-clamp-2">
-              {article.excerpt}
-            </p>
+        <Link
+          href={`/${locale}/blog/${article.slug.current}`}
+          className={`block h-full border rounded-sm overflow-hidden bg-primary relative transition-shadow duration-300 ${
+            hovered ? "shadow-2xl border-accent/40" : "border-gray-100 shadow-none"
+          }`}
+        >
+          {article.mainImage && (
+            <div className="relative h-44 overflow-hidden">
+              <Image
+                src={urlFor(article.mainImage).width(600).height(400).url()}
+                alt={article.title}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent" />
+            </div>
           )}
-          <div className="mt-3 flex items-center gap-1 text-accent text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-            Διαβάστε περισσότερα →
+          <div className="p-5">
+            <div className="flex items-center flex-wrap gap-2 text-white/50 text-xs mb-3">
+              <Calendar size={11} />
+              <span>
+                {article.publishedAt
+                  ? new Date(article.publishedAt).toLocaleDateString(
+                      locale === "el" ? "el-GR" : "en-US"
+                    )
+                  : ""}
+              </span>
+              <span>·</span>
+              <Clock size={11} />
+              <span>{readingTime(article.body)} λεπτά</span>
+              {article.category && categoryLabels[article.category] && (
+                <>
+                  <span>·</span>
+                  <span className="text-accent font-medium">{categoryLabels[article.category]}</span>
+                </>
+              )}
+            </div>
+            {/* Title: no mid-word cut, wraps naturally */}
+            <h2 className="text-white font-bold text-base mb-2 border-b border-accent/60 pb-2 leading-snug [overflow-wrap:break-word] [word-break:break-word] line-clamp-3">
+              {article.title}
+            </h2>
+            {article.excerpt && (
+              <p className="text-white/55 text-sm leading-relaxed line-clamp-2 [overflow-wrap:break-word]">
+                {article.excerpt}
+              </p>
+            )}
+            <div className={`mt-3 flex items-center gap-1 text-accent text-xs font-semibold transition-opacity duration-200 ${hovered ? "opacity-100" : "opacity-0"}`}>
+              Διαβάστε περισσότερα →
+            </div>
           </div>
-        </div>
-      </Link>
+        </Link>
+      </div>
     </div>
   );
 }
@@ -140,9 +167,7 @@ export default function BlogList({ articles, locale, categoryLabels }: Props) {
 
   const chip = (active: boolean) =>
     `px-4 py-2 rounded-sm text-sm font-semibold transition-all duration-200 ${
-      active
-        ? "bg-primary text-white shadow-md"
-        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+      active ? "bg-primary text-white shadow-md" : "bg-gray-100 text-gray-600 hover:bg-gray-200"
     }`;
 
   return (
