@@ -14,11 +14,11 @@ body {
 
 @keyframes reveal-down {
   from {
-    clip-path: inset(0 0 100% 0);
     opacity: 0;
+    transform: translateY(-16px);
   }
   to {
-    clip-path: inset(0 0 0% 0);
     opacity: 1;
+    transform: translateY(0);
   }
 }
