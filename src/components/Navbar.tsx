@@ -6,6 +6,64 @@ import { useTranslations, useLocale } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import { Menu, X, Scale } from "lucide-react";
 
+const localeConfig = {
+  el: { flag: "gr", label: "ΕΛ" },
+  en: { flag: "gb", label: "EN" },
+  de: { flag: "de", label: "DE" },
+} as const;
+
+function FlagButton({
+  locale: l,
+  active,
+  onClick,
+  bordered,
+  compact,
+}: {
+  locale: "el" | "en" | "de";
+  active: boolean;
+  onClick: () => void;
+  bordered: boolean;
+  compact?: boolean;
+}) {
+  const { flag, label } = localeConfig[l];
+  return (
+    <button
+      onClick={onClick}
+      title={label}
+      className={`flex flex-col items-center justify-center gap-0.5 transition-all duration-200
+        ${compact ? "px-2 py-1.5" : "px-2.5 py-2"}
+        ${active
+          ? "bg-accent/20 shadow-[inset_0_0_0_1px_rgba(200,146,42,0.6)]"
+          : "hover:bg-white/10"
+        }
+        ${bordered ? "border-l border-white/20" : ""}
+      `}
+    >
+      {/* Flag image */}
+      <span className={`block overflow-hidden rounded-[2px] transition-all duration-200
+        ${active ? "ring-1 ring-accent/80 opacity-100" : "opacity-50 hover:opacity-80"}
+        ${compact ? "w-[22px] h-[15px]" : "w-[26px] h-[17px]"}
+      `}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={`https://flagcdn.com/w40/${flag}.png`}
+          alt={label}
+          width={40}
+          height={27}
+          className="w-full h-full object-cover"
+        />
+      </span>
+      {/* Locale label */}
+      <span className={`font-bold tracking-wider leading-none transition-colors duration-200
+        ${compact ? "text-[8px]" : "text-[9px]"}
+        ${active ? "text-accent" : "text-white/40"}
+      `}>
+        {label}
+      </span>
+    </button>
+  );
+}
+
 export default function Navbar() {
   const t = useTranslations();
   const tNav = useTranslations("nav");
@@ -17,7 +75,6 @@ export default function Navbar() {
   const locales = ["el", "en", "de"] as const;
 
   function switchLocale(target: string) {
-    // Remember manual choice so geo-detection won't override it
     document.cookie = `locale-pref=${target}; max-age=${60 * 60 * 24 * 30}; path=/; samesite=lax`;
     const newPath = pathname.replace(`/${locale}`, `/${target}`);
     router.push(newPath);
@@ -65,19 +122,16 @@ export default function Navbar() {
               {l.label}
             </Link>
           ))}
+          {/* Desktop language switcher */}
           <div className="ml-4 flex items-center border border-white/20 rounded-sm overflow-hidden">
             {locales.map((l, i) => (
-              <button
+              <FlagButton
                 key={l}
+                locale={l}
+                active={l === locale}
                 onClick={() => switchLocale(l)}
-                className={`text-xs font-bold px-2.5 py-1.5 transition-all ${
-                  l === locale
-                    ? "bg-accent text-white"
-                    : "text-white/50 hover:text-white hover:bg-white/10"
-                } ${i > 0 ? "border-l border-white/20" : ""}`}
-              >
-                {l.toUpperCase()}
-              </button>
+                bordered={i > 0}
+              />
             ))}
           </div>
         </div>
@@ -86,17 +140,14 @@ export default function Navbar() {
         <div className="md:hidden flex items-center gap-3">
           <div className="flex items-center border border-white/20 rounded-sm overflow-hidden">
             {locales.map((l, i) => (
-              <button
+              <FlagButton
                 key={l}
+                locale={l}
+                active={l === locale}
                 onClick={() => switchLocale(l)}
-                className={`text-xs font-bold px-2 py-1.5 transition-all ${
-                  l === locale
-                    ? "bg-accent text-white"
-                    : "text-white/50 hover:text-white hover:bg-white/10"
-                } ${i > 0 ? "border-l border-white/20" : ""}`}
-              >
-                {l.toUpperCase()}
-              </button>
+                bordered={i > 0}
+                compact
+              />
             ))}
           </div>
           <button
