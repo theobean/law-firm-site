@@ -80,7 +80,7 @@ export default function ContactPage() {
             </div>
 
             {/* Google Maps embed */}
-            <div className="mt-10 rounded-sm overflow-hidden h-64">
+            <div className="hidden md:block mt-10 rounded-sm overflow-hidden h-64">
               <iframe
                 src={`https://maps.google.com/maps?q=Λέοντος+του+Σοφού+12,+54625+Θεσσαλονίκη&output=embed&hl=${locale}`}
                 width="100%"
