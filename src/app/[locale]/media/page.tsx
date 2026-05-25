@@ -21,24 +21,24 @@ export default async function MediaPage({ params }: { params: Promise<{ locale: 
   const interviews = await getInterviews();
 
   return (
-    <main className="bg-primary min-h-screen">
-      {/* Hero */}
-      <section className="grain relative overflow-hidden bg-primary border-b border-white/10 py-20">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <p className="text-accent text-sm font-semibold tracking-widest uppercase mb-4">
-            {t("eyebrow")}
-          </p>
-          <h1 className="font-playfair text-4xl md:text-5xl font-bold text-white mb-4">
-            {t("title")}
-          </h1>
-          <p className="text-white/60 text-lg max-w-2xl mx-auto">{t("subtitle")}</p>
+    <div className="bg-white">
+      {/* Hero — dark like other pages */}
+      <section className="bg-primary py-24 text-white">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="border-l-4 border-accent pl-6">
+            <p className="text-accent text-sm font-semibold tracking-widest uppercase mb-2">
+              {t("eyebrow")}
+            </p>
+            <h1 className="text-4xl md:text-5xl font-playfair font-bold">{t("title")}</h1>
+            <p className="text-white/70 text-xl mt-2">{t("subtitle")}</p>
+          </div>
         </div>
       </section>
 
-      {/* Grid */}
+      {/* Grid — white background like other pages */}
       <section className="max-w-6xl mx-auto px-6 py-16">
         <MediaGrid interviews={interviews} locale={locale} />
       </section>
-    </main>
+    </div>
   );
 }

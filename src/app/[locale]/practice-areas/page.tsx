@@ -17,8 +17,8 @@ export default function PracticeAreasPage() {
   const t = useTranslations("practiceAreas");
 
   return (
-    <main className="bg-primary min-h-screen">
-      <section className="grain relative overflow-hidden border-b border-white/10 py-20 text-white">
+    <div className="bg-white">
+      <section className="bg-primary py-24 text-white">
         <div className="max-w-6xl mx-auto px-6">
           <div className="border-l-4 border-accent pl-6">
             <h1 className="text-4xl md:text-5xl font-playfair font-bold">
@@ -29,6 +29,6 @@ export default function PracticeAreasPage() {
         </div>
       </section>
       <PracticeAreasGrid />
-    </main>
+    </div>
   );
 }

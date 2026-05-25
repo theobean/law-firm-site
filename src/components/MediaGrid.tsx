@@ -45,7 +45,7 @@ function InterviewCard({ interview, locale }: { interview: Interview; locale: st
     <div
       ref={ref}
       style={visible ? { animation: "reveal-up 0.5s cubic-bezier(0.4,0,0.2,1) both" } : { opacity: 0 }}
-      className="flex flex-col rounded-sm overflow-hidden border border-white/10 bg-white/5 hover:border-accent/40 transition-all duration-300 hover:shadow-xl hover:shadow-black/30 group"
+      className="flex flex-col rounded-sm overflow-hidden border border-gray-200 bg-white hover:border-accent/60 transition-all duration-300 hover:shadow-xl hover:shadow-black/10 group"
     >
       {/* Video / Thumbnail */}
       <div className="relative aspect-video bg-black overflow-hidden">
@@ -86,7 +86,7 @@ function InterviewCard({ interview, locale }: { interview: Interview; locale: st
       {/* Info */}
       <div className="p-4 flex flex-col gap-2 flex-1">
         {(interview.show || formattedDate) && (
-          <div className="flex items-center gap-3 text-white/50 text-xs">
+          <div className="flex items-center gap-3 text-gray-400 text-xs">
             {interview.show && (
               <span className="flex items-center gap-1 text-accent font-semibold">
                 <Tv size={11} />
@@ -102,11 +102,11 @@ function InterviewCard({ interview, locale }: { interview: Interview; locale: st
             )}
           </div>
         )}
-        <h3 className="text-white font-semibold text-sm leading-snug line-clamp-2">
+        <h3 className="text-primary font-semibold text-sm leading-snug line-clamp-2">
           {interview.title}
         </h3>
         {interview.description && (
-          <p className="text-white/50 text-xs leading-relaxed line-clamp-2">
+          <p className="text-gray-500 text-xs leading-relaxed line-clamp-2">
             {interview.description}
           </p>
         )}
@@ -119,7 +119,7 @@ export default function MediaGrid({ interviews, locale }: { interviews: Intervie
   const t = useTranslations("media");
 
   if (interviews.length === 0) {
-    return <p className="text-white/40 text-center py-20">{t("empty")}</p>;
+    return <p className="text-gray-400 text-center py-20">{t("empty")}</p>;
   }
 
   return (
