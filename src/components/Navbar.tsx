@@ -30,8 +30,8 @@ function FlagButton({
     <button
       onClick={onClick}
       title={label}
-      className={`flex items-center gap-1.5 transition-all duration-200
-        ${compact ? "px-2 py-1.5" : "px-2.5 py-1.5"}
+      className={`flex items-center gap-1 transition-all duration-200
+        ${compact ? "px-1.5 py-1.5" : "px-2 py-1.5"}
         ${active ? "bg-accent/15" : "hover:bg-white/8"}
         ${bordered ? "border-l border-white/15" : ""}
       `}
@@ -97,30 +97,30 @@ export default function Navbar() {
       </div>
 
       {/* Main nav */}
-      <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <nav className="max-w-6xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link href={`/${locale}`} className="flex items-center gap-2 md:gap-3 text-white min-w-0">
-          <Scale size={24} className="text-accent shrink-0 md:w-7 md:h-7" />
-          <div className="w-px h-7 bg-accent/60 shrink-0" />
-          <div className="leading-tight min-w-0">
-            <p className="font-playfair font-bold text-sm md:text-lg uppercase tracking-wide md:tracking-wider truncate">{t("about.name")}</p>
-            <p className="text-[10px] md:text-xs text-white/60 tracking-widest uppercase truncate">{t("common.firmTagline")}</p>
+        <Link href={`/${locale}`} className="flex items-center gap-2 text-white shrink-0">
+          <Scale size={22} className="text-accent shrink-0" />
+          <div className="w-px h-6 bg-accent/60 shrink-0" />
+          <div className="leading-tight">
+            <p className="font-playfair font-bold text-sm md:text-base uppercase tracking-wide whitespace-nowrap">{t("about.name")}</p>
+            <p className="hidden md:block text-[10px] text-white/60 tracking-widest uppercase">{t("common.firmTagline")}</p>
           </div>
         </Link>
 
         {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-4 lg:gap-6">
           {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className="text-white/80 hover:text-accent transition-colors text-sm font-medium"
+              className="text-white/80 hover:text-accent transition-colors text-xs font-medium whitespace-nowrap"
             >
               {l.label}
             </Link>
           ))}
           {/* Desktop language switcher */}
-          <div className="ml-4 flex items-center border border-white/20 rounded-sm overflow-hidden">
+          <div className="ml-2 flex items-center border border-white/20 rounded-sm overflow-hidden">
             {locales.map((l, i) => (
               <FlagButton
                 key={l}
