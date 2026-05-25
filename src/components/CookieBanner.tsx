@@ -6,6 +6,23 @@ import { useTranslations, useLocale } from "next-intl";
 import { Cookie, X } from "lucide-react";
 
 const STORAGE_KEY = "cookieConsent";
+const GA_ID = "G-HFKWE6YF77";
+
+function loadGoogleAnalytics() {
+  if (typeof window === "undefined" || document.getElementById("ga-script")) return;
+
+  const script = document.createElement("script");
+  script.id = "ga-script";
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+  document.head.appendChild(script);
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(...args: unknown[]) { window.dataLayer.push(args); }
+  window.gtag = gtag;
+  gtag("js", new Date());
+  gtag("config", GA_ID);
+}
 
 export default function CookieBanner() {
   const t = useTranslations("cookies");
@@ -13,14 +30,19 @@ export default function CookieBanner() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== "undefined" && !localStorage.getItem(STORAGE_KEY)) {
+    if (typeof window === "undefined") return;
+    const consent = localStorage.getItem(STORAGE_KEY);
+    if (!consent) {
       setVisible(true);
+    } else if (consent === "accepted") {
+      loadGoogleAnalytics();
     }
   }, []);
 
   function accept() {
     localStorage.setItem(STORAGE_KEY, "accepted");
     setVisible(false);
+    loadGoogleAnalytics();
   }
 
   if (!visible) return null;
