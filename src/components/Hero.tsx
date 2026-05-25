@@ -22,17 +22,17 @@ export default function Hero() {
       <div className="relative max-w-6xl mx-auto px-6 py-32 grid md:grid-cols-2 gap-16 items-center">
         {/* Text */}
         <div>
-          <div className="border-l-4 border-accent pl-6 mb-8">
+          <div className="border-l-4 border-accent pl-6 mb-8" style={{ animation: "reveal-left 0.7s cubic-bezier(0.4,0,0.2,1) 0.1s both" }}>
             <h1 className="font-playfair font-bold text-4xl md:text-4xl lg:text-5xl 2xl:text-6xl text-white leading-tight uppercase whitespace-nowrap">
               {t("tagline")}
               <br />
-              <span className="text-accent">{t("tagline2")}</span>
+              <span className="text-accent" style={{ animation: "reveal-left 0.7s cubic-bezier(0.4,0,0.2,1) 0.3s both", display: "inline-block" }}>{t("tagline2")}</span>
             </h1>
           </div>
-          <p className="text-white/70 text-lg md:text-xl leading-relaxed mb-10 max-w-lg">
+          <p className="text-white/70 text-lg md:text-xl leading-relaxed mb-10 max-w-lg" style={{ animation: "reveal-up 0.6s cubic-bezier(0.4,0,0.2,1) 0.5s both" }}>
             {t("subtitle")}
           </p>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4" style={{ animation: "reveal-up 0.6s cubic-bezier(0.4,0,0.2,1) 0.65s both" }}>
             <Link
               href={`/${locale}/contact`}
               className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-8 py-4 rounded-sm transition-colors"
@@ -49,7 +49,7 @@ export default function Hero() {
         </div>
 
         {/* Why us card */}
-        <div className="hidden md:block">
+        <div className="hidden md:block" style={{ animation: "reveal-right 0.7s cubic-bezier(0.4,0,0.2,1) 0.2s both" }}>
           <div className="relative">
             <div className="bg-white/5 border border-white/10 rounded-sm p-10 backdrop-blur-sm">
               <p className="text-accent text-xs font-bold tracking-widest uppercase mb-6">{t("whyUs")}</p>
