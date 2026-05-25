@@ -7,7 +7,7 @@ export default function Footer() {
   const locale = useLocale();
 
   return (
-    <footer className="bg-primary text-white">
+    <footer className="grain relative overflow-hidden bg-primary text-white">
       <div className="max-w-6xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Logo & tagline */}
