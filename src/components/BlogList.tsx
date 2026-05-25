@@ -238,7 +238,7 @@ export default function BlogList({ articles, locale, categoryLabels }: Props) {
                     onClick={() => handlePage(p)}
                     className={`w-10 h-10 flex items-center justify-center rounded-sm text-sm font-semibold transition-all duration-200 ${
                       p === page
-                        ? "bg-primary text-white shadow-md"
+                        ? "bg-accent text-white shadow-md border-accent"
                         : "border border-gray-200 text-gray-600 hover:border-primary hover:text-primary"
                     }`}
                   >
