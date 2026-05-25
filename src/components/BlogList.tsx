@@ -145,7 +145,7 @@ function AnimatedCard({ article, locale, categoryLabels, index }: {
 export default function BlogList({ articles, locale, categoryLabels }: Props) {
   const t = useTranslations("blog");
   const [selected, setSelected] = useState<string>("all");
-  const [showing, setShowing] = useState(PAGE_SIZE);
+  const [page, setPage] = useState(1);
 
   const availableCategories = useMemo(() => {
     const set = new Set<string>();
@@ -157,13 +157,18 @@ export default function BlogList({ articles, locale, categoryLabels }: Props) {
     return selected === "all" ? articles : articles.filter((a) => a.category === selected);
   }, [articles, selected]);
 
+  const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
+  const paginated = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
   const handleFilter = (cat: string) => {
     setSelected(cat);
-    setShowing(PAGE_SIZE);
+    setPage(1);
   };
 
-  const paginated = filtered.slice(0, showing);
-  const hasMore = showing < filtered.length;
+  const handlePage = (p: number) => {
+    setPage(p);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const chip = (active: boolean) =>
     `px-4 py-2 rounded-sm text-sm font-semibold transition-all duration-200 ${
@@ -201,15 +206,63 @@ export default function BlogList({ articles, locale, categoryLabels }: Props) {
             ))}
           </div>
 
-          {hasMore && (
-            <div className="mt-12 text-center">
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="mt-12 flex items-center justify-center gap-2 flex-wrap">
+              {/* Prev */}
               <button
-                onClick={() => setShowing((s) => s + PAGE_SIZE)}
-                className="inline-flex items-center gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold px-8 py-3 rounded-sm transition-all duration-200"
+                onClick={() => handlePage(page - 1)}
+                disabled={page === 1}
+                className="w-10 h-10 flex items-center justify-center rounded-sm border border-gray-200 text-gray-500 hover:border-primary hover:text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-all"
               >
-                Φόρτωσε περισσότερα ({filtered.length - showing} ακόμα)
+                ←
+              </button>
+
+              {/* Page numbers */}
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => {
+                // Show: first, last, current ±1, ellipsis
+                const show = p === 1 || p === totalPages || Math.abs(p - page) <= 1;
+                const ellipsisBefore = p === 2 && page > 4;
+                const ellipsisAfter = p === totalPages - 1 && page < totalPages - 3;
+
+                if (!show) {
+                  if (ellipsisBefore || ellipsisAfter) {
+                    return <span key={p} className="text-gray-400 px-1">…</span>;
+                  }
+                  return null;
+                }
+
+                return (
+                  <button
+                    key={p}
+                    onClick={() => handlePage(p)}
+                    className={`w-10 h-10 flex items-center justify-center rounded-sm text-sm font-semibold transition-all duration-200 ${
+                      p === page
+                        ? "bg-primary text-white shadow-md"
+                        : "border border-gray-200 text-gray-600 hover:border-primary hover:text-primary"
+                    }`}
+                  >
+                    {p}
+                  </button>
+                );
+              })}
+
+              {/* Next */}
+              <button
+                onClick={() => handlePage(page + 1)}
+                disabled={page === totalPages}
+                className="w-10 h-10 flex items-center justify-center rounded-sm border border-gray-200 text-gray-500 hover:border-primary hover:text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+              >
+                →
               </button>
             </div>
+          )}
+
+          {/* Info */}
+          {totalPages > 1 && (
+            <p className="text-center text-gray-400 text-sm mt-4">
+              Σελίδα {page} από {totalPages} · {filtered.length} άρθρα
+            </p>
           )}
         </>
       )}
