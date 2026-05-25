@@ -49,15 +49,23 @@ export default function ContactPage() {
                     href={href ?? undefined}
                     target={external ? "_blank" : undefined}
                     rel={external ? "noopener noreferrer" : undefined}
-                    className={`flex gap-4 group items-center rounded-sm transition-colors px-2 py-1 -mx-2 ${href ? "hover:bg-primary/5 active:bg-primary/5 cursor-pointer" : "cursor-default"}`}
+                    className={`flex gap-4 group items-center rounded-sm px-4 py-3 transition-all duration-150 ${
+                      href
+                        ? `bg-gray-50 hover:bg-white active:bg-gray-50
+                           border border-gray-200 hover:border-accent/40 active:border-accent/20
+                           shadow-[0_3px_0_0_rgba(0,0,0,0.08)] hover:shadow-[0_3px_0_0_rgba(200,146,42,0.2)]
+                           active:shadow-none active:translate-y-[3px]
+                           cursor-pointer`
+                        : "cursor-default"
+                    }`}
                   >
-                    <div className={`w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${href ? "group-hover:bg-accent/10" : ""}`}>
+                    <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
                       <Icon className="text-accent" size={18} />
                     </div>
                     <div className="flex-1">
-                      <p className={`font-bold mb-1 transition-colors ${href ? "text-primary group-hover:text-accent" : "text-primary"}`}>{label}</p>
+                      <p className={`font-bold mb-0.5 transition-colors ${href ? "text-primary group-hover:text-accent" : "text-primary"}`}>{label}</p>
                       {lines.map((line) => (
-                        <p key={line} className="text-gray-600">{line}</p>
+                        <p key={line} className="text-gray-500 text-sm">{line}</p>
                       ))}
                     </div>
                     {href && <ChevronRight size={16} className="text-gray-300 group-hover:text-accent flex-shrink-0 transition-colors" />}

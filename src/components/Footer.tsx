@@ -32,27 +32,33 @@ export default function Footer() {
             </h3>
             <ul className="space-y-4">
               {[
-                { icon: MapPin, text: <>{t("contact.addressLine1")}<br />{t("contact.addressLine2")}</>, href: "https://maps.google.com/?q=Λέοντος+του+Σοφού+12,+54625+Θεσσαλονίκη", external: true, align: "items-start" },
-                { icon: Phone, text: "+30 2310 545 261", href: "tel:+302310545261", external: false, align: "items-center" },
-                { icon: Mail, text: "iopapaio@gmail.com", href: "mailto:iopapaio@gmail.com", external: false, align: "items-center" },
-              ].map(({ icon: Icon, text, href, external, align }) => (
+                { icon: MapPin, text: <>{t("contact.addressLine1")}<br />{t("contact.addressLine2")}</>, href: "https://maps.google.com/?q=Λέοντος+του+Σοφού+12,+54625+Θεσσαλονίκη", external: true },
+                { icon: Phone, text: "+30 2310 545 261", href: "tel:+302310545261", external: false },
+                { icon: Mail, text: "iopapaio@gmail.com", href: "mailto:iopapaio@gmail.com", external: false },
+              ].map(({ icon: Icon, text, href, external }) => (
                 <li key={href}>
                   <a
                     href={href}
                     target={external ? "_blank" : undefined}
                     rel={external ? "noopener noreferrer" : undefined}
-                    className={`flex ${align} justify-between gap-3 text-white/60 text-sm hover:text-accent active:text-accent transition-colors group rounded-sm hover:bg-white/5 active:bg-white/5 py-1 px-1 -mx-1`}
+                    className="flex items-center justify-between gap-3 text-white/70 text-sm group
+                      bg-white/5 hover:bg-white/10 active:bg-white/5
+                      border border-white/10 hover:border-accent/40 active:border-accent/20
+                      rounded-sm px-4 py-3
+                      shadow-[0_3px_0_0_rgba(0,0,0,0.4)] hover:shadow-[0_3px_0_0_rgba(200,146,42,0.3)]
+                      active:shadow-none active:translate-y-[3px]
+                      transition-all duration-150"
                   >
-                    <div className="flex gap-3 items-start">
-                      <Icon size={16} className="text-accent flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+                    <div className="flex gap-3 items-center">
+                      <Icon size={15} className="text-accent flex-shrink-0" />
                       <span>{text}</span>
                     </div>
-                    <ChevronRight size={14} className="flex-shrink-0 opacity-40 group-hover:opacity-100 mt-0.5 transition-opacity" />
+                    <ChevronRight size={13} className="flex-shrink-0 text-accent/50 group-hover:text-accent transition-colors" />
                   </a>
                 </li>
               ))}
-              <li className="flex items-center gap-3 text-white/60 text-sm py-1">
-                <Clock size={16} className="text-accent flex-shrink-0" />
+              <li className="flex items-center gap-3 text-white/50 text-sm px-4 py-2">
+                <Clock size={15} className="text-accent flex-shrink-0" />
                 <span>{t("contact.hoursValue")}</span>
               </li>
             </ul>
