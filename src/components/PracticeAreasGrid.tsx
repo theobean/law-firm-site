@@ -46,7 +46,7 @@ export default function PracticeAreasGrid({ preview = false }: Props) {
                 href={`/${locale}/practice-areas/${key}`}
                 className="group bg-primary hover:bg-primary/90 p-8 rounded-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
               >
-                <div className="mb-5 inline-flex items-center justify-center w-12 h-12 rounded-sm bg-accent/15 border border-accent/30 group-hover:bg-accent/25 transition-colors">
+                <div className="mb-5 flex items-center justify-center w-12 h-12 rounded-sm bg-accent/15 border border-accent/30 group-hover:bg-accent/25 transition-colors">
                   <Icon className="text-accent" size={22} />
                 </div>
                 <h3 className="text-white font-bold text-lg mb-2 border-b border-accent pb-2 inline-block">
