@@ -17,7 +17,7 @@ const securityHeaders = [
       "font-src 'self' https://fonts.gstatic.com",
       "img-src 'self' data: blob: https://cdn.sanity.io",
       "connect-src 'self' https://api.web3forms.com https://cdn.sanity.io https://*.sanity.io",
-      "frame-src 'none'",
+      "frame-src https://www.google.com https://maps.google.com",
     ].join("; "),
   },
 ];
