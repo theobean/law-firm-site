@@ -57,6 +57,10 @@ export async function generateMetadata({
       images: ["/δικηγορος.png"],
     },
     robots: { index: true, follow: true },
+    icons: {
+      icon: "/favicon.svg",
+      shortcut: "/favicon.svg",
+    },
   };
 }
 
