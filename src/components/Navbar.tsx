@@ -32,7 +32,7 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-primary shadow-md">
+    <header className="grain sticky top-0 z-50 bg-primary shadow-md relative overflow-hidden">
       {/* Top bar */}
       <div className="bg-primary/90 border-b border-white/10 text-white/60 text-sm hidden md:block">
         <div className="max-w-6xl mx-auto px-6 py-2 flex justify-between">
