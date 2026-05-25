@@ -8,6 +8,13 @@ import { Cookie, X } from "lucide-react";
 const STORAGE_KEY = "cookieConsent";
 const GA_ID = "G-HFKWE6YF77";
 
+declare global {
+  interface Window {
+    dataLayer: unknown[];
+    gtag: (...args: unknown[]) => void;
+  }
+}
+
 function loadGoogleAnalytics() {
   if (typeof window === "undefined" || document.getElementById("ga-script")) return;
 
@@ -18,10 +25,9 @@ function loadGoogleAnalytics() {
   document.head.appendChild(script);
 
   window.dataLayer = window.dataLayer || [];
-  function gtag(...args: unknown[]) { window.dataLayer.push(args); }
-  window.gtag = gtag;
-  gtag("js", new Date());
-  gtag("config", GA_ID);
+  window.gtag = function (...args: unknown[]) { window.dataLayer.push(args); };
+  window.gtag("js", new Date());
+  window.gtag("config", GA_ID);
 }
 
 export default function CookieBanner() {
