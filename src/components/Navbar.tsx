@@ -7,9 +7,9 @@ import { usePathname, useRouter } from "next/navigation";
 import { Menu, X, Scale } from "lucide-react";
 
 const localeConfig = {
-  el: { flag: "gr", label: "ΕΛ" },
-  en: { flag: "gb", label: "EN" },
-  de: { flag: "de", label: "DE" },
+  el: { flag: "/flags/gr.svg", label: "ΕΛ" },
+  en: { flag: "/flags/gb.svg", label: "EN" },
+  de: { flag: "/flags/de.svg", label: "DE" },
 } as const;
 
 function FlagButton({
@@ -43,7 +43,7 @@ function FlagButton({
       `}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={`https://flagcdn.com/w40/${flag}.png`}
+          src={flag}
           alt={label}
           width={40}
           height={27}
