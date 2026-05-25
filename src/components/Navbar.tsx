@@ -104,7 +104,7 @@ export default function Navbar() {
           <div className="w-px h-6 bg-accent/60 shrink-0" />
           <div className="leading-tight">
             <p className="font-playfair font-bold text-sm md:text-base uppercase tracking-wide whitespace-nowrap">{t("about.name")}</p>
-            <p className="hidden md:block text-[10px] text-white/60 tracking-widest uppercase">{t("common.firmTagline")}</p>
+            <p className="text-[9px] md:text-[10px] text-white/60 tracking-widest uppercase">{t("common.firmTagline")}</p>
           </div>
         </Link>
 
