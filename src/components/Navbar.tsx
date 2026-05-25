@@ -17,6 +17,8 @@ export default function Navbar() {
   const locales = ["el", "en", "de"] as const;
 
   function switchLocale(target: string) {
+    // Remember manual choice so geo-detection won't override it
+    document.cookie = `locale-pref=${target}; max-age=${60 * 60 * 24 * 30}; path=/; samesite=lax`;
     const newPath = pathname.replace(`/${locale}`, `/${target}`);
     router.push(newPath);
   }
