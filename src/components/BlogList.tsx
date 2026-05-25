@@ -115,7 +115,7 @@ function AnimatedCard({ article, locale, categoryLabels, index }: {
               </span>
               <span>·</span>
               <Clock size={11} />
-              <span>{readingTime(article.body)} λεπτά</span>
+              <span>{readingTime(article.body)} {locale === "el" ? "λεπτά" : "min"}</span>
               {article.category && categoryLabels[article.category] && (
                 <>
                   <span>·</span>
@@ -133,7 +133,7 @@ function AnimatedCard({ article, locale, categoryLabels, index }: {
               </p>
             )}
             <div className={`mt-3 flex items-center gap-1 text-accent text-xs font-semibold transition-opacity duration-200 ${hovered ? "opacity-100" : "opacity-0"}`}>
-              Διαβάστε περισσότερα →
+              {locale === "el" ? "Διαβάστε περισσότερα" : "Read more"} →
             </div>
           </div>
         </Link>
