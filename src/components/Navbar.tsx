@@ -178,7 +178,7 @@ export default function Navbar() {
           open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-4">
+        <div className="max-w-6xl mx-auto px-6 pt-4 pb-8 flex flex-col gap-4">
           {links.map((l) => (
             <Link
               key={l.href}
