@@ -100,9 +100,9 @@ export default function Navbar() {
           ))}
           <button
             onClick={() => { switchLocale(); setOpen(false); }}
-            className="text-left text-sm font-bold text-accent"
+            className="self-start text-xs font-bold border border-white/30 text-white/70 hover:border-accent hover:text-accent px-3 py-1 rounded transition-colors"
           >
-            {otherLocale === "el" ? "Ελληνικά" : "English"}
+            {otherLocale.toUpperCase()}
           </button>
         </div>
       </div>

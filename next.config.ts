@@ -12,11 +12,11 @@ const securityHeaders = [
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://api.web3forms.com",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://api.web3forms.com https://www.googletagmanager.com",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
       "img-src 'self' data: blob: https://cdn.sanity.io",
-      "connect-src 'self' https://api.web3forms.com https://cdn.sanity.io https://*.sanity.io",
+      "connect-src 'self' https://api.web3forms.com https://cdn.sanity.io https://*.sanity.io https://www.google-analytics.com https://analytics.google.com",
       "frame-src https://www.google.com https://maps.google.com",
     ].join("; "),
   },
