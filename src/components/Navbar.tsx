@@ -114,7 +114,7 @@ export default function Navbar() {
             <Link
               key={l.href}
               href={l.href}
-              className="text-white/80 hover:text-accent transition-colors text-xs font-medium whitespace-nowrap"
+              className="text-white/80 hover:text-accent transition-colors text-sm font-medium whitespace-nowrap"
             >
               {l.label}
             </Link>
