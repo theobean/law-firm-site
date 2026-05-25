@@ -45,12 +45,12 @@ export default function Navbar() {
       {/* Main nav */}
       <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link href={`/${locale}`} className="flex items-center gap-3 text-white">
-          <Scale size={28} className="text-accent" />
-          <div className="w-px h-8 bg-accent/60" />
-          <div className="leading-tight">
-            <p className="font-playfair font-bold text-lg uppercase tracking-wider">{t("about.name")}</p>
-            <p className="text-xs text-white/60 tracking-widest uppercase">{t("common.firmTagline")}</p>
+        <Link href={`/${locale}`} className="flex items-center gap-2 md:gap-3 text-white min-w-0">
+          <Scale size={24} className="text-accent shrink-0 md:w-7 md:h-7" />
+          <div className="w-px h-7 bg-accent/60 shrink-0" />
+          <div className="leading-tight min-w-0">
+            <p className="font-playfair font-bold text-sm md:text-lg uppercase tracking-wide md:tracking-wider truncate">{t("about.name")}</p>
+            <p className="text-[10px] md:text-xs text-white/60 tracking-widest uppercase truncate">{t("common.firmTagline")}</p>
           </div>
         </Link>
 
