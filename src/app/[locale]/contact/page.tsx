@@ -1,7 +1,7 @@
 import { useTranslations, useLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, ChevronRight } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 import ScrollReveal from "@/components/ScrollReveal";
 
@@ -49,17 +49,18 @@ export default function ContactPage() {
                     href={href ?? undefined}
                     target={external ? "_blank" : undefined}
                     rel={external ? "noopener noreferrer" : undefined}
-                    className={`flex gap-4 group ${href ? "hover:text-accent cursor-pointer" : "cursor-default"}`}
+                    className={`flex gap-4 group items-center rounded-sm transition-colors px-2 py-1 -mx-2 ${href ? "hover:bg-primary/5 active:bg-primary/5 cursor-pointer" : "cursor-default"}`}
                   >
                     <div className={`w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${href ? "group-hover:bg-accent/10" : ""}`}>
                       <Icon className="text-accent" size={18} />
                     </div>
-                    <div>
+                    <div className="flex-1">
                       <p className={`font-bold mb-1 transition-colors ${href ? "text-primary group-hover:text-accent" : "text-primary"}`}>{label}</p>
                       {lines.map((line) => (
                         <p key={line} className="text-gray-600">{line}</p>
                       ))}
                     </div>
+                    {href && <ChevronRight size={16} className="text-gray-300 group-hover:text-accent flex-shrink-0 transition-colors" />}
                   </a>
                 </ScrollReveal>
               ))}

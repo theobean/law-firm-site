@@ -1,6 +1,6 @@
 import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
-import { Scale, MapPin, Phone, Mail, Clock } from "lucide-react";
+import { Scale, MapPin, Phone, Mail, Clock, ChevronRight } from "lucide-react";
 
 export default function Footer() {
   const t = useTranslations();
@@ -31,36 +31,27 @@ export default function Footer() {
               {t("nav.contact")}
             </h3>
             <ul className="space-y-4">
-              <li>
-                <a
-                  href="https://maps.google.com/?q=Λέοντος+του+Σοφού+12,+54625+Θεσσαλονίκη"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-start gap-3 text-white/60 text-sm hover:text-accent transition-colors group"
-                >
-                  <MapPin size={16} className="text-accent flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
-                  <span>{t("contact.addressLine1")}<br />{t("contact.addressLine2")}</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="tel:+302310545261"
-                  className="flex items-center gap-3 text-white/60 text-sm hover:text-accent transition-colors group"
-                >
-                  <Phone size={16} className="text-accent flex-shrink-0 group-hover:scale-110 transition-transform" />
-                  <span>+30 2310 545 261</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="mailto:iopapaio@gmail.com"
-                  className="flex items-center gap-3 text-white/60 text-sm hover:text-accent transition-colors group"
-                >
-                  <Mail size={16} className="text-accent flex-shrink-0 group-hover:scale-110 transition-transform" />
-                  <span>iopapaio@gmail.com</span>
-                </a>
-              </li>
-              <li className="flex items-center gap-3 text-white/60 text-sm">
+              {[
+                { icon: MapPin, text: <>{t("contact.addressLine1")}<br />{t("contact.addressLine2")}</>, href: "https://maps.google.com/?q=Λέοντος+του+Σοφού+12,+54625+Θεσσαλονίκη", external: true, align: "items-start" },
+                { icon: Phone, text: "+30 2310 545 261", href: "tel:+302310545261", external: false, align: "items-center" },
+                { icon: Mail, text: "iopapaio@gmail.com", href: "mailto:iopapaio@gmail.com", external: false, align: "items-center" },
+              ].map(({ icon: Icon, text, href, external, align }) => (
+                <li key={href}>
+                  <a
+                    href={href}
+                    target={external ? "_blank" : undefined}
+                    rel={external ? "noopener noreferrer" : undefined}
+                    className={`flex ${align} justify-between gap-3 text-white/60 text-sm hover:text-accent active:text-accent transition-colors group rounded-sm hover:bg-white/5 active:bg-white/5 py-1 px-1 -mx-1`}
+                  >
+                    <div className="flex gap-3 items-start">
+                      <Icon size={16} className="text-accent flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+                      <span>{text}</span>
+                    </div>
+                    <ChevronRight size={14} className="flex-shrink-0 opacity-40 group-hover:opacity-100 mt-0.5 transition-opacity" />
+                  </a>
+                </li>
+              ))}
+              <li className="flex items-center gap-3 text-white/60 text-sm py-1">
                 <Clock size={16} className="text-accent flex-shrink-0" />
                 <span>{t("contact.hoursValue")}</span>
               </li>
