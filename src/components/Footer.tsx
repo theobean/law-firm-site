@@ -31,17 +31,34 @@ export default function Footer() {
               {t("nav.contact")}
             </h3>
             <ul className="space-y-4">
-              <li className="flex items-start gap-3 text-white/60 text-sm">
-                <MapPin size={16} className="text-accent flex-shrink-0 mt-0.5" />
-                <span>{t("contact.addressLine1")}<br />{t("contact.addressLine2")}</span>
+              <li>
+                <a
+                  href="https://maps.google.com/?q=Λέοντος+του+Σοφού+12,+54625+Θεσσαλονίκη"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-3 text-white/60 text-sm hover:text-accent transition-colors group"
+                >
+                  <MapPin size={16} className="text-accent flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+                  <span>{t("contact.addressLine1")}<br />{t("contact.addressLine2")}</span>
+                </a>
               </li>
-              <li className="flex items-center gap-3 text-white/60 text-sm">
-                <Phone size={16} className="text-accent flex-shrink-0" />
-                <span>+30 2310 545 261</span>
+              <li>
+                <a
+                  href="tel:+302310545261"
+                  className="flex items-center gap-3 text-white/60 text-sm hover:text-accent transition-colors group"
+                >
+                  <Phone size={16} className="text-accent flex-shrink-0 group-hover:scale-110 transition-transform" />
+                  <span>+30 2310 545 261</span>
+                </a>
               </li>
-              <li className="flex items-center gap-3 text-white/60 text-sm">
-                <Mail size={16} className="text-accent flex-shrink-0" />
-                <span>iopapaio@gmail.com</span>
+              <li>
+                <a
+                  href="mailto:iopapaio@gmail.com"
+                  className="flex items-center gap-3 text-white/60 text-sm hover:text-accent transition-colors group"
+                >
+                  <Mail size={16} className="text-accent flex-shrink-0 group-hover:scale-110 transition-transform" />
+                  <span>iopapaio@gmail.com</span>
+                </a>
               </li>
               <li className="flex items-center gap-3 text-white/60 text-sm">
                 <Clock size={16} className="text-accent flex-shrink-0" />

@@ -39,23 +39,28 @@ export default function ContactPage() {
           <div>
             <div className="space-y-8">
               {[
-                { icon: MapPin, label: t("address"), lines: [t("addressLine1"), t("addressLine2")] },
-                { icon: Phone, label: t("phone"), lines: ["+30 2310 545 261"] },
-                { icon: Mail, label: t("email"), lines: ["iopapaio@gmail.com"] },
-                { icon: Clock, label: t("hours"), lines: [t("hoursValue")] },
-              ].map(({ icon: Icon, label, lines }, i) => (
+                { icon: MapPin, label: t("address"), lines: [t("addressLine1"), t("addressLine2")], href: "https://maps.google.com/?q=Λέοντος+του+Σοφού+12,+54625+Θεσσαλονίκη", external: true },
+                { icon: Phone, label: t("phone"), lines: ["+30 2310 545 261"], href: "tel:+302310545261", external: false },
+                { icon: Mail, label: t("email"), lines: ["iopapaio@gmail.com"], href: "mailto:iopapaio@gmail.com", external: false },
+                { icon: Clock, label: t("hours"), lines: [t("hoursValue")], href: null, external: false },
+              ].map(({ icon: Icon, label, lines, href, external }, i) => (
                 <ScrollReveal key={label} direction="left" delay={i * 0.12}>
-                  <div className="flex gap-4">
-                    <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                  <a
+                    href={href ?? undefined}
+                    target={external ? "_blank" : undefined}
+                    rel={external ? "noopener noreferrer" : undefined}
+                    className={`flex gap-4 group ${href ? "hover:text-accent cursor-pointer" : "cursor-default"}`}
+                  >
+                    <div className={`w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${href ? "group-hover:bg-accent/10" : ""}`}>
                       <Icon className="text-accent" size={18} />
                     </div>
                     <div>
-                      <p className="font-bold text-primary mb-1">{label}</p>
+                      <p className={`font-bold mb-1 transition-colors ${href ? "text-primary group-hover:text-accent" : "text-primary"}`}>{label}</p>
                       {lines.map((line) => (
                         <p key={line} className="text-gray-600">{line}</p>
                       ))}
                     </div>
-                  </div>
+                  </a>
                 </ScrollReveal>
               ))}
             </div>
