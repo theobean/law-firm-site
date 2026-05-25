@@ -11,3 +11,14 @@ body {
   background: #ffffff;
   color: #1a1a1a;
 }
+
+@keyframes reveal-down {
+  from {
+    clip-path: inset(0 0 100% 0);
+    opacity: 0;
+  }
+  to {
+    clip-path: inset(0 0 0% 0);
+    opacity: 1;
+  }
+}
