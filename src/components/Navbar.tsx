@@ -82,28 +82,30 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile menu */}
-      {open && (
-        <div className="md:hidden bg-primary border-t border-white/10">
-          <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-4">
-            {links.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="text-white/80 hover:text-accent transition-colors font-medium py-2 border-b border-white/10"
-              >
-                {l.label}
-              </Link>
-            ))}
-            <button
-              onClick={() => { switchLocale(); setOpen(false); }}
-              className="text-left text-sm font-bold text-accent"
+      <div
+        className={`md:hidden bg-primary border-t border-white/10 overflow-hidden transition-all duration-300 ease-in-out ${
+          open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-4">
+          {links.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              className="text-white/80 hover:text-accent transition-colors font-medium py-2 border-b border-white/10"
             >
-              {otherLocale === "el" ? "Ελληνικά" : "English"}
-            </button>
-          </div>
+              {l.label}
+            </Link>
+          ))}
+          <button
+            onClick={() => { switchLocale(); setOpen(false); }}
+            className="text-left text-sm font-bold text-accent"
+          >
+            {otherLocale === "el" ? "Ελληνικά" : "English"}
+          </button>
         </div>
-      )}
+      </div>
     </header>
   );
 }
