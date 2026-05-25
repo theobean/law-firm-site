@@ -4,8 +4,9 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { urlFor } from "@/sanity/image";
-import { Calendar } from "lucide-react";
+import { Calendar, Clock } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { readingTime } from "@/lib/readingTime";
 
 interface Article {
   _id: string;
@@ -15,6 +16,7 @@ interface Article {
   excerpt?: string;
   mainImage?: { _type: string; asset: { _ref: string } } | null;
   category?: string;
+  body?: Array<{ _type: string; children?: Array<{ text?: string }> }>;
 }
 
 interface Props {
@@ -97,6 +99,9 @@ export default function BlogList({ articles, locale, categoryLabels }: Props) {
                         )
                       : ""}
                   </span>
+                  <span>·</span>
+                  <Clock size={12} />
+                  <span>{t("readingTime", { minutes: readingTime(article.body) })}</span>
                   {article.category && categoryLabels[article.category] && (
                     <>
                       <span>·</span>
