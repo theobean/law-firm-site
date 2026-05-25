@@ -65,9 +65,7 @@ function InterviewCard({ interview, locale }: { interview: Interview; locale: st
               alt={interview.title}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
-            {/* Dark overlay */}
             <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-300" />
-            {/* Play button */}
             <button
               onClick={() => setPlaying(true)}
               aria-label="Αναπαραγωγή"
