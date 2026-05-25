@@ -49,7 +49,7 @@ export default function Hero() {
         </div>
 
         {/* Why us card */}
-        <div className="hidden md:block" style={{ animation: "reveal-right 0.7s cubic-bezier(0.4,0,0.2,1) 0.2s both" }}>
+        <div className="hidden md:block">
           <div className="relative">
             <div className="bg-white/5 border border-white/10 rounded-sm p-10 backdrop-blur-sm">
               <p className="text-accent text-xs font-bold tracking-widest uppercase mb-6">{t("whyUs")}</p>
