@@ -26,6 +26,14 @@ export async function getArticle(slug: string) {
   );
 }
 
+export async function getInterviews() {
+  return client.fetch(
+    `*[_type == "interview"] | order(date desc) {
+      _id, title, youtubeUrl, show, date, description
+    }`
+  );
+}
+
 export async function getRelatedArticles(currentSlug: string, category: string, limit = 3) {
   return client.fetch(
     `*[_type == "article" && slug.current != $currentSlug && category == $category] | order(publishedAt desc)[0...$limit] {

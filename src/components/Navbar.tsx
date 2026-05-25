@@ -83,6 +83,7 @@ export default function Navbar() {
     { href: `/${locale}/practice-areas`, label: tNav("practiceAreas") },
     { href: `/${locale}/blog`, label: tNav("blog") },
     { href: `/${locale}/faq`, label: tNav("faq") },
+    { href: `/${locale}/media`, label: tNav("media") },
     { href: `/${locale}/contact`, label: tNav("contact") },
   ];
 

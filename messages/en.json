@@ -5,8 +5,17 @@
     "practiceAreas": "Practice Areas",
     "blog": "Articles",
     "faq": "FAQ",
+    "media": "Media",
     "contact": "Contact",
     "navigation": "Navigation"
+  },
+  "media": {
+    "eyebrow": "TV Appearances",
+    "title": "In The Media",
+    "subtitle": "Interviews and television appearances by our law firm",
+    "seoTitle": "TV Interviews | Papaioannou Law Office",
+    "seoDescription": "Television appearances and interviews by lawyer Ioannis Papaioannou on Greek channels.",
+    "empty": "No interviews yet."
   },
   "blog": {
     "title": "Articles & News",

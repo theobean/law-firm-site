@@ -5,8 +5,17 @@
     "practiceAreas": "Rechtsgebiete",
     "blog": "Artikel",
     "faq": "FAQ",
+    "media": "Medien",
     "contact": "Kontakt",
     "navigation": "Navigation"
+  },
+  "media": {
+    "eyebrow": "TV-Auftritte",
+    "title": "In Den Medien",
+    "subtitle": "Interviews und Fernsehauftritte unserer Kanzlei",
+    "seoTitle": "TV-Interviews | Kanzlei Papaioannou",
+    "seoDescription": "Fernsehauftritte und Interviews von Rechtsanwalt Ioannis Papaioannou in griechischen Sendern.",
+    "empty": "Noch keine Interviews vorhanden."
   },
   "blog": {
     "title": "Artikel & Neuigkeiten",
