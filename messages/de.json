@@ -1,0 +1,296 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "about": "Über uns",
+    "practiceAreas": "Rechtsgebiete",
+    "blog": "Artikel",
+    "faq": "FAQ",
+    "contact": "Kontakt",
+    "navigation": "Navigation"
+  },
+  "blog": {
+    "title": "Artikel & Neuigkeiten",
+    "subtitle": "Rechtliche Neuigkeiten aus unserer Kanzlei",
+    "empty": "Noch keine Artikel vorhanden.",
+    "readingTime": "{minutes} Min. Lesezeit",
+    "share": "Artikel teilen",
+    "relatedTitle": "Ähnliche Artikel",
+    "categoryAll": "Alle",
+    "byAuthor": "Von",
+    "copyLink": "Link kopieren",
+    "linkCopied": "Kopiert!"
+  },
+  "faq": {
+    "title": "Häufig gestellte Fragen",
+    "subtitle": "Antworten auf die häufigsten Fragen, die wir erhalten",
+    "q1": "Wie kann ich einen Termin vereinbaren?",
+    "a1": "Sie können uns telefonisch unter +30 2310 545 261, per E-Mail an iopapaio@gmail.com oder über das Kontaktformular auf der Website erreichen. Wir antworten innerhalb von 24 Stunden, um einen Termin zu vereinbaren.",
+    "q2": "Ist die erste Beratung kostenlos?",
+    "a2": "Die erste Kontaktaufnahme zur Beurteilung Ihres Falles ist kostenlos. Honorare für detaillierte Rechtsberatung oder Fallvertretung werden vorab schriftlich vereinbart.",
+    "q3": "Auf welche Rechtsgebiete sind Sie spezialisiert?",
+    "a3": "Wir bearbeiten Fälle im Zivil-, Straf-, Handels-, Arbeits-, Verwaltungs-, Erb- und Steuerrecht sowie Immobilienfragen. Alle Bereiche finden Sie detailliert auf der Seite «Rechtsgebiete».",
+    "q4": "Bearbeiten Sie auch Fälle außerhalb von Thessaloniki?",
+    "a4": "Ja, wir bearbeiten Fälle in ganz Griechenland. Bei Fällen außerhalb von Thessaloniki kann die Zusammenarbeit mit einem lokalen Anwalt oder zusätzliche Reisekosten erforderlich sein, die vorab vereinbart werden.",
+    "q5": "Wie werden Ihre Honorare berechnet?",
+    "a5": "Die Honorare richten sich nach Art und Komplexität des Falles. Wir folgen den Bestimmungen des griechischen Anwaltsgesetzbuchs und unterbreiten vor Fallübernahme eine schriftliche Honorarvereinbarung für vollständige Transparenz.",
+    "q6": "Wie lange dauert die Lösung eines Falls?",
+    "a6": "Die Dauer hängt von der Art des Falls, der Zuständigkeit und den Gerichtsterminen ab. Beim ersten Gespräch geben wir eine realistische Zeiteinschätzung basierend auf unserer Erfahrung.",
+    "q7": "Sind meine Angaben vertraulich?",
+    "a7": "Absolut. Wir sind an die anwaltliche Schweigepflicht gemäß dem griechischen Anwaltsgesetzbuch gebunden. Alle Informationen, die Sie uns mitteilen — in Gesprächen, per E-Mail oder telefonisch — bleiben streng vertraulich.",
+    "q8": "Kann ich Sie per E-Mail für Updates kontaktieren?",
+    "a8": "Selbstverständlich. Wir informieren Sie kontinuierlich über den Fortschritt Ihres Falls per E-Mail, Telefon oder persönlichen Besprechungen, ganz nach Ihren Wünschen."
+  },
+  "common": {
+    "firmTagline": "Rechtsanwaltskanzlei",
+    "mapTitle": "Lageplan der Kanzlei"
+  },
+  "seo": {
+    "siteName": "Ioannis Papaioannou | Rechtsanwaltskanzlei",
+    "defaultTitle": "Ioannis Papaioannou — Rechtsanwalt in Thessaloniki",
+    "defaultDescription": "Rechtsanwaltskanzlei in Thessaloniki mit über 20 Jahren Erfahrung im Zivil-, Straf-, Handels-, Arbeits- und Steuerrecht.",
+    "homeTitle": "Startseite",
+    "aboutTitle": "Über uns",
+    "aboutDescription": "Lernen Sie Rechtsanwalt Ioannis Papaioannou und unsere Kanzlei kennen. Über 20 Jahre Erfahrung für Privatpersonen und Unternehmen.",
+    "practiceAreasTitle": "Rechtsgebiete",
+    "practiceAreasDescription": "Umfassende rechtliche Beratung in Zivil-, Straf-, Handels-, Immobilien-, Arbeits-, Verwaltungs-, Erb- und Steuerrecht.",
+    "contactTitle": "Kontakt",
+    "contactDescription": "Kontaktieren Sie unsere Kanzlei in Thessaloniki. Leontos tou Sofou 12, Tel. +30 2310 545 261.",
+    "blogTitle": "Artikel & Rechtsneuigkeiten",
+    "blogDescription": "Artikel und rechtliche Neuigkeiten unserer Kanzlei aus allen Rechtsgebieten.",
+    "faqTitle": "Häufig gestellte Fragen",
+    "faqDescription": "Antworten auf die häufigsten Fragen zu unseren Dienstleistungen, Honoraren und Kontaktaufnahme.",
+    "privacyTitle": "Datenschutzerklärung",
+    "termsTitle": "Nutzungsbedingungen"
+  },
+  "cookies": {
+    "message": "Wir verwenden Cookies, um Ihnen die bestmögliche Erfahrung auf unserer Website zu bieten. Durch weiteres Surfen stimmen Sie deren Verwendung zu.",
+    "accept": "Akzeptieren",
+    "learnMore": "Mehr erfahren"
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "message": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+    "cta": "Zur Startseite"
+  },
+  "hero": {
+    "tagline": "Gerechte",
+    "tagline2": "Vertretung",
+    "subtitle": "Wir bieten umfassende Rechtsdienstleistungen, zugeschnitten auf die modernen Bedürfnisse von Privatpersonen und Unternehmen.",
+    "cta": "Kontakt aufnehmen",
+    "ctaSecondary": "Mehr erfahren",
+    "whyUs": "Warum wir",
+    "why1": "Persönliche Betreuung in jedem Fall",
+    "why2": "Direkter Kontakt und kontinuierliche Updates",
+    "why3": "Über 20 Jahre nachgewiesene Erfahrung",
+    "why4": "Absolute Einhaltung der Berufsethik"
+  },
+  "stats": {
+    "experience": "Jahre Erfahrung",
+    "cases": "Bearbeitete Fälle",
+    "clients": "Zufriedene Mandanten",
+    "areas": "Rechtsgebiete",
+    "cta": "Kontakt aufnehmen"
+  },
+  "practiceAreas": {
+    "title": "Umfassende Rechtsberatung",
+    "subtitle": "mit strategischem Vorteil",
+    "viewAll": "Alle Rechtsgebiete",
+    "servicesTitle": "Was wir übernehmen",
+    "approachTitle": "Unser Ansatz",
+    "ctaTitle": "Benötigen Sie rechtliche Unterstützung?",
+    "ctaText": "Kontaktieren Sie uns, um Ihren Fall diskret und professionell zu besprechen.",
+    "backToAll": "Zurück zu allen Rechtsgebieten",
+    "areas": {
+      "civil": {
+        "title": "Zivilrecht",
+        "desc": "Verträge, unerlaubte Handlungen, Eigentumsrecht und Familienrecht.",
+        "longDesc": "Das Zivilrecht bildet die Grundlage des alltäglichen Verhältnisses zwischen Privatpersonen und juristischen Personen. Es umfasst ein breites Spektrum an Angelegenheiten rund um Verträge, Familie, Eigentumsstreitigkeiten und Schadensersatz. Unsere Kanzlei bietet umfassende rechtliche Unterstützung in allen Bereichen des Zivilrechts, mit besonderem Augenmerk auf eine persönliche Vertrauensbeziehung zu unseren Mandanten.",
+        "approach": "In jedem Fall suchen wir zunächst eine gütliche Einigung, wo dies möglich ist. Wenn gerichtliche Schritte erforderlich sind, bereiten wir diese mit wissenschaftlicher Sorgfalt und strategischem Denken vor.",
+        "services": [
+          "Erstellung und Prüfung von Verträgen aller Art",
+          "Scheidung, Unterhalt und Sorgerechtsangelegenheiten",
+          "Schadensersatzansprüche aus unerlaubten Handlungen (Verkehrsunfälle, ärztliche Fehler)",
+          "Eigentumsschutz-, Besitz- und Unterlassungsklagen",
+          "Wohnungseigentums- und Nachbarrechtstreitigkeiten",
+          "Außergerichtliche Streitbeilegung und Mediation"
+        ]
+      },
+      "criminal": {
+        "title": "Strafrecht",
+        "desc": "Strafverteidigung in allen Instanzen.",
+        "longDesc": "Eine Strafverfolgung kann das Leben eines Menschen grundlegend verändern. Die richtige Verteidigung vom ersten Moment an — noch vor der Einvernahme — ist entscheidend für den Ausgang des Verfahrens. Wir bearbeiten Strafsachen in allen Instanzen mit fundierter Rechtsprechungskenntnis und strategischer Flexibilität.",
+        "approach": "Wir studieren die Akte sorgfältig, identifizieren Verfahrenslücken und erarbeiten die Verteidigungsstrategie, die unseren Mandanten am besten dient — ob Freispruch, Strafmilderung oder Verfahrensaussetzung.",
+        "services": [
+          "Verteidigung von Beschuldigten in allen Stadien des Vor- und Hauptverfahrens",
+          "Vertretung von Opfern als Nebenkläger",
+          "Berufungen und Revisionen",
+          "Wirtschaftsdelikte und Pressedelikte",
+          "Verfahren wegen Delikten gegen Leben, körperliche Unversehrtheit und Eigentum",
+          "Anträge auf Strafaussetzung, Strafumwandlung und Strafaufschub"
+        ]
+      },
+      "commercial": {
+        "title": "Handelsrecht",
+        "desc": "Unternehmenstransaktionen, Verträge und Handelsstreitigkeiten.",
+        "longDesc": "Unternehmen agieren in einem komplexen rechtlichen Umfeld, das ständige Aufmerksamkeit erfordert. Wir bieten umfassende rechtliche Unterstützung für Unternehmen jeder Größe — von der Gründung und Organisation bis zur Vertragsverwaltung und Beilegung von Handelsstreitigkeiten.",
+        "approach": "Wir verbinden rechtliche Expertise mit dem Verständnis für geschäftliche Anforderungen, sodass unsere Lösungen nicht nur rechtlich einwandfrei, sondern auch praktisch umsetzbar sind.",
+        "services": [
+          "Gründung von Gesellschaften (AG, GmbH, OHG, KG) und Satzungsänderungen",
+          "Erstellung und Verhandlung von Handelsverträgen",
+          "Rechtliche Due Diligence bei Übernahmen und Fusionen",
+          "Unlauterer Wettbewerb und gewerblicher Rechtsschutz",
+          "Forderungseinzug und Mahnverfahren",
+          "Gesellschafter- und Aktionärsstreitigkeiten"
+        ]
+      },
+      "realEstate": {
+        "title": "Immobilienrecht",
+        "desc": "Immobilientransaktionen, Mietverträge und Grundbuchfragen.",
+        "longDesc": "Kauf oder Verkauf einer Immobilie ist eine der wichtigsten finanziellen Entscheidungen im Leben. Eine gründliche rechtliche Prüfung der Eigentumstitel und die korrekte Vertragsgestaltung sind unerlässlich, um zukünftige Probleme zu vermeiden.",
+        "approach": "Wir führen eine vollständige Titelprüfung im Grundbuch und Kataster durch, begleiten den gesamten Prozess bis zur Eintragung und stellen sicher, dass unser Mandant vollständig geschützt ist.",
+        "services": [
+          "Eigentums- und Belastungsprüfungen",
+          "Erstellung und Prüfung von Kaufverträgen",
+          "Mietverträge (Wohn- und Gewerbemiete)",
+          "Mieter-Vermieter-Streitigkeiten, Räumungsklagen",
+          "Erklärungen und Korrekturen im Nationalen Kataster",
+          "Ersitzungs- und Besitzklagen"
+        ]
+      },
+      "labor": {
+        "title": "Arbeitsrecht",
+        "desc": "Arbeitsverhältnisse, Kündigungen und Entschädigungsansprüche.",
+        "longDesc": "Arbeitsstreitigkeiten erfordern schnelles und effektives Handeln, da sie den Lebensunterhalt von Menschen betreffen. Wir vertreten sowohl Arbeitnehmer als auch Arbeitgeber und schützen deren berechtigte Interessen.",
+        "approach": "Wir suchen zunächst eine außergerichtliche Lösung über die Arbeitsaufsichtsbehörde. Wo dies nicht möglich ist, bereiten wir die Klage mit allen erforderlichen Belegen vor.",
+        "services": [
+          "Kündigungsschutzklagen und Abfindungsansprüche",
+          "Ansprüche auf ausstehende Löhne und Überstunden",
+          "Arbeitsunfälle und Schadensersatz",
+          "Arbeitsverträge und Betriebsvereinbarungen",
+          "Vertretung vor der Arbeitsaufsichtsbehörde",
+          "Rentenangelegenheiten und Sozialversicherungsfragen"
+        ]
+      },
+      "administrative": {
+        "title": "Verwaltungsrecht",
+        "desc": "Anfechtung von Verwaltungsakten und Genehmigungsverfahren.",
+        "longDesc": "Die Beziehung zwischen Bürgern, Unternehmen und der öffentlichen Verwaltung ist oft komplex. Wir bieten rechtliche Unterstützung bei der Anfechtung von Verwaltungsakten, Genehmigungsverfahren und staatlichen Entscheidungen.",
+        "approach": "Wir prüfen jeden Verwaltungsakt sorgfältig auf Rechtmäßigkeit und Verfassungskonformität und nutzen alle verfügbaren Rechtsmittel zum Schutz der Rechte unserer Mandanten.",
+        "services": [
+          "Rechtsmittel vor Verwaltungsgerichten",
+          "Nichtigkeitsklagen vor dem Staatsrat",
+          "Genehmigungen (Bau, Umwelt, Gesundheit)",
+          "Streitigkeiten mit Gemeinden, Regionen und Ministerien",
+          "Disziplinarverfahren von Beamten",
+          "Schadensersatzansprüche gegen den Staat"
+        ]
+      },
+      "inheritance": {
+        "title": "Erbrecht",
+        "desc": "Testamente, Erbschaftsstreitigkeiten und Erbschaftsausschlagung.",
+        "longDesc": "Erbschaftsangelegenheiten sind oft emotional belastend und rechtlich komplex. Wir bieten Diskretion, Einfühlungsvermögen und präzise Rechtsberatung zum Schutz der Rechte aller Erben.",
+        "approach": "Wir suchen familiäre Konflikte durch gütliche Einigungen zu vermeiden. Wenn gerichtliche Schritte unvermeidlich sind, vertreten wir die Interessen unserer Mandanten entschieden.",
+        "services": [
+          "Erstellung von eigenhändigen und notariellen Testamenten",
+          "Testamentseröffnung und -bestätigung",
+          "Erbschaftsannahme und -ausschlagung",
+          "Aufteilung des Nachlassvermögens",
+          "Erbschafts- und Pflichtteilsklagen",
+          "Erbschaftsteuer — Erklärungen und Befreiungen"
+        ]
+      },
+      "tax": {
+        "title": "Steuerrecht",
+        "desc": "Steuerkonformität, Streitigkeiten mit Finanzbehörden und Steuerbefreiungen.",
+        "longDesc": "Das Steuersystem in Griechenland ist besonders komplex und ändert sich häufig. Wir bieten spezialisierte rechtliche Unterstützung in Steuerangelegenheiten und schützen unsere Mandanten vor missbräuchlichen Maßnahmen der Verwaltung.",
+        "approach": "Wir arbeiten mit spezialisierten Buchhaltern und Steuerberatern zusammen, sodass die Rechtsstrategie mit solider Steuerpraxis kombiniert wird und eine ganzheitliche Lösung entsteht.",
+        "services": [
+          "Verwaltungsbeschwerden und Klagen vor Verwaltungsgerichten",
+          "Steuerplanung für Privatpersonen und Unternehmen",
+          "Mehrwertsteuer-, Einkommensteuer- und Grundsteuerverfahren",
+          "Ansprüche auf Erstattung überzahlter Beträge",
+          "Disziplinar- und strafrechtliche Steuerverfahren",
+          "Schuldenregelungen und Ratenzahlungspläne"
+        ]
+      }
+    }
+  },
+  "about": {
+    "title": "Unsere Kanzlei",
+    "name": "Ioannis Papaioannou",
+    "role": "Rechtsanwalt",
+    "bio1": "Mit mehr als 20 Jahren Erfahrung vertreten wir Privatpersonen und Unternehmen in einer Vielzahl von Rechtsangelegenheiten. Unsere Philosophie basiert auf Mandantentreue, Transparenz und dem Erzielen bestmöglicher Ergebnisse.",
+    "bio2": "Wir gehen jeden Fall mit vollem Einsatz an und verbinden fundierte Rechtskenntnisse mit einem praxisorientierten Ansatz zur Problemlösung.",
+    "education": "Ausbildung",
+    "edu1": "Juristische Fakultät, Democritus-Universität Thrakien, Komotini",
+    "edu2": "LL.M. Postgraduiertenstudium, Ludwig-Maximilians-Universität München",
+    "memberships": "Mitgliedschaften",
+    "member1": "Rechtsanwaltskammer Thessaloniki",
+    "cta": "Kontakt",
+    "teaser": "Lernen Sie unsere Kanzlei kennen",
+    "teaserSub": "Über 20 Jahre Erfahrung zu Ihren Diensten.",
+    "teaserCta": "Mehr erfahren",
+    "value1Title": "Ethik",
+    "value1Desc": "Strikte Einhaltung der Berufsethik in jedem Fall, den wir bearbeiten.",
+    "value2Title": "Direkter Kontakt",
+    "value2Desc": "Persönliche Kommunikation und sofortige Updates bei jeder Entwicklung.",
+    "value3Title": "Fachkompetenz",
+    "value3Desc": "Kontinuierliche berufliche Weiterbildung und genaue Beobachtung der Rechtsprechung."
+  },
+  "contact": {
+    "title": "Kontakt",
+    "subtitle": "Wir stehen Ihnen für jede rechtliche Angelegenheit zur Verfügung.",
+    "name": "Vollständiger Name",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "message": "Nachricht",
+    "send": "Senden",
+    "sending": "Wird gesendet...",
+    "success": "Ihre Nachricht wurde erfolgreich gesendet!",
+    "successDetail": "Vielen Dank für Ihre Kontaktaufnahme. Wir werden uns so schnell wie möglich unter der von Ihnen angegebenen E-Mail-Adresse bei Ihnen melden.",
+    "firmName": "Kanzlei Papaioannou",
+    "address": "Adresse",
+    "addressLine1": "Leontos tou Sofou 12",
+    "addressLine2": "54625, Thessaloniki, Griechenland",
+    "hours": "Öffnungszeiten",
+    "hoursValue": "Montag - Freitag: 9:00 - 19:00 Uhr",
+    "required": "Dieses Feld ist erforderlich",
+    "invalidEmail": "Ungültige E-Mail-Adresse"
+  },
+  "footer": {
+    "rights": "Alle Rechte vorbehalten.",
+    "privacy": "Datenschutzerklärung",
+    "terms": "Nutzungsbedingungen",
+    "social": "Soziale Medien",
+    "description": "Umfassende Rechtsdienstleistungen mit Professionalität, Integrität und Hingabe zum Mandanten."
+  },
+  "legal": {
+    "lastUpdated": "Zuletzt aktualisiert",
+    "privacyTitle": "Datenschutzerklärung",
+    "privacyIntro": "Diese Datenschutzerklärung beschreibt, wie die Kanzlei Ioannis Papaioannou Ihre personenbezogenen Daten beim Besuch unserer Website erhebt, verwendet und schützt, gemäß der Datenschutz-Grundverordnung (DSGVO — EU-Verordnung 2016/679).",
+    "privacySection1Title": "1. Verantwortlicher",
+    "privacySection1": "Der Verantwortliche für Ihre personenbezogenen Daten ist die Kanzlei Ioannis Papaioannou, Leontos tou Sofou 12, 54625 Thessaloniki, Griechenland. Bei Fragen zum Datenschutz wenden Sie sich bitte an iopapaio@gmail.com.",
+    "privacySection2Title": "2. Erhobene Daten",
+    "privacySection2": "Über das Kontaktformular erheben wir: vollständigen Namen, E-Mail-Adresse, Telefonnummer (optional) und den Inhalt Ihrer Nachricht. Wir erheben auch automatisch Browsing-Daten (IP-Adresse, Browsertyp, besuchte Seiten) zu statistischen Zwecken.",
+    "privacySection3Title": "3. Verarbeitungszweck",
+    "privacySection3": "Die von Ihnen bereitgestellten Daten werden ausschließlich zur Beantwortung Ihrer Anfrage, zur Erbringung von Rechtsdienstleistungen und zur Erfüllung unserer rechtlichen Pflichten verwendet. Wir übermitteln Ihre Daten nicht zu kommerziellen Zwecken an Dritte.",
+    "privacySection4Title": "4. Aufbewahrungsfrist",
+    "privacySection4": "Kontaktformulardaten werden so lange aufbewahrt, wie es zur Bearbeitung Ihrer Anfrage und zur Erfüllung unserer rechtlichen Pflichten erforderlich ist.",
+    "privacySection5Title": "5. Ihre Rechte",
+    "privacySection5": "Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch. Sie können diese Rechte per E-Mail an iopapaio@gmail.com ausüben. Sie haben auch das Recht, eine Beschwerde bei der zuständigen Datenschutzbehörde einzureichen.",
+    "privacySection6Title": "6. Cookies",
+    "privacySection6": "Die Website verwendet technisch notwendige Cookies für ihren Grundbetrieb. Wir verwenden keine Tracking-Cookies Dritter ohne Ihre Zustimmung.",
+    "termsTitle": "Nutzungsbedingungen",
+    "termsIntro": "Die Nutzung dieser Website unterliegt den folgenden Bedingungen. Durch das Surfen auf dieser Website akzeptieren Sie diese bedingungslos.",
+    "termsSection1Title": "1. Informationscharakter",
+    "termsSection1": "Der Inhalt der Website ist rein informeller Natur. Er stellt keine Rechtsberatung dar und begründet kein Mandatsverhältnis zwischen dem Nutzer und der Kanzlei. Jede Rechtsangelegenheit erfordert persönliche Kommunikation und eine gegenseitige Beauftragung.",
+    "termsSection2Title": "2. Geistige Eigentumsrechte",
+    "termsSection2": "Alle Texte, Grafiken, Logos und Bilder auf der Website sind geistiges Eigentum der Kanzlei Ioannis Papaioannou und durch griechisches und internationales Recht geschützt. Eine Vervielfältigung ohne vorherige schriftliche Genehmigung ist untersagt.",
+    "termsSection3Title": "3. Links zu Drittseiten",
+    "termsSection3": "Die Website kann Links zu anderen Websites enthalten. Wir übernehmen keine Verantwortung für den Inhalt, die Datenschutzpraktiken oder die Verfügbarkeit dieser Websites.",
+    "termsSection4Title": "4. Haftungsbeschränkung",
+    "termsSection4": "Wir bemühen uns um die Richtigkeit und Aktualität der Inhalte, garantieren jedoch nicht, dass diese stets vollständig oder fehlerfrei sind. Die Nutzung der Website erfolgt auf eigene Verantwortung des Nutzers.",
+    "termsSection5Title": "5. Anwendbares Recht",
+    "termsSection5": "Diese Bedingungen unterliegen griechischem Recht. Die Gerichte in Thessaloniki sind ausschließlich zuständig für etwaige Streitigkeiten."
+  }
+}

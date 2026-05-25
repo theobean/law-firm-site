@@ -14,11 +14,11 @@ export default function Navbar() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
 
-  const otherLocale = locale === "el" ? "en" : "el";
+  const localeOrder = ["el", "en", "de"] as const;
+  const nextLocale = localeOrder[(localeOrder.indexOf(locale as "el" | "en" | "de") + 1) % localeOrder.length];
 
   function switchLocale() {
-    // Replace /el/ or /en/ prefix in pathname
-    const newPath = pathname.replace(`/${locale}`, `/${otherLocale}`);
+    const newPath = pathname.replace(`/${locale}`, `/${nextLocale}`);
     router.push(newPath);
   }
 
@@ -68,7 +68,7 @@ export default function Navbar() {
             onClick={switchLocale}
             className="ml-4 text-xs font-bold border border-white/40 text-white bg-white/10 hover:bg-accent hover:border-accent active:scale-95 px-3 py-1.5 rounded transition-all"
           >
-            {otherLocale.toUpperCase()}
+            {nextLocale.toUpperCase()}
           </button>
         </div>
 
@@ -78,7 +78,7 @@ export default function Navbar() {
             onClick={switchLocale}
             className="text-xs font-bold border border-white/40 text-white bg-white/10 hover:bg-accent hover:border-accent active:scale-95 px-3 py-1.5 rounded transition-all"
           >
-            {otherLocale.toUpperCase()}
+            {nextLocale.toUpperCase()}
           </button>
           <button
             onClick={() => setOpen(!open)}
