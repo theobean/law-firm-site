@@ -71,14 +71,22 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Mobile hamburger */}
-        <button
-          className="md:hidden text-white"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
-        >
-          {open ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        {/* Mobile right: language + hamburger */}
+        <div className="md:hidden flex items-center gap-3">
+          <button
+            onClick={switchLocale}
+            className="text-xs font-bold border border-white/30 text-white/70 hover:border-accent hover:text-accent px-3 py-1 rounded transition-colors"
+          >
+            {otherLocale.toUpperCase()}
+          </button>
+          <button
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle menu"
+            className="text-white"
+          >
+            {open ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile menu */}
@@ -98,12 +106,6 @@ export default function Navbar() {
               {l.label}
             </Link>
           ))}
-          <button
-            onClick={() => { switchLocale(); setOpen(false); }}
-            className="self-start text-xs font-bold border border-white/30 text-white/70 hover:border-accent hover:text-accent px-3 py-1 rounded transition-colors"
-          >
-            {otherLocale.toUpperCase()}
-          </button>
         </div>
       </div>
     </header>
