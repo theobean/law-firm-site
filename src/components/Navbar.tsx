@@ -30,19 +30,16 @@ function FlagButton({
     <button
       onClick={onClick}
       title={label}
-      className={`flex flex-col items-center justify-center gap-0.5 transition-all duration-200
-        ${compact ? "px-2 py-1.5" : "px-2.5 py-2"}
-        ${active
-          ? "bg-accent/20 shadow-[inset_0_0_0_1px_rgba(200,146,42,0.6)]"
-          : "hover:bg-white/10"
-        }
-        ${bordered ? "border-l border-white/20" : ""}
+      className={`flex items-center gap-1.5 transition-all duration-200
+        ${compact ? "px-2 py-1.5" : "px-2.5 py-1.5"}
+        ${active ? "bg-accent/15" : "hover:bg-white/8"}
+        ${bordered ? "border-l border-white/15" : ""}
       `}
     >
-      {/* Flag image */}
-      <span className={`block overflow-hidden rounded-[2px] transition-all duration-200
-        ${active ? "ring-1 ring-accent/80 opacity-100" : "opacity-50 hover:opacity-80"}
-        ${compact ? "w-[22px] h-[15px]" : "w-[26px] h-[17px]"}
+      {/* Flag */}
+      <span className={`block overflow-hidden rounded-[2px] shadow-sm transition-all duration-200 shrink-0
+        ${active ? "ring-1 ring-accent/70" : "opacity-60 group-hover:opacity-90"}
+        ${compact ? "w-[20px] h-[13px]" : "w-[22px] h-[15px]"}
       `}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -53,10 +50,10 @@ function FlagButton({
           className="w-full h-full object-cover"
         />
       </span>
-      {/* Locale label */}
-      <span className={`font-bold tracking-wider leading-none transition-colors duration-200
-        ${compact ? "text-[8px]" : "text-[9px]"}
-        ${active ? "text-accent" : "text-white/40"}
+      {/* Label */}
+      <span className={`font-semibold tracking-widest leading-none transition-colors duration-200
+        ${compact ? "text-[9px]" : "text-[10px]"}
+        ${active ? "text-accent" : "text-white/50"}
       `}>
         {label}
       </span>
