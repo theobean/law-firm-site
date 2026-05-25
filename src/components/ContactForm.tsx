@@ -51,7 +51,7 @@ export default function ContactForm() {
         </p>
         <div className="mt-8 inline-flex items-center gap-2 text-accent text-xs uppercase tracking-widest font-semibold">
           <span className="w-8 h-px bg-accent" />
-          Δικηγορικό Γραφείο Παπαϊωάννου
+          {t("firmName")}
           <span className="w-8 h-px bg-accent" />
         </div>
       </div>
