@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { urlFor } from "@/sanity/image";
@@ -25,9 +25,100 @@ interface Props {
   categoryLabels: Record<string, string>;
 }
 
+const PAGE_SIZE = 6;
+
+function AnimatedCard({ article, locale, categoryLabels, index }: {
+  article: Article;
+  locale: string;
+  categoryLabels: Record<string, string>;
+  index: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect(); } },
+      { threshold: 0.08 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const delay = (index % PAGE_SIZE) * 0.07;
+
+  return (
+    <div
+      ref={ref}
+      style={
+        visible
+          ? { animation: `reveal-up 0.5s cubic-bezier(0.4,0,0.2,1) ${delay}s both` }
+          : { opacity: 0 }
+      }
+      className="relative group"
+    >
+      <Link
+        href={`/${locale}/blog/${article.slug.current}`}
+        className="block border border-gray-100 rounded-sm overflow-hidden bg-primary
+          transition-all duration-300 ease-out
+          hover:scale-[1.04] hover:shadow-2xl hover:z-10 hover:border-accent/40
+          active:scale-[1.01]
+          relative"
+      >
+        {article.mainImage && (
+          <div className="relative h-44 overflow-hidden">
+            <Image
+              src={urlFor(article.mainImage).width(600).height(400).url()}
+              alt={article.title}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent" />
+          </div>
+        )}
+        <div className="p-5">
+          <div className="flex items-center flex-wrap gap-2 text-white/50 text-xs mb-3">
+            <Calendar size={11} />
+            <span>
+              {article.publishedAt
+                ? new Date(article.publishedAt).toLocaleDateString(
+                    locale === "el" ? "el-GR" : "en-US"
+                  )
+                : ""}
+            </span>
+            <span>·</span>
+            <Clock size={11} />
+            <span>{readingTime(article.body)} λεπτά</span>
+            {article.category && categoryLabels[article.category] && (
+              <>
+                <span>·</span>
+                <span className="text-accent font-medium">{categoryLabels[article.category]}</span>
+              </>
+            )}
+          </div>
+          <h2 className="text-white font-bold text-base mb-2 border-b border-accent/60 pb-2 leading-snug line-clamp-2">
+            {article.title}
+          </h2>
+          {article.excerpt && (
+            <p className="text-white/55 text-sm leading-relaxed line-clamp-2">
+              {article.excerpt}
+            </p>
+          )}
+          <div className="mt-3 flex items-center gap-1 text-accent text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            Διαβάστε περισσότερα →
+          </div>
+        </div>
+      </Link>
+    </div>
+  );
+}
+
 export default function BlogList({ articles, locale, categoryLabels }: Props) {
   const t = useTranslations("blog");
   const [selected, setSelected] = useState<string>("all");
+  const [showing, setShowing] = useState(PAGE_SIZE);
 
   const availableCategories = useMemo(() => {
     const set = new Set<string>();
@@ -36,14 +127,21 @@ export default function BlogList({ articles, locale, categoryLabels }: Props) {
   }, [articles]);
 
   const filtered = useMemo(() => {
-    if (selected === "all") return articles;
-    return articles.filter((a) => a.category === selected);
+    return selected === "all" ? articles : articles.filter((a) => a.category === selected);
   }, [articles, selected]);
 
+  const handleFilter = (cat: string) => {
+    setSelected(cat);
+    setShowing(PAGE_SIZE);
+  };
+
+  const paginated = filtered.slice(0, showing);
+  const hasMore = showing < filtered.length;
+
   const chip = (active: boolean) =>
-    `px-4 py-2 rounded-sm text-sm font-semibold transition-colors ${
+    `px-4 py-2 rounded-sm text-sm font-semibold transition-all duration-200 ${
       active
-        ? "bg-primary text-white"
+        ? "bg-primary text-white shadow-md"
         : "bg-gray-100 text-gray-600 hover:bg-gray-200"
     }`;
 
@@ -51,18 +149,11 @@ export default function BlogList({ articles, locale, categoryLabels }: Props) {
     <>
       {availableCategories.length > 1 && (
         <div className="flex flex-wrap gap-2 mb-10">
-          <button
-            onClick={() => setSelected("all")}
-            className={chip(selected === "all")}
-          >
+          <button onClick={() => handleFilter("all")} className={chip(selected === "all")}>
             {t("categoryAll")}
           </button>
           {availableCategories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setSelected(cat)}
-              className={chip(selected === cat)}
-            >
+            <button key={cat} onClick={() => handleFilter(cat)} className={chip(selected === cat)}>
               {categoryLabels[cat] ?? cat}
             </button>
           ))}
@@ -72,55 +163,30 @@ export default function BlogList({ articles, locale, categoryLabels }: Props) {
       {filtered.length === 0 ? (
         <p className="text-gray-400 text-center py-20">{t("empty")}</p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filtered.map((article) => (
-            <Link
-              key={article._id}
-              href={`/${locale}/blog/${article.slug.current}`}
-              className="group block border border-gray-100 rounded-sm overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-primary"
-            >
-              {article.mainImage && (
-                <div className="relative h-48 overflow-hidden">
-                  <Image
-                    src={urlFor(article.mainImage).width(600).height(400).url()}
-                    alt={article.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-              )}
-              <div className="p-6 bg-primary">
-                <div className="flex items-center flex-wrap gap-2 text-white/50 text-xs mb-3">
-                  <Calendar size={12} />
-                  <span>
-                    {article.publishedAt
-                      ? new Date(article.publishedAt).toLocaleDateString(
-                          locale === "el" ? "el-GR" : "en-US"
-                        )
-                      : ""}
-                  </span>
-                  <span>·</span>
-                  <Clock size={12} />
-                  <span>{readingTime(article.body)} λεπτά</span>
-                  {article.category && categoryLabels[article.category] && (
-                    <>
-                      <span>·</span>
-                      <span className="text-accent">{categoryLabels[article.category]}</span>
-                    </>
-                  )}
-                </div>
-                <h2 className="text-white font-bold text-lg mb-2 border-b border-accent pb-2 inline-block">
-                  {article.title}
-                </h2>
-                {article.excerpt && (
-                  <p className="text-white/60 text-sm leading-relaxed mt-3 line-clamp-3">
-                    {article.excerpt}
-                  </p>
-                )}
-              </div>
-            </Link>
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {paginated.map((article, i) => (
+              <AnimatedCard
+                key={article._id}
+                article={article}
+                locale={locale}
+                categoryLabels={categoryLabels}
+                index={i}
+              />
+            ))}
+          </div>
+
+          {hasMore && (
+            <div className="mt-12 text-center">
+              <button
+                onClick={() => setShowing((s) => s + PAGE_SIZE)}
+                className="inline-flex items-center gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold px-8 py-3 rounded-sm transition-all duration-200"
+              >
+                Φόρτωσε περισσότερα ({filtered.length - showing} ακόμα)
+              </button>
+            </div>
+          )}
+        </>
       )}
     </>
   );
