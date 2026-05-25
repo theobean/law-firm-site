@@ -65,7 +65,7 @@ export default function Navbar() {
           ))}
           <button
             onClick={switchLocale}
-            className="ml-4 text-xs font-bold border border-white/30 text-white/70 hover:border-accent hover:text-accent px-3 py-1 rounded transition-colors"
+            className="ml-4 text-xs font-bold border border-white/40 text-white bg-white/10 hover:bg-accent hover:border-accent active:scale-95 px-3 py-1.5 rounded transition-all"
           >
             {otherLocale.toUpperCase()}
           </button>
@@ -75,7 +75,7 @@ export default function Navbar() {
         <div className="md:hidden flex items-center gap-3">
           <button
             onClick={switchLocale}
-            className="text-xs font-bold border border-white/30 text-white/70 hover:border-accent hover:text-accent px-3 py-1 rounded transition-colors"
+            className="text-xs font-bold border border-white/40 text-white bg-white/10 hover:bg-accent hover:border-accent active:scale-95 px-3 py-1.5 rounded transition-all"
           >
             {otherLocale.toUpperCase()}
           </button>
