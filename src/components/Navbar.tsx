@@ -30,8 +30,8 @@ function FlagButton({
     <button
       onClick={onClick}
       title={label}
-      className={`flex items-center gap-1.5 transition-all duration-200
-        ${compact ? "px-2 py-2" : "px-2.5 py-2"}
+      className={`flex items-center gap-1 transition-all duration-200
+        ${compact ? "px-1.5 py-1.5" : "px-2 py-1.5"}
         ${active ? "bg-accent/15" : "hover:bg-white/10"}
         ${bordered ? "border-l border-white/15" : ""}
       `}
@@ -39,20 +39,20 @@ function FlagButton({
       {/* Flag */}
       <span className={`block overflow-hidden rounded-[2px] shadow-sm transition-all duration-200 shrink-0
         ${active ? "ring-1 ring-accent/80" : "opacity-70"}
-        ${compact ? "w-[26px] h-[17px]" : "w-[28px] h-[19px]"}
+        ${compact ? "w-[18px] h-[12px]" : "w-[20px] h-[13px]"}
       `}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={flag}
           alt={label}
-          width={56}
-          height={38}
+          width={40}
+          height={27}
           className="w-full h-full object-cover"
         />
       </span>
       {/* Label */}
       <span className={`font-bold tracking-wider leading-none transition-colors duration-200
-        ${compact ? "text-[10px]" : "text-[11px]"}
+        ${compact ? "text-[8px]" : "text-[9px]"}
         ${active ? "text-accent" : "text-white/60"}
       `}>
         {label}
