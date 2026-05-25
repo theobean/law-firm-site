@@ -102,7 +102,7 @@ export default function Navbar() {
         {pathname === `/${locale}` ? (
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="flex items-center gap-2 text-white shrink-0"
+            className="flex items-center gap-2 text-white shrink-0 cursor-pointer"
           >
             <Scale size={22} className="text-accent shrink-0" />
             <div className="w-px h-6 bg-accent/60 shrink-0" />
