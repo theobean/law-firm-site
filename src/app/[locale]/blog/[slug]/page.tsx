@@ -100,6 +100,12 @@ export default async function ArticlePage({
           <ShareButtons url={articleUrl} title={article.title} />
         </div>
 
+        {article.excerpt && (
+          <p className="text-xl text-gray-600 leading-relaxed border-l-4 border-accent pl-6 mb-10 italic">
+            {article.excerpt}
+          </p>
+        )}
+
         <div className="prose prose-lg max-w-none prose-headings:font-playfair prose-headings:text-primary prose-a:text-accent">
           {article.body && <PortableText value={article.body} />}
         </div>
