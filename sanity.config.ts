@@ -6,8 +6,8 @@ import { schemaTypes } from "./src/sanity/schemaTypes";
 export default defineConfig({
   name: "law-firm",
   title: "Παπαϊωάννου — Διαχείριση",
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "hwu5yvsr",
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production",
+  projectId: (process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "hwu5yvsr").trim(),
+  dataset: (process.env.NEXT_PUBLIC_SANITY_DATASET || "production").trim(),
   basePath: "/studio",
   plugins: [structureTool(), visionTool()],
   schema: { types: schemaTypes },
