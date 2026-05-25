@@ -44,8 +44,9 @@ export default function Navbar() {
       {/* Main nav */}
       <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link href={`/${locale}`} className="flex items-center gap-2 text-white">
+        <Link href={`/${locale}`} className="flex items-center gap-3 text-white">
           <Scale size={28} className="text-accent" />
+          <div className="w-px h-8 bg-accent/60" />
           <div className="leading-tight">
             <p className="font-playfair font-bold text-lg uppercase tracking-wider">{t("about.name")}</p>
             <p className="text-xs text-white/60 tracking-widest uppercase">{t("common.firmTagline")}</p>

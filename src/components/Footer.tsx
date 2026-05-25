@@ -12,8 +12,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Logo & tagline */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center gap-3 mb-4">
               <Scale size={28} className="text-accent" />
+              <div className="w-px h-8 bg-accent/60" />
               <div>
                 <p className="font-playfair font-bold text-lg uppercase tracking-wider">{t("about.name")}</p>
                 <p className="text-xs text-white/50 tracking-widest uppercase">{t("common.firmTagline")}</p>
