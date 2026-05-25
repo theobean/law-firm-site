@@ -172,7 +172,7 @@ export default function BlogList({ articles, locale, categoryLabels }: Props) {
 
   const chip = (active: boolean) =>
     `px-4 py-2 rounded-sm text-sm font-semibold transition-all duration-200 ${
-      active ? "bg-primary text-white shadow-md" : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+      active ? "bg-accent text-white shadow-md" : "bg-gray-100 text-gray-600 hover:bg-gray-200"
     }`;
 
   return (
