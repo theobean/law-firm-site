@@ -6,7 +6,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { Cookie, X } from "lucide-react";
 
 const STORAGE_KEY = "cookieConsent";
-const GA_ID = "G-4J60MD3JC8";
+const GA_ID = "G-TE25ZYG8WM";
 
 declare global {
   interface Window {
