@@ -14,11 +14,10 @@ export default function Navbar() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
 
-  const localeOrder = ["el", "en", "de"] as const;
-  const nextLocale = localeOrder[(localeOrder.indexOf(locale as "el" | "en" | "de") + 1) % localeOrder.length];
+  const locales = ["el", "en", "de"] as const;
 
-  function switchLocale() {
-    const newPath = pathname.replace(`/${locale}`, `/${nextLocale}`);
+  function switchLocale(target: string) {
+    const newPath = pathname.replace(`/${locale}`, `/${target}`);
     router.push(newPath);
   }
 
@@ -64,22 +63,40 @@ export default function Navbar() {
               {l.label}
             </Link>
           ))}
-          <button
-            onClick={switchLocale}
-            className="ml-4 text-xs font-bold border border-white/40 text-white bg-white/10 hover:bg-accent hover:border-accent active:scale-95 px-3 py-1.5 rounded transition-all"
-          >
-            {nextLocale.toUpperCase()}
-          </button>
+          <div className="ml-4 flex items-center border border-white/20 rounded-sm overflow-hidden">
+            {locales.map((l, i) => (
+              <button
+                key={l}
+                onClick={() => switchLocale(l)}
+                className={`text-xs font-bold px-2.5 py-1.5 transition-all ${
+                  l === locale
+                    ? "bg-accent text-white"
+                    : "text-white/50 hover:text-white hover:bg-white/10"
+                } ${i > 0 ? "border-l border-white/20" : ""}`}
+              >
+                {l.toUpperCase()}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Mobile right: language + hamburger */}
         <div className="md:hidden flex items-center gap-3">
-          <button
-            onClick={switchLocale}
-            className="text-xs font-bold border border-white/40 text-white bg-white/10 hover:bg-accent hover:border-accent active:scale-95 px-3 py-1.5 rounded transition-all"
-          >
-            {nextLocale.toUpperCase()}
-          </button>
+          <div className="flex items-center border border-white/20 rounded-sm overflow-hidden">
+            {locales.map((l, i) => (
+              <button
+                key={l}
+                onClick={() => switchLocale(l)}
+                className={`text-xs font-bold px-2 py-1.5 transition-all ${
+                  l === locale
+                    ? "bg-accent text-white"
+                    : "text-white/50 hover:text-white hover:bg-white/10"
+                } ${i > 0 ? "border-l border-white/20" : ""}`}
+              >
+                {l.toUpperCase()}
+              </button>
+            ))}
+          </div>
           <button
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
