@@ -1,4 +1,7 @@
+"use client";
+
 import { useTranslations } from "next-intl";
+import { useEffect, useRef, useState } from "react";
 
 const stats = [
   { value: "20+", key: "experience" },
@@ -9,16 +12,36 @@ const stats = [
 
 export default function StatsSection() {
   const t = useTranslations("stats");
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect(); } },
+      { threshold: 0.2 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section className="relative bg-primary/95 py-24 overflow-hidden">
-      {/* Subtle background */}
       <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/90 to-primary" />
 
-      <div className="relative max-w-6xl mx-auto px-6">
+      <div ref={ref} className="relative max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {stats.map(({ value, key }) => (
-            <div key={key} className="border-l-2 border-accent pl-6">
+          {stats.map(({ value, key }, i) => (
+            <div
+              key={key}
+              className="border-l-2 border-accent pl-6 transition-all duration-700"
+              style={{
+                transitionDelay: `${i * 150}ms`,
+                opacity: visible ? 1 : 0,
+                transform: visible ? "translateX(0)" : "translateX(-40px)",
+              }}
+            >
               <p className="text-4xl md:text-5xl font-playfair font-bold text-white mb-2">
                 {value}
               </p>
@@ -27,7 +50,6 @@ export default function StatsSection() {
           ))}
         </div>
 
-        {/* CTA */}
         <div className="mt-16 text-center">
           <a
             href="#contact"
