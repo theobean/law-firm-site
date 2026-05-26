@@ -15,15 +15,15 @@ interface Decision {
 }
 
 const categoryColors: Record<string, string> = {
-  banking: "bg-blue-50 text-blue-700 border-blue-200",
-  extrajudicial: "bg-emerald-50 text-emerald-700 border-emerald-200",
-  criminal: "bg-red-50 text-red-700 border-red-200",
-  commercial: "bg-amber-50 text-amber-700 border-amber-200",
-  realEstate: "bg-orange-50 text-orange-700 border-orange-200",
-  administrative: "bg-purple-50 text-purple-700 border-purple-200",
-  inheritance: "bg-teal-50 text-teal-700 border-teal-200",
-  tax: "bg-indigo-50 text-indigo-700 border-indigo-200",
-  labor: "bg-rose-50 text-rose-700 border-rose-200",
+  banking: "bg-blue-900/40 text-blue-300 border-blue-700/40",
+  extrajudicial: "bg-emerald-900/40 text-emerald-300 border-emerald-700/40",
+  criminal: "bg-red-900/40 text-red-300 border-red-700/40",
+  commercial: "bg-amber-900/40 text-amber-300 border-amber-700/40",
+  realEstate: "bg-orange-900/40 text-orange-300 border-orange-700/40",
+  administrative: "bg-purple-900/40 text-purple-300 border-purple-700/40",
+  inheritance: "bg-teal-900/40 text-teal-300 border-teal-700/40",
+  tax: "bg-indigo-900/40 text-indigo-300 border-indigo-700/40",
+  labor: "bg-rose-900/40 text-rose-300 border-rose-700/40",
 };
 
 function DecisionCard({ decision, locale }: { decision: Decision; locale: string }) {
@@ -45,11 +45,11 @@ function DecisionCard({ decision, locale }: { decision: Decision; locale: string
     : "";
 
   return (
-    <div className="flex flex-col border border-gray-100 rounded-sm p-6 hover:border-accent/40 hover:shadow-md transition-all duration-300 group bg-white">
+    <div className="flex flex-col border border-white/10 rounded-sm p-6 hover:border-accent/40 hover:shadow-xl hover:shadow-black/30 transition-all duration-300 group bg-primary">
       {/* Top row: icon + category badge */}
       <div className="flex items-start justify-between gap-3 mb-4">
-        <div className="w-10 h-10 rounded-sm bg-primary/8 border border-primary/10 flex items-center justify-center shrink-0 group-hover:bg-accent/10 group-hover:border-accent/20 transition-colors">
-          <FileText size={18} className="text-primary/60 group-hover:text-accent transition-colors" />
+        <div className="w-10 h-10 rounded-sm bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-accent/15 group-hover:border-accent/30 transition-colors">
+          <FileText size={18} className="text-white/40 group-hover:text-accent transition-colors" />
         </div>
         {categoryLabel && (
           <span className={`text-[10px] font-bold tracking-wider uppercase px-2 py-1 rounded-sm border ${colorClass}`}>
@@ -59,20 +59,20 @@ function DecisionCard({ decision, locale }: { decision: Decision; locale: string
       </div>
 
       {/* Title */}
-      <h3 className="text-primary font-semibold text-base leading-snug mb-3 group-hover:text-accent transition-colors">
+      <h3 className="text-white font-semibold text-base leading-snug mb-3 group-hover:text-accent transition-colors">
         {decision.title}
       </h3>
 
       {/* Meta */}
       <div className="flex flex-col gap-1.5 mb-4">
         {decision.court && (
-          <div className="flex items-center gap-1.5 text-xs text-gray-500">
+          <div className="flex items-center gap-1.5 text-xs text-white/50">
             <Landmark size={11} className="shrink-0" />
             <span>{decision.court}</span>
           </div>
         )}
         {formattedDate && (
-          <div className="flex items-center gap-1.5 text-xs text-gray-500">
+          <div className="flex items-center gap-1.5 text-xs text-white/50">
             <Calendar size={11} className="shrink-0" />
             <span>{formattedDate}</span>
           </div>
@@ -81,7 +81,7 @@ function DecisionCard({ decision, locale }: { decision: Decision; locale: string
 
       {/* Description */}
       {decision.description && (
-        <p className="text-gray-500 text-xs leading-relaxed mb-4 line-clamp-2">
+        <p className="text-white/40 text-xs leading-relaxed mb-4 line-clamp-2">
           {decision.description}
         </p>
       )}
@@ -100,7 +100,7 @@ function DecisionCard({ decision, locale }: { decision: Decision; locale: string
           </a>
           <a
             href={`${decision.fileUrl}?dl=`}
-            className="flex items-center gap-1.5 text-xs font-semibold text-primary border border-primary/20 hover:border-accent hover:text-accent px-3 py-2 rounded-sm transition-colors"
+            className="flex items-center gap-1.5 text-xs font-semibold text-white/70 border border-white/20 hover:border-accent hover:text-accent px-3 py-2 rounded-sm transition-colors"
           >
             <Download size={12} />
             {t("download")}
@@ -149,8 +149,8 @@ export default function DecisionsGrid({
             onClick={() => setActive(null)}
             className={`px-4 py-1.5 rounded-sm text-sm font-medium border transition-colors ${
               active === null
-                ? "bg-primary text-white border-primary"
-                : "text-gray-600 border-gray-200 hover:border-primary hover:text-primary"
+                ? "bg-accent text-white border-accent"
+                : "text-gray-500 border-gray-200 hover:border-accent hover:text-accent"
             }`}
           >
             Όλες
@@ -161,8 +161,8 @@ export default function DecisionsGrid({
               onClick={() => setActive(active === cat ? null : cat)}
               className={`px-4 py-1.5 rounded-sm text-sm font-medium border transition-colors ${
                 active === cat
-                  ? "bg-primary text-white border-primary"
-                  : "text-gray-600 border-gray-200 hover:border-primary hover:text-primary"
+                  ? "bg-accent text-white border-accent"
+                  : "text-gray-500 border-gray-200 hover:border-accent hover:text-accent"
               }`}
             >
               {tPA(cat as Parameters<typeof tPA>[0])}
