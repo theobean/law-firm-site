@@ -305,16 +305,26 @@
   "team": {
     "sectionTitle": "Unser Team",
     "sectionSubtitle": "Erfahrene Rechtsberater in Ihrem Dienst",
-    "founderBadge": "Gründer",
-    "associateBadge": "Mitarbeiter",
-    "associateRole": "Rechtsanwalt — Mitarbeiter",
+    "role": "Rechtsanwalt",
+    "educationLabel": "Ausbildung",
+    "clickToExpand": "Mehr",
+    "ioannis": {
+      "name": "Ioannis Papaioannou",
+      "role": "Rechtsanwalt",
+      "bio": "Mit über 20 Jahren Erfahrung vertritt er Privatpersonen und Unternehmen in einem breiten Spektrum von Rechtsangelegenheiten.",
+      "edu": ["Juristische Fakultät, Demokrit-Universität Thrakien, Komotini", "LL.M. Postgraduales Studium, Ludwig-Maximilians-Universität München"]
+    },
     "georgios": {
       "name": "Georgios Liamos",
-      "bio": "Kanzleimitarbeiter mit Schwerpunkt im Zivil- und Handelsrecht. Er bietet rechtliche Unterstützung bei Vertragsstreitigkeiten, gesellschaftsrechtlichen Angelegenheiten und zivilrechtlichen Klagen, verbindet analytisches Denken mit praxisorientierten Lösungen."
+      "role": "Rechtsanwalt — Mitarbeiter",
+      "bio": "Schwerpunkt im Zivil- und Handelsrecht. Bietet rechtliche Unterstützung bei Vertragsstreitigkeiten, gesellschaftsrechtlichen Angelegenheiten und zivilrechtlichen Klagen.",
+      "edu": ["Juristische Fakultät, Aristoteles-Universität Thessaloniki (AUTH)"]
     },
     "lamprinι": {
       "name": "Lampriní Papaioannou",
-      "bio": "Kanzleimitarbeiterin mit Schwerpunkt im Familien- und Erbrecht. Sie bearbeitet Scheidungs-, Sorgerechts- und Erbschaftsstreitigkeiten mit Einfühlungsvermögen und Professionalität."
+      "role": "Rechtsanwältin — Mitarbeiterin",
+      "bio": "Schwerpunkt im Familien- und Erbrecht. Bearbeitet Scheidungs-, Sorgerechts- und Erbschaftsstreitigkeiten mit Einfühlungsvermögen.",
+      "edu": ["Juristische Fakultät, Demokrit-Universität Thrakien, Komotini"]
     }
   }
 }
