@@ -6,8 +6,8 @@ import Link from "next/link";
 import { useLocale } from "next-intl";
 
 const stats = [
-  { value: "20+", key: "experience" },
-  { value: "500+", key: "cases" },
+  { value: "25+", key: "experience" },
+  { value: "1000+", key: "cases" },
   { value: "350+", key: "clients" },
   { value: "9", key: "areas" },
 ] as const;

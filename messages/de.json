@@ -75,10 +75,10 @@
   "seo": {
     "siteName": "Ioannis Papaioannou | Rechtsanwaltskanzlei",
     "defaultTitle": "Ioannis Papaioannou — Rechtsanwalt in Thessaloniki",
-    "defaultDescription": "Rechtsanwaltskanzlei in Thessaloniki mit über 20 Jahren Erfahrung im Zivil-, Straf-, Handels-, Arbeits- und Steuerrecht.",
+    "defaultDescription": "Rechtsanwaltskanzlei in Thessaloniki mit über 25 Jahren Erfahrung im Zivil-, Straf-, Handels-, Arbeits- und Steuerrecht.",
     "homeTitle": "Startseite",
     "aboutTitle": "Über uns",
-    "aboutDescription": "Lernen Sie Rechtsanwalt Ioannis Papaioannou und unsere Kanzlei kennen. Über 20 Jahre Erfahrung für Privatpersonen und Unternehmen.",
+    "aboutDescription": "Lernen Sie Rechtsanwalt Ioannis Papaioannou und unsere Kanzlei kennen. Über 25 Jahre Erfahrung für Privatpersonen und Unternehmen.",
     "practiceAreasTitle": "Rechtsgebiete",
     "practiceAreasDescription": "Umfassende rechtliche Beratung in Zivil-, Straf-, Handels-, Immobilien-, Arbeits-, Verwaltungs-, Erb- und Steuerrecht.",
     "contactTitle": "Kontakt",
@@ -109,7 +109,7 @@
     "whyUs": "Warum wir",
     "why1": "Persönliche Betreuung in jedem Fall",
     "why2": "Direkter Kontakt und kontinuierliche Updates",
-    "why3": "Über 20 Jahre nachgewiesene Erfahrung",
+    "why3": "Über 25 Jahre nachgewiesene Erfahrung",
     "why4": "Absolute Einhaltung der Berufsethik"
   },
   "stats": {
@@ -261,7 +261,7 @@
     "title": "Unsere Kanzlei",
     "name": "Ioannis Papaioannou",
     "role": "Rechtsanwalt",
-    "bio1": "Mit mehr als 20 Jahren Erfahrung vertreten wir Privatpersonen und Unternehmen in einer Vielzahl von Rechtsangelegenheiten. Unsere Philosophie basiert auf Mandantentreue, Transparenz und dem Erzielen bestmöglicher Ergebnisse.",
+    "bio1": "Mit mehr als 25 Jahren Erfahrung vertreten wir Privatpersonen und Unternehmen in einer Vielzahl von Rechtsangelegenheiten. Unsere Philosophie basiert auf Mandantentreue, Transparenz und dem Erzielen bestmöglicher Ergebnisse.",
     "bio2": "Wir gehen jeden Fall mit vollem Einsatz an und verbinden fundierte Rechtskenntnisse mit einem praxisorientierten Ansatz zur Problemlösung.",
     "education": "Ausbildung",
     "edu1": "Juristische Fakultät, Democritus-Universität Thrakien, Komotini",
@@ -270,7 +270,7 @@
     "member1": "Rechtsanwaltskammer Thessaloniki",
     "cta": "Kontakt",
     "teaser": "Lernen Sie unsere Kanzlei kennen",
-    "teaserSub": "Über 20 Jahre Erfahrung zu Ihren Diensten.",
+    "teaserSub": "Über 25 Jahre Erfahrung zu Ihren Diensten.",
     "teaserCta": "Mehr erfahren",
     "value1Title": "Ethik",
     "value1Desc": "Strikte Einhaltung der Berufsethik in jedem Fall, den wir bearbeiten.",
@@ -344,7 +344,7 @@
     "ioannis": {
       "name": "Ioannis Papaioannou",
       "role": "Rechtsanwalt",
-      "bio": "Mit über 20 Jahren Erfahrung vertritt er Privatpersonen und Unternehmen in einem breiten Spektrum von Rechtsangelegenheiten.",
+      "bio": "Mit über 25 Jahren Erfahrung vertritt er Privatpersonen und Unternehmen in einem breiten Spektrum von Rechtsangelegenheiten.",
       "edu": ["Juristische Fakultät, Demokrit-Universität Thrakien, Komotini", "LL.M. Postgraduales Studium, Ludwig-Maximilians-Universität München"]
     },
     "georgios": {

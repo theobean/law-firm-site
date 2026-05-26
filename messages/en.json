@@ -75,10 +75,10 @@
   "seo": {
     "siteName": "Ioannis Papaioannou | Law Office",
     "defaultTitle": "Ioannis Papaioannou — Lawyer in Thessaloniki",
-    "defaultDescription": "Law office in Thessaloniki with 20+ years of experience in Civil, Criminal, Commercial, Labor and Tax Law.",
+    "defaultDescription": "Law office in Thessaloniki with 25+ years of experience in Civil, Criminal, Commercial, Labor and Tax Law.",
     "homeTitle": "Home",
     "aboutTitle": "About Us",
-    "aboutDescription": "Meet lawyer Ioannis Papaioannou and our firm. 20+ years of experience serving individuals and businesses.",
+    "aboutDescription": "Meet lawyer Ioannis Papaioannou and our firm. 25+ years of experience serving individuals and businesses.",
     "practiceAreasTitle": "Practice Areas",
     "practiceAreasDescription": "Comprehensive legal coverage in Civil, Criminal, Commercial, Real Estate, Labor, Administrative, Inheritance and Tax Law.",
     "contactTitle": "Contact",
@@ -109,7 +109,7 @@
     "whyUs": "Why Us",
     "why1": "Personal attention to every case",
     "why2": "Direct communication and continuous updates",
-    "why3": "20+ years of proven experience",
+    "why3": "25+ years of proven experience",
     "why4": "Absolute adherence to professional ethics"
   },
   "stats": {
@@ -261,7 +261,7 @@
     "title": "Our Firm",
     "name": "Ioannis Papaioannou",
     "role": "Attorney at Law",
-    "bio1": "With more than 20 years of experience, we represent individuals and businesses across a wide range of legal matters. Our philosophy is built on client dedication, transparency and achieving the best possible outcomes.",
+    "bio1": "With more than 25 years of experience, we represent individuals and businesses across a wide range of legal matters. Our philosophy is built on client dedication, transparency and achieving the best possible outcomes.",
     "bio2": "We approach every case with full commitment, combining in-depth knowledge of the law with a practical approach to problem solving.",
     "education": "Education",
     "edu1": "Faculty of Law, Democritus University of Thrace, Komotini",
@@ -270,7 +270,7 @@
     "member1": "Thessaloniki Bar Association",
     "cta": "Contact",
     "teaser": "Meet our firm",
-    "teaserSub": "Over 20 years of experience at your service.",
+    "teaserSub": "Over 25 years of experience at your service.",
     "teaserCta": "Learn More",
     "value1Title": "Ethics",
     "value1Desc": "Strict adherence to professional ethics in every case we handle.",
@@ -344,7 +344,7 @@
     "ioannis": {
       "name": "Ioannis Papaioannou",
       "role": "Attorney at Law",
-      "bio": "With more than 20 years of experience, he represents individuals and businesses across a wide range of legal matters.",
+      "bio": "With more than 25 years of experience, he represents individuals and businesses across a wide range of legal matters.",
       "edu": ["Faculty of Law, Democritus University of Thrace, Komotini", "LL.M. Postgraduate Studies, Ludwig Maximilian University of Munich"]
     },
     "georgios": {
