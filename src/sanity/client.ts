@@ -34,6 +34,15 @@ export async function getInterviews() {
   );
 }
 
+export async function getDecisions() {
+  return client.fetch(
+    `*[_type == "decision"] | order(date desc) {
+      _id, title, date, court, category, description,
+      "fileUrl": file.asset->url
+    }`
+  );
+}
+
 export async function getRelatedArticles(currentSlug: string, category: string, limit = 3) {
   return client.fetch(
     `*[_type == "article" && slug.current != $currentSlug && category == $category] | order(publishedAt desc)[0...$limit] {

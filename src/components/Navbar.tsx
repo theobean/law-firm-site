@@ -84,6 +84,7 @@ export default function Navbar() {
     { href: `/${locale}/blog`, label: tNav("blog") },
     { href: `/${locale}/faq`, label: tNav("faq") },
     { href: `/${locale}/media`, label: tNav("media") },
+    { href: `/${locale}/decisions`, label: tNav("decisions") },
     { href: `/${locale}/contact`, label: tNav("contact") },
   ];
 

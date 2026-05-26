@@ -6,8 +6,30 @@
     "blog": "Articles",
     "faq": "FAQ",
     "media": "Media",
+    "decisions": "Decisions",
     "contact": "Contact",
     "navigation": "Navigation"
+  },
+  "decisions": {
+    "eyebrow": "Case Law",
+    "title": "Decisions",
+    "subtitle": "Selected rulings and legal documents from our firm",
+    "seoTitle": "Decisions | Papaioannou & Associates",
+    "seoDescription": "Selected court decisions and legal documents from the law office of Ioannis Papaioannou.",
+    "empty": "No decisions yet.",
+    "download": "Download",
+    "view": "View",
+    "categories": {
+      "banking": "Banking",
+      "extrajudicial": "Out-of-Court",
+      "criminal": "Criminal",
+      "commercial": "Commercial",
+      "realEstate": "Real Estate",
+      "administrative": "Administrative",
+      "inheritance": "Inheritance",
+      "tax": "Tax",
+      "labor": "Labor"
+    }
   },
   "media": {
     "eyebrow": "TV Appearances",

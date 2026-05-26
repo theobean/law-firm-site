@@ -1,4 +1,25 @@
 {
+  "decisions": {
+    "eyebrow": "Rechtsprechung",
+    "title": "Entscheidungen",
+    "subtitle": "Ausgewählte Urteile und Rechtsdokumente unserer Kanzlei",
+    "seoTitle": "Entscheidungen | Papaioannou & Partner",
+    "seoDescription": "Ausgewählte Gerichtsentscheidungen und Rechtsdokumente der Kanzlei Ioannis Papaioannou.",
+    "empty": "Noch keine Entscheidungen vorhanden.",
+    "download": "Herunterladen",
+    "view": "Anzeigen",
+    "categories": {
+      "banking": "Bankrecht",
+      "extrajudicial": "Außergerichtlich",
+      "criminal": "Strafrecht",
+      "commercial": "Handelsrecht",
+      "realEstate": "Immobilien",
+      "administrative": "Verwaltungsrecht",
+      "inheritance": "Erbrecht",
+      "tax": "Steuerrecht",
+      "labor": "Arbeitsrecht"
+    }
+  },
   "nav": {
     "home": "Startseite",
     "about": "Über uns",
@@ -6,6 +27,7 @@
     "blog": "Artikel",
     "faq": "FAQ",
     "media": "Medien",
+    "decisions": "Entscheidungen",
     "contact": "Kontakt",
     "navigation": "Navigation"
   },
