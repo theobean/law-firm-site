@@ -110,30 +110,44 @@
     "ctaText": "Contact us to discuss your case with discretion and professionalism.",
     "backToAll": "Back to all practice areas",
     "areas": {
-      "civil": {
-        "title": "Civil Law",
-        "desc": "Contracts, torts, property law and family matters.",
-        "longDesc": "Civil Law forms the foundation of everyday relationships between individuals and legal entities. It covers a broad range of matters relating to contracts, family, property disputes and damages. Our firm provides comprehensive legal support across all branches of Civil Law, with particular emphasis on building a personal relationship of trust with our clients.",
-        "approach": "In every case we first seek an amicable solution where feasible. When court action is required, we prepare it with scientific rigor and strategic thinking.",
+      "banking": {
+        "title": "Banking Law & Objections",
+        "desc": "Objections, enforcement, suspension of auctions and defence of borrowers.",
+        "longDesc": "Banking Law is the firm's primary area of expertise. We handle a wide range of cases concerning the borrower–bank relationship, with a focus on timely and effective defence against claims by banking institutions and loan management companies (funds). Our experience covers objections to payment orders, enforcement objections, suspension and annulment of auctions, as well as offensive claims against banks for abusive terms.",
+        "approach": "We promptly assess every case in terms of the legal remedies available to the client and act without delay, as banking law deadlines are often strict and decisive.",
         "services": [
-          "Drafting and reviewing contracts of all kinds",
-          "Divorce, alimony and child custody matters",
-          "Damages claims arising from torts (traffic accidents, medical malpractice)",
-          "Real action lawsuits (rei vindicatio, possessory, negatory)",
-          "Condominium and neighbor law disputes",
-          "Out-of-court dispute resolution and mediation"
+          "Objection against payment order",
+          "Enforcement objection and opposition to enforcement actions",
+          "Suspension and annulment of residential or commercial property auction",
+          "Claims against banks for abusive contractual terms",
+          "Fund cases — management of claims by companies such as Dovalue, Cepal etc.",
+          "Application for exemption of primary residence from auction"
+        ]
+      },
+      "extrajudicial": {
+        "title": "Out-of-Court Mechanism & Negotiations",
+        "desc": "Out-of-Court Debt Settlement Mechanism (Law 4738/2020), bilateral negotiations and debt restructuring.",
+        "longDesc": "Out-of-court debt settlement is often the fastest and most cost-effective solution for individuals and businesses facing serious financial difficulties. We have extensive experience in the Out-of-Court Debt Settlement Mechanism under Law 4738/2020 as well as in direct (bilateral) negotiations with banks, funds and other creditors.",
+        "approach": "We evaluate all available settlement routes — out-of-court and judicial — and recommend the strategy that offers the optimal outcome for the client, taking into account both financial sustainability and asset protection.",
+        "services": [
+          "Application for the Out-of-Court Debt Settlement Mechanism (Law 4738/2020)",
+          "Negotiation of debt restructuring with banks, the State and insurance funds",
+          "Bilateral negotiations with banks and loan management companies",
+          "Bankruptcy application and reorganisation plan (New Insolvency Code)",
+          "Over-indebted household debt settlement",
+          "Strategy planning for repayment and asset protection"
         ]
       },
       "criminal": {
         "title": "Criminal Law",
-        "desc": "Defense in criminal cases at all levels of jurisdiction.",
-        "longDesc": "Criminal prosecution can dramatically alter someone's life. Proper defense from the very first moment — even before the apologia — is critical to the outcome of the case. We handle criminal cases at all levels, with knowledge of case law and flexibility in strategy.",
-        "approach": "We meticulously study the case file, identify procedural gaps and build the defense strategy that best serves our client — whether that means acquittal, mitigating circumstances or a postponement.",
+        "desc": "Defence in criminal cases at all levels, in collaboration with specialist attorneys.",
+        "longDesc": "Criminal prosecution can dramatically alter someone's life. Proper defence from the very first moment — even before the apologia — is critical to the outcome of the case. The firm handles criminal cases in collaboration with experienced associate criminal lawyers, ensuring the best possible local and subject-matter representation.",
+        "approach": "We meticulously study the case file, identify procedural gaps and build the defence strategy that best serves our client, in close collaboration with specialists in criminal law.",
         "services": [
-          "Defense of defendants at all stages of preliminary and main proceedings",
+          "Defence of defendants at all stages of preliminary and main proceedings",
           "Representation of victims as civil claimants",
           "Appeals and cassation",
-          "Financial crimes and press offenses",
+          "Financial crimes and press offences",
           "Cases against life, bodily integrity and property",
           "Applications for suspension, conversion and postponement of sentence execution"
         ]
@@ -168,9 +182,9 @@
       },
       "labor": {
         "title": "Labor Law",
-        "desc": "Employment relations, dismissals and compensation claims.",
-        "longDesc": "Labor disputes require swift and effective handling, as they concern people's livelihood. We represent both employees and employers, aiming to protect their legitimate interests.",
-        "approach": "We first seek out-of-court resolution through the Labor Inspectorate, and where this is not possible, we prepare the court claim with all necessary evidence.",
+        "desc": "Employment relations, dismissals and compensation claims, with specialist associate attorneys.",
+        "longDesc": "Labor disputes require swift and effective handling, as they concern people's livelihood. We represent both employees and employers in collaboration with specialist labor law attorneys, aiming to fully protect their legitimate interests.",
+        "approach": "We first seek out-of-court resolution through the Labor Inspectorate, and where this is not possible, we prepare the court claim with specialist associates and all necessary evidence.",
         "services": [
           "Dismissal complaints and severance claims",
           "Claims for unpaid wages and overtime",
@@ -182,9 +196,9 @@
       },
       "administrative": {
         "title": "Administrative Law",
-        "desc": "Appeals against administrative acts and licensing procedures.",
-        "longDesc": "The relationship of citizens and businesses with public administration is often complex. We provide legal support in cases involving challenges to administrative acts, licensing and state decisions.",
-        "approach": "We carefully examine every administrative act for legality and constitutionality, and use all available legal remedies to defend our client's rights.",
+        "desc": "Appeals against administrative acts and licensing, with specialist associate attorneys.",
+        "longDesc": "The relationship of citizens and businesses with public administration is often complex. We provide legal support in cases involving challenges to administrative acts, licensing and state decisions, in collaboration with specialist administrative law attorneys.",
+        "approach": "We carefully examine every administrative act for legality and constitutionality, and use all available legal remedies to defend our client's rights, in close collaboration with specialists in the field.",
         "services": [
           "Appeals before administrative courts",
           "Annulment applications to the Council of State",
@@ -210,9 +224,9 @@
       },
       "tax": {
         "title": "Tax Law",
-        "desc": "Tax compliance, disputes with tax authorities and exemptions.",
-        "longDesc": "The tax system in Greece is particularly complex and changes frequently. We provide specialized legal support in tax matters, aiming to protect our clients from abusive acts of the administration.",
-        "approach": "We work with specialized accountants and tax advisors so that legal strategy is combined with sound tax practices, providing a holistic solution.",
+        "desc": "Tax disputes, administrative appeals and exemptions, with specialist associate attorneys.",
+        "longDesc": "The tax system in Greece is particularly complex and changes frequently. We provide specialized legal support in tax matters in collaboration with experienced tax lawyers, aiming to protect our clients from abusive acts of the administration.",
+        "approach": "We work with specialist tax lawyers, accountants and tax advisors so that legal strategy is combined with sound tax practices, providing a holistic solution.",
         "services": [
           "Administrative appeals and appeals to administrative courts",
           "Tax planning for individuals and businesses",

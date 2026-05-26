@@ -110,25 +110,39 @@
     "ctaText": "Kontaktieren Sie uns, um Ihren Fall diskret und professionell zu besprechen.",
     "backToAll": "Zurück zu allen Rechtsgebieten",
     "areas": {
-      "civil": {
-        "title": "Zivilrecht",
-        "desc": "Verträge, unerlaubte Handlungen, Eigentumsrecht und Familienrecht.",
-        "longDesc": "Das Zivilrecht bildet die Grundlage des alltäglichen Verhältnisses zwischen Privatpersonen und juristischen Personen. Es umfasst ein breites Spektrum an Angelegenheiten rund um Verträge, Familie, Eigentumsstreitigkeiten und Schadensersatz. Unsere Kanzlei bietet umfassende rechtliche Unterstützung in allen Bereichen des Zivilrechts, mit besonderem Augenmerk auf eine persönliche Vertrauensbeziehung zu unseren Mandanten.",
-        "approach": "In jedem Fall suchen wir zunächst eine gütliche Einigung, wo dies möglich ist. Wenn gerichtliche Schritte erforderlich sind, bereiten wir diese mit wissenschaftlicher Sorgfalt und strategischem Denken vor.",
+      "banking": {
+        "title": "Bankrecht & Anfechtungen",
+        "desc": "Anfechtungen, Zwangsvollstreckung, Aussetzung von Versteigerungen und Schutz von Kreditnehmern.",
+        "longDesc": "Das Bankrecht ist das Hauptspezialgebiet der Kanzlei. Wir bearbeiten zahlreiche Fälle, die das Verhältnis zwischen Kreditnehmer und Bank betreffen, mit dem Schwerpunkt auf rechtzeitiger und effektiver Verteidigung gegen Forderungen von Banken und Forderungsverwaltungsgesellschaften (Fonds). Unsere Erfahrung umfasst Mahnbescheidsanfechtungen, Vollstreckungsanfechtungen, Aussetzung und Aufhebung von Versteigerungen sowie offensive Klagen gegen Banken wegen missbräuchlicher Klauseln.",
+        "approach": "Wir bewerten jeden Fall umgehend hinsichtlich der rechtlichen Möglichkeiten des Mandanten und handeln ohne Verzögerung, da im Bankrecht Fristen oft streng und fristgebunden sind.",
         "services": [
-          "Erstellung und Prüfung von Verträgen aller Art",
-          "Scheidung, Unterhalt und Sorgerechtsangelegenheiten",
-          "Schadensersatzansprüche aus unerlaubten Handlungen (Verkehrsunfälle, ärztliche Fehler)",
-          "Eigentumsschutz-, Besitz- und Unterlassungsklagen",
-          "Wohnungseigentums- und Nachbarrechtstreitigkeiten",
-          "Außergerichtliche Streitbeilegung und Mediation"
+          "Anfechtung des Mahnbescheids",
+          "Vollstreckungsanfechtung und Widerspruch gegen Vollstreckungsmaßnahmen",
+          "Aussetzung und Aufhebung der Versteigerung von Wohn- oder Gewerbeimmobilien",
+          "Klagen gegen Banken wegen missbräuchlicher Vertragsklauseln",
+          "Fondsfälle — Forderungsverwaltung durch Gesellschaften wie Dovalue, Cepal u.a.",
+          "Antrag auf Befreiung des Erstwohnsitzes von der Versteigerung"
+        ]
+      },
+      "extrajudicial": {
+        "title": "Außergerichtlicher Mechanismus & Verhandlungen",
+        "desc": "Außergerichtlicher Schuldenregelungsmechanismus (Ges. 4738/2020), bilaterale Verhandlungen und Schuldenrestrukturierung.",
+        "longDesc": "Die außergerichtliche Schuldenregelung ist oft die schnellste und kostengünstigste Lösung für Privatpersonen und Unternehmen in ernsthaften finanziellen Schwierigkeiten. Wir verfügen über umfangreiche Erfahrung im außergerichtlichen Schuldenregelungsmechanismus nach Gesetz 4738/2020 sowie in direkten (bilateralen) Verhandlungen mit Banken, Fonds und anderen Gläubigern.",
+        "approach": "Wir prüfen alle verfügbaren Regelungswege — außergerichtlich und gerichtlich — und empfehlen die Strategie, die das optimale Ergebnis für den Mandanten bietet, unter Berücksichtigung sowohl der finanziellen Tragfähigkeit als auch des Vermögensschutzes.",
+        "services": [
+          "Antrag auf außergerichtlichen Schuldenregelungsmechanismus (Ges. 4738/2020)",
+          "Verhandlung der Schuldenrestrukturierung mit Banken, Staat und Versicherungsträgern",
+          "Bilaterale Verhandlungen mit Banken und Forderungsverwaltungsgesellschaften",
+          "Insolvenzantrag und Reorganisationsplan (Neues Insolvenzrecht)",
+          "Schuldenregelung für überschuldete Haushalte",
+          "Strategie zur Rückzahlung und zum Vermögensschutz"
         ]
       },
       "criminal": {
         "title": "Strafrecht",
-        "desc": "Strafverteidigung in allen Instanzen.",
-        "longDesc": "Eine Strafverfolgung kann das Leben eines Menschen grundlegend verändern. Die richtige Verteidigung vom ersten Moment an — noch vor der Einvernahme — ist entscheidend für den Ausgang des Verfahrens. Wir bearbeiten Strafsachen in allen Instanzen mit fundierter Rechtsprechungskenntnis und strategischer Flexibilität.",
-        "approach": "Wir studieren die Akte sorgfältig, identifizieren Verfahrenslücken und erarbeiten die Verteidigungsstrategie, die unseren Mandanten am besten dient — ob Freispruch, Strafmilderung oder Verfahrensaussetzung.",
+        "desc": "Strafverteidigung in allen Instanzen, in Zusammenarbeit mit spezialisierten Anwälten.",
+        "longDesc": "Eine Strafverfolgung kann das Leben eines Menschen grundlegend verändern. Die richtige Verteidigung vom ersten Moment an — noch vor der Einvernahme — ist entscheidend für den Ausgang des Verfahrens. Die Kanzlei bearbeitet Strafsachen in Zusammenarbeit mit erfahrenen assoziierten Strafverteidigern und gewährleistet so die bestmögliche örtliche und sachliche Vertretung.",
+        "approach": "Wir studieren die Akte sorgfältig, identifizieren Verfahrenslücken und erarbeiten die Verteidigungsstrategie in enger Zusammenarbeit mit Spezialisten im Strafrecht.",
         "services": [
           "Verteidigung von Beschuldigten in allen Stadien des Vor- und Hauptverfahrens",
           "Vertretung von Opfern als Nebenkläger",
@@ -168,9 +182,9 @@
       },
       "labor": {
         "title": "Arbeitsrecht",
-        "desc": "Arbeitsverhältnisse, Kündigungen und Entschädigungsansprüche.",
-        "longDesc": "Arbeitsstreitigkeiten erfordern schnelles und effektives Handeln, da sie den Lebensunterhalt von Menschen betreffen. Wir vertreten sowohl Arbeitnehmer als auch Arbeitgeber und schützen deren berechtigte Interessen.",
-        "approach": "Wir suchen zunächst eine außergerichtliche Lösung über die Arbeitsaufsichtsbehörde. Wo dies nicht möglich ist, bereiten wir die Klage mit allen erforderlichen Belegen vor.",
+        "desc": "Arbeitsverhältnisse, Kündigungen und Entschädigungsansprüche, mit spezialisierten Partnern.",
+        "longDesc": "Arbeitsstreitigkeiten erfordern schnelles und effektives Handeln, da sie den Lebensunterhalt von Menschen betreffen. Wir vertreten sowohl Arbeitnehmer als auch Arbeitgeber in Zusammenarbeit mit spezialisierten Arbeitsrechtsanwälten und schützen deren berechtigte Interessen vollständig.",
+        "approach": "Wir suchen zunächst eine außergerichtliche Lösung über die Arbeitsaufsichtsbehörde. Wo dies nicht möglich ist, bereiten wir die Klage gemeinsam mit spezialisierten Partnern und allen erforderlichen Belegen vor.",
         "services": [
           "Kündigungsschutzklagen und Abfindungsansprüche",
           "Ansprüche auf ausstehende Löhne und Überstunden",
@@ -182,9 +196,9 @@
       },
       "administrative": {
         "title": "Verwaltungsrecht",
-        "desc": "Anfechtung von Verwaltungsakten und Genehmigungsverfahren.",
-        "longDesc": "Die Beziehung zwischen Bürgern, Unternehmen und der öffentlichen Verwaltung ist oft komplex. Wir bieten rechtliche Unterstützung bei der Anfechtung von Verwaltungsakten, Genehmigungsverfahren und staatlichen Entscheidungen.",
-        "approach": "Wir prüfen jeden Verwaltungsakt sorgfältig auf Rechtmäßigkeit und Verfassungskonformität und nutzen alle verfügbaren Rechtsmittel zum Schutz der Rechte unserer Mandanten.",
+        "desc": "Anfechtung von Verwaltungsakten und Genehmigungen, mit spezialisierten Partnern.",
+        "longDesc": "Die Beziehung zwischen Bürgern, Unternehmen und der öffentlichen Verwaltung ist oft komplex. Wir bieten rechtliche Unterstützung bei der Anfechtung von Verwaltungsakten, Genehmigungsverfahren und staatlichen Entscheidungen, in Zusammenarbeit mit spezialisierten Verwaltungsrechtsanwälten.",
+        "approach": "Wir prüfen jeden Verwaltungsakt sorgfältig auf Rechtmäßigkeit und Verfassungskonformität und nutzen alle verfügbaren Rechtsmittel zum Schutz der Rechte unserer Mandanten, in enger Zusammenarbeit mit Fachspezialisten.",
         "services": [
           "Rechtsmittel vor Verwaltungsgerichten",
           "Nichtigkeitsklagen vor dem Staatsrat",
@@ -210,9 +224,9 @@
       },
       "tax": {
         "title": "Steuerrecht",
-        "desc": "Steuerkonformität, Streitigkeiten mit Finanzbehörden und Steuerbefreiungen.",
-        "longDesc": "Das Steuersystem in Griechenland ist besonders komplex und ändert sich häufig. Wir bieten spezialisierte rechtliche Unterstützung in Steuerangelegenheiten und schützen unsere Mandanten vor missbräuchlichen Maßnahmen der Verwaltung.",
-        "approach": "Wir arbeiten mit spezialisierten Buchhaltern und Steuerberatern zusammen, sodass die Rechtsstrategie mit solider Steuerpraxis kombiniert wird und eine ganzheitliche Lösung entsteht.",
+        "desc": "Steuerstreitigkeiten, Verwaltungsbeschwerden und Steuerbefreiungen, mit spezialisierten Partnern.",
+        "longDesc": "Das Steuersystem in Griechenland ist besonders komplex und ändert sich häufig. Wir bieten spezialisierte rechtliche Unterstützung in Steuerangelegenheiten in Zusammenarbeit mit erfahrenen Steuerrechtsanwälten und schützen unsere Mandanten vor missbräuchlichen Maßnahmen der Verwaltung.",
+        "approach": "Wir arbeiten mit spezialisierten Steuerrechtsanwälten, Buchhaltern und Steuerberatern zusammen, sodass die Rechtsstrategie mit solider Steuerpraxis kombiniert wird und eine ganzheitliche Lösung entsteht.",
         "services": [
           "Verwaltungsbeschwerden und Klagen vor Verwaltungsgerichten",
           "Steuerplanung für Privatpersonen und Unternehmen",

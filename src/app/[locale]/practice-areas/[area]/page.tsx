@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Check, Scale, Shield, Briefcase, Home, Users, Building2, BookOpen, Receipt } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Banknote, Handshake, ShieldCheck, Briefcase, Home, Users, Building2, BookOpen, Receipt, HardHat } from "lucide-react";
 import { use } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 
@@ -22,27 +22,29 @@ export async function generateMetadata({
 }
 
 const validAreas = [
-  "civil",
+  "banking",
+  "extrajudicial",
   "criminal",
   "commercial",
   "realEstate",
-  "labor",
   "administrative",
   "inheritance",
   "tax",
+  "labor",
 ] as const;
 
 type AreaKey = (typeof validAreas)[number];
 
-const icons: Record<AreaKey, typeof Scale> = {
-  civil: Scale,
-  criminal: Shield,
+const icons: Record<AreaKey, typeof Banknote> = {
+  banking: Banknote,
+  extrajudicial: Handshake,
+  criminal: ShieldCheck,
   commercial: Briefcase,
   realEstate: Home,
-  labor: Users,
   administrative: Building2,
   inheritance: BookOpen,
   tax: Receipt,
+  labor: HardHat,
 };
 
 export function generateStaticParams() {

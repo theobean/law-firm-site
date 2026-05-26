@@ -1,18 +1,19 @@
 import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
-import { Scale, ShieldCheck, Briefcase, Building, HardHat, Landmark, ScrollText, Calculator, ArrowRight } from "lucide-react";
+import { Banknote, Handshake, ShieldCheck, Briefcase, Building, HardHat, Landmark, ScrollText, Calculator, ArrowRight } from "lucide-react";
 
-const areaKeys = ["civil", "criminal", "commercial", "realEstate", "labor", "administrative", "inheritance", "tax"] as const;
+const areaKeys = ["banking", "extrajudicial", "criminal", "commercial", "realEstate", "administrative", "inheritance", "tax", "labor"] as const;
 
 const icons = {
-  civil: Scale,
+  banking: Banknote,
+  extrajudicial: Handshake,
   criminal: ShieldCheck,
   commercial: Briefcase,
   realEstate: Building,
-  labor: HardHat,
   administrative: Landmark,
   inheritance: ScrollText,
   tax: Calculator,
+  labor: HardHat,
 };
 
 interface Props {
