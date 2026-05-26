@@ -1,14 +1,15 @@
 import { defineField, defineType } from "sanity";
 
 const categories = [
-  { title: "Αστικό Δίκαιο", value: "civil" },
+  { title: "Τραπεζικό Δίκαιο & Ανακοπές", value: "banking" },
+  { title: "Εξωδικαστικός Μηχανισμός", value: "extrajudicial" },
   { title: "Ποινικό Δίκαιο", value: "criminal" },
   { title: "Εμπορικό Δίκαιο", value: "commercial" },
   { title: "Ακίνητη Περιουσία", value: "realEstate" },
-  { title: "Εργατικό Δίκαιο", value: "labor" },
   { title: "Διοικητικό Δίκαιο", value: "administrative" },
   { title: "Κληρονομικό Δίκαιο", value: "inheritance" },
   { title: "Φορολογικό Δίκαιο", value: "tax" },
+  { title: "Εργατικό Δίκαιο", value: "labor" },
   { title: "Γενικά", value: "general" },
 ];
 
