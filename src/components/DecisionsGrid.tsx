@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { FileText, Download, Eye, Calendar, Landmark, Tag } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { FileText, Download, Eye, Calendar, Landmark, ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 interface Decision {
@@ -13,6 +13,8 @@ interface Decision {
   category?: string;
   description?: string;
 }
+
+const PAGE_SIZE = 6;
 
 const categoryColors: Record<string, string> = {
   banking: "bg-blue-900/40 text-blue-300 border-blue-700/40",
@@ -26,8 +28,31 @@ const categoryColors: Record<string, string> = {
   labor: "bg-rose-900/40 text-rose-300 border-rose-700/40",
 };
 
-function DecisionCard({ decision, locale }: { decision: Decision; locale: string }) {
+function DecisionCard({
+  decision,
+  locale,
+  index,
+}: {
+  decision: Decision;
+  locale: string;
+  index: number;
+}) {
   const t = useTranslations("decisions");
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) { setVisible(true); observer.disconnect(); }
+      },
+      { threshold: 0.08 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const formattedDate = decision.date
     ? new Date(decision.date).toLocaleDateString(
@@ -36,16 +61,23 @@ function DecisionCard({ decision, locale }: { decision: Decision; locale: string
       )
     : null;
 
-  const categoryLabel = decision.category
-    ? t(`categories.${decision.category}`)
-    : null;
-
+  const categoryLabel = decision.category ? t(`categories.${decision.category}`) : null;
   const colorClass = decision.category
-    ? categoryColors[decision.category] ?? "bg-gray-50 text-gray-600 border-gray-200"
+    ? categoryColors[decision.category] ?? "bg-gray-800/40 text-gray-300 border-gray-600/40"
     : "";
 
+  const delay = (index % PAGE_SIZE) * 0.07;
+
   return (
-    <div className="flex flex-col border border-white/10 rounded-sm p-6 hover:border-accent/40 hover:shadow-xl hover:shadow-black/30 transition-all duration-300 group bg-primary">
+    <div
+      ref={ref}
+      style={
+        visible
+          ? { animation: `reveal-up 0.5s cubic-bezier(0.4,0,0.2,1) ${delay}s both` }
+          : { opacity: 0 }
+      }
+      className="flex flex-col border border-white/10 rounded-sm p-6 hover:border-accent/40 hover:shadow-xl hover:shadow-black/30 transition-all duration-300 group bg-primary"
+    >
       {/* Top row: icon + category badge */}
       <div className="flex items-start justify-between gap-3 mb-4">
         <div className="w-10 h-10 rounded-sm bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-accent/15 group-hover:border-accent/30 transition-colors">
@@ -119,7 +151,7 @@ export default function DecisionsGrid({
   locale: string;
 }) {
   const t = useTranslations("decisions");
-  const tPA = useTranslations("decisions.categories");
+  const tCat = useTranslations("decisions.categories");
 
   const allCategories = [
     "banking", "extrajudicial", "criminal", "commercial",
@@ -131,13 +163,25 @@ export default function DecisionsGrid({
   );
 
   const [active, setActive] = useState<string | null>(null);
+  const [page, setPage] = useState(1);
 
   const filtered = active ? decisions.filter((d) => d.category === active) : decisions;
+  const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
+  const paginated = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+  // Reset to page 1 when filter changes
+  function handleFilter(cat: string | null) {
+    setActive(cat);
+    setPage(1);
+  }
+
+  function handlePage(p: number) {
+    setPage(p);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
   if (decisions.length === 0) {
-    return (
-      <p className="text-gray-400 text-center py-20">{t("empty")}</p>
-    );
+    return <p className="text-gray-400 text-center py-20">{t("empty")}</p>;
   }
 
   return (
@@ -146,7 +190,7 @@ export default function DecisionsGrid({
       {presentCategories.length > 1 && (
         <div className="flex flex-wrap gap-2 mb-10">
           <button
-            onClick={() => setActive(null)}
+            onClick={() => handleFilter(null)}
             className={`px-4 py-1.5 rounded-sm text-sm font-medium border transition-colors ${
               active === null
                 ? "bg-accent text-white border-accent"
@@ -158,14 +202,14 @@ export default function DecisionsGrid({
           {presentCategories.map((cat) => (
             <button
               key={cat}
-              onClick={() => setActive(active === cat ? null : cat)}
+              onClick={() => handleFilter(active === cat ? null : cat)}
               className={`px-4 py-1.5 rounded-sm text-sm font-medium border transition-colors ${
                 active === cat
                   ? "bg-accent text-white border-accent"
                   : "text-gray-500 border-gray-200 hover:border-accent hover:text-accent"
               }`}
             >
-              {tPA(cat as Parameters<typeof tPA>[0])}
+              {tCat(cat as Parameters<typeof tCat>[0])}
             </button>
           ))}
         </div>
@@ -173,10 +217,45 @@ export default function DecisionsGrid({
 
       {/* Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {filtered.map((d) => (
-          <DecisionCard key={d._id} decision={d} locale={locale} />
+        {paginated.map((d, i) => (
+          <DecisionCard key={d._id} decision={d} locale={locale} index={i} />
         ))}
       </div>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="flex items-center justify-center gap-2 mt-12">
+          <button
+            onClick={() => handlePage(page - 1)}
+            disabled={page === 1}
+            className="w-9 h-9 flex items-center justify-center border border-gray-200 rounded-sm text-gray-500 hover:border-accent hover:text-accent transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+          >
+            <ChevronLeft size={16} />
+          </button>
+
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+            <button
+              key={p}
+              onClick={() => handlePage(p)}
+              className={`w-9 h-9 flex items-center justify-center rounded-sm text-sm font-semibold border transition-colors ${
+                p === page
+                  ? "bg-primary text-white border-primary"
+                  : "border-gray-200 text-gray-600 hover:border-accent hover:text-accent"
+              }`}
+            >
+              {p}
+            </button>
+          ))}
+
+          <button
+            onClick={() => handlePage(page + 1)}
+            disabled={page === totalPages}
+            className="w-9 h-9 flex items-center justify-center border border-gray-200 rounded-sm text-gray-500 hover:border-accent hover:text-accent transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+          >
+            <ChevronRight size={16} />
+          </button>
+        </div>
+      )}
     </div>
   );
 }
