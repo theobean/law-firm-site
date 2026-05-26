@@ -15,10 +15,10 @@ export default function AboutTeaser() {
           <div className="relative order-2 md:order-1">
             <div className="aspect-square max-w-sm mx-auto rounded-sm overflow-hidden relative">
               <Image
-                src="/δικηγορος.png"
-                alt={t("name")}
+                src="/γραφειο.png"
+                alt={t("teaser")}
                 fill
-                className="object-cover object-top"
+                className="object-cover object-center"
               />
             </div>
             <div className="absolute -bottom-4 -left-4 w-full h-full border-2 border-accent/30 rounded-sm -z-10" />
