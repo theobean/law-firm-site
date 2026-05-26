@@ -9,7 +9,7 @@ const stats = [
   { value: "20+", key: "experience" },
   { value: "500+", key: "cases" },
   { value: "350+", key: "clients" },
-  { value: "8", key: "areas" },
+  { value: "9", key: "areas" },
 ] as const;
 
 export default function StatsSection() {
