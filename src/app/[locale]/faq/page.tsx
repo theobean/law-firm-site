@@ -16,7 +16,7 @@ export async function generateMetadata({
 export default function FaqPage() {
   const t = useTranslations("faq");
 
-  const items = Array.from({ length: 8 }, (_, i) => ({
+  const items = Array.from({ length: 6 }, (_, i) => ({
     q: t(`q${i + 1}`),
     a: t(`a${i + 1}`),
   }));
