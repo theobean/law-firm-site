@@ -301,5 +301,18 @@
     "termsSection4": "Wir bemühen uns um die Richtigkeit und Aktualität der Inhalte, garantieren jedoch nicht, dass diese stets vollständig oder fehlerfrei sind. Die Nutzung der Website erfolgt auf eigene Verantwortung des Nutzers.",
     "termsSection5Title": "5. Anwendbares Recht",
     "termsSection5": "Diese Bedingungen unterliegen griechischem Recht. Die Gerichte in Thessaloniki sind ausschließlich zuständig für etwaige Streitigkeiten."
+  },
+  "team": {
+    "sectionTitle": "Unser Team",
+    "sectionSubtitle": "Erfahrene Rechtsberater in Ihrem Dienst",
+    "associateRole": "Rechtsanwalt — Mitarbeiter",
+    "georgios": {
+      "name": "Georgios Liamos",
+      "bio": "Kanzleimitarbeiter mit Schwerpunkt im Zivil- und Handelsrecht. Er bietet rechtliche Unterstützung bei Vertragsstreitigkeiten, gesellschaftsrechtlichen Angelegenheiten und zivilrechtlichen Klagen, verbindet analytisches Denken mit praxisorientierten Lösungen."
+    },
+    "lamprinι": {
+      "name": "Lampriní Papaioannou",
+      "bio": "Kanzleimitarbeiterin mit Schwerpunkt im Familien- und Erbrecht. Sie bearbeitet Scheidungs-, Sorgerechts- und Erbschaftsstreitigkeiten mit Einfühlungsvermögen und Professionalität."
+    }
   }
 }

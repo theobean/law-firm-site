@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
-import { Scale, GraduationCap, Users } from "lucide-react";
+import { Scale, GraduationCap, Users, Briefcase } from "lucide-react";
 import Image from "next/image";
 
 export async function generateMetadata({
@@ -16,6 +16,7 @@ export async function generateMetadata({
 
 export default function AboutPage() {
   const t = useTranslations("about");
+  const tTeam = useTranslations("team");
 
   return (
     <div className="bg-white">
@@ -94,6 +95,55 @@ export default function AboutPage() {
                 <p className="text-gray-600">{desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Team section */}
+      <section className="max-w-6xl mx-auto px-6 py-20">
+        {/* Section header */}
+        <div className="mb-12">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-8 h-px bg-accent" />
+            <p className="text-accent text-sm font-semibold tracking-widest uppercase">{tTeam("sectionTitle")}</p>
+          </div>
+          <h2 className="text-3xl font-playfair font-bold text-primary">{tTeam("sectionSubtitle")}</h2>
+        </div>
+
+        {/* Team cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Georgios Liamos */}
+          <div className="flex gap-6 p-6 border border-gray-100 rounded-sm hover:border-accent/30 transition-colors duration-300 group">
+            {/* Avatar placeholder */}
+            <div className="shrink-0 w-20 h-20 rounded-full bg-primary flex items-center justify-center shadow-md">
+              <span className="text-accent font-playfair font-bold text-xl">ΛΓ</span>
+            </div>
+            {/* Info */}
+            <div className="flex-1 min-w-0">
+              <h3 className="text-xl font-playfair font-bold text-primary mb-1">{tTeam("georgios.name")}</h3>
+              <div className="flex items-center gap-2 mb-3">
+                <Briefcase size={13} className="text-accent shrink-0" />
+                <p className="text-accent text-xs font-semibold tracking-wide uppercase">{tTeam("associateRole")}</p>
+              </div>
+              <p className="text-gray-600 text-sm leading-relaxed">{tTeam("georgios.bio")}</p>
+            </div>
+          </div>
+
+          {/* Lampriní Papaioannou */}
+          <div className="flex gap-6 p-6 border border-gray-100 rounded-sm hover:border-accent/30 transition-colors duration-300 group">
+            {/* Avatar placeholder */}
+            <div className="shrink-0 w-20 h-20 rounded-full bg-primary flex items-center justify-center shadow-md">
+              <span className="text-accent font-playfair font-bold text-xl">ΠΛ</span>
+            </div>
+            {/* Info */}
+            <div className="flex-1 min-w-0">
+              <h3 className="text-xl font-playfair font-bold text-primary mb-1">{tTeam("lamprinι.name")}</h3>
+              <div className="flex items-center gap-2 mb-3">
+                <Briefcase size={13} className="text-accent shrink-0" />
+                <p className="text-accent text-xs font-semibold tracking-wide uppercase">{tTeam("associateRole")}</p>
+              </div>
+              <p className="text-gray-600 text-sm leading-relaxed">{tTeam("lamprinι.bio")}</p>
+            </div>
           </div>
         </div>
       </section>

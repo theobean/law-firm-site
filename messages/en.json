@@ -301,5 +301,18 @@
     "termsSection4": "We make every effort to ensure the accuracy and timeliness of the content; however, we do not guarantee that it is always complete or error-free. Use of the website is at the user's sole responsibility.",
     "termsSection5Title": "5. Governing law",
     "termsSection5": "These terms are governed by Greek law. The courts of Thessaloniki have exclusive jurisdiction over any disputes."
+  },
+  "team": {
+    "sectionTitle": "Our Team",
+    "sectionSubtitle": "Experienced legal advisors at your service",
+    "associateRole": "Associate Attorney",
+    "georgios": {
+      "name": "Georgios Liamos",
+      "bio": "Associate at the firm specialising in Civil and Commercial Law. He provides legal support in contractual disputes, corporate matters and civil claims, combining analytical thinking with practical solutions."
+    },
+    "lamprinι": {
+      "name": "Lampriní Papaioannou",
+      "bio": "Associate at the firm specialising in Family and Inheritance Law. She handles divorce, child custody and estate disputes with sensitivity and professionalism."
+    }
   }
 }
