@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FileText, Download, Eye, Calendar, Landmark, ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -40,6 +40,8 @@ function DecisionCard({
   const t = useTranslations("decisions");
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -53,6 +55,18 @@ function DecisionCard({
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    setTilt({ x: y * -9, y: x * 9 });
+  };
+
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 });
+    setHovered(false);
+  };
 
   const formattedDate = decision.date
     ? new Date(decision.date).toLocaleDateString(
@@ -76,8 +90,22 @@ function DecisionCard({
           ? { animation: `reveal-up 0.5s cubic-bezier(0.4,0,0.2,1) ${delay}s both` }
           : { opacity: 0 }
       }
-      className="flex flex-col border border-white/10 rounded-sm p-6 hover:border-accent/40 hover:shadow-xl hover:shadow-black/30 transition-all duration-300 group bg-primary"
     >
+      <div
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          transform: hovered
+            ? `perspective(700px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale(1.04)`
+            : "perspective(700px) rotateX(0deg) rotateY(0deg) scale(1)",
+          transition: hovered ? "transform 0.08s ease-out" : "transform 0.4s ease-out",
+          willChange: "transform",
+        }}
+        className={`flex flex-col border rounded-sm p-6 transition-shadow duration-300 group bg-primary ${
+          hovered ? "shadow-2xl border-accent/40" : "border-white/10 shadow-none"
+        }`}
+      >
       {/* Top row: icon + category badge */}
       <div className="flex items-start justify-between gap-3 mb-4">
         <div className="w-10 h-10 rounded-sm bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-accent/15 group-hover:border-accent/30 transition-colors">
@@ -139,6 +167,7 @@ function DecisionCard({
           </a>
         </div>
       )}
+      </div>
     </div>
   );
 }
