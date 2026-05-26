@@ -22,7 +22,8 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
   const articles = await getArticles();
 
   const categoryKeys = [
-    "civil",
+    "banking",
+    "extrajudicial",
     "criminal",
     "commercial",
     "realEstate",
@@ -35,7 +36,7 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
   const categoryLabels: Record<string, string> = Object.fromEntries(
     categoryKeys.map((k) => [k, tAreas(`areas.${k}.title`)])
   );
-  categoryLabels.general = locale === "el" ? "Γενικά" : "General";
+  categoryLabels.general = locale === "el" ? "Γενικά" : locale === "de" ? "Allgemein" : "General";
 
   return (
     <div className="bg-white">
