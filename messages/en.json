@@ -305,6 +305,8 @@
   "team": {
     "sectionTitle": "Our Team",
     "sectionSubtitle": "Experienced legal advisors at your service",
+    "founderBadge": "Founder",
+    "associateBadge": "Associate",
     "associateRole": "Associate Attorney",
     "georgios": {
       "name": "Georgios Liamos",

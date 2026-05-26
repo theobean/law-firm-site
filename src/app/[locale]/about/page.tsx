@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
-import { Scale, GraduationCap, Users, Briefcase } from "lucide-react";
+import { Scale, GraduationCap, Users } from "lucide-react";
 import Image from "next/image";
 
 export async function generateMetadata({
@@ -29,57 +29,115 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Main content */}
+      {/* Team grid — all three members */}
       <section className="max-w-6xl mx-auto px-6 py-20">
-        <div className="grid md:grid-cols-2 gap-16 items-start">
-          {/* Photo */}
-          <div className="relative">
-            <div className="aspect-[3/4] rounded-sm overflow-hidden">
+        <div className="mb-12">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-8 h-px bg-accent" />
+            <p className="text-accent text-sm font-semibold tracking-widest uppercase">{tTeam("sectionTitle")}</p>
+          </div>
+          <h2 className="text-3xl font-playfair font-bold text-primary">{tTeam("sectionSubtitle")}</h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Ioannis Papaioannou — founder */}
+          <div className="group flex flex-col border border-gray-100 rounded-sm overflow-hidden hover:border-accent/40 hover:shadow-lg transition-all duration-300">
+            <div className="relative aspect-[3/4] bg-gray-100 overflow-hidden">
               <Image
                 src="/δικηγορος.png"
                 alt={t("name")}
                 fill
-                className="object-cover object-top"
+                className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <span className="inline-block bg-accent text-white text-[10px] font-bold tracking-widest uppercase px-2 py-1 mb-2">
+                  {tTeam("founderBadge")}
+                </span>
+              </div>
             </div>
-            <div className="absolute -bottom-6 -right-6 bg-accent w-40 h-1" />
+            <div className="p-5 flex-1 flex flex-col">
+              <h3 className="text-xl font-playfair font-bold text-primary mb-1">{t("name")}</h3>
+              <p className="text-accent text-xs font-semibold tracking-wide uppercase mb-3">{t("role")}</p>
+              <p className="text-gray-600 text-sm leading-relaxed">{t("bio1")}</p>
+            </div>
           </div>
 
-          {/* Bio */}
-          <div>
-            <h2 className="text-3xl font-playfair font-bold text-primary mb-2">{t("name")}</h2>
-            <p className="text-accent font-semibold mb-8 text-lg">{t("role")}</p>
-            <p className="text-gray-600 leading-relaxed mb-4">{t("bio1")}</p>
-            <p className="text-gray-600 leading-relaxed mb-10">{t("bio2")}</p>
-
-            {/* Education */}
-            <div className="mb-8">
-              <div className="flex items-center gap-3 mb-4">
-                <GraduationCap className="text-accent" size={22} />
-                <h3 className="text-xl font-bold text-primary">{t("education")}</h3>
+          {/* Georgios Liamos */}
+          <div className="group flex flex-col border border-gray-100 rounded-sm overflow-hidden hover:border-accent/40 hover:shadow-lg transition-all duration-300">
+            <div className="relative aspect-[3/4] bg-primary flex items-center justify-center overflow-hidden">
+              <span className="text-accent font-playfair font-bold text-6xl opacity-30 select-none">ΛΓ</span>
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <span className="inline-block bg-white/10 text-white/70 text-[10px] font-bold tracking-widest uppercase px-2 py-1 mb-2">
+                  {tTeam("associateBadge")}
+                </span>
               </div>
-              <ul className="space-y-2 pl-8">
-                <li className="text-gray-600 before:content-['—'] before:mr-2 before:text-accent">{t("edu1")}</li>
-                <li className="text-gray-600 before:content-['—'] before:mr-2 before:text-accent">{t("edu2")}</li>
-              </ul>
             </div>
+            <div className="p-5 flex-1 flex flex-col">
+              <h3 className="text-xl font-playfair font-bold text-primary mb-1">{tTeam("georgios.name")}</h3>
+              <p className="text-accent text-xs font-semibold tracking-wide uppercase mb-3">{tTeam("associateRole")}</p>
+              <p className="text-gray-600 text-sm leading-relaxed">{tTeam("georgios.bio")}</p>
+            </div>
+          </div>
 
-            {/* Memberships */}
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <Users className="text-accent" size={22} />
-                <h3 className="text-xl font-bold text-primary">{t("memberships")}</h3>
+          {/* Lampriní Papaioannou */}
+          <div className="group flex flex-col border border-gray-100 rounded-sm overflow-hidden hover:border-accent/40 hover:shadow-lg transition-all duration-300">
+            <div className="relative aspect-[3/4] bg-primary flex items-center justify-center overflow-hidden">
+              <span className="text-accent font-playfair font-bold text-6xl opacity-30 select-none">ΠΛ</span>
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <span className="inline-block bg-white/10 text-white/70 text-[10px] font-bold tracking-widest uppercase px-2 py-1 mb-2">
+                  {tTeam("associateBadge")}
+                </span>
               </div>
-              <ul className="space-y-2 pl-8">
-                <li className="text-gray-600 before:content-['—'] before:mr-2 before:text-accent">{t("member1")}</li>
-              </ul>
+            </div>
+            <div className="p-5 flex-1 flex flex-col">
+              <h3 className="text-xl font-playfair font-bold text-primary mb-1">{tTeam("lamprinι.name")}</h3>
+              <p className="text-accent text-xs font-semibold tracking-wide uppercase mb-3">{tTeam("associateRole")}</p>
+              <p className="text-gray-600 text-sm leading-relaxed">{tTeam("lamprinι.bio")}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Founder detail — education & memberships */}
+      <section className="bg-gray-50 py-16">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="max-w-2xl">
+            <h2 className="text-2xl font-playfair font-bold text-primary mb-8">{t("name")}</h2>
+            <p className="text-gray-600 leading-relaxed mb-8">{t("bio2")}</p>
+
+            <div className="grid sm:grid-cols-2 gap-8">
+              {/* Education */}
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <GraduationCap className="text-accent" size={20} />
+                  <h3 className="text-lg font-bold text-primary">{t("education")}</h3>
+                </div>
+                <ul className="space-y-2">
+                  <li className="text-gray-600 text-sm before:content-['—'] before:mr-2 before:text-accent">{t("edu1")}</li>
+                  <li className="text-gray-600 text-sm before:content-['—'] before:mr-2 before:text-accent">{t("edu2")}</li>
+                </ul>
+              </div>
+
+              {/* Memberships */}
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <Users className="text-accent" size={20} />
+                  <h3 className="text-lg font-bold text-primary">{t("memberships")}</h3>
+                </div>
+                <ul className="space-y-2">
+                  <li className="text-gray-600 text-sm before:content-['—'] before:mr-2 before:text-accent">{t("member1")}</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Values strip */}
-      <section className="bg-gray-50 py-16">
+      <section className="py-16">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
@@ -95,55 +153,6 @@ export default function AboutPage() {
                 <p className="text-gray-600">{desc}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Team section */}
-      <section className="max-w-6xl mx-auto px-6 py-20">
-        {/* Section header */}
-        <div className="mb-12">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-8 h-px bg-accent" />
-            <p className="text-accent text-sm font-semibold tracking-widest uppercase">{tTeam("sectionTitle")}</p>
-          </div>
-          <h2 className="text-3xl font-playfair font-bold text-primary">{tTeam("sectionSubtitle")}</h2>
-        </div>
-
-        {/* Team cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Georgios Liamos */}
-          <div className="flex gap-6 p-6 border border-gray-100 rounded-sm hover:border-accent/30 transition-colors duration-300 group">
-            {/* Avatar placeholder */}
-            <div className="shrink-0 w-20 h-20 rounded-full bg-primary flex items-center justify-center shadow-md">
-              <span className="text-accent font-playfair font-bold text-xl">ΛΓ</span>
-            </div>
-            {/* Info */}
-            <div className="flex-1 min-w-0">
-              <h3 className="text-xl font-playfair font-bold text-primary mb-1">{tTeam("georgios.name")}</h3>
-              <div className="flex items-center gap-2 mb-3">
-                <Briefcase size={13} className="text-accent shrink-0" />
-                <p className="text-accent text-xs font-semibold tracking-wide uppercase">{tTeam("associateRole")}</p>
-              </div>
-              <p className="text-gray-600 text-sm leading-relaxed">{tTeam("georgios.bio")}</p>
-            </div>
-          </div>
-
-          {/* Lampriní Papaioannou */}
-          <div className="flex gap-6 p-6 border border-gray-100 rounded-sm hover:border-accent/30 transition-colors duration-300 group">
-            {/* Avatar placeholder */}
-            <div className="shrink-0 w-20 h-20 rounded-full bg-primary flex items-center justify-center shadow-md">
-              <span className="text-accent font-playfair font-bold text-xl">ΠΛ</span>
-            </div>
-            {/* Info */}
-            <div className="flex-1 min-w-0">
-              <h3 className="text-xl font-playfair font-bold text-primary mb-1">{tTeam("lamprinι.name")}</h3>
-              <div className="flex items-center gap-2 mb-3">
-                <Briefcase size={13} className="text-accent shrink-0" />
-                <p className="text-accent text-xs font-semibold tracking-wide uppercase">{tTeam("associateRole")}</p>
-              </div>
-              <p className="text-gray-600 text-sm leading-relaxed">{tTeam("lamprinι.bio")}</p>
-            </div>
           </div>
         </div>
       </section>

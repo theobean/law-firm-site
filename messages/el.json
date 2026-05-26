@@ -305,6 +305,8 @@
   "team": {
     "sectionTitle": "Η Ομάδα μας",
     "sectionSubtitle": "Έμπειροι νομικοί σύμβουλοι στην υπηρεσία σας",
+    "founderBadge": "Ιδρυτής",
+    "associateBadge": "Συνεργάτης",
     "associateRole": "Δικηγόρος — Συνεργάτης",
     "georgios": {
       "name": "Λιάμος Γεώργιος",
