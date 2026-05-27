@@ -112,22 +112,22 @@ export default function Navbar() {
         {pathname === `/${locale}` ? (
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="flex items-center gap-2 text-white shrink-0 cursor-pointer"
+            className="flex items-center gap-2 text-white min-w-0 shrink cursor-pointer"
           >
             <Scale size={22} className="text-accent shrink-0" />
             <div className="w-px h-6 bg-accent/60 shrink-0" />
-            <div className="leading-tight text-left">
+            <div className="leading-tight text-left min-w-0">
               <p className="font-playfair font-bold text-sm md:text-base uppercase tracking-wide whitespace-nowrap">{t("about.name")}</p>
-              <p className="text-[9px] md:text-[10px] text-white/60 tracking-widest uppercase">{t("common.firmTagline")}</p>
+              <p className="text-[9px] md:text-[10px] text-white/60 tracking-widest uppercase truncate">{t("common.firmTagline")}</p>
             </div>
           </button>
         ) : (
-          <Link href={`/${locale}`} className="flex items-center gap-2 text-white shrink-0">
+          <Link href={`/${locale}`} className="flex items-center gap-2 text-white min-w-0 shrink">
             <Scale size={22} className="text-accent shrink-0" />
             <div className="w-px h-6 bg-accent/60 shrink-0" />
-            <div className="leading-tight">
+            <div className="leading-tight min-w-0">
               <p className="font-playfair font-bold text-sm md:text-base uppercase tracking-wide whitespace-nowrap">{t("about.name")}</p>
-              <p className="text-[9px] md:text-[10px] text-white/60 tracking-widest uppercase">{t("common.firmTagline")}</p>
+              <p className="text-[9px] md:text-[10px] text-white/60 tracking-widest uppercase truncate">{t("common.firmTagline")}</p>
             </div>
           </Link>
         )}
@@ -195,7 +195,7 @@ export default function Navbar() {
         </div>
 
         {/* Mobile right: language + hamburger */}
-        <div className="md:hidden flex items-center gap-3">
+        <div className="md:hidden flex items-center gap-3 shrink-0">
           <div className="flex items-center border border-white/20 rounded-sm overflow-hidden">
             {locales.map((l, i) => (
               <FlagButton
