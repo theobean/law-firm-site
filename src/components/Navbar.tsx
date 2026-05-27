@@ -117,7 +117,7 @@ export default function Navbar() {
             <Scale size={22} className="text-accent shrink-0" />
             <div className="w-px h-6 bg-accent/60 shrink-0" />
             <div className="leading-tight text-left min-w-0">
-              <p className="font-playfair font-bold text-sm md:text-base uppercase tracking-wide whitespace-nowrap">{t("about.name")}</p>
+              <p className="font-playfair font-bold text-sm md:text-base uppercase tracking-wide truncate">{t("about.name")}</p>
               <p className="text-[9px] md:text-[10px] text-white/60 tracking-widest uppercase truncate">{t("common.firmTagline")}</p>
             </div>
           </button>
@@ -126,7 +126,7 @@ export default function Navbar() {
             <Scale size={22} className="text-accent shrink-0" />
             <div className="w-px h-6 bg-accent/60 shrink-0" />
             <div className="leading-tight min-w-0">
-              <p className="font-playfair font-bold text-sm md:text-base uppercase tracking-wide whitespace-nowrap">{t("about.name")}</p>
+              <p className="font-playfair font-bold text-sm md:text-base uppercase tracking-wide truncate">{t("about.name")}</p>
               <p className="text-[9px] md:text-[10px] text-white/60 tracking-widest uppercase truncate">{t("common.firmTagline")}</p>
             </div>
           </Link>
