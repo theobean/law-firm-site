@@ -26,9 +26,7 @@ function TeamCard({ member }: { member: Member }) {
   const bio = t(`${member.key}.bio`);
   // next-intl raw array access
   const edu0 = t.raw(`${member.key}.edu`) as string[];
-  // Optional specializations (only some members have them)
-  let specializations: string[] = [];
-  try { specializations = t.raw(`${member.key}.specializations`) as string[]; } catch { /* not all members have this */ }
+  const specializations = t.raw(`${member.key}.specializations`) as string[];
 
   return (
     <div className="group flex flex-col border border-gray-100 rounded-sm overflow-hidden hover:border-accent/40 hover:shadow-lg transition-all duration-300">

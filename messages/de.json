@@ -345,13 +345,15 @@
       "name": "Ioannis Papaioannou",
       "role": "Rechtsanwalt",
       "bio": "Mit über 25 Jahren Erfahrung vertritt er Privatpersonen und Unternehmen in einem breiten Spektrum von Rechtsangelegenheiten.",
-      "edu": ["Juristische Fakultät, Demokrit-Universität Thrakien, Komotini", "LL.M. Postgraduales Studium, Ludwig-Maximilians-Universität München"]
+      "edu": ["Juristische Fakultät, Demokrit-Universität Thrakien, Komotini", "LL.M. Postgraduales Studium, Ludwig-Maximilians-Universität München"],
+      "specializations": []
     },
     "georgios": {
       "name": "Georgios Liamos",
       "role": "Rechtsanwalt am Berufungsgericht",
       "bio": "Schwerpunkt im Zivil- und Handelsrecht. Bietet rechtliche Unterstützung bei Vertragsstreitigkeiten, gesellschaftsrechtlichen Angelegenheiten und zivilrechtlichen Klagen.",
-      "edu": ["Juristische Fakultät, Aristoteles-Universität Thessaloniki (AUTH)"]
+      "edu": ["Juristische Fakultät, Aristoteles-Universität Thessaloniki (AUTH)"],
+      "specializations": []
     },
     "lamprinι": {
       "name": "Lampriní Papaioannou",
