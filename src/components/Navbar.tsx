@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
@@ -12,44 +12,61 @@ const localeConfig = {
   de: { flag: "/flags/de.svg", label: "DE" },
 } as const;
 
-function FlagButton({
-  locale: l,
-  active,
-  onClick,
-  bordered,
-  compact,
-}: {
-  locale: "el" | "en" | "de";
-  active: boolean;
-  onClick: () => void;
-  bordered: boolean;
-  compact?: boolean;
-}) {
+function FlagImg({ locale: l, size = "md" }: { locale: "el" | "en" | "de"; size?: "sm" | "md" }) {
   const { flag, label } = localeConfig[l];
   return (
-    <button
-      onClick={onClick}
-      title={label}
-      className={`flex items-center gap-1 transition-all duration-200
-        ${compact ? "px-1.5 py-1.5" : "px-2 py-1.5"}
-        ${active ? "bg-accent/15" : "hover:bg-white/10"}
-        ${bordered ? "border-l border-white/15" : ""}
-      `}
-    >
-      <span className={`block overflow-hidden rounded-[2px] shadow-sm transition-all duration-200 shrink-0
-        ${active ? "ring-1 ring-accent/80" : "opacity-70"}
-        ${compact ? "w-[18px] h-[12px]" : "w-[20px] h-[13px]"}
-      `}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={flag} alt={label} width={40} height={27} className="w-full h-full object-cover" />
-      </span>
-      <span className={`font-bold tracking-wider leading-none transition-colors duration-200
-        ${compact ? "text-[8px]" : "text-[9px]"}
-        ${active ? "text-accent" : "text-white/60"}
-      `}>
-        {label}
-      </span>
-    </button>
+    <span className={`block overflow-hidden rounded-[2px] shadow-sm shrink-0 ${size === "sm" ? "w-[16px] h-[11px]" : "w-[20px] h-[13px]"}`}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={flag} alt={label} width={40} height={27} className="w-full h-full object-cover" />
+    </span>
+  );
+}
+
+function LangDropdown({ switchLocale }: { switchLocale: (l: string) => void }) {
+  const locale = useLocale() as "el" | "en" | "de";
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  // Close on outside click
+  useEffect(() => {
+    function handler(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const others = (["el", "en", "de"] as const).filter((l) => l !== locale);
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        onClick={() => setOpen(!open)}
+        className="flex items-center gap-1.5 px-2.5 py-1.5 border border-white/20 rounded-sm hover:border-accent/50 transition-colors"
+      >
+        <FlagImg locale={locale} />
+        <span className="text-[9px] font-bold tracking-wider text-accent">{localeConfig[locale].label}</span>
+        <ChevronDown
+          size={11}
+          className={`text-white/50 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+        />
+      </button>
+
+      <div className={`absolute top-full right-0 mt-1.5 w-24 bg-primary border border-white/10 shadow-xl rounded-sm overflow-hidden transition-all duration-150 z-50 ${
+        open ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-1 pointer-events-none"
+      }`}>
+        {others.map((l) => (
+          <button
+            key={l}
+            onClick={() => { switchLocale(l); setOpen(false); }}
+            className="w-full flex items-center gap-2 px-3 py-2.5 text-white/70 hover:text-accent hover:bg-white/5 transition-colors border-b border-white/5 last:border-0"
+          >
+            <FlagImg locale={l} size="sm" />
+            <span className="text-[10px] font-bold tracking-wider">{localeConfig[l].label}</span>
+          </button>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -63,8 +80,6 @@ export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileUpdatesOpen, setMobileUpdatesOpen] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const locales = ["el", "en", "de"] as const;
 
   function switchLocale(target: string) {
     document.cookie = `locale-pref=${target}; max-age=${60 * 60 * 24 * 30}; path=/; samesite=lax`;
@@ -160,7 +175,6 @@ export default function Navbar() {
               />
             </button>
 
-            {/* Dropdown panel */}
             <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-44 bg-primary border border-white/10 shadow-xl rounded-sm overflow-hidden transition-all duration-150 ${
               dropdownOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-1 pointer-events-none"
             }`}>
@@ -180,34 +194,13 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Language switcher */}
-          <div className="ml-2 flex items-center border border-white/20 rounded-sm overflow-hidden">
-            {locales.map((l, i) => (
-              <FlagButton
-                key={l}
-                locale={l}
-                active={l === locale}
-                onClick={() => switchLocale(l)}
-                bordered={i > 0}
-              />
-            ))}
-          </div>
+          {/* Language dropdown */}
+          <LangDropdown switchLocale={switchLocale} />
         </div>
 
-        {/* Mobile right: language + hamburger */}
+        {/* Mobile right: language dropdown + hamburger */}
         <div className="md:hidden flex items-center gap-3 shrink-0">
-          <div className="flex items-center border border-white/20 rounded-sm overflow-hidden">
-            {locales.map((l, i) => (
-              <FlagButton
-                key={l}
-                locale={l}
-                active={l === locale}
-                onClick={() => switchLocale(l)}
-                bordered={i > 0}
-                compact
-              />
-            ))}
-          </div>
+          <LangDropdown switchLocale={switchLocale} />
           <button
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
