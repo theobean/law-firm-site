@@ -357,7 +357,8 @@
       "name": "Lampriní Papaioannou",
       "role": "Attorney at the Court of Appeal",
       "bio": "Specialising in Family and Inheritance Law. Handles divorce, child custody and estate disputes with sensitivity and professionalism.",
-      "edu": ["Faculty of Law, Democritus University of Thrace, Komotini"]
+      "edu": ["Faculty of Law, Democritus University of Thrace, Komotini"],
+      "specializations": ["Out-of-Court Mechanism L.4738/2020", "Small-Scale Insolvency Law", "Property Sale Contracts"]
     }
   }
 }

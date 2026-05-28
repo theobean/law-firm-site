@@ -26,6 +26,9 @@ function TeamCard({ member }: { member: Member }) {
   const bio = t(`${member.key}.bio`);
   // next-intl raw array access
   const edu0 = t.raw(`${member.key}.edu`) as string[];
+  // Optional specializations (only some members have them)
+  let specializations: string[] = [];
+  try { specializations = t.raw(`${member.key}.specializations`) as string[]; } catch { /* not all members have this */ }
 
   return (
     <div className="group flex flex-col border border-gray-100 rounded-sm overflow-hidden hover:border-accent/40 hover:shadow-lg transition-all duration-300">
@@ -51,6 +54,17 @@ function TeamCard({ member }: { member: Member }) {
         <h3 className="text-xl font-playfair font-bold text-primary leading-tight">{name}</h3>
         <p className="text-accent text-xs font-semibold tracking-wide uppercase mb-2">{role}</p>
         <p className="text-gray-600 text-sm leading-relaxed">{bio}</p>
+
+        {/* Specializations badges */}
+        {specializations.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 mt-3">
+            {specializations.map((s, i) => (
+              <span key={i} className="text-[10px] font-semibold tracking-wide bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded-sm">
+                {s}
+              </span>
+            ))}
+          </div>
+        )}
 
         {/* Expandable education */}
         <button
