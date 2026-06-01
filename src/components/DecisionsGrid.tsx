@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FileText, Download, Eye, Calendar, Landmark, ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
+import ShareButtons from "@/components/ShareButtons";
 
 interface Decision {
   _id: string;
@@ -148,23 +149,35 @@ function DecisionCard({
 
       {/* Actions */}
       {decision.fileUrl && (
-        <div className="mt-auto flex gap-2">
-          <a
-            href={decision.fileUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-xs font-semibold text-white bg-accent hover:bg-accent/90 px-3 py-2 rounded-sm transition-colors"
-          >
-            <Eye size={12} />
-            {t("view")}
-          </a>
-          <a
-            href={`${decision.fileUrl}?dl=`}
-            className="flex items-center gap-1.5 text-xs font-semibold text-white/70 border border-white/20 hover:border-accent hover:text-accent px-3 py-2 rounded-sm transition-colors"
-          >
-            <Download size={12} />
-            {t("download")}
-          </a>
+        <div className="mt-auto flex flex-col gap-3">
+          <div className="flex gap-2">
+            <a
+              href={decision.fileUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-xs font-semibold text-white bg-accent hover:bg-accent/90 px-3 py-2 rounded-sm transition-colors"
+            >
+              <Eye size={12} />
+              {t("view")}
+            </a>
+            <a
+              href={`${decision.fileUrl}?dl=`}
+              className="flex items-center gap-1.5 text-xs font-semibold text-white/70 border border-white/20 hover:border-accent hover:text-accent px-3 py-2 rounded-sm transition-colors"
+            >
+              <Download size={12} />
+              {t("download")}
+            </a>
+          </div>
+          <div className="border-t border-white/10 pt-3">
+            <ShareButtons
+              url={decision.fileUrl}
+              title={decision.title}
+              shareLabel={t("share")}
+              copyLinkLabel={t("copyLink")}
+              linkCopiedLabel={t("linkCopied")}
+              dark
+            />
+          </div>
         </div>
       )}
       </div>
