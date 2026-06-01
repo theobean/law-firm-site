@@ -134,6 +134,9 @@
     "ctaTitle": "Need legal assistance?",
     "ctaText": "Contact us to discuss your case with discretion and professionalism.",
     "backToAll": "Back to all practice areas",
+    "pleistariasmosBannerTitle": "Facing a property auction?",
+    "pleistariasmosBannerText": "See our dedicated page for legal defence in property auction proceedings.",
+    "pleistariasmosBannerCta": "Auction Defence Page",
     "areas": {
       "banking": {
         "title": "Banking Law & Objections",
@@ -368,6 +371,12 @@
       "edu": ["Faculty of Law, Democritus University of Thrace, Komotini"],
       "specializations": ["Out-of-Court Mechanism L.4738/2020", "Small-Scale Insolvency Law", "Property Sale Contracts"]
     }
+  },
+  "auctionBanner": {
+    "eyebrow": "Urgent legal help",
+    "title": "Facing a property auction?",
+    "text": "Injunctions, stays, and seizure cancellations — 25+ years of banking law experience.",
+    "cta": "How we can help"
   },
   "pleistariasmos": {
     "seoTitle": "Foreclosure & Auction Defence Lawyer – Thessaloniki",

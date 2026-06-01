@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Check, Banknote, Handshake, ShieldCheck, Briefcase, Home, Users, Building2, BookOpen, Receipt, HardHat } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Banknote, Handshake, ShieldCheck, Briefcase, Home, Users, Building2, BookOpen, Receipt, HardHat, Gavel } from "lucide-react";
 import { use } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 
@@ -97,6 +97,28 @@ export default function PracticeAreaDetailPage({
             {t(`areas.${area}.longDesc`)}
           </p>
         </ScrollReveal>
+
+        {area === "banking" && (
+          <ScrollReveal direction="up" delay={0.05}>
+            <div className="bg-amber-50 border border-amber-200 rounded-sm p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-12">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-sm bg-accent/15 border border-accent flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Gavel className="text-accent" size={18} />
+                </div>
+                <div>
+                  <p className="font-semibold text-primary text-sm">{t("pleistariasmosBannerTitle")}</p>
+                  <p className="text-gray-600 text-sm mt-0.5">{t("pleistariasmosBannerText")}</p>
+                </div>
+              </div>
+              <Link
+                href={`/${locale}/pleistariasmos`}
+                className="whitespace-nowrap inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-5 py-2.5 rounded-sm transition-colors text-sm flex-shrink-0"
+              >
+                {t("pleistariasmosBannerCta")} <ArrowRight size={14} />
+              </Link>
+            </div>
+          </ScrollReveal>
+        )}
 
         <div className="grid md:grid-cols-2 gap-12">
           <ScrollReveal direction="left" delay={0.1}>

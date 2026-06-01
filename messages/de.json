@@ -128,6 +128,9 @@
     "ctaTitle": "Benötigen Sie rechtliche Unterstützung?",
     "ctaText": "Kontaktieren Sie uns, um Ihren Fall diskret und professionell zu besprechen.",
     "backToAll": "Zurück zu allen Rechtsgebieten",
+    "pleistariasmosBannerTitle": "Droht Ihnen eine Zwangsversteigerung?",
+    "pleistariasmosBannerText": "Besuchen Sie unsere dedizierte Seite zur rechtlichen Verteidigung in Zwangsversteigerungsverfahren.",
+    "pleistariasmosBannerCta": "Zwangsversteigerungsseite",
     "areas": {
       "banking": {
         "title": "Bankrecht & Anfechtungen",
@@ -362,6 +365,12 @@
       "edu": ["Juristische Fakultät, Demokrit-Universität Thrakien, Komotini"],
       "specializations": ["Außergerichtlicher Mechanismus Ges. 4738/2020", "Insolvenzrecht für Kleinschuldner", "Immobilienkaufverträge"]
     }
+  },
+  "auctionBanner": {
+    "eyebrow": "Dringende Rechtshilfe",
+    "title": "Droht Ihnen eine Zwangsversteigerung?",
+    "text": "Vollstreckungswidersprüche, Aussetzungen und Pfändungsaufhebungen — 25+ Jahre Erfahrung.",
+    "cta": "Wie wir helfen können"
   },
   "pleistariasmos": {
     "seoTitle": "Anwalt für Zwangsversteigerungen – Thessaloniki",
