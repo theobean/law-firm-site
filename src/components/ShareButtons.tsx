@@ -7,17 +7,25 @@ import { useTranslations } from "next-intl";
 interface Props {
   url: string;
   title: string;
+  shareLabel?: string;
+  copyLinkLabel?: string;
+  linkCopiedLabel?: string;
+  dark?: boolean;
 }
 
-export default function ShareButtons({ url, title }: Props) {
+export default function ShareButtons({ url, title, shareLabel, copyLinkLabel, linkCopiedLabel, dark = false }: Props) {
   const t = useTranslations("blog");
   const [copied, setCopied] = useState(false);
+
+  const shareText = shareLabel ?? t("share");
+  const copyLinkText = copyLinkLabel ?? t("copyLink");
+  const linkCopiedText = linkCopiedLabel ?? t("linkCopied");
 
   const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
   const liUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
   const twUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`;
 
-  async function copyLink() {
+  async function handleCopy() {
     try {
       await navigator.clipboard.writeText(url);
       setCopied(true);
@@ -27,12 +35,15 @@ export default function ShareButtons({ url, title }: Props) {
     }
   }
 
-  const btn =
-    "w-10 h-10 flex items-center justify-center rounded-sm bg-gray-100 hover:bg-accent hover:text-white text-gray-600 transition-colors";
+  const btn = dark
+    ? "w-10 h-10 flex items-center justify-center rounded-sm bg-white/10 hover:bg-accent hover:text-white text-white/50 transition-colors"
+    : "w-10 h-10 flex items-center justify-center rounded-sm bg-gray-100 hover:bg-accent hover:text-white text-gray-600 transition-colors";
 
   return (
     <div className="flex items-center gap-3 flex-wrap">
-      <span className="text-sm text-gray-500 font-semibold">{t("share")}:</span>
+      <span className={dark ? "text-sm text-white/50 font-semibold" : "text-sm text-gray-500 font-semibold"}>
+        {shareText}:
+      </span>
 
       <a href={fbUrl} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className={btn}>
         <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
@@ -53,14 +64,14 @@ export default function ShareButtons({ url, title }: Props) {
       </a>
 
       <button
-        onClick={copyLink}
-        aria-label={t("copyLink")}
+        onClick={handleCopy}
+        aria-label={copyLinkText}
         className={`${btn} ${copied ? "bg-accent text-white" : ""}`}
       >
         {copied ? <Check size={18} /> : <Link2 size={18} />}
       </button>
 
-      {copied && <span className="text-xs text-accent font-semibold">{t("linkCopied")}</span>}
+      {copied && <span className="text-xs text-accent font-semibold">{linkCopiedText}</span>}
     </div>
   );
 }

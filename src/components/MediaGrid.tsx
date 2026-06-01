@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { Play, Tv, Calendar } from "lucide-react";
 import { getYouTubeId, getThumbnailUrl, getEmbedUrl } from "@/lib/youtube";
 import { useTranslations } from "next-intl";
+import ShareButtons from "@/components/ShareButtons";
 
 interface Interview {
   _id: string;
@@ -15,6 +16,7 @@ interface Interview {
 }
 
 function InterviewCard({ interview, locale }: { interview: Interview; locale: string }) {
+  const t = useTranslations("media");
   const [playing, setPlaying] = useState(false);
   const [visible, setVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -110,6 +112,16 @@ function InterviewCard({ interview, locale }: { interview: Interview; locale: st
             {interview.description}
           </p>
         )}
+        <div className="mt-auto pt-3 border-t border-white/10">
+          <ShareButtons
+            url={interview.youtubeUrl}
+            title={interview.title}
+            shareLabel={t("share")}
+            copyLinkLabel={t("copyLink")}
+            linkCopiedLabel={t("linkCopied")}
+            dark
+          />
+        </div>
       </div>
     </div>
   );

@@ -20,6 +20,9 @@
     "empty": "No decisions yet.",
     "download": "Download",
     "view": "View",
+    "share": "Share",
+    "copyLink": "Copy link",
+    "linkCopied": "Copied!",
     "categories": {
       "banking": "Banking",
       "extrajudicial": "Out-of-Court",
@@ -38,7 +41,10 @@
     "subtitle": "Interviews and television appearances by our law firm",
     "seoTitle": "TV Interviews | Papaioannou Law Office",
     "seoDescription": "Television appearances and interviews by lawyer Ioannis Papaioannou on Greek channels.",
-    "empty": "No interviews yet."
+    "empty": "No interviews yet.",
+    "share": "Share",
+    "copyLink": "Copy link",
+    "linkCopied": "Copied!"
   },
   "blog": {
     "title": "Articles & News",
