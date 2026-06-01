@@ -67,6 +67,9 @@ export async function generateMetadata({
       description: t("defaultDescription"),
       images: ["/δικηγορος.png"],
     },
+    verification: {
+      google: "JUS1nmscWFd22T2yqxoTEmMcXBIKA9ztFnMJ-MTSM3g",
+    },
     robots: {
       index: true,
       follow: true,
