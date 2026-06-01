@@ -368,5 +368,60 @@
       "edu": ["Faculty of Law, Democritus University of Thrace, Komotini"],
       "specializations": ["Out-of-Court Mechanism L.4738/2020", "Small-Scale Insolvency Law", "Property Sale Contracts"]
     }
+  },
+  "pleistariasmos": {
+    "seoTitle": "Foreclosure & Auction Defence Lawyer – Thessaloniki",
+    "seoDescription": "Expert legal defence against property auctions in Thessaloniki. Injunctions, stays, seizure cancellations. 25+ years' experience.",
+    "heroTitle": "Foreclosure & Auction Defence",
+    "heroCity": "Thessaloniki",
+    "heroSubtitle": "Injunctions · Stays · Seizure Cancellations",
+    "intro": "A forced auction is not inevitable. With 25+ years of banking and enforcement law experience, we have helped hundreds of debtors protect their homes from banks and funds.",
+    "whatTitle": "What is a forced auction?",
+    "whatText": "A forced auction (πλειστηριασμός) is the compulsory sale of a property or assets to satisfy a creditor — bank, fund, or the State. Greek law provides significant rights of defence for the debtor, provided you act in time.",
+    "servicesTitle": "How we defend you",
+    "services": [
+      "Stay of auction of primary residence or business premises",
+      "Objection to enforcement (Article 933 CCP)",
+      "Cancellation of seizure on formal or substantive grounds",
+      "Oppositions to enforcement acts",
+      "Application to exempt primary residence from enforcement",
+      "Objection to payment order",
+      "Actions against banks for unfair contract terms",
+      "Fund cases — challenging legality of claim assignment",
+      "Application to out-of-court restructuring mechanism (L. 4738/2020)",
+      "Debt restructuring negotiation with banks and servicers"
+    ],
+    "urgencyTitle": "Deadlines are strict — act immediately",
+    "urgencyText": "Enforcement proceedings are subject to very short mandatory deadlines. As soon as you receive an enforcement order, seizure notice, or auction notification, contact us immediately.",
+    "whyTitle": "Why choose us",
+    "whyItems": [
+      "25+ years in banking law & enforcement proceedings",
+      "Hundreds of successful objections and auction stays",
+      "In-depth knowledge of bank, fund, and servicer practices",
+      "Direct communication and full transparency at every stage",
+      "Office in Thessaloniki — cases throughout Greece"
+    ],
+    "faqTitle": "Frequently Asked Questions",
+    "faq": [
+      {
+        "q": "Can an auction be stayed just days before it takes place?",
+        "a": "Yes, in many cases this is possible if there are valid legal grounds and the application is filed in time. The court can issue a temporary stay order even the day before the auction."
+      },
+      {
+        "q": "What is an objection to enforcement?",
+        "a": "An objection to enforcement (Article 933 CCP) is the main judicial remedy to challenge the legality of a seizure or auction. It can be based on formal or substantive defects in the enforcement process."
+      },
+      {
+        "q": "Can a fund auction my home?",
+        "a": "Yes, if the claim has been validly assigned to it. However, the assignment of claims from banks to funds raises significant legal questions that can be effectively challenged in court."
+      },
+      {
+        "q": "How much does legal defence cost?",
+        "a": "Fees depend on the type and complexity of the case. At a first meeting we provide a free assessment of your situation and inform you transparently of the costs involved."
+      }
+    ],
+    "ctaTitle": "Contact us now",
+    "ctaText": "Don't let deadlines catch you off guard. Call us today for a case assessment.",
+    "ctaButton": "Book a consultation"
   }
 }

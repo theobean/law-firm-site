@@ -362,5 +362,60 @@
       "edu": ["Juristische Fakultät, Demokrit-Universität Thrakien, Komotini"],
       "specializations": ["Außergerichtlicher Mechanismus Ges. 4738/2020", "Insolvenzrecht für Kleinschuldner", "Immobilienkaufverträge"]
     }
+  },
+  "pleistariasmos": {
+    "seoTitle": "Anwalt für Zwangsversteigerungen – Thessaloniki",
+    "seoDescription": "Rechtliche Verteidigung gegen Zwangsversteigerungen in Thessaloniki. Einstweilige Verfügungen, Aussetzungen, Pfändungsaufhebungen. 25+ Jahre Erfahrung.",
+    "heroTitle": "Verteidigung gegen Zwangsversteigerungen",
+    "heroCity": "Thessaloniki",
+    "heroSubtitle": "Einstweilige Verfügungen · Aussetzungen · Pfändungsaufhebungen",
+    "intro": "Eine Zwangsversteigerung ist nicht unausweichlich. Mit mehr als 25 Jahren Erfahrung im Bank- und Vollstreckungsrecht haben wir Hunderten von Schuldnern geholfen, ihr Zuhause vor Banken und Fonds zu schützen.",
+    "whatTitle": "Was ist eine Zwangsversteigerung?",
+    "whatText": "Eine Zwangsversteigerung ist der zwangsweise Verkauf einer Immobilie oder von Vermögenswerten zur Befriedigung eines Gläubigers — Bank, Fonds oder Staat. Das griechische Recht gewährt dem Schuldner jedoch wesentliche Verteidigungsrechte, sofern rechtzeitig gehandelt wird.",
+    "servicesTitle": "Wie wir Sie verteidigen",
+    "services": [
+      "Aussetzung der Versteigerung des Hauptwohnsitzes oder Geschäftsgebäudes",
+      "Vollstreckungswiderspruch (Art. 933 ZPO)",
+      "Aufhebung der Pfändung wegen formeller oder materieller Mängel",
+      "Einwendungen gegen Vollstreckungsmaßnahmen",
+      "Antrag auf Freistellung des Hauptwohnsitzes von der Vollstreckung",
+      "Widerspruch gegen Zahlungsbefehl",
+      "Klagen gegen Banken wegen missbräuchlicher Vertragsklauseln",
+      "Fondsverfahren — Anfechtung der Rechtmäßigkeit der Forderungsabtretung",
+      "Antrag auf außergerichtliches Umstrukturierungsverfahren (Ges. 4738/2020)",
+      "Schuldenrestrukturierungsverhandlungen mit Banken und Verwaltern"
+    ],
+    "urgencyTitle": "Die Fristen sind streng — handeln Sie sofort",
+    "urgencyText": "Vollstreckungsverfahren unterliegen sehr kurzen zwingenden Fristen. Sobald Sie eine Vollstreckungsanordnung, Pfändungsmitteilung oder Versteigerungsbenachrichtigung erhalten, kontaktieren Sie uns sofort.",
+    "whyTitle": "Warum wir",
+    "whyItems": [
+      "25+ Jahre im Bankrecht und Vollstreckungsverfahren",
+      "Hunderte erfolgreicher Vollstreckungswidersprüche und Versteigerungsaussetzungen",
+      "Tiefgreifende Kenntnis der Praktiken von Banken, Fonds und Verwaltern",
+      "Direkte Kommunikation und volle Transparenz in jeder Phase",
+      "Büro in Thessaloniki — Mandate in ganz Griechenland"
+    ],
+    "faqTitle": "Häufige Fragen",
+    "faq": [
+      {
+        "q": "Kann eine Versteigerung noch kurz vorher ausgesetzt werden?",
+        "a": "Ja, in vielen Fällen ist dies möglich, wenn stichhaltige Rechtsgründe vorliegen und der Antrag rechtzeitig gestellt wird. Das Gericht kann eine einstweilige Aussetzung noch am Vortag der Versteigerung gewähren."
+      },
+      {
+        "q": "Was ist ein Vollstreckungswiderspruch?",
+        "a": "Der Vollstreckungswiderspruch (Art. 933 ZPO) ist das wichtigste gerichtliche Mittel zur Anfechtung der Rechtmäßigkeit einer Pfändung oder Versteigerung auf formeller oder materieller Grundlage."
+      },
+      {
+        "q": "Kann ein Fonds mein Haus versteigern?",
+        "a": "Ja, wenn die Forderung wirksam abgetreten wurde. Die Abtretung von Forderungen von Banken an Fonds wirft jedoch erhebliche Rechtsfragen auf, die effektiv vor Gericht angefochten werden können."
+      },
+      {
+        "q": "Was kostet die rechtliche Verteidigung?",
+        "a": "Die Honorare richten sich nach Art und Komplexität des Falls. Im Erstgespräch bewerten wir Ihren Fall kostenlos und informieren Sie transparent über die anfallenden Kosten."
+      }
+    ],
+    "ctaTitle": "Kontaktieren Sie uns sofort",
+    "ctaText": "Lassen Sie die Fristen nicht verstreichen. Rufen Sie uns heute für eine Fallbewertung an.",
+    "ctaButton": "Termin vereinbaren"
   }
 }

@@ -13,6 +13,7 @@ const staticPaths = [
   "/media",
   "/privacy",
   "/terms",
+  "/pleistariasmos",
 ];
 const practiceAreas = [
   "civil",
