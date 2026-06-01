@@ -26,6 +26,13 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "seo" });
+  const isEl = locale === "el";
+
+  const ogLocaleMap: Record<string, string> = { el: "el_GR", en: "en_US", de: "de_DE" };
+  const ogLocale = ogLocaleMap[locale] ?? "el_GR";
+  const ogAlternateLocale = Object.entries(ogLocaleMap)
+    .filter(([k]) => k !== locale)
+    .map(([, v]) => v);
 
   return {
     metadataBase: new URL(siteUrl),
@@ -34,17 +41,20 @@ export async function generateMetadata({
       template: `%s | ${t("siteName")}`,
     },
     description: t("defaultDescription"),
+    ...(isEl && { authors: [{ name: "Ιωάννης Παπαϊωάννου" }] }),
     alternates: {
       canonical: `/${locale}`,
       languages: {
         el: "/el",
         en: "/en",
+        de: "/de",
         "x-default": "/el",
       },
     },
     openGraph: {
       type: "website",
-      locale: locale === "el" ? "el_GR" : "en_US",
+      locale: ogLocale,
+      alternateLocale: ogAlternateLocale,
       url: `${siteUrl}/${locale}`,
       siteName: t("siteName"),
       title: t("defaultTitle"),
@@ -57,11 +67,32 @@ export async function generateMetadata({
       description: t("defaultDescription"),
       images: ["/δικηγορος.png"],
     },
-    robots: { index: true, follow: true },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-snippet": -1,
+        "max-image-preview": "large",
+        "max-video-preview": -1,
+      },
+    },
     icons: {
       icon: "/favicon.svg",
       shortcut: "/favicon.svg",
     },
+    ...(isEl && {
+      other: {
+        "geo.region": "GR-B",
+        "geo.placename": "Θεσσαλονίκη",
+        "geo.position": "40.6401;22.9444",
+        "ICBM": "40.6401, 22.9444",
+        "revisit-after": "7 days",
+        "rating": "general",
+        "language": "Greek",
+      },
+    }),
   };
 }
 
@@ -81,14 +112,18 @@ export default async function LocaleLayout({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "LegalService",
-    name: t("siteName"),
+    name: "Παπαϊωάννου Ι. – Λιάμος Γ. & Συνεργάτες",
+    alternateName: ["Παπαιωάννου δικηγόρος", "Ioannis Papaioannou Lawyer"],
+    description: "Δικηγορικό γραφείο στη Θεσσαλονίκη με εξειδίκευση σε πλειστηριασμούς, ανακοπές, αναστολές κατασχέσεων και τραπεζικό δίκαιο.",
     url: `${siteUrl}/${locale}`,
-    telephone: "+30 2310 545 261",
+    telephone: "+302310545261",
     email: "iopapaio@gmail.com",
     image: `${siteUrl}/δικηγορος.png`,
+    foundingDate: "2000",
+    priceRange: "€€",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Λέοντος του Σοφού 12",
+      streetAddress: "Λέοντος Σοφού 12",
       addressLocality: "Θεσσαλονίκη",
       postalCode: "54625",
       addressCountry: "GR",
@@ -102,10 +137,22 @@ export default async function LocaleLayout({
       "@type": "OpeningHoursSpecification",
       dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
       opens: "09:00",
-      closes: "19:00",
+      closes: "17:00",
     },
-    areaServed: { "@type": "Country", name: "GR" },
-    priceRange: "€€",
+    areaServed: { "@type": "City", name: "Θεσσαλονίκη" },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Νομικές Υπηρεσίες",
+      itemListElement: [
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Ανακοπή Πλειστηριασμού" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Αναστολή Πλειστηριασμού" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Ακύρωση Κατάσχεσης" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Εξωδικαστικός Μηχανισμός" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Τραπεζικό Δίκαιο" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Ανακοπή Διαταγής Πληρωμής" } },
+      ],
+    },
+    sameAs: ["https://www.facebook.com/ioannis.papaioannou.94"],
   };
 
   return (
