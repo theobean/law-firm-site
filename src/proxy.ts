@@ -17,7 +17,7 @@ function geoLocale(country: string | undefined): "el" | "en" | "de" {
   return "en";
 }
 
-export default function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Already on a locale path (/el, /en, /de) — let next-intl handle it
