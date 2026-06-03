@@ -56,6 +56,17 @@ body {
   }
 }
 
+@keyframes slide-from-left {
+  from {
+    opacity: 0;
+    transform: translateX(-120px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 @keyframes reveal-up {
   from {
     opacity: 0;
