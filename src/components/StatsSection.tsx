@@ -7,7 +7,7 @@ import { useLocale } from "next-intl";
 
 const stats = [
   { value: "25+", key: "experience" },
-  { value: "1000+", key: "cases" },
+  { value: null, key: "cases" },
   { value: "350+", key: "clients" },
   { value: "9", key: "areas" },
 ] as const;
@@ -45,10 +45,18 @@ export default function StatsSection() {
                   : { opacity: 0 }
               }
             >
-              <p className="text-4xl md:text-5xl font-playfair font-bold text-white mb-2">
-                {value}
-              </p>
-              <p className="text-white/60 text-sm leading-tight">{t(key)}</p>
+              {value !== null ? (
+                <>
+                  <p className="text-4xl md:text-5xl font-playfair font-bold text-white mb-2">
+                    {value}
+                  </p>
+                  <p className="text-white/60 text-sm leading-tight">{t(key)}</p>
+                </>
+              ) : (
+                <p className="text-white font-playfair text-base md:text-lg leading-snug">
+                  {t(key)}
+                </p>
+              )}
             </div>
           ))}
         </div>
