@@ -2,8 +2,8 @@ import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { Scale, GraduationCap, Users } from "lucide-react";
-import TeamGrid from "@/components/TeamGrid";
 import BiographySection from "@/components/BiographySection";
+import AssociatesGrid from "@/components/AssociatesGrid";
 
 export async function generateMetadata({
   params,
@@ -29,14 +29,14 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team grid — all three members, clickable */}
-      <TeamGrid />
-
-      {/* Biography section — Ioannis Papaioannou full bio */}
+      {/* Full biography — Ioannis Papaioannou */}
       <BiographySection />
 
+      {/* Associates — Georgios & Lampriní */}
+      <AssociatesGrid />
+
       {/* Values strip */}
-      <section className="bg-gray-50 py-16">
+      <section className="bg-gray-50 py-16 border-t border-gray-100">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
