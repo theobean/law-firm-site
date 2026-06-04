@@ -131,9 +131,10 @@ export default async function LocaleLayout({
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: 40.6401,
-      longitude: 22.9444,
+      latitude: 40.6372647,
+      longitude: 22.9371058,
     },
+    hasMap: "https://maps.google.com/?cid=10350029232005631470",
     openingHoursSpecification: {
       "@type": "OpeningHoursSpecification",
       dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
@@ -153,7 +154,10 @@ export default async function LocaleLayout({
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "Ανακοπή Διαταγής Πληρωμής" } },
       ],
     },
-    sameAs: ["https://www.facebook.com/ioannis.papaioannou.94"],
+    sameAs: [
+      "https://www.facebook.com/ioannis.papaioannou.94",
+      "https://maps.google.com/?cid=10350029232005631470",
+    ],
   };
 
   return (
