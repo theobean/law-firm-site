@@ -30,8 +30,17 @@ export async function getArticle(slug: string) {
 export async function getInterviews() {
   return client.fetch(
     `*[_type == "interview"] | order(date desc) {
-      _id, title, youtubeUrl, show, date, description
+      _id, title, slug, youtubeUrl, show, date, description
     }`
+  );
+}
+
+export async function getInterviewBySlug(slug: string) {
+  return client.fetch(
+    `*[_type == "interview" && slug.current == $slug][0] {
+      _id, title, slug, youtubeUrl, show, date, description
+    }`,
+    { slug }
   );
 }
 

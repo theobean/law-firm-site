@@ -12,10 +12,17 @@ export const interview = defineType({
       validation: (r) => r.required(),
     }),
     defineField({
+      name: "slug",
+      title: "URL (slug)",
+      type: "slug",
+      options: { source: "title", maxLength: 96 },
+      description: "Δημιουργείται αυτόματα από τον τίτλο — πάτα Generate.",
+    }),
+    defineField({
       name: "youtubeUrl",
-      title: "YouTube URL",
+      title: "Video URL (YouTube / Facebook)",
       type: "url",
-      description: "π.χ. https://www.youtube.com/watch?v=XXXXX ή https://youtu.be/XXXXX",
+      description: "π.χ. https://www.youtube.com/watch?v=XXXXX ή Facebook video URL",
       validation: (r) => r.required(),
     }),
     defineField({

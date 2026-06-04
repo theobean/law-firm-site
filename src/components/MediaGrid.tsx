@@ -7,11 +7,13 @@ import {
   getFacebookEmbedUrl, getVideoType,
 } from "@/lib/youtube";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 import ShareButtons from "@/components/ShareButtons";
 
 interface Interview {
   _id: string;
   title: string;
+  slug?: { current?: string };
   youtubeUrl: string;
   show?: string;
   date?: string;
@@ -130,9 +132,18 @@ function InterviewCard({ interview, locale }: { interview: Interview; locale: st
             )}
           </div>
         )}
-        <h3 className="text-white font-semibold text-sm leading-snug line-clamp-2">
-          {interview.title}
-        </h3>
+        {interview.slug?.current ? (
+          <Link
+            href={`/${locale}/media/${interview.slug.current}`}
+            className="text-white font-semibold text-sm leading-snug line-clamp-2 hover:text-accent transition-colors"
+          >
+            {interview.title}
+          </Link>
+        ) : (
+          <h3 className="text-white font-semibold text-sm leading-snug line-clamp-2">
+            {interview.title}
+          </h3>
+        )}
         {interview.description && (
           <p className="text-white/50 text-xs leading-relaxed line-clamp-2">
             {interview.description}
@@ -140,7 +151,9 @@ function InterviewCard({ interview, locale }: { interview: Interview; locale: st
         )}
         <div className="mt-auto pt-3 border-t border-white/10">
           <ShareButtons
-            url={interview.youtubeUrl}
+            url={interview.slug?.current
+              ? `https://www.ioannispapaioannou.lawyer/${locale}/media/${interview.slug.current}`
+              : interview.youtubeUrl}
             title={interview.title}
             shareLabel={t("share")}
             copyLinkLabel={t("copyLink")}
