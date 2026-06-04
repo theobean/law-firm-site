@@ -399,6 +399,11 @@
       ]
     }
   },
+  "urgentCta": {
+    "text": "Have you been served with a payment order, seizure or auction notice?",
+    "sub": "Do not wait. Deadlines in enforcement proceedings are short and critical.",
+    "cta": "Immediate file review"
+  },
   "auctionBanner": {
     "eyebrow": "Urgent legal help",
     "title": "Facing a property auction?",

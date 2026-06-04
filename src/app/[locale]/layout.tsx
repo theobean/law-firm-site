@@ -7,6 +7,7 @@ import { routing } from "@/i18n/routing";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
+import UrgentCTABar from "@/components/UrgentCTABar";
 import ScrollToTop from "@/components/ScrollToTop";
 import "../globals.css";
 
@@ -167,6 +168,7 @@ export default async function LocaleLayout({
           <main className="flex-1">{children}</main>
           <Footer />
           <CookieBanner />
+          <UrgentCTABar />
           <ScrollToTop />
         </NextIntlClientProvider>
       </body>

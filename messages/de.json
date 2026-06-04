@@ -393,6 +393,11 @@
       ]
     }
   },
+  "urgentCta": {
+    "text": "Wurde Ihnen ein Mahnbescheid, eine Pfändung oder ein Versteigerungstermin zugestellt?",
+    "sub": "Warten Sie nicht. Fristen im Vollstreckungsverfahren sind kurz und entscheidend.",
+    "cta": "Sofortige Aktenprüfung"
+  },
   "auctionBanner": {
     "eyebrow": "Dringende Rechtshilfe",
     "title": "Droht Ihnen eine Zwangsversteigerung?",
