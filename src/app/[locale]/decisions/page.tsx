@@ -3,7 +3,7 @@ import { getDecisions } from "@/sanity/client";
 import DecisionsGrid from "@/components/DecisionsGrid";
 import type { Metadata } from "next";
 
-export const revalidate = 60;
+export const revalidate = 10;
 
 export async function generateMetadata({
   params,
