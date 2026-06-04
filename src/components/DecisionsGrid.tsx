@@ -72,60 +72,52 @@ function Lightbox({
   }, [onClose, prev, next]);
 
   return (
-    <div
-      className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center"
-      onClick={onClose}
-    >
-      {/* Close */}
-      <button
-        onClick={onClose}
-        aria-label="Κλείσιμο"
-        className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-black/60 text-white/70 hover:text-white hover:bg-black/80 transition-colors"
-      >
-        <X size={20} />
-      </button>
-
-      {/* Counter */}
-      {images.length > 1 && (
-        <span className="absolute top-4 left-1/2 -translate-x-1/2 z-10 text-white/60 text-sm bg-black/50 px-3 py-1 rounded-full">
-          {idx + 1} / {images.length}
-        </span>
-      )}
+    <div className="fixed inset-0 z-[100] bg-black flex" onClick={onClose}>
 
       {/* Prev arrow */}
       {images.length > 1 && (
         <button
           onClick={(e) => { e.stopPropagation(); prev(); }}
           aria-label="Προηγούμενη"
-          className="absolute left-3 z-10 w-11 h-11 flex items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+          className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/25 text-white transition-colors"
         >
-          <ChevronLeft size={22} />
+          <ChevronLeft size={26} />
         </button>
       )}
 
-      {/* Image — as large as viewport allows */}
-      <div
-        className="relative max-h-[95vh] max-w-[92vw] overflow-auto"
+      {/* Image — truly full screen, object-contain */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={images[idx].url}
+        alt={`${title} — εικόνα ${idx + 1}`}
         onClick={(e) => e.stopPropagation()}
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={images[idx].url}
-          alt={`${title} — εικόνα ${idx + 1}`}
-          className="max-h-[95vh] max-w-[92vw] w-auto h-auto object-contain shadow-2xl"
-        />
-      </div>
+        className="w-full h-full object-contain"
+      />
 
       {/* Next arrow */}
       {images.length > 1 && (
         <button
           onClick={(e) => { e.stopPropagation(); next(); }}
           aria-label="Επόμενη"
-          className="absolute right-3 z-10 w-11 h-11 flex items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+          className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/25 text-white transition-colors"
         >
-          <ChevronRight size={22} />
+          <ChevronRight size={26} />
         </button>
       )}
+
+      {/* Close + counter */}
+      <div className="absolute top-4 right-4 z-10 flex items-center gap-3">
+        {images.length > 1 && (
+          <span className="text-white/60 text-sm">{idx + 1} / {images.length}</span>
+        )}
+        <button
+          onClick={onClose}
+          aria-label="Κλείσιμο"
+          className="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/25 text-white transition-colors"
+        >
+          <X size={20} />
+        </button>
+      </div>
     </div>
   );
 }
