@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowLeft, Calendar, Landmark, Download, Eye } from "lucide-react";
-import DecisionImageViewer from "@/components/DecisionImageViewer";
+// import DecisionImageViewer from "@/components/DecisionImageViewer";
 
 export const revalidate = 10;
 
@@ -120,7 +120,14 @@ export default async function DecisionPage({
           </div>
         )}
 
-        {hasImages && <DecisionImageViewer images={decision.images} title={decision.title} />}
+        {hasImages && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {decision.images.map((img: { url: string }, i: number) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img key={i} src={img.url} alt={`${decision.title} ${i + 1}`} className="w-full rounded shadow" />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
