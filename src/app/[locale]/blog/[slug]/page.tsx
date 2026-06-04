@@ -119,8 +119,15 @@ export default async function ArticlePage({
           </p>
         )}
 
-        <div className="prose prose-lg max-w-none prose-headings:font-playfair prose-headings:text-primary prose-a:text-accent">
-          {article.body && <PortableText value={article.body} />}
+        <div className="prose prose-lg max-w-none prose-headings:font-playfair prose-headings:text-primary prose-a:text-accent prose-p:leading-relaxed prose-p:mb-6">
+          {article.body && (
+            <PortableText
+              value={article.body}
+              components={{
+                hardBreak: () => <> </>,
+              }}
+            />
+          )}
         </div>
 
         <div className="mt-12 pt-8 border-t border-gray-100">
