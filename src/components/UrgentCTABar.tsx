@@ -14,7 +14,6 @@ export default function UrgentCTABar() {
 
   useEffect(() => {
     if (!sessionStorage.getItem(SESSION_KEY)) {
-      // Small delay so it slides in after page load
       const timer = setTimeout(() => setVisible(true), 1200);
       return () => clearTimeout(timer);
     }
@@ -32,22 +31,33 @@ export default function UrgentCTABar() {
       }`}
     >
       <div className="bg-primary border-t-2 border-accent shadow-2xl">
-        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center gap-4">
 
-          {/* Accent line */}
-          <div className="hidden sm:block w-1 self-stretch bg-accent rounded-full flex-shrink-0" />
+        {/* ── MOBILE layout ── */}
+        <div className="sm:hidden flex items-center gap-2 px-3 py-2.5">
+          <Link
+            href={`/${locale}/contact`}
+            onClick={dismiss}
+            className="flex-1 flex items-center justify-center gap-1.5 bg-accent text-primary text-xs font-bold tracking-wide uppercase px-3 py-2.5 rounded-sm hover:bg-accent/90 transition-colors"
+          >
+            {t("cta")}
+            <ArrowRight size={13} />
+          </Link>
+          <button
+            onClick={dismiss}
+            aria-label="Κλείσιμο"
+            className="flex-shrink-0 text-white/40 hover:text-white/80 transition-colors p-1.5"
+          >
+            <X size={16} />
+          </button>
+        </div>
 
-          {/* Text */}
+        {/* ── DESKTOP layout ── */}
+        <div className="hidden sm:flex max-w-6xl mx-auto px-4 py-3 items-center gap-4">
+          <div className="w-1 self-stretch bg-accent rounded-full flex-shrink-0" />
           <div className="flex-1 min-w-0">
-            <p className="text-white font-semibold text-sm leading-snug">
-              {t("text")}
-            </p>
-            <p className="text-white/60 text-xs mt-0.5 leading-snug">
-              {t("sub")}
-            </p>
+            <p className="text-white font-semibold text-sm leading-snug">{t("text")}</p>
+            <p className="text-white/60 text-xs mt-0.5 leading-snug">{t("sub")}</p>
           </div>
-
-          {/* CTA button */}
           <Link
             href={`/${locale}/contact`}
             onClick={dismiss}
@@ -56,8 +66,6 @@ export default function UrgentCTABar() {
             {t("cta")}
             <ArrowRight size={13} />
           </Link>
-
-          {/* Dismiss */}
           <button
             onClick={dismiss}
             aria-label="Κλείσιμο"
@@ -66,6 +74,7 @@ export default function UrgentCTABar() {
             <X size={16} />
           </button>
         </div>
+
       </div>
     </div>
   );
