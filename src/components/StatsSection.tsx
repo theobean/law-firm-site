@@ -47,7 +47,7 @@ export default function StatsSection() {
             >
               {text ? (
                 <>
-                  <p className="text-3xl md:text-4xl font-playfair font-bold text-accent mb-2">
+                  <p className="text-3xl md:text-4xl font-playfair font-bold text-white mb-2">
                     {t(`${key}Title`)}
                   </p>
                   <p className="text-white/60 text-sm leading-tight">{t(key)}</p>
