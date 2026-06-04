@@ -32,7 +32,7 @@ export default function Footer() {
             </h3>
             <ul className="space-y-4">
               {[
-                { icon: MapPin, text: <>{t("contact.addressLine1")}<br />{t("contact.addressLine2")}</>, href: "https://maps.google.com/?q=Λέοντος+του+Σοφού+12,+54625+Θεσσαλονίκη", external: true },
+                { icon: MapPin, text: <>{t("contact.addressLine1")}<br />{t("contact.addressLine2")}</>, href: "https://maps.google.com/?cid=10350029232005631470", external: true },
                 { icon: Phone, text: "+30 2310 545 261", href: "tel:+302310545261", external: false },
                 { icon: Mail, text: "iopapaio@gmail.com", href: "mailto:iopapaio@gmail.com", external: false },
               ].map(({ icon: Icon, text, href, external }) => (
