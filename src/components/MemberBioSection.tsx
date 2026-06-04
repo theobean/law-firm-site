@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { ChevronDown } from "lucide-react";
 
@@ -9,6 +10,10 @@ type MemberKey = "georgios" | "lamprinι";
 const initials: Record<MemberKey, string> = {
   georgios: "ΛΓ",
   "lamprinι": "ΠΛ",
+};
+
+const photos: Partial<Record<MemberKey, string>> = {
+  georgios: "/γεωργιος.jpeg",
 };
 
 const PREVIEW_COUNT = 2;
@@ -47,9 +52,18 @@ export default function MemberBioSection({
           {/* Left: monogram + identity */}
           <div className="flex flex-col items-center md:items-start gap-4 md:sticky md:top-24">
             <div className="relative w-48 md:w-full aspect-[3/4] rounded-sm overflow-hidden shadow-lg bg-primary">
-              <span className="absolute inset-0 flex items-center justify-center font-playfair font-bold text-8xl text-accent opacity-20 select-none">
-                {initials[memberKey]}
-              </span>
+              {photos[memberKey] ? (
+                <Image
+                  src={photos[memberKey]!}
+                  alt={name}
+                  fill
+                  className="object-cover object-top"
+                />
+              ) : (
+                <span className="absolute inset-0 flex items-center justify-center font-playfair font-bold text-8xl text-accent opacity-20 select-none">
+                  {initials[memberKey]}
+                </span>
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent" />
             </div>
             <div className="text-center md:text-left">
