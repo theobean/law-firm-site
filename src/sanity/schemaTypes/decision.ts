@@ -15,10 +15,17 @@ export const decision = defineType({
     }),
     defineField({
       name: "file",
-      title: "Αρχείο (PDF)",
+      title: "Αρχείο PDF",
       type: "file",
       options: { accept: ".pdf,.doc,.docx" },
-      validation: (Rule) => Rule.required(),
+      description: "Προαιρετικό — βάλε PDF ή/και εικόνες παρακάτω.",
+    }),
+    defineField({
+      name: "images",
+      title: "Εικόνες απόφασης",
+      type: "array",
+      of: [{ type: "image", options: { hotspot: true } }],
+      description: "Προαιρετικό — μπορείς να ανεβάσεις μία ή περισσότερες εικόνες.",
     }),
     defineField({
       name: "date",
@@ -57,10 +64,11 @@ export const decision = defineType({
     }),
   ],
   preview: {
-    select: { title: "title", court: "court", date: "date" },
-    prepare({ title, court, date }) {
+    select: { title: "title", court: "court", date: "date", media: "images.0" },
+    prepare({ title, court, date, media }) {
       return {
         title,
+        media,
         subtitle: [court, date].filter(Boolean).join(" · "),
       };
     },

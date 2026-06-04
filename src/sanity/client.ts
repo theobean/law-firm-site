@@ -39,7 +39,12 @@ export async function getDecisions() {
   return client.fetch(
     `*[_type == "decision"] | order(date desc) {
       _id, title, date, court, category, description,
-      "fileUrl": file.asset->url
+      "fileUrl": file.asset->url,
+      "images": images[]{
+        "url": asset->url,
+        "width": asset->metadata.dimensions.width,
+        "height": asset->metadata.dimensions.height
+      }
     }`
   );
 }
