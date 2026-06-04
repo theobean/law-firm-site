@@ -32,9 +32,9 @@ const cats: Record<string, Record<string, string>> = {
   de: { banking:"Bankrecht", extrajudicial:"Außergerichtlich", criminal:"Strafrecht", commercial:"Handelsrecht", realEstate:"Immobilien", administrative:"Verwaltungsrecht", inheritance:"Erbrecht", tax:"Steuerrecht", labor:"Arbeitsrecht" },
 };
 const ui: Record<string, Record<string, string>> = {
-  el: { back:"Όλες οι αποφάσεις", view:"Προβολή", dl:"Λήψη" },
-  en: { back:"All decisions", view:"View", dl:"Download" },
-  de: { back:"Alle Entscheidungen", view:"Ansehen", dl:"Herunterladen" },
+  el: { back:"Όλες οι αποφάσεις", view:"Προβολή", dl:"Λήψη", share:"Μοιραστείτε την απόφαση", copy:"Αντιγραφή συνδέσμου", copied:"Αντιγράφηκε!" },
+  en: { back:"All decisions", view:"View", dl:"Download", share:"Share this decision", copy:"Copy link", copied:"Copied!" },
+  de: { back:"Alle Entscheidungen", view:"Ansehen", dl:"Herunterladen", share:"Entscheidung teilen", copy:"Link kopieren", copied:"Kopiert!" },
 };
 
 export default async function DecisionPage({ params }: { params: Promise<{ slug: string; locale: string }> }) {
@@ -76,6 +76,9 @@ export default async function DecisionPage({ params }: { params: Promise<{ slug:
           <ShareButtons
             url={`https://www.ioannispapaioannou.lawyer/${locale}/decisions/${slug}`}
             title={decision.title}
+            shareLabel={s.share}
+            copyLinkLabel={s.copy}
+            linkCopiedLabel={s.copied}
           />
         </div>
 
