@@ -39,7 +39,7 @@ export default function ContactPage() {
           <div>
             <div className="space-y-8">
               {[
-                { icon: MapPin, label: t("address"), lines: [t("addressLine1"), t("addressLine2")], href: "https://maps.google.com/?q=Λέοντος+του+Σοφού+12,+54625+Θεσσαλονίκη", external: true },
+                { icon: MapPin, label: t("address"), lines: [t("addressLine1"), t("addressLine2")], href: "https://maps.google.com/?cid=10350029232005631470", external: true },
                 { icon: Phone, label: t("phone"), lines: ["+30 2310 545 261"], href: "tel:+302310545261", external: false },
                 { icon: Mail, label: t("email"), lines: ["iopapaio@gmail.com"], href: "mailto:iopapaio@gmail.com", external: false },
                 { icon: Clock, label: t("hours"), lines: [t("hoursValue")], href: null, external: false },
@@ -78,7 +78,7 @@ export default function ContactPage() {
             <ScrollReveal direction="up" delay={0.5}>
               <div className="hidden md:block mt-10 rounded-sm overflow-hidden h-64">
                 <iframe
-                  src={`https://maps.google.com/maps?q=Λέοντος+του+Σοφού+12,+54625+Θεσσαλονίκη&output=embed&hl=${locale}`}
+                  src={`https://maps.google.com/maps?cid=10350029232005631470&output=embed&hl=${locale}`}
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
