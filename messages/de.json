@@ -8,6 +8,9 @@
     "empty": "Noch keine Entscheidungen vorhanden.",
     "download": "Herunterladen",
     "view": "Anzeigen",
+    "share": "Entscheidung teilen",
+    "copyLink": "Link kopieren",
+    "linkCopied": "Kopiert!",
     "categories": {
       "banking": "Bankrecht",
       "extrajudicial": "Außergerichtlich",
