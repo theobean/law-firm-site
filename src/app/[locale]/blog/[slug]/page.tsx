@@ -13,32 +13,43 @@ import type { Metadata } from "next";
 
 export const revalidate = 60;
 
-// Splits Sanity blocks that contain hardBreaks (from Word paste) into
-// separate paragraph blocks so each visual paragraph renders as its own <p>.
-function splitHardBreaks(blocks: any[]): any[] {
+// Normalises article body pasted from Word/PDF, where the whole text often
+// lands inside a single span with literal "\n" characters:
+//   - double newline ("\n\n")  = a real paragraph break  -> new <p> block
+//   - single newline ("\n")    = a soft line-wrap         -> joined with a space
+// Blocks that are already well-structured pass through unchanged.
+function normalizeBody(blocks: any[]): any[] {
   const result: any[] = [];
-  let keyCounter = 0;
+  let key = 0;
 
   for (const block of blocks) {
-    if (block._type !== "block" || !block.children?.some((c: any) => c._type === "hardBreak")) {
+    if (block._type !== "block" || !block.children) {
       result.push(block);
       continue;
     }
 
     let current: any[] = [];
-    for (const child of block.children) {
-      if (child._type === "hardBreak") {
-        if (current.length > 0) {
-          result.push({ ...block, _key: `${block._key}_${keyCounter++}`, children: current });
-          current = [];
-        }
-      } else {
-        current.push(child);
+    const flush = () => {
+      if (current.some((c) => c._type !== "span" || c.text.trim() !== "")) {
+        result.push({ ...block, _key: `${block._key}-${key++}`, children: current });
       }
+      current = [];
+    };
+
+    for (const child of block.children) {
+      if (child._type !== "span" || typeof child.text !== "string") {
+        current.push(child);
+        continue;
+      }
+      // Split this span on paragraph breaks (2+ newlines).
+      const paras: string[] = child.text.split(/\n{2,}/);
+      paras.forEach((para: string, idx: number) => {
+        if (idx > 0) flush(); // paragraph boundary inside the span
+        const cleaned = para.replace(/\s*\n\s*/g, " ").replace(/[ \t]{2,}/g, " ");
+        current.push({ ...child, _key: `${child._key}-${key++}`, text: cleaned });
+      });
     }
-    if (current.length > 0) {
-      result.push({ ...block, _key: `${block._key}_${keyCounter++}`, children: current });
-    }
+    flush();
   }
 
   return result;
@@ -153,7 +164,7 @@ export default async function ArticlePage({
         <div className="prose prose-lg max-w-none prose-headings:font-playfair prose-headings:text-primary prose-a:text-accent prose-p:leading-relaxed prose-p:mb-6">
           {article.body && (
             <PortableText
-              value={splitHardBreaks(article.body)}
+              value={normalizeBody(article.body)}
             />
           )}
         </div>
