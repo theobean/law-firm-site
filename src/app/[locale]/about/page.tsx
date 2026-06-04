@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { Scale, GraduationCap, Users } from "lucide-react";
 import TeamGrid from "@/components/TeamGrid";
+import BiographySection from "@/components/BiographySection";
 
 export async function generateMetadata({
   params,
@@ -30,6 +31,9 @@ export default function AboutPage() {
 
       {/* Team grid — all three members, clickable */}
       <TeamGrid />
+
+      {/* Biography section — Ioannis Papaioannou full bio */}
+      <BiographySection />
 
       {/* Values strip */}
       <section className="bg-gray-50 py-16">
