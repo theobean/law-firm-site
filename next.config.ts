@@ -33,6 +33,30 @@ const baseHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      // WordPress post ID URLs: /?p=123
+      { source: "/", has: [{ type: "query", key: "p" }], destination: "/el", permanent: true },
+      // WordPress page ID URLs: /?page_id=123
+      { source: "/", has: [{ type: "query", key: "page_id" }], destination: "/el", permanent: true },
+      // WordPress category/tag/author archives
+      { source: "/category/:slug*", destination: "/el", permanent: true },
+      { source: "/tag/:slug*",      destination: "/el", permanent: true },
+      { source: "/author/:slug*",   destination: "/el", permanent: true },
+      // WordPress feed
+      { source: "/feed",            destination: "/el", permanent: true },
+      { source: "/feed/:path*",     destination: "/el", permanent: true },
+      // WordPress wp-login / wp-admin
+      { source: "/wp-login.php",    destination: "/el", permanent: true },
+      { source: "/wp-admin/:path*", destination: "/el", permanent: true },
+      // WordPress xmlrpc
+      { source: "/xmlrpc.php",      destination: "/el", permanent: true },
+      // WordPress sitemap plugins
+      { source: "/sitemap_index.xml",    destination: "/sitemap.xml", permanent: true },
+      { source: "/post-sitemap.xml",     destination: "/sitemap.xml", permanent: true },
+      { source: "/page-sitemap.xml",     destination: "/sitemap.xml", permanent: true },
+    ];
+  },
   images: {
     remotePatterns: [
       {
