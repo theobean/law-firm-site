@@ -355,6 +355,8 @@
   "team": {
     "sectionTitle": "Unser Team",
     "sectionSubtitle": "Erfahrene Rechtsberater in Ihrem Dienst",
+    "bioReadMore": "Weiterlesen",
+    "bioReadLess": "Weniger anzeigen",
     "role": "Rechtsanwalt",
     "educationLabel": "Ausbildung",
     "clickToExpand": "Mehr",
@@ -370,14 +372,23 @@
       "role": "Rechtsanwalt am Berufungsgericht",
       "bio": "Schwerpunkt im Zivil- und Handelsrecht. Bietet rechtliche Unterstützung bei Vertragsstreitigkeiten, gesellschaftsrechtlichen Angelegenheiten und zivilrechtlichen Klagen.",
       "edu": ["Juristische Fakultät, Aristoteles-Universität Thessaloniki (AUTH)"],
-      "specializations": []
+      "specializations": [],
+      "bioParagraphs": [
+        "Georgios Liamos ist Rechtsanwalt am Berufungsgericht mit Schwerpunkt im Zivil- und Handelsrecht. Er arbeitet mit der Kanzlei Papaioannou zusammen und bietet rechtliche Unterstützung bei Vertragsstreitigkeiten, gesellschaftsrechtlichen Angelegenheiten und zivilrechtlichen Klagen.",
+        "[Platzhalter — Vollständige Biografie folgt in Kürze.]"
+      ]
     },
     "lamprinι": {
       "name": "Lampriní Papaioannou",
       "role": "Rechtsanwältin am Berufungsgericht",
       "bio": "Schwerpunkt im Familien- und Erbrecht. Bearbeitet Scheidungs-, Sorgerechts- und Erbschaftsstreitigkeiten mit Einfühlungsvermögen.",
       "edu": ["Juristische Fakultät, Demokrit-Universität Thrakien, Komotini"],
-      "specializations": ["Außergerichtlicher Mechanismus Ges. 4738/2020", "Insolvenzrecht für Kleinschuldner", "Immobilienkaufverträge"]
+      "specializations": ["Außergerichtlicher Mechanismus Ges. 4738/2020", "Insolvenzrecht für Kleinschuldner", "Immobilienkaufverträge"],
+      "bioParagraphs": [
+        "Lampriní Papaioannou ist Rechtsanwältin am Berufungsgericht mit Schwerpunkt im Familien- und Erbrecht. Sie bearbeitet Scheidungs-, Sorgerechts-, Unterhalts- und Erbschaftsstreitigkeiten mit besonderem Einfühlungsvermögen.",
+        "Darüber hinaus ist sie im außergerichtlichen Schuldenregelungsmechanismus (Ges. 4738/2020), im Insolvenzrecht für Kleinschuldner und bei Immobilienkaufverträgen tätig.",
+        "[Platzhalter — Vollständige Biografie folgt in Kürze.]"
+      ]
     }
   },
   "auctionBanner": {

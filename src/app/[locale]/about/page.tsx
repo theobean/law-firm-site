@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { Scale, GraduationCap, Users } from "lucide-react";
 import BiographySection from "@/components/BiographySection";
-import AssociatesGrid from "@/components/AssociatesGrid";
+import MemberBioSection from "@/components/MemberBioSection";
 
 export async function generateMetadata({
   params,
@@ -32,8 +32,11 @@ export default function AboutPage() {
       {/* Full biography — Ioannis Papaioannou */}
       <BiographySection />
 
-      {/* Associates — Georgios & Lampriní */}
-      <AssociatesGrid />
+      {/* Georgios Liamos */}
+      <MemberBioSection memberKey="georgios" bg="white" />
+
+      {/* Lampriní Papaioannou */}
+      <MemberBioSection memberKey="lamprinι" bg="gray" />
 
       {/* Values strip */}
       <section className="bg-gray-50 py-16 border-t border-gray-100">
