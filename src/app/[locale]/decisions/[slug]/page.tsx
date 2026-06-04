@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowLeft, Calendar, Landmark, Download, Eye } from "lucide-react";
 import DecisionImageViewer from "@/components/DecisionImageViewer";
+import ShareButtons from "@/components/ShareButtons";
 
 export const dynamic = "force-dynamic";
 
@@ -70,6 +71,14 @@ export default async function DecisionPage({ params }: { params: Promise<{ slug:
             {decision.description}
           </p>
         )}
+        {/* Share */}
+        <div className="mb-8 pb-6 border-b border-gray-100">
+          <ShareButtons
+            url={`https://www.ioannispapaioannou.lawyer/${locale}/decisions/${slug}`}
+            title={decision.title}
+          />
+        </div>
+
         {decision.fileUrl && (
           <div className="flex gap-3 mb-10">
             <a href={decision.fileUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-primary text-white text-sm font-semibold px-5 py-3 rounded-sm hover:bg-primary/90 transition-colors"><Eye size={15}/>{s.view} PDF</a>
