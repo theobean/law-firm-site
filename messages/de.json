@@ -114,8 +114,10 @@
   },
   "stats": {
     "experience": "Jahre Erfahrung",
-    "cases": "Jahrelange Gerichtserfahrung in Bank-, Zivil- und Handelssachen",
-    "clients": "Eine dauerhaft vertrauensvolle Beziehung zu Privatpersonen und Unternehmen",
+    "casesTitle": "Gerichtserfahrung",
+    "cases": "in Bank-, Zivil- und Handelssachen",
+    "clientsTitle": "Vertrauensbeziehung",
+    "clients": "mit Privatpersonen und Unternehmen",
     "areas": "Rechtsgebiete",
     "cta": "Kontakt aufnehmen"
   },
