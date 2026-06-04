@@ -258,7 +258,7 @@ function DecisionCard({
           </div>
 
           {/* Title */}
-          <h3 className="text-white font-semibold text-base leading-snug mb-3 group-hover:text-accent transition-colors">
+          <h3 className="text-white font-semibold text-base leading-snug mb-3 group-hover:text-accent transition-colors line-clamp-3 min-h-[4.5rem]">
             {decision.title}
           </h3>
 
