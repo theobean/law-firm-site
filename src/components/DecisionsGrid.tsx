@@ -72,52 +72,59 @@ function Lightbox({
   }, [onClose, prev, next]);
 
   return (
-    <div className="fixed inset-0 z-[100] bg-black/95 overflow-y-auto">
+    <div
+      className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center"
+      onClick={onClose}
+    >
+      {/* Close */}
+      <button
+        onClick={onClose}
+        aria-label="Κλείσιμο"
+        className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-black/60 text-white/70 hover:text-white hover:bg-black/80 transition-colors"
+      >
+        <X size={20} />
+      </button>
 
-      {/* Sticky toolbar */}
-      <div className="sticky top-0 z-10 flex items-center justify-between px-4 py-3 bg-black/80 backdrop-blur-sm">
-        <p className="text-white/60 text-sm">{title}</p>
-        <div className="flex items-center gap-3">
-          {images.length > 1 && (
-            <span className="text-white/50 text-sm">{idx + 1} / {images.length}</span>
-          )}
-          <button
-            onClick={onClose}
-            className="text-white/60 hover:text-white transition-colors p-1"
-            aria-label="Κλείσιμο"
-          >
-            <X size={24} />
-          </button>
-        </div>
-      </div>
+      {/* Counter */}
+      {images.length > 1 && (
+        <span className="absolute top-4 left-1/2 -translate-x-1/2 z-10 text-white/60 text-sm bg-black/50 px-3 py-1 rounded-full">
+          {idx + 1} / {images.length}
+        </span>
+      )}
 
-      {/* Full-size image — scrollable */}
-      <div className="flex justify-center px-4 py-6">
+      {/* Prev arrow */}
+      {images.length > 1 && (
+        <button
+          onClick={(e) => { e.stopPropagation(); prev(); }}
+          aria-label="Προηγούμενη"
+          className="absolute left-3 z-10 w-11 h-11 flex items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+        >
+          <ChevronLeft size={22} />
+        </button>
+      )}
+
+      {/* Image — as large as viewport allows */}
+      <div
+        className="relative max-h-[95vh] max-w-[92vw] overflow-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={images[idx].url}
           alt={`${title} — εικόνα ${idx + 1}`}
-          className="w-full max-w-3xl shadow-2xl rounded"
+          className="max-h-[95vh] max-w-[92vw] w-auto h-auto object-contain shadow-2xl"
         />
       </div>
 
-      {/* Page navigation — bottom */}
+      {/* Next arrow */}
       {images.length > 1 && (
-        <div className="sticky bottom-0 flex items-center justify-center gap-4 py-4 bg-black/80 backdrop-blur-sm">
-          <button
-            onClick={prev}
-            className="flex items-center gap-1.5 text-white/70 hover:text-white text-sm font-medium transition-colors px-4 py-2 rounded-sm bg-white/10 hover:bg-white/20"
-          >
-            <ChevronLeft size={16} /> Προηγούμενη
-          </button>
-          <span className="text-white/40 text-sm">{idx + 1} / {images.length}</span>
-          <button
-            onClick={next}
-            className="flex items-center gap-1.5 text-white/70 hover:text-white text-sm font-medium transition-colors px-4 py-2 rounded-sm bg-white/10 hover:bg-white/20"
-          >
-            Επόμενη <ChevronRight size={16} />
-          </button>
-        </div>
+        <button
+          onClick={(e) => { e.stopPropagation(); next(); }}
+          aria-label="Επόμενη"
+          className="absolute right-3 z-10 w-11 h-11 flex items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+        >
+          <ChevronRight size={22} />
+        </button>
       )}
     </div>
   );
