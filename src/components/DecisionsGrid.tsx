@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import { createPortal } from "react-dom";
 import {
   FileText, Download, Eye, Calendar, Landmark,
   ChevronLeft, ChevronRight, X, Images, ZoomIn,
@@ -53,11 +54,13 @@ function Lightbox({
   onClose: () => void;
 }) {
   const [idx, setIdx] = useState(startIndex);
+  const [mounted, setMounted] = useState(false);
 
   const prev = useCallback(() => setIdx((i) => (i - 1 + images.length) % images.length), [images.length]);
   const next = useCallback(() => setIdx((i) => (i + 1) % images.length), [images.length]);
 
   useEffect(() => {
+    setMounted(true);
     const handler = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
       if (e.key === "ArrowLeft") prev();
@@ -71,7 +74,9 @@ function Lightbox({
     };
   }, [onClose, prev, next]);
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <div className="fixed inset-0 z-[100] bg-black flex" onClick={onClose}>
 
       {/* Prev arrow */}
@@ -118,7 +123,8 @@ function Lightbox({
           <X size={20} />
         </button>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
