@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { ChevronDown, GraduationCap } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 type MemberKey = "georgios" | "lamprinι";
 
@@ -25,8 +25,6 @@ export default function MemberBioSection({
 
   const name = t(`${memberKey}.name`);
   const role = t(`${memberKey}.role`);
-  const edu = t.raw(`${memberKey}.edu`) as string[];
-  const specializations = t.raw(`${memberKey}.specializations`) as string[];
   const paragraphs = t.raw(`${memberKey}.bioParagraphs`) as string[];
 
   const preview = paragraphs.slice(0, PREVIEW_COUNT);
@@ -57,28 +55,6 @@ export default function MemberBioSection({
             <div className="text-center md:text-left">
               <h2 className="font-playfair font-bold text-xl text-primary">{name}</h2>
               <p className="text-accent text-xs font-semibold tracking-wide uppercase mt-1">{role}</p>
-            </div>
-
-            {/* Specializations */}
-            {specializations.length > 0 && (
-              <div className="flex flex-wrap gap-1.5">
-                {specializations.map((s, i) => (
-                  <span key={i} className="text-[10px] font-semibold tracking-wide bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded-sm">
-                    {s}
-                  </span>
-                ))}
-              </div>
-            )}
-
-            {/* Education */}
-            <div className="flex flex-col gap-1">
-              <div className="flex items-center gap-1.5 text-xs font-semibold text-primary/50 mb-1">
-                <GraduationCap size={13} />
-                {t("educationLabel")}
-              </div>
-              {edu.map((item, i) => (
-                <p key={i} className="text-gray-500 text-xs leading-snug border-l-2 border-accent/30 pl-3">{item}</p>
-              ))}
             </div>
           </div>
 
