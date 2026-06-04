@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getArticles } from "@/sanity/client";
+import { getArticles, getDecisions, getInterviews } from "@/sanity/client";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 const locales = ["el", "en", "de"] as const;
@@ -11,12 +11,14 @@ const staticPaths = [
   "/faq",
   "/contact",
   "/media",
+  "/decisions",
   "/privacy",
   "/terms",
   "/pleistariasmos",
 ];
 const practiceAreas = [
-  "civil",
+  "banking",
+  "extrajudicial",
   "criminal",
   "commercial",
   "realEstate",
@@ -51,16 +53,52 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
     const articles = await getArticles();
     articleEntries = locales.flatMap((locale) =>
-      articles.map((article: { slug: { current: string }; publishedAt?: string }) => ({
-        url: `${siteUrl}/${locale}/blog/${article.slug.current}`,
-        lastModified: article.publishedAt ? new Date(article.publishedAt) : now,
-        changeFrequency: "monthly" as const,
-        priority: 0.6,
-      }))
+      (articles ?? [])
+        .filter((a: { slug?: { current?: string } }) => a.slug?.current)
+        .map((article: { slug: { current: string }; publishedAt?: string }) => ({
+          url: `${siteUrl}/${locale}/blog/${article.slug.current}`,
+          lastModified: article.publishedAt ? new Date(article.publishedAt) : now,
+          changeFrequency: "monthly" as const,
+          priority: 0.6,
+        }))
     );
   } catch {
-    // Sanity unavailable — skip article entries
+    // Sanity unavailable — skip
   }
 
-  return [...staticEntries, ...areaEntries, ...articleEntries];
+  let decisionEntries: MetadataRoute.Sitemap = [];
+  try {
+    const decisions = await getDecisions();
+    decisionEntries = locales.flatMap((locale) =>
+      (decisions ?? [])
+        .filter((d: { slug?: { current?: string } }) => d.slug?.current)
+        .map((d: { slug: { current: string }; date?: string }) => ({
+          url: `${siteUrl}/${locale}/decisions/${d.slug.current}`,
+          lastModified: d.date ? new Date(d.date) : now,
+          changeFrequency: "yearly" as const,
+          priority: 0.7,
+        }))
+    );
+  } catch {
+    // Sanity unavailable — skip
+  }
+
+  let interviewEntries: MetadataRoute.Sitemap = [];
+  try {
+    const interviews = await getInterviews();
+    interviewEntries = locales.flatMap((locale) =>
+      (interviews ?? [])
+        .filter((i: { slug?: { current?: string } }) => i.slug?.current)
+        .map((i: { slug: { current: string }; date?: string }) => ({
+          url: `${siteUrl}/${locale}/media/${i.slug.current}`,
+          lastModified: i.date ? new Date(i.date) : now,
+          changeFrequency: "yearly" as const,
+          priority: 0.6,
+        }))
+    );
+  } catch {
+    // Sanity unavailable — skip
+  }
+
+  return [...staticEntries, ...areaEntries, ...articleEntries, ...decisionEntries, ...interviewEntries];
 }
