@@ -49,6 +49,21 @@ export async function getDecisions() {
   );
 }
 
+export async function getDecisionById(id: string) {
+  return client.fetch(
+    `*[_type == "decision" && _id == $id][0] {
+      _id, title, date, court, category, description,
+      "fileUrl": file.asset->url,
+      "images": images[]{
+        "url": asset->url,
+        "width": asset->metadata.dimensions.width,
+        "height": asset->metadata.dimensions.height
+      }
+    }`,
+    { id }
+  );
+}
+
 export async function getRelatedArticles(currentSlug: string, category: string, limit = 3) {
   return client.fetch(
     `*[_type == "article" && slug.current != $currentSlug && category == $category] | order(publishedAt desc)[0...$limit] {
