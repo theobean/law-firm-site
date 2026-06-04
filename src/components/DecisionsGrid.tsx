@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { createPortal } from "react-dom";
+import Link from "next/link";
 import {
   FileText, Download, Eye, Calendar, Landmark,
   ChevronLeft, ChevronRight, X, Images, ZoomIn,
@@ -258,9 +259,15 @@ function DecisionCard({
           </div>
 
           {/* Title */}
-          <h3 className="text-white font-semibold text-base leading-snug mb-3 group-hover:text-accent transition-colors line-clamp-3 min-h-[4.5rem]">
+          <h3 className="text-white font-semibold text-base leading-snug mb-1 group-hover:text-accent transition-colors line-clamp-3 min-h-[4.5rem]">
             {decision.title}
           </h3>
+          <Link
+            href={`/${locale}/decisions/${decision._id}`}
+            className="text-accent/70 hover:text-accent text-xs font-semibold mb-3 inline-block transition-colors"
+          >
+            Διαβάστε περισσότερα →
+          </Link>
 
           {/* Meta */}
           <div className="flex flex-col gap-1.5 mb-4">
