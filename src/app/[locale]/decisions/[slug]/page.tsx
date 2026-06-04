@@ -1,22 +1,11 @@
-import { getDecisionBySlug, getDecisions } from "@/sanity/client";
+import { getDecisionBySlug } from "@/sanity/client";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowLeft, Calendar, Landmark, Download, Eye } from "lucide-react";
 import DecisionImageViewer from "@/components/DecisionImageViewer";
 
-export const revalidate = 10;
-
-export async function generateStaticParams() {
-  try {
-    const decisions = await getDecisions();
-    return (decisions ?? [])
-      .filter((d: any) => d.slug?.current)
-      .map((d: any) => ({ slug: d.slug.current }));
-  } catch {
-    return [];
-  }
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string; locale: string }> }): Promise<Metadata> {
   try {
