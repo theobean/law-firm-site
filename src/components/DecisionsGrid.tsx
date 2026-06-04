@@ -63,66 +63,62 @@ function Lightbox({
       if (e.key === "ArrowLeft") prev();
       if (e.key === "ArrowRight") next();
     };
+    document.body.style.overflow = "hidden";
     window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handler);
+    };
   }, [onClose, prev, next]);
 
   return (
-    <div
-      className="fixed inset-0 z-[100] bg-black/95 flex flex-col items-center justify-center"
-      onClick={onClose}
-    >
-      {/* Close */}
-      <button
-        onClick={onClose}
-        className="absolute top-4 right-4 text-white/60 hover:text-white transition-colors p-2"
-        aria-label="Κλείσιμο"
-      >
-        <X size={28} />
-      </button>
+    <div className="fixed inset-0 z-[100] bg-black/95 overflow-y-auto">
 
-      {/* Counter */}
-      <p className="absolute top-5 left-1/2 -translate-x-1/2 text-white/50 text-sm">
-        {idx + 1} / {images.length}
-      </p>
+      {/* Sticky toolbar */}
+      <div className="sticky top-0 z-10 flex items-center justify-between px-4 py-3 bg-black/80 backdrop-blur-sm">
+        <p className="text-white/60 text-sm">{title}</p>
+        <div className="flex items-center gap-3">
+          {images.length > 1 && (
+            <span className="text-white/50 text-sm">{idx + 1} / {images.length}</span>
+          )}
+          <button
+            onClick={onClose}
+            className="text-white/60 hover:text-white transition-colors p-1"
+            aria-label="Κλείσιμο"
+          >
+            <X size={24} />
+          </button>
+        </div>
+      </div>
 
-      {/* Image */}
-      <div
-        className="relative max-w-5xl max-h-[80vh] w-full px-16 flex items-center justify-center"
-        onClick={(e) => e.stopPropagation()}
-      >
+      {/* Full-size image — scrollable */}
+      <div className="flex justify-center px-4 py-6">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={images[idx].url}
           alt={`${title} — εικόνα ${idx + 1}`}
-          className="max-h-[80vh] max-w-full object-contain rounded shadow-2xl"
+          className="w-full max-w-3xl shadow-2xl rounded"
         />
       </div>
 
-      {/* Arrows — only if more than one image */}
+      {/* Page navigation — bottom */}
       {images.length > 1 && (
-        <>
+        <div className="sticky bottom-0 flex items-center justify-center gap-4 py-4 bg-black/80 backdrop-blur-sm">
           <button
-            onClick={(e) => { e.stopPropagation(); prev(); }}
-            className="absolute left-3 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
-            aria-label="Προηγούμενη"
+            onClick={prev}
+            className="flex items-center gap-1.5 text-white/70 hover:text-white text-sm font-medium transition-colors px-4 py-2 rounded-sm bg-white/10 hover:bg-white/20"
           >
-            <ChevronLeft size={24} />
+            <ChevronLeft size={16} /> Προηγούμενη
           </button>
+          <span className="text-white/40 text-sm">{idx + 1} / {images.length}</span>
           <button
-            onClick={(e) => { e.stopPropagation(); next(); }}
-            className="absolute right-3 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
-            aria-label="Επόμενη"
+            onClick={next}
+            className="flex items-center gap-1.5 text-white/70 hover:text-white text-sm font-medium transition-colors px-4 py-2 rounded-sm bg-white/10 hover:bg-white/20"
           >
-            <ChevronRight size={24} />
+            Επόμενη <ChevronRight size={16} />
           </button>
-        </>
+        </div>
       )}
-
-      {/* Title */}
-      <p className="absolute bottom-5 left-1/2 -translate-x-1/2 text-white/50 text-xs max-w-lg text-center px-4">
-        {title}
-      </p>
     </div>
   );
 }
