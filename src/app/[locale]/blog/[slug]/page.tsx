@@ -124,7 +124,7 @@ export default async function ArticlePage({
             <PortableText
               value={article.body}
               components={{
-                hardBreak: () => <> </>,
+                hardBreak: () => <span className="block mt-5" />,
               }}
             />
           )}
