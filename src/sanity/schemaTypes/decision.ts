@@ -14,6 +14,13 @@ export const decision = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "slug",
+      title: "URL (slug)",
+      type: "slug",
+      options: { source: "title", maxLength: 96 },
+      description: "Δημιουργείται αυτόματα από τον τίτλο — πάτα Generate.",
+    }),
+    defineField({
       name: "file",
       title: "Αρχείο PDF",
       type: "file",

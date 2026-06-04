@@ -38,7 +38,7 @@ export async function getInterviews() {
 export async function getDecisions() {
   return client.fetch(
     `*[_type == "decision"] | order(date desc) {
-      _id, title, date, court, category, description,
+      _id, title, slug, date, court, category, description,
       "fileUrl": file.asset->url,
       "images": images[]{
         "url": asset->url,
@@ -49,10 +49,10 @@ export async function getDecisions() {
   );
 }
 
-export async function getDecisionById(id: string) {
+export async function getDecisionBySlug(slug: string) {
   return client.fetch(
-    `*[_type == "decision" && _id == $id][0] {
-      _id, title, date, court, category, description,
+    `*[_type == "decision" && slug.current == $slug][0] {
+      _id, title, slug, date, court, category, description,
       "fileUrl": file.asset->url,
       "images": images[]{
         "url": asset->url,
@@ -60,7 +60,7 @@ export async function getDecisionById(id: string) {
         "height": asset->metadata.dimensions.height
       }
     }`,
-    { id }
+    { slug }
   );
 }
 

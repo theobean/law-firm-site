@@ -19,6 +19,7 @@ interface DecisionImage {
 interface Decision {
   _id: string;
   title: string;
+  slug?: { current?: string };
   fileUrl: string | null;
   images?: DecisionImage[];
   date?: string;
@@ -262,12 +263,14 @@ function DecisionCard({
           <h3 className="text-white font-semibold text-base leading-snug mb-1 group-hover:text-accent transition-colors line-clamp-3 min-h-[4.5rem]">
             {decision.title}
           </h3>
-          <Link
-            href={`/${locale}/decisions/${decision._id}`}
-            className="text-accent/70 hover:text-accent text-xs font-semibold mb-3 inline-block transition-colors"
-          >
-            Διαβάστε περισσότερα →
-          </Link>
+          {decision.slug?.current && (
+            <Link
+              href={`/${locale}/decisions/${decision.slug.current}`}
+              className="text-accent/70 hover:text-accent text-xs font-semibold mb-3 inline-block transition-colors"
+            >
+              Διαβάστε περισσότερα →
+            </Link>
+          )}
 
           {/* Meta */}
           <div className="flex flex-col gap-1.5 mb-4">
@@ -337,7 +340,7 @@ function DecisionCard({
             {(hasPdf || hasImages) && (
               <div className="border-t border-white/10 pt-3">
                 <ShareButtons
-                  url={`${typeof window !== "undefined" ? window.location.origin : "https://www.ioannispapaioannou.lawyer"}/${locale}/decisions/${decision._id}`}
+                  url={decision.slug?.current ? `${typeof window !== "undefined" ? window.location.origin : "https://www.ioannispapaioannou.lawyer"}/${locale}/decisions/${decision.slug.current}` : (decision.fileUrl ?? window.location.href)}
                   title={decision.title}
                   shareLabel={t("share")}
                   copyLinkLabel={t("copyLink")}
