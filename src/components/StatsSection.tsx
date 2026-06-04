@@ -30,7 +30,7 @@ export default function StatsSection() {
   }, []);
 
   return (
-    <section className="relative bg-primary/95 py-24 overflow-hidden">
+    <section className="relative bg-primary/95 py-24">
       <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/90 to-primary" />
 
       <div className="relative max-w-6xl mx-auto px-6">
@@ -47,7 +47,7 @@ export default function StatsSection() {
             >
               {text ? (
                 <>
-                  <p className="text-3xl md:text-4xl font-playfair font-bold text-white mb-2">
+                  <p className="text-2xl md:text-3xl lg:text-4xl font-playfair font-bold text-white mb-2 break-words hyphens-auto">
                     {t(`${key}Title`)}
                   </p>
                   <p className="text-white/60 text-sm leading-tight">{t(key)}</p>
