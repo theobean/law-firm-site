@@ -34,7 +34,7 @@ export default function StatsSection() {
       <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/90 to-primary" />
 
       <div className="relative max-w-6xl mx-auto px-6">
-        <div ref={ref} className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div ref={ref} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map(({ value, key, text }, i) => (
             <div
               key={key}
