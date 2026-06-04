@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowLeft, Calendar, Landmark, Download, Eye } from "lucide-react";
+import DecisionImageViewer from "@/components/DecisionImageViewer";
 
 export const revalidate = 10;
 
@@ -75,23 +76,18 @@ export default async function DecisionPage({ params }: { params: Promise<{ slug:
         </div>
       </section>
       <div className="max-w-4xl mx-auto px-6 py-12">
-        {decision.description && <p className="text-gray-600 text-lg leading-relaxed mb-10 border-l-4 border-accent/30 pl-6 whitespace-pre-line">{decision.description}</p>}
+        {decision.description && (
+          <p className="text-gray-600 text-lg leading-relaxed mb-10 border-l-4 border-accent/30 pl-6 whitespace-pre-line">
+            {decision.description}
+          </p>
+        )}
         {decision.fileUrl && (
           <div className="flex gap-3 mb-10">
             <a href={decision.fileUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-primary text-white text-sm font-semibold px-5 py-3 rounded-sm hover:bg-primary/90 transition-colors"><Eye size={15}/>{s.view} PDF</a>
             <a href={`${decision.fileUrl}?dl=`} className="flex items-center gap-2 border border-gray-200 text-gray-600 text-sm font-semibold px-5 py-3 rounded-sm hover:border-accent hover:text-accent transition-colors"><Download size={15}/>{s.dl}</a>
           </div>
         )}
-        {hasImages && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {decision.images.map((img: any, i: number) => (
-              <a key={i} href={img.url} target="_blank" rel="noopener noreferrer">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={img.url} alt={`${decision.title} ${i+1}`} className="w-full rounded shadow hover:opacity-90 transition-opacity"/>
-              </a>
-            ))}
-          </div>
-        )}
+        {hasImages && <DecisionImageViewer images={decision.images} title={decision.title} />}
       </div>
     </div>
   );

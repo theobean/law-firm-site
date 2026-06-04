@@ -340,7 +340,7 @@ function DecisionCard({
             {(hasPdf || hasImages) && (
               <div className="border-t border-white/10 pt-3">
                 <ShareButtons
-                  url={decision.slug?.current ? `${typeof window !== "undefined" ? window.location.origin : "https://www.ioannispapaioannou.lawyer"}/${locale}/decisions/${decision.slug.current}` : (decision.fileUrl ?? window.location.href)}
+                  url={decision.slug?.current ? `https://www.ioannispapaioannou.lawyer/${locale}/decisions/${decision.slug.current}` : (decision.fileUrl ?? `https://www.ioannispapaioannou.lawyer/${locale}/decisions`)}
                   title={decision.title}
                   shareLabel={t("share")}
                   copyLinkLabel={t("copyLink")}
