@@ -24,17 +24,18 @@ export async function generateMetadata({
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.ioannnispapaioannou.lawyer";
   const articleUrl = `${siteUrl}/${locale}/blog/${slug}`;
-  const description = article.excerpt || article.title;
+  const metaTitle = article.seoTitle || article.title;
+  const description = article.seoDescription || article.excerpt || article.title;
   const ogImage = article.mainImage
     ? urlFor(article.mainImage).width(1200).height(630).url()
     : `${siteUrl}/δικηγορος.png`;
 
   return {
-    title: article.title,
+    title: metaTitle,
     description,
     alternates: { canonical: articleUrl },
     openGraph: {
-      title: article.title,
+      title: metaTitle,
       description,
       url: articleUrl,
       type: "article",

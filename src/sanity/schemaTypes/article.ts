@@ -76,6 +76,27 @@ export const article = defineType({
       type: "array",
       of: [{ type: "block" }, { type: "image", options: { hotspot: true } }],
     }),
+    // ─── SEO ────────────────────────────────────────────────────
+    defineField({
+      name: "seoTitle",
+      title: "SEO Τίτλος",
+      type: "string",
+      description: "Τίτλος για Google (αν διαφέρει από τον τίτλο του άρθρου). Μέγιστο 60 χαρακτήρες.",
+      validation: (r) => r.max(60),
+      group: "seo",
+    }),
+    defineField({
+      name: "seoDescription",
+      title: "Meta Description",
+      type: "text",
+      rows: 3,
+      description: "Περιγραφή για Google και social media. Ιδανικά 120–160 χαρακτήρες.",
+      validation: (r) => r.max(160),
+      group: "seo",
+    }),
+  ],
+  groups: [
+    { name: "seo", title: "SEO", icon: () => "🔍" },
   ],
   preview: {
     select: { title: "title", media: "mainImage", date: "publishedAt" },
