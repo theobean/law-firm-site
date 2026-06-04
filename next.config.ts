@@ -11,7 +11,7 @@ const publicCSP = [
   "font-src 'self' https://fonts.gstatic.com",
   "img-src 'self' data: blob: https://cdn.sanity.io https://www.google-analytics.com https://www.googletagmanager.com https://img.youtube.com",
   "connect-src 'self' https://api.web3forms.com https://cdn.sanity.io https://*.sanity.io https://www.google-analytics.com https://analytics.google.com https://*.google-analytics.com https://www.googletagmanager.com",
-  "frame-src https://www.google.com https://maps.google.com https://www.youtube.com",
+  "frame-src https://www.google.com https://maps.google.com https://www.youtube.com https://www.facebook.com",
 ].join("; ");
 
 // CSP with unsafe-eval — required by Sanity Studio
@@ -22,7 +22,7 @@ const studioCSP = [
   "font-src 'self' https://fonts.gstatic.com",
   "img-src 'self' data: blob: https://cdn.sanity.io https://www.google-analytics.com https://www.googletagmanager.com https://img.youtube.com",
   "connect-src 'self' https://api.web3forms.com https://cdn.sanity.io https://*.sanity.io https://www.google-analytics.com https://analytics.google.com https://*.google-analytics.com https://www.googletagmanager.com",
-  "frame-src https://www.google.com https://maps.google.com https://www.youtube.com",
+  "frame-src https://www.google.com https://maps.google.com https://www.youtube.com https://www.facebook.com",
 ].join("; ");
 
 const baseHeaders = [

@@ -2,7 +2,10 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Play, Tv, Calendar } from "lucide-react";
-import { getYouTubeId, getThumbnailUrl, getEmbedUrl } from "@/lib/youtube";
+import {
+  getYouTubeId, getThumbnailUrl, getEmbedUrl,
+  getFacebookEmbedUrl, getVideoType,
+} from "@/lib/youtube";
 import { useTranslations } from "next-intl";
 import ShareButtons from "@/components/ShareButtons";
 
@@ -15,15 +18,36 @@ interface Interview {
   description?: string;
 }
 
+function FacebookPlaceholder({ onPlay }: { onPlay: () => void }) {
+  return (
+    <button
+      onClick={onPlay}
+      aria-label="Αναπαραγωγή"
+      className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[#1877F2]/10 hover:bg-[#1877F2]/20 transition-colors duration-300 group"
+    >
+      {/* Facebook "f" logo */}
+      <span className="text-[#1877F2] font-extrabold text-4xl leading-none select-none">f</span>
+      <span className="w-14 h-14 rounded-full bg-accent/90 hover:bg-accent flex items-center justify-center shadow-lg shadow-black/50 transition-all duration-200 hover:scale-110 group-hover:scale-105">
+        <Play size={26} className="text-white ml-1" fill="white" />
+      </span>
+    </button>
+  );
+}
+
 function InterviewCard({ interview, locale }: { interview: Interview; locale: string }) {
   const t = useTranslations("media");
   const [playing, setPlaying] = useState(false);
   const [visible, setVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
-  const id = getYouTubeId(interview.youtubeUrl);
-  const thumbnail = id ? getThumbnailUrl(id) : null;
-  const embedUrl = id ? getEmbedUrl(id) : null;
+  const videoType = getVideoType(interview.youtubeUrl);
+  const ytId = videoType === "youtube" ? getYouTubeId(interview.youtubeUrl) : null;
+  const thumbnail = ytId ? getThumbnailUrl(ytId) : null;
+  const embedUrl = videoType === "youtube" && ytId
+    ? getEmbedUrl(ytId)
+    : videoType === "facebook"
+    ? getFacebookEmbedUrl(interview.youtubeUrl)
+    : null;
 
   useEffect(() => {
     const el = ref.current;
@@ -78,6 +102,8 @@ function InterviewCard({ interview, locale }: { interview: Interview; locale: st
               </span>
             </button>
           </>
+        ) : videoType === "facebook" ? (
+          <FacebookPlaceholder onPlay={() => setPlaying(true)} />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-primary/80">
             <Tv size={40} className="text-white/20" />
