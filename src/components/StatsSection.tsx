@@ -6,10 +6,10 @@ import Link from "next/link";
 import { useLocale } from "next-intl";
 
 const stats = [
-  { value: "25+", key: "experience" },
-  { value: null, key: "cases" },
-  { value: "350+", key: "clients" },
-  { value: "9", key: "areas" },
+  { value: "25+", key: "experience", text: false },
+  { value: null, key: "cases", text: true },
+  { value: "350+", key: "clients", text: false },
+  { value: "9", key: "areas", text: false },
 ] as const;
 
 export default function StatsSection() {
@@ -35,7 +35,7 @@ export default function StatsSection() {
 
       <div className="relative max-w-6xl mx-auto px-6">
         <div ref={ref} className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {stats.map(({ value, key }, i) => (
+          {stats.map(({ value, key, text }, i) => (
             <div
               key={key}
               className="border-l-2 border-accent pl-6"
@@ -45,17 +45,17 @@ export default function StatsSection() {
                   : { opacity: 0 }
               }
             >
-              {value !== null ? (
+              {text ? (
+                <p className="text-white font-playfair font-semibold text-base md:text-lg leading-snug">
+                  {t(key)}
+                </p>
+              ) : (
                 <>
                   <p className="text-4xl md:text-5xl font-playfair font-bold text-white mb-2">
                     {value}
                   </p>
                   <p className="text-white/60 text-sm leading-tight">{t(key)}</p>
                 </>
-              ) : (
-                <p className="text-white font-playfair text-base md:text-lg leading-snug">
-                  {t(key)}
-                </p>
               )}
             </div>
           ))}
