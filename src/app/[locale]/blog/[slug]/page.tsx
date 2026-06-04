@@ -13,6 +13,37 @@ import type { Metadata } from "next";
 
 export const revalidate = 60;
 
+// Splits Sanity blocks that contain hardBreaks (from Word paste) into
+// separate paragraph blocks so each visual paragraph renders as its own <p>.
+function splitHardBreaks(blocks: any[]): any[] {
+  const result: any[] = [];
+  let keyCounter = 0;
+
+  for (const block of blocks) {
+    if (block._type !== "block" || !block.children?.some((c: any) => c._type === "hardBreak")) {
+      result.push(block);
+      continue;
+    }
+
+    let current: any[] = [];
+    for (const child of block.children) {
+      if (child._type === "hardBreak") {
+        if (current.length > 0) {
+          result.push({ ...block, _key: `${block._key}_${keyCounter++}`, children: current });
+          current = [];
+        }
+      } else {
+        current.push(child);
+      }
+    }
+    if (current.length > 0) {
+      result.push({ ...block, _key: `${block._key}_${keyCounter++}`, children: current });
+    }
+  }
+
+  return result;
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -122,10 +153,7 @@ export default async function ArticlePage({
         <div className="prose prose-lg max-w-none prose-headings:font-playfair prose-headings:text-primary prose-a:text-accent prose-p:leading-relaxed prose-p:mb-6">
           {article.body && (
             <PortableText
-              value={article.body}
-              components={{
-                hardBreak: () => <> </>,
-              }}
+              value={splitHardBreaks(article.body)}
             />
           )}
         </div>
