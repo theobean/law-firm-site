@@ -8,7 +8,7 @@ import { useLocale } from "next-intl";
 const stats = [
   { value: "25+", key: "experience", text: false },
   { value: null, key: "cases", text: true },
-  { value: "350+", key: "clients", text: false },
+  { value: null, key: "clients", text: true },
   { value: "9", key: "areas", text: false },
 ] as const;
 
