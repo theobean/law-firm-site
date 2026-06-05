@@ -142,6 +142,9 @@
     "pleistariasmosBannerTitle": "Facing a property auction?",
     "pleistariasmosBannerText": "See our dedicated page for legal defence in property auction proceedings.",
     "pleistariasmosBannerCta": "Auction Defence Page",
+    "fundsBannerTitle": "Dealing with an NPL fund or servicer?",
+    "fundsBannerText": "Review of transfer legality, claim accuracy, and negotiation from a position of strength.",
+    "fundsBannerCta": "NPL Fund Defence",
     "areas": {
       "banking": {
         "title": "Banking Law & Objections",
@@ -466,7 +469,11 @@
     "eyebrow": "Urgent legal help",
     "title": "Facing a property auction?",
     "text": "Injunctions, stays, and seizure cancellations — 25+ years of banking law experience.",
-    "cta": "How we can help"
+    "cta": "Immediate File Review",
+    "fundsEyebrow": "NPL Funds & Servicers",
+    "fundsTitle": "Has a fund purchased your loan?",
+    "fundsText": "Review of transfer legality, claim accuracy, and negotiation from a position of strength.",
+    "fundsCta": "Immediate File Review"
   },
   "pleistariasmos": {
     "seoTitle": "Primary Residence Foreclosure Defence | Lawyer Thessaloniki – Papaioannou",

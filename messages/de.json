@@ -139,6 +139,9 @@
     "pleistariasmosBannerTitle": "Droht Ihnen eine Zwangsversteigerung?",
     "pleistariasmosBannerText": "Besuchen Sie unsere dedizierte Seite zur rechtlichen Verteidigung in Zwangsversteigerungsverfahren.",
     "pleistariasmosBannerCta": "Zwangsversteigerungsseite",
+    "fundsBannerTitle": "Haben Sie es mit einem NPL-Fonds oder Servicer zu tun?",
+    "fundsBannerText": "Prüfung der Abtretungsrechtmäßigkeit, Forderungsrichtigkeit und Verhandlung aus starker Position.",
+    "fundsBannerCta": "NPL-Fonds Rechtsschutz",
     "areas": {
       "banking": {
         "title": "Bankrecht & Anfechtungen",
@@ -463,7 +466,11 @@
     "eyebrow": "Dringende Rechtshilfe",
     "title": "Droht Ihnen eine Zwangsversteigerung?",
     "text": "Vollstreckungswidersprüche, Aussetzungen und Pfändungsaufhebungen — 25+ Jahre Erfahrung.",
-    "cta": "Wie wir helfen können"
+    "cta": "Sofortige Aktenprüfung",
+    "fundsEyebrow": "NPL-Fonds & Servicer",
+    "fundsTitle": "Hat ein Fonds Ihren Kredit gekauft?",
+    "fundsText": "Prüfung der Abtretungsrechtmäßigkeit, Forderungsrichtigkeit und Verhandlung aus starker Position.",
+    "fundsCta": "Sofortige Aktenprüfung"
   },
   "pleistariasmos": {
     "seoTitle": "Zwangsversteigerung Hauptwohnsitz | Anwalt Thessaloniki – Papaioannou",

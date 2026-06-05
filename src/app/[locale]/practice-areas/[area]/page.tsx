@@ -98,24 +98,45 @@ export default function PracticeAreaDetailPage({
           </p>
         </ScrollReveal>
 
-        {area === "banking" && (
+        {(area === "banking" || area === "extrajudicial") && (
           <ScrollReveal direction="up" delay={0.05}>
-            <div className="bg-amber-50 border border-amber-200 rounded-sm p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-12">
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-sm bg-accent/15 border border-accent flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <Gavel className="text-accent" size={18} />
+            <div className="grid sm:grid-cols-2 gap-4 mb-12">
+              {area === "banking" && (
+                <div className="bg-amber-50 border border-amber-200 rounded-sm p-5 flex flex-col justify-between gap-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-9 h-9 rounded-sm bg-accent/15 border border-accent flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Gavel className="text-accent" size={16} />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-primary text-sm">{t("pleistariasmosBannerTitle")}</p>
+                      <p className="text-gray-600 text-xs mt-0.5">{t("pleistariasmosBannerText")}</p>
+                    </div>
+                  </div>
+                  <Link
+                    href={`/${locale}/pleistariasmos`}
+                    className="self-start inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-4 py-2 rounded-sm transition-colors text-xs"
+                  >
+                    {t("pleistariasmosBannerCta")} <ArrowRight size={12} />
+                  </Link>
                 </div>
-                <div>
-                  <p className="font-semibold text-primary text-sm">{t("pleistariasmosBannerTitle")}</p>
-                  <p className="text-gray-600 text-sm mt-0.5">{t("pleistariasmosBannerText")}</p>
+              )}
+              <div className="bg-amber-50 border border-amber-200 rounded-sm p-5 flex flex-col justify-between gap-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-sm bg-accent/15 border border-accent flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Building2 className="text-accent" size={16} />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-primary text-sm">{t("fundsBannerTitle")}</p>
+                    <p className="text-gray-600 text-xs mt-0.5">{t("fundsBannerText")}</p>
+                  </div>
                 </div>
+                <Link
+                  href={`/${locale}/funds`}
+                  className="self-start inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-4 py-2 rounded-sm transition-colors text-xs"
+                >
+                  {t("fundsBannerCta")} <ArrowRight size={12} />
+                </Link>
               </div>
-              <Link
-                href={`/${locale}/pleistariasmos`}
-                className="whitespace-nowrap inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-5 py-2.5 rounded-sm transition-colors text-sm flex-shrink-0"
-              >
-                {t("pleistariasmosBannerCta")} <ArrowRight size={14} />
-              </Link>
             </div>
           </ScrollReveal>
         )}
