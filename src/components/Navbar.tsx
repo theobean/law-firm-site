@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
-import { Menu, X, Scale, ChevronDown, FileText, Tv, BookOpen } from "lucide-react";
+import { Menu, X, Scale, ChevronDown, FileText, Tv, BookOpen, Gavel, Building2 } from "lucide-react";
 
 const localeConfig = {
   el: { flag: "/flags/gr.svg", label: "ΕΛ" },
@@ -78,8 +78,11 @@ export default function Navbar() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const [mobileUpdatesOpen, setMobileUpdatesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const servicesCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   function switchLocale(target: string) {
     document.cookie = `locale-pref=${target}; max-age=${60 * 60 * 24 * 30}; path=/; samesite=lax`;
@@ -91,10 +94,13 @@ export default function Navbar() {
     { href: `/${locale}`, label: tNav("home") },
     { href: `/${locale}/about`, label: tNav("about") },
     { href: `/${locale}/practice-areas`, label: tNav("practiceAreas") },
-    { href: `/${locale}/funds`, label: tNav("funds") },
-    { href: `/${locale}/pleistariasmos`, label: tNav("pleistariasmos") },
     { href: `/${locale}/faq`, label: tNav("faq") },
     { href: `/${locale}/contact`, label: tNav("contact") },
+  ];
+
+  const servicesLinks = [
+    { href: `/${locale}/funds`, label: tNav("funds"), icon: Building2 },
+    { href: `/${locale}/pleistariasmos`, label: tNav("pleistariasmos"), icon: Gavel },
   ];
 
   const updatesLinks = [
@@ -111,6 +117,13 @@ export default function Navbar() {
   }
   function handleMouseLeave() {
     closeTimer.current = setTimeout(() => setDropdownOpen(false), 120);
+  }
+  function handleServicesMouseEnter() {
+    if (servicesCloseTimer.current) clearTimeout(servicesCloseTimer.current);
+    setServicesDropdownOpen(true);
+  }
+  function handleServicesMouseLeave() {
+    servicesCloseTimer.current = setTimeout(() => setServicesDropdownOpen(false), 120);
   }
 
   return (
@@ -160,6 +173,41 @@ export default function Navbar() {
               {l.label}
             </Link>
           ))}
+
+          {/* Υπηρεσίες dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={handleServicesMouseEnter}
+            onMouseLeave={handleServicesMouseLeave}
+          >
+            <button className={`flex items-center gap-1 text-sm font-medium whitespace-nowrap transition-colors ${
+              servicesLinks.some((l) => pathname.startsWith(l.href)) ? "text-accent" : "text-white/80 hover:text-accent"
+            }`}>
+              {tNav("services")}
+              <ChevronDown
+                size={13}
+                className={`transition-transform duration-200 ${servicesDropdownOpen ? "rotate-180" : ""}`}
+              />
+            </button>
+
+            <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-primary border border-white/10 shadow-xl rounded-sm overflow-hidden transition-all duration-150 ${
+              servicesDropdownOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-1 pointer-events-none"
+            }`}>
+              {servicesLinks.map(({ href, label, icon: Icon }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  onClick={() => setServicesDropdownOpen(false)}
+                  className={`flex items-center gap-2.5 px-4 py-3 text-sm font-medium transition-colors border-b border-white/5 last:border-0 ${
+                    pathname.startsWith(href) ? "text-accent bg-accent/10" : "text-white/80 hover:text-accent hover:bg-white/5"
+                  }`}
+                >
+                  <Icon size={13} className="shrink-0 opacity-70" />
+                  {label}
+                </Link>
+              ))}
+            </div>
+          </div>
 
           {/* Ενημέρωση dropdown */}
           <div
@@ -230,6 +278,33 @@ export default function Navbar() {
               {l.label}
             </Link>
           ))}
+
+          {/* Υπηρεσίες accordion in mobile */}
+          <button
+            onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+            className={`flex items-center justify-between w-full font-medium py-2.5 border-b border-white/10 transition-colors ${
+              servicesLinks.some((l) => pathname.startsWith(l.href)) ? "text-accent" : "text-white/80"
+            }`}
+          >
+            {tNav("services")}
+            <ChevronDown
+              size={14}
+              className={`transition-transform duration-200 ${mobileServicesOpen ? "rotate-180 text-accent" : "text-white/40"}`}
+            />
+          </button>
+          <div className={`overflow-hidden transition-all duration-200 ${mobileServicesOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"}`}>
+            {servicesLinks.map(({ href, label, icon: Icon }) => (
+              <Link
+                key={href}
+                href={href}
+                onClick={() => { setOpen(false); setMobileServicesOpen(false); }}
+                className="flex items-center gap-2 text-white/70 hover:text-accent transition-colors text-sm py-2 pl-4 border-b border-white/5"
+              >
+                <Icon size={13} className="shrink-0" />
+                {label}
+              </Link>
+            ))}
+          </div>
 
           {/* Ενημέρωση accordion in mobile */}
           <button
