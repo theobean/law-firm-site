@@ -112,7 +112,7 @@ export default async function LocaleLayout({
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "LegalService",
+    "@type": ["LegalService", "LocalBusiness"],
     name: "Παπαϊωάννου Ι. – Λιάμος Γ. & Συνεργάτες",
     alternateName: ["Παπαιωάννου δικηγόρος", "Ioannis Papaioannou Lawyer"],
     description: "Δικηγορικό γραφείο στη Θεσσαλονίκη με εξειδίκευση σε πλειστηριασμούς, ανακοπές, αναστολές κατασχέσεων και τραπεζικό δίκαιο.",
@@ -152,6 +152,8 @@ export default async function LocaleLayout({
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "Εξωδικαστικός Μηχανισμός" } },
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "Τραπεζικό Δίκαιο" } },
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "Ανακοπή Διαταγής Πληρωμής" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Αντιμετώπιση Funds & NPL" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Διαπραγμάτευση με Funds" } },
       ],
     },
     sameAs: [

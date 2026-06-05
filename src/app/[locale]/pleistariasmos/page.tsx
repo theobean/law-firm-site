@@ -7,6 +7,8 @@ import { use } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 import FaqAccordion from "@/components/FaqAccordion";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.ioannispapaioannou.lawyer";
+
 export async function generateMetadata({
   params,
 }: {
@@ -17,6 +19,15 @@ export async function generateMetadata({
   return {
     title: t("seoTitle"),
     description: t("seoDescription"),
+    alternates: {
+      canonical: `${siteUrl}/${locale}/pleistariasmos`,
+      languages: {
+        el: `${siteUrl}/el/pleistariasmos`,
+        en: `${siteUrl}/en/pleistariasmos`,
+        de: `${siteUrl}/de/pleistariasmos`,
+        "x-default": `${siteUrl}/el/pleistariasmos`,
+      },
+    },
   };
 }
 
@@ -34,8 +45,22 @@ export default function PleistariasmoiPage({
   const options = t.raw("options") as { title: string; desc: string }[];
   const timelineItems = t.raw("timelineItems") as { phase: string; title: string; desc: string }[];
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    })),
+  };
+
   return (
     <div className="bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <section className="bg-primary py-24 text-white">
         <div className="max-w-4xl mx-auto px-6">
           <p className="text-accent font-semibold tracking-widest text-sm uppercase mb-3">
