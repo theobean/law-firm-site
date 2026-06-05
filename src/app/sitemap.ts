@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getArticles, getDecisions, getInterviews } from "@/sanity/client";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.ioannispapaioannou.lawyer";
 const locales = ["el", "en", "de"] as const;
 const staticPaths = [
   "",

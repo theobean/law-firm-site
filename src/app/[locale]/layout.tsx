@@ -18,7 +18,7 @@ const jost = Jost({
   variable: "--font-playfair",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.ioannispapaioannou.lawyer";
 
 export async function generateMetadata({
   params,
