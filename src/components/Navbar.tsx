@@ -91,6 +91,7 @@ export default function Navbar() {
     { href: `/${locale}`, label: tNav("home") },
     { href: `/${locale}/about`, label: tNav("about") },
     { href: `/${locale}/practice-areas`, label: tNav("practiceAreas") },
+    { href: `/${locale}/funds`, label: tNav("funds") },
     { href: `/${locale}/faq`, label: tNav("faq") },
     { href: `/${locale}/contact`, label: tNav("contact") },
   ];

@@ -3,6 +3,7 @@
     "home": "Home",
     "about": "About",
     "practiceAreas": "Practice Areas",
+    "funds": "NPL Funds",
     "blog": "Articles",
     "faq": "FAQ",
     "media": "Media",
@@ -398,6 +399,61 @@
         "Her philosophy centres on genuinely understanding each client's needs and personally overseeing every case. She approaches every legal matter — from family disputes to debt restructuring — with the same professional consistency and dedication."
       ]
     }
+  },
+  "funds": {
+    "seoTitle": "NPL Fund Defence Lawyer | Thessaloniki – Papaioannou",
+    "seoDescription": "Has a fund purchased your loan? Learn your legal rights and how to negotiate effectively. Free case assessment. Call today.",
+    "heroTitle": "NPL Fund Defence",
+    "heroCity": "Thessaloniki",
+    "heroSubtitle": "Legal Protection · Negotiation · Stopping Foreclosure",
+    "intro": "The transfer of your loan to an NPL fund does not mean a dead end. Thousands of borrowers in Greece now face companies such as DoValue, Intrum or Cepal as their new creditors — without knowing their rights. With specialised expertise in banking law and NPL markets, we assess every case from the start: legality of transfer, claim amount, grounds for challenge, and negotiation strategy.",
+    "whatTitle": "What Are NPL Funds",
+    "whatText": "NPL funds (non-performing loan funds or credit servicers) purchased large portfolios of non-performing loans from Greek banks under Law 4354/2015. These transfers must meet strict legal requirements — and often do not. A fund is not a bank: it has different obligations, different limitations, and different legal vulnerabilities.",
+    "servicesTitle": "How We Help",
+    "services": [
+      "Legal review of claim assignment — challenging the legality of the transfer",
+      "Verification of the claim amount, interest, and charges",
+      "Objection against a payment order issued by a fund or servicer",
+      "Stay or cancellation of an auction initiated by a fund",
+      "Negotiation of a settlement with DoValue, Intrum, Cepal and other servicers",
+      "Application under the Out-of-Court Mechanism (Law 4738/2020)",
+      "Claims against funds for breach of borrower notification obligations",
+      "Full defence strategy — judicial and out-of-court"
+    ],
+    "urgencyTitle": "Every day that passes strengthens the fund's position",
+    "urgencyText": "Funds and servicers have specialised legal teams. If you have received a loan transfer notice, payment order, or auction notice from a fund, acting promptly is critical. Do not sign any settlement without legal review.",
+    "ctaInlineTitle": "Not sure where you stand legally?",
+    "ctaInlineText": "Get a free assessment of your legal position against the fund. Call us or send us your details.",
+    "whyTitle": "Why Choose Us",
+    "whyItems": [
+      "25+ years' experience in banking law and enforcement proceedings",
+      "Specialised knowledge of NPL legislation (Law 4354/2015, Law 4738/2020)",
+      "Head of the Legal Team, Association of Borrowers of Northern Greece",
+      "Practical knowledge of DoValue, Intrum, Cepal and other servicer practices",
+      "Direct and realistic case assessment — no empty promises"
+    ],
+    "faqTitle": "Frequently Asked Questions About Funds",
+    "faq": [
+      {
+        "q": "Can a fund foreclose on my home?",
+        "a": "Yes, provided the transfer was lawful and the claim is enforceable. However, loan portfolio transfers raise serious legal issues — standing, completeness of the claim, accuracy of the principal amount — that can be effectively challenged. Every case is reviewed individually."
+      },
+      {
+        "q": "What is the difference between a fund and a bank for the borrower?",
+        "a": "A fund does not hold a banking licence and operates under a different legal regime. Notification obligations, charge limits, and standing requirements differ significantly from those of a bank — and these differences can form the basis for a legal challenge."
+      },
+      {
+        "q": "Can I negotiate with a fund without a lawyer?",
+        "a": "Technically yes, but it is not recommended. Funds employ specialist negotiators who know exactly where you stand. Without a review of the claim, you risk signing a settlement for an amount you do not owe, or on terms that do not serve your interests."
+      },
+      {
+        "q": "What should I do if I just received a notice of loan transfer to a fund?",
+        "a": "Do not ignore the notice, but do not sign anything without legal review. Request a full detailed statement of the outstanding amount immediately and consult a specialist lawyer to assess the legality of the transfer and the accuracy of the claim."
+      }
+    ],
+    "ctaTitle": "Assess Your Case Today",
+    "ctaText": "Every day of delay strengthens the fund's position. Contact us for a full assessment of your legal standing.",
+    "ctaButton": "Book a Consultation"
   },
   "urgentCta": {
     "text": "Have you been served with a payment order, seizure or auction notice?",
