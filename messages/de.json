@@ -27,6 +27,8 @@
     "home": "Startseite",
     "about": "Über uns",
     "practiceAreas": "Rechtsgebiete",
+    "funds": "NPL-Fonds",
+    "pleistariasmos": "Zwangsversteigerung",
     "blog": "Artikel",
     "faq": "FAQ",
     "media": "Medien",
@@ -396,6 +398,61 @@
       ]
     }
   },
+  "funds": {
+    "seoTitle": "NPL-Fonds Rechtsschutz | Anwalt Thessaloniki – Papaioannou",
+    "seoDescription": "Hat ein Fonds Ihren Kredit gekauft? Erfahren Sie Ihre Rechte und wie Sie effektiv verhandeln können. Kostenlose Ersteinschätzung. Rufen Sie uns an.",
+    "heroTitle": "Rechtsschutz gegen NPL-Fonds",
+    "heroCity": "Thessaloniki",
+    "heroSubtitle": "Rechtlicher Schutz · Verhandlung · Zwangsversteigerung stoppen",
+    "intro": "Wir akzeptieren die Abtretung eines Kredits an einen Fonds nicht als gegebene Tatsache. Wir prüfen die Rechtmäßigkeit der Abtretung, die Richtigkeit des Betrags, die Zinsen, die Gebühren und die Legitimation des Servicers. Oft deckt diese Prüfung Mängel auf, die die Verhandlungsposition des Schuldners grundlegend verändern.",
+    "whatTitle": "Was sind NPL-Fonds",
+    "whatText": "NPL-Fonds haben massenhaft notleidende Kredite von griechischen Banken auf Basis des Gesetzes 4354/2015 erworben. Diese Abtretungen müssen strenge rechtliche Voraussetzungen erfüllen — und tun dies oft nicht. Ein Fonds ist keine Bank: Er hat andere Verpflichtungen, andere Grenzen und andere rechtliche Schwachstellen.",
+    "servicesTitle": "Wie wir Ihnen helfen",
+    "services": [
+      "Rechtliche Prüfung der Forderungsabtretung — Anfechtung der Rechtmäßigkeit",
+      "Überprüfung der Forderungshöhe, Zinsen und Gebühren",
+      "Widerspruch gegen einen Mahnbescheid eines Fonds oder Servicers",
+      "Aussetzung oder Aufhebung einer vom Fonds betriebenen Zwangsversteigerung",
+      "Verhandlung mit DoValue, Intrum, Cepal und anderen Servicern",
+      "Antrag im außergerichtlichen Restrukturierungsverfahren (Ges. 4738/2020)",
+      "Klagen gegen Fonds wegen Verletzung der Informationspflichten",
+      "Vollständige Verteidigungsstrategie — gerichtlich und außergerichtlich"
+    ],
+    "urgencyTitle": "Der Fonds hat Ihre Lage bereits bewertet. Sie?",
+    "urgencyText": "Fonds und Servicer verfügen über spezialisierte Rechtsabteilungen, die genau wissen, was ihre Forderung wert ist. Wenn Sie ein Abtretungsschreiben, einen Mahnbescheid oder eine Versteigerungsankündigung erhalten haben, unterschreiben Sie nichts, bevor Ihre Akte geprüft wurde.",
+    "ctaInlineTitle": "Ihre Akte muss geprüft werden — vor jedem weiteren Schritt.",
+    "ctaInlineText": "Wir prüfen Legitimation, Betrag, Zinsen und Gebühren. Erst dann wissen wir — und sagen Ihnen —, womit Sie es wirklich zu tun haben.",
+    "whyTitle": "Warum wir",
+    "whyItems": [
+      "25+ Jahre ausschließlich in Bank- und Vollstreckungsrecht",
+      "Spezialkenntnisse der NPL-Gesetzgebung — Ges. 4354/2015, Ges. 4738/2020",
+      "Leiter des Rechtsteams des Darlehensnehmerschutzbundes Nordgriechenlands",
+      "Praxiswissen über DoValue, Intrum, Cepal — eingesetzt zugunsten des Schuldners",
+      "Realistische Einschätzung ohne Versprechungen — Sie wissen ab dem ersten Gespräch, wo Sie stehen"
+    ],
+    "faqTitle": "Häufige Fragen zu NPL-Fonds",
+    "faq": [
+      {
+        "q": "Kann ein Fonds mein Haus zwangsversteigern?",
+        "a": "Ja, sofern die Abtretung rechtmäßig erfolgt ist und die Forderung vollstreckbar ist. Aber genau das prüfen wir: Legitimation, Richtigkeit des Betrags, Verfahrensmängel. Der Fonds hat nicht immer, was er zu haben glaubt."
+      },
+      {
+        "q": "Was ist der Unterschied zwischen Fonds und Bank für den Kreditnehmer?",
+        "a": "Ein Fonds besitzt keine Banklizenz und unterliegt einem anderen Rechtsregime. Informationspflichten, Gebührengrenzen und Legitimationsanforderungen unterscheiden sich erheblich — und diese Unterschiede bilden die Grundlage für eine rechtliche Anfechtung."
+      },
+      {
+        "q": "Kann ich ohne Anwalt mit einem Fonds verhandeln?",
+        "a": "Technisch ja, aber nicht empfehlenswert. Fonds beschäftigen spezialisierte Verhandlungsführer, die Ihre rechtliche Lage genau kennen. Ohne Prüfung der Forderung riskieren Sie, eine Vereinbarung für einen Betrag zu unterzeichnen, den Sie nicht schulden."
+      },
+      {
+        "q": "Was tue ich, wenn ich soeben eine Abtretungsmitteilung erhalten habe?",
+        "a": "Ignorieren Sie sie nicht. Unterschreiben Sie nichts ohne rechtliche Prüfung. Fordern Sie sofort eine vollständige Kontoaufstellung an und lassen Sie Ihre Akte prüfen. Die Rechtmäßigkeit der Abtretung und die Richtigkeit des Betrags werden geprüft — und oft angefochten."
+      }
+    ],
+    "ctaTitle": "Verhandeln Sie nicht von einer schwachen Position aus.",
+    "ctaText": "Bevor Sie etwas unterschreiben oder dem Fonds antworten, prüfen Sie zuerst, womit Sie es wirklich zu tun haben. Konkret, schnell, ohne Wunderversprechungen.",
+    "ctaButton": "Sofortige Aktenprüfung"
+  },
   "urgentCta": {
     "text": "Wurde Ihnen ein Mahnbescheid, eine Pfändung oder ein Versteigerungstermin zugestellt?",
     "sub": "Warten Sie nicht. Fristen im Vollstreckungsverfahren sind kurz und entscheidend.",
@@ -408,14 +465,14 @@
     "cta": "Wie wir helfen können"
   },
   "pleistariasmos": {
-    "seoTitle": "Anwalt für Zwangsversteigerungen – Thessaloniki",
-    "seoDescription": "Rechtliche Verteidigung gegen Zwangsversteigerungen in Thessaloniki. Einstweilige Verfügungen, Aussetzungen, Pfändungsaufhebungen. 25+ Jahre Erfahrung.",
-    "heroTitle": "Verteidigung gegen Zwangsversteigerungen",
+    "seoTitle": "Zwangsversteigerung Hauptwohnsitz | Anwalt Thessaloniki – Papaioannou",
+    "seoDescription": "Droht Ihnen eine Zwangsversteigerung des Hauptwohnsitzes? Es gibt rechtliche Wege. Widersprüche, Aussetzungen, Pfändungsaufhebungen. 25+ Jahre Erfahrung.",
+    "heroTitle": "Zwangsversteigerung des Hauptwohnsitzes: Rechtliche Wege, die Sie nicht kennen",
     "heroCity": "Thessaloniki",
     "heroSubtitle": "Einstweilige Verfügungen · Aussetzungen · Pfändungsaufhebungen",
-    "intro": "Eine Zwangsversteigerung ist nicht unausweichlich. Mit mehr als 25 Jahren Erfahrung im Bank- und Vollstreckungsrecht haben wir Hunderten von Schuldnern geholfen, ihr Zuhause vor Banken und Fonds zu schützen.",
+    "intro": "Wir behandeln keine Zwangsversteigerung als vollendete Tatsache. Jede Akte wird von Grund auf geprüft: Legitimation des Gläubigers, Richtigkeit der Forderung, Vollstreckungshandlungen, Fristen, Möglichkeiten für Widerspruch oder Aussetzung. Mit 25+ Jahren Erfahrung im Bankrecht haben wir Versteigerungen gestoppt, die unausweichlich schienen.",
     "whatTitle": "Was ist eine Zwangsversteigerung?",
-    "whatText": "Eine Zwangsversteigerung ist der zwangsweise Verkauf einer Immobilie oder von Vermögenswerten zur Befriedigung eines Gläubigers — Bank, Fonds oder Staat. Das griechische Recht gewährt dem Schuldner jedoch wesentliche Verteidigungsrechte, sofern rechtzeitig gehandelt wird.",
+    "whatText": "Eine Zwangsversteigerung ist der zwangsweise Verkauf einer Immobilie zur Befriedigung eines Gläubigers — Bank, Fonds oder Staat. Das griechische Recht gewährt dem Schuldner wesentliche Verteidigungsrechte, sofern rechtzeitig gehandelt wird.",
     "servicesTitle": "Wie wir Sie verteidigen",
     "services": [
       "Aussetzung der Versteigerung des Hauptwohnsitzes oder Geschäftsgebäudes",
@@ -429,33 +486,76 @@
       "Antrag auf außergerichtliches Umstrukturierungsverfahren (Ges. 4738/2020)",
       "Schuldenrestrukturierungsverhandlungen mit Banken und Verwaltern"
     ],
-    "urgencyTitle": "Die Fristen sind streng — handeln Sie sofort",
-    "urgencyText": "Vollstreckungsverfahren unterliegen sehr kurzen zwingenden Fristen. Sobald Sie eine Vollstreckungsanordnung, Pfändungsmitteilung oder Versteigerungsbenachrichtigung erhalten, kontaktieren Sie uns sofort.",
+    "optionsTitle": "Was Sie tun können — 4 rechtliche Optionen",
+    "options": [
+      {
+        "title": "Antrag auf Aussetzung der Zwangsversteigerung",
+        "desc": "Das Gericht kann noch wenige Tage vor dem Termin eine einstweilige Verfügung erlassen. Der Rechtsgrund ist fast immer vorhanden — man muss ihn rechtzeitig finden. Genau das tun wir."
+      },
+      {
+        "title": "Antrag nach Ges. 4738/2020",
+        "desc": "Die Einreichung des Antrags setzt automatisch alle Vollstreckungsmaßnahmen aus. Wir prüfen, ob die Voraussetzungen erfüllt sind, und stellen den Antrag strategisch — nicht nur bürokratisch."
+      },
+      {
+        "title": "Vollstreckungswiderspruch",
+        "desc": "Jede Vollstreckungshandlung kann formelle oder materielle Mängel aufweisen. Forderung des Fonds, seine Legitimation, Zinsen — wir prüfen alles. Der Widerspruch ist keine Zeitverzögerung: Er ist die primäre Verteidigungslinie."
+      },
+      {
+        "title": "Verhandlung aus starker Position",
+        "desc": "Verhandlungen beginnen nicht aus Angst — sie beginnen, nachdem Forderung, Betrag und Legitimation geprüft wurden. Erst dann wissen wir, was das Angebot des Gläubigers wirklich wert ist."
+      }
+    ],
+    "ctaInlineTitle": "Ihre Akte braucht eine Prüfung — nicht nur einen Rat.",
+    "ctaInlineText": "Wir bewerten sofort Forderung, Legitimation, Fristen und Möglichkeiten. Ohne Versprechungen — mit echten Daten.",
+    "timelineTitle": "Zeitplan — Wann Sie handeln müssen",
+    "timelineItems": [
+      {
+        "phase": "90+ Tage vorher",
+        "title": "Maximale Optionen — idealer Zeitpunkt",
+        "desc": "Widerspruch, Aussetzungsantrag, Einreichung nach Ges. 4738/2020, Verhandlung aus starker Position. Alle Schritte verfügbar. Jetzt kann das Kräfteverhältnis verändert werden."
+      },
+      {
+        "phase": "30 Tage vorher",
+        "title": "Dringend — aber noch möglich",
+        "desc": "Der Aussetzungsantrag muss sofort eingereicht werden. Eine einstweilige Verfügung kann noch am Vortag ergehen. Jeder Tag ohne Handeln ist ein Tag zugunsten des Gläubigers."
+      },
+      {
+        "phase": "Nach der Versteigerung",
+        "title": "Es ist noch nicht vorbei",
+        "desc": "Widerspruch gegen den Zuschlag, Bereicherungsklage, Anfechtung der Legitimation der Forderungsabtretung — die Optionen hängen von den Aktendaten ab. Geben Sie nicht auf, ohne zu wissen, was Sie in der Hand haben."
+      }
+    ],
+    "urgencyTitle": "Die Fristen warten nicht",
+    "urgencyText": "Vollstreckungsbefehl, Pfändungsmitteilung, Versteigerungstermin — jedes dieser Dokumente aktiviert kurze, zwingende Ausschlussfristen. Verzögerung kostet keine Zeit: Sie kostet Optionen.",
     "whyTitle": "Warum wir",
     "whyItems": [
-      "25+ Jahre im Bankrecht und Vollstreckungsverfahren",
-      "Hunderte erfolgreicher Vollstreckungswidersprüche und Versteigerungsaussetzungen",
-      "Tiefgreifende Kenntnis der Praktiken von Banken, Fonds und Verwaltern",
-      "Direkte Kommunikation und volle Transparenz in jeder Phase",
+      "25+ Jahre ausschließlich in Bank- und Vollstreckungsrecht",
+      "Hunderte Widersprüche und Aussetzungen — auch in scheinbar aussichtslosen Fällen",
+      "Vollständige Kenntnis der Praktiken von Banken, Fonds und Servicern — offensiv eingesetzt",
+      "Keine Akte wird oberflächlich geprüft — alle Daten, alle Fristen",
       "Büro in Thessaloniki — Mandate in ganz Griechenland"
     ],
-    "faqTitle": "Häufige Fragen",
+    "faqTitle": "Häufige Fragen zur Zwangsversteigerung des Hauptwohnsitzes",
     "faq": [
       {
         "q": "Kann eine Versteigerung noch kurz vorher ausgesetzt werden?",
-        "a": "Ja, in vielen Fällen ist dies möglich, wenn stichhaltige Rechtsgründe vorliegen und der Antrag rechtzeitig gestellt wird. Das Gericht kann eine einstweilige Aussetzung noch am Vortag der Versteigerung gewähren."
+        "a": "Ja. Wenn Rechtsgründe vorliegen und der Antrag rechtzeitig gestellt wird, kann das Gericht eine einstweilige Aussetzung noch am Vortag gewähren. Unsere Erfahrung mit solchen Anträgen ist umfangreich."
       },
       {
-        "q": "Was ist ein Vollstreckungswiderspruch?",
-        "a": "Der Vollstreckungswiderspruch (Art. 933 ZPO) ist das wichtigste gerichtliche Mittel zur Anfechtung der Rechtmäßigkeit einer Pfändung oder Versteigerung auf formeller oder materieller Grundlage."
+        "q": "Was ist ein Vollstreckungswiderspruch und wann wird er eingereicht?",
+        "a": "Der Vollstreckungswiderspruch (Art. 933 ZPO) ficht die Rechtmäßigkeit der Pfändung oder Versteigerung an — formell oder materiell. In Fondsfällen wird auch die Legitimation des Gläubigers und die Richtigkeit der Forderung geprüft."
       },
       {
         "q": "Kann ein Fonds mein Haus versteigern?",
-        "a": "Ja, wenn die Forderung wirksam abgetreten wurde. Die Abtretung von Forderungen von Banken an Fonds wirft jedoch erhebliche Rechtsfragen auf, die effektiv vor Gericht angefochten werden können."
+        "a": "Ja — wenn die Forderung rechtmäßig abgetreten und vollstreckbar ist. Aber genau das prüfen wir: Legitimation, Richtigkeit des Betrags, Verfahrensmängel. Der Fonds hat nicht immer, was er zu haben glaubt."
+      },
+      {
+        "q": "Was passiert, wenn die Versteigerung bereits stattgefunden hat?",
+        "a": "Der Fall ist nicht automatisch abgeschlossen. Widerspruch gegen den Zuschlag, Bereicherungsklage, Anfechtung der Legitimation — die Optionen hängen von den Aktendaten ab. Melden Sie sich, bevor Sie entscheiden, dass es keinen Ausweg gibt."
       }
     ],
-    "ctaTitle": "Kontaktieren Sie uns sofort",
-    "ctaText": "Lassen Sie die Fristen nicht verstreichen. Rufen Sie uns heute für eine Fallbewertung an.",
-    "ctaButton": "Termin vereinbaren"
+    "ctaTitle": "Jeder Tag ohne Handeln ist ein Tag zugunsten des Gläubigers.",
+    "ctaText": "Wir prüfen Ihre Akte sofort und sagen Ihnen genau, wo Sie rechtlich stehen. Ohne Versprechungen — mit Fakten.",
+    "ctaButton": "Sofortige Aktenprüfung"
   }
 }
