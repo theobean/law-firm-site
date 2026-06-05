@@ -467,12 +467,12 @@
     "cta": "How we can help"
   },
   "pleistariasmos": {
-    "seoTitle": "Foreclosure & Auction Defence Lawyer – Thessaloniki",
-    "seoDescription": "Expert legal defence against property auctions in Thessaloniki. Injunctions, stays, seizure cancellations. 25+ years' experience.",
-    "heroTitle": "Foreclosure & Auction Defence",
+    "seoTitle": "Primary Residence Foreclosure Defence | Lawyer Thessaloniki – Papaioannou",
+    "seoDescription": "Facing foreclosure on your primary residence? There are legal options. Injunctions, stays, seizure cancellations. 25+ years' experience in Thessaloniki.",
+    "heroTitle": "Primary Residence Foreclosure: Legal Options You May Not Know",
     "heroCity": "Thessaloniki",
     "heroSubtitle": "Injunctions · Stays · Seizure Cancellations",
-    "intro": "A forced auction is not inevitable. With 25+ years of banking and enforcement law experience, we have helped hundreds of debtors protect their homes from banks and funds.",
+    "intro": "Foreclosure of your primary residence is not inevitable. Greek law provides significant rights of defence — provided you act in time. With 25+ years of banking and enforcement law experience, we have helped hundreds of debtors protect their homes from banks and funds.",
     "whatTitle": "What is a forced auction?",
     "whatText": "A forced auction (πλειστηριασμός) is the compulsory sale of a property or assets to satisfy a creditor — bank, fund, or the State. Greek law provides significant rights of defence for the debtor, provided you act in time.",
     "servicesTitle": "How we defend you",
@@ -488,6 +488,45 @@
       "Application to out-of-court restructuring mechanism (L. 4738/2020)",
       "Debt restructuring negotiation with banks and servicers"
     ],
+    "optionsTitle": "What You Can Do — 4 Legal Options",
+    "options": [
+      {
+        "title": "Application for Auction Stay",
+        "desc": "The court can issue a temporary stay order even days before the auction. The application must demonstrate probable harm and legal grounds — we identify these for you."
+      },
+      {
+        "title": "Filing under Law 4738/2020",
+        "desc": "The New Insolvency Code allows individuals who meet the criteria to restructure their debts and protect their primary residence. Filing automatically suspends all enforcement proceedings."
+      },
+      {
+        "title": "Objection to Enforcement",
+        "desc": "An objection to enforcement (Article 933 CCP) challenges the legality of the seizure or auction on formal or substantive grounds — including the validity of the fund's claim."
+      },
+      {
+        "title": "Negotiation with Bank or Fund",
+        "desc": "Negotiating before the auction is often the fastest solution. We assess the claim first — only then do we know from what position we are negotiating."
+      }
+    ],
+    "ctaInlineTitle": "Not sure which option applies to your case?",
+    "ctaInlineText": "Every case is different. Contact us for a full assessment of your legal position and available options.",
+    "timelineTitle": "Timeline — When You Need to Act",
+    "timelineItems": [
+      {
+        "phase": "90+ Days Before",
+        "title": "Maximum options — ideal timing",
+        "desc": "There is time for an objection, stay application, filing under Law 4738/2020, and negotiation from a position of strength. All options remain open."
+      },
+      {
+        "phase": "30 Days Before",
+        "title": "Urgent — still achievable",
+        "desc": "A stay application must be filed immediately. The court can grant a temporary order. Every day of delay reduces the odds."
+      },
+      {
+        "phase": "After the Auction",
+        "title": "There is still a way out",
+        "desc": "An objection to the sale, an unjust enrichment claim, and a challenge to the legality of the claim assignment remain possible. Do not give up without legal advice."
+      }
+    ],
     "urgencyTitle": "Deadlines are strict — act immediately",
     "urgencyText": "Enforcement proceedings are subject to very short mandatory deadlines. As soon as you receive an enforcement order, seizure notice, or auction notification, contact us immediately.",
     "whyTitle": "Why choose us",
@@ -498,7 +537,7 @@
       "Direct communication and full transparency at every stage",
       "Office in Thessaloniki — cases throughout Greece"
     ],
-    "faqTitle": "Frequently Asked Questions",
+    "faqTitle": "Frequently Asked Questions About Foreclosure",
     "faq": [
       {
         "q": "Can an auction be stayed just days before it takes place?",
