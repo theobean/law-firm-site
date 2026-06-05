@@ -110,6 +110,14 @@ export default async function LocaleLayout({
   const messages = await getMessages();
   const t = await getTranslations({ locale, namespace: "seo" });
 
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Ιωάννης Παπαϊωάννου – Δικηγόρος Πλειστηριασμών Θεσσαλονίκη",
+    alternateName: "Παπαϊωάννου – Λιάμος & Συνεργάτες",
+    url: `${siteUrl}/${locale}`,
+  };
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": ["LegalService", "LocalBusiness"],
@@ -171,6 +179,10 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={`${inter.variable} ${jost.variable}`}>
       <body className="min-h-screen flex flex-col font-sans antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
