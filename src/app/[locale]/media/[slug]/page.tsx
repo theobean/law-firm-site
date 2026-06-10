@@ -4,10 +4,9 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowLeft, Calendar, Tv } from "lucide-react";
 import { getYouTubeId, getThumbnailUrl, getEmbedUrl, getFacebookEmbedUrl, getVideoType } from "@/lib/youtube";
+import { siteUrl as SITE } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
-
-const SITE = "https://www.ioannispapaioannou.lawyer";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string; locale: string }> }): Promise<Metadata> {
   try {

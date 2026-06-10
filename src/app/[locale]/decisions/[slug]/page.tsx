@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { ArrowLeft, Calendar, Landmark, Download, Eye } from "lucide-react";
 import DecisionImageViewer from "@/components/DecisionImageViewer";
 import ShareButtons from "@/components/ShareButtons";
+import { siteUrl } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
@@ -13,7 +14,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const { slug, locale } = await params;
     const decision = await getDecisionBySlug(slug);
     if (!decision) return {};
-    const siteUrl = "https://www.ioannispapaioannou.lawyer";
     const pageUrl = `${siteUrl}/${locale}/decisions/${slug}`;
     const ogImage = decision.images?.[0]?.url ?? `${siteUrl}/δικηγορος.png`;
     const description = (decision.description ?? "").slice(0, 160) || decision.title;

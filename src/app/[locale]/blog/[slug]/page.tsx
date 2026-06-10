@@ -10,6 +10,7 @@ import AuthorCard from "@/components/AuthorCard";
 import RelatedArticles from "@/components/RelatedArticles";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
+import { siteUrl } from "@/lib/seo";
 
 export const revalidate = 60;
 
@@ -64,7 +65,6 @@ export async function generateMetadata({
   const article = await getArticle(slug);
   if (!article) return {};
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.ioannnispapaioannou.lawyer";
   const articleUrl = `${siteUrl}/${locale}/blog/${slug}`;
   const metaTitle = article.seoTitle || article.title;
   const description = article.seoDescription || article.excerpt || article.title;
@@ -110,8 +110,7 @@ export default async function ArticlePage({
     ? await getRelatedArticles(slug, article.category, 3)
     : [];
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
-  const articleUrl = `${baseUrl}/${locale}/blog/${slug}`;
+  const articleUrl = `${siteUrl}/${locale}/blog/${slug}`;
 
   return (
     <div className="bg-white">
