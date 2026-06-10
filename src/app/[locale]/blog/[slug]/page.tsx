@@ -10,7 +10,7 @@ import AuthorCard from "@/components/AuthorCard";
 import RelatedArticles from "@/components/RelatedArticles";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
-import { siteUrl } from "@/lib/seo";
+import { siteUrl, ogDefaults } from "@/lib/seo";
 
 export const revalidate = 60;
 
@@ -77,6 +77,7 @@ export async function generateMetadata({
     description,
     alternates: { canonical: articleUrl },
     openGraph: {
+      ...ogDefaults(locale),
       title: metaTitle,
       description,
       url: articleUrl,

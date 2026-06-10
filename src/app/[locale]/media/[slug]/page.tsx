@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowLeft, Calendar, Tv } from "lucide-react";
 import { getYouTubeId, getThumbnailUrl, getEmbedUrl, getFacebookEmbedUrl, getVideoType } from "@/lib/youtube";
-import { siteUrl as SITE } from "@/lib/seo";
+import { siteUrl as SITE, ogDefaults } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     return {
       title: iv.title, description,
       alternates: { canonical: pageUrl },
-      openGraph: { title: iv.title, description, url: pageUrl, type: "video.other", images: [{ url: ogImage, width: 1280, height: 720, alt: iv.title }] },
+      openGraph: { ...ogDefaults(locale), title: iv.title, description, url: pageUrl, type: "video.other", images: [{ url: ogImage, width: 1280, height: 720, alt: iv.title }] },
       twitter: { card: "summary_large_image", title: iv.title, description, images: [ogImage] },
     };
   } catch { return {}; }

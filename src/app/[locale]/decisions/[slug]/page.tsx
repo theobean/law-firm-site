@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import { ArrowLeft, Calendar, Landmark, Download, Eye } from "lucide-react";
 import DecisionImageViewer from "@/components/DecisionImageViewer";
 import ShareButtons from "@/components/ShareButtons";
-import { siteUrl } from "@/lib/seo";
+import { siteUrl, ogDefaults } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     return {
       title: decision.title, description,
       alternates: { canonical: pageUrl },
-      openGraph: { title: decision.title, description, url: pageUrl, type: "article", images: [{ url: ogImage, width: 1200, height: 630, alt: decision.title }] },
+      openGraph: { ...ogDefaults(locale), title: decision.title, description, url: pageUrl, type: "article", images: [{ url: ogImage, width: 1200, height: 630, alt: decision.title }] },
       twitter: { card: "summary_large_image", title: decision.title, description, images: [ogImage] },
     };
   } catch { return {}; }

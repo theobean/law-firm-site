@@ -1,7 +1,32 @@
 export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.ioannispapaioannou.lawyer";
 
+const ogLocaleMap: Record<string, string> = { el: "el_GR", en: "en_US", de: "de_DE" };
+
+// must mirror seo.siteName in messages/*.json — buildPageMeta is sync, so we
+// can't read translations here
+const siteNames: Record<string, string> = {
+  el: "Παπαϊωάννου – Λιάμος & Συνεργάτες",
+  en: "Ioannis Papaioannou | Law Office",
+  de: "Ioannis Papaioannou | Rechtsanwaltskanzlei",
+};
+
 function cleanPath(path: string) {
   return path === "" ? "" : path.startsWith("/") ? path : `/${path}`;
+}
+
+/**
+ * Shared OG fields lost when a page defines its own openGraph (Next.js
+ * shallow-merges metadata: a page-level openGraph replaces the layout's
+ * entirely). Spread this into any page-level openGraph object.
+ */
+export function ogDefaults(locale: string) {
+  return {
+    siteName: siteNames[locale] ?? siteNames.el,
+    locale: ogLocaleMap[locale] ?? "el_GR",
+    alternateLocale: Object.entries(ogLocaleMap)
+      .filter(([k]) => k !== locale)
+      .map(([, v]) => v),
+  };
 }
 
 export function buildPageMeta(locale: string, path: string) {
@@ -17,10 +42,11 @@ export function buildPageMeta(locale: string, path: string) {
         "x-default": `${siteUrl}/el${p}`,
       },
     },
-    openGraph: { url: canonical },
+    openGraph: {
+      ...ogDefaults(locale),
+      type: "website" as const,
+      url: canonical,
+      images: [{ url: "/δικηγορος.png", width: 1200, height: 630 }],
+    },
   };
 }
-
-// backward compat for funds/pleistariasmos
-export const buildAlternates = (locale: string, path: string) =>
-  buildPageMeta(locale, path).alternates;
