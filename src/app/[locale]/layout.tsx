@@ -44,7 +44,6 @@ export async function generateMetadata({
     description: t("defaultDescription"),
     ...(isEl && { authors: [{ name: "Ιωάννης Παπαϊωάννου" }] }),
     alternates: {
-      canonical: `/${locale}`,
       languages: {
         el: "/el",
         en: "/en",
