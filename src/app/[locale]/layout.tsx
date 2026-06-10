@@ -43,14 +43,6 @@ export async function generateMetadata({
     },
     description: t("defaultDescription"),
     ...(isEl && { authors: [{ name: "Ιωάννης Παπαϊωάννου" }] }),
-    alternates: {
-      languages: {
-        el: "/el",
-        en: "/en",
-        de: "/de",
-        "x-default": "/el",
-      },
-    },
     openGraph: {
       type: "website",
       locale: ogLocale,
