@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { buildAlternates } from "@/lib/seo";
+import { buildPageMeta } from "@/lib/seo";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Check, Banknote, Handshake, ShieldCheck, Briefcase, Home, Users, Building2, BookOpen, Receipt, HardHat, Gavel } from "lucide-react";
 import { use } from "react";
@@ -19,7 +19,7 @@ export async function generateMetadata({
   return {
     title: t(`areas.${area}.title`),
     description: t(`areas.${area}.desc`),
-    alternates: buildAlternates(locale, `/practice-areas/${area}`),
+    ...buildPageMeta(locale, `/practice-areas/${area}`),
   };
 }
 

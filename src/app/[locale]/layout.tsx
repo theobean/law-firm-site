@@ -47,7 +47,6 @@ export async function generateMetadata({
       type: "website",
       locale: ogLocale,
       alternateLocale: ogAlternateLocale,
-      url: `${siteUrl}/${locale}`,
       siteName: t("siteName"),
       title: t("defaultTitle"),
       description: t("defaultDescription"),

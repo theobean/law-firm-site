@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
-import { buildAlternates } from "@/lib/seo";
+import { buildPageMeta } from "@/lib/seo";
 import { Scale, GraduationCap, Users } from "lucide-react";
 import BiographySection from "@/components/BiographySection";
 import MemberBioSection from "@/components/MemberBioSection";
@@ -13,7 +13,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "seo" });
-  return { title: t("aboutTitle"), description: t("aboutDescription"), alternates: buildAlternates(locale, "/about") };
+  return { title: t("aboutTitle"), description: t("aboutDescription"), ...buildPageMeta(locale, "/about") };
 }
 
 export default function AboutPage() {

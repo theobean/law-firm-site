@@ -2,7 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { getDecisions } from "@/sanity/client";
 import DecisionsGrid from "@/components/DecisionsGrid";
 import type { Metadata } from "next";
-import { buildAlternates } from "@/lib/seo";
+import { buildPageMeta } from "@/lib/seo";
 
 export const revalidate = 10;
 
@@ -13,7 +13,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "decisions" });
-  return { title: t("seoTitle"), description: t("seoDescription"), alternates: buildAlternates(locale, "/decisions") };
+  return { title: t("seoTitle"), description: t("seoDescription"), ...buildPageMeta(locale, "/decisions") };
 }
 
 export default async function DecisionsPage({

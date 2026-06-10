@@ -2,12 +2,11 @@ import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { buildPageMeta } from "@/lib/seo";
 import { ArrowRight, Check, AlertTriangle, Clock } from "lucide-react";
 import { use } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 import FaqAccordion from "@/components/FaqAccordion";
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.ioannispapaioannou.lawyer";
 
 export async function generateMetadata({
   params,
@@ -19,15 +18,7 @@ export async function generateMetadata({
   return {
     title: t("seoTitle"),
     description: t("seoDescription"),
-    alternates: {
-      canonical: `${siteUrl}/${locale}/pleistariasmos`,
-      languages: {
-        el: `${siteUrl}/el/pleistariasmos`,
-        en: `${siteUrl}/en/pleistariasmos`,
-        de: `${siteUrl}/de/pleistariasmos`,
-        "x-default": `${siteUrl}/el/pleistariasmos`,
-      },
-    },
+    ...buildPageMeta(locale, "/pleistariasmos"),
   };
 }
 

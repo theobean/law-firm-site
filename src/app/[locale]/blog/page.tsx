@@ -2,7 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { getArticles } from "@/sanity/client";
 import BlogList from "@/components/BlogList";
 import type { Metadata } from "next";
-import { buildAlternates } from "@/lib/seo";
+import { buildPageMeta } from "@/lib/seo";
 
 export const revalidate = 60;
 
@@ -13,7 +13,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "seo" });
-  return { title: t("blogTitle"), description: t("blogDescription"), alternates: buildAlternates(locale, "/blog") };
+  return { title: t("blogTitle"), description: t("blogDescription"), ...buildPageMeta(locale, "/blog") };
 }
 
 export default async function BlogPage({ params }: { params: Promise<{ locale: string }> }) {
