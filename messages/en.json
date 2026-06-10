@@ -405,8 +405,78 @@
       ]
     }
   },
+  "dovalue": {
+    "seoTitle": "doValue Defence Lawyer – Foreclosures Thessaloniki",
+    "seoDescription": "Received a payment order or foreclosure notice from doValue Greece? Deadlines are running. Objection, suspension, debt haircut negotiation in Thessaloniki. Call: +30 2310 545 261.",
+    "heroCity": "Thessaloniki · 12 Leontos Sofou St.",
+    "heroTitle": "Lawyer for doValue Foreclosures in Thessaloniki",
+    "heroSubtitle": "Objection · Suspension · Haircut Negotiation",
+    "intro": "If you are holding a document signed by doValue Greece — a formal notice, payment order, enforcement order or foreclosure schedule — your time is measured in days, not months. Our office handles cases against servicers and funds daily in the courts of Thessaloniki. Ioannis Papaioannou, legal counsel to the Borrowers' & Consumer Protection Association of Northern Greece, has defended borrowers against banks and loan servicers for over 25 years. We know how doValue operates, where it pushes — and where it backs down.",
+    "whatTitle": "What is doValue and why is it contacting you",
+    "whatText": "doValue Greece is the largest loan servicing company in Greece. It is not a bank: it manages loans that banks transferred to international funds — usually for a fraction of what you are being asked to pay today. This has two practical consequences. First, doValue acts on behalf of a third party, and its legal standing in every individual act is subject to judicial review — which does not always come out in its favour. Second, when a claim was bought at a fraction of its face value, there is real, proven room for a haircut. Anyone negotiating without knowing this is negotiating blind.",
+    "protectTitle": "Protecting Your Primary Residence from a doValue Foreclosure",
+    "protectText": "A home is not lost when a notice arrives. It is lost when the legal deadlines pass unused. At every stage — from the first demand letter to days before the auction — specific legal tools exist: objection, suspension application, the out-of-court workout, settlement. We treat no foreclosure as final. Every file is reviewed from scratch: doValue's standing, the accuracy of the claim, abusive terms, procedural defects. That is where the outcome is decided.",
+    "deadlinesTitle": "Received a Notice or Payment Order from doValue: The Critical Deadlines",
+    "deadlinesIntro": "Every served document triggers a strict statutory deadline. Once it passes, the right is lost permanently — however well-founded your objections were.",
+    "deadlines": [
+      { "title": "Payment Order — 15 working days", "desc": "From service of a payment order you have 15 working days to file an objection. If none is filed, the order becomes an enforceable title: doValue's next step is seizure." },
+      { "title": "Seizure — 45 days", "desc": "From the imposition of seizure, a 45-day deadline runs for an objection against enforcement. This is where the fund's standing, the amount of the claim and every procedural defect are challenged." },
+      { "title": "Before the Auction — the final 15 days", "desc": "Even after an auction has been scheduled, a narrow window exists for a suspension application. The earlier you act, the more tools we have — but even in the final days not everything is lost." }
+    ],
+    "deadlinesWarning": "The service date on your document is not a detail — it is the clock counting down. Bring us the document today, not tomorrow.",
+    "cta1Title": "Holding a doValue document right now?",
+    "cta1Text": "Your file gets an immediate first assessment: what exactly was served, which deadline is running, what options you have. Call +30 2310 545 261 or fill in the form.",
+    "negotiationTitle": "Negotiation Strategy: How We Achieve a Sustainable Debt Haircut with doValue",
+    "negotiationIntro": "Negotiating with doValue is not pleading — it is a contest of positions. The outcome depends on who knows the file better. Our job is to shift that balance in your favour:",
+    "negotiationPoints": [
+      "File review before any contact: standing, the real amount owed, unlawful charges and interest. We do not negotiate a figure we have not verified.",
+      "Leveraging the claim's real value: the fund bought your loan at a fraction of the balance. Our proposal is built on that fact — not on the figure printed in the letter.",
+      "A sustainable proposal, not wishful thinking: based on your actual financial capacity and the property's objective value. Proposals that don't add up get rejected — ours add up.",
+      "Judicial pressure where needed: a pending objection with well-founded grounds radically changes the other side's willingness to settle."
+    ],
+    "negotiationOutro": "A haircut is not given — it is won. And it is won by those who come to the table with a complete file and a credible judicial threat.",
+    "cta2Title": "Before you reply to or sign anything for doValue — talk to us.",
+    "cta2Text": "One wrong signature can acknowledge a debt that could have been contested. Review first, reply second.",
+    "anakopiTitle": "Objection and Suspension of Foreclosure in the Courts of Thessaloniki",
+    "anakopiText1": "Our cases are heard where we work every day: the Magistrates' Court and the Court of First Instance of Thessaloniki. Experience in these specific courts — their case law, their practice — is what separates an objection that was merely filed from an objection that was won. The grounds that most often succeed against servicers:",
+    "anakopiPoints": [
+      "Standing defects: the transfer of the claim or the servicing assignment is not fully and validly proven.",
+      "Miscalculated debt: unlawful compound interest, abusive charges, levies not owed.",
+      "Abusive terms in the loan agreement undermining the validity of the claim.",
+      "Procedural defects in enforcement: defective service, errors in the seizure report, missed statutory deadlines."
+    ],
+    "anakopiText2": "Where needed, the objection is combined with a suspension application — freezing the auction until the merits are decided. The goal is twofold: win time and build negotiating leverage.",
+    "caseTitle": "Success Story: Saving a Family Home in Thessaloniki",
+    "caseDisclaimer": "A real case from our office, with anonymised details. Every case turns on its own facts — this example is not a guarantee of outcome.",
+    "caseSituationTitle": "The situation",
+    "caseSituation": "A borrower from eastern Thessaloniki with a mortgage loan transferred to a fund serviced by doValue. Total claim: €178,000. An auction of the family's primary residence had already been scheduled.",
+    "caseActionTitle": "Our move",
+    "caseAction": "We filed an objection on grounds of standing and debt miscalculation, together with a suspension application at the Court of First Instance of Thessaloniki. The auction was suspended. With the court ruling pending, we opened negotiations from a position of strength.",
+    "caseResultTitle": "The result",
+    "caseResult": "doValue accepted a settlement at €92,000 — a 48% write-off — with instalments matched to the family's real income. The house never went to auction again.",
+    "caseStats": [
+      { "value": "€178,000", "label": "Original claim" },
+      { "value": "−48%", "label": "Debt written off" },
+      { "value": "€92,000", "label": "Final settlement — home saved" }
+    ],
+    "faqTitle": "Frequently Asked Questions about doValue",
+    "faq": [
+      { "q": "I've been getting calls and letters from doValue. Should I respond?", "a": "Not before your file is reviewed. Any verbal or written acknowledgement of the debt can weaken defences you currently have. Log the communications, keep the documents, and get legal review before committing to anything." },
+      { "q": "Can doValue auction my home?", "a": "Only if it holds an enforceable title and the procedure is valid at every step — and that is precisely what courts review. Standing, claim amount, enforcement acts: every stage has checkpoints and defence deadlines." },
+      { "q": "How much of a haircut can I realistically achieve?", "a": "It depends on the portfolio, the collateral, your financial profile and the judicial pressure that can be applied. On secured loans, settlements with substantial write-offs are entirely achievable when negotiation is backed by a complete file — not by pleading." },
+      { "q": "The auction is days away. Is there still time?", "a": "Possibly — but every hour counts. Even in the final days options may exist, depending on the procedure's defects. Call +30 2310 545 261 immediately with the auction schedule in front of you." },
+      { "q": "What should I bring to the first appointment?", "a": "Every document you have received: notices, payment order, enforcement order, seizure report, auction schedule, and the loan agreement if you have it. And the service dates — all deadlines are counted from them." }
+    ],
+    "ctaTitle": "doValue has a legal department. Now so do you.",
+    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki — next to the courts where these cases are decided. Due to strict deadlines, your file gets an urgent first assessment: today, not \"at some point\".",
+    "ctaButton": "Immediate File Review",
+    "ctaPhone": "Call now: +30 2310 545 261"
+  },
   "funds": {
-    "seoTitle": "NPL Fund Defence Lawyer | Thessaloniki – Papaioannou",
+    "dovalueLinkTitle": "Received documents from doValue?",
+    "dovalueLinkText": "See in detail the deadlines, negotiation strategies and how a primary residence is protected specifically against doValue Greece.",
+    "dovalueLinkCta": "Dealing with doValue – Full Guide",
+    "seoTitle": "NPL Fund Defence Lawyer – Thessaloniki",
     "seoDescription": "Has a fund purchased your loan? Learn your legal rights and how to negotiate effectively. Free case assessment. Call today.",
     "heroTitle": "NPL Fund Defence",
     "heroCity": "Thessaloniki",
@@ -476,7 +546,7 @@
     "fundsCta": "Immediate File Review"
   },
   "pleistariasmos": {
-    "seoTitle": "Primary Residence Foreclosure Defence | Lawyer Thessaloniki – Papaioannou",
+    "seoTitle": "Primary Residence Foreclosure Defence – Lawyer Thessaloniki",
     "seoDescription": "Facing foreclosure on your primary residence? There are legal options. Injunctions, stays, seizure cancellations. 25+ years' experience in Thessaloniki.",
     "heroTitle": "Primary Residence Foreclosure: Legal Options You May Not Know",
     "heroCity": "Thessaloniki",
