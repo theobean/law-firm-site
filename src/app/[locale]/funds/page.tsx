@@ -108,14 +108,22 @@ export default function FundsPage({
 
         <ScrollReveal direction="up" delay={0.1}>
           <div className="border border-accent/30 bg-accent/5 rounded-sm p-6 mb-12">
-            <p className="text-primary font-playfair text-lg font-semibold mb-1">{t("dovalueLinkTitle")}</p>
-            <p className="text-gray-600 text-sm mb-4">{t("dovalueLinkText")}</p>
-            <Link
-              href={`/${locale}/funds/dovalue`}
-              className="inline-flex items-center gap-2 text-accent font-semibold text-sm hover:gap-3 transition-all"
-            >
-              {t("dovalueLinkCta")} <ArrowRight size={16} />
-            </Link>
+            <p className="text-primary font-playfair text-lg font-semibold mb-1">{t("servicersLinkTitle")}</p>
+            <p className="text-gray-600 text-sm mb-4">{t("servicersLinkText")}</p>
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-8">
+              <Link
+                href={`/${locale}/funds/dovalue`}
+                className="inline-flex items-center gap-2 text-accent font-semibold text-sm hover:gap-3 transition-all"
+              >
+                {t("dovalueLinkCta")} <ArrowRight size={16} />
+              </Link>
+              <Link
+                href={`/${locale}/funds/intrum`}
+                className="inline-flex items-center gap-2 text-accent font-semibold text-sm hover:gap-3 transition-all"
+              >
+                {t("intrumLinkCta")} <ArrowRight size={16} />
+              </Link>
+            </div>
           </div>
         </ScrollReveal>
 

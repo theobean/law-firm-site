@@ -17,6 +17,7 @@ const staticPaths = [
   "/pleistariasmos",
   "/funds",
   "/funds/dovalue",
+  "/funds/intrum",
 ];
 const practiceAreas = [
   "banking",
