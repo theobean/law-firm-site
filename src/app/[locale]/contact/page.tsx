@@ -1,6 +1,7 @@
 import { useTranslations, useLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
+import { buildAlternates } from "@/lib/seo";
 import { MapPin, Phone, Mail, Clock, ChevronRight } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -12,7 +13,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "seo" });
-  return { title: t("contactTitle"), description: t("contactDescription") };
+  return { title: t("contactTitle"), description: t("contactDescription"), alternates: buildAlternates(locale, "/contact") };
 }
 
 export default function ContactPage() {

@@ -2,6 +2,7 @@ import PracticeAreasGrid from "@/components/PracticeAreasGrid";
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
+import { buildAlternates } from "@/lib/seo";
 
 export async function generateMetadata({
   params,
@@ -10,7 +11,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "seo" });
-  return { title: t("practiceAreasTitle"), description: t("practiceAreasDescription") };
+  return { title: t("practiceAreasTitle"), description: t("practiceAreasDescription"), alternates: buildAlternates(locale, "/practice-areas") };
 }
 
 export default function PracticeAreasPage() {

@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
+import { buildAlternates } from "@/lib/seo";
 import FaqAccordion from "@/components/FaqAccordion";
 
 export async function generateMetadata({
@@ -10,7 +11,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "seo" });
-  return { title: t("faqTitle"), description: t("faqDescription") };
+  return { title: t("faqTitle"), description: t("faqDescription"), alternates: buildAlternates(locale, "/faq") };
 }
 
 export default function FaqPage() {

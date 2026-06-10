@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildAlternates } from "@/lib/seo";
 import Hero from "@/components/Hero";
 import AuctionBanner from "@/components/AuctionBanner";
 import PracticeAreasGrid from "@/components/PracticeAreasGrid";
@@ -77,8 +78,10 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  if (locale !== "el") return {};
-  return { keywords: EL_KEYWORDS };
+  return {
+    ...(locale === "el" && { keywords: EL_KEYWORDS }),
+    alternates: buildAlternates(locale, ""),
+  };
 }
 
 export default function HomePage() {

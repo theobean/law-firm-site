@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { getInterviews } from "@/sanity/client";
 import MediaGrid from "@/components/MediaGrid";
 import type { Metadata } from "next";
+import { buildAlternates } from "@/lib/seo";
 
 export const revalidate = 60;
 
@@ -12,7 +13,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "media" });
-  return { title: t("seoTitle"), description: t("seoDescription") };
+  return { title: t("seoTitle"), description: t("seoDescription"), alternates: buildAlternates(locale, "/media") };
 }
 
 export default async function MediaPage({ params }: { params: Promise<{ locale: string }> }) {
