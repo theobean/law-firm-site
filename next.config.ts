@@ -6,22 +6,22 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 // CSP without unsafe-eval — used for all public pages
 const publicCSP = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://api.web3forms.com https://www.googletagmanager.com",
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
   "img-src 'self' data: blob: https://cdn.sanity.io https://www.google-analytics.com https://www.googletagmanager.com https://img.youtube.com",
-  "connect-src 'self' https://api.web3forms.com https://cdn.sanity.io https://*.sanity.io https://www.google-analytics.com https://analytics.google.com https://*.google-analytics.com https://www.googletagmanager.com",
+  "connect-src 'self' https://cdn.sanity.io https://*.sanity.io https://www.google-analytics.com https://analytics.google.com https://*.google-analytics.com https://www.googletagmanager.com",
   "frame-src https://www.google.com https://maps.google.com https://www.youtube.com https://www.facebook.com",
 ].join("; ");
 
 // CSP with unsafe-eval — required by Sanity Studio
 const studioCSP = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://api.web3forms.com https://www.googletagmanager.com",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
   "img-src 'self' data: blob: https://cdn.sanity.io https://www.google-analytics.com https://www.googletagmanager.com https://img.youtube.com",
-  "connect-src 'self' https://api.web3forms.com https://cdn.sanity.io https://*.sanity.io https://www.google-analytics.com https://analytics.google.com https://*.google-analytics.com https://www.googletagmanager.com",
+  "connect-src 'self' https://cdn.sanity.io https://*.sanity.io https://www.google-analytics.com https://analytics.google.com https://*.google-analytics.com https://www.googletagmanager.com",
   "frame-src https://www.google.com https://maps.google.com https://www.youtube.com https://www.facebook.com",
 ].join("; ");
 

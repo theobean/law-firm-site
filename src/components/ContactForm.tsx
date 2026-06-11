@@ -9,6 +9,7 @@ interface FormData {
   email: string;
   phone: string;
   message: string;
+  botcheck: boolean;
 }
 
 export default function ContactForm() {
@@ -17,17 +18,15 @@ export default function ContactForm() {
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>();
 
   async function onSubmit(data: FormData) {
-    const res = await fetch("https://api.web3forms.com/submit", {
+    const res = await fetch("/api/contact", {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify({
-        access_key: "36eb1c5f-2261-4b67-af44-085ab241a840",
-        subject: `Νέο μήνυμα από ${data.name}`,
-        from_name: "Δικηγορικό Γραφείο Παπαϊωάννου — Φόρμα Επικοινωνίας",
         name: data.name,
         email: data.email,
         phone: data.phone || "—",
         message: data.message,
+        botcheck: data.botcheck,
       }),
     });
     const result = await res.json();
@@ -60,6 +59,15 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+      {/* Honeypot — humans never see or fill this */}
+      <input
+        type="checkbox"
+        tabIndex={-1}
+        autoComplete="off"
+        className="hidden"
+        aria-hidden="true"
+        {...register("botcheck")}
+      />
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">{t("name")} *</label>
         <input
