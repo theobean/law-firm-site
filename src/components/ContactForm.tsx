@@ -18,10 +18,16 @@ export default function ContactForm() {
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>();
 
   async function onSubmit(data: FormData) {
-    const res = await fetch("/api/contact", {
+    // Web3Forms free plan only accepts browser calls — the access key is
+    // public by design (NEXT_PUBLIC). Spam is handled by the botcheck
+    // honeypot, which Web3Forms discards server-side.
+    const res = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify({
+        access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
+        subject: `Νέο μήνυμα από ${data.name}`,
+        from_name: "Δικηγορικό Γραφείο Παπαϊωάννου — Φόρμα Επικοινωνίας",
         name: data.name,
         email: data.email,
         phone: data.phone || "—",
