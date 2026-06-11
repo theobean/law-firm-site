@@ -376,14 +376,19 @@
       "name": "Ioannis Papaioannou",
       "role": "Attorney at Law",
       "bio": "With more than 25 years of experience, he represents individuals and businesses across a wide range of legal matters.",
-      "edu": ["Faculty of Law, Democritus University of Thrace, Komotini", "LL.M. Postgraduate Studies, Ludwig Maximilian University of Munich"],
+      "edu": [
+        "Faculty of Law, Democritus University of Thrace, Komotini",
+        "LL.M. Postgraduate Studies, Ludwig Maximilian University of Munich"
+      ],
       "specializations": []
     },
     "georgios": {
       "name": "Georgios Liamos",
       "role": "Attorney at the Court of Appeal",
       "bio": "Specialising in Civil and Commercial Law. Provides legal support in contractual disputes, corporate matters and civil claims.",
-      "edu": ["Faculty of Law, Aristotle University of Thessaloniki (AUTH)"],
+      "edu": [
+        "Faculty of Law, Aristotle University of Thessaloniki (AUTH)"
+      ],
       "specializations": [],
       "bioParagraphs": [
         "Georgios Liamos is an Attorney at the Court of Appeal, a graduate of the Faculty of Law at the Aristotle University of Thessaloniki (AUTH). He collaborates with the Papaioannou law office, handling civil and commercial law matters and representing individuals and businesses before first-instance and appellate courts.",
@@ -395,7 +400,9 @@
       "name": "Lampriní Papaioannou",
       "role": "Attorney at the Court of Appeal",
       "bio": "Specialising in Family and Inheritance Law. Handles divorce, child custody and estate disputes with sensitivity and professionalism.",
-      "edu": ["Faculty of Law, Democritus University of Thrace, Komotini"],
+      "edu": [
+        "Faculty of Law, Democritus University of Thrace, Komotini"
+      ],
       "specializations": [],
       "bioParagraphs": [
         "Lampriní Papaioannou is an Attorney at the Court of Appeal, a graduate of the Faculty of Law at the Democritus University of Thrace. She handles a broad range of legal matters, with a primary focus on Family and Inheritance Law, managing divorce, child custody, maintenance and estate disputes with particular sensitivity and professionalism.",
@@ -419,9 +426,18 @@
     "deadlinesTitle": "Received a Notice or Payment Order from Intrum: The Critical Deadlines",
     "deadlinesIntro": "Defence deadlines are preclusive: once they pass, the right is extinguished — no matter how strong your arguments were.",
     "deadlines": [
-      { "title": "Payment Order — 15 working days", "desc": "An objection against a payment order must be filed within 15 working days of service. Without one, Intrum obtains an enforceable title — and the road to seizure opens." },
-      { "title": "Seizure — 45 days", "desc": "An objection against enforcement carries a 45-day deadline from the seizure. At this stage, standing, the debt calculation and procedural defects are all challenged." },
-      { "title": "Before the Auction — the final 15 days", "desc": "Even with an auction date set, a narrow window remains for a suspension application. Every earlier day counts — but even at the last moment we examine every available remedy." }
+      {
+        "title": "Payment Order — 15 working days",
+        "desc": "An objection against a payment order must be filed within 15 working days of service. Without one, Intrum obtains an enforceable title — and the road to seizure opens."
+      },
+      {
+        "title": "Seizure — 45 days",
+        "desc": "An objection against enforcement carries a 45-day deadline from the seizure. At this stage, standing, the debt calculation and procedural defects are all challenged."
+      },
+      {
+        "title": "Before the Auction — the final 15 days",
+        "desc": "Even with an auction date set, a narrow window remains for a suspension application. Every earlier day counts — but even at the last moment we examine every available remedy."
+      }
     ],
     "deadlinesWarning": "Do not leave Intrum's document in a drawer \"for later\". The service date is already counting down — bring it in for review today.",
     "cta1Title": "Holding an Intrum document right now?",
@@ -448,11 +464,26 @@
     "anakopiText2": "Where the case requires it, the objection is paired with a suspension application, keeping the auction on ice until the merits are decided. That wins both time and negotiating weight.",
     "faqTitle": "Frequently Asked Questions about Intrum",
     "faq": [
-      { "q": "Intrum keeps calling me. What should I do?", "a": "Do not commit to anything verbally and do not \"acknowledge\" the debt on the phone. Ask for everything in writing, keep a log of calls and documents, and bring the file in for review before any reply." },
-      { "q": "Can Intrum auction my property?", "a": "Only with an enforceable title and a fully valid procedure — both are subject to judicial review. The servicer's standing, the claim amount and every enforcement act have points of challenge with specific deadlines." },
-      { "q": "Is it worth negotiating with Intrum on my own?", "a": "It is risky. You are facing a specialised operation that negotiates thousands of cases — you have one. Without a file review you don't even know whether the amount demanded is correct, or what your real bargaining power is." },
-      { "q": "The auction is very close. Is there still hope?", "a": "It depends on the file — but the answer only comes after we see it, and quickly. Procedural defects may support action even in the final days. Call +30 2310 545 261 immediately." },
-      { "q": "What documents do you need for the review?", "a": "Everything received from Intrum or, before it, from the bank: letters, notices, payment order, enforcement order, seizure report, auction schedule and the loan agreement. Most important of all: the service dates." }
+      {
+        "q": "Intrum keeps calling me. What should I do?",
+        "a": "Do not commit to anything verbally and do not \"acknowledge\" the debt on the phone. Ask for everything in writing, keep a log of calls and documents, and bring the file in for review before any reply."
+      },
+      {
+        "q": "Can Intrum auction my property?",
+        "a": "Only with an enforceable title and a fully valid procedure — both are subject to judicial review. The servicer's standing, the claim amount and every enforcement act have points of challenge with specific deadlines."
+      },
+      {
+        "q": "Is it worth negotiating with Intrum on my own?",
+        "a": "It is risky. You are facing a specialised operation that negotiates thousands of cases — you have one. Without a file review you don't even know whether the amount demanded is correct, or what your real bargaining power is."
+      },
+      {
+        "q": "The auction is very close. Is there still hope?",
+        "a": "It depends on the file — but the answer only comes after we see it, and quickly. Procedural defects may support action even in the final days. Call +30 2310 545 261 immediately."
+      },
+      {
+        "q": "What documents do you need for the review?",
+        "a": "Everything received from Intrum or, before it, from the bank: letters, notices, payment order, enforcement order, seizure report, auction schedule and the loan agreement. Most important of all: the service dates."
+      }
     ],
     "ctaTitle": "Intrum negotiates every day. We litigate every day.",
     "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. Due to strict deadlines, your file is assessed urgently — today, not \"at some point\".",
@@ -473,9 +504,18 @@
     "deadlinesTitle": "Received a Notice or Payment Order from doValue: The Critical Deadlines",
     "deadlinesIntro": "Every served document triggers a strict statutory deadline. Once it passes, the right is lost permanently — however well-founded your objections were.",
     "deadlines": [
-      { "title": "Payment Order — 15 working days", "desc": "From service of a payment order you have 15 working days to file an objection. If none is filed, the order becomes an enforceable title: doValue's next step is seizure." },
-      { "title": "Seizure — 45 days", "desc": "From the imposition of seizure, a 45-day deadline runs for an objection against enforcement. This is where the fund's standing, the amount of the claim and every procedural defect are challenged." },
-      { "title": "Before the Auction — the final 15 days", "desc": "Even after an auction has been scheduled, a narrow window exists for a suspension application. The earlier you act, the more tools we have — but even in the final days not everything is lost." }
+      {
+        "title": "Payment Order — 15 working days",
+        "desc": "From service of a payment order you have 15 working days to file an objection. If none is filed, the order becomes an enforceable title: doValue's next step is seizure."
+      },
+      {
+        "title": "Seizure — 45 days",
+        "desc": "From the imposition of seizure, a 45-day deadline runs for an objection against enforcement. This is where the fund's standing, the amount of the claim and every procedural defect are challenged."
+      },
+      {
+        "title": "Before the Auction — the final 15 days",
+        "desc": "Even after an auction has been scheduled, a narrow window exists for a suspension application. The earlier you act, the more tools we have — but even in the final days not everything is lost."
+      }
     ],
     "deadlinesWarning": "The service date on your document is not a detail — it is the clock counting down. Bring us the document today, not tomorrow.",
     "cta1Title": "Holding a doValue document right now?",
@@ -502,11 +542,26 @@
     "anakopiText2": "Where needed, the objection is combined with a suspension application — freezing the auction until the merits are decided. The goal is twofold: win time and build negotiating leverage.",
     "faqTitle": "Frequently Asked Questions about doValue",
     "faq": [
-      { "q": "I've been getting calls and letters from doValue. Should I respond?", "a": "Not before your file is reviewed. Any verbal or written acknowledgement of the debt can weaken defences you currently have. Log the communications, keep the documents, and get legal review before committing to anything." },
-      { "q": "Can doValue auction my home?", "a": "Only if it holds an enforceable title and the procedure is valid at every step — and that is precisely what courts review. Standing, claim amount, enforcement acts: every stage has checkpoints and defence deadlines." },
-      { "q": "How much of a haircut can I realistically achieve?", "a": "It depends on the portfolio, the collateral, your financial profile and the judicial pressure that can be applied. On secured loans, settlements with substantial write-offs are entirely achievable when negotiation is backed by a complete file — not by pleading." },
-      { "q": "The auction is days away. Is there still time?", "a": "Possibly — but every hour counts. Even in the final days options may exist, depending on the procedure's defects. Call +30 2310 545 261 immediately with the auction schedule in front of you." },
-      { "q": "What should I bring to the first appointment?", "a": "Every document you have received: notices, payment order, enforcement order, seizure report, auction schedule, and the loan agreement if you have it. And the service dates — all deadlines are counted from them." }
+      {
+        "q": "I've been getting calls and letters from doValue. Should I respond?",
+        "a": "Not before your file is reviewed. Any verbal or written acknowledgement of the debt can weaken defences you currently have. Log the communications, keep the documents, and get legal review before committing to anything."
+      },
+      {
+        "q": "Can doValue auction my home?",
+        "a": "Only if it holds an enforceable title and the procedure is valid at every step — and that is precisely what courts review. Standing, claim amount, enforcement acts: every stage has checkpoints and defence deadlines."
+      },
+      {
+        "q": "How much of a haircut can I realistically achieve?",
+        "a": "It depends on the portfolio, the collateral, your financial profile and the judicial pressure that can be applied. On secured loans, settlements with substantial write-offs are entirely achievable when negotiation is backed by a complete file — not by pleading."
+      },
+      {
+        "q": "The auction is days away. Is there still time?",
+        "a": "Possibly — but every hour counts. Even in the final days options may exist, depending on the procedure's defects. Call +30 2310 545 261 immediately with the auction schedule in front of you."
+      },
+      {
+        "q": "What should I bring to the first appointment?",
+        "a": "Every document you have received: notices, payment order, enforcement order, seizure report, auction schedule, and the loan agreement if you have it. And the service dates — all deadlines are counted from them."
+      }
     ],
     "ctaTitle": "doValue has a legal department. Now so do you.",
     "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki — next to the courts where these cases are decided. Due to strict deadlines, your file gets an urgent first assessment: today, not \"at some point\".",
@@ -570,7 +625,8 @@
     ],
     "ctaTitle": "Assess Your Case Today",
     "ctaText": "Every day of delay strengthens the fund's position. Contact us for a full assessment of your legal standing.",
-    "ctaButton": "Book a Consultation"
+    "ctaButton": "Book a Consultation",
+    "cepalLinkCta": "Cepal – Full Defence Guide"
   },
   "urgentCta": {
     "text": "Have you been served with a payment order, seizure or auction notice?",
@@ -676,5 +732,79 @@
     "ctaTitle": "Contact us now",
     "ctaText": "Don't let deadlines catch you off guard. Call us today for a case assessment.",
     "ctaButton": "Book a consultation"
+  },
+  "cepal": {
+    "seoTitle": "Lawyer for Cepal – Property Auctions Thessaloniki",
+    "seoDescription": "Received a payment order or enforcement notice from Cepal? Every document triggers strict deadlines for legal defence. Objection, suspension, debt settlement in Thessaloniki. Tel: 2310 545 261.",
+    "heroCity": "Thessaloniki · 12 Leontos Sofou St.",
+    "heroTitle": "Lawyer for Cepal Auctions and Enforcement in Thessaloniki",
+    "heroSubtitle": "Objection · Suspension · Debt Settlement",
+    "intro": "Documents from Cepal are not mere reminders — they start legal processes with firm deadlines. Payment order, seizure, auction programme: each document opens a window for action that closes permanently once the deadline passes. Our office handles servicer cases at the Thessaloniki courts on a daily basis. Ioannis Papaioannou, Legal Adviser to the Association of Borrowers and Consumer Protection of Northern Greece, knows how Cepal operates — and how to build an effective defence.",
+    "whatTitle": "What Is Cepal and What Does It Mean for Your Loan?",
+    "whatText": "Cepal Hellas Financial Services is the largest servicer in Greece by managed portfolio, primarily handling loans from Eurobank (Cairo securitisation programme) and other Greek banks. Two key points: first, Cepal is a manager, not the owner of your loan — it must prove its authority to act on the fund's behalf at every step. Second, these portfolios were acquired at a fraction of face value. That acquisition price is the foundation of any realistic settlement negotiation.",
+    "protectTitle": "Protecting Your Primary Residence from Cepal Auction",
+    "protectText": "Because of its large portfolio volume, Cepal moves quickly — and that speed creates procedural vulnerabilities. We check every file from the start: whether authority is properly established, whether the debt amount is correctly calculated, whether every service of process and enforcement act complies strictly with Greek law. High volume often means rushed procedures — and rushed procedures create grounds for challenge.",
+    "deadlinesTitle": "Received a Payment Order or Notice from Cepal? Critical Deadlines",
+    "deadlinesIntro": "Greek procedural law grants no extensions on deadlines for challenging servicers. Once a deadline passes, the enforcement title becomes unassailable and the path to seizure opens unobstructed.",
+    "deadlines": [
+      {
+        "title": "Payment Order — 15 working days",
+        "desc": "An objection must be filed within 15 working days of service. After that, Cepal holds an enforceable title and can proceed to property seizure."
+      },
+      {
+        "title": "Seizure — 45 days",
+        "desc": "The objection against enforcement must be filed within 45 days of seizure. At this stage, the authority chain, the debt amount, and procedural defects can all be challenged."
+      },
+      {
+        "title": "Before Auction — last 15 days",
+        "desc": "Even with an auction date set, an application for suspension of enforcement remains possible. Every day earlier improves the chances — but we examine every available option even at the last moment."
+      }
+    ],
+    "deadlinesWarning": "The clock started the day Cepal served the document. Do not wait for a convenient moment — bring the file for review today.",
+    "cta1Title": "Do you have a Cepal document in front of you?",
+    "cta1Text": "Immediate first review: what was served, which deadline is running, what options you have. Call 2310 545 261 or send the contact form.",
+    "negotiationTitle": "Negotiation Strategy: Achieving a Viable Debt Settlement with Cepal",
+    "negotiationIntro": "Cepal manages portfolios acquired at a discount — we use this as a practical tool in negotiation, not just a theoretical point. How we build your position:",
+    "negotiationPoints": [
+      "Full file review before any contact: authority chain, actual balance, interest charges and fees that may be disputed. We do not negotiate without knowing exactly what claim we are dealing with.",
+      "Acquisition cost as the starting point for any proposal: the portfolio was purchased at a fraction of face value — our offer is based on economic reality, not the figure in the letter.",
+      "Settlement tailored to real repayment capacity: the goal is an agreement that holds, not an instalment that collapses in six months.",
+      "Court proceedings as a negotiating lever: a pending objection changes the dynamic — Cepal recognises it is dealing with a legally represented counterparty, not an uninformed debtor."
+    ],
+    "negotiationOutro": "The goal is not the best possible deal under pressure — it is the settlement that fits the specific file, with specific numbers and a specific strategy.",
+    "cta2Title": "Before signing anything with Cepal — speak to us first.",
+    "cta2Text": "A rushed settlement can be worse than signing nothing. We review first, then decide.",
+    "anakopiTitle": "Objection and Suspension of Cepal Auctions in Thessaloniki",
+    "anakopiText1": "Cepal's high case volume makes it particularly exposed to procedural defects. Grounds that typically support objections and suspensions in Cepal cases:",
+    "anakopiPoints": [
+      "Weak authority chain: securitisation and management assignment involve multiple transfer steps that must each be properly documented — gaps here are a significant basis for objection.",
+      "Incorrect debt amount: unlawful compound interest, abusive fees, miscalculated default interest.",
+      "Unfair contractual terms: clauses that were not individually negotiated and that undermine the legal foundation of the claim.",
+      "Formal enforcement defects: irregular service of process, incorrect amounts in the seizure report, failure to observe mandatory intervals."
+    ],
+    "anakopiText2": "Where the case requires it, an objection is accompanied by an immediate suspension application so that the auction is stayed until a court decision is issued. This combination — legal defence and parallel negotiation — is usually the most effective approach.",
+    "faqTitle": "Frequently Asked Questions about Cepal",
+    "faq": [
+      {
+        "q": "Cepal is asking me to sign an out-of-court settlement. Should I?",
+        "a": "Do not sign anything without legal review. An out-of-court agreement may block defences you currently have — objection, debt challenge, suspension. We review it at no charge during the first consultation."
+      },
+      {
+        "q": "Cepal is the biggest servicer in Greece. Can I really fight them?",
+        "a": "Size does not protect against legal defects — high volume actually increases the likelihood of errors in service of process, debt calculations, and authority chains. That is what we examine first."
+      },
+      {
+        "q": "My loan was with Eurobank. Why is Cepal writing to me?",
+        "a": "Your loan was likely assigned to the Cairo securitisation programme or another SPV, with Cepal appointed as manager. That assignment must have been properly executed and notified to you — we check this as part of the file review."
+      },
+      {
+        "q": "What happens if I simply do not respond to Cepal?",
+        "a": "Silence is not a defence. If a payment order has been issued or a seizure has taken place, inaction allows Cepal to proceed without obstacle. The earlier you have the file reviewed, the more options remain open."
+      }
+    ],
+    "ctaTitle": "Cepal works every day. Your defence should start today.",
+    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. Files are assessed on an urgent basis — every working day lost may count.",
+    "ctaButton": "Immediate File Review",
+    "ctaPhone": "Call now: 2310 545 261"
   }
 }

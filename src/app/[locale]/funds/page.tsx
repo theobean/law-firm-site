@@ -123,6 +123,12 @@ export default function FundsPage({
               >
                 {t("intrumLinkCta")} <ArrowRight size={16} />
               </Link>
+              <Link
+                href={`/${locale}/funds/cepal`}
+                className="inline-flex items-center gap-2 text-accent font-semibold text-sm hover:gap-3 transition-all"
+              >
+                {t("cepalLinkCta")} <ArrowRight size={16} />
+              </Link>
             </div>
           </div>
         </ScrollReveal>

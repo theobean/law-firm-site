@@ -373,14 +373,19 @@
       "name": "Ioannis Papaioannou",
       "role": "Rechtsanwalt",
       "bio": "Mit über 25 Jahren Erfahrung vertritt er Privatpersonen und Unternehmen in einem breiten Spektrum von Rechtsangelegenheiten.",
-      "edu": ["Juristische Fakultät, Demokrit-Universität Thrakien, Komotini", "LL.M. Postgraduales Studium, Ludwig-Maximilians-Universität München"],
+      "edu": [
+        "Juristische Fakultät, Demokrit-Universität Thrakien, Komotini",
+        "LL.M. Postgraduales Studium, Ludwig-Maximilians-Universität München"
+      ],
       "specializations": []
     },
     "georgios": {
       "name": "Georgios Liamos",
       "role": "Rechtsanwalt am Berufungsgericht",
       "bio": "Schwerpunkt im Zivil- und Handelsrecht. Bietet rechtliche Unterstützung bei Vertragsstreitigkeiten, gesellschaftsrechtlichen Angelegenheiten und zivilrechtlichen Klagen.",
-      "edu": ["Juristische Fakultät, Aristoteles-Universität Thessaloniki (AUTH)"],
+      "edu": [
+        "Juristische Fakultät, Aristoteles-Universität Thessaloniki (AUTH)"
+      ],
       "specializations": [],
       "bioParagraphs": [
         "Georgios Liamos ist Rechtsanwalt am Berufungsgericht und Absolvent der Rechtswissenschaftlichen Fakultät der Aristoteles-Universität Thessaloniki (AUTH). Er arbeitet mit der Kanzlei Papaioannou zusammen und bearbeitet zivil- und handelsrechtliche Fälle, wobei er Privatpersonen und Unternehmen vor erst- und zweitinstanzlichen Gerichten vertritt.",
@@ -392,7 +397,9 @@
       "name": "Lampriní Papaioannou",
       "role": "Rechtsanwältin am Berufungsgericht",
       "bio": "Schwerpunkt im Familien- und Erbrecht. Bearbeitet Scheidungs-, Sorgerechts- und Erbschaftsstreitigkeiten mit Einfühlungsvermögen.",
-      "edu": ["Juristische Fakultät, Demokrit-Universität Thrakien, Komotini"],
+      "edu": [
+        "Juristische Fakultät, Demokrit-Universität Thrakien, Komotini"
+      ],
       "specializations": [],
       "bioParagraphs": [
         "Lampriní Papaioannou ist Rechtsanwältin am Berufungsgericht und Absolventin der Rechtswissenschaftlichen Fakultät der Demokrit-Universität Thrakien. Sie bearbeitet ein breites Spektrum rechtlicher Angelegenheiten, mit Schwerpunkt im Familien- und Erbrecht — Scheidungs-, Sorgerechts-, Unterhalts- und Erbschaftsstreitigkeiten werden von ihr mit besonderer Sensibilität geführt.",
@@ -416,9 +423,18 @@
     "deadlinesTitle": "Mahnung oder Zahlungsbefehl von Intrum erhalten: Die kritischen Fristen",
     "deadlinesIntro": "Verteidigungsfristen sind Ausschlussfristen: Verstreichen sie, erlischt das Recht — egal wie stark Ihre Argumente waren.",
     "deadlines": [
-      { "title": "Zahlungsbefehl — 15 Werktage", "desc": "Der Widerspruch gegen einen Zahlungsbefehl ist innerhalb von 15 Werktagen ab Zustellung einzulegen. Ohne ihn erhält Intrum einen vollstreckbaren Titel — und der Weg zur Pfändung ist frei." },
-      { "title": "Pfändung — 45 Tage", "desc": "Der Widerspruch gegen die Zwangsvollstreckung hat eine Frist von 45 Tagen ab der Pfändung. In dieser Phase werden Legitimation, Schuldberechnung und Verfahrensfehler angegriffen." },
-      { "title": "Vor der Versteigerung — die letzten 15 Tage", "desc": "Auch mit festgesetztem Versteigerungstermin bleibt ein enges Fenster für einen Aussetzungsantrag. Jeder frühere Tag zählt — aber selbst im letzten Moment prüfen wir jedes verfügbare Mittel." }
+      {
+        "title": "Zahlungsbefehl — 15 Werktage",
+        "desc": "Der Widerspruch gegen einen Zahlungsbefehl ist innerhalb von 15 Werktagen ab Zustellung einzulegen. Ohne ihn erhält Intrum einen vollstreckbaren Titel — und der Weg zur Pfändung ist frei."
+      },
+      {
+        "title": "Pfändung — 45 Tage",
+        "desc": "Der Widerspruch gegen die Zwangsvollstreckung hat eine Frist von 45 Tagen ab der Pfändung. In dieser Phase werden Legitimation, Schuldberechnung und Verfahrensfehler angegriffen."
+      },
+      {
+        "title": "Vor der Versteigerung — die letzten 15 Tage",
+        "desc": "Auch mit festgesetztem Versteigerungstermin bleibt ein enges Fenster für einen Aussetzungsantrag. Jeder frühere Tag zählt — aber selbst im letzten Moment prüfen wir jedes verfügbare Mittel."
+      }
     ],
     "deadlinesWarning": "Legen Sie das Intrum-Dokument nicht „für später\" in eine Schublade. Das Zustellungsdatum zählt bereits rückwärts — bringen Sie es heute zur Prüfung.",
     "cta1Title": "Halten Sie gerade ein Intrum-Dokument in den Händen?",
@@ -445,11 +461,26 @@
     "anakopiText2": "Wo der Fall es erfordert, wird der Widerspruch mit einem Aussetzungsantrag verbunden, sodass die Versteigerung auf Eis liegt, bis in der Sache entschieden ist. Das gewinnt Zeit und Verhandlungsgewicht zugleich.",
     "faqTitle": "Häufige Fragen zu Intrum",
     "faq": [
-      { "q": "Intrum ruft mich ständig an. Was soll ich tun?", "a": "Verpflichten Sie sich mündlich zu nichts und „erkennen\" Sie die Schuld am Telefon nicht an. Verlangen Sie alles schriftlich, führen Sie ein Protokoll über Anrufe und Schreiben und lassen Sie die Akte vor jeder Antwort prüfen." },
-      { "q": "Kann Intrum meine Immobilie versteigern lassen?", "a": "Nur mit vollstreckbarem Titel und vollständig formgerechtem Verfahren — beides unterliegt gerichtlicher Kontrolle. Die Legitimation des Verwalters, die Forderungshöhe und jeder Vollstreckungsakt haben Angriffspunkte mit konkreten Fristen." },
-      { "q": "Lohnt es sich, allein mit Intrum zu verhandeln?", "a": "Es ist riskant. Ihnen gegenüber steht ein spezialisierter Apparat, der Tausende Fälle verhandelt — Sie haben einen. Ohne Aktenprüfung wissen Sie nicht einmal, ob der geforderte Betrag stimmt oder wie stark Ihre Verhandlungsposition wirklich ist." },
-      { "q": "Die Versteigerung steht kurz bevor. Gibt es noch Hoffnung?", "a": "Das hängt von der Akte ab — aber die Antwort gibt es erst, nachdem wir sie gesehen haben, und zwar schnell. Verfahrensfehler können selbst in den letzten Tagen Handlungsgrundlagen bieten. Rufen Sie sofort +30 2310 545 261 an." },
-      { "q": "Welche Unterlagen brauchen Sie für die Prüfung?", "a": "Alles, was Sie von Intrum oder davor von der Bank erhalten haben: Briefe, Mahnungen, Zahlungsbefehl, Vollstreckungstitel, Pfändungsprotokoll, Versteigerungstermin und den Darlehensvertrag. Am wichtigsten: die Zustellungsdaten." }
+      {
+        "q": "Intrum ruft mich ständig an. Was soll ich tun?",
+        "a": "Verpflichten Sie sich mündlich zu nichts und „erkennen\" Sie die Schuld am Telefon nicht an. Verlangen Sie alles schriftlich, führen Sie ein Protokoll über Anrufe und Schreiben und lassen Sie die Akte vor jeder Antwort prüfen."
+      },
+      {
+        "q": "Kann Intrum meine Immobilie versteigern lassen?",
+        "a": "Nur mit vollstreckbarem Titel und vollständig formgerechtem Verfahren — beides unterliegt gerichtlicher Kontrolle. Die Legitimation des Verwalters, die Forderungshöhe und jeder Vollstreckungsakt haben Angriffspunkte mit konkreten Fristen."
+      },
+      {
+        "q": "Lohnt es sich, allein mit Intrum zu verhandeln?",
+        "a": "Es ist riskant. Ihnen gegenüber steht ein spezialisierter Apparat, der Tausende Fälle verhandelt — Sie haben einen. Ohne Aktenprüfung wissen Sie nicht einmal, ob der geforderte Betrag stimmt oder wie stark Ihre Verhandlungsposition wirklich ist."
+      },
+      {
+        "q": "Die Versteigerung steht kurz bevor. Gibt es noch Hoffnung?",
+        "a": "Das hängt von der Akte ab — aber die Antwort gibt es erst, nachdem wir sie gesehen haben, und zwar schnell. Verfahrensfehler können selbst in den letzten Tagen Handlungsgrundlagen bieten. Rufen Sie sofort +30 2310 545 261 an."
+      },
+      {
+        "q": "Welche Unterlagen brauchen Sie für die Prüfung?",
+        "a": "Alles, was Sie von Intrum oder davor von der Bank erhalten haben: Briefe, Mahnungen, Zahlungsbefehl, Vollstreckungstitel, Pfändungsprotokoll, Versteigerungstermin und den Darlehensvertrag. Am wichtigsten: die Zustellungsdaten."
+      }
     ],
     "ctaTitle": "Intrum verhandelt jeden Tag. Wir prozessieren jeden Tag.",
     "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Wegen der strengen Fristen wird Ihre Akte dringlich geprüft — heute, nicht „irgendwann\".",
@@ -470,9 +501,18 @@
     "deadlinesTitle": "Mahnung oder Zahlungsbefehl von doValue erhalten: Die kritischen Fristen",
     "deadlinesIntro": "Jedes zugestellte Dokument löst eine Ausschlussfrist aus. Verstreicht sie, ist das Recht endgültig verloren — so begründet Ihre Einwände auch waren.",
     "deadlines": [
-      { "title": "Zahlungsbefehl — 15 Werktage", "desc": "Ab Zustellung des Zahlungsbefehls haben Sie 15 Werktage für den Widerspruch. Wird keiner eingelegt, wird der Befehl zum vollstreckbaren Titel: Der nächste Schritt von doValue ist die Pfändung." },
-      { "title": "Pfändung — 45 Tage", "desc": "Ab der Pfändung läuft eine 45-Tage-Frist für den Widerspruch gegen die Zwangsvollstreckung. Hier werden die Legitimation des Fonds, die Forderungshöhe und jeder Verfahrensfehler angegriffen." },
-      { "title": "Vor der Versteigerung — die letzten 15 Tage", "desc": "Auch nach Ansetzung eines Versteigerungstermins besteht ein enges Zeitfenster für einen Aussetzungsantrag. Je früher Sie handeln, desto mehr Mittel haben wir — aber selbst in den letzten Tagen ist nicht alles verloren." }
+      {
+        "title": "Zahlungsbefehl — 15 Werktage",
+        "desc": "Ab Zustellung des Zahlungsbefehls haben Sie 15 Werktage für den Widerspruch. Wird keiner eingelegt, wird der Befehl zum vollstreckbaren Titel: Der nächste Schritt von doValue ist die Pfändung."
+      },
+      {
+        "title": "Pfändung — 45 Tage",
+        "desc": "Ab der Pfändung läuft eine 45-Tage-Frist für den Widerspruch gegen die Zwangsvollstreckung. Hier werden die Legitimation des Fonds, die Forderungshöhe und jeder Verfahrensfehler angegriffen."
+      },
+      {
+        "title": "Vor der Versteigerung — die letzten 15 Tage",
+        "desc": "Auch nach Ansetzung eines Versteigerungstermins besteht ein enges Zeitfenster für einen Aussetzungsantrag. Je früher Sie handeln, desto mehr Mittel haben wir — aber selbst in den letzten Tagen ist nicht alles verloren."
+      }
     ],
     "deadlinesWarning": "Das Zustellungsdatum auf Ihrem Dokument ist kein Detail — es ist die Uhr, die rückwärts läuft. Bringen Sie uns das Dokument heute, nicht morgen.",
     "cta1Title": "Halten Sie gerade ein doValue-Dokument in den Händen?",
@@ -499,11 +539,26 @@
     "anakopiText2": "Wo erforderlich, wird der Widerspruch mit einem Aussetzungsantrag kombiniert — die Versteigerung wird eingefroren, bis in der Sache entschieden ist. Das Ziel ist doppelt: Zeit gewinnen und Verhandlungsposition aufbauen.",
     "faqTitle": "Häufige Fragen zu doValue",
     "faq": [
-      { "q": "Ich erhalte Anrufe und Briefe von doValue. Soll ich antworten?", "a": "Nicht bevor Ihre Akte geprüft wurde. Jede mündliche oder schriftliche Anerkennung der Schuld kann Verteidigungen schwächen, die Sie heute noch haben. Dokumentieren Sie die Kontakte, bewahren Sie die Schreiben auf und lassen Sie alles rechtlich prüfen, bevor Sie sich binden." },
-      { "q": "Kann doValue mein Haus versteigern lassen?", "a": "Nur mit vollstreckbarem Titel und einem in jedem Schritt formgerechten Verfahren — und genau das wird gerichtlich überprüft. Legitimation, Forderungshöhe, Vollstreckungsakte: In jeder Phase gibt es Kontrollpunkte und Verteidigungsfristen." },
-      { "q": "Wie viel Schuldenschnitt ist realistisch?", "a": "Das hängt vom Portfolio, der Besicherung, Ihrer finanziellen Lage und dem möglichen gerichtlichen Druck ab. Bei besicherten Krediten sind Vergleiche mit substanziellem Erlass absolut erreichbar, wenn mit vollständiger Akte verhandelt wird — nicht mit Bitten." },
-      { "q": "Die Versteigerung ist in wenigen Tagen. Ist noch Zeit?", "a": "Möglicherweise — aber jede Stunde zählt. Selbst in den letzten Tagen können je nach Verfahrensfehlern Optionen bestehen. Rufen Sie sofort +30 2310 545 261 an, mit dem Versteigerungstermin vor sich." },
-      { "q": "Was bringe ich zum ersten Termin mit?", "a": "Alle erhaltenen Dokumente: Mahnschreiben, Zahlungsbefehl, Vollstreckungstitel, Pfändungsprotokoll, Versteigerungstermin und — falls vorhanden — den Darlehensvertrag. Und die Zustellungsdaten: Ab ihnen laufen alle Fristen." }
+      {
+        "q": "Ich erhalte Anrufe und Briefe von doValue. Soll ich antworten?",
+        "a": "Nicht bevor Ihre Akte geprüft wurde. Jede mündliche oder schriftliche Anerkennung der Schuld kann Verteidigungen schwächen, die Sie heute noch haben. Dokumentieren Sie die Kontakte, bewahren Sie die Schreiben auf und lassen Sie alles rechtlich prüfen, bevor Sie sich binden."
+      },
+      {
+        "q": "Kann doValue mein Haus versteigern lassen?",
+        "a": "Nur mit vollstreckbarem Titel und einem in jedem Schritt formgerechten Verfahren — und genau das wird gerichtlich überprüft. Legitimation, Forderungshöhe, Vollstreckungsakte: In jeder Phase gibt es Kontrollpunkte und Verteidigungsfristen."
+      },
+      {
+        "q": "Wie viel Schuldenschnitt ist realistisch?",
+        "a": "Das hängt vom Portfolio, der Besicherung, Ihrer finanziellen Lage und dem möglichen gerichtlichen Druck ab. Bei besicherten Krediten sind Vergleiche mit substanziellem Erlass absolut erreichbar, wenn mit vollständiger Akte verhandelt wird — nicht mit Bitten."
+      },
+      {
+        "q": "Die Versteigerung ist in wenigen Tagen. Ist noch Zeit?",
+        "a": "Möglicherweise — aber jede Stunde zählt. Selbst in den letzten Tagen können je nach Verfahrensfehlern Optionen bestehen. Rufen Sie sofort +30 2310 545 261 an, mit dem Versteigerungstermin vor sich."
+      },
+      {
+        "q": "Was bringe ich zum ersten Termin mit?",
+        "a": "Alle erhaltenen Dokumente: Mahnschreiben, Zahlungsbefehl, Vollstreckungstitel, Pfändungsprotokoll, Versteigerungstermin und — falls vorhanden — den Darlehensvertrag. Und die Zustellungsdaten: Ab ihnen laufen alle Fristen."
+      }
     ],
     "ctaTitle": "doValue hat eine Rechtsabteilung. Jetzt haben Sie auch eine.",
     "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki — neben den Gerichten, an denen diese Fälle entschieden werden. Wegen der strengen Fristen erhält Ihre Akte eine dringliche Ersteinschätzung: heute, nicht „irgendwann\".",
@@ -567,7 +622,8 @@
     ],
     "ctaTitle": "Verhandeln Sie nicht von einer schwachen Position aus.",
     "ctaText": "Bevor Sie etwas unterschreiben oder dem Fonds antworten, prüfen Sie zuerst, womit Sie es wirklich zu tun haben. Konkret, schnell, ohne Wunderversprechungen.",
-    "ctaButton": "Sofortige Aktenprüfung"
+    "ctaButton": "Sofortige Aktenprüfung",
+    "cepalLinkCta": "Cepal – Vollständiger Verteidigungsratgeber"
   },
   "urgentCta": {
     "text": "Wurde Ihnen ein Mahnbescheid, eine Pfändung oder ein Versteigerungstermin zugestellt?",
@@ -677,5 +733,79 @@
     "ctaTitle": "Jeder Tag ohne Handeln ist ein Tag zugunsten des Gläubigers.",
     "ctaText": "Wir prüfen Ihre Akte sofort und sagen Ihnen genau, wo Sie rechtlich stehen. Ohne Versprechungen — mit Fakten.",
     "ctaButton": "Sofortige Aktenprüfung"
+  },
+  "cepal": {
+    "seoTitle": "Anwalt für Cepal – Zwangsversteigerungen Thessaloniki",
+    "seoDescription": "Zahlungsbefehl oder Vollstreckungsmaßnahme von Cepal erhalten? Jedes Dokument setzt strikte Fristen für die Rechtsverteidigung. Widerspruch, Vollstreckungsaussetzung, Schuldenregulierung in Thessaloniki.",
+    "heroCity": "Thessaloniki · Leontos Sofou 12",
+    "heroTitle": "Anwalt für Cepal-Vollstreckungen und Zwangsversteigerungen in Thessaloniki",
+    "heroSubtitle": "Widerspruch · Aussetzung · Schuldenregulierung",
+    "intro": "Dokumente von Cepal sind keine bloßen Erinnerungen — sie setzen rechtliche Prozesse mit strengen Fristen in Gang. Zahlungsbefehl, Pfändung, Versteigerungsprogramm: jedes Dokument öffnet ein Handlungsfenster, das sich unwiderruflich schließt, sobald die Frist abläuft. Unsere Kanzlei bearbeitet täglich Servicer-Fälle vor den Gerichten in Thessaloniki. Ioannis Papaioannou, Rechtsberater des Vereins der Kreditnehmer und Verbraucherschutz Nordgriechenlands, kennt das Vorgehen von Cepal — und wie man eine wirksame Verteidigung aufbaut.",
+    "whatTitle": "Was ist Cepal und was bedeutet es für Ihr Darlehen?",
+    "whatText": "Cepal Hellas Financial Services ist der größte Servicer in Griechenland nach verwaltetem Portfolio und betreut hauptsächlich Darlehen der Eurobank (Cairo-Verbriefungsprogramm) sowie anderer griechischer Banken. Zwei wichtige Punkte: Erstens ist Cepal ein Verwalter, nicht der Eigentümer Ihres Darlehens — es muss bei jedem Schritt seine Handlungsbefugnis rechtmäßig nachweisen. Zweitens wurden diese Portfolios zu einem Bruchteil des Nennwerts erworben. Dieser Erwerbspreis ist die Grundlage jeder realistischen Vergleichsverhandlung.",
+    "protectTitle": "Schutz Ihres Hauptwohnsitzes vor der Cepal-Zwangsversteigerung",
+    "protectText": "Aufgrund des großen Portfoliovolumens agiert Cepal schnell — und diese Schnelligkeit schafft Verfahrensschwächen. Wir prüfen jede Akte von Grund auf: ob die Vollmacht ordnungsgemäß nachgewiesen wird, ob der Schuldenbetrag korrekt berechnet wurde und ob jede Zustellung und Vollstreckungshandlung das griechische Recht strikt einhält. Hohes Volumen bedeutet oft hastiges Vorgehen — und hastiges Vorgehen schafft Anfechtungsgrundlagen.",
+    "deadlinesTitle": "Zahlungsbefehl oder Bescheid von Cepal erhalten? Kritische Fristen",
+    "deadlinesIntro": "Das griechische Verfahrensrecht gewährt keine Fristverlängerungen für Einwände gegen Servicer. Sobald eine Frist abläuft, wird der Vollstreckungstitel unanfechtbar.",
+    "deadlines": [
+      {
+        "title": "Zahlungsbefehl — 15 Werktage",
+        "desc": "Ein Widerspruch muss innerhalb von 15 Werktagen nach Zustellung eingelegt werden. Danach besitzt Cepal einen vollstreckbaren Titel und kann zur Pfändung schreiten."
+      },
+      {
+        "title": "Pfändung — 45 Tage",
+        "desc": "Der Widerspruch gegen die Zwangsvollstreckung hat eine Frist von 45 Tagen. In dieser Phase können die Handlungsbefugnis, der Schuldenbetrag und Verfahrensmängel angefochten werden."
+      },
+      {
+        "title": "Vor der Versteigerung — letzte 15 Tage",
+        "desc": "Auch mit festem Versteigerungstermin ist ein Antrag auf Vollstreckungsaussetzung noch möglich. Je früher, desto besser — doch wir prüfen alle verfügbaren Mittel auch in letzter Minute."
+      }
+    ],
+    "deadlinesWarning": "Die Frist hat ab dem Tag der Zustellung durch Cepal zu laufen begonnen. Warten Sie nicht auf einen günstigen Moment — bringen Sie die Akte noch heute zur Prüfung.",
+    "cta1Title": "Haben Sie ein Dokument von Cepal vor sich?",
+    "cta1Text": "Sofortige Erstprüfung: was zugestellt wurde, welche Frist läuft, welche Optionen Sie haben. Rufen Sie 2310 545 261 an oder senden Sie das Kontaktformular.",
+    "negotiationTitle": "Verhandlungsstrategie: Schuldenregulierung mit Cepal erreichen",
+    "negotiationIntro": "Cepal verwaltet Portfolios, die mit einem Abschlag erworben wurden — wir setzen das praktisch in der Verhandlung ein. So bauen wir Ihre Position auf:",
+    "negotiationPoints": [
+      "Vollständige Aktenprüfung vor jedem Kontakt: Handlungskette, tatsächlicher Saldo, mögliche Gebühren und Zinsen. Wir verhandeln nicht, ohne genau zu wissen, mit welchem Anspruch wir es zu tun haben.",
+      "Erwerbskosten als Ausgangspunkt: das Portfolio wurde zu einem Bruchteil des Nennwerts gekauft — unser Angebot basiert auf wirtschaftlicher Realität, nicht auf der Ziffer im Schreiben.",
+      "Regulierung angepasst an reale Rückzahlungsfähigkeit: Ziel ist eine tragfähige Vereinbarung, keine Rate, die nach sechs Monaten scheitert.",
+      "Gerichtsverfahren als Verhandlungshebel: ein anhängiger Widerspruch verändert die Dynamik — Cepal erkennt, dass es einem rechtlich vertretenen Gegner gegenübersteht."
+    ],
+    "negotiationOutro": "Das Ziel ist nicht das bestmögliche Ergebnis unter Druck — sondern die Regulierung, die zur konkreten Akte passt, mit konkreten Zahlen und konkreter Strategie.",
+    "cta2Title": "Bevor Sie irgendetwas mit Cepal unterschreiben — sprechen Sie zuerst mit uns.",
+    "cta2Text": "Ein übereilter Vergleich kann schlimmer sein als gar nichts zu unterschreiben. Erst prüfen, dann entscheiden.",
+    "anakopiTitle": "Widerspruch und Aussetzung von Cepal-Versteigerungen in Thessaloniki",
+    "anakopiText1": "Das hohe Fallvolumen von Cepal macht es besonders anfällig für Verfahrensmängel. Häufige Grundlagen für Widersprüche und Aussetzungen in Cepal-Fällen:",
+    "anakopiPoints": [
+      "Lückenhafte Vollmachtskette: Verbriefung und Verwaltungsübertragung umfassen mehrere Übertragungsschritte, die jeweils ordnungsgemäß dokumentiert sein müssen — Lücken hier sind ein wichtiger Widerspruchsgrund.",
+      "Falscher Schuldbetrag: unzulässige Zinseszinsen, missbräuchliche Gebühren, fehlerhaft berechnete Verzugszinsen.",
+      "Missbräuchliche Vertragsklauseln: nicht individuell ausgehandelte Klauseln, die die rechtliche Grundlage der Forderung untergraben.",
+      "Formelle Vollstreckungsmängel: fehlerhafte Zustellungen, falsche Beträge im Pfändungsprotokoll, Nichtbeachtung gesetzlicher Fristen."
+    ],
+    "anakopiText2": "Wenn der Fall es erfordert, wird der Widerspruch von einem sofortigen Aussetzungsantrag begleitet, damit die Versteigerung bis zur gerichtlichen Entscheidung ausgesetzt bleibt. Diese Kombination — rechtliche Verteidigung und parallele Verhandlung — ist in der Regel der wirkungsvollste Ansatz.",
+    "faqTitle": "Häufige Fragen zu Cepal",
+    "faq": [
+      {
+        "q": "Cepal bittet mich, einen außergerichtlichen Vergleich zu unterzeichnen. Soll ich das tun?",
+        "a": "Unterschreiben Sie nichts ohne rechtliche Prüfung. Ein außergerichtlicher Vergleich kann Ihnen Verteidigungsmöglichkeiten verschließen — Widerspruch, Schuldenbestreitung, Aussetzung. Wir prüfen ihn kostenlos beim Erstgespräch."
+      },
+      {
+        "q": "Cepal ist der größte Servicer. Kann ich wirklich gegen sie vorgehen?",
+        "a": "Größe schützt nicht vor Rechtsfehlern — hohes Volumen erhöht tatsächlich die Wahrscheinlichkeit von Fehlern bei Zustellungen, Schuldberechnungen und Vollmachtsketten. Das prüfen wir als Erstes."
+      },
+      {
+        "q": "Mein Darlehen war bei der Eurobank. Warum schreibt mir jetzt Cepal?",
+        "a": "Ihr Darlehen wurde wahrscheinlich dem Cairo-Verbriefungsprogramm oder einem anderen SPV zugewiesen, wobei Cepal als Verwalter eingesetzt wurde. Diese Übertragung muss ordnungsgemäß erfolgt und Ihnen mitgeteilt worden sein — wir prüfen dies als Teil der Aktenprüfung."
+      },
+      {
+        "q": "Was passiert, wenn ich auf Cepal gar nicht reagiere?",
+        "a": "Schweigen ist keine Verteidigung. Wenn ein Zahlungsbefehl ergangen ist oder eine Pfändung stattgefunden hat, erlaubt Untätigkeit Cepal, ohne Hindernisse vorzugehen. Je früher Sie die Akte prüfen lassen, desto mehr Optionen bleiben offen."
+      }
+    ],
+    "ctaTitle": "Cepal arbeitet täglich. Ihre Verteidigung sollte heute beginnen.",
+    "ctaText": "Kanzlei in der Leontos Sofou 12, Thessaloniki. Akten werden dringend geprüft — jeder verlorene Werktag kann entscheidend sein.",
+    "ctaButton": "Sofortige Aktenprüfung",
+    "ctaPhone": "Jetzt anrufen: 2310 545 261"
   }
 }

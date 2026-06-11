@@ -18,6 +18,7 @@ const staticPaths = [
   "/funds",
   "/funds/dovalue",
   "/funds/intrum",
+  "/funds/cepal",
 ];
 const practiceAreas = [
   "banking",
