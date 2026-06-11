@@ -151,7 +151,7 @@ export default async function LocaleLayout({
     founder: {
       "@type": "Person",
       name: "Ιωάννης Παπαϊωάννου",
-      jobTitle: "Δικηγόρος",
+      jobTitle: "Δικηγόρος παρ' Αρείω Πάγω",
       worksFor: { "@id": `${siteUrl}/#legalservice` },
       affiliation: {
         "@type": "Organization",
