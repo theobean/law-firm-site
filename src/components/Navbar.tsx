@@ -197,7 +197,7 @@ export default function Navbar() {
               />
             </button>
 
-            <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-primary border border-white/10 shadow-xl rounded-sm overflow-hidden transition-all duration-150 ${
+            <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-primary border border-white/10 shadow-xl rounded-sm transition-all duration-150 ${
               servicesDropdownOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-1 pointer-events-none"
             }`}>
               {servicesLinks.map(({ href, label, icon: Icon }) => {
