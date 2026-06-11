@@ -129,6 +129,12 @@ export default function FundsPage({
               >
                 {t("cepalLinkCta")} <ArrowRight size={16} />
               </Link>
+              <Link
+                href={`/${locale}/funds/qquant`}
+                className="inline-flex items-center gap-2 text-accent font-semibold text-sm hover:gap-3 transition-all"
+              >
+                {t("qquantLinkCta")} <ArrowRight size={16} />
+              </Link>
             </div>
           </div>
         </ScrollReveal>

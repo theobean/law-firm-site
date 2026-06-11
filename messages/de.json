@@ -623,7 +623,8 @@
     "ctaTitle": "Verhandeln Sie nicht von einer schwachen Position aus.",
     "ctaText": "Bevor Sie etwas unterschreiben oder dem Fonds antworten, prüfen Sie zuerst, womit Sie es wirklich zu tun haben. Konkret, schnell, ohne Wunderversprechungen.",
     "ctaButton": "Sofortige Aktenprüfung",
-    "cepalLinkCta": "Cepal – Vollständiger Verteidigungsratgeber"
+    "cepalLinkCta": "Cepal – Vollständiger Verteidigungsratgeber",
+    "qquantLinkCta": "QQuant – Vollständiger Verteidigungsratgeber"
   },
   "urgentCta": {
     "text": "Wurde Ihnen ein Mahnbescheid, eine Pfändung oder ein Versteigerungstermin zugestellt?",
@@ -805,6 +806,80 @@
     ],
     "ctaTitle": "Cepal arbeitet täglich. Ihre Verteidigung sollte heute beginnen.",
     "ctaText": "Kanzlei in der Leontos Sofou 12, Thessaloniki. Akten werden dringend geprüft — jeder verlorene Werktag kann entscheidend sein.",
+    "ctaButton": "Sofortige Aktenprüfung",
+    "ctaPhone": "Jetzt anrufen: 2310 545 261"
+  },
+  "qquant": {
+    "seoTitle": "Anwalt für QQuant – Forderungen & Zwangsversteigerungen Thessaloniki",
+    "seoDescription": "QQuant verfolgt Sie wegen eines alten Darlehens? Bevor Sie zahlen oder unterschreiben: Vollmacht, Verjährung und tatsächlichen Saldo prüfen lassen. Widerspruch, Aussetzung, Regulierung in Thessaloniki.",
+    "heroCity": "Thessaloniki · Leontos Sofou 12",
+    "heroTitle": "Anwalt für QQuant-Forderungen und Zwangsversteigerungen in Thessaloniki",
+    "heroSubtitle": "Widerspruch · Aussetzung · Schuldenregulierung",
+    "intro": "QQuant meldet sich oft wegen Darlehen, die Sie längst für vergessen hielten — Forderungen, die zwei- oder dreimal den Besitzer wechselten, bevor sie dort landeten. Genau darin liegt Ihre Chance: Je länger der Weg einer Forderung, desto mehr Stellen, an denen etwas nicht ordnungsgemäß ablief — und desto wahrscheinlicher die Verjährung. Ioannis Papaioannou, Rechtsberater des Vereins der Kreditnehmer und Verbraucherschutz Nordgriechenlands, mit über 25 Jahren Erfahrung in Bankstreitigkeiten, prüft jede QQuant-Akte, bevor irgendeine Antwort oder Zahlung erfolgt.",
+    "whatTitle": "Was ist QQuant und was bedeutet es für Ihr Darlehen?",
+    "whatText": "QQuant Master Servicer war einer der ersten lizenzierten Forderungsverwalter in Griechenland und verwaltet Portfolios im Auftrag mehrerer Funds — Verbraucher-, Hypotheken- und Unternehmensdarlehen verschiedener Banken. Diese Vielfalt ist rechtlich relevant: Jedes Portfolio hat eine andere Übertragungskette, die für jedes einzelne Darlehen vollständig nachgewiesen werden muss. Zudem sind viele der von QQuant verwalteten Forderungen alt — vor Jahren gekündigt. Damit stellt sich unmittelbar die Frage der Verjährung, die das Bild der Schuld grundlegend verändern kann.",
+    "protectTitle": "Schutz Ihres Hauptwohnsitzes vor einer QQuant-Zwangsversteigerung",
+    "protectText": "Kein Schreiben von QQuant bedeutet für sich genommen den Verlust von Eigentum — eine Versteigerung setzt einen vollstreckbaren Titel und ein in jedem Schritt rechtmäßiges Verfahren voraus. In jeder Akte prüfen wir: ob QQuant seine Verwaltungsbefugnis für Ihr konkretes Darlehen nachweist, ob die Forderung ganz oder teilweise verjährt ist, ob der Betrag unzulässige Zinsen und Gebühren enthält und ob jede Zustellung gesetzeskonform erfolgte. Bei alten Schulden kippt diese Prüfung das Bild oft vollständig.",
+    "deadlinesTitle": "Zahlungsbefehl oder Bescheid von QQuant erhalten? Kritische Fristen",
+    "deadlinesIntro": "Auch bei einer alten, bestrittenen oder möglicherweise verjährten Schuld laufen die Verfahrensfristen normal weiter. Wird der Widerspruch nicht fristgerecht eingelegt, ist Ihre Verteidigungsposition verloren — so begründet sie auch war.",
+    "deadlines": [
+      {
+        "title": "Zahlungsbefehl — 15 Werktage",
+        "desc": "Der Widerspruch gegen einen Zahlungsbefehl muss innerhalb von 15 Werktagen nach Zustellung eingelegt werden. Jetzt sind Verjährung, Vollmachtsmängel und ein falscher Betrag geltend zu machen."
+      },
+      {
+        "title": "Pfändung — 45 Tage",
+        "desc": "Der Widerspruch gegen die Zwangsvollstreckung hat eine Frist von 45 Tagen ab Pfändung. Angefochten werden können die Befugnis von QQuant, die Forderungshöhe und Verfahrensmängel."
+      },
+      {
+        "title": "Vor der Versteigerung — letzte 15 Tage",
+        "desc": "Auch mit festem Versteigerungstermin bleibt ein enges Fenster für einen Aussetzungsantrag. Je früher Sie handeln, desto stärker Ihre Position — wir prüfen jedoch jede Option bis zuletzt."
+      }
+    ],
+    "deadlinesWarning": "Dass die Schuld alt ist, heißt nicht, dass Sie Zeit haben — es heißt, dass Sie möglicherweise Argumente haben. Argumente zählen aber nur, wenn sie fristgerecht vorgebracht werden. Bringen Sie das Dokument noch heute zur Prüfung.",
+    "cta1Title": "Haben Sie ein Dokument von QQuant vor sich?",
+    "cta1Text": "Sofortige Erstbewertung: was zugestellt wurde, ob Verjährung im Raum steht, welche Frist läuft. Rufen Sie 2310 545 261 an oder senden Sie das Kontaktformular.",
+    "negotiationTitle": "Verhandlungsstrategie: Schuldenschnitt mit QQuant erreichen",
+    "negotiationIntro": "Bei den älteren Portfolios, die QQuant verwaltet, ist die Lücke zwischen Buchsaldo und realem Wert der Forderung meist die größte am Markt. Das ist Ihr Verhandlungsvorteil — sofern er sauber dokumentiert wird:",
+    "negotiationPoints": [
+      "Verjährungsprüfung vor jedem Gespräch: eine ganz oder teilweise verjährte Forderung verändert die Verhandlungsgrundlage vollständig — oder macht die Verhandlung überflüssig.",
+      "Nachweis der Befugnis für Ihr konkretes Darlehen: bei diesen mehrfach übertragenen Portfolios weist die Kette oft Lücken auf, die die Position des Servicers schwächen.",
+      "Bereinigung des Betrags um unzulässige Zinsen und Gebühren: bei jahrelang laufenden Schulden blähen fehlerhafte Zinseszinsen den Saldo erheblich auf.",
+      "Ein Angebot auf Basis der wirtschaftlichen Realität: die niedrigen Erwerbskosten alter Portfolios geben QQuant großen Spielraum für einen Schuldenschnitt — wenn das Angebot richtig präsentiert wird."
+    ],
+    "negotiationOutro": "In QQuant-Fällen ist die richtige Reihenfolge nicht verhandelbar: erst rechtliche Prüfung, dann Verhandlung. Die umgekehrte Reihenfolge verschenkt Geld, das womöglich gar nicht geschuldet wird.",
+    "cta2Title": "Bevor Sie QQuant etwas zahlen oder anerkennen — sprechen Sie mit uns.",
+    "cta2Text": "Bei alten Schulden kann eine einfache Zahlung oder schriftliche Anerkennung die Verjährung unterbrechen und eine erlöschende Forderung wiederbeleben. Erst prüfen, dann handeln.",
+    "anakopiTitle": "Widerspruch und Aussetzung von QQuant-Vollstreckungen in Thessaloniki",
+    "anakopiText1": "Vor den Gerichten in Thessaloniki, wo wir täglich prozessieren, werden QQuant-Fälle an den Details der Akte entschieden. Die Widerspruchsgründe, die am häufigsten Erfolg haben:",
+    "anakopiPoints": [
+      "Verjährung der Forderung oder eines Teils davon: bei vor Jahren gekündigten Darlehen hat die Zeit oft ihre Arbeit getan — sie muss nur ordnungsgemäß geltend gemacht werden.",
+      "Vollmachtsmängel: die mehrfachen Übertragungen der bei QQuant gelandeten Portfolios müssen lückenlos nachgewiesen werden — ein fehlendes Glied bedeutet einen begründeten Widerspruchsgrund.",
+      "Falscher Schuldbetrag: unzulässige Zinseszinsen, missbräuchliche Gebühren und Zinsen, die einer gerichtlichen Prüfung nicht standhalten.",
+      "Verfahrensmängel: fehlerhafte Zustellungen, Fehler im Pfändungsprotokoll, Nichtbeachtung gesetzlicher Fristen und Formvorschriften."
+    ],
+    "anakopiText2": "Wenn der Fall es erfordert, wird der Widerspruch mit einem Aussetzungsantrag verbunden, damit keine Vollstreckungshandlung vor der Entscheidung in der Sache voranschreitet. Parallel dient das anhängige Verfahren als Hebel für eine realistische Regulierung.",
+    "faqTitle": "Häufige Fragen zu QQuant",
+    "faq": [
+      {
+        "q": "QQuant verfolgt mich wegen eines Darlehens von vor vielen Jahren. Schulde ich es noch?",
+        "a": "Nicht unbedingt — und nicht unbedingt den vollen Betrag. Je nach Art der Schuld und Zeitpunkt der Kündigung kann die Forderung ganz oder teilweise verjährt sein. Das lässt sich nur durch Aktenprüfung feststellen — nehmen Sie es nicht an und zahlen Sie nicht, bevor es geprüft ist."
+      },
+      {
+        "q": "Kann es mir schaden, einen kleinen Betrag zu zahlen, um Ruhe zu haben?",
+        "a": "Möglicherweise erheblich. Eine Zahlung oder schriftliche Anerkennung der Schuld kann die Verjährung unterbrechen und eine erlöschende Forderung wiederbeleben. Keine Zahlung und keine Unterschrift vor einer rechtlichen Prüfung."
+      },
+      {
+        "q": "Woher weiß ich, dass QQuant dieses Darlehen überhaupt geltend machen darf?",
+        "a": "Sie wissen es nicht — und Sie müssen es nicht als gegeben hinnehmen. QQuant handelt als Verwalter im Auftrag von Funds und muss die gesamte Übertragungs- und Beauftragungskette für Ihr Darlehen rechtmäßig nachweisen. Wir prüfen das Dokument für Dokument."
+      },
+      {
+        "q": "Ich habe einen Zahlungsbefehl von QQuant erhalten. Was tue ich jetzt?",
+        "a": "Notieren Sie sofort das Zustellungsdatum: ab diesem Tag laufen 15 Werktage für den Widerspruch. In diesem Fenster müssen Verjährung, Befugnis und Betrag geprüft werden. Rufen Sie unverzüglich 2310 545 261 an."
+      }
+    ],
+    "ctaTitle": "QQuant setzt darauf, dass Sie nicht prüfen. Beweisen Sie das Gegenteil.",
+    "ctaText": "Kanzlei in der Leontos Sofou 12, Thessaloniki. Ihre Akte — einschließlich der Verjährungsfrage — wird dringend bewertet, bevor eine weitere Frist abläuft.",
     "ctaButton": "Sofortige Aktenprüfung",
     "ctaPhone": "Jetzt anrufen: 2310 545 261"
   }

@@ -626,7 +626,8 @@
     "ctaTitle": "Assess Your Case Today",
     "ctaText": "Every day of delay strengthens the fund's position. Contact us for a full assessment of your legal standing.",
     "ctaButton": "Book a Consultation",
-    "cepalLinkCta": "Cepal – Full Defence Guide"
+    "cepalLinkCta": "Cepal – Full Defence Guide",
+    "qquantLinkCta": "QQuant – Full Defence Guide"
   },
   "urgentCta": {
     "text": "Have you been served with a payment order, seizure or auction notice?",
@@ -804,6 +805,80 @@
     ],
     "ctaTitle": "Cepal works every day. Your defence should start today.",
     "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. Files are assessed on an urgent basis — every working day lost may count.",
+    "ctaButton": "Immediate File Review",
+    "ctaPhone": "Call now: 2310 545 261"
+  },
+  "qquant": {
+    "seoTitle": "Lawyer for QQuant – Debt Claims & Auctions Thessaloniki",
+    "seoDescription": "Is QQuant pursuing you over an old loan? Before paying or signing anything, check authority, limitation periods and the real balance. Objection, suspension, settlement in Thessaloniki. Tel: 2310 545 261.",
+    "heroCity": "Thessaloniki · 12 Leontos Sofou St.",
+    "heroTitle": "Lawyer for QQuant Claims and Auctions in Thessaloniki",
+    "heroSubtitle": "Objection · Suspension · Debt Settlement",
+    "intro": "QQuant often appears over loans you had considered long forgotten — debts that changed hands two or three times before reaching it. That is precisely where your opportunity lies: the longer a claim's journey, the more points where something was not done properly — and the more likely the claim is time-barred. Ioannis Papaioannou, Legal Adviser to the Association of Borrowers and Consumer Protection of Northern Greece, with 25+ years in banking disputes, reviews every QQuant file before any response or payment is made.",
+    "whatTitle": "What Is QQuant and What Does It Mean for Your Loan?",
+    "whatText": "QQuant Master Servicer was among the first licensed loan servicers in Greece and manages portfolios on behalf of multiple funds — consumer, mortgage and business loans originating from various banks. This diversity matters legally: each portfolio has a different transfer chain, which must be fully proven for each individual loan. Moreover, many of the claims QQuant manages are old — terminated years ago. That directly raises the question of limitation (prescription), which can radically change the picture of the debt.",
+    "protectTitle": "Protecting Your Primary Residence from a QQuant Auction",
+    "protectText": "No letter from QQuant means losing property by itself — an auction requires an enforceable title and a lawful procedure at every step. In every file we check: whether QQuant proves its management authority for your specific loan, whether the claim is wholly or partly time-barred, whether the amount includes unlawful interest and charges, and whether every service of process was carried out as the law requires. With old debts, this review often overturns the picture entirely.",
+    "deadlinesTitle": "Received a Payment Order or Notice from QQuant? Critical Deadlines",
+    "deadlinesIntro": "Even for an old, disputed or possibly time-barred debt, procedural deadlines run normally. If an objection is not filed in time, your defensive position is lost — however well-founded it was.",
+    "deadlines": [
+      {
+        "title": "Payment Order — 15 working days",
+        "desc": "An objection against a payment order must be filed within 15 working days of service. This is the moment to raise limitation, authority defects and an incorrect amount."
+      },
+      {
+        "title": "Seizure — 45 days",
+        "desc": "The objection against enforcement must be filed within 45 days of seizure. QQuant's authority, the amount of the claim and procedural defects can all be challenged."
+      },
+      {
+        "title": "Before Auction — last 15 days",
+        "desc": "Even with an auction date set, a narrow window remains for a suspension application. The earlier you act, the stronger your position — but we examine every option to the end."
+      }
+    ],
+    "deadlinesWarning": "The debt being old does not mean you have time — it means you may have arguments. But arguments only count if raised within the deadline. Bring the document for review today.",
+    "cta1Title": "Do you have a QQuant document in front of you?",
+    "cta1Text": "Immediate first assessment: what was served, whether limitation is in play, which deadline is running. Call 2310 545 261 or send the contact form.",
+    "negotiationTitle": "Negotiation Strategy: Achieving a Debt Haircut with QQuant",
+    "negotiationIntro": "In the older portfolios QQuant manages, the gap between book balance and the claim's real value is usually the widest in the market. That is your negotiating advantage — provided it is properly documented:",
+    "negotiationPoints": [
+      "Limitation check before any discussion: a wholly or partly time-barred claim completely changes the basis of negotiation — or makes it unnecessary.",
+      "Verification of authority for your specific loan: in these multi-transfer portfolios, the chain often has gaps that weaken the servicer's position.",
+      "Stripping unlawful interest and charges from the amount: in debts running for years, incorrect compounding inflates the balance significantly.",
+      "A proposal built on economic reality: the low acquisition cost of old portfolios gives QQuant wide room for a haircut — if the proposal is presented correctly."
+    ],
+    "negotiationOutro": "In QQuant cases the correct order is non-negotiable: legal review first, negotiation second. The reverse order gives away money that may not even be owed.",
+    "cta2Title": "Before paying or acknowledging anything to QQuant — talk to us.",
+    "cta2Text": "With old debts, a simple payment or written acknowledgment can interrupt the limitation period and revive a claim that was expiring. Review first, then any move.",
+    "anakopiTitle": "Objection and Suspension of QQuant Enforcement in Thessaloniki",
+    "anakopiText1": "At the Thessaloniki courts, where we litigate daily, QQuant cases are decided on the details of the file. The grounds of objection that most often succeed:",
+    "anakopiPoints": [
+      "Limitation of the claim or part of it: in loans terminated years ago, time has often done its work — it just needs to be raised properly.",
+      "Authority defects: the multiple transfers of portfolios that ended up with QQuant must be fully proven — a missing link means a well-founded ground of objection.",
+      "Incorrect debt amount: unlawful compounding, abusive charges and interest that does not withstand judicial scrutiny.",
+      "Procedural defects: irregular service, errors in the seizure report, failure to observe statutory deadlines and formalities."
+    ],
+    "anakopiText2": "Where the case requires it, the objection is combined with a suspension application so that no enforcement act proceeds before the merits are decided. In parallel, the pending case serves as leverage for a realistic settlement.",
+    "faqTitle": "Frequently Asked Questions about QQuant",
+    "faq": [
+      {
+        "q": "QQuant is pursuing me over a loan from many years ago. Do I still owe it?",
+        "a": "Not necessarily — and not necessarily the full amount. Depending on the type of debt and when it was terminated, the claim or part of it may be time-barred. This is determined only by reviewing the file — do not assume it, and do not pay before it is checked."
+      },
+      {
+        "q": "If I pay a small amount just to be left alone, can that hurt me?",
+        "a": "Potentially seriously. A payment or written acknowledgment of the debt can interrupt the limitation period and revive a claim that was expiring. No payment and no signature before a legal review."
+      },
+      {
+        "q": "How do I know QQuant is actually entitled to claim this loan?",
+        "a": "You don't — and you don't have to take it for granted. QQuant acts as manager on behalf of funds and must lawfully prove the entire chain of transfer and assignment for your loan. We check this document by document."
+      },
+      {
+        "q": "I received a payment order from QQuant. What do I do now?",
+        "a": "Note the date of service immediately: 15 working days for an objection run from that date. Within that window, limitation, authority and the amount must all be checked. Call 2310 545 261 without delay."
+      }
+    ],
+    "ctaTitle": "QQuant is betting you won't check. Prove them wrong.",
+    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. Your file — including the limitation question — is assessed urgently, before another deadline runs.",
     "ctaButton": "Immediate File Review",
     "ctaPhone": "Call now: 2310 545 261"
   }
