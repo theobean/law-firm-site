@@ -111,6 +111,7 @@ export default async function LocaleLayout({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": ["LegalService", "LocalBusiness"],
+    "@id": `${siteUrl}/#legalservice`,
     name: "Παπαϊωάννου Ι. – Λιάμος Γ. & Συνεργάτες",
     alternateName: [
       "Παπαιωάννου δικηγόρος",
@@ -146,6 +147,19 @@ export default async function LocaleLayout({
       closes: "17:00",
     },
     areaServed: { "@type": "City", name: "Θεσσαλονίκη" },
+    knowsLanguage: ["el", "en", "de"],
+    founder: {
+      "@type": "Person",
+      name: "Ιωάννης Παπαϊωάννου",
+      jobTitle: "Δικηγόρος",
+      worksFor: { "@id": `${siteUrl}/#legalservice` },
+      affiliation: {
+        "@type": "Organization",
+        name: "Σύλλογος Δανειοληπτών & Προστασίας Καταναλωτών Βορείου Ελλάδος",
+        description: "Νομικός Σύμβουλος",
+      },
+      url: `${siteUrl}/${locale}/about`,
+    },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Νομικές Υπηρεσίες",
