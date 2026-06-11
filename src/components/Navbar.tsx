@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
-import { Menu, X, Scale, ChevronDown, FileText, Tv, BookOpen, Gavel, Building2 } from "lucide-react";
+import { Menu, X, Scale, ChevronDown, ChevronRight, FileText, Tv, BookOpen, Gavel, Building2 } from "lucide-react";
 
 const localeConfig = {
   el: { flag: "/flags/gr.svg", label: "ΕΛ" },
@@ -103,6 +103,13 @@ export default function Navbar() {
     { href: `/${locale}/pleistariasmos`, label: tNav("pleistariasmos"), icon: Gavel },
   ];
 
+  const fundsSubLinks = [
+    { href: `/${locale}/funds/dovalue`, label: "doValue" },
+    { href: `/${locale}/funds/intrum`, label: "Intrum" },
+    { href: `/${locale}/funds/cepal`, label: "Cepal" },
+    { href: `/${locale}/funds/qquant`, label: "QQuant" },
+  ];
+
   const updatesLinks = [
     { href: `/${locale}/blog`, label: tNav("blog"), icon: BookOpen },
     { href: `/${locale}/media`, label: tNav("media"), icon: Tv },
@@ -193,19 +200,53 @@ export default function Navbar() {
             <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-primary border border-white/10 shadow-xl rounded-sm overflow-hidden transition-all duration-150 ${
               servicesDropdownOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-1 pointer-events-none"
             }`}>
-              {servicesLinks.map(({ href, label, icon: Icon }) => (
-                <Link
-                  key={href}
-                  href={href}
-                  onClick={() => setServicesDropdownOpen(false)}
-                  className={`flex items-center gap-2.5 px-4 py-3 text-sm font-medium transition-colors border-b border-white/5 last:border-0 ${
-                    pathname.startsWith(href) ? "text-accent bg-accent/10" : "text-white/80 hover:text-accent hover:bg-white/5"
-                  }`}
-                >
-                  <Icon size={13} className="shrink-0 opacity-70" />
-                  {label}
-                </Link>
-              ))}
+              {servicesLinks.map(({ href, label, icon: Icon }) => {
+                const isFunds = href === `/${locale}/funds`;
+                const itemClass = `flex items-center gap-2.5 px-4 py-3 text-sm font-medium transition-colors ${
+                  pathname.startsWith(href) ? "text-accent bg-accent/10" : "text-white/80 hover:text-accent hover:bg-white/5"
+                }`;
+                if (!isFunds) {
+                  return (
+                    <Link
+                      key={href}
+                      href={href}
+                      onClick={() => setServicesDropdownOpen(false)}
+                      className={`${itemClass} border-b border-white/5 last:border-0`}
+                    >
+                      <Icon size={13} className="shrink-0 opacity-70" />
+                      {label}
+                    </Link>
+                  );
+                }
+                return (
+                  <div key={href} className="relative group/funds border-b border-white/5 last:border-0">
+                    <Link
+                      href={href}
+                      onClick={() => setServicesDropdownOpen(false)}
+                      className={itemClass}
+                    >
+                      <Icon size={13} className="shrink-0 opacity-70" />
+                      {label}
+                      <ChevronRight size={12} className="ml-auto shrink-0 opacity-60" />
+                    </Link>
+                    {/* Servicer flyout submenu */}
+                    <div className="absolute left-full top-0 w-36 bg-primary border border-white/10 shadow-xl rounded-sm overflow-hidden opacity-0 -translate-x-1 pointer-events-none transition-all duration-150 group-hover/funds:opacity-100 group-hover/funds:translate-x-0 group-hover/funds:pointer-events-auto">
+                      {fundsSubLinks.map((sub) => (
+                        <Link
+                          key={sub.href}
+                          href={sub.href}
+                          onClick={() => setServicesDropdownOpen(false)}
+                          className={`block px-4 py-2.5 text-sm font-medium transition-colors border-b border-white/5 last:border-0 ${
+                            pathname.startsWith(sub.href) ? "text-accent bg-accent/10" : "text-white/80 hover:text-accent hover:bg-white/5"
+                          }`}
+                        >
+                          {sub.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
@@ -292,17 +333,30 @@ export default function Navbar() {
               className={`transition-transform duration-200 ${mobileServicesOpen ? "rotate-180 text-accent" : "text-white/40"}`}
             />
           </button>
-          <div className={`overflow-hidden transition-all duration-200 ${mobileServicesOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"}`}>
+          <div className={`overflow-hidden transition-all duration-200 ${mobileServicesOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
             {servicesLinks.map(({ href, label, icon: Icon }) => (
-              <Link
-                key={href}
-                href={href}
-                onClick={() => { setOpen(false); setMobileServicesOpen(false); }}
-                className="flex items-center gap-2 text-white/70 hover:text-accent transition-colors text-sm py-2 pl-4 border-b border-white/5"
-              >
-                <Icon size={13} className="shrink-0" />
-                {label}
-              </Link>
+              <div key={href}>
+                <Link
+                  href={href}
+                  onClick={() => { setOpen(false); setMobileServicesOpen(false); }}
+                  className="flex items-center gap-2 text-white/70 hover:text-accent transition-colors text-sm py-2 pl-4 border-b border-white/5"
+                >
+                  <Icon size={13} className="shrink-0" />
+                  {label}
+                </Link>
+                {href === `/${locale}/funds` &&
+                  fundsSubLinks.map((sub) => (
+                    <Link
+                      key={sub.href}
+                      href={sub.href}
+                      onClick={() => { setOpen(false); setMobileServicesOpen(false); }}
+                      className="flex items-center gap-2 text-white/60 hover:text-accent transition-colors text-sm py-2 pl-10 border-b border-white/5"
+                    >
+                      <ChevronRight size={11} className="shrink-0 opacity-60" />
+                      {sub.label}
+                    </Link>
+                  ))}
+              </div>
             ))}
           </div>
 
