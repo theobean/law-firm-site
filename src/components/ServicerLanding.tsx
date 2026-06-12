@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Check, AlertTriangle, Clock, Phone, Scale } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import FaqAccordion from "@/components/FaqAccordion";
+import ServicerDecisions from "@/components/ServicerDecisions";
 
 /**
  * Shared landing-page body for servicer-specific SEO pages
@@ -173,6 +174,11 @@ export default function ServicerLanding({
             ))}
           </ul>
           <p className="text-gray-600 leading-relaxed mb-16">{t("anakopiText2")}</p>
+        </ScrollReveal>
+
+        {/* Related decisions */}
+        <ScrollReveal direction="up" delay={0.1}>
+          <ServicerDecisions locale={locale} />
         </ScrollReveal>
 
         {/* FAQ */}
