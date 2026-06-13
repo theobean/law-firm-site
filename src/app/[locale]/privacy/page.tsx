@@ -21,7 +21,7 @@ export default function PrivacyPage() {
       title={t("privacyTitle")}
       intro={t("privacyIntro")}
       lastUpdatedLabel={t("lastUpdated")}
-      lastUpdatedDate="25/05/2026"
+      lastUpdatedDate="13/06/2026"
       sections={[
         { title: t("privacySection1Title"), body: t("privacySection1") },
         { title: t("privacySection2Title"), body: t("privacySection2") },
@@ -29,6 +29,7 @@ export default function PrivacyPage() {
         { title: t("privacySection4Title"), body: t("privacySection4") },
         { title: t("privacySection5Title"), body: t("privacySection5") },
         { title: t("privacySection6Title"), body: t("privacySection6") },
+        { title: t("privacySection7Title"), body: t("privacySection7") },
       ]}
     />
   );
