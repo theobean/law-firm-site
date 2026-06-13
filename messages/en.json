@@ -582,17 +582,17 @@
     "heroSubtitle": "Legal Protection · Negotiation · Stopping Foreclosure",
     "intro": "The transfer of your loan to an NPL fund does not mean a dead end. Thousands of borrowers in Greece now face companies such as DoValue, Intrum or Cepal as their new creditors — without knowing their rights. With specialised expertise in banking law and NPL markets, we assess every case from the start: legality of transfer, claim amount, grounds for challenge, and negotiation strategy.",
     "whatTitle": "What Are NPL Funds",
-    "whatText": "NPL funds (non-performing loan funds or credit servicers) purchased large portfolios of non-performing loans from Greek banks under Law 4354/2015. These transfers must meet strict legal requirements — and often do not. A fund is not a bank: it has different obligations, different limitations, and different legal vulnerabilities.",
+    "whatText": "Funds are not banks, nor are they the management companies themselves. They are the entities that acquired, or financed the acquisition of, claims arising from loans — often through securitisations under Law 3156/2003 or transfers under Law 4354/2015, while today the framework is also supplemented by Law 5072/2023. The assignment, the management and the judicial pursuit of every claim must rest on specific documents and lawful conditions. That is precisely where the review begins. Because before a fund can demand, it must first prove that it is entitled to demand.",
     "servicesTitle": "How We Help",
     "services": [
-      "Legal review of claim assignment — challenging the legality of the transfer",
-      "Verification of the claim amount, interest, and charges",
-      "Objection against a payment order issued by a fund or servicer",
-      "Stay or cancellation of an auction initiated by a fund",
-      "Negotiation of a settlement with DoValue, Intrum, Cepal and other servicers",
-      "Application under the Out-of-Court Mechanism (Law 4738/2020)",
-      "Claims against funds for breach of borrower notification obligations",
-      "Full defence strategy — judicial and out-of-court"
+      "We check the assignment of the claim.",
+      "We check the standing of the creditor and the management company.",
+      "We check interest, charges, compound interest and the actual amount of the debt.",
+      "We file objections against payment orders, writs, seizures and acts of enforcement.",
+      "We seek a stay of the auction, where there are lawful and documented grounds.",
+      "We negotiate settlements from a strong legal basis, not out of fear.",
+      "We use the out-of-court mechanism of Law 4738/2020, where it can genuinely help.",
+      "We tackle opaque charges, inadequate notification and abusive practices."
     ],
     "urgencyTitle": "Every day that passes strengthens the fund's position",
     "urgencyText": "Funds and servicers have specialised legal teams. If you have received a loan transfer notice, payment order, or auction notice from a fund, acting promptly is critical. Do not sign any settlement without legal review.",
@@ -672,19 +672,19 @@
     "options": [
       {
         "title": "Application for Auction Stay",
-        "desc": "The court can issue a temporary stay order even days before the auction. The application must demonstrate probable harm and legal grounds — we identify these for you."
+        "desc": "An auction is not suspended automatically, nor merely because its date is approaching. It can, however, be stayed by the court, provided there are lawful and documented grounds and the critical deadlines have been met. We review the enforcement file immediately and act in a targeted way, before time becomes the harshest opponent."
       },
       {
         "title": "Filing under Law 4738/2020",
-        "desc": "The New Insolvency Code allows individuals who meet the criteria to restructure their debts and protect their primary residence. Filing automatically suspends all enforcement proceedings."
+        "desc": "An application under the out-of-court mechanism can offer substantial protection against enforcement measures, subject to the conditions and exceptions of the law. We assess in good time whether the filing can genuinely be used in the case and handle it strategically — not as a mere online application."
       },
       {
         "title": "Objection to Enforcement",
-        "desc": "An objection to enforcement (Article 933 CCP) challenges the legality of the seizure or auction on formal or substantive grounds — including the validity of the fund's claim."
+        "desc": "In enforcement proceedings, the detail often decides the case. The writ, the seizure, the company's standing, the amount of the claim, the interest and the charges are checked one by one. An objection is not a delay. It is the organised legal defence before enforcement becomes a fait accompli."
       },
       {
-        "title": "Negotiation with Bank or Fund",
-        "desc": "Negotiating before the auction is often the fastest solution. We assess the claim first — only then do we know from what position we are negotiating."
+        "title": "Negotiation from a Position of Strength",
+        "desc": "Negotiation does not start from fear. It starts after the claim, the amount, the interest, the creditor's standing and the margins of defence have been checked. Only then do we know what a settlement proposal is really worth and how it can be improved in the debtor's favour."
       }
     ],
     "ctaInlineTitle": "Not sure which option applies to your case?",
@@ -711,25 +711,25 @@
     "urgencyText": "Enforcement proceedings are subject to very short mandatory deadlines. As soon as you receive an enforcement order, seizure notice, or auction notification, contact us immediately.",
     "whyTitle": "Why choose us",
     "whyItems": [
-      "25+ years in banking law & enforcement proceedings",
-      "Hundreds of successful objections and auction stays",
-      "In-depth knowledge of bank, fund, and servicer practices",
-      "Direct communication and full transparency at every stage",
-      "Office in Thessaloniki — cases throughout Greece"
+      "25+ years on the front line of banking disputes and enforcement proceedings.",
+      "Hundreds of objections and stays, even in cases that seemed already \"lost\".",
+      "Full knowledge of the practices of banks, funds and debt management companies, using every critical element in the debtor's favour.",
+      "No file is reviewed superficially. We examine the claim, the assignment, standing, interest, charges, enforcement acts and deadlines.",
+      "Office in Thessaloniki, banking cases throughout Greece."
     ],
     "faqTitle": "Frequently Asked Questions About Foreclosure",
     "faq": [
       {
         "q": "Can an auction be stayed just days before it takes place?",
-        "a": "Yes, in many cases this is possible if there are valid legal grounds and the application is filed in time. The court can issue a temporary stay order even the day before the auction."
+        "a": "Yes, protection is possible right up to the eve of the auction — but not with an application filed out of time. It requires a timely procedural step, a serious legal basis and documented harm. When these exist, judicial protection can be triggered even at the final stage, before the auction is completed. That is why the file must be reviewed immediately, before the last moment becomes a missed opportunity."
       },
       {
-        "q": "What is an objection to enforcement?",
-        "a": "An objection to enforcement (Article 933 CCP) is the main judicial remedy to challenge the legality of a seizure or auction. It can be based on formal or substantive defects in the enforcement process."
+        "q": "What is an objection to enforcement and when do we file it?",
+        "a": "The objection to enforcement is the main judicial remedy against compulsory enforcement. Through it, the payment writ, the seizure, the auction, the claim, the interest, the charges and the standing of the party pursuing enforcement are all reviewed. The deadlines are strict. In typical cases, the objection is filed within 45 days of the seizure, while special deadlines apply to the final act of enforcement, particularly after the auction. That is why we do not wait until the last moment. We review the file immediately, before the defence is lost to a deadline."
       },
       {
         "q": "Can a fund auction my home?",
-        "a": "Yes, if the claim has been validly assigned to it. However, the assignment of claims from banks to funds raises significant legal questions that can be effectively challenged in court."
+        "a": "An auction can be pursued by a management company on behalf of a fund or claims-acquisition company, provided there is an enforceable title, a valid assignment of the claim and full standing of the party initiating the process. This does not mean the file is invulnerable. We check the assignment, the standing, the amount of the claim, the interest, the charges and every act of enforcement. Because before a property is lost, it must first be checked whether the enforcement rests on solid legal ground."
       }
     ],
     "ctaTitle": "Contact us now",
