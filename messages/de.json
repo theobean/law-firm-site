@@ -689,19 +689,19 @@
     "timelineTitle": "Zeitplan — Wann Sie handeln müssen",
     "timelineItems": [
       {
-        "phase": "90+ Tage vorher",
-        "title": "Maximale Optionen — idealer Zeitpunkt",
-        "desc": "Widerspruch, Aussetzungsantrag, Einreichung nach Ges. 4738/2020, Verhandlung aus starker Position. Alle Schritte verfügbar. Jetzt kann das Kräfteverhältnis verändert werden."
+        "phase": "Ab dem ersten Vollstreckungsbefehl oder der Pfändung",
+        "title": "Die Zeit beginnt zu laufen",
+        "desc": "In der Zwangsvollstreckung verzeihen Fristen keine Verzögerung. Ab der ersten Vollstreckungshandlung müssen die Forderung, die Zinsen, die Legitimation des Betreibenden und die Rechtmäßigkeit des Verfahrens sofort geprüft werden. Je früher Sie handeln, desto mehr Optionen haben Sie."
       },
       {
-        "phase": "30 Tage vorher",
-        "title": "Dringend — aber noch möglich",
-        "desc": "Der Aussetzungsantrag muss sofort eingereicht werden. Eine einstweilige Verfügung kann noch am Vortag ergehen. Jeder Tag ohne Handeln ist ein Tag zugunsten des Gläubigers."
+        "phase": "Wenn die Versteigerung näher rückt",
+        "title": "Dringend — aber nicht verloren",
+        "desc": "Die Versteigerung wird nicht automatisch ausgesetzt. Eine gerichtliche Aussetzung kann jedoch beantragt werden, sofern rechtmäßige und belegte Gründe vorliegen und die kritischen Fristen nicht versäumt wurden. Jeder Tag zählt, denn je näher der Termin, desto enger der prozessuale Spielraum."
       },
       {
         "phase": "Nach der Versteigerung",
-        "title": "Es ist noch nicht vorbei",
-        "desc": "Widerspruch gegen den Zuschlag, Bereicherungsklage, Anfechtung der Legitimation der Forderungsabtretung — die Optionen hängen von den Aktendaten ab. Geben Sie nicht auf, ohne zu wissen, was Sie in der Hand haben."
+        "title": "Nicht immer das Ende",
+        "desc": "Auch nach der Versteigerung muss die Akte geprüft werden. Je nach Stadium und tatsächlichen Daten kann es Möglichkeiten geben, Handlungen anzufechten, den Zuschlag, die Rangtabelle oder andere rechtliche Folgen der Vollstreckung zu überprüfen. Geben Sie nicht auf, bevor Sie wissen, was Sie wirklich tun können."
       }
     ],
     "urgencyTitle": "Die Fristen warten nicht",

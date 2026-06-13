@@ -692,19 +692,19 @@
     "timelineTitle": "Timeline — When You Need to Act",
     "timelineItems": [
       {
-        "phase": "90+ Days Before",
-        "title": "Maximum options — ideal timing",
-        "desc": "There is time for an objection, stay application, filing under Law 4738/2020, and negotiation from a position of strength. All options remain open."
+        "phase": "From the first writ or seizure",
+        "title": "The clock starts ticking",
+        "desc": "In enforcement proceedings, deadlines do not forgive delay. From the first act of enforcement, the claim, the interest, the creditor's standing and the legality of the procedure must be checked immediately. The sooner you act, the more options you have."
       },
       {
-        "phase": "30 Days Before",
-        "title": "Urgent — still achievable",
-        "desc": "A stay application must be filed immediately. The court can grant a temporary order. Every day of delay reduces the odds."
+        "phase": "As the auction approaches",
+        "title": "Urgent — but not lost",
+        "desc": "The auction is not suspended automatically. A judicial stay can be sought, provided there are lawful and documented grounds and the critical deadlines have not been missed. Every day counts, because the closer the date, the narrower the procedural margin."
       },
       {
-        "phase": "After the Auction",
-        "title": "There is still a way out",
-        "desc": "An objection to the sale, an unjust enrichment claim, and a challenge to the legality of the claim assignment remain possible. Do not give up without legal advice."
+        "phase": "After the auction",
+        "title": "Not always the end",
+        "desc": "Even after the auction, the file must be reviewed. Depending on the stage and the actual facts, there may be options to challenge acts, review the award, the ranking table or other legal consequences of enforcement. Do not give up before learning what you can really do."
       }
     ],
     "urgencyTitle": "Deadlines are strict — act immediately",
