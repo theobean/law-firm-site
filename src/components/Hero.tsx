@@ -23,7 +23,7 @@ export default function Hero() {
         {/* Text */}
         <div>
           <div className="border-l-4 border-accent pl-6 mb-8" style={{ animation: "reveal-left 0.7s cubic-bezier(0.4,0,0.2,1) 0.1s both" }}>
-            <h1 className="font-playfair font-bold text-4xl md:text-4xl lg:text-5xl 2xl:text-6xl text-white leading-tight uppercase whitespace-nowrap">
+            <h1 className="font-playfair font-bold text-4xl md:text-4xl lg:text-5xl 2xl:text-6xl text-white leading-tight uppercase break-words hyphens-auto">
               {t("tagline")}
               <br />
               <span className="text-accent" style={{ animation: "reveal-left 0.7s cubic-bezier(0.4,0,0.2,1) 0.3s both", display: "inline-block" }}>{t("tagline2")}</span>
