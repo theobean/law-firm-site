@@ -43,6 +43,9 @@ export default async function DecisionsPage({
       {/* Grid */}
       <section className="max-w-6xl mx-auto px-6 py-16">
         <DecisionsGrid decisions={decisions} locale={locale} />
+        <p className="text-gray-400 text-xs leading-relaxed mt-12 pt-6 border-t border-gray-100 max-w-3xl">
+          {t("disclaimer")}
+        </p>
       </section>
     </div>
   );

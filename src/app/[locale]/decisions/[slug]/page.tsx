@@ -32,9 +32,9 @@ const cats: Record<string, Record<string, string>> = {
   de: { banking:"Bankrecht", extrajudicial:"Außergerichtlich", criminal:"Strafrecht", commercial:"Handelsrecht", realEstate:"Immobilien", administrative:"Verwaltungsrecht", inheritance:"Erbrecht", tax:"Steuerrecht", labor:"Arbeitsrecht" },
 };
 const ui: Record<string, Record<string, string>> = {
-  el: { back:"Όλες οι αποφάσεις", view:"Προβολή", dl:"Λήψη", share:"Μοιραστείτε την απόφαση", copy:"Αντιγραφή συνδέσμου", copied:"Αντιγράφηκε!" },
-  en: { back:"All decisions", view:"View", dl:"Download", share:"Share this decision", copy:"Copy link", copied:"Copied!" },
-  de: { back:"Alle Entscheidungen", view:"Ansehen", dl:"Herunterladen", share:"Entscheidung teilen", copy:"Link kopieren", copied:"Kopiert!" },
+  el: { back:"Όλες οι αποφάσεις", view:"Προβολή", dl:"Λήψη", share:"Μοιραστείτε την απόφαση", copy:"Αντιγραφή συνδέσμου", copied:"Αντιγράφηκε!", disclaimer:"Κάθε υπόθεση κρίνεται στα δικά της πραγματικά και νομικά δεδομένα. Η παρούσα απόφαση παρατίθεται ενημερωτικά και δεν συνιστά εγγύηση ή πρόβλεψη για την έκβαση οποιασδήποτε άλλης υπόθεσης." },
+  en: { back:"All decisions", view:"View", dl:"Download", share:"Share this decision", copy:"Copy link", copied:"Copied!", disclaimer:"Each case is judged on its own factual and legal circumstances. This decision is presented for informational purposes and does not constitute a guarantee or prediction of the outcome of any other case." },
+  de: { back:"Alle Entscheidungen", view:"Ansehen", dl:"Herunterladen", share:"Entscheidung teilen", copy:"Link kopieren", copied:"Kopiert!", disclaimer:"Jeder Fall wird nach seinen eigenen tatsächlichen und rechtlichen Gegebenheiten beurteilt. Diese Entscheidung dient nur zu Informationszwecken und stellt keine Garantie oder Vorhersage für den Ausgang eines anderen Falls dar." },
 };
 
 export default async function DecisionPage({ params }: { params: Promise<{ slug: string; locale: string }> }) {
@@ -89,6 +89,10 @@ export default async function DecisionPage({ params }: { params: Promise<{ slug:
           </div>
         )}
         {hasImages && <DecisionImageViewer images={decision.images} title={decision.title} />}
+
+        <p className="text-gray-400 text-xs leading-relaxed mt-12 pt-6 border-t border-gray-100">
+          {s.disclaimer}
+        </p>
       </div>
     </div>
   );
