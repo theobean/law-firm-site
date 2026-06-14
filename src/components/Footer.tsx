@@ -87,10 +87,14 @@ export default function Footer() {
             {/* Social */}
             <div className="mt-8 flex flex-col items-start">
               <p className="text-white/40 text-xs mb-3">{t("footer.social")}</p>
-              <div className="flex">
+              <div className="flex gap-3">
                 {/* Facebook */}
                 <a href="https://www.facebook.com/IoannisPapaioannouLawyer" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-12 h-12 bg-white/10 hover:bg-accent flex items-center justify-center rounded-sm transition-colors">
                   <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
+                {/* LinkedIn */}
+                <a href="https://www.linkedin.com/in/%CE%B9%CF%89%CE%AC%CE%BD%CE%BD%CE%B7%CF%82-%CF%80%CE%B1%CF%80%CE%B1%CF%8A%CF%89%CE%AC%CE%BD%CE%BD%CE%BF%CF%85-367845416/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="w-12 h-12 bg-white/10 hover:bg-accent flex items-center justify-center rounded-sm transition-colors">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.24 8h4.52v12.5H.24V8zm7.5 0h4.33v1.71h.06c.6-1.14 2.07-2.34 4.26-2.34 4.56 0 5.4 3 5.4 6.9v6.23h-4.52v-5.52c0-1.32-.02-3.02-1.84-3.02-1.84 0-2.12 1.44-2.12 2.92v5.62H7.74V8z"/></svg>
                 </a>
               </div>
             </div>
