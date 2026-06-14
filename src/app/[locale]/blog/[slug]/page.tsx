@@ -2,8 +2,9 @@ import { getArticle, getRelatedArticles } from "@/sanity/client";
 import { urlFor } from "@/sanity/image";
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Calendar, Clock } from "lucide-react";
+import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { readingTime } from "@/lib/readingTime";
 import ShareButtons from "@/components/ShareButtons";
 import AuthorCard from "@/components/AuthorCard";
@@ -111,6 +112,17 @@ export default async function ArticlePage({
     ? await getRelatedArticles(slug, article.category, 3)
     : [];
 
+  // Silo link back to the matching practice-area pillar (skip "general").
+  const pillarAreas = ["banking", "extrajudicial", "criminal", "commercial", "realEstate", "administrative", "inheritance", "tax", "labor"];
+  const pillar = article.category && pillarAreas.includes(article.category) ? article.category : null;
+  const tAreas = pillar ? await getTranslations("practiceAreas") : null;
+  const lang = locale === "de" || locale === "en" ? locale : "el";
+  const siloLabels: Record<string, { area: string; view: string }> = {
+    el: { area: "Σχετικός τομέας δικαίου", view: "Δείτε τον τομέα" },
+    en: { area: "Related practice area", view: "View practice area" },
+    de: { area: "Verwandtes Rechtsgebiet", view: "Zum Rechtsgebiet" },
+  };
+
   const articleUrl = `${siteUrl}/${locale}/blog/${slug}`;
 
   return (
@@ -168,6 +180,21 @@ export default async function ArticlePage({
             />
           )}
         </div>
+
+        {pillar && tAreas && (
+          <div className="mt-10 bg-primary/5 border border-primary/10 rounded-sm p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <p className="text-gray-500 text-xs uppercase tracking-wide mb-1">{siloLabels[lang].area}</p>
+              <p className="text-primary font-playfair font-semibold text-lg">{tAreas(`areas.${pillar}.title`)}</p>
+            </div>
+            <Link
+              href={`/${locale}/practice-areas/${pillar}`}
+              className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-5 py-3 rounded-sm transition-colors text-sm flex-shrink-0 self-start sm:self-auto"
+            >
+              {siloLabels[lang].view} <ArrowRight size={16} />
+            </Link>
+          </div>
+        )}
 
         <div className="mt-12 pt-8 border-t border-gray-100">
           <ShareButtons url={articleUrl} title={article.title} />
