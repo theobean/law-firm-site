@@ -175,7 +175,7 @@ export default async function LocaleLayout({
       ],
     },
     sameAs: [
-      "https://www.facebook.com/ioannis.papaioannou.94",
+      "https://www.facebook.com/IoannisPapaioannouLawyer",
       "https://maps.google.com/?cid=10350029232005631470",
     ],
   };
