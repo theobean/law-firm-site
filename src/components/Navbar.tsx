@@ -90,10 +90,15 @@ export default function Navbar() {
     router.push(newPath);
   }
 
+  // Rendered BEFORE the Services/Updates dropdowns
   const links = [
     { href: `/${locale}`, label: tNav("home") },
     { href: `/${locale}/about`, label: tNav("about") },
     { href: `/${locale}/practice-areas`, label: tNav("practiceAreas") },
+  ];
+
+  // Rendered AFTER the dropdowns (support + conversion last)
+  const endLinks = [
     { href: `/${locale}/faq`, label: tNav("faq") },
     { href: `/${locale}/contact`, label: tNav("contact") },
   ];
@@ -285,6 +290,17 @@ export default function Navbar() {
             </div>
           </div>
 
+          {/* End links (FAQ + Contact) — after dropdowns */}
+          {endLinks.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className="text-white/80 hover:text-accent transition-colors text-sm font-medium whitespace-nowrap"
+            >
+              {l.label}
+            </Link>
+          ))}
+
           {/* Language dropdown */}
           <LangDropdown switchLocale={switchLocale} />
         </div>
@@ -386,6 +402,18 @@ export default function Navbar() {
               </Link>
             ))}
           </div>
+
+          {/* End links (FAQ + Contact) — after dropdowns */}
+          {endLinks.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              className="text-white/80 hover:text-accent transition-colors font-medium py-2.5 border-b border-white/10"
+            >
+              {l.label}
+            </Link>
+          ))}
         </div>
       </div>
     </header>
