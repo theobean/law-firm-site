@@ -7,6 +7,9 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight, Check, Banknote, Handshake, ShieldCheck, Briefcase, Home, Users, Building2, BookOpen, Receipt, HardHat, Gavel } from "lucide-react";
 import { use } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
+import CategoryArticles from "@/components/CategoryArticles";
+
+export const revalidate = 60;
 
 export async function generateMetadata({
   params,
@@ -167,6 +170,10 @@ export default function PracticeAreaDetailPage({
             <p className="text-gray-600 leading-relaxed">{t(`areas.${area}.approach`)}</p>
           </ScrollReveal>
         </div>
+
+        <ScrollReveal direction="up" delay={0.1}>
+          <CategoryArticles category={area} locale={locale} />
+        </ScrollReveal>
       </section>
 
       <section className="bg-primary py-16">

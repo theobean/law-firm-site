@@ -73,6 +73,15 @@ export async function getDecisionBySlug(slug: string) {
   );
 }
 
+export async function getArticlesByCategory(category: string, limit = 4) {
+  return client.fetch(
+    `*[_type == "article" && category == $category && defined(slug.current)] | order(publishedAt desc)[0...$limit] {
+      _id, title, slug, publishedAt, excerpt
+    }`,
+    { category, limit }
+  );
+}
+
 export async function getRelatedArticles(currentSlug: string, category: string, limit = 3) {
   return client.fetch(
     `*[_type == "article" && slug.current != $currentSlug && category == $category] | order(publishedAt desc)[0...$limit] {
