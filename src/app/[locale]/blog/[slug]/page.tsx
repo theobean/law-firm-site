@@ -125,8 +125,39 @@ export default async function ArticlePage({
 
   const articleUrl = `${siteUrl}/${locale}/blog/${slug}`;
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.seoTitle || article.title,
+    name: article.title,
+    description: article.seoDescription || article.excerpt || "",
+    url: articleUrl,
+    datePublished: article.publishedAt,
+    inLanguage: locale,
+    author: {
+      "@type": "Person",
+      name: article.author?.name || "Ιωάννης Παπαϊωάννου",
+      url: `${siteUrl}/${locale}/about`,
+    },
+    publisher: {
+      "@type": "LegalService",
+      name: "Παπαϊωάννου Ι. – Λιάμος Γ. & Συνεργάτες",
+      url: siteUrl,
+      logo: { "@type": "ImageObject", url: `${siteUrl}/δικηγορος.png` },
+    },
+    ...(article.mainImage && {
+      image: { "@type": "ImageObject", url: `${siteUrl}/_next/image?url=${encodeURIComponent(urlFor(article.mainImage).width(1200).height(630).url())}&w=1200&q=80` },
+    }),
+    ...(article.tags?.length && { keywords: article.tags.join(", ") }),
+    isPartOf: { "@type": "WebSite", name: "Παπαϊωάννου – Λιάμος & Συνεργάτες", url: siteUrl },
+  };
+
   return (
     <div className="bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <section className="bg-primary py-24 text-white">
         <div className="max-w-3xl mx-auto px-6">
           <div className="flex flex-wrap items-center gap-4 text-white/50 text-sm mb-4">
