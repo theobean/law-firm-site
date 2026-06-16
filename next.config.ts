@@ -55,6 +55,10 @@ const nextConfig: NextConfig = {
       { source: "/sitemap_index.xml",    destination: "/sitemap.xml", permanent: true },
       { source: "/post-sitemap.xml",     destination: "/sitemap.xml", permanent: true },
       { source: "/page-sitemap.xml",     destination: "/sitemap.xml", permanent: true },
+      // Legacy WordPress slugs (cached in Google) → semantically closest new page
+      { source: "/el/ανακοπες-ακυρωσης-κατασχεσης", destination: "/el/practice-areas/banking", permanent: true },
+      { source: "/el/εξωδικαστικη-ρυθμιση-οφειλων", destination: "/el/practice-areas/extrajudicial", permanent: true },
+      { source: "/el/79-2", destination: "/el", permanent: true },
     ];
   },
   images: {
