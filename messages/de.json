@@ -503,23 +503,23 @@
     "whatText": "doValue Greece ist keine Bank und nicht der Fonds, der die Forderung erworben hat. Es handelt sich um eine Forderungsverwaltungsgesellschaft, die im Auftrag des Forderungsinhabers handelt, der in der Regel eine Zweckgesellschaft ist, die Darlehensforderungen von Banken erworben hat. Das ist von großer praktischer Bedeutung. In jedem Fall ist zu prüfen, wer Inhaber der Forderung ist, wann und wie die Forderung übertragen wurde, mit welchen Dokumenten die Übertragung nachgewiesen wird, ob doValue im konkreten Verfahren handlungsbefugt ist und ob der geforderte Betrag rechtmäßig, klar und überprüfbar zustande kommt. Das Vorliegen eines Schreibens von doValue bedeutet nicht, dass alles feststeht. Es bedeutet, dass die Akte unverzüglich geöffnet werden muss. Bevor über einen Vergleich gesprochen wird, müssen wir wissen, was gefordert wird, von wem es gefordert wird, mit welcher Legitimation und mit welcher Berechnung.",
     "protectTitle": "Schutz des Eigenheims vor einer von doValue betriebenen Zwangsversteigerung",
     "protectText": "Ein Eigenheim geht nicht verloren, weil ein Schreiben eintrifft oder ein Versteigerungstermin angesetzt wurde. Es ist gefährdet, wenn die Akte nicht rechtzeitig geprüft wird und die gesetzlichen Verteidigungsmöglichkeiten ungenutzt bleiben. In jeder Phase prüfen wir, ob Raum für Widerspruch, Aussetzungsantrag, Eintritt in den außergerichtlichen Mechanismus, direkte Verhandlung oder eine andere zielgerichtete Maßnahme besteht. Wir behandeln keine Zwangsversteigerung als vollendete Tatsache. Wir prüfen von Grund auf die Legitimation von doValue, die Abtretung der Forderung, die Höhe der Schuld, die Zinsen, die Gebühren, die missbräuchlichen Klauseln und jede Handlung der Zwangsvollstreckung. Ziel ist nicht, einfach nur schnell zu handeln. Ziel ist, richtig zu handeln. Denn bei Zwangsversteigerungen kann Eile ohne Prüfung mehr kosten als Verzögerung.",
-    "deadlinesTitle": "Mahnung oder Zahlungsbefehl von doValue erhalten: Die kritischen Fristen",
-    "deadlinesIntro": "Jedes zugestellte Dokument löst eine Ausschlussfrist aus. Verstreicht sie, ist das Recht endgültig verloren — so begründet Ihre Einwände auch waren.",
+    "deadlinesTitle": "Mahnung, Zahlungsbefehl oder Pfändung von doValue erhalten — Die Fristen, die nicht verstreichen dürfen",
+    "deadlinesIntro": "Nicht jedes Dokument hat dasselbe rechtliche Gewicht. Eine außergerichtliche Vertragskündigung, ein Zahlungsbefehl und eine Pfändung haben jeweils eine andere Wirkung. Doch jede Stufe zeigt, dass der Fall voranschreitet und die Reaktionszeit kürzer wird.",
     "deadlines": [
       {
-        "title": "Zahlungsbefehl — 15 Werktage",
-        "desc": "Ab Zustellung des Zahlungsbefehls haben Sie 15 Werktage für den Widerspruch. Wird keiner eingelegt, wird der Befehl zum vollstreckbaren Titel: Der nächste Schritt von doValue ist die Pfändung."
+        "title": "Außergerichtliche Vertragskündigung",
+        "desc": "Die außergerichtliche Kündigung eines Darlehens- oder Kreditvertrags ist meist der erste ernsthafte Schritt des Gläubigers. Mit der Kündigung wird die Schuld als fällig und einforderbar dargestellt, und der Weg zum Erlass eines Zahlungsbefehls wird geöffnet. In dieser Phase besteht möglicherweise noch keine Widerspruchsfrist, aber es gibt Zeit, die nicht verloren gehen darf. Die Akte muss sofort geprüft werden, bevor die Forderung zum gerichtlichen Titel wird und der Schuldner sich unter Druck verteidigen muss."
       },
       {
-        "title": "Pfändung — 45 Tage",
-        "desc": "Ab der Pfändung läuft eine 45-Tage-Frist für den Widerspruch gegen die Zwangsvollstreckung. Hier werden die Legitimation des Fonds, die Forderungshöhe und jeder Verfahrensfehler angegriffen."
+        "title": "Zahlungsbefehl",
+        "desc": "Der Zahlungsbefehl ist der zweite und weitaus schwerwiegendere Schritt. Die Forderung erhält nun eine gerichtliche Form und kann für die Zwangsvollstreckung verwendet werden. Der Widerspruch gegen den Zahlungsbefehl ist innerhalb von fünfzehn Werktagen ab Zustellung einzulegen, wenn der Schuldner Wohnsitz oder Sitz in Griechenland hat. Liegt der Wohnsitz oder Sitz im Ausland oder ist er unbekannt, beträgt die Frist dreißig Werktage. Beim Zahlungsbefehl warten wir nicht. Wir handeln sofort."
       },
       {
-        "title": "Vor der Versteigerung",
-        "desc": "Auch wenn ein Versteigerungstermin bereits anberaumt ist, muss die Akte sofort geprüft werden. Eine Aussetzung ist nicht selbstverständlich, kann jedoch gerichtlich erwirkt werden, wenn rechtmäßige und belegte Gründe vorliegen. Je früher Sie handeln, desto mehr prozessuale Mittel stehen zur Verfügung. Aber selbst wenn die Zeit knapp wird, geben wir nicht auf, bevor wir geprüft haben, was wirklich möglich ist."
+        "title": "Pfändung",
+        "desc": "Die Pfändung ist die dritte kritische Stufe. Bei der Pfändung einer Immobilie ist bereits der Versteigerungstermin angesetzt, der Fall befindet sich also nicht mehr auf einer Warnstufe. Die Zwangsvollstreckung hat begonnen. Der Widerspruch gegen die Zwangsvollstreckung — aus Gründen, die die Forderung, den Vollstreckungstitel, das Vorverfahren und die Pfändung betreffen — ist innerhalb von fünfundvierzig Tagen ab dem Tag der Pfändung einzulegen. Muss zusätzlich eine Aussetzung der Versteigerung beantragt werden, ist dieser Schritt gesondert zu prüfen und rechtzeitig zu unternehmen."
       }
     ],
-    "deadlinesWarning": "Das Zustellungsdatum auf Ihrem Dokument ist kein Detail — es ist die Uhr, die rückwärts läuft. Bringen Sie uns das Dokument heute, nicht morgen.",
+    "deadlinesWarning": "Die Schlussfolgerung ist einfach. Bei einer Vertragskündigung bleiben wir nicht untätig. Beim Zahlungsbefehl handeln wir ohne Verzögerung. Bei der Pfändung muss die Reaktion sofort erfolgen, denn mit ihr liegt die Versteigerung bereits auf dem Tisch.",
     "cta1Title": "Halten Sie gerade ein doValue-Dokument in den Händen?",
     "cta1Text": "Ihre Akte erhält sofort eine erste Einschätzung: Was wurde zugestellt, welche Frist läuft, welche Optionen bestehen. Rufen Sie +30 2310 545 261 an oder nutzen Sie das Formular.",
     "negotiationTitle": "Verhandlungsstrategie: Wie wir einen tragfähigen Schuldenschnitt mit doValue erreichen",

@@ -506,23 +506,23 @@
     "whatText": "doValue Greece is not a bank and is not the fund that acquired the claim. It is a claim management company that acts on behalf of the holder of the claim, which is usually a special purpose vehicle that acquired loan claims from banks. This carries great practical significance. In every case it must be examined who holds the claim, when and how the claim was transferred, with what documents the transfer is proven, whether doValue has standing to act in the specific procedure and whether the amount claimed is established in a lawful, clear and verifiable manner. The existence of a document from doValue does not mean everything is settled. It means the file must be opened immediately. Before any discussion of settlement, we must know what is being claimed, by whom, on what basis of standing and with what calculation.",
     "protectTitle": "Protecting Your Home from a Foreclosure Initiated by doValue",
     "protectText": "A home is not lost because a notice arrived or because an auction schedule was posted. It is at risk when the file is not reviewed in time and when the lawful means of defence remain unused. At every stage we examine whether there is room for an objection, a suspension application, entry into the out-of-court workout, direct negotiation or another targeted action. We treat no foreclosure as final. We review from the start doValue's standing, the assignment of the claim, the amount of the debt, the interest, the charges, the abusive terms and every act of enforcement. The goal is not simply to move fast. The goal is to move correctly. Because in foreclosure cases, haste without review can cost more than delay.",
-    "deadlinesTitle": "Received a Notice or Payment Order from doValue: The Critical Deadlines",
-    "deadlinesIntro": "Every served document triggers a strict statutory deadline. Once it passes, the right is lost permanently — however well-founded your objections were.",
+    "deadlinesTitle": "Received a Notice, Payment Order or Seizure from doValue — The Deadlines That Must Not Be Missed",
+    "deadlinesIntro": "Not every document carries the same legal weight. A formal notice terminating the contract, a payment order and a seizure each have a different effect. But every stage shows that the case is moving forward and that the time to react is shrinking.",
     "deadlines": [
       {
-        "title": "Payment Order — 15 working days",
-        "desc": "From service of a payment order you have 15 working days to file an objection. If none is filed, the order becomes an enforceable title: doValue's next step is seizure."
+        "title": "Formal notice terminating the contract",
+        "desc": "A formal notice terminating a loan or credit agreement is usually the creditor's first serious move. With the termination, the debt is presented as overdue and due, and the way is opened for a payment order to be issued. At this stage there may not yet be an objection deadline, but there is time that must not be lost. The case must be reviewed immediately, before the claim becomes a judicial title and before the borrower has to defend under pressure."
       },
       {
-        "title": "Seizure — 45 days",
-        "desc": "From the imposition of seizure, a 45-day deadline runs for an objection against enforcement. This is where the fund's standing, the amount of the claim and every procedural defect are challenged."
+        "title": "Payment order",
+        "desc": "The payment order is the second and far more serious step. The claim now takes a judicial form and can be used for enforcement. An objection against the payment order is filed within fifteen working days of its service, when the debtor's residence or seat is in Greece. If the residence or seat is abroad or unknown, the deadline is thirty working days. With a payment order, we do not wait. We move immediately."
       },
       {
-        "title": "Before the Auction",
-        "desc": "Even after an auction has been scheduled, the file must be reviewed immediately. A suspension is not automatic, but it can be pursued in court when there are lawful and documented grounds. The earlier you act, the more procedural tools are available. But even when time is running short, we do not give up before checking what can really be done."
+        "title": "Seizure",
+        "desc": "Seizure is the third critical stage. With seizure of real property, the auction is already set, so the case is no longer at a warning level. Enforcement has begun. An objection against enforcement, on grounds concerning the claim, the writ of execution, the preliminary procedure and the seizure itself, is filed within forty-five days from the date of seizure. If a suspension of the auction must also be sought, that step is examined separately and must be taken in time."
       }
     ],
-    "deadlinesWarning": "The service date on your document is not a detail — it is the clock counting down. Bring us the document today, not tomorrow.",
+    "deadlinesWarning": "The conclusion is simple. With a notice terminating the contract, we do not stay idle. With a payment order, we act without delay. With a seizure, the response must be immediate, because with it the auction is already on the table.",
     "cta1Title": "Holding a doValue document right now?",
     "cta1Text": "Your file gets an immediate first assessment: what exactly was served, which deadline is running, what options you have. Call +30 2310 545 261 or fill in the form.",
     "negotiationTitle": "Negotiation Strategy: How We Achieve a Sustainable Debt Haircut with doValue",
