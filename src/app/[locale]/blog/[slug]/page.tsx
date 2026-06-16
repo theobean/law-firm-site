@@ -149,7 +149,7 @@ export default async function ArticlePage({
       image: { "@type": "ImageObject", url: `${siteUrl}/_next/image?url=${encodeURIComponent(urlFor(article.mainImage).width(1200).height(630).url())}&w=1200&q=80` },
     }),
     ...(article.tags?.length && { keywords: article.tags.join(", ") }),
-    isPartOf: { "@type": "WebSite", name: "Παπαϊωάννου – Λιάμος & Συνεργάτες", url: siteUrl },
+    isPartOf: { "@type": "WebSite", name: "Παπαϊωάννου & Συνεργάτες", url: siteUrl },
   };
 
   return (

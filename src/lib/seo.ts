@@ -5,7 +5,7 @@ const ogLocaleMap: Record<string, string> = { el: "el_GR", en: "en_US", de: "de_
 // must mirror seo.siteName in messages/*.json — buildPageMeta is sync, so we
 // can't read translations here
 const siteNames: Record<string, string> = {
-  el: "Παπαϊωάννου – Λιάμος & Συνεργάτες",
+  el: "Παπαϊωάννου & Συνεργάτες",
   en: "Ioannis Papaioannou | Law Office",
   de: "Ioannis Papaioannou | Rechtsanwaltskanzlei",
 };
