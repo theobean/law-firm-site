@@ -425,23 +425,23 @@
     "whatText": "Intrum Hellas ist keine Bank und nicht der Forderungsinhaber. Es handelt sich um eine Forderungsverwaltungsgesellschaft, die im Auftrag der Stelle handelt, die als Forderungsinhaber auftritt, nämlich einer Zweckgesellschaft, die Darlehensforderungen von Banken erworben hat. Das ist von praktischer Bedeutung. In jedem Fall ist zu prüfen, wer der tatsächliche Forderungsinhaber ist, wann und wie das Darlehen übertragen wurde, mit welchen Dokumenten die Übertragung nachgewiesen wird, ob Intrum im konkreten Verfahren handlungsbefugt ist und ob der geforderte Betrag rechtmäßig, klar und überprüfbar zustande kommt. Das Vorliegen eines Schreibens von Intrum bedeutet nicht, dass alles feststeht. Es bedeutet, dass die Akte unverzüglich geprüft werden muss. Bevor über einen Vergleich gesprochen wird, müssen wir wissen, was gefordert wird, von wem es gefordert wird, mit welcher Legitimation und mit welcher Berechnung.",
     "protectTitle": "Schutz des Eigenheims vor einer von Intrum betriebenen Zwangsversteigerung",
     "protectText": "Keine Immobilie geht verloren, weil ein Schreiben eintrifft. Sie ist gefährdet, wenn die Akte nicht rechtzeitig geprüft wird und die gesetzlichen Verteidigungsmöglichkeiten ungenutzt bleiben. Von der außergerichtlichen Vertragskündigung über den Zahlungsbefehl, den Vollstreckungstitel, die Pfändung bis zur Versteigerung hat jede Stufe ihre eigene Bedeutung. Wir prüfen, ob Raum für Widerspruch, Aussetzungsantrag, Eintritt in den außergerichtlichen Mechanismus, direkte Verhandlung oder eine andere zielgerichtete Maßnahme besteht. Wir behandeln keine Zwangsversteigerung als vollendete Tatsache. Wir prüfen von Grund auf die Legitimation von Intrum, die Abtretung der Forderung, die Höhe der Schuld, die Zinsen, die Gebühren, die missbräuchlichen Klauseln und jede Handlung der Zwangsvollstreckung. Dort, in den Details, die häufig ungeprüft bleiben, kann sich der Verlauf eines Falls ändern. Ziel ist nicht, einfach nur schnell zu handeln. Ziel ist, richtig zu handeln, bevor die Zwangsvollstreckung als einziger Weg erscheint.",
-    "deadlinesTitle": "Mahnung oder Zahlungsbefehl von Intrum erhalten: Die kritischen Fristen",
-    "deadlinesIntro": "Verteidigungsfristen sind Ausschlussfristen: Verstreichen sie, erlischt das Recht — egal wie stark Ihre Argumente waren.",
+    "deadlinesTitle": "Mahnung, Zahlungsbefehl oder Pfändung von Intrum erhalten — Die Fristen, die nicht verstreichen dürfen",
+    "deadlinesIntro": "Nicht jedes Dokument von Intrum hat dasselbe rechtliche Gewicht. Eine außergerichtliche Vertragskündigung, ein Zahlungsbefehl und eine Pfändung haben jeweils eine andere Wirkung. Doch jede Stufe zeigt, dass der Fall voranschreitet und die Reaktionszeit kürzer wird.",
     "deadlines": [
       {
-        "title": "Zahlungsbefehl — 15 Werktage",
-        "desc": "Der Widerspruch gegen einen Zahlungsbefehl ist innerhalb von 15 Werktagen ab Zustellung einzulegen. Ohne ihn erhält Intrum einen vollstreckbaren Titel — und der Weg zur Pfändung ist frei."
+        "title": "Außergerichtliche Vertragskündigung",
+        "desc": "Die außergerichtliche Vertragskündigung ist meist der erste ernsthafte Schritt. Die Schuld wird nun als fällig und einforderbar dargestellt, und der Weg zum Erlass eines Zahlungsbefehls wird geöffnet. In dieser Phase besteht möglicherweise noch keine Widerspruchsfrist, aber es gibt Zeit, die nicht verloren gehen darf. Die Akte muss geprüft werden, bevor die Forderung zum gerichtlichen Titel wird."
       },
       {
-        "title": "Pfändung — 45 Tage",
-        "desc": "Der Widerspruch gegen die Zwangsvollstreckung hat eine Frist von 45 Tagen ab der Pfändung. In dieser Phase werden Legitimation, Schuldberechnung und Verfahrensfehler angegriffen."
+        "title": "Zahlungsbefehl",
+        "desc": "Der Zahlungsbefehl ist der nächste Schritt. Die Forderung erhält eine gerichtliche Form und kann zur Zwangsvollstreckung führen. Der Widerspruch gegen den Zahlungsbefehl ist innerhalb von fünfzehn Werktagen ab Zustellung einzulegen, wenn der Schuldner Wohnsitz oder Sitz in Griechenland hat. Liegt der Wohnsitz oder Sitz im Ausland oder ist er unbekannt, beträgt die Frist dreißig Werktage."
       },
       {
-        "title": "Vor der Versteigerung",
-        "desc": "Auch wenn ein Versteigerungstermin bereits anberaumt ist, muss die Akte sofort geprüft werden. Eine Aussetzung ist nicht selbstverständlich, kann jedoch gerichtlich erwirkt werden, wenn rechtmäßige und belegte Gründe vorliegen. Je früher Sie handeln, desto mehr prozessuale Mittel stehen zur Verfügung. Aber selbst wenn die Zeit knapp wird, geben wir nicht auf, bevor wir geprüft haben, was wirklich möglich ist."
+        "title": "Pfändung",
+        "desc": "Die Pfändung ist die Stufe, auf der die Zwangsvollstreckung bereits begonnen hat, und bei der Pfändung einer Immobilie ist bereits der Versteigerungstermin angesetzt. Der Widerspruch gegen die Zwangsvollstreckung — aus Gründen, die die Forderung, den Vollstreckungstitel, das Vorverfahren und die Pfändung betreffen — ist innerhalb von fünfundvierzig Tagen ab dem Tag der Pfändung einzulegen. Muss zusätzlich eine Aussetzung der Versteigerung beantragt werden, ist dieser Schritt gesondert zu prüfen und rechtzeitig zu unternehmen."
       }
     ],
-    "deadlinesWarning": "Legen Sie das Intrum-Dokument nicht „für später\" in eine Schublade. Das Zustellungsdatum zählt bereits rückwärts — bringen Sie es heute zur Prüfung.",
+    "deadlinesWarning": "Bei der Vertragskündigung bleiben wir nicht untätig. Beim Zahlungsbefehl handeln wir sofort. Bei der Pfändung gibt es keinen Raum für halbe Schritte. Verteidigungsfristen warten nicht darauf, dass der Schuldner sich vom Schock erholt.",
     "cta1Title": "Halten Sie gerade ein Intrum-Dokument in den Händen?",
     "cta1Text": "Sofortige Ersteinschätzung: was zugestellt wurde, welche Frist läuft, welche Schritte möglich sind. Rufen Sie +30 2310 545 261 an oder senden Sie das Formular.",
     "negotiationTitle": "Verhandlungsstrategie: Wie wir einen tragfähigen Schuldenschnitt mit Intrum erreichen",
