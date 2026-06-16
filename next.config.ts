@@ -55,9 +55,13 @@ const nextConfig: NextConfig = {
       { source: "/sitemap_index.xml",    destination: "/sitemap.xml", permanent: true },
       { source: "/post-sitemap.xml",     destination: "/sitemap.xml", permanent: true },
       { source: "/page-sitemap.xml",     destination: "/sitemap.xml", permanent: true },
-      // Legacy WordPress slugs (cached in Google) → semantically closest new page
+      // Legacy WordPress slugs (cached in Google) → semantically closest new page.
+      // Next.js matches against the decoded pathname, so we list both the
+      // raw-Greek form and the percent-encoded form for safety.
       { source: "/el/ανακοπες-ακυρωσης-κατασχεσης", destination: "/el/practice-areas/banking", permanent: true },
+      { source: "/el/%CE%B1%CE%BD%CE%B1%CE%BA%CE%BF%CF%80%CE%B5%CF%82-%CE%B1%CE%BA%CF%85%CF%81%CF%89%CF%83%CE%B7%CF%82-%CE%BA%CE%B1%CF%84%CE%B1%CF%83%CF%87%CE%B5%CF%83%CE%B7%CF%82", destination: "/el/practice-areas/banking", permanent: true },
       { source: "/el/εξωδικαστικη-ρυθμιση-οφειλων", destination: "/el/practice-areas/extrajudicial", permanent: true },
+      { source: "/el/%CE%B5%CE%BE%CF%89%CE%B4%CE%B9%CE%BA%CE%B1%CF%83%CF%84%CE%B9%CE%BA%CE%B7-%CF%81%CF%85%CE%B8%CE%BC%CE%B9%CF%83%CE%B7-%CE%BF%CF%86%CE%B5%CE%B9%CE%BB%CF%89%CE%BD", destination: "/el/practice-areas/extrajudicial", permanent: true },
       { source: "/el/79-2", destination: "/el", permanent: true },
     ];
   },
