@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     <footer className="grain relative overflow-hidden bg-primary text-white">
       <div className="max-w-6xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Logo & tagline */}
           <div>
             <div className="flex items-center gap-3 mb-4">
@@ -74,7 +74,33 @@ export default function Footer() {
                 { href: `/${locale}`, label: t("nav.home") },
                 { href: `/${locale}/about`, label: t("nav.about") },
                 { href: `/${locale}/practice-areas`, label: t("nav.practiceAreas") },
+                { href: `/${locale}/blog`, label: t("nav.blog") },
+                { href: `/${locale}/decisions`, label: t("nav.decisions") },
+                { href: `/${locale}/faq`, label: t("nav.faq") },
                 { href: `/${locale}/contact`, label: t("nav.contact") },
+              ].map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="text-white/60 hover:text-accent text-sm transition-colors">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Services / Servicers */}
+          <div>
+            <h3 className="font-bold text-white mb-6 text-sm tracking-widest uppercase border-b border-white/10 pb-3">
+              {t("footer.servicesHeader")}
+            </h3>
+            <ul className="space-y-3">
+              {[
+                { href: `/${locale}/pleistariasmos`, label: t("footer.firstResidence") },
+                { href: `/${locale}/funds`, label: t("nav.funds") },
+                { href: `/${locale}/funds/intrum`, label: "Intrum" },
+                { href: `/${locale}/funds/dovalue`, label: "doValue" },
+                { href: `/${locale}/funds/cepal`, label: "Cepal" },
+                { href: `/${locale}/funds/qquant`, label: "QQuant" },
               ].map((l) => (
                 <li key={l.href}>
                   <Link href={l.href} className="text-white/60 hover:text-accent text-sm transition-colors">
@@ -89,12 +115,12 @@ export default function Footer() {
               <p className="text-white/40 text-xs mb-3">{t("footer.social")}</p>
               <div className="flex gap-3">
                 {/* Facebook */}
-                <a href="https://www.facebook.com/IoannisPapaioannouLawyer" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-12 h-12 bg-white/10 hover:bg-accent flex items-center justify-center rounded-sm transition-colors">
-                  <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                <a href="https://www.facebook.com/IoannisPapaioannouLawyer" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-10 h-10 bg-white/10 hover:bg-accent flex items-center justify-center rounded-sm transition-colors">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                 </a>
                 {/* LinkedIn */}
-                <a href="https://www.linkedin.com/in/%CE%B9%CF%89%CE%AC%CE%BD%CE%BD%CE%B7%CF%82-%CF%80%CE%B1%CF%80%CE%B1%CF%8A%CF%89%CE%AC%CE%BD%CE%BD%CE%BF%CF%85-367845416/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="w-12 h-12 bg-white/10 hover:bg-accent flex items-center justify-center rounded-sm transition-colors">
-                  <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.24 8h4.52v12.5H.24V8zm7.5 0h4.33v1.71h.06c.6-1.14 2.07-2.34 4.26-2.34 4.56 0 5.4 3 5.4 6.9v6.23h-4.52v-5.52c0-1.32-.02-3.02-1.84-3.02-1.84 0-2.12 1.44-2.12 2.92v5.62H7.74V8z"/></svg>
+                <a href="https://www.linkedin.com/in/%CE%B9%CF%89%CE%AC%CE%BD%CE%BD%CE%B7%CF%82-%CF%80%CE%B1%CF%80%CE%B1%CF%8A%CF%89%CE%AC%CE%BD%CE%BD%CE%BF%CF%85-367845416/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="w-10 h-10 bg-white/10 hover:bg-accent flex items-center justify-center rounded-sm transition-colors">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.24 8h4.52v12.5H.24V8zm7.5 0h4.33v1.71h.06c.6-1.14 2.07-2.34 4.26-2.34 4.56 0 5.4 3 5.4 6.9v6.23h-4.52v-5.52c0-1.32-.02-3.02-1.84-3.02-1.84 0-2.12 1.44-2.12 2.92v5.62H7.74V8z"/></svg>
                 </a>
               </div>
             </div>
