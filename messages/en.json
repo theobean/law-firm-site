@@ -824,23 +824,23 @@
     "whatText": "QQuant Master Servicer is a claim management company. It is not a bank and it is not the holder of the claim. It acts on behalf of entities presented as holders of claims, which may be linked to different portfolios, different assignments and different contractual paths. QQuant's position in the market is not the same as that of other large management companies that appear in vast volumes of securitised loans. But that does not make it any less critical for the debtor who receives one of its documents. On the contrary, in many cases the particularity lies precisely in the origin of the claim, its age, the chain of assignment and the way it now appears as due. In every case it must be examined who the actual holder of the claim is, when and how the loan was transferred, whether QQuant proves its management authority for the specific loan, whether the claim is time-barred in whole or in part, and whether the amount has been inflated by interest, charges or compounding that can be challenged. The existence of a document from QQuant does not mean everything is settled. It means the case must be reviewed immediately. Before we reply, before we settle, before we pay, we must know whether the claim exists, whether it is preserved in time, whether it is proven and how it actually holds up under legal scrutiny.",
     "protectTitle": "Protecting Your Home from a Foreclosure Initiated Through QQuant",
     "protectText": "No letter from QQuant by itself means a loss of property. A foreclosure requires an enforceable title, standing, a correctly established claim and compliance with the procedure at every stage. In every case we check whether QQuant has standing to act for the specific loan, whether the claim is wholly or partly time-barred, whether the amount includes disputable interest and charges, whether services of process were carried out lawfully and whether every act of enforcement rests on a complete and verifiable basis. With old debts, this review can change the whole picture. Where the debtor sees an old debt resurfacing, we check whether the claim can still be pursued, by whom, with what documents and for what real amount.",
-    "deadlinesTitle": "Received a Payment Order or Notice from QQuant? Critical Deadlines",
-    "deadlinesIntro": "Even for an old, disputed or possibly time-barred debt, procedural deadlines run normally. If an objection is not filed in time, your defensive position is lost — however well-founded it was.",
+    "deadlinesTitle": "Received a Notice, Payment Order or Seizure from QQuant — The Deadlines That Must Not Be Missed",
+    "deadlinesIntro": "Even for an old, disputed or possibly time-barred debt, procedural deadlines run normally. Limitation, lack of standing or a challenge to the amount are not enough on their own if they are not raised correctly and in time.",
     "deadlines": [
       {
-        "title": "Payment Order — 15 working days",
-        "desc": "An objection against a payment order must be filed within 15 working days of service. This is the moment to raise limitation, authority defects and an incorrect amount."
+        "title": "Formal notice terminating the contract",
+        "desc": "With a formal notice terminating the contract, we do not stay idle. There may not yet be an objection deadline, but there is time to review the case, to respond formally, to negotiate and to prepare a defence before the claim takes a judicial form."
       },
       {
-        "title": "Seizure — 45 days",
-        "desc": "The objection against enforcement must be filed within 45 days of seizure. QQuant's authority, the amount of the claim and procedural defects can all be challenged."
+        "title": "Payment order",
+        "desc": "With a payment order, we act immediately. An objection is filed within fifteen working days of its service, when the debtor's residence or seat is in Greece. If the residence or seat is abroad or unknown, the deadline is thirty working days."
       },
       {
-        "title": "Before the Auction",
-        "desc": "Even after an auction has been scheduled, the file must be reviewed immediately. A suspension is not automatic, but it can be pursued in court when there are lawful and documented grounds. The earlier you act, the more procedural tools are available. But even when time is running short, we do not give up before checking what can really be done."
+        "title": "Seizure",
+        "desc": "With a seizure, there is no room for half-measures. Enforcement has already begun and, with seizure of real property, an auction is already set. An objection against enforcement, on grounds concerning the claim, the writ of execution, the preliminary procedure and the seizure itself, is filed within forty-five days from the date of seizure. If a suspension of the auction must also be sought, that step is examined separately and at the right time."
       }
     ],
-    "deadlinesWarning": "The debt being old does not mean you have time — it means you may have arguments. But arguments only count if raised within the deadline. Bring the document for review today.",
+    "deadlinesWarning": "The correct order is non-negotiable. First review, then response, then negotiation. Reversing that order can give away money that may not even be owed.",
     "cta1Title": "Do you have a QQuant document in front of you?",
     "cta1Text": "Immediate first assessment: what was served, whether limitation is in play, which deadline is running. Call 2310 545 261 or send the contact form.",
     "negotiationTitle": "Negotiation Strategy: Achieving a Debt Haircut with QQuant",
