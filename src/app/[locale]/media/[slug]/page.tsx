@@ -16,7 +16,21 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const pageUrl = `${SITE}/${locale}/media/${slug}`;
     const ytId = getYouTubeId(iv.youtubeUrl);
     const ogImage = ytId ? getThumbnailUrl(ytId) : `${SITE}/δικηγορος.png`;
-    const description = (iv.description ?? "").slice(0, 160) || [iv.show, iv.date ? new Date(iv.date).getFullYear() : null].filter(Boolean).join(" · ") || iv.title;
+    const year = iv.date ? new Date(iv.date).getFullYear() : null;
+    const lawyerLabel = locale === "de" ? "Rechtsanwalt Ioannis Papaioannou" : locale === "en" ? "Lawyer Ioannis Papaioannou" : "Δικηγόρος Ιωάννης Παπαϊωάννου";
+    // Word-boundary truncation to avoid cutting mid-word
+    const truncate = (s: string, n: number) => {
+      if (s.length <= n) return s;
+      const cut = s.slice(0, n);
+      const lastSpace = cut.lastIndexOf(" ");
+      return (lastSpace > n * 0.6 ? cut.slice(0, lastSpace) : cut).replace(/[,.;:·\-–—]+$/, "").trim() + "…";
+    };
+    const baseDesc = (iv.description ?? "").trim();
+    // Always include lawyer name + show + year for SEO; pad with original description.
+    const suffix = [lawyerLabel, iv.show, year].filter(Boolean).join(" · ");
+    const description = baseDesc
+      ? truncate(`${baseDesc} — ${suffix}`, 160)
+      : truncate(`${iv.title}. ${suffix}.`, 160);
     return {
       title: iv.title, description,
       alternates: { canonical: pageUrl },
