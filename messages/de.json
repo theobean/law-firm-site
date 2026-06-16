@@ -844,15 +844,15 @@
     "deadlinesWarning": "Die richtige Reihenfolge ist nicht verhandelbar. Zuerst Prüfung, dann Antwort, dann Verhandlung. Die umgekehrte Reihenfolge kann Geld verschenken, das vielleicht gar nicht geschuldet wird.",
     "cta1Title": "Haben Sie ein Dokument von QQuant vor sich?",
     "cta1Text": "Sofortige Erstbewertung: was zugestellt wurde, ob Verjährung im Raum steht, welche Frist läuft. Rufen Sie 2310 545 261 an oder senden Sie das Kontaktformular.",
-    "negotiationTitle": "Verhandlungsstrategie: Schuldenschnitt mit QQuant erreichen",
-    "negotiationIntro": "Bei den älteren Portfolios, die QQuant verwaltet, ist die Lücke zwischen Buchsaldo und realem Wert der Forderung meist die größte am Markt. Das ist Ihr Verhandlungsvorteil — sofern er sauber dokumentiert wird:",
+    "negotiationTitle": "Verhandlungsstrategie mit QQuant — Vergleich mit dem Ziel eines Schuldenerlasses (Haircut)",
+    "negotiationIntro": "In QQuant-Fällen darf die Verhandlung nicht beim Betrag aus dem Schreiben beginnen. Sie muss beim Alter der Forderung, der Abtretungskette, der Legitimation, der Verjährung, den Zinsen und dem tatsächlichen Saldo beginnen. Vor jedem Gespräch prüfen wir, ob die Forderung ganz oder teilweise verjährt ist. Eine verjährte oder teilweise verjährte Forderung verändert die Verhandlungsgrundlage oder kann die Verhandlung überflüssig machen. Wir prüfen außerdem, ob QQuant die Verwaltungsbefugnis für das konkrete Darlehen nachweist und ob die Abtretungskette Lücken aufweist, die ihre Position schwächen.",
     "negotiationPoints": [
-      "Verjährungsprüfung vor jedem Gespräch: eine ganz oder teilweise verjährte Forderung verändert die Verhandlungsgrundlage vollständig — oder macht die Verhandlung überflüssig.",
-      "Nachweis der Befugnis für Ihr konkretes Darlehen: bei diesen mehrfach übertragenen Portfolios weist die Kette oft Lücken auf, die die Position des Servicers schwächen.",
-      "Bereinigung des Betrags um unzulässige Zinsen und Gebühren: bei jahrelang laufenden Schulden blähen fehlerhafte Zinseszinsen den Saldo erheblich auf.",
-      "Ein Angebot auf Basis der wirtschaftlichen Realität: die niedrigen Erwerbskosten alter Portfolios geben QQuant großen Spielraum für einen Schuldenschnitt — wenn das Angebot richtig präsentiert wird."
+      "Der Betrag wird bereinigt, bevor er besprochen wird. Bei Schulden, die nach Jahren wieder auftauchen, können Zinsen, Gebühren und Zinseszinsen den Saldo erheblich aufgebläht haben. Ein nicht verifizierter Betrag darf nicht zur Grundlage eines Vergleichs werden.",
+      "Der Vergleich muss auf wirtschaftlicher Realität beruhen. Ein Vorschlag, der eindrucksvoll erscheint und nach wenigen Monaten zusammenbricht, hat keinen Wert. Ziel ist ein Vergleich, der hält, mit konkreten Zahlen, konkreten Argumenten und einer klaren Strategie.",
+      "Auf dieser Grundlage bauen wir auch den Antrag auf Schuldenerlass (Haircut) auf. Bei alten Portfolios kann der Abstand zwischen dem Buchsaldo und dem realen wirtschaftlichen Wert der Forderung einen erheblichen Verhandlungsspielraum schaffen. Wir berufen uns auf diesen Spielraum nicht pauschal. Wir belegen ihn.",
+      "Die beste Verhandlung findet statt, wenn der Schuldner seine Rechte bereits geltend gemacht hat oder bereit ist, dies zu tun. Ein gut begründeter Widerspruch, ein Aussetzungsantrag, eine ernsthafte Verjährungseinrede oder eine belegte Anfechtung der Legitimation verwandelt das Gespräch von einem Bitten in ein Kräftemessen."
     ],
-    "negotiationOutro": "In QQuant-Fällen ist die richtige Reihenfolge nicht verhandelbar: erst rechtliche Prüfung, dann Verhandlung. Die umgekehrte Reihenfolge verschenkt Geld, das womöglich gar nicht geschuldet wird.",
+    "negotiationOutro": "In QQuant-Fällen zuerst die rechtliche Prüfung und dann die Verhandlung. Nicht weil wir zögern. Sondern weil wir nur so wissen, ob wir über eine Schuld verhandeln, die tatsächlich geschuldet wird, einen Betrag, der tatsächlich Bestand hat, und eine Forderung, die tatsächlich geltend gemacht werden kann.",
     "cta2Title": "Bevor Sie QQuant etwas zahlen oder anerkennen — sprechen Sie mit uns.",
     "cta2Text": "Bei alten Schulden kann eine einfache Zahlung oder schriftliche Anerkennung die Verjährung unterbrechen und eine erlöschende Forderung wiederbeleben. Erst prüfen, dann handeln.",
     "anakopiTitle": "Widerspruch und Aussetzung von QQuant-Vollstreckungen in Thessaloniki",
