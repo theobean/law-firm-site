@@ -39,7 +39,7 @@ export async function generateMetadata({
     metadataBase: new URL(siteUrl),
     title: {
       default: t("defaultTitle"),
-      template: `%s | ${t("siteName")}`,
+      template: `%s – ${t("siteName")}`,
     },
     description: t("defaultDescription"),
     ...(isEl && { authors: [{ name: "Ιωάννης Παπαϊωάννου" }] }),

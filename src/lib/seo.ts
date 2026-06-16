@@ -6,8 +6,8 @@ const ogLocaleMap: Record<string, string> = { el: "el_GR", en: "en_US", de: "de_
 // can't read translations here
 const siteNames: Record<string, string> = {
   el: "Παπαϊωάννου & Συνεργάτες",
-  en: "Ioannis Papaioannou | Law Office",
-  de: "Ioannis Papaioannou | Rechtsanwaltskanzlei",
+  en: "Papaioannou & Associates",
+  de: "Papaioannou & Partner",
 };
 
 function cleanPath(path: string) {
