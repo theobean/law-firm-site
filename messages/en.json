@@ -750,23 +750,23 @@
     "whatText": "Cepal Hellas Financial Services is not a bank and is not the holder of the claim. It is a claim management company that acts on behalf of the entity presented as the holder of the claim — namely a special purpose vehicle that acquired loan claims from banks. This means that in every case it must be examined who the actual holder of the claim is, when and how the loan was transferred, with what documents the transfer is proven, whether Cepal has standing to act in the specific procedure and whether the amount claimed is established in a lawful, clear and verifiable manner. The existence of a document from Cepal does not mean everything is settled. It means the case must be reviewed immediately. Before any settlement is made, we must know what is being claimed, by whom, on what basis of standing and with what calculation.",
     "protectTitle": "Protecting Your Home from a Foreclosure Initiated by Cepal",
     "protectText": "Cepal is one of the claim management companies most frequently seen in enforcement and foreclosure proceedings. In a number of cases its stance appears particularly strict and inflexible, especially when settlement proposals are rejected without a real assessment of the debtor's actual financial circumstances. But that can also be the weak point of the case. An uncompromising stance, when combined with prolonged inaction, refusal of a sustainable settlement, excessive inflation of the debt, incomplete information or enforcement pursued without real weighing of the circumstances, may under certain conditions be used legally — particularly in the context of arguments of abuse of right. In every case we review from the start Cepal's standing, the assignment of the claim, the amount of the debt, the interest, the charges, the abusive terms, the services of process and every act of enforcement. The high volume of cases handled by management companies often leads to standardised moves. It is there, in the details that must not be left unchecked, that real defence can be found. We treat no foreclosure as final. We examine whether there is room for an objection, a suspension application, entry into the out-of-court workout, direct negotiation or another targeted action. The goal is not merely to gain time. The goal is to shift the balance, before enforcement appears as the only road.",
-    "deadlinesTitle": "Received a Payment Order or Notice from Cepal? Critical Deadlines",
-    "deadlinesIntro": "Greek procedural law grants no extensions on deadlines for challenging servicers. Once a deadline passes, the enforcement title becomes unassailable and the path to seizure opens unobstructed.",
+    "deadlinesTitle": "Received a Notice, Payment Order or Seizure from Cepal — The Deadlines That Must Not Be Missed",
+    "deadlinesIntro": "Not all documents from Cepal carry the same legal weight. A formal notice terminating the contract is the first serious warning step. A payment order turns the claim into a judicial title. A seizure means enforcement has already begun and, when it concerns real property, an auction is set along with it.",
     "deadlines": [
       {
-        "title": "Payment Order — 15 working days",
-        "desc": "An objection must be filed within 15 working days of service. After that, Cepal holds an enforceable title and can proceed to property seizure."
+        "title": "Formal notice terminating the contract",
+        "desc": "With a formal notice terminating the contract, we do not stay idle. The debt is now presented as overdue and due, and the way to the next move is open. At this stage there may not yet be an objection deadline, but there is time to review the case, to respond formally, to negotiate and to prepare a defence before the claim takes a judicial form."
       },
       {
-        "title": "Seizure — 45 days",
-        "desc": "The objection against enforcement must be filed within 45 days of seizure. At this stage, the authority chain, the debt amount, and procedural defects can all be challenged."
+        "title": "Payment order",
+        "desc": "With a payment order, we act immediately. An objection is filed within fifteen working days of its service, when the debtor's residence or seat is in Greece. If the residence or seat is abroad or unknown, the deadline is thirty working days. If this deadline is missed, the debtor's position is decisively weakened."
       },
       {
-        "title": "Before the Auction",
-        "desc": "Even after an auction has been scheduled, the file must be reviewed immediately. A suspension is not automatic, but it can be pursued in court when there are lawful and documented grounds. The earlier you act, the more procedural tools are available. But even when time is running short, we do not give up before checking what can really be done."
+        "title": "Seizure",
+        "desc": "With a seizure, there is no room for half-measures. An objection against enforcement, on grounds concerning the claim, the writ of execution, the preliminary procedure and the seizure itself, is filed within forty-five days from the date of seizure. If a suspension of the auction must also be sought, that step is examined separately and must be taken at the right time."
       }
     ],
-    "deadlinesWarning": "The clock started the day Cepal served the document. Do not wait for a convenient moment — bring the file for review today.",
+    "deadlinesWarning": "Greek law does not wait for the debtor to recover from the shock. Every stage opens a window for action that closes at some point. That is why the case must be reviewed from the start, before enforcement appears as the only road.",
     "cta1Title": "Do you have a Cepal document in front of you?",
     "cta1Text": "Immediate first review: what was served, which deadline is running, what options you have. Call 2310 545 261 or send the contact form.",
     "negotiationTitle": "Negotiation Strategy: Achieving a Viable Debt Settlement with Cepal",
