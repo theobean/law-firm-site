@@ -357,7 +357,7 @@
     "privacySection6Title": "6. Cookies",
     "privacySection6": "The website uses technically necessary cookies for its basic operation. We do not use our own tracking cookies. The contact page embeds a Google map (Google Maps), which may set cookies and collect your IP address when loaded, in accordance with Google's privacy policy.",
     "privacySection7Title": "7. Providers & Data Processors",
-    "privacySection7": "To operate the website we work with the following providers, who act as data processors: (a) Web3Forms — delivery of contact form messages; (b) Vercel — website hosting and automatic technical logging (logs, IP); (c) Google Maps — display of the map on the contact page. These providers process data solely for the above purposes and are bound by their own privacy policies and GDPR requirements.",
+    "privacySection7": "To operate the website we work with the following providers, who act as data processors: (a) Web3Forms — delivery of contact form messages; (b) Vercel — website hosting and automatic technical logging (logs, IP); (c) Google Maps — display of the map on the contact page; (d) Brevo (Sendinblue SAS, France) — management of newsletter subscriptions and delivery of newsletter emails. Brevo stores data within the European Union. These providers process data solely for the above purposes and are bound by their own privacy policies and GDPR requirements.",
     "termsTitle": "Terms of Use",
     "termsIntro": "The use of this website is governed by the following terms. By browsing this website, you unconditionally accept them.",
     "termsSection1Title": "1. Informational nature",

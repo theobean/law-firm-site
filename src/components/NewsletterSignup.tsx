@@ -15,7 +15,7 @@ const i18n = {
     success: "Σας ευχαριστούμε για την εγγραφή!",
     successDetail: "Θα λαμβάνετε τα νέα άρθρα του γραφείου μας.",
     error: "Παρουσιάστηκε σφάλμα. Δοκιμάστε ξανά.",
-    privacy: "Δεν μοιραζόμαστε τη διεύθυνσή σας με τρίτους. Μπορείτε να διαγραφείτε όποτε θελήσετε.",
+    privacy: "Δεν κοινοποιούμε τη διεύθυνσή σας σε τρίτους για διαφημιστικούς σκοπούς. Μπορείτε να διαγραφείτε όποτε θελήσετε.",
   },
   en: {
     eyebrow: "NEWSLETTER",
@@ -27,7 +27,7 @@ const i18n = {
     success: "Thank you for subscribing!",
     successDetail: "You will receive our new articles.",
     error: "Something went wrong. Please try again.",
-    privacy: "We do not share your address with third parties. You can unsubscribe at any time.",
+    privacy: "We will not share your address with third parties for marketing purposes. You can unsubscribe at any time.",
   },
   de: {
     eyebrow: "NEWSLETTER",
@@ -39,7 +39,7 @@ const i18n = {
     success: "Vielen Dank für Ihre Anmeldung!",
     successDetail: "Sie erhalten unsere neuen Artikel.",
     error: "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
-    privacy: "Wir geben Ihre Adresse nicht an Dritte weiter. Sie können sich jederzeit abmelden.",
+    privacy: "Wir geben Ihre Adresse nicht zu Werbezwecken an Dritte weiter. Sie können sich jederzeit abmelden.",
   },
 };
 
