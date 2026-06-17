@@ -11,6 +11,7 @@
     "@portabletext/react": "^6.2.0",
     "@sanity/image-url": "^2.1.1",
     "@sanity/vision": "^5.26.0",
+    "@vercel/analytics": "^2.0.1",
     "lucide-react": "^1.16.0",
     "next": "16.2.6",
     "next-intl": "^4.12.0",

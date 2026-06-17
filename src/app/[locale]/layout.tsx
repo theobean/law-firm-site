@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
 import UrgentCTABar from "@/components/UrgentCTABar";
 import ScrollToTop from "@/components/ScrollToTop";
+import { Analytics } from "@vercel/analytics/next";
 import "../globals.css";
 
 const inter = Inter({ subsets: ["latin", "greek"], variable: "--font-inter" });
@@ -200,6 +201,7 @@ export default async function LocaleLayout({
           <UrgentCTABar />
           <ScrollToTop />
         </NextIntlClientProvider>
+        <Analytics />
       </body>
     </html>
   );
