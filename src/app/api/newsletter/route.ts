@@ -15,14 +15,12 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: "Invalid email" }, { status: 400 });
     }
 
-    const apiKey = process.env.BREVO_API_KEY;
-    const listId = Number(process.env.BREVO_LIST_ID);
+    const apiKey = (process.env.BREVO_API_KEY ?? "").trim();
+    const listId = Number((process.env.BREVO_LIST_ID ?? "").trim());
 
     if (!apiKey || !listId) {
-      // Env vars not yet configured on the server. Don't break the form — log and
-      // return success so the visitor sees confirmation; the email is just lost.
-      console.error("Brevo env vars missing (BREVO_API_KEY, BREVO_LIST_ID)");
-      return NextResponse.json({ success: true });
+      console.error("Brevo env vars missing", { hasKey: !!apiKey, listId });
+      return NextResponse.json({ success: false, error: "Server config: missing env vars", debug: { hasKey: !!apiKey, listId } }, { status: 500 });
     }
 
     const res = await fetch("https://api.brevo.com/v3/contacts", {
@@ -40,8 +38,6 @@ export async function POST(req: Request) {
       }),
     });
 
-    // Brevo returns 201 (created) or 204 (updated). 400 with code "duplicate_parameter"
-    // means the contact already exists in this list — treat as success.
     if (res.ok) return NextResponse.json({ success: true });
 
     const body = await res.json().catch(() => ({}));
@@ -50,7 +46,13 @@ export async function POST(req: Request) {
     }
 
     console.error("Brevo error", res.status, body);
-    return NextResponse.json({ success: false, error: "Subscription failed" }, { status: 502 });
+    // Temporary: surface Brevo's error code/message in response so we can diagnose
+    // without needing Vercel function logs. Remove once newsletter is verified.
+    return NextResponse.json({
+      success: false,
+      error: "Subscription failed",
+      debug: { status: res.status, brevo: body },
+    }, { status: 502 });
   } catch (err) {
     console.error("Newsletter route error", err);
     return NextResponse.json({ success: false, error: "Server error" }, { status: 500 });
