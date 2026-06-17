@@ -58,15 +58,12 @@ export default function NewsletterSignup({ locale }: { locale: string }) {
   async function onSubmit(data: FormData) {
     setErrorMsg(null);
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch("/api/newsletter", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
-          subject: `Νέα εγγραφή Newsletter: ${data.email}`,
-          from_name: "Δικηγορικό Γραφείο Παπαϊωάννου — Newsletter",
           email: data.email,
-          message: `Νέα εγγραφή στο newsletter από: ${data.email} (γλώσσα: ${locale})`,
+          locale,
           botcheck: data.botcheck,
         }),
       });
