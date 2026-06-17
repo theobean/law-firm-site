@@ -20,7 +20,7 @@ export async function POST(req: Request) {
 
     if (!apiKey || !listId) {
       console.error("Brevo env vars missing", { hasKey: !!apiKey, listId });
-      return NextResponse.json({ success: false, error: "Server config: missing env vars", debug: { hasKey: !!apiKey, listId } }, { status: 500 });
+      return NextResponse.json({ success: false, error: "Server config error" }, { status: 500 });
     }
 
     const res = await fetch("https://api.brevo.com/v3/contacts", {
@@ -46,13 +46,7 @@ export async function POST(req: Request) {
     }
 
     console.error("Brevo error", res.status, body);
-    // Temporary: surface Brevo's error code/message in response so we can diagnose
-    // without needing Vercel function logs. Remove once newsletter is verified.
-    return NextResponse.json({
-      success: false,
-      error: "Subscription failed",
-      debug: { status: res.status, brevo: body },
-    }, { status: 502 });
+    return NextResponse.json({ success: false, error: "Subscription failed" }, { status: 502 });
   } catch (err) {
     console.error("Newsletter route error", err);
     return NextResponse.json({ success: false, error: "Server error" }, { status: 500 });
