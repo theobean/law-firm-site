@@ -5,6 +5,8 @@ import AuctionBanner from "@/components/AuctionBanner";
 import PracticeAreasGrid from "@/components/PracticeAreasGrid";
 import StatsSection from "@/components/StatsSection";
 import AboutTeaser from "@/components/AboutTeaser";
+import LatestArticles from "@/components/LatestArticles";
+import NewsletterSignup from "@/components/NewsletterSignup";
 
 const EL_KEYWORDS = [
   "πλειστηριασμοί δικηγόρος Θεσσαλονίκη",
@@ -84,7 +86,12 @@ export async function generateMetadata({
   };
 }
 
-export default function HomePage() {
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
   return (
     <>
       <Hero />
@@ -92,6 +99,8 @@ export default function HomePage() {
       <PracticeAreasGrid preview />
       <StatsSection />
       <AboutTeaser />
+      <LatestArticles locale={locale} />
+      <NewsletterSignup locale={locale} />
     </>
   );
 }
