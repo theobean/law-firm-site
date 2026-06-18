@@ -26,9 +26,8 @@ export default function UrgentCTABar() {
 
   return (
     <div
-      style={{ bottom: "var(--cookie-banner-height, 0px)" }}
-      className={`fixed left-0 right-0 z-40 transition-[transform,bottom] duration-500 ease-out ${
-        visible ? "translate-y-0" : "translate-y-full"
+      className={`overflow-hidden transition-[max-height] duration-500 ease-out ${
+        visible ? "max-h-40" : "max-h-0"
       }`}
     >
       <div className="bg-primary border-t-2 border-accent shadow-2xl">

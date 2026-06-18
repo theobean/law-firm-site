@@ -197,8 +197,10 @@ export default async function LocaleLayout({
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />
-          <CookieBanner />
-          <UrgentCTABar />
+          <div className="fixed inset-x-0 bottom-0 z-50 flex flex-col">
+            <UrgentCTABar />
+            <CookieBanner />
+          </div>
           <ScrollToTop />
         </NextIntlClientProvider>
         <Analytics />
