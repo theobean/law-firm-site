@@ -84,32 +84,44 @@ export default function CookieBanner() {
   if (!visible) return null;
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:bottom-6 md:max-w-md z-50 bg-primary text-white rounded-sm shadow-2xl border border-accent/30 overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-1 bg-accent" />
-      <div className="p-5 relative">
-        <div className="flex items-start gap-3 mb-4">
-          <Cookie className="text-accent flex-shrink-0 mt-1" size={20} />
-          <p className="text-sm leading-relaxed text-white/80">{t("message")}</p>
-        </div>
-        <div className="flex flex-wrap items-center gap-3 mt-4">
-          <button
-            onClick={accept}
-            className="bg-accent hover:bg-accent/90 text-white text-sm font-semibold px-5 py-2 rounded-sm transition-colors"
-          >
-            {t("accept")}
-          </button>
-          <button
-            onClick={reject}
-            className="border border-white/30 hover:border-white/60 text-white text-sm font-semibold px-5 py-2 rounded-sm transition-colors"
-          >
-            {t("reject")}
-          </button>
-          <Link
-            href={`/${locale}/privacy`}
-            className="text-white/60 hover:text-accent text-xs underline ml-auto"
-          >
-            {t("learnMore")}
-          </Link>
+    <div className="fixed inset-x-0 bottom-0 z-50 bg-primary/95 backdrop-blur-md text-white border-t border-accent/40 shadow-[0_-8px_32px_rgba(0,0,0,0.4)]">
+      <div className="max-w-6xl mx-auto px-6 py-5">
+        <div className="flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
+
+          {/* Left: icon + text */}
+          <div className="flex items-start gap-4 flex-1 min-w-0">
+            <div className="hidden md:flex w-10 h-10 rounded-full bg-accent/15 items-center justify-center flex-shrink-0">
+              <Cookie className="text-accent" size={18} />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-[13px] md:text-[13.5px] leading-relaxed text-white/85">
+                {t("message")}{" "}
+                <Link
+                  href={`/${locale}/privacy`}
+                  className="text-accent/90 hover:text-accent underline underline-offset-2"
+                >
+                  {t("learnMore")}
+                </Link>
+              </p>
+            </div>
+          </div>
+
+          {/* Right: actions */}
+          <div className="flex items-center gap-2.5 flex-shrink-0">
+            <button
+              onClick={reject}
+              className="text-white/75 hover:text-white text-[13px] font-medium px-4 py-2 border border-white/20 hover:border-white/40 rounded-sm transition-colors whitespace-nowrap"
+            >
+              {t("reject")}
+            </button>
+            <button
+              onClick={accept}
+              className="bg-accent hover:bg-accent/90 text-primary text-[13px] font-semibold px-5 py-2 rounded-sm transition-colors whitespace-nowrap"
+            >
+              {t("accept")}
+            </button>
+          </div>
+
         </div>
       </div>
     </div>
