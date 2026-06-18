@@ -1,6 +1,9 @@
+"use client";
+
 import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
 import { Scale, MapPin, Phone, Mail, Clock, ChevronRight } from "lucide-react";
+import { openCookieSettings } from "./CookieBanner";
 
 export default function Footer() {
   const t = useTranslations();
@@ -143,6 +146,7 @@ export default function Footer() {
           <div className="flex gap-4">
             <Link href={`/${locale}/privacy`} className="hover:text-accent transition-colors">{t("footer.privacy")}</Link>
             <Link href={`/${locale}/terms`} className="hover:text-accent transition-colors">{t("footer.terms")}</Link>
+            <button onClick={openCookieSettings} className="hover:text-accent transition-colors">{t("cookies.settings")}</button>
           </div>
         </div>
       </div>

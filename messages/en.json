@@ -101,9 +101,11 @@
     "termsTitle": "Terms of Use"
   },
   "cookies": {
-    "message": "We use cookies to ensure the best experience on our website. By continuing to browse, you accept their use.",
+    "message": "We use analytics cookies (Google Analytics) to improve your experience. They will not load unless you give explicit consent. You can change your mind anytime via Cookie Settings in the footer.",
     "accept": "Accept",
-    "learnMore": "Learn more"
+    "reject": "Reject",
+    "learnMore": "Learn more",
+    "settings": "Cookie Settings"
   },
   "notFound": {
     "title": "Page not found",

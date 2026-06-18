@@ -98,9 +98,11 @@
     "termsTitle": "Nutzungsbedingungen"
   },
   "cookies": {
-    "message": "Wir verwenden Cookies, um Ihnen die bestmögliche Erfahrung auf unserer Website zu bieten. Durch weiteres Surfen stimmen Sie deren Verwendung zu.",
+    "message": "Wir verwenden Analyse-Cookies (Google Analytics), um Ihre Erfahrung zu verbessern. Diese werden nur mit Ihrer ausdrücklichen Zustimmung geladen. Sie können Ihre Auswahl jederzeit über die Cookie-Einstellungen im Footer ändern.",
     "accept": "Akzeptieren",
-    "learnMore": "Mehr erfahren"
+    "reject": "Ablehnen",
+    "learnMore": "Mehr erfahren",
+    "settings": "Cookie-Einstellungen"
   },
   "notFound": {
     "title": "Seite nicht gefunden",
