@@ -103,7 +103,7 @@
   "cookies": {
     "message": "We use analytics cookies (Google Analytics) to improve your experience. They will not load unless you give explicit consent. You can change your mind anytime via Cookie Settings in the footer.",
     "accept": "Accept",
-    "reject": "Reject",
+    "reject": "Essential only",
     "learnMore": "Learn more",
     "settings": "Cookie Settings"
   },
