@@ -1,6 +1,7 @@
 import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import HeroVideo from "./HeroVideo";
 
 export default function Hero() {
   const t = useTranslations("hero");
@@ -8,32 +9,8 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-[90vh] flex items-center bg-primary overflow-hidden">
-      {/* Background video */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="metadata"
-        poster="/hero-office-poster.jpg"
-        className="absolute inset-0 w-full h-full object-cover opacity-25"
-        aria-hidden="true"
-      >
-        <source src="/hero-office.webm" type="video/webm" />
-        <source src="/hero-office.mp4" type="video/mp4" />
-      </video>
-
-      {/* Warm tint overlay (slightly amber to harmonize with brand) */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/70 via-primary/60 to-primary/80 mix-blend-multiply" aria-hidden="true" />
-      <div className="absolute inset-0 bg-accent/[0.04]" aria-hidden="true" />
-
-      {/* Background pattern */}
-      <div className="absolute inset-0 opacity-[0.04]">
-        <div className="absolute inset-0" style={{
-          backgroundImage: "repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%)",
-          backgroundSize: "20px 20px"
-        }} />
-      </div>
+      {/* Cinematic background video with all overlays */}
+      <HeroVideo />
 
       {/* Accent line */}
       <div className="absolute left-0 top-1/4 bottom-1/4 w-1 bg-accent" />

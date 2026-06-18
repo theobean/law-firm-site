@@ -66,3 +66,9 @@ body {
     transform: translateY(0);
   }
 }
+
+@keyframes hero-zoom {
+  from { transform: scale(1.12); }
+  to   { transform: scale(1.0); }
+}
+.hero-zoom { animation: hero-zoom 14s cubic-bezier(0.22, 0.61, 0.36, 1) forwards; transform-origin: center 60%; }
