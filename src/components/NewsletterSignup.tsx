@@ -76,27 +76,27 @@ export default function NewsletterSignup({ locale }: { locale: string }) {
   }
 
   return (
-    <section className="bg-primary py-20 grain relative overflow-hidden">
+    <section className="bg-gray-50 py-20 relative overflow-hidden border-t border-b border-gray-200">
       <div className="max-w-4xl mx-auto px-6 text-center">
         <p className="text-accent text-xs uppercase tracking-widest font-semibold mb-3">
           {t.eyebrow}
         </p>
-        <h2 className="text-3xl md:text-4xl font-playfair font-bold text-white mb-4 leading-tight">
+        <h2 className="text-3xl md:text-4xl font-playfair font-bold text-primary mb-4 leading-tight">
           {t.heading}
         </h2>
-        <p className="text-white/70 text-base mb-8 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-gray-600 text-base mb-8 max-w-2xl mx-auto leading-relaxed">
           {t.sub}
         </p>
 
         {submitted ? (
           <div className="max-w-md mx-auto">
-            <div className="bg-accent/15 border border-accent/40 rounded-sm p-6 flex items-center gap-4">
+            <div className="bg-white border border-accent/40 rounded-sm p-6 flex items-center gap-4 shadow-sm">
               <div className="w-12 h-12 rounded-full bg-accent flex items-center justify-center flex-shrink-0">
-                <Check size={22} className="text-primary" strokeWidth={3} />
+                <Check size={22} className="text-white" strokeWidth={3} />
               </div>
               <div className="text-left">
-                <p className="text-white font-semibold">{t.success}</p>
-                <p className="text-white/60 text-sm mt-1">{t.successDetail}</p>
+                <p className="text-primary font-semibold">{t.success}</p>
+                <p className="text-gray-600 text-sm mt-1">{t.successDetail}</p>
               </div>
             </div>
           </div>
@@ -105,19 +105,19 @@ export default function NewsletterSignup({ locale }: { locale: string }) {
             <input type="checkbox" {...register("botcheck")} className="hidden" tabIndex={-1} autoComplete="off" />
             <div className="flex flex-col sm:flex-row gap-3">
               <div className="relative flex-grow">
-                <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" />
+                <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
                 <input
                   type="email"
                   placeholder={t.placeholder}
                   {...register("email", { required: true, pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ })}
-                  className="w-full bg-white/10 border border-white/20 focus:border-accent text-white placeholder:text-white/40 rounded-sm pl-11 pr-4 py-3 outline-none transition-colors"
+                  className="w-full bg-white border border-gray-300 focus:border-accent text-primary placeholder:text-gray-400 rounded-sm pl-11 pr-4 py-3 outline-none transition-colors"
                   disabled={isSubmitting}
                 />
               </div>
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 active:bg-accent/80 text-primary font-semibold px-6 py-3 rounded-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+                className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent/90 active:bg-accent/80 text-white font-semibold px-6 py-3 rounded-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
               >
                 {isSubmitting ? t.sending : (<>{t.button} <Send size={14} /></>)}
               </button>
@@ -128,7 +128,7 @@ export default function NewsletterSignup({ locale }: { locale: string }) {
             {errorMsg && (
               <p className="text-accent text-xs mt-2 text-left">{errorMsg}</p>
             )}
-            <p className="text-white/40 text-xs mt-4 leading-relaxed">{t.privacy}</p>
+            <p className="text-gray-500 text-xs mt-4 leading-relaxed">{t.privacy}</p>
           </form>
         )}
       </div>
