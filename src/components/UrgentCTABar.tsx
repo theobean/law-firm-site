@@ -26,7 +26,8 @@ export default function UrgentCTABar() {
 
   return (
     <div
-      className={`fixed bottom-0 left-0 right-0 z-50 transition-transform duration-500 ease-out ${
+      style={{ bottom: "var(--cookie-banner-height, 0px)" }}
+      className={`fixed left-0 right-0 z-40 transition-[transform,bottom] duration-500 ease-out ${
         visible ? "translate-y-0" : "translate-y-full"
       }`}
     >

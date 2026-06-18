@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
 import { Cookie } from "lucide-react";
@@ -54,6 +54,7 @@ export default function CookieBanner() {
   const t = useTranslations("cookies");
   const locale = useLocale();
   const [visible, setVisible] = useState(false);
+  const barRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -68,6 +69,29 @@ export default function CookieBanner() {
     window.addEventListener(REOPEN_EVENT, onReopen);
     return () => window.removeEventListener(REOPEN_EVENT, onReopen);
   }, []);
+
+  // Expose banner height as CSS variable so other fixed elements (UrgentCTABar)
+  // can stack above it without overlap.
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    const root = document.documentElement;
+    if (!visible) {
+      root.style.setProperty("--cookie-banner-height", "0px");
+      return;
+    }
+    const el = barRef.current;
+    if (!el) return;
+    const setHeight = () => {
+      root.style.setProperty("--cookie-banner-height", `${el.offsetHeight}px`);
+    };
+    setHeight();
+    const ro = new ResizeObserver(setHeight);
+    ro.observe(el);
+    return () => {
+      ro.disconnect();
+      root.style.setProperty("--cookie-banner-height", "0px");
+    };
+  }, [visible]);
 
   function accept() {
     localStorage.setItem(STORAGE_KEY, "accepted");
@@ -84,7 +108,7 @@ export default function CookieBanner() {
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 bg-primary/95 backdrop-blur-md text-white border-t border-accent/40 shadow-[0_-8px_32px_rgba(0,0,0,0.4)]">
+    <div ref={barRef} className="fixed inset-x-0 bottom-0 z-50 bg-primary/95 backdrop-blur-md text-white border-t border-accent/40 shadow-[0_-8px_32px_rgba(0,0,0,0.4)]">
       <div className="max-w-6xl mx-auto px-6 py-5">
         <div className="flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
 
