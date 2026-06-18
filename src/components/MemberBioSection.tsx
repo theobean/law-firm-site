@@ -14,6 +14,7 @@ const initials: Record<MemberKey, string> = {
 
 const photos: Partial<Record<MemberKey, string>> = {
   georgios: "/γεωργιος.jpeg",
+  "lamprinι": "/λαμπρινη.png",
 };
 
 const PREVIEW_COUNT = 2;
