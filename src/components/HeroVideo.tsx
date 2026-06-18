@@ -51,8 +51,8 @@ export default function HeroVideo() {
           playsInline
           preload="metadata"
           poster="/hero-office-poster.jpg"
-          className="hero-zoom absolute inset-0 w-full h-full object-cover opacity-50"
-          style={{ filter: "contrast(1.06) saturate(1.1) brightness(1.05)" }}
+          className="hero-zoom absolute inset-0 w-full h-full object-cover opacity-40"
+          style={{ filter: "contrast(1.07) saturate(1.1) brightness(1.0)" }}
           aria-hidden="true"
         >
           <source src="/hero-office.webm" type="video/webm" />
@@ -72,7 +72,7 @@ export default function HeroVideo() {
 
       {/* Navy brand tint (keeps text readable) */}
       <div
-        className="absolute inset-0 pointer-events-none bg-gradient-to-br from-primary/45 via-primary/30 to-primary/55 mix-blend-multiply"
+        className="absolute inset-0 pointer-events-none bg-gradient-to-br from-primary/55 via-primary/40 to-primary/65 mix-blend-multiply"
         aria-hidden="true"
       />
 
@@ -81,7 +81,7 @@ export default function HeroVideo() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.35) 100%)",
+            "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.45) 100%)",
         }}
         aria-hidden="true"
       />
