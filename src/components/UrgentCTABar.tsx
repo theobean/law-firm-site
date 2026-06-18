@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
-import { X, ArrowRight } from "lucide-react";
+import { X, ArrowRight, AlertTriangle } from "lucide-react";
 
 const SESSION_KEY = "urgent-cta-dismissed";
 
@@ -27,28 +27,32 @@ export default function UrgentCTABar() {
   return (
     <div
       className={`overflow-hidden transition-[max-height] duration-500 ease-out ${
-        visible ? "max-h-40" : "max-h-0"
+        visible ? "max-h-60" : "max-h-0"
       }`}
     >
       <div className="bg-primary border-t-2 border-accent shadow-2xl">
 
         {/* ── MOBILE layout ── */}
-        <div className="sm:hidden flex items-center gap-2 px-3 py-2.5">
+        <div className="sm:hidden px-3 pt-2.5 pb-3 relative">
+          <button
+            onClick={dismiss}
+            aria-label="Κλείσιμο"
+            className="absolute top-1.5 right-1.5 text-white/40 hover:text-white/80 transition-colors p-1.5"
+          >
+            <X size={14} />
+          </button>
+          <div className="flex items-start gap-2 mb-2 pr-7">
+            <AlertTriangle size={16} className="text-accent flex-shrink-0 mt-0.5" />
+            <p className="text-white text-[12.5px] leading-snug font-medium">{t("text")}</p>
+          </div>
           <Link
             href={`/${locale}/contact`}
             onClick={dismiss}
-            className="flex-1 flex items-center justify-center gap-1.5 bg-accent text-primary text-xs font-bold tracking-wide uppercase px-3 py-2.5 rounded-sm hover:bg-accent/90 transition-colors"
+            className="flex items-center justify-center gap-1.5 bg-accent text-primary text-xs font-bold tracking-wide uppercase px-3 py-2.5 rounded-sm hover:bg-accent/90 transition-colors w-full"
           >
             {t("cta")}
             <ArrowRight size={13} />
           </Link>
-          <button
-            onClick={dismiss}
-            aria-label="Κλείσιμο"
-            className="flex-shrink-0 text-white/40 hover:text-white/80 transition-colors p-1.5"
-          >
-            <X size={16} />
-          </button>
         </div>
 
         {/* ── DESKTOP layout ── */}
