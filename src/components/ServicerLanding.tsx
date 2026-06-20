@@ -162,18 +162,24 @@ export default function ServicerLanding({
           <h3 className="text-xl font-playfair font-bold text-primary mb-4 border-l-4 border-accent pl-4">
             {t("anakopiTitle")}
           </h3>
-          <p className="text-gray-600 leading-relaxed mb-6">{t("anakopiText1")}</p>
-          <ul className="space-y-4 mb-6">
-            {anakopiPoints.map((p, i) => (
-              <li key={i} className="flex items-start gap-3 text-gray-700">
-                <div className="mt-1 w-5 h-5 rounded-full bg-accent/15 border border-accent flex items-center justify-center flex-shrink-0">
-                  <Scale size={11} className="text-accent" strokeWidth={2.5} />
-                </div>
-                <span className="leading-relaxed">{p}</span>
-              </li>
-            ))}
-          </ul>
-          <p className="text-gray-600 leading-relaxed mb-16">{t("anakopiText2")}</p>
+          {t("anakopiText1").split("\n\n").map((para, i) => (
+            <p key={i} className="text-gray-600 leading-relaxed mb-6">{para}</p>
+          ))}
+          {anakopiPoints.length > 0 && (
+            <ul className="space-y-4 mb-6">
+              {anakopiPoints.map((p, i) => (
+                <li key={i} className="flex items-start gap-3 text-gray-700">
+                  <div className="mt-1 w-5 h-5 rounded-full bg-accent/15 border border-accent flex items-center justify-center flex-shrink-0">
+                    <Scale size={11} className="text-accent" strokeWidth={2.5} />
+                  </div>
+                  <span className="leading-relaxed">{p}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+          {t("anakopiText2").split("\n\n").map((para, i, arr) => (
+            <p key={i} className={`text-gray-600 leading-relaxed ${i === arr.length - 1 ? "mb-16" : "mb-6"}`}>{para}</p>
+          ))}
         </ScrollReveal>
 
         {/* Related decisions */}
