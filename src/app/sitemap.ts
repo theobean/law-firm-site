@@ -25,6 +25,14 @@ const staticPaths = [
   "/banks/alpha",
   "/banks/piraeus",
   "/banks/ethniki",
+  "/banks/eurobank/epicheiriseis",
+  "/banks/alpha/epicheiriseis",
+  "/banks/piraeus/epicheiriseis",
+  "/banks/ethniki/epicheiriseis",
+  "/funds/dovalue/epicheiriseis",
+  "/funds/intrum/epicheiriseis",
+  "/funds/cepal/epicheiriseis",
+  "/funds/qquant/epicheiriseis",
 ];
 const practiceAreas = [
   "banking",

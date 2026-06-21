@@ -24,5 +24,5 @@ export default function AlphaBankPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = use(params);
-  return <ServicerLanding locale={locale} namespace="alpha" />;
+  return <ServicerLanding locale={locale} namespace="alpha" counterpartHref={`/${locale}/banks/alpha/epicheiriseis`} />;
 }

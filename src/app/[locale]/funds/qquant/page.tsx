@@ -24,5 +24,5 @@ export default function QquantPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = use(params);
-  return <ServicerLanding locale={locale} namespace="qquant" />;
+  return <ServicerLanding locale={locale} namespace="qquant" counterpartHref={`/${locale}/funds/qquant/epicheiriseis`} />;
 }

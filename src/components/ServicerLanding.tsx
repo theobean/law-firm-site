@@ -13,9 +13,13 @@ import ServicerDecisions from "@/components/ServicerDecisions";
 export default function ServicerLanding({
   locale,
   namespace,
+  audience = "individual",
+  counterpartHref,
 }: {
   locale: string;
   namespace: string;
+  audience?: "individual" | "business";
+  counterpartHref?: string;
 }) {
   const t = useTranslations(namespace);
   const tr = useTranslations("related");
@@ -60,6 +64,16 @@ export default function ServicerLanding({
       </section>
 
       <section className="max-w-4xl mx-auto px-6 py-16">
+        {audience === "business" && counterpartHref && (
+          <ScrollReveal direction="up" delay={0}>
+            <Link
+              href={counterpartHref}
+              className="inline-flex items-center gap-2 text-accent font-semibold text-sm hover:gap-3 transition-all mb-8"
+            >
+              <ArrowRight size={15} className="rotate-180" /> {tb("toIndividualCta")}
+            </Link>
+          </ScrollReveal>
+        )}
         <ScrollReveal direction="up" delay={0}>
           <p className="text-gray-700 text-lg leading-relaxed mb-12">{t("intro")}</p>
         </ScrollReveal>
@@ -80,24 +94,34 @@ export default function ServicerLanding({
           <p className="text-gray-600 leading-relaxed mb-16">{t("protectText")}</p>
         </ScrollReveal>
 
-        {/* Businesses & professionals */}
-        <ScrollReveal direction="up" delay={0.1}>
-          <h2 className="text-2xl font-playfair font-bold text-primary mb-6 border-l-4 border-accent pl-4">
-            {tb("title")}
-          </h2>
-          <p className="text-gray-600 leading-relaxed mb-6">{tb("text")}</p>
-          <ul className="space-y-4 mb-6">
-            {businessPoints.map((p, i) => (
-              <li key={i} className="flex items-start gap-3 text-gray-700">
-                <div className="mt-1 w-5 h-5 rounded-full bg-accent/15 border border-accent flex items-center justify-center flex-shrink-0">
-                  <Check size={12} className="text-accent" strokeWidth={3} />
-                </div>
-                <span className="leading-relaxed">{p}</span>
-              </li>
-            ))}
-          </ul>
-          <p className="text-primary font-medium leading-relaxed mb-16">{tb("outro")}</p>
-        </ScrollReveal>
+        {/* Businesses & professionals — shown only on the individual-focused page */}
+        {audience === "individual" && (
+          <ScrollReveal direction="up" delay={0.1}>
+            <h2 className="text-2xl font-playfair font-bold text-primary mb-6 border-l-4 border-accent pl-4">
+              {tb("title")}
+            </h2>
+            <p className="text-gray-600 leading-relaxed mb-6">{tb("text")}</p>
+            <ul className="space-y-4 mb-6">
+              {businessPoints.map((p, i) => (
+                <li key={i} className="flex items-start gap-3 text-gray-700">
+                  <div className="mt-1 w-5 h-5 rounded-full bg-accent/15 border border-accent flex items-center justify-center flex-shrink-0">
+                    <Check size={12} className="text-accent" strokeWidth={3} />
+                  </div>
+                  <span className="leading-relaxed">{p}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="text-primary font-medium leading-relaxed mb-6">{tb("outro")}</p>
+            {counterpartHref && (
+              <Link
+                href={counterpartHref}
+                className="inline-flex items-center gap-2 bg-primary/5 border border-primary/15 hover:border-accent text-primary font-semibold px-5 py-3 rounded-sm text-sm transition-colors mb-16"
+              >
+                {tb("toBusinessCta")} <ArrowRight size={16} className="text-accent" />
+              </Link>
+            )}
+          </ScrollReveal>
+        )}
 
         {/* H3: Deadlines */}
         <ScrollReveal direction="up" delay={0.1}>

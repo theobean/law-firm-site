@@ -24,5 +24,5 @@ export default function PiraeusBankPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = use(params);
-  return <ServicerLanding locale={locale} namespace="piraeus" />;
+  return <ServicerLanding locale={locale} namespace="piraeus" counterpartHref={`/${locale}/banks/piraeus/epicheiriseis`} />;
 }
