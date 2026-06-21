@@ -568,6 +568,17 @@
     "ctaButton": "Immediate File Review",
     "ctaPhone": "Call now: +30 2310 545 261"
   },
+  "business": {
+    "title": "Businesses and Self-Employed Professionals",
+    "text": "Enforcement does not concern home loans only. Professional and corporate loans, working capital, current accounts, bond loans and personal guarantees of managers and partners equally lead to payment orders, seizures and auctions — often with larger amounts and more complex files. The logic of the defence stays the same, but the points to check are more.",
+    "points": [
+      "Professional and corporate loans: review of the contract, the securities, the balance and the legal standing of the party pursuing.",
+      "Personal guarantees: when the entrepreneur, manager or partner has guaranteed, the extent and limits of liability are checked separately — a guarantee is not always unlimited or valid.",
+      "Business property and equipment: seizure of business premises, machinery or goods is met with an objection and an application for suspension, just like a home.",
+      "Out-of-court mechanism for businesses: settlement of debts to banks, funds, social security (EFKA) and the tax office in a single framework, where the conditions are met."
+    ],
+    "outro": "For businesses and professionals, time and the proper organisation of the file count double — the amounts are larger and the consequences for viability immediate."
+  },
   "related": {
     "title": "See also",
     "bankingLaw": "Banking Law",

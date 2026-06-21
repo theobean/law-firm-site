@@ -19,11 +19,13 @@ export default function ServicerLanding({
 }) {
   const t = useTranslations(namespace);
   const tr = useTranslations("related");
+  const tb = useTranslations("business");
 
   const deadlines = t.raw("deadlines") as { title: string; desc: string }[];
   const negotiationPoints = t.raw("negotiationPoints") as string[];
   const anakopiPoints = t.raw("anakopiPoints") as string[];
   const faqItems = t.raw("faq") as { q: string; a: string }[];
+  const businessPoints = tb.raw("points") as string[];
 
   const faqSchema = {
     "@context": "https://schema.org",
@@ -76,6 +78,25 @@ export default function ServicerLanding({
             {t("protectTitle")}
           </h2>
           <p className="text-gray-600 leading-relaxed mb-16">{t("protectText")}</p>
+        </ScrollReveal>
+
+        {/* Businesses & professionals */}
+        <ScrollReveal direction="up" delay={0.1}>
+          <h2 className="text-2xl font-playfair font-bold text-primary mb-6 border-l-4 border-accent pl-4">
+            {tb("title")}
+          </h2>
+          <p className="text-gray-600 leading-relaxed mb-6">{tb("text")}</p>
+          <ul className="space-y-4 mb-6">
+            {businessPoints.map((p, i) => (
+              <li key={i} className="flex items-start gap-3 text-gray-700">
+                <div className="mt-1 w-5 h-5 rounded-full bg-accent/15 border border-accent flex items-center justify-center flex-shrink-0">
+                  <Check size={12} className="text-accent" strokeWidth={3} />
+                </div>
+                <span className="leading-relaxed">{p}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="text-primary font-medium leading-relaxed mb-16">{tb("outro")}</p>
         </ScrollReveal>
 
         {/* H3: Deadlines */}

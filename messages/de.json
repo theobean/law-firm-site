@@ -565,6 +565,17 @@
     "ctaButton": "Sofortige Aktenprüfung",
     "ctaPhone": "Jetzt anrufen: +30 2310 545 261"
   },
+  "business": {
+    "title": "Unternehmen und Selbstständige",
+    "text": "Die Zwangsvollstreckung betrifft nicht nur Wohnungsbaudarlehen. Gewerbe- und Unternehmensdarlehen, Betriebskapital, Kontokorrentkredite, Anleihedarlehen und persönliche Bürgschaften von Geschäftsführern und Gesellschaftern führen ebenso zu Zahlungsbefehlen, Pfändungen und Versteigerungen — oft mit höheren Beträgen und komplexeren Akten. Die Logik der Verteidigung bleibt dieselbe, aber es gibt mehr zu prüfen.",
+    "points": [
+      "Gewerbe- und Unternehmensdarlehen: Prüfung des Vertrags, der Sicherheiten, des Saldos und der Berechtigung der verfolgenden Partei.",
+      "Persönliche Bürgschaften: Wenn der Unternehmer, Geschäftsführer oder Gesellschafter gebürgt hat, werden Umfang und Grenzen der Haftung gesondert geprüft — eine Bürgschaft ist nicht immer unbegrenzt oder gültig.",
+      "Betriebsvermögen und Ausrüstung: Die Pfändung von Geschäftsräumen, Maschinen oder Waren wird mit einem Einspruch und einem Aussetzungsantrag begegnet, ebenso wie beim Wohnhaus.",
+      "Außergerichtlicher Mechanismus für Unternehmen: Regelung von Schulden gegenüber Banken, Fonds, Sozialversicherung (EFKA) und Finanzamt in einem einheitlichen Rahmen, sofern die Voraussetzungen vorliegen."
+    ],
+    "outro": "Für Unternehmen und Selbstständige zählen Zeit und die richtige Organisation der Akte doppelt — die Beträge sind höher und die Folgen für die Existenzfähigkeit unmittelbar."
+  },
   "related": {
     "title": "Siehe auch",
     "bankingLaw": "Bankrecht",
