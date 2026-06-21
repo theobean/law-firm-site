@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
-import { Menu, X, Scale, ChevronDown, ChevronRight, FileText, Tv, BookOpen, Gavel, Building2 } from "lucide-react";
+import { Menu, X, Scale, ChevronDown, ChevronRight, FileText, Tv, BookOpen, Gavel, Building2, Landmark } from "lucide-react";
 
 const localeConfig = {
   el: { flag: "/flags/gr.svg", label: "ΕΛ" },
@@ -103,16 +103,24 @@ export default function Navbar() {
     { href: `/${locale}/contact`, label: tNav("contact") },
   ];
 
-  const servicesLinks = [
-    { href: `/${locale}/funds`, label: tNav("funds"), icon: Building2 },
-    { href: `/${locale}/pleistariasmos`, label: tNav("pleistariasmos"), icon: Gavel },
-  ];
-
   const fundsSubLinks = [
     { href: `/${locale}/funds/dovalue`, label: "doValue" },
     { href: `/${locale}/funds/intrum`, label: "Intrum" },
     { href: `/${locale}/funds/cepal`, label: "Cepal" },
     { href: `/${locale}/funds/qquant`, label: "QQuant" },
+  ];
+
+  const banksSubLinks = [
+    { href: `/${locale}/banks/eurobank`, label: "Eurobank" },
+    { href: `/${locale}/banks/alpha`, label: "Alpha Bank" },
+    { href: `/${locale}/banks/piraeus`, label: "Τράπεζα Πειραιώς" },
+    { href: `/${locale}/banks/ethniki`, label: "Εθνική Τράπεζα" },
+  ];
+
+  const servicesLinks = [
+    { href: `/${locale}/funds`, label: tNav("funds"), icon: Building2, subLinks: fundsSubLinks },
+    { href: `/${locale}/banks/eurobank`, label: tNav("banks"), icon: Landmark, subLinks: banksSubLinks },
+    { href: `/${locale}/pleistariasmos`, label: tNav("pleistariasmos"), icon: Gavel, subLinks: null },
   ];
 
   const updatesLinks = [
@@ -205,12 +213,11 @@ export default function Navbar() {
             <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-primary border border-white/10 shadow-xl rounded-sm transition-all duration-150 ${
               servicesDropdownOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-1 pointer-events-none"
             }`}>
-              {servicesLinks.map(({ href, label, icon: Icon }) => {
-                const isFunds = href === `/${locale}/funds`;
+              {servicesLinks.map(({ href, label, icon: Icon, subLinks }) => {
                 const itemClass = `flex items-center gap-2.5 px-4 py-3 text-sm font-medium transition-colors ${
                   pathname.startsWith(href) ? "text-accent bg-accent/10" : "text-white/80 hover:text-accent hover:bg-white/5"
                 }`;
-                if (!isFunds) {
+                if (!subLinks) {
                   return (
                     <Link
                       key={href}
@@ -224,7 +231,7 @@ export default function Navbar() {
                   );
                 }
                 return (
-                  <div key={href} className="relative group/funds border-b border-white/5 last:border-0">
+                  <div key={href} className="relative group/sub border-b border-white/5 last:border-0">
                     <Link
                       href={href}
                       onClick={() => setServicesDropdownOpen(false)}
@@ -234,9 +241,9 @@ export default function Navbar() {
                       {label}
                       <ChevronRight size={12} className="ml-auto shrink-0 opacity-60" />
                     </Link>
-                    {/* Servicer flyout submenu */}
-                    <div className="absolute left-full top-0 w-36 bg-primary border border-white/10 shadow-xl rounded-sm overflow-hidden opacity-0 -translate-x-1 pointer-events-none transition-all duration-150 group-hover/funds:opacity-100 group-hover/funds:translate-x-0 group-hover/funds:pointer-events-auto">
-                      {fundsSubLinks.map((sub) => (
+                    {/* Flyout submenu */}
+                    <div className="absolute left-full top-0 w-36 bg-primary border border-white/10 shadow-xl rounded-sm overflow-hidden opacity-0 -translate-x-1 pointer-events-none transition-all duration-150 group-hover/sub:opacity-100 group-hover/sub:translate-x-0 group-hover/sub:pointer-events-auto">
+                      {subLinks.map((sub) => (
                         <Link
                           key={sub.href}
                           href={sub.href}
@@ -350,7 +357,7 @@ export default function Navbar() {
             />
           </button>
           <div className={`overflow-hidden transition-all duration-200 ${mobileServicesOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
-            {servicesLinks.map(({ href, label, icon: Icon }) => (
+            {servicesLinks.map(({ href, label, icon: Icon, subLinks }) => (
               <div key={href}>
                 <Link
                   href={href}
@@ -360,8 +367,8 @@ export default function Navbar() {
                   <Icon size={13} className="shrink-0" />
                   {label}
                 </Link>
-                {href === `/${locale}/funds` &&
-                  fundsSubLinks.map((sub) => (
+                {subLinks &&
+                  subLinks.map((sub) => (
                     <Link
                       key={sub.href}
                       href={sub.href}
