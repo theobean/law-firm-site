@@ -18,6 +18,7 @@ export default function ServicerLanding({
   namespace: string;
 }) {
   const t = useTranslations(namespace);
+  const tr = useTranslations("related");
 
   const deadlines = t.raw("deadlines") as { title: string; desc: string }[];
   const negotiationPoints = t.raw("negotiationPoints") as string[];
@@ -193,6 +194,31 @@ export default function ServicerLanding({
             {t("faqTitle")}
           </h2>
           <FaqAccordion items={faqItems} />
+        </ScrollReveal>
+
+        {/* See also — cross links to related areas */}
+        <ScrollReveal direction="up" delay={0.1}>
+          <div className="mt-16 pt-10 border-t border-gray-200">
+            <h2 className="text-xl font-playfair font-bold text-primary mb-5">{tr("title")}</h2>
+            <div className="grid sm:grid-cols-2 gap-3">
+              {[
+                { href: `/${locale}/practice-areas/banking`, label: tr("bankingLaw") },
+                { href: `/${locale}/practice-areas/extrajudicial`, label: tr("extrajudicial") },
+                { href: `/${locale}/pleistariasmos`, label: tr("foreclosure") },
+                { href: `/${locale}/funds`, label: tr("funds") },
+                { href: `/${locale}/banks`, label: tr("banks") },
+              ].map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className="group inline-flex items-center gap-2 text-gray-700 hover:text-accent border border-gray-200 hover:border-accent/40 rounded-sm px-4 py-3 text-sm font-medium transition-colors"
+                >
+                  <ArrowRight size={15} className="text-accent shrink-0 group-hover:translate-x-0.5 transition-transform" />
+                  {l.label}
+                </Link>
+              ))}
+            </div>
+          </div>
         </ScrollReveal>
       </section>
 
