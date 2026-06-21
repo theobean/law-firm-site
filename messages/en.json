@@ -568,6 +568,46 @@
     "ctaButton": "Immediate File Review",
     "ctaPhone": "Call now: +30 2310 545 261"
   },
+  "banks": {
+    "seoTitle": "Lawyer for Bank Loans – Foreclosures in Thessaloniki",
+    "seoDescription": "Eurobank, Alpha Bank, Piraeus Bank or National Bank of Greece loan in arrears? Objection, suspension, settlement with a haircut in Thessaloniki and across Greece. Tel: +30 2310 545 261.",
+    "heroCity": "Thessaloniki · 12 Leontos Sofou St.",
+    "heroTitle": "Lawyer for Bank Loans and Foreclosures",
+    "heroSubtitle": "Eurobank · Alpha Bank · Piraeus Bank · National Bank of Greece",
+    "intro": "When a bank loan falls into arrears, the case rarely stays with the bank itself. It is often transferred to a special purpose vehicle (fund) and management is taken over by a credit servicing company (servicer). Whatever the bank, the logic of the defence is the same: checking the legal standing, the transfer, the amount and every act of enforcement, within the deadlines that are running. Choose your bank for detailed information.",
+    "cardsTitle": "Choose your bank",
+    "cardCta": "View the page",
+    "cards": [
+      {
+        "slug": "eurobank",
+        "name": "Eurobank",
+        "desc": "Eurobank loans that have often passed to a fund and servicer. Objection, suspension and settlement aiming at a debt write-off."
+      },
+      {
+        "slug": "alpha",
+        "name": "Alpha Bank",
+        "desc": "Alpha Bank loans and securitisations. Checking the chain of transfer is often the weakest point of the other side."
+      },
+      {
+        "slug": "piraeus",
+        "name": "Piraeus Bank",
+        "desc": "Piraeus Bank loans. Strict, standardised enforcement procedures — which for that very reason can be challenged on formal grounds."
+      },
+      {
+        "slug": "ethniki",
+        "name": "National Bank of Greece",
+        "desc": "National Bank of Greece loans, often older ones. Limitation periods and the chain of transfers are often the strongest defence points."
+      }
+    ],
+    "servicersNoteTitle": "Is a servicer pursuing you instead of the bank?",
+    "servicersNoteText": "If the claim is now managed by doValue, Intrum, Cepal or QQuant, see the detailed pages per servicing company.",
+    "servicersNoteCta": "Pages for funds & servicers",
+    "urgencyTitle": "Every document has a deadline",
+    "urgencyText": "Extrajudicial notices, payment orders, seizures and auctions have strict defence deadlines. The earlier the file is checked, the more moves remain available.",
+    "ctaTitle": "Whatever the bank — first the check, then the strategy.",
+    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. Your file is assessed as a matter of urgency, due to the deadlines.",
+    "ctaButton": "Immediate File Review"
+  },
   "ethniki": {
     "seoTitle": "National Bank of Greece Lawyer – Loans & Foreclosures in Thessaloniki",
     "seoDescription": "Is National Bank of Greece or the servicer handling your loan pressing you with a payment order or auction? Every document has a defence deadline. Objection, suspension, settlement with a haircut in Thessaloniki. Tel: +30 2310 545 261.",

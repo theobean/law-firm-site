@@ -565,6 +565,46 @@
     "ctaButton": "Sofortige Aktenprüfung",
     "ctaPhone": "Jetzt anrufen: +30 2310 545 261"
   },
+  "banks": {
+    "seoTitle": "Anwalt für Bankdarlehen – Zwangsversteigerungen Thessaloniki",
+    "seoDescription": "Darlehen von Eurobank, Alpha Bank, Piraeus Bank oder National Bank of Greece im Verzug? Einspruch, Aussetzung, Vergleich mit Schuldenschnitt in Thessaloniki und ganz Griechenland. Tel: +30 2310 545 261.",
+    "heroCity": "Thessaloniki · Leontos Sofou 12",
+    "heroTitle": "Anwalt für Bankdarlehen und Zwangsversteigerungen",
+    "heroSubtitle": "Eurobank · Alpha Bank · Piraeus Bank · National Bank of Greece",
+    "intro": "Wenn ein Bankdarlehen in Verzug gerät, bleibt der Fall selten bei der Bank selbst. Oft wird er an eine Zweckgesellschaft (Fonds) übertragen und die Verwaltung von einem Kreditverwaltungsunternehmen (Servicer) übernommen. Welche Bank auch immer — die Logik der Verteidigung ist dieselbe: Prüfung der Berechtigung, der Übertragung, des Betrags und jeder Vollstreckungshandlung, innerhalb der laufenden Fristen. Wählen Sie Ihre Bank für detaillierte Informationen.",
+    "cardsTitle": "Wählen Sie Ihre Bank",
+    "cardCta": "Zur Seite",
+    "cards": [
+      {
+        "slug": "eurobank",
+        "name": "Eurobank",
+        "desc": "Eurobank-Darlehen, die oft an einen Fonds und Servicer übergegangen sind. Einspruch, Aussetzung und Vergleich mit dem Ziel eines Schuldenschnitts."
+      },
+      {
+        "slug": "alpha",
+        "name": "Alpha Bank",
+        "desc": "Alpha-Bank-Darlehen und Verbriefungen. Die Prüfung der Übertragungskette ist oft der schwächste Punkt der Gegenseite."
+      },
+      {
+        "slug": "piraeus",
+        "name": "Piraeus Bank",
+        "desc": "Piraeus-Bank-Darlehen. Strenge, standardisierte Vollstreckungsverfahren — die gerade deshalb formal angefochten werden können."
+      },
+      {
+        "slug": "ethniki",
+        "name": "National Bank of Greece",
+        "desc": "Darlehen der National Bank of Greece, oft ältere. Verjährung und Übertragungskette sind oft die stärksten Verteidigungspunkte."
+      }
+    ],
+    "servicersNoteTitle": "Verfolgt Sie ein Servicer statt der Bank?",
+    "servicersNoteText": "Wenn die Forderung nun von doValue, Intrum, Cepal oder QQuant verwaltet wird, sehen Sie die detaillierten Seiten je Verwaltungsunternehmen.",
+    "servicersNoteCta": "Seiten für Fonds & Servicer",
+    "urgencyTitle": "Jedes Dokument hat eine Frist",
+    "urgencyText": "Außergerichtliche Aufforderungen, Zahlungsbefehle, Pfändungen und Versteigerungen haben strenge Verteidigungsfristen. Je früher die Akte geprüft wird, desto mehr Schritte bleiben verfügbar.",
+    "ctaTitle": "Welche Bank auch immer — erst die Prüfung, dann die Strategie.",
+    "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Ihre Akte wird aufgrund der Fristen vordringlich bewertet.",
+    "ctaButton": "Sofortige Aktenprüfung"
+  },
   "ethniki": {
     "seoTitle": "Anwalt National Bank of Greece – Darlehen & Zwangsversteigerungen Thessaloniki",
     "seoDescription": "Setzt Sie National Bank of Greece oder der Servicer Ihres Darlehens mit Zahlungsbefehl oder Versteigerung unter Druck? Jedes Dokument hat eine Verteidigungsfrist. Einspruch, Aussetzung, Vergleich mit Schuldenschnitt in Thessaloniki. Tel: +30 2310 545 261.",

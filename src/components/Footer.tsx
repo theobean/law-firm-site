@@ -114,7 +114,7 @@ export default function Footer() {
             </ul>
 
             {/* Banks */}
-            <p className="text-white/40 text-xs mt-6 mb-3 tracking-widest uppercase">{t("nav.banks")}</p>
+            <Link href={`/${locale}/banks`} className="block text-white/40 hover:text-accent text-xs mt-6 mb-3 tracking-widest uppercase transition-colors">{t("nav.banks")}</Link>
             <ul className="space-y-3">
               {[
                 { href: `/${locale}/banks/eurobank`, label: "Eurobank" },

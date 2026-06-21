@@ -119,7 +119,7 @@ export default function Navbar() {
 
   const servicesLinks = [
     { href: `/${locale}/funds`, label: tNav("funds"), icon: Building2, subLinks: fundsSubLinks },
-    { href: `/${locale}/banks/eurobank`, label: tNav("banks"), icon: Landmark, subLinks: banksSubLinks },
+    { href: `/${locale}/banks`, label: tNav("banks"), icon: Landmark, subLinks: banksSubLinks },
     { href: `/${locale}/pleistariasmos`, label: tNav("pleistariasmos"), icon: Gavel, subLinks: null },
   ];
 

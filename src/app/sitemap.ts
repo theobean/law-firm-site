@@ -20,6 +20,7 @@ const staticPaths = [
   "/funds/intrum",
   "/funds/cepal",
   "/funds/qquant",
+  "/banks",
   "/banks/eurobank",
   "/banks/alpha",
   "/banks/piraeus",
