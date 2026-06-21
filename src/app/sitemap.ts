@@ -20,6 +20,10 @@ const staticPaths = [
   "/funds/intrum",
   "/funds/cepal",
   "/funds/qquant",
+  "/banks/eurobank",
+  "/banks/alpha",
+  "/banks/piraeus",
+  "/banks/ethniki",
 ];
 const practiceAreas = [
   "banking",
