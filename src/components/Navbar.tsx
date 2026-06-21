@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
-import { Menu, X, Scale, ChevronDown, ChevronRight, FileText, Tv, BookOpen, Gavel, Building2, Landmark } from "lucide-react";
+import { Menu, X, Scale, ChevronDown, ChevronRight, FileText, Tv, BookOpen, Gavel, Building2 } from "lucide-react";
 
 const localeConfig = {
   el: { flag: "/flags/gr.svg", label: "ΕΛ" },
@@ -110,16 +110,8 @@ export default function Navbar() {
     { href: `/${locale}/funds/qquant`, label: "QQuant" },
   ];
 
-  const banksSubLinks = [
-    { href: `/${locale}/banks/eurobank`, label: "Eurobank" },
-    { href: `/${locale}/banks/alpha`, label: "Alpha Bank" },
-    { href: `/${locale}/banks/piraeus`, label: "Τράπεζα Πειραιώς" },
-    { href: `/${locale}/banks/ethniki`, label: "Εθνική Τράπεζα" },
-  ];
-
   const servicesLinks = [
     { href: `/${locale}/funds`, label: tNav("funds"), icon: Building2, subLinks: fundsSubLinks },
-    { href: `/${locale}/banks`, label: tNav("banks"), icon: Landmark, subLinks: banksSubLinks },
     { href: `/${locale}/pleistariasmos`, label: tNav("pleistariasmos"), icon: Gavel, subLinks: null },
   ];
 

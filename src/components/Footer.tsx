@@ -113,22 +113,6 @@ export default function Footer() {
               ))}
             </ul>
 
-            {/* Banks */}
-            <Link href={`/${locale}/banks`} className="block text-white/40 hover:text-accent text-xs mt-6 mb-3 tracking-widest uppercase transition-colors">{t("nav.banks")}</Link>
-            <ul className="space-y-3">
-              {[
-                { href: `/${locale}/banks/eurobank`, label: "Eurobank" },
-                { href: `/${locale}/banks/alpha`, label: "Alpha Bank" },
-                { href: `/${locale}/banks/piraeus`, label: "Τράπεζα Πειραιώς" },
-                { href: `/${locale}/banks/ethniki`, label: "Εθνική Τράπεζα" },
-              ].map((l) => (
-                <li key={l.href}>
-                  <Link href={l.href} className="text-white/60 hover:text-accent text-sm transition-colors">
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
 
             {/* Social */}
             <div className="mt-8 flex flex-col items-start">

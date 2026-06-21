@@ -35,6 +35,9 @@ const baseHeaders = [
 const nextConfig: NextConfig = {
   async redirects() {
     return [
+      // Bank pages withdrawn (content not approved) — already indexed, so 308 → contact
+      { source: "/:locale/banks", destination: "/:locale/contact", permanent: true },
+      { source: "/:locale/banks/:path*", destination: "/:locale/contact", permanent: true },
       // WordPress post ID URLs: /?p=123
       { source: "/", has: [{ type: "query", key: "p" }], destination: "/el", permanent: true },
       // WordPress page ID URLs: /?page_id=123

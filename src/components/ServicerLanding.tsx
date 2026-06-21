@@ -251,7 +251,6 @@ export default function ServicerLanding({
                 { href: `/${locale}/practice-areas/extrajudicial`, label: tr("extrajudicial") },
                 { href: `/${locale}/pleistariasmos`, label: tr("foreclosure") },
                 { href: `/${locale}/funds`, label: tr("funds") },
-                { href: `/${locale}/banks`, label: tr("banks") },
               ].map((l) => (
                 <Link
                   key={l.href}
