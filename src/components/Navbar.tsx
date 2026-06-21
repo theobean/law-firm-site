@@ -113,6 +113,8 @@ export default function Navbar() {
   const banksSubLinks = [
     { href: `/${locale}/banks/eurobank`, label: "Eurobank" },
     { href: `/${locale}/banks/alpha`, label: "Alpha Bank" },
+    { href: `/${locale}/banks/piraeus`, label: "Τράπεζα Πειραιώς" },
+    { href: `/${locale}/banks/ethniki`, label: "Εθνική Τράπεζα" },
   ];
 
   const servicesLinks = [
