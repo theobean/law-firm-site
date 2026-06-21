@@ -1053,9 +1053,14 @@
     "timelineTitle": "Timeline — When You Need to Act",
     "timelineItems": [
       {
+        "phase": "From the payment order",
+        "title": "The first critical deadline",
+        "desc": "A payment order is not a simple demand letter. It is an enforceable title that can lead to compulsory enforcement. From the moment it is served, critical deadlines begin to run and it must be checked immediately whether the claim is legally established, whether the amount is liquidated, whether the interest has been correctly calculated and whether the supporting documents are sufficient. A timely objection against the payment order may be the first and most decisive means of defence."
+      },
+      {
         "phase": "From the first writ or seizure",
-        "title": "The clock starts ticking",
-        "desc": "In enforcement proceedings, deadlines do not forgive delay. From the first act of enforcement, the claim, the interest, the creditor's standing and the legality of the procedure must be checked immediately. The sooner you act, the more options you have."
+        "title": "The clock starts ticking again",
+        "desc": "If enforcement proceedings have already begun, from the first writ of execution or seizure, the claim, the interest, the creditor's standing, the transfer of the claim, the appointment of a servicer and the legality of the procedure must all be checked immediately. In enforcement proceedings deadlines do not forgive delay. The sooner you act, the more options you have."
       },
       {
         "phase": "As the auction approaches",

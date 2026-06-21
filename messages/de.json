@@ -1050,9 +1050,14 @@
     "timelineTitle": "Zeitplan — Wann Sie handeln müssen",
     "timelineItems": [
       {
+        "phase": "Ab dem Mahnbescheid",
+        "title": "Die erste kritische Frist",
+        "desc": "Ein Mahnbescheid ist kein einfaches Mahnschreiben. Er ist ein Vollstreckungstitel, der zur Zwangsvollstreckung führen kann. Ab seiner Zustellung beginnen kritische Fristen zu laufen und es muss sofort geprüft werden, ob die Forderung rechtlich nachgewiesen ist, ob der Betrag beziffert ist, ob die Zinsen korrekt berechnet wurden und ob die unterstützenden Dokumente ausreichen. Ein rechtzeitiger Widerspruch gegen den Mahnbescheid kann das erste und entscheidende Verteidigungsmittel sein."
+      },
+      {
         "phase": "Ab dem ersten Vollstreckungsbefehl oder der Pfändung",
-        "title": "Die Zeit beginnt zu laufen",
-        "desc": "In der Zwangsvollstreckung verzeihen Fristen keine Verzögerung. Ab der ersten Vollstreckungshandlung müssen die Forderung, die Zinsen, die Legitimation des Betreibenden und die Rechtmäßigkeit des Verfahrens sofort geprüft werden. Je früher Sie handeln, desto mehr Optionen haben Sie."
+        "title": "Die Zeit beginnt erneut zu laufen",
+        "desc": "Wenn die Zwangsvollstreckung bereits begonnen hat, müssen ab dem ersten Vollstreckungsbefehl oder der Pfändung sofort die Forderung, die Zinsen, die Legitimation des Betreibenden, die Übertragung der Forderung, die Verwaltungsbeauftragung und die Rechtmäßigkeit des Verfahrens geprüft werden. In der Zwangsvollstreckung verzeihen Fristen keine Verzögerung. Je früher Sie handeln, desto mehr Optionen haben Sie."
       },
       {
         "phase": "Wenn die Versteigerung näher rückt",
