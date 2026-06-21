@@ -112,6 +112,7 @@ export default function Navbar() {
 
   const banksSubLinks = [
     { href: `/${locale}/banks/eurobank`, label: "Eurobank" },
+    { href: `/${locale}/banks/alpha`, label: "Alpha Bank" },
   ];
 
   const servicesLinks = [
