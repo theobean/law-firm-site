@@ -46,7 +46,10 @@
     "subtitle": "Interviews und Fernsehauftritte unserer Kanzlei",
     "seoTitle": "TV-Interviews",
     "seoDescription": "Fernsehauftritte und Interviews von Rechtsanwalt Ioannis Papaioannou in griechischen Sendern.",
-    "empty": "Noch keine Interviews vorhanden."
+    "empty": "Noch keine Interviews vorhanden.",
+    "share": "Teilen",
+    "copyLink": "Link kopieren",
+    "linkCopied": "Kopiert!"
   },
   "blog": {
     "title": "Artikel & Neuigkeiten",
