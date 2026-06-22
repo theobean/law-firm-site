@@ -155,7 +155,7 @@ export default function ServicerLanding({
             <p className="text-gray-600 text-sm mb-5">{t("cta1Text")}</p>
             <div className="flex flex-wrap gap-3">
               <Link
-                href={`/${locale}/contact`}
+                href={`/contact`}
                 className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-6 py-3 rounded-sm transition-colors text-sm"
               >
                 {t("ctaButton")} <ArrowRight size={16} />
@@ -195,7 +195,7 @@ export default function ServicerLanding({
             <p className="text-primary font-playfair text-xl font-semibold mb-2">{t("cta2Title")}</p>
             <p className="text-gray-600 text-sm mb-5">{t("cta2Text")}</p>
             <Link
-              href={`/${locale}/contact`}
+              href={`/contact`}
               className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-6 py-3 rounded-sm transition-colors text-sm"
             >
               {t("ctaButton")} <ArrowRight size={16} />
@@ -247,10 +247,10 @@ export default function ServicerLanding({
             <h2 className="text-xl font-playfair font-bold text-primary mb-5">{tr("title")}</h2>
             <div className="grid sm:grid-cols-2 gap-3">
               {[
-                { href: `/${locale}/practice-areas/banking`, label: tr("bankingLaw") },
-                { href: `/${locale}/practice-areas/extrajudicial`, label: tr("extrajudicial") },
-                { href: `/${locale}/pleistariasmos`, label: tr("foreclosure") },
-                { href: `/${locale}/funds`, label: tr("funds") },
+                { href: `/practice-areas/banking`, label: tr("bankingLaw") },
+                { href: `/practice-areas/extrajudicial`, label: tr("extrajudicial") },
+                { href: `/pleistariasmos`, label: tr("foreclosure") },
+                { href: `/funds`, label: tr("funds") },
               ].map((l) => (
                 <Link
                   key={l.href}
@@ -273,7 +273,7 @@ export default function ServicerLanding({
           <p className="text-white/70 mb-8">{t("ctaText")}</p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link
-              href={`/${locale}/contact`}
+              href={`/contact`}
               className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-8 py-4 rounded-sm transition-colors"
             >
               {t("ctaButton")} <ArrowRight size={18} />

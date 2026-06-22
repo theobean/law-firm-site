@@ -48,7 +48,7 @@ export default async function CategoryArticles({
         {articles.map((a) => (
           <Link
             key={a._id}
-            href={`/${locale}/blog/${a.slug!.current}`}
+            href={`/blog/${a.slug!.current}`}
             className="group block border border-gray-200 hover:border-accent/40 rounded-sm p-5 transition-all duration-200 hover:shadow-md"
           >
             <div className="flex items-start gap-3">

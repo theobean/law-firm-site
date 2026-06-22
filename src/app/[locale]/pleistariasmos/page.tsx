@@ -127,7 +127,7 @@ export default function PleistariasmoiPage({
             <p className="text-primary font-playfair text-xl font-semibold mb-2">{t("ctaInlineTitle")}</p>
             <p className="text-gray-600 text-sm mb-5">{t("ctaInlineText")}</p>
             <Link
-              href={`/${locale}/contact`}
+              href={`/contact`}
               className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-6 py-3 rounded-sm transition-colors text-sm"
             >
               {t("ctaButton")} <ArrowRight size={16} />
@@ -201,7 +201,7 @@ export default function PleistariasmoiPage({
           </h2>
           <p className="text-white/70 mb-8">{t("ctaText")}</p>
           <Link
-            href={`/${locale}/contact`}
+            href={`/contact`}
             className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-8 py-4 rounded-sm transition-colors"
           >
             {t("ctaButton")} <ArrowRight size={18} />

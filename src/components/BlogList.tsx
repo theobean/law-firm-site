@@ -87,7 +87,7 @@ function AnimatedCard({ article, locale, categoryLabels, index }: {
         className="group relative h-full"
       >
         <Link
-          href={`/${locale}/blog/${article.slug.current}`}
+          href={`/blog/${article.slug.current}`}
           className={`block h-full border rounded-sm overflow-hidden bg-primary relative transition-shadow duration-300 ${
             hovered ? "shadow-2xl border-accent/40" : "border-gray-100 shadow-none"
           }`}

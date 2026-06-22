@@ -97,7 +97,7 @@ export default function CookieBanner() {
               <p className="text-[13px] md:text-[13.5px] leading-relaxed text-white/85">
                 {t("message")}{" "}
                 <Link
-                  href={`/${locale}/privacy`}
+                  href={`/privacy`}
                   className="text-accent/90 hover:text-accent underline underline-offset-2"
                 >
                   {t("learnMore")}

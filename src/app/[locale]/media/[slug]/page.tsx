@@ -70,7 +70,7 @@ export default async function InterviewPage({ params }: { params: Promise<{ slug
     <div className="bg-white min-h-screen">
       <section className="bg-primary py-16 text-white">
         <div className="max-w-4xl mx-auto px-6">
-          <Link href={`/${locale}/media`} className="inline-flex items-center gap-2 text-white/50 hover:text-white text-sm mb-8 transition-colors">
+          <Link href={`/media`} className="inline-flex items-center gap-2 text-white/50 hover:text-white text-sm mb-8 transition-colors">
             <ArrowLeft size={15} /> {s.back}
           </Link>
           <h1 className="text-2xl md:text-3xl font-playfair font-bold leading-snug border-l-4 border-accent pl-6">{iv.title}</h1>

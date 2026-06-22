@@ -30,13 +30,13 @@ export default function Hero() {
           </p>
           <div className="flex flex-wrap gap-4" style={{ animation: "reveal-up 0.6s cubic-bezier(0.4,0,0.2,1) 0.65s both" }}>
             <Link
-              href={`/${locale}/contact`}
+              href={`/contact`}
               className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-8 py-4 rounded-sm transition-colors"
             >
               {t("cta")} <ArrowRight size={18} />
             </Link>
             <Link
-              href={`/${locale}/about`}
+              href={`/about`}
               className="inline-flex items-center gap-2 border border-white/30 hover:border-accent text-white hover:text-accent font-semibold px-8 py-4 rounded-sm transition-colors"
             >
               {t("ctaSecondary")}

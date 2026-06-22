@@ -55,7 +55,7 @@ export default async function LatestArticles({ locale }: { locale: string }) {
               {i18n.heading[loc]}
             </h2>
             <Link
-              href={`/${locale}/blog`}
+              href="/blog"
               className="inline-flex items-center gap-2 text-primary hover:text-accent text-sm font-semibold transition-colors flex-shrink-0"
             >
               {i18n.viewAll[loc]} <ArrowRight size={14} />
@@ -68,7 +68,7 @@ export default async function LatestArticles({ locale }: { locale: string }) {
           {articles.map((a) => (
             <Link
               key={a._id}
-              href={`/${locale}/blog/${a.slug!.current}`}
+              href={`/blog/${a.slug!.current}`}
               className="group bg-white border border-gray-200 hover:border-accent/40 rounded-sm p-6 transition-all duration-200 hover:shadow-lg flex flex-col"
             >
               <div className="w-10 h-10 rounded-full bg-primary/10 group-hover:bg-accent/15 flex items-center justify-center mb-4 transition-colors">

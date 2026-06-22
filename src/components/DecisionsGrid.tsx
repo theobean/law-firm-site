@@ -321,7 +321,7 @@ function DecisionCard({
         className={cardClassName}
       >
         {decision.slug?.current ? (
-          <Link href={`/${locale}/decisions/${decision.slug.current}`} className="flex flex-col flex-1 overflow-hidden text-inherit no-underline">
+          <Link href={`/decisions/${decision.slug.current}`} className="flex flex-col flex-1 overflow-hidden text-inherit no-underline">
             {cardContent}
           </Link>
         ) : (

@@ -77,7 +77,7 @@ export default function PracticeAreaDetailPage({
       <section className="bg-primary py-24 text-white">
         <div className="max-w-4xl mx-auto px-6">
           <Link
-            href={`/${locale}/practice-areas`}
+            href={`/practice-areas`}
             className="inline-flex items-center gap-2 text-white/60 hover:text-accent text-sm mb-6 transition-colors"
           >
             <ArrowLeft size={14} /> {t("backToAll")}
@@ -118,7 +118,7 @@ export default function PracticeAreaDetailPage({
                     </div>
                   </div>
                   <Link
-                    href={`/${locale}/pleistariasmos`}
+                    href={`/pleistariasmos`}
                     className="self-start inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-4 py-2 rounded-sm transition-colors text-xs"
                   >
                     {t("pleistariasmosBannerCta")} <ArrowRight size={12} />
@@ -136,7 +136,7 @@ export default function PracticeAreaDetailPage({
                   </div>
                 </div>
                 <Link
-                  href={`/${locale}/funds`}
+                  href={`/funds`}
                   className="self-start inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-4 py-2 rounded-sm transition-colors text-xs"
                 >
                   {t("fundsBannerCta")} <ArrowRight size={12} />
@@ -183,7 +183,7 @@ export default function PracticeAreaDetailPage({
           </h2>
           <p className="text-white/70 mb-8">{t("ctaText")}</p>
           <Link
-            href={`/${locale}/contact`}
+            href={`/contact`}
             className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-8 py-4 rounded-sm transition-colors"
           >
             {t("ctaTitle")} <ArrowRight size={18} />

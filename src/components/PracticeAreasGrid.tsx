@@ -44,7 +44,7 @@ export default function PracticeAreasGrid({ preview = false }: Props) {
             return (
               <Link
                 key={key}
-                href={`/${locale}/practice-areas/${key}`}
+                href={`/practice-areas/${key}`}
                 className="group bg-primary hover:bg-primary/90 p-8 rounded-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
               >
                 <div className="mb-5 flex items-center justify-center w-12 h-12 rounded-sm bg-accent/15 border border-accent/30 group-hover:bg-accent/25 transition-colors">
@@ -67,7 +67,7 @@ export default function PracticeAreasGrid({ preview = false }: Props) {
         {preview && (
           <div className="mt-10 text-center">
             <Link
-              href={`/${locale}/practice-areas`}
+              href={`/practice-areas`}
               className="inline-flex items-center gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold px-8 py-3 rounded-sm transition-colors"
             >
               {t("viewAll")} <ArrowRight size={16} />

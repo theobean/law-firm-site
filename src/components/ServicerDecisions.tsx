@@ -41,7 +41,7 @@ export default async function ServicerDecisions({ locale }: { locale: string }) 
         {decisions.map((d) => (
           <Link
             key={d._id}
-            href={`/${locale}/decisions/${d.slug!.current}`}
+            href={`/decisions/${d.slug!.current}`}
             className="group block border border-gray-200 hover:border-accent/40 rounded-sm p-5 transition-all duration-200 hover:shadow-md"
           >
             <div className="flex items-start gap-3">

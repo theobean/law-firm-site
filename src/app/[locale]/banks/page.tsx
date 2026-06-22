@@ -62,7 +62,7 @@ export default function BanksPage({
           {cards.map((c, i) => (
             <ScrollReveal key={c.slug} direction="up" delay={0.1 + i * 0.05}>
               <Link
-                href={`/${locale}/banks/${c.slug}`}
+                href={`/banks/${c.slug}`}
                 className="group block h-full border border-gray-200 hover:border-accent/50 rounded-sm p-6 transition-colors"
               >
                 <div className="flex items-center gap-3 mb-3">
@@ -85,7 +85,7 @@ export default function BanksPage({
             <p className="text-primary font-playfair text-lg font-semibold mb-1">{t("servicersNoteTitle")}</p>
             <p className="text-gray-600 text-sm mb-4">{t("servicersNoteText")}</p>
             <Link
-              href={`/${locale}/funds`}
+              href={`/funds`}
               className="inline-flex items-center gap-2 text-accent font-semibold text-sm hover:gap-3 transition-all"
             >
               {t("servicersNoteCta")} <ArrowRight size={16} />
@@ -109,7 +109,7 @@ export default function BanksPage({
           <h2 className="text-3xl font-playfair font-bold text-white mb-4">{t("ctaTitle")}</h2>
           <p className="text-white/70 mb-8">{t("ctaText")}</p>
           <Link
-            href={`/${locale}/contact`}
+            href={`/contact`}
             className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-8 py-4 rounded-sm transition-colors"
           >
             {t("ctaButton")} <ArrowRight size={18} />

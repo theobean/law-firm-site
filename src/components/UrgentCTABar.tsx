@@ -46,7 +46,7 @@ export default function UrgentCTABar() {
             <p className="text-white text-[12.5px] leading-snug font-medium">{t("text")}</p>
           </div>
           <Link
-            href={`/${locale}/contact`}
+            href={`/contact`}
             onClick={dismiss}
             className="flex items-center justify-center gap-1.5 bg-accent text-primary text-xs font-bold tracking-wide uppercase px-3 py-2.5 rounded-sm hover:bg-accent/90 transition-colors w-full"
           >
@@ -63,7 +63,7 @@ export default function UrgentCTABar() {
             <p className="text-white/60 text-xs mt-0.5 leading-snug">{t("sub")}</p>
           </div>
           <Link
-            href={`/${locale}/contact`}
+            href={`/contact`}
             onClick={dismiss}
             className="flex-shrink-0 flex items-center gap-1.5 bg-accent text-primary text-xs font-bold tracking-wide uppercase px-4 py-2.5 rounded-sm hover:bg-accent/90 transition-colors whitespace-nowrap"
           >

@@ -26,7 +26,7 @@ export default function AuctionBanner() {
             </p>
             <p className="text-gray-600 text-sm mb-3">{t("text")}</p>
             <Link
-              href={`/${locale}/pleistariasmos`}
+              href={`/pleistariasmos`}
               className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white font-semibold px-4 py-2 rounded-sm transition-colors text-sm"
             >
               {t("cta")} <ArrowRight size={14} />
@@ -48,7 +48,7 @@ export default function AuctionBanner() {
             </p>
             <p className="text-gray-600 text-sm mb-3">{t("fundsText")}</p>
             <Link
-              href={`/${locale}/funds`}
+              href={`/funds`}
               className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white font-semibold px-4 py-2 rounded-sm transition-colors text-sm"
             >
               {t("fundsCta")} <ArrowRight size={14} />

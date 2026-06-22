@@ -66,7 +66,7 @@ export default function StatsSection() {
 
         <div className="mt-16 text-center">
           <Link
-            href={`/${locale}/contact`}
+            href={`/contact`}
             className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-10 py-4 rounded-sm transition-colors text-lg"
           >
             {t("cta")} →

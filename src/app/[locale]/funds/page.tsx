@@ -112,25 +112,25 @@ export default function FundsPage({
             <p className="text-gray-600 text-sm mb-4">{t("servicersLinkText")}</p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-8">
               <Link
-                href={`/${locale}/funds/dovalue`}
+                href={`/funds/dovalue`}
                 className="inline-flex items-center gap-2 text-accent font-semibold text-sm hover:gap-3 transition-all"
               >
                 {t("dovalueLinkCta")} <ArrowRight size={16} />
               </Link>
               <Link
-                href={`/${locale}/funds/intrum`}
+                href={`/funds/intrum`}
                 className="inline-flex items-center gap-2 text-accent font-semibold text-sm hover:gap-3 transition-all"
               >
                 {t("intrumLinkCta")} <ArrowRight size={16} />
               </Link>
               <Link
-                href={`/${locale}/funds/cepal`}
+                href={`/funds/cepal`}
                 className="inline-flex items-center gap-2 text-accent font-semibold text-sm hover:gap-3 transition-all"
               >
                 {t("cepalLinkCta")} <ArrowRight size={16} />
               </Link>
               <Link
-                href={`/${locale}/funds/qquant`}
+                href={`/funds/qquant`}
                 className="inline-flex items-center gap-2 text-accent font-semibold text-sm hover:gap-3 transition-all"
               >
                 {t("qquantLinkCta")} <ArrowRight size={16} />
@@ -144,7 +144,7 @@ export default function FundsPage({
             <p className="text-primary font-playfair text-xl font-semibold mb-2">{t("ctaInlineTitle")}</p>
             <p className="text-gray-600 text-sm mb-5">{t("ctaInlineText")}</p>
             <Link
-              href={`/${locale}/contact`}
+              href={`/contact`}
               className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-6 py-3 rounded-sm transition-colors text-sm"
             >
               {t("ctaButton")} <ArrowRight size={16} />
@@ -183,7 +183,7 @@ export default function FundsPage({
           </h2>
           <p className="text-white/70 mb-8">{t("ctaText")}</p>
           <Link
-            href={`/${locale}/contact`}
+            href={`/contact`}
             className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-8 py-4 rounded-sm transition-colors"
           >
             {t("ctaButton")} <ArrowRight size={18} />

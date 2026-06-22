@@ -75,12 +75,12 @@ export default function Footer() {
             <ul className="space-y-3">
               {[
                 { href: `/${locale}`, label: t("nav.home") },
-                { href: `/${locale}/about`, label: t("nav.about") },
-                { href: `/${locale}/practice-areas`, label: t("nav.practiceAreas") },
-                { href: `/${locale}/blog`, label: t("nav.blog") },
-                { href: `/${locale}/decisions`, label: t("nav.decisions") },
-                { href: `/${locale}/faq`, label: t("nav.faq") },
-                { href: `/${locale}/contact`, label: t("nav.contact") },
+                { href: `/about`, label: t("nav.about") },
+                { href: `/practice-areas`, label: t("nav.practiceAreas") },
+                { href: `/blog`, label: t("nav.blog") },
+                { href: `/decisions`, label: t("nav.decisions") },
+                { href: `/faq`, label: t("nav.faq") },
+                { href: `/contact`, label: t("nav.contact") },
               ].map((l) => (
                 <li key={l.href}>
                   <Link href={l.href} className="text-white/60 hover:text-accent text-sm transition-colors">
@@ -98,12 +98,12 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3">
               {[
-                { href: `/${locale}/pleistariasmos`, label: t("footer.firstResidence") },
-                { href: `/${locale}/funds`, label: t("nav.funds") },
-                { href: `/${locale}/funds/intrum`, label: "Intrum" },
-                { href: `/${locale}/funds/dovalue`, label: "doValue" },
-                { href: `/${locale}/funds/cepal`, label: "Cepal" },
-                { href: `/${locale}/funds/qquant`, label: "QQuant" },
+                { href: `/pleistariasmos`, label: t("footer.firstResidence") },
+                { href: `/funds`, label: t("nav.funds") },
+                { href: `/funds/intrum`, label: "Intrum" },
+                { href: `/funds/dovalue`, label: "doValue" },
+                { href: `/funds/cepal`, label: "Cepal" },
+                { href: `/funds/qquant`, label: "QQuant" },
               ].map((l) => (
                 <li key={l.href}>
                   <Link href={l.href} className="text-white/60 hover:text-accent text-sm transition-colors">
@@ -145,8 +145,8 @@ export default function Footer() {
         <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-2 text-white/40 text-xs">
           <span>© {new Date().getFullYear()} {t("about.name")}. {t("footer.rights")}</span>
           <div className="flex gap-4">
-            <Link href={`/${locale}/privacy`} className="hover:text-accent transition-colors">{t("footer.privacy")}</Link>
-            <Link href={`/${locale}/terms`} className="hover:text-accent transition-colors">{t("footer.terms")}</Link>
+            <Link href={`/privacy`} className="hover:text-accent transition-colors">{t("footer.privacy")}</Link>
+            <Link href={`/terms`} className="hover:text-accent transition-colors">{t("footer.terms")}</Link>
             <button onClick={openCookieSettings} className="hover:text-accent transition-colors">{t("cookies.settings")}</button>
           </div>
         </div>

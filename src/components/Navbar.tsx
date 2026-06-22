@@ -93,32 +93,32 @@ export default function Navbar() {
   // Rendered BEFORE the Services/Updates dropdowns
   const links = [
     { href: `/${locale}`, label: tNav("home") },
-    { href: `/${locale}/about`, label: tNav("about") },
-    { href: `/${locale}/practice-areas`, label: tNav("practiceAreas") },
+    { href: `/about`, label: tNav("about") },
+    { href: `/practice-areas`, label: tNav("practiceAreas") },
   ];
 
   // Rendered AFTER the dropdowns (support + conversion last)
   const endLinks = [
-    { href: `/${locale}/faq`, label: tNav("faq") },
-    { href: `/${locale}/contact`, label: tNav("contact") },
+    { href: `/faq`, label: tNav("faq") },
+    { href: `/contact`, label: tNav("contact") },
   ];
 
   const fundsSubLinks = [
-    { href: `/${locale}/funds/dovalue`, label: "doValue" },
-    { href: `/${locale}/funds/intrum`, label: "Intrum" },
-    { href: `/${locale}/funds/cepal`, label: "Cepal" },
-    { href: `/${locale}/funds/qquant`, label: "QQuant" },
+    { href: `/funds/dovalue`, label: "doValue" },
+    { href: `/funds/intrum`, label: "Intrum" },
+    { href: `/funds/cepal`, label: "Cepal" },
+    { href: `/funds/qquant`, label: "QQuant" },
   ];
 
   const servicesLinks = [
-    { href: `/${locale}/funds`, label: tNav("funds"), icon: Building2, subLinks: fundsSubLinks },
-    { href: `/${locale}/pleistariasmos`, label: tNav("pleistariasmos"), icon: Gavel, subLinks: null },
+    { href: `/funds`, label: tNav("funds"), icon: Building2, subLinks: fundsSubLinks },
+    { href: `/pleistariasmos`, label: tNav("pleistariasmos"), icon: Gavel, subLinks: null },
   ];
 
   const updatesLinks = [
-    { href: `/${locale}/blog`, label: tNav("blog"), icon: BookOpen },
-    { href: `/${locale}/media`, label: tNav("media"), icon: Tv },
-    { href: `/${locale}/decisions`, label: tNav("decisions"), icon: FileText },
+    { href: `/blog`, label: tNav("blog"), icon: BookOpen },
+    { href: `/media`, label: tNav("media"), icon: Tv },
+    { href: `/decisions`, label: tNav("decisions"), icon: FileText },
   ];
 
   const isUpdatesActive = updatesLinks.some((l) => pathname.startsWith(l.href));

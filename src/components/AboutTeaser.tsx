@@ -34,7 +34,7 @@ export default function AboutTeaser() {
             <p className="text-gray-600 text-lg leading-relaxed mb-4">{t("bio1")}</p>
             <p className="text-gray-500 leading-relaxed mb-8">{t("teaserSub")}</p>
             <Link
-              href={`/${locale}/about`}
+              href={`/about`}
               className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white font-semibold px-8 py-4 rounded-sm transition-colors"
             >
               {t("teaserCta")} <ArrowRight size={16} />

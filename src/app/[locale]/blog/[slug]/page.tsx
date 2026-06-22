@@ -219,7 +219,7 @@ export default async function ArticlePage({
               <p className="text-primary font-playfair font-semibold text-lg">{tAreas(`areas.${pillar}.title`)}</p>
             </div>
             <Link
-              href={`/${locale}/practice-areas/${pillar}`}
+              href={`/practice-areas/${pillar}`}
               className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-5 py-3 rounded-sm transition-colors text-sm flex-shrink-0 self-start sm:self-auto"
             >
               {siloLabels[lang].view} <ArrowRight size={16} />

@@ -54,7 +54,7 @@ export default async function DecisionPage({ params }: { params: Promise<{ slug:
     <div className="bg-white min-h-screen">
       <section className="bg-primary py-20 text-white">
         <div className="max-w-4xl mx-auto px-6">
-          <Link href={`/${locale}/decisions`} className="inline-flex items-center gap-2 text-white/50 hover:text-white text-sm mb-8 transition-colors">
+          <Link href={`/decisions`} className="inline-flex items-center gap-2 text-white/50 hover:text-white text-sm mb-8 transition-colors">
             <ArrowLeft size={15} /> {s.back}
           </Link>
           {catLabel && <div className="mb-4"><span className="text-xs font-bold tracking-widest uppercase text-accent border border-accent/30 px-3 py-1 rounded-sm">{catLabel}</span></div>}

@@ -134,7 +134,7 @@ function InterviewCard({ interview, locale }: { interview: Interview; locale: st
         )}
         {interview.slug?.current ? (
           <Link
-            href={`/${locale}/media/${interview.slug.current}`}
+            href={`/media/${interview.slug.current}`}
             className="text-white font-semibold text-sm leading-snug line-clamp-2 hover:text-accent transition-colors"
           >
             {interview.title}

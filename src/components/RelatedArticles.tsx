@@ -34,7 +34,7 @@ export default function RelatedArticles({
           {articles.map((article) => (
             <Link
               key={article._id}
-              href={`/${locale}/blog/${article.slug.current}`}
+              href={`/blog/${article.slug.current}`}
               className="group block bg-white border border-gray-100 rounded-sm overflow-hidden hover:shadow-lg transition-shadow"
             >
               {article.mainImage && (
