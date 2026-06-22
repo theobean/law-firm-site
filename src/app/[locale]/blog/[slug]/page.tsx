@@ -2,7 +2,7 @@ import { getArticle, getRelatedArticles } from "@/sanity/client";
 import { urlFor } from "@/sanity/image";
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { notFound } from "next/navigation";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { readingTime } from "@/lib/readingTime";

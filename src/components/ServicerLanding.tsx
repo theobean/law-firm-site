@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { ArrowRight, Check, AlertTriangle, Clock, Phone, Scale } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import FaqAccordion from "@/components/FaqAccordion";

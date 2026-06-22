@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import { ArrowLeft } from "lucide-react";
 

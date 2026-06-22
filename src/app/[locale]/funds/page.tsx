@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { buildPageMeta } from "@/lib/seo";
 import { ArrowRight, Check, AlertTriangle } from "lucide-react";
 import { use } from "react";

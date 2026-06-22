@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect, useRef } from "react";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import Image from "next/image";
 import { urlFor } from "@/sanity/image";
 import { Calendar, Clock } from "lucide-react";

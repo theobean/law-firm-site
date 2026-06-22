@@ -1,5 +1,5 @@
 import { getArticlesByCategory } from "@/sanity/client";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { ArrowRight, FileText } from "lucide-react";
 
 const i18n = {

@@ -1,6 +1,6 @@
 import { getDecisionBySlug } from "@/sanity/client";
 import { notFound } from "next/navigation";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import type { Metadata } from "next";
 import { ArrowLeft, Calendar, Landmark, Download, Eye } from "lucide-react";
 import DecisionImageViewer from "@/components/DecisionImageViewer";

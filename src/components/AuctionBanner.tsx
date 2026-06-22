@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import { ArrowRight, Gavel, Building2 } from "lucide-react";
 

@@ -7,7 +7,7 @@ import {
   getFacebookEmbedUrl, getVideoType,
 } from "@/lib/youtube";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import ShareButtons from "@/components/ShareButtons";
 
 interface Interview {

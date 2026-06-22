@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { buildPageMeta } from "@/lib/seo";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { ArrowLeft, ArrowRight, Check, Banknote, Handshake, ShieldCheck, Briefcase, Home, Users, Building2, BookOpen, Receipt, HardHat, Gavel } from "lucide-react";
 import { use } from "react";
 import ScrollReveal from "@/components/ScrollReveal";

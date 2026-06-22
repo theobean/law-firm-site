@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/navigation";
 import Image from "next/image";
 import { urlFor } from "@/sanity/image";
 import { useTranslations } from "next-intl";

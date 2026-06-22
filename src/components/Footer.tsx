@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations, useLocale } from "next-intl";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { Scale, MapPin, Phone, Mail, Clock, ChevronRight } from "lucide-react";
 import { openCookieSettings } from "./CookieBanner";
 

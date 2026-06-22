@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { createPortal } from "react-dom";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import {
   FileText, Download, Eye, Calendar, Landmark,
   ChevronLeft, ChevronRight, X, Images,

@@ -1,6 +1,6 @@
 import { getInterviewBySlug } from "@/sanity/client";
 import { notFound } from "next/navigation";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import type { Metadata } from "next";
 import { ArrowLeft, Calendar, Tv } from "lucide-react";
 import { getYouTubeId, getThumbnailUrl, getEmbedUrl, getFacebookEmbedUrl, getVideoType } from "@/lib/youtube";

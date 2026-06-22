@@ -1,5 +1,5 @@
 import { useTranslations, useLocale } from "next-intl";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { Banknote, Handshake, ShieldCheck, Briefcase, Building, HardHat, Landmark, ScrollText, Calculator, ArrowRight } from "lucide-react";
 
 const areaKeys = ["banking", "extrajudicial", "criminal", "commercial", "realEstate", "administrative", "inheritance", "tax", "labor"] as const;
