@@ -144,7 +144,7 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-2 text-white/40 text-xs">
           <span>© {new Date().getFullYear()} {t("about.name")}. {t("footer.rights")}</span>
-          <a href="https://www.syncweb.gr/" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">Made by Sync.™</a>
+          <a href="https://www.syncweb.gr/" target="_blank" rel="noopener noreferrer" className="transition-colors">Made by <span className="text-white">Sync</span><span className="text-accent">.</span>™</a>
           <div className="flex gap-4">
             <Link href={`/privacy`} className="hover:text-accent transition-colors">{t("footer.privacy")}</Link>
             <Link href={`/terms`} className="hover:text-accent transition-colors">{t("footer.terms")}</Link>
