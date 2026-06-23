@@ -92,7 +92,7 @@ export default function Navbar() {
 
   // Rendered BEFORE the Services/Updates dropdowns
   const links = [
-    { href: `/${locale}`, label: tNav("home") },
+    { href: "/", label: tNav("home") },
     { href: `/about`, label: tNav("about") },
     { href: `/practice-areas`, label: tNav("practiceAreas") },
   ];
@@ -164,7 +164,7 @@ export default function Navbar() {
             </div>
           </button>
         ) : (
-          <Link href={`/${locale}`} className="flex items-center gap-2 text-white min-w-0 shrink">
+          <Link href="/" className="flex items-center gap-2 text-white min-w-0 shrink">
             <Scale size={22} className="text-accent shrink-0" />
             <div className="w-px h-6 bg-accent/60 shrink-0" />
             <div className="leading-tight min-w-0">

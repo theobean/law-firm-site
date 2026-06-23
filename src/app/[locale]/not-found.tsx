@@ -16,7 +16,7 @@ export default function NotFound() {
         </h1>
         <p className="text-white/60 mb-10 leading-relaxed">{t("message")}</p>
         <Link
-          href={`/${locale}`}
+          href="/"
           className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-8 py-4 rounded-sm transition-colors"
         >
           <ArrowLeft size={16} /> {t("cta")}

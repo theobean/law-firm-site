@@ -74,7 +74,7 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3">
               {[
-                { href: `/${locale}`, label: t("nav.home") },
+                { href: "/", label: t("nav.home") },
                 { href: `/about`, label: t("nav.about") },
                 { href: `/practice-areas`, label: t("nav.practiceAreas") },
                 { href: `/blog`, label: t("nav.blog") },

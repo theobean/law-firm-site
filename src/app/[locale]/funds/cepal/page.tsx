@@ -24,5 +24,5 @@ export default function CepalPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = use(params);
-  return <ServicerLanding locale={locale} namespace="cepal" counterpartHref={`/${locale}/funds/cepal/epicheiriseis`} />;
+  return <ServicerLanding locale={locale} namespace="cepal" />;
 }

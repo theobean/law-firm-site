@@ -24,5 +24,5 @@ export default function DovaluePage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = use(params);
-  return <ServicerLanding locale={locale} namespace="dovalue" counterpartHref={`/${locale}/funds/dovalue/epicheiriseis`} />;
+  return <ServicerLanding locale={locale} namespace="dovalue" />;
 }

@@ -20,10 +20,6 @@ const staticPaths = [
   "/funds/intrum",
   "/funds/cepal",
   "/funds/qquant",
-  "/funds/dovalue/epicheiriseis",
-  "/funds/intrum/epicheiriseis",
-  "/funds/cepal/epicheiriseis",
-  "/funds/qquant/epicheiriseis",
   // Bank pages — content under revision, currently 308 → /contact
   // Keep in sitemap so Google retains crawl signal until new content is ready
   "/banks",

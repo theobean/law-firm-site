@@ -24,5 +24,5 @@ export default function IntrumPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = use(params);
-  return <ServicerLanding locale={locale} namespace="intrum" counterpartHref={`/${locale}/funds/intrum/epicheiriseis`} />;
+  return <ServicerLanding locale={locale} namespace="intrum" />;
 }
