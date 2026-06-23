@@ -145,9 +145,12 @@ export default async function ArticlePage({
       url: siteUrl,
       logo: { "@type": "ImageObject", url: `${siteUrl}/δικηγορος.jpg` },
     },
-    ...(article.mainImage && {
-      image: { "@type": "ImageObject", url: `${siteUrl}/_next/image?url=${encodeURIComponent(urlFor(article.mainImage).width(1200).height(630).url())}&w=1200&q=80` },
-    }),
+    // image is REQUIRED by Google for Article rich results — always include it,
+    // using a directly-fetchable URL (Sanity CDN, or the site OG image as fallback)
+    image: article.mainImage
+      ? { "@type": "ImageObject", url: urlFor(article.mainImage).width(1200).height(630).url(), width: 1200, height: 630 }
+      : { "@type": "ImageObject", url: `${siteUrl}/δικηγορος.jpg`, width: 1200, height: 1232 },
+    dateModified: article.publishedAt,
     ...(article.tags?.length && { keywords: article.tags.join(", ") }),
     isPartOf: { "@type": "WebSite", name: "Παπαϊωάννου & Συνεργάτες", url: siteUrl },
   };
