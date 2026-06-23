@@ -71,7 +71,7 @@ export async function generateMetadata({
   const description = article.seoDescription || article.excerpt || article.title;
   const ogImage = article.mainImage
     ? urlFor(article.mainImage).width(1200).height(630).url()
-    : `${siteUrl}/δικηγορος.png`;
+    : `${siteUrl}/δικηγορος.jpg`;
 
   return {
     title: metaTitle,
@@ -143,7 +143,7 @@ export default async function ArticlePage({
       "@type": "LegalService",
       name: "Παπαϊωάννου Ι. – Λιάμος Γ. & Συνεργάτες",
       url: siteUrl,
-      logo: { "@type": "ImageObject", url: `${siteUrl}/δικηγορος.png` },
+      logo: { "@type": "ImageObject", url: `${siteUrl}/δικηγορος.jpg` },
     },
     ...(article.mainImage && {
       image: { "@type": "ImageObject", url: `${siteUrl}/_next/image?url=${encodeURIComponent(urlFor(article.mainImage).width(1200).height(630).url())}&w=1200&q=80` },

@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     if (!iv) return {};
     const pageUrl = `${SITE}/${locale}/media/${slug}`;
     const ytId = getYouTubeId(iv.youtubeUrl);
-    const ogImage = ytId ? getThumbnailUrl(ytId) : `${SITE}/δικηγορος.png`;
+    const ogImage = ytId ? getThumbnailUrl(ytId) : `${SITE}/δικηγορος.jpg`;
     const year = iv.date ? new Date(iv.date).getFullYear() : null;
     const lawyerLabel = locale === "de" ? "Rechtsanwalt Ioannis Papaioannou" : locale === "en" ? "Lawyer Ioannis Papaioannou" : "Δικηγόρος Ιωάννης Παπαϊωάννου";
     // Word-boundary truncation to avoid cutting mid-word

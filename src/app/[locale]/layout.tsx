@@ -51,13 +51,13 @@ export async function generateMetadata({
       siteName: t("siteName"),
       title: t("defaultTitle"),
       description: t("defaultDescription"),
-      images: [{ url: "/δικηγορος.png", width: 1200, height: 630, alt: t("siteName") }],
+      images: [{ url: "/δικηγορος.jpg", width: 1200, height: 1232, alt: t("siteName") }],
     },
     twitter: {
       card: "summary_large_image",
       title: t("defaultTitle"),
       description: t("defaultDescription"),
-      images: ["/δικηγορος.png"],
+      images: ["/δικηγορος.jpg"],
     },
     robots: {
       index: true,
@@ -125,7 +125,7 @@ export default async function LocaleLayout({
     url: `${siteUrl}/${locale}`,
     telephone: "+302310545261",
     email: "iopapaio@gmail.com",
-    image: `${siteUrl}/δικηγορος.png`,
+    image: `${siteUrl}/δικηγορος.jpg`,
     foundingDate: "2000",
     priceRange: "€€",
     address: {

@@ -12,7 +12,7 @@ interface Member {
 }
 
 const members: Member[] = [
-  { key: "ioannis", initials: "ΙΠ", photo: "/δικηγορος.png" },
+  { key: "ioannis", initials: "ΙΠ", photo: "/δικηγορος.jpg" },
   { key: "georgios", initials: "ΛΓ" },
   { key: "lamprinι", initials: "ΠΛ" },
 ];

@@ -33,7 +33,7 @@ export default function BiographySection() {
           <div className="flex flex-col items-center md:items-start gap-4 md:sticky md:top-24">
             <div className="relative w-48 md:w-full aspect-[3/4] rounded-sm overflow-hidden shadow-lg">
               <Image
-                src="/δικηγορος.png"
+                src="/δικηγορος.jpg"
                 alt={t("name")}
                 fill
                 className="object-cover object-top"

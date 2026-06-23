@@ -46,7 +46,7 @@ export function buildPageMeta(locale: string, path: string) {
       ...ogDefaults(locale),
       type: "website" as const,
       url: canonical,
-      images: [{ url: "/δικηγορος.png", width: 1200, height: 630 }],
+      images: [{ url: "/δικηγορος.jpg", width: 1200, height: 1232 }],
     },
   };
 }

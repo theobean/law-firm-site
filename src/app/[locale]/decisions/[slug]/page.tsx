@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const decision = await getDecisionBySlug(slug);
     if (!decision) return {};
     const pageUrl = `${siteUrl}/${locale}/decisions/${slug}`;
-    const ogImage = decision.images?.[0]?.url ?? `${siteUrl}/δικηγορος.png`;
+    const ogImage = decision.images?.[0]?.url ?? `${siteUrl}/δικηγορος.jpg`;
     const description = (decision.description ?? "").slice(0, 160) || decision.title;
     return {
       title: decision.title, description,
