@@ -15,6 +15,7 @@ const staticPaths = [
   "/privacy",
   "/terms",
   "/pleistariasmos",
+  "/exodikastikos",
   "/funds",
   "/funds/dovalue",
   "/funds/intrum",

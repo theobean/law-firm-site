@@ -99,6 +99,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {[
                 { href: `/pleistariasmos`, label: t("nav.pleistariasmos") },
+                { href: `/exodikastikos`, label: t("nav.exodikastikos") },
                 { href: `/funds`, label: t("nav.funds") },
                 { href: `/funds/intrum`, label: "Intrum" },
                 { href: `/funds/dovalue`, label: "doValue" },

@@ -7,6 +7,7 @@
     "funds": "NPL Funds",
     "banks": "Banks",
     "pleistariasmos": "Foreclosure",
+    "exodikastikos": "Out-of-Court Mechanism",
     "blog": "Articles",
     "faq": "FAQ",
     "media": "Media",
@@ -149,6 +150,9 @@
     "fundsBannerTitle": "Dealing with an NPL fund or servicer?",
     "fundsBannerText": "Review of transfer legality, claim accuracy, and negotiation from a position of strength.",
     "fundsBannerCta": "NPL Fund Defence",
+    "exodikastikosBannerTitle": "Settle your debts with one application?",
+    "exodikastikosBannerText": "Out-of-court mechanism for banks, funds and the State — conditions, instalments and debt write-off.",
+    "exodikastikosBannerCta": "Out-of-Court Mechanism",
     "areas": {
       "banking": {
         "title": "Banking Law & Objections",
@@ -1101,6 +1105,108 @@
     "ctaTitle": "Contact us now",
     "ctaText": "Don't let deadlines catch you off guard. Call us today for a case assessment.",
     "ctaButton": "Book a consultation"
+  },
+  "exodikastikos": {
+    "seoTitle": "Out-of-Court Debt Settlement Mechanism – Lawyer Thessaloniki",
+    "seoDescription": "Settle debts to banks, funds and the State with a single application, through the out-of-court mechanism (Law 4738/2020). Conditions, instalments, debt write-off and protection from foreclosure. Thessaloniki — Call: +30 2310 545 261.",
+    "heroCity": "Thessaloniki · 12 Leontos Sofou St.",
+    "heroTitle": "Out-of-Court Debt Settlement Mechanism — One Settlement for Banks, Funds and the State",
+    "heroSubtitle": "Law 4738/2020 · Many instalments · Possible write-off · Asset protection",
+    "intro": "The out-of-court mechanism is not a simple online application. It is a negotiation with rules, limits and strict deadlines, where the outcome is decided by preparation. Through it you can settle, in a single procedure, debts to banks, claims-management companies (funds), the tax authority (AADE), social-security funds and municipalities. Ioannis Papaioannou, Legal Counsel of the Association of Borrowers and Consumer Protection of Northern Greece, has handled debt-settlement cases against banks and funds for 25+ years. We do not just file an application — we build a file that holds, pursues the best possible settlement and, where the data allow, a write-off of part of the debt.",
+    "whatTitle": "What the Out-of-Court Mechanism Is",
+    "whatText": "It is the statutory mechanism of Law 4738/2020 for the comprehensive settlement of debts of individuals and businesses to multiple creditors at once. It operates through an electronic platform and allows repayment over a large number of monthly instalments, while in suitable cases it also provides for a write-off of part of the principal debt, interest and penalties. Inclusion is neither self-evident nor automatic: it depends on conditions, on the viability of the settlement and on how the file is presented.",
+    "servicesTitle": "How we help you through the process",
+    "services": [
+      "Checking the eligibility conditions before submission",
+      "Full mapping of debts to banks, funds and the State",
+      "Preparing and submitting the application on the electronic platform",
+      "Negotiating the terms of the settlement with creditors",
+      "Pursuing a debt write-off (haircut) where the data allow",
+      "Reviewing the settlement proposal before acceptance",
+      "Combining with an objection or suspension where enforcement is pending",
+      "Monitoring compliance and protection from enforcement measures"
+    ],
+    "optionsTitle": "Conditions & Critical Points — What We Check First",
+    "options": [
+      {
+        "title": "Which debts enter the settlement",
+        "desc": "We check which of your debts can be included — to banks, management companies, the tax authority, social-security funds and municipalities — and which may be excluded. The picture must be complete before anything starts, because an incomplete mapping costs you in the settlement."
+      },
+      {
+        "title": "Viability of the settlement",
+        "desc": "The proposal the mechanism produces is based on income, asset value and the level of debt. We assess in advance what settlement is realistically achievable, so you are not driven into instalments that do not hold over time."
+      },
+      {
+        "title": "Grounds for exclusion",
+        "desc": "There are cases that prevent or limit inclusion — pending bankruptcy, criminal convictions for specific offences, or a previous breach of settlement. We check these from the start, so no time is lost on a dead-end road."
+      },
+      {
+        "title": "Protection from foreclosure",
+        "desc": "Submission and progress of the application may trigger protection against enforcement measures, under conditions. Where a payment order, seizure or auction is pending, the out-of-court mechanism is combined with targeted procedural moves."
+      }
+    ],
+    "ctaInlineTitle": "Before you submit an application, check whether it pays off.",
+    "ctaInlineText": "We assess conditions, debts and a realistic outcome — and tell you whether the out-of-court route is the right one or whether a better option exists.",
+    "timelineTitle": "The Stages of the Process",
+    "timelineItems": [
+      {
+        "phase": "Before the application",
+        "title": "Checking and preparing the file",
+        "desc": "We record all debts, check the eligibility conditions and grounds for exclusion and gather the necessary information. At this stage it is decided whether the out-of-court mechanism is the right solution and with what goals we will move."
+      },
+      {
+        "phase": "Submission",
+        "title": "Filing the application on the platform",
+        "desc": "The application is submitted electronically, with a waiver of tax and bank confidentiality for the required data. From here the process begins and, under conditions, protection against enforcement measures is activated."
+      },
+      {
+        "phase": "Negotiation",
+        "title": "Settlement proposal from the creditors",
+        "desc": "The mechanism produces a proposal based on a specific calculation. This is where the substance is decided: we check whether the proposal is correct and viable, negotiate terms and pursue, where feasible, a write-off of part of the debt."
+      },
+      {
+        "phase": "Acceptance & compliance",
+        "title": "Settlement agreement",
+        "desc": "On acceptance the settlement is signed and repayment begins in the agreed instalments. Compliance is critical — a breach can annul the settlement and bring back enforcement. We monitor so that protection is not lost on a technicality."
+      }
+    ],
+    "urgencyTitle": "The out-of-court mechanism does not, on its own, stop a running enforcement",
+    "urgencyText": "If there is already a payment order, a seizure or a scheduled auction, the defence deadlines run independently. The out-of-court application must be coordinated with the procedural moves, otherwise protection may come too late.",
+    "whyTitle": "Why us",
+    "whyItems": [
+      "25+ years in debt settlements and banking disputes.",
+      "We do not file a standard application — we build a strategy aimed at the best possible settlement.",
+      "Full knowledge of the practice of banks, funds and claims-management companies.",
+      "Pursuit of a debt write-off where the data of the case support it.",
+      "Combining the out-of-court mechanism with objection and suspension where enforcement is pending.",
+      "Office in Thessaloniki, cases across Greece."
+    ],
+    "faqTitle": "Frequently Asked Questions about the Out-of-Court Mechanism",
+    "faq": [
+      {
+        "q": "Which debts can I settle through the out-of-court mechanism?",
+        "a": "Debts to banks and claims-management companies (funds), to the tax authority (AADE), to social-security funds (e.g. e-EFKA) and to municipalities. The key advantage is that all of these can be addressed in a single procedure, instead of separate negotiations with each one. Exactly which of your debts are included and which may be excluded is something we check in the first assessment of the file."
+      },
+      {
+        "q": "What are the conditions for inclusion?",
+        "a": "Inclusion depends on the profile of the debts, their relationship to your assets and income, and the absence of grounds for exclusion. It is not enough simply to owe money — your case must meet the criteria of the law and the proposed settlement must be viable. That is why the conditions are checked before submission, so as not to start a procedure that leads to a dead end or an unfavourable proposal."
+      },
+      {
+        "q": "Over how many instalments can I repay?",
+        "a": "The law provides for repayment over a large number of monthly instalments, with the exact number differing depending on the creditor — one figure for the State and social-security funds, another for banks and management companies. The final number of instalments and the amount of each one result from the mechanism's calculation based on income, asset value and the level of debt. Our aim is a settlement that genuinely holds over time."
+      },
+      {
+        "q": "Can part of the debt be written off?",
+        "a": "Yes, in suitable cases a write-off of part of the principal debt, interest and penalties is provided for. The write-off is neither automatic nor guaranteed — it results from the calculation and from the data of the case. The better documented the file, the stronger your position in pursuing better terms."
+      },
+      {
+        "q": "If I already have a payment order or a scheduled auction, does the out-of-court mechanism protect me?",
+        "a": "The application may trigger protection against enforcement measures, under conditions, but it does not by itself cancel the defence deadlines already running. If a payment order, seizure or auction is pending, the out-of-court mechanism must be coordinated with an objection or a suspension application. That is why the file is assessed as a whole and immediately, before a deadline becomes a missed opportunity."
+      }
+    ],
+    "ctaTitle": "The out-of-court mechanism is won in preparation, not in submission.",
+    "ctaText": "We check conditions, debts and a realistic outcome and tell you exactly what your position is. No promises — just data.",
+    "ctaButton": "Immediate File Review"
   },
   "cepal": {
     "seoTitle": "Lawyer vs Cepal – Foreclosures Thessaloniki & Greece",

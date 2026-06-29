@@ -32,6 +32,7 @@
     "funds": "NPL-Fonds",
     "banks": "Banken",
     "pleistariasmos": "Zwangsversteigerung",
+    "exodikastikos": "Außergerichtlicher Mechanismus",
     "blog": "Artikel",
     "faq": "FAQ",
     "media": "Medien",
@@ -149,6 +150,9 @@
     "fundsBannerTitle": "Haben Sie es mit einem NPL-Fonds oder Servicer zu tun?",
     "fundsBannerText": "Prüfung der Abtretungsrechtmäßigkeit, Forderungsrichtigkeit und Verhandlung aus starker Position.",
     "fundsBannerCta": "NPL-Fonds Rechtsschutz",
+    "exodikastikosBannerTitle": "Schulden mit einem Antrag regeln?",
+    "exodikastikosBannerText": "Außergerichtlicher Mechanismus für Banken, Fonds und den Staat — Voraussetzungen, Raten und Schuldenerlass.",
+    "exodikastikosBannerCta": "Außergerichtlicher Mechanismus",
     "areas": {
       "banking": {
         "title": "Bankrecht & Anfechtungen",
@@ -1104,6 +1108,108 @@
     ],
     "ctaTitle": "Jeder Tag ohne Handeln ist ein Tag zugunsten des Gläubigers.",
     "ctaText": "Wir prüfen Ihre Akte sofort und sagen Ihnen genau, wo Sie rechtlich stehen. Ohne Versprechungen — mit Fakten.",
+    "ctaButton": "Sofortige Aktenprüfung"
+  },
+  "exodikastikos": {
+    "seoTitle": "Außergerichtlicher Mechanismus zur Schuldenregulierung – Anwalt Thessaloniki",
+    "seoDescription": "Schulden bei Banken, Fonds und dem Staat mit einem einzigen Antrag regeln, über den außergerichtlichen Mechanismus (Gesetz 4738/2020). Voraussetzungen, Raten, Schuldenerlass und Schutz vor Zwangsversteigerung. Thessaloniki — Tel: +30 2310 545 261.",
+    "heroCity": "Thessaloniki · Leontos Sofou 12",
+    "heroTitle": "Außergerichtlicher Mechanismus zur Schuldenregulierung — Eine Regelung für Banken, Fonds und den Staat",
+    "heroSubtitle": "Gesetz 4738/2020 · Viele Raten · Möglicher Erlass · Vermögensschutz",
+    "intro": "Der außergerichtliche Mechanismus ist kein einfacher Online-Antrag. Er ist eine Verhandlung mit Regeln, Grenzen und strengen Fristen, deren Ergebnis durch die Vorbereitung entschieden wird. Über ihn können Sie in einem einzigen Verfahren Schulden bei Banken, Forderungsverwaltungsgesellschaften (Fonds), der Steuerbehörde (AADE), den Sozialversicherungsträgern und den Gemeinden regeln. Ioannis Papaioannou, Rechtsberater des Verbands der Kreditnehmer und für Verbraucherschutz Nordgriechenlands, bearbeitet seit über 25 Jahren Fälle der Schuldenregulierung gegenüber Banken und Fonds. Wir stellen nicht einfach einen Antrag — wir bauen eine Akte, die hält, die bestmögliche Regelung anstrebt und, wo die Daten es zulassen, einen Erlass eines Teils der Schuld erwirkt.",
+    "whatTitle": "Was der außergerichtliche Mechanismus ist",
+    "whatText": "Es ist der gesetzliche Mechanismus des Gesetzes 4738/2020 zur umfassenden Regelung von Schulden natürlicher Personen und Unternehmen gegenüber mehreren Gläubigern zugleich. Er funktioniert über eine elektronische Plattform und ermöglicht die Rückzahlung über eine große Zahl monatlicher Raten, während er in geeigneten Fällen auch einen Erlass eines Teils der Hauptschuld, der Zinsen und der Strafzuschläge vorsieht. Die Aufnahme ist weder selbstverständlich noch automatisch: Sie hängt von Voraussetzungen, von der Tragfähigkeit der Regelung und davon ab, wie die Akte präsentiert wird.",
+    "servicesTitle": "Wie wir Sie durch das Verfahren begleiten",
+    "services": [
+      "Prüfung der Aufnahmevoraussetzungen vor der Einreichung",
+      "Vollständige Erfassung der Schulden bei Banken, Fonds und dem Staat",
+      "Vorbereitung und Einreichung des Antrags auf der elektronischen Plattform",
+      "Verhandlung der Regelungsbedingungen mit den Gläubigern",
+      "Anstreben eines Schuldenerlasses (Haircut), wo die Daten es zulassen",
+      "Prüfung des Regelungsvorschlags vor der Annahme",
+      "Kombination mit Widerspruch oder Aussetzung bei laufender Vollstreckung",
+      "Überwachung der Einhaltung und des Schutzes vor Vollstreckungsmaßnahmen"
+    ],
+    "optionsTitle": "Voraussetzungen & kritische Punkte — Was wir zuerst prüfen",
+    "options": [
+      {
+        "title": "Welche Schulden in die Regelung kommen",
+        "desc": "Wir prüfen, welche Ihrer Schulden einbezogen werden können — gegenüber Banken, Verwaltungsgesellschaften, der Steuerbehörde, den Sozialversicherungsträgern und den Gemeinden — und welche möglicherweise ausgeschlossen sind. Das Bild muss vollständig sein, bevor irgendetwas beginnt, denn eine unvollständige Erfassung kostet bei der Regelung."
+      },
+      {
+        "title": "Tragfähigkeit der Regelung",
+        "desc": "Der vom Mechanismus erzeugte Vorschlag beruht auf Einkommen, Vermögenswert und Schuldenhöhe. Wir beurteilen im Voraus, welche Regelung realistisch erreichbar ist, damit Sie nicht zu Raten gedrängt werden, die auf Dauer nicht tragbar sind."
+      },
+      {
+        "title": "Ausschlussgründe",
+        "desc": "Es gibt Fälle, die die Aufnahme verhindern oder einschränken — ein laufendes Insolvenzverfahren, strafrechtliche Verurteilungen wegen bestimmter Delikte oder ein früherer Bruch einer Regelung. Wir prüfen diese von Anfang an, damit keine Zeit auf einem Sackgassenweg verloren geht."
+      },
+      {
+        "title": "Schutz vor Zwangsversteigerung",
+        "desc": "Die Einreichung und der Fortgang des Antrags können unter Voraussetzungen einen Schutz vor Vollstreckungsmaßnahmen auslösen. Wo ein Zahlungsbefehl, eine Pfändung oder eine Versteigerung ansteht, wird der außergerichtliche Mechanismus mit gezielten verfahrensrechtlichen Schritten kombiniert."
+      }
+    ],
+    "ctaInlineTitle": "Bevor Sie einen Antrag stellen, prüfen Sie, ob es sich lohnt.",
+    "ctaInlineText": "Wir beurteilen Voraussetzungen, Schulden und ein realistisches Ergebnis — und sagen Ihnen, ob der außergerichtliche Weg der richtige ist oder ob es eine bessere Option gibt.",
+    "timelineTitle": "Die Phasen des Verfahrens",
+    "timelineItems": [
+      {
+        "phase": "Vor dem Antrag",
+        "title": "Prüfung und Vorbereitung der Akte",
+        "desc": "Wir erfassen alle Schulden, prüfen die Aufnahmevoraussetzungen und die Ausschlussgründe und tragen die erforderlichen Unterlagen zusammen. In dieser Phase entscheidet sich, ob der außergerichtliche Mechanismus die richtige Lösung ist und mit welchen Zielen wir vorgehen."
+      },
+      {
+        "phase": "Einreichung",
+        "title": "Einreichung des Antrags auf der Plattform",
+        "desc": "Der Antrag wird elektronisch eingereicht, mit Aufhebung des Steuer- und Bankgeheimnisses für die erforderlichen Daten. Von hier an beginnt das Verfahren und wird unter Voraussetzungen ein Schutz vor Vollstreckungsmaßnahmen aktiviert."
+      },
+      {
+        "phase": "Verhandlung",
+        "title": "Regelungsvorschlag der Gläubiger",
+        "desc": "Der Mechanismus erzeugt einen Vorschlag auf der Grundlage einer konkreten Berechnung. Hier entscheidet sich das Wesentliche: Wir prüfen, ob der Vorschlag korrekt und tragfähig ist, verhandeln Bedingungen und streben, wo möglich, einen Erlass eines Teils der Schuld an."
+      },
+      {
+        "phase": "Annahme & Einhaltung",
+        "title": "Regelungsvertrag",
+        "desc": "Mit der Annahme wird die Regelung unterzeichnet und die Rückzahlung in den vereinbarten Raten beginnt. Die Einhaltung ist entscheidend — ein Bruch kann die Regelung aufheben und die Maßnahmen zurückbringen. Wir überwachen, damit der Schutz nicht aus einem formalen Grund verloren geht."
+      }
+    ],
+    "urgencyTitle": "Der außergerichtliche Mechanismus stoppt eine laufende Vollstreckung nicht von allein",
+    "urgencyText": "Wenn bereits ein Zahlungsbefehl, eine Pfändung oder eine geplante Versteigerung vorliegt, laufen die Verteidigungsfristen unabhängig weiter. Der außergerichtliche Antrag muss mit den verfahrensrechtlichen Schritten abgestimmt werden, sonst kann der Schutz zu spät kommen.",
+    "whyTitle": "Warum wir",
+    "whyItems": [
+      "25+ Jahre in Schuldenregulierungen und Bankstreitigkeiten.",
+      "Wir stellen keinen Standardantrag — wir bauen eine Strategie mit dem Ziel der bestmöglichen Regelung.",
+      "Vollständige Kenntnis der Praxis von Banken, Fonds und Forderungsverwaltungsgesellschaften.",
+      "Anstreben eines Schuldenerlasses, wo die Daten des Falls es stützen.",
+      "Kombination des außergerichtlichen Mechanismus mit Widerspruch und Aussetzung bei laufender Vollstreckung.",
+      "Kanzlei in Thessaloniki, Fälle in ganz Griechenland."
+    ],
+    "faqTitle": "Häufige Fragen zum außergerichtlichen Mechanismus",
+    "faq": [
+      {
+        "q": "Welche Schulden kann ich über den außergerichtlichen Mechanismus regeln?",
+        "a": "Schulden bei Banken und Forderungsverwaltungsgesellschaften (Fonds), bei der Steuerbehörde (AADE), bei den Sozialversicherungsträgern (z. B. e-EFKA) und bei den Gemeinden. Der wesentliche Vorteil ist, dass all dies in einem einzigen Verfahren behandelt werden kann, statt in getrennten Verhandlungen mit jedem Einzelnen. Welche genau Ihrer Schulden einbezogen werden und welche möglicherweise ausgeschlossen sind, prüfen wir bei der ersten Beurteilung der Akte."
+      },
+      {
+        "q": "Was sind die Voraussetzungen für die Aufnahme?",
+        "a": "Die Aufnahme hängt vom Profil der Schulden, ihrem Verhältnis zu Vermögen und Einkommen und vom Fehlen von Ausschlussgründen ab. Es genügt nicht, einfach Schulden zu haben — Ihr Fall muss die Kriterien des Gesetzes erfüllen und die vorgeschlagene Regelung muss tragfähig sein. Deshalb werden die Voraussetzungen vor der Einreichung geprüft, um kein Verfahren zu beginnen, das in eine Sackgasse oder zu einem ungünstigen Vorschlag führt."
+      },
+      {
+        "q": "In wie vielen Raten kann ich zurückzahlen?",
+        "a": "Das Gesetz sieht eine Rückzahlung über eine große Zahl monatlicher Raten vor, wobei die genaue Zahl je nach Gläubiger unterschiedlich ist — eine für den Staat und die Sozialversicherungsträger, eine andere für Banken und Verwaltungsgesellschaften. Die endgültige Zahl der Raten und die Höhe jeder Rate ergeben sich aus der Berechnung des Mechanismus auf der Grundlage von Einkommen, Vermögenswert und Schuldenhöhe. Unser Ziel ist eine Regelung, die auf Dauer wirklich trägt."
+      },
+      {
+        "q": "Kann ein Teil der Schuld erlassen werden?",
+        "a": "Ja, in geeigneten Fällen ist ein Erlass eines Teils der Hauptschuld, der Zinsen und der Strafzuschläge vorgesehen. Der Erlass ist weder automatisch noch garantiert — er ergibt sich aus der Berechnung und aus den Daten des Falls. Je besser die Akte dokumentiert ist, desto stärker Ihre Position beim Anstreben besserer Bedingungen."
+      },
+      {
+        "q": "Wenn ich bereits einen Zahlungsbefehl oder eine geplante Versteigerung habe, schützt mich der außergerichtliche Mechanismus?",
+        "a": "Der Antrag kann unter Voraussetzungen einen Schutz vor Vollstreckungsmaßnahmen auslösen, hebt aber für sich allein nicht die bereits laufenden Verteidigungsfristen auf. Wenn ein Zahlungsbefehl, eine Pfändung oder eine Versteigerung ansteht, muss der außergerichtliche Mechanismus mit einem Widerspruch oder einem Aussetzungsantrag abgestimmt werden. Deshalb wird die Akte als Ganzes und sofort beurteilt, bevor eine Frist zu einer verpassten Gelegenheit wird."
+      }
+    ],
+    "ctaTitle": "Der außergerichtliche Mechanismus wird in der Vorbereitung gewonnen, nicht in der Einreichung.",
+    "ctaText": "Wir prüfen Voraussetzungen, Schulden und ein realistisches Ergebnis und sagen Ihnen genau, wo Sie stehen. Ohne Versprechungen — mit Fakten.",
     "ctaButton": "Sofortige Aktenprüfung"
   },
   "cepal": {

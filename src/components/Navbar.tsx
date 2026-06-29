@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { Link } from "@/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
-import { Menu, X, Scale, ChevronDown, ChevronRight, FileText, Tv, BookOpen, Gavel, Building2 } from "lucide-react";
+import { Menu, X, Scale, ChevronDown, ChevronRight, FileText, Tv, BookOpen, Gavel, Building2, Handshake } from "lucide-react";
 
 const localeConfig = {
   el: { flag: "/flags/gr.svg", label: "ΕΛ" },
@@ -113,6 +113,7 @@ export default function Navbar() {
   const servicesLinks = [
     { href: `/funds`, label: tNav("funds"), icon: Building2, subLinks: fundsSubLinks },
     { href: `/pleistariasmos`, label: tNav("pleistariasmos"), icon: Gavel, subLinks: null },
+    { href: `/exodikastikos`, label: tNav("exodikastikos"), icon: Handshake, subLinks: null },
   ];
 
   const updatesLinks = [

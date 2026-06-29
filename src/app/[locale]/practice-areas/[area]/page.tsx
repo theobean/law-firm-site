@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { buildPageMeta } from "@/lib/seo";
 import { Link } from "@/navigation";
-import { ArrowLeft, ArrowRight, Check, Banknote, Handshake, ShieldCheck, Briefcase, Home, Users, Building2, BookOpen, Receipt, HardHat, Gavel } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Banknote, Handshake, ShieldCheck, Briefcase, Home, Building2, BookOpen, Receipt, HardHat, Gavel } from "lucide-react";
 import { use } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 import CategoryArticles from "@/components/CategoryArticles";
@@ -122,6 +122,25 @@ export default function PracticeAreaDetailPage({
                     className="self-start inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-4 py-2 rounded-sm transition-colors text-xs"
                   >
                     {t("pleistariasmosBannerCta")} <ArrowRight size={12} />
+                  </Link>
+                </div>
+              )}
+              {area === "extrajudicial" && (
+                <div className="bg-amber-50 border border-amber-200 rounded-sm p-5 flex flex-col justify-between gap-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-9 h-9 rounded-sm bg-accent/15 border border-accent flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Handshake className="text-accent" size={16} />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-primary text-sm">{t("exodikastikosBannerTitle")}</p>
+                      <p className="text-gray-600 text-xs mt-0.5">{t("exodikastikosBannerText")}</p>
+                    </div>
+                  </div>
+                  <Link
+                    href={`/exodikastikos`}
+                    className="self-start inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-4 py-2 rounded-sm transition-colors text-xs"
+                  >
+                    {t("exodikastikosBannerCta")} <ArrowRight size={12} />
                   </Link>
                 </div>
               )}
