@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { Link } from "@/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
-import { Menu, X, Scale, ChevronDown, ChevronRight, FileText, Tv, BookOpen, Gavel, Building2, Handshake } from "lucide-react";
+import { Menu, X, Scale, ChevronDown, ChevronRight, FileText, Tv, BookOpen, Landmark, Handshake } from "lucide-react";
 
 const localeConfig = {
   el: { flag: "/flags/gr.svg", label: "ΕΛ" },
@@ -110,9 +110,13 @@ export default function Navbar() {
     { href: `/funds/qquant`, label: "QQuant" },
   ];
 
+  const bankingLawSubLinks = [
+    { href: `/funds`, label: tNav("funds"), subLinks: fundsSubLinks },
+    { href: `/pleistariasmos`, label: tNav("pleistariasmos"), subLinks: null },
+  ];
+
   const servicesLinks = [
-    { href: `/funds`, label: tNav("funds"), icon: Building2, subLinks: fundsSubLinks },
-    { href: `/pleistariasmos`, label: tNav("pleistariasmos"), icon: Gavel, subLinks: null },
+    { href: `/practice-areas/banking`, label: tNav("bankingLaw"), icon: Landmark, subLinks: bankingLawSubLinks },
     { href: `/exodikastikos`, label: tNav("exodikastikos"), icon: Handshake, subLinks: null },
   ];
 
@@ -235,19 +239,42 @@ export default function Navbar() {
                       <ChevronRight size={12} className="ml-auto shrink-0 opacity-60" />
                     </Link>
                     {/* Flyout submenu */}
-                    <div className="absolute left-full top-0 w-36 bg-primary border border-white/10 shadow-xl rounded-sm overflow-hidden opacity-0 -translate-x-1 pointer-events-none transition-all duration-150 group-hover/sub:opacity-100 group-hover/sub:translate-x-0 group-hover/sub:pointer-events-auto">
-                      {subLinks.map((sub) => (
-                        <Link
-                          key={sub.href}
-                          href={sub.href}
-                          onClick={() => setServicesDropdownOpen(false)}
-                          className={`block px-4 py-2.5 text-sm font-medium transition-colors border-b border-white/5 last:border-0 ${
-                            pathname.startsWith(sub.href) ? "text-accent bg-accent/10" : "text-white/80 hover:text-accent hover:bg-white/5"
-                          }`}
-                        >
-                          {sub.label}
-                        </Link>
-                      ))}
+                    <div className="absolute left-full top-0 w-36 bg-primary border border-white/10 shadow-xl rounded-sm opacity-0 -translate-x-1 pointer-events-none transition-all duration-150 group-hover/sub:opacity-100 group-hover/sub:translate-x-0 group-hover/sub:pointer-events-auto">
+                      {subLinks.map((sub) => {
+                        const subClass = `flex items-center gap-2 px-4 py-2.5 text-sm font-medium transition-colors border-b border-white/5 last:border-0 ${
+                          pathname.startsWith(sub.href) ? "text-accent bg-accent/10" : "text-white/80 hover:text-accent hover:bg-white/5"
+                        }`;
+                        if (!sub.subLinks) {
+                          return (
+                            <Link key={sub.href} href={sub.href} onClick={() => setServicesDropdownOpen(false)} className={subClass}>
+                              {sub.label}
+                            </Link>
+                          );
+                        }
+                        return (
+                          <div key={sub.href} className="relative group/sub2 border-b border-white/5 last:border-0">
+                            <Link href={sub.href} onClick={() => setServicesDropdownOpen(false)} className={subClass}>
+                              {sub.label}
+                              <ChevronRight size={11} className="ml-auto shrink-0 opacity-60" />
+                            </Link>
+                            {/* Nested flyout: named funds */}
+                            <div className="absolute left-full top-0 w-32 bg-primary border border-white/10 shadow-xl rounded-sm overflow-hidden opacity-0 -translate-x-1 pointer-events-none transition-all duration-150 group-hover/sub2:opacity-100 group-hover/sub2:translate-x-0 group-hover/sub2:pointer-events-auto">
+                              {sub.subLinks.map((leaf) => (
+                                <Link
+                                  key={leaf.href}
+                                  href={leaf.href}
+                                  onClick={() => setServicesDropdownOpen(false)}
+                                  className={`block px-4 py-2.5 text-sm font-medium transition-colors border-b border-white/5 last:border-0 ${
+                                    pathname.startsWith(leaf.href) ? "text-accent bg-accent/10" : "text-white/80 hover:text-accent hover:bg-white/5"
+                                  }`}
+                                >
+                                  {leaf.label}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 );
@@ -349,7 +376,7 @@ export default function Navbar() {
               className={`transition-transform duration-200 ${mobileServicesOpen ? "rotate-180 text-accent" : "text-white/40"}`}
             />
           </button>
-          <div className={`overflow-hidden transition-all duration-200 ${mobileServicesOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
+          <div className={`overflow-hidden transition-all duration-200 ${mobileServicesOpen ? "max-h-[32rem] opacity-100" : "max-h-0 opacity-0"}`}>
             {servicesLinks.map(({ href, label, icon: Icon, subLinks }) => (
               <div key={href}>
                 <Link
@@ -362,15 +389,28 @@ export default function Navbar() {
                 </Link>
                 {subLinks &&
                   subLinks.map((sub) => (
-                    <Link
-                      key={sub.href}
-                      href={sub.href}
-                      onClick={() => { setOpen(false); setMobileServicesOpen(false); }}
-                      className="flex items-center gap-2 text-white/60 hover:text-accent transition-colors text-sm py-2 pl-10 border-b border-white/5"
-                    >
-                      <ChevronRight size={11} className="shrink-0 opacity-60" />
-                      {sub.label}
-                    </Link>
+                    <div key={sub.href}>
+                      <Link
+                        href={sub.href}
+                        onClick={() => { setOpen(false); setMobileServicesOpen(false); }}
+                        className="flex items-center gap-2 text-white/60 hover:text-accent transition-colors text-sm py-2 pl-10 border-b border-white/5"
+                      >
+                        <ChevronRight size={11} className="shrink-0 opacity-60" />
+                        {sub.label}
+                      </Link>
+                      {sub.subLinks &&
+                        sub.subLinks.map((leaf) => (
+                          <Link
+                            key={leaf.href}
+                            href={leaf.href}
+                            onClick={() => { setOpen(false); setMobileServicesOpen(false); }}
+                            className="flex items-center gap-2 text-white/50 hover:text-accent transition-colors text-sm py-2 pl-16 border-b border-white/5"
+                          >
+                            <ChevronRight size={10} className="shrink-0 opacity-50" />
+                            {leaf.label}
+                          </Link>
+                        ))}
+                    </div>
                   ))}
               </div>
             ))}
