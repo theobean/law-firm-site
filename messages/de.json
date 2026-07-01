@@ -136,8 +136,9 @@
     "cta": "Kontakt aufnehmen"
   },
   "practiceAreas": {
-    "title": "Umfassende Rechtsberatung",
-    "subtitle": "mit strategischem Vorteil",
+    "title": "Schutz & Strategie für den Kreditnehmer (und darüber hinaus)",
+    "subtitle": "in jeder Phase Ihres Falls",
+    "intro": "Die tiefe Spezialisierung auf Bankrecht und den Schutz von Kreditnehmern bildet den Kern unserer anwaltlichen Tätigkeit. Im Bewusstsein, dass die heutigen Herausforderungen vielschichtig sind, wird unsere Kanzlei durch ein starkes Netzwerk ausgewählter Partner ergänzt. So gewährleisten wir durch die Verbindung unserer unmittelbaren strategischen Erfahrung mit dem Fachwissen spezialisierter Juristen den umfassenden Schutz Ihrer Interessen in jedem Rechtsgebiet.",
     "viewAll": "Alle Rechtsgebiete",
     "servicesTitle": "Was wir übernehmen",
     "approachTitle": "Unser Ansatz",
@@ -1002,6 +1003,7 @@
     "cta": "Sofortige Aktenprüfung"
   },
   "auctionBanner": {
+    "heading": "Anwalt für Zwangsversteigerungen in Thessaloniki",
     "eyebrow": "Dringende Rechtshilfe",
     "title": "Droht Ihnen eine Zwangsversteigerung?",
     "text": "Vollstreckungswidersprüche, Aussetzungen und Pfändungsaufhebungen — 25+ Jahre Erfahrung.",

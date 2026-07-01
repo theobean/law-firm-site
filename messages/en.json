@@ -136,8 +136,9 @@
     "cta": "Contact Us"
   },
   "practiceAreas": {
-    "title": "Comprehensive legal support",
-    "subtitle": "with a strategic edge",
+    "title": "Protection & Strategy for the Borrower (and beyond)",
+    "subtitle": "at every stage of your case",
+    "intro": "Deep specialization in banking law and the protection of borrowers lies at the core of our legal practice. Recognizing, however, that today's challenges are multidimensional, our firm is backed by a strong network of selected associates. By combining our hands-on strategic experience with the expertise of specialized lawyers, we ensure the complete protection of your interests in every area of law.",
     "viewAll": "All practice areas",
     "servicesTitle": "What we handle",
     "approachTitle": "Our approach",
@@ -1002,6 +1003,7 @@
     "cta": "Immediate file review"
   },
   "auctionBanner": {
+    "heading": "Auction & Foreclosure Lawyer in Thessaloniki",
     "eyebrow": "Urgent legal help",
     "title": "Facing a property auction?",
     "text": "Injunctions, stays, and seizure cancellations — 25+ years of banking law experience.",

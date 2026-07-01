@@ -30,11 +30,16 @@ export default function PracticeAreasGrid({ preview = false }: Props) {
     <section className="py-20 bg-white">
       <div className="max-w-6xl mx-auto px-6">
         {preview && (
-          <div className="mb-12 border-l-4 border-accent pl-6">
-            <h2 className="text-3xl md:text-4xl font-playfair font-bold text-primary">
-              {t("title")}
-            </h2>
-            <p className="text-gray-500 text-xl mt-1">{t("subtitle")}</p>
+          <div className="mb-12">
+            <div className="border-l-4 border-accent pl-6">
+              <h2 className="text-3xl md:text-4xl font-playfair font-bold text-primary">
+                {t("title")}
+              </h2>
+              <p className="text-gray-500 text-xl mt-1">{t("subtitle")}</p>
+            </div>
+            <p className="text-gray-600 text-base md:text-lg leading-relaxed max-w-3xl mt-6">
+              {t("intro")}
+            </p>
           </div>
         )}
 

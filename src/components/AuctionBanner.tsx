@@ -10,7 +10,11 @@ export default function AuctionBanner() {
 
   return (
     <section className="bg-amber-50 border-y border-amber-200">
-      <div className="max-w-6xl mx-auto px-6 py-8 grid sm:grid-cols-2 gap-6">
+      <div className="max-w-6xl mx-auto px-6 py-8">
+        <h2 className="font-playfair font-bold text-primary text-xl mb-6">
+          {t("heading")}
+        </h2>
+        <div className="grid sm:grid-cols-2 gap-6">
 
         {/* Πλειστηριασμοί */}
         <div className="flex items-start gap-4">
@@ -56,6 +60,7 @@ export default function AuctionBanner() {
           </div>
         </div>
 
+        </div>
       </div>
     </section>
   );
