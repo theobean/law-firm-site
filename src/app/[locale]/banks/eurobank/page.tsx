@@ -24,5 +24,5 @@ export default function EurobankPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = use(params);
-  return <ServicerLanding locale={locale} namespace="eurobank" counterpartHref={`/${locale}/banks/eurobank/epicheiriseis`} />;
+  return <ServicerLanding locale={locale} namespace="eurobank" counterpartHref={`/banks/eurobank/epicheiriseis`} />;
 }

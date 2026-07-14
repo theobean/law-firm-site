@@ -32,6 +32,8 @@
     "bankingLaw": "Bankrecht",
     "funds": "NPL-Fonds",
     "banks": "Banken",
+    "individuals": "Privatpersonen",
+    "businesses": "Unternehmen",
     "pleistariasmos": "Zwangsversteigerung",
     "exodikastikos": "Außergerichtlicher Mechanismus",
     "blog": "Artikel",
@@ -436,10 +438,10 @@
     "heroSubtitle": "Einspruch · Aussetzung · Verhandlung über Schuldenschnitt",
     "intro": "Wenn Sie ein notleidendes Alpha Bank-Darlehen haben oder eine außergerichtliche Aufforderung, eine Kündigung des Vertrags, einen Zahlungsbefehl, einen Vollstreckungstitel, einen Pfändungsbericht oder ein Versteigerungsprogramm erhalten haben, befindet sich Ihr Fall nicht mehr in einem theoretischen Stadium. In manchen Fällen wird die Forderung noch von Alpha Bank selbst verfolgt. In anderen wurde das Darlehen an eine Zweckgesellschaft (Fonds) übertragen und die Verwaltung einem Kreditverwaltungsunternehmen (Servicer) übertragen. Das Erste, was wir prüfen, ist genau das: wer Sie heute verfolgt und mit welcher Berechtigung. Ioannis Papaioannou, Rechtsberater des Verbands der Kreditnehmer und für Verbraucherschutz Nordgriechenlands, verteidigt seit über 25 Jahren Kreditnehmer gegenüber Banken und Servicern. Wir wissen, wie Alpha Bank in der Praxis vorgeht, welche Dokumente vorgelegt werden müssen und welche Punkte des Falles geprüft werden müssen, bevor der Schuldner aus Angst in einen Vergleich oder ohne echte Verteidigung in eine Versteigerung gedrängt wird.",
     "whatTitle": "Alpha Bank, Fonds und Servicer: wer Ihr Darlehen wirklich verfolgt",
-    "whatText": "Ein Alpha Bank-Darlehen kann sich heute in anderen Händen befinden als bei der Unterzeichnung. Mal bleibt es bei der Bank, mal wurde es über eine Verbriefung an eine Zweckgesellschaft (Fonds) übertragen, mit der Verwaltung durch einen Servicer. Das ist in der Praxis von Bedeutung. In jedem Fall muss geprüft werden, wer heute der wahre Gläubiger der Forderung ist, wann und wie das Darlehen von Alpha Bank übertragen wurde, mit welchen Dokumenten die Übertragung und die Verwaltungsbeauftragung nachgewiesen werden, ob die vollstreckende Partei im konkreten Verfahren berechtigt ist und ob der geforderte Betrag rechtmäßig, klar und überprüfbar zustande kommt. Ein Dokument — von Alpha Bank oder von einem Servicer — bedeutet nicht, dass alles feststeht. Es bedeutet, dass der Fall sofort geprüft werden muss. Vor jeder Gespräch über einen Vergleich müssen wir wissen, was gefordert wird, von wem, mit welcher Berechtigung und mit welcher Berechnung. Wenn die Verwaltung von einem bestimmten Unternehmen übernommen wurde — wie Cepal, doValue, Intrum oder QQuant — sehen Sie sich auch unsere entsprechende Seite an.",
+    "whatText": "Ein Alpha Bank-Darlehen kann sich heute in anderen Händen befinden als bei der Unterzeichnung. Mal bleibt es bei der Bank, mal wurde es über eine Verbriefung an eine Zweckgesellschaft (Fonds) übertragen, mit der Verwaltung durch einen Servicer. Das ist in der Praxis von Bedeutung. In jedem Fall muss geprüft werden, wer heute der wahre Gläubiger der Forderung ist, wann und wie das Darlehen von Alpha Bank übertragen wurde, mit welchen Dokumenten die Übertragung und die Verwaltungsbeauftragung nachgewiesen werden, ob die vollstreckende Partei im konkreten Verfahren berechtigt ist und ob der geforderte Betrag rechtmäßig, klar und überprüfbar zustande kommt. Ein Dokument, ob von Alpha Bank oder von einem Servicer, bedeutet nicht, dass alles feststeht. Es bedeutet, dass der Fall sofort geprüft werden muss. Vor jeder Gespräch über einen Vergleich müssen wir wissen, was gefordert wird, von wem, mit welcher Berechtigung und mit welcher Berechnung. Wenn die Verwaltung von einem bestimmten Unternehmen übernommen wurde, etwa Cepal, doValue, Intrum oder QQuant, sehen Sie sich auch unsere entsprechende Seite an.",
     "protectTitle": "Schutz Ihres Zuhauses vor einer Zwangsversteigerung bei einem Alpha Bank-Darlehen",
     "protectText": "Keine Immobilie geht verloren, weil ein Brief eingetroffen ist. Sie ist gefährdet, wenn der Fall nicht rechtzeitig geprüft wird und die rechtlichen Verteidigungsmöglichkeiten ungenutzt bleiben. Von der Kündigung des Vertrags über den Zahlungsbefehl, den Vollstreckungstitel, die Pfändung bis zur Versteigerung hat jede Phase ihre eigene Bedeutung. Wir prüfen, ob Raum für einen Einspruch, einen Aussetzungsantrag, die Aufnahme in den außergerichtlichen Mechanismus, eine direkte Verhandlung oder eine andere gezielte Maßnahme besteht. Wir behandeln keine Versteigerung als beschlossene Sache. Von Anfang an prüfen wir die Berechtigung der vollstreckenden Partei, die Übertragung der Forderung von Alpha Bank, die Höhe der Schuld, die Zinsen, die Gebühren, die missbräuchlichen Klauseln und jede Vollstreckungshandlung. Dort, in den Details, die oft nicht geprüft werden, kann sich der Verlauf eines Falles ändern. Das Ziel ist nicht, einfach schnell zu handeln. Das Ziel ist, richtig zu handeln, bevor die Vollstreckung als einziger Weg erscheint.",
-    "deadlinesTitle": "Ich habe eine außergerichtliche Aufforderung, einen Zahlungsbefehl oder eine Pfändung zu einem Alpha Bank-Darlehen erhalten — Die Fristen, die Sie nicht versäumen dürfen",
+    "deadlinesTitle": "Ich habe eine außergerichtliche Aufforderung, einen Zahlungsbefehl oder eine Pfändung zu einem Alpha Bank-Darlehen erhalten: Die Fristen, die Sie nicht versäumen dürfen",
     "deadlinesIntro": "Nicht jedes Dokument hat dasselbe rechtliche Gewicht. Die Kündigung des Vertrags ist eine Sache, der Zahlungsbefehl eine andere und die Pfändung noch eine andere. Aber jede Phase zeigt, dass der Fall voranschreitet und die Reaktionszeit kürzer wird.",
     "deadlines": [
       {
@@ -455,20 +457,20 @@
         "desc": "Die Pfändung ist die Phase, in der die Vollstreckung bereits begonnen hat und bei Immobilien bereits eine Versteigerung angesetzt ist. Ein Einspruch gegen die Vollstreckung, aus Gründen, die die Forderung, den Titel, das Verfahren und die Pfändung betreffen, wird innerhalb von fünfundvierzig Tagen ab dem Tag der Pfändung eingelegt. Ist auch eine Aussetzung der Versteigerung erforderlich, wird dieser Schritt gesondert geprüft und muss rechtzeitig erfolgen."
       }
     ],
-    "deadlinesWarning": "Bei der Kündigung bleiben wir nicht untätig. Beim Zahlungsbefehl handeln wir sofort. Bei der Pfändung gibt es keinen Raum für Versuche. Verteidigungsfristen warten nicht, bis sich der Schuldner vom Schock erholt hat.",
+    "deadlinesWarning": "Keine dieser Fristen verlängert sich, weil der Schuldner Zeit brauchte, um sich vom Schock zu erholen. Deshalb sollte die Akte geprüft werden, sobald das erste Dokument eintrifft, und nicht erst, wenn die Versteigerung bereits nahe ist.",
     "cta1Title": "Haben Sie ein Alpha Bank- oder Servicer-Dokument vor sich?",
-    "cta1Text": "Eine sofortige erste Einschätzung: was Ihnen zugestellt wurde, welche Frist läuft, welche Schritte verfügbar sind. Viele Alpha-Bank-Darlehen wurden über Verbriefungen übertragen — die Übertragungskette ist oft der schwächste Punkt der Gegenseite. Rufen Sie +30 2310 545 261 an oder senden Sie das Formular.",
-    "negotiationTitle": "Verhandlungsstrategie für Alpha Bank-Darlehen — Ein Vergleich mit dem Ziel eines Schuldenschnitts (Haircut), wo der Fall es zulässt",
-    "negotiationIntro": "Ob Sie Alpha Bank oder dem Servicer gegenüberstehen, der die Forderung verwaltet — Sie gehen nicht hin, um um Gnade zu bitten. Sie gehen hin, um eine Position darzulegen. Welche Seite den Fall besser kennt, hat den stärkeren Verhandlungsvorteil. Unsere Aufgabe ist es, diesen Vorteil dem Schuldner zu verschaffen. Vor jedem Kontakt prüfen wir die Berechtigung der verfolgenden Partei, den wahren Gläubiger der Forderung, die Übertragung von Alpha Bank, den Saldo, die Zinsen, die Gebühren und jedes Element, das den Betrag beeinflusst. Ein nicht überprüfter Betrag darf nicht zum Ausgangspunkt einer Verhandlung werden.",
+    "cta1Text": "Eine sofortige erste Einschätzung: was Ihnen zugestellt wurde, welche Frist läuft, welche Schritte verfügbar sind. Rufen Sie +30 2310 545 261 an oder senden Sie das Formular.",
+    "negotiationTitle": "Verhandlungsstrategie für Alpha Bank-Darlehen: Ein Vergleich mit dem Ziel eines Schuldenschnitts (Haircut), wo der Fall es zulässt",
+    "negotiationIntro": "Ob Sie Alpha Bank oder dem Servicer gegenüberstehen, der die Forderung verwaltet: Sie gehen nicht hin, um um Gnade zu bitten. Sie gehen hin, um eine Position darzulegen. Welche Seite den Fall besser kennt, hat den stärkeren Verhandlungsvorteil. Unsere Aufgabe ist es, diesen Vorteil dem Schuldner zu verschaffen. Vor jedem Kontakt prüfen wir die Berechtigung der verfolgenden Partei, den wahren Gläubiger der Forderung, die Übertragung von Alpha Bank, den Saldo, die Zinsen, die Gebühren und jedes Element, das den Betrag beeinflusst. Ein nicht überprüfter Betrag darf nicht zum Ausgangspunkt einer Verhandlung werden.",
     "negotiationPoints": [
       "Der Vergleich muss der Zeit standhalten. Eine Vereinbarung, die auf dem Papier gut aussieht, aber bei der zweiten oder dritten Rate zusammenbricht, ist wertlos. Der Vorschlag muss mit der tatsächlichen finanziellen Leistungsfähigkeit des Schuldners, dem Wert der Sicherheit, dem Verlauf der Forderung und den Daten des Falles verbunden sein.",
-      "Ein Schuldenschnitt (Haircut) wird nicht als Wunsch formuliert. Er wird als Verhandlungsziel aufgebaut, wenn die Elemente des Falles es zulassen.",
+      "Ein Schuldenschnitt (Haircut) wird nicht als Wunsch geäußert; er wird als Verhandlungsziel belegt, wenn die Elemente des Falles es zulassen.",
       "Der Preis, zu dem der Fonds das Darlehen von Alpha Bank erworben hat, die Geschichte des Portfolios, die Aussicht auf Beitreibung, der Wert der Immobilie und das Bestehen einer gerichtlichen Anfechtung sind Faktoren, die die Diskussion verändern können.",
-      "Die beste Verhandlung findet statt, wenn der Schuldner seine Rechte bereits ausgeübt hat oder bereit ist, sie auszuüben. Ein begründeter Einspruch, ein Aussetzungsantrag oder eine ernsthafte gerichtliche Anfechtung verwandelt die Verhandlung von einer bloßen Bitte in einen Wettstreit der Positionen."
+      "Die beste Verhandlung findet statt, wenn der Schuldner seine Rechte bereits ausgeübt hat oder bereit ist, sie auszuüben. Ein begründeter Einspruch, ein Aussetzungsantrag oder eine ernsthafte gerichtliche Anfechtung verändert die Grundlage des Gesprächs: die Gegenseite weiß, dass der Fall vor Gericht entschieden wird, wenn es keine Einigung gibt."
     ],
-    "negotiationOutro": "Es geht nicht darum, dass ein Vorschlag gehört wird. Es geht darum, dass er Bestand hat. Ein Vergleich, der bezahlt wird. Ein Schuldenschnitt (Haircut), wenn er belegt ist. Gerichtlicher Druck, wo nötig. Denn gegenüber einer Bank oder einem Servicer werden die besten Konditionen nicht geschenkt. Sie werden mit Kontrolle, Strategie und richtig aufgebautem Druck gewonnen.",
-    "cta2Title": "Bevor Sie Alpha Bank oder dem Servicer etwas beantworten oder unterschreiben — sprechen Sie mit uns.",
-    "cta2Text": "Viele Alpha-Bank-Darlehen wurden über Verbriefungen übertragen — die Übertragungskette ist oft der schwächste Punkt der Gegenseite. Eine voreilige Schuldanerkennung kann Türen schließen, die heute offen sind. Erst die Prüfung, dann die Antwort.",
+    "negotiationOutro": "Ein Vorschlag muss nicht nur gehört werden, er muss auch Bestand haben. Das heißt ein Vergleich, der tatsächlich bezahlt werden kann, ein Schuldenschnitt, wo er belegt ist, und gerichtlicher Druck, wo er nötig ist. Gegenüber einer Bank oder einem Servicer schenkt niemand die guten Konditionen; sie werden durch Kontrolle der Akte und sorgfältige Vorbereitung gewonnen.",
+    "cta2Title": "Bevor Sie Alpha Bank oder dem Servicer etwas beantworten oder unterschreiben, sprechen Sie zuerst mit uns.",
+    "cta2Text": "Viele Alpha-Bank-Darlehen wurden über Verbriefungen übertragen, und die Übertragungskette ist oft der schwächste Punkt der Gegenseite. Eine voreilige Schuldanerkennung kann Türen schließen, die heute offen sind. Erst die Prüfung, dann die Antwort.",
     "anakopiTitle": "Einspruch und Aussetzung der Versteigerung vor den Gerichten in Thessaloniki und ganz Griechenland",
     "anakopiText1": "Die Zwangsvollstreckung wird nicht mit allgemeinen Protesten beantwortet, sondern mit einer gezielten verfahrensrechtlichen Prüfung jeder Handlung, jedes Dokuments und jedes Betrags, auf den sich die verfolgende Seite beruft.\n\nUnsere Anwaltskanzlei bearbeitet täglich Fälle von Einsprüchen, Aussetzungsanträgen und Versteigerungen vor den Gerichten in Thessaloniki und im gesamten griechischen Hoheitsgebiet.\n\nIn jedem Fall prüfen wir umfassend den Zahlungstitel, den Pfändungsbericht, die Dokumente der Übertragung der Forderung, die Verwaltungsbeauftragung, die Analyse der Schuld, die Zinsen, die Gebühren, die Zustellungen und die Einhaltung der gesetzlichen Fristen. Ein Einspruch darf kein routinemäßiger Verteidigungsschriftsatz sein. Er muss verfahrensrechtlich präzise, beweisrechtlich belegt und an die tatsächlichen Daten der konkreten Akte angepasst sein.",
     "anakopiPoints": [],
@@ -477,19 +479,19 @@
     "faq": [
       {
         "q": "Mein Darlehen war bei Alpha Bank, aber jetzt ruft mich eine andere Firma an. Was bedeutet das?",
-        "a": "Es bedeutet, dass Alpha Bank die Forderung wahrscheinlich an eine Zweckgesellschaft (Fonds) übertragen und die Verwaltung einem Kreditverwaltungsunternehmen (Servicer) übertragen hat — wie, je nach Portfolio, Cepal, doValue, Intrum oder QQuant. Es bedeutet nicht, dass die Schuld selbstverständlich oder korrekt berechnet ist. Die Übertragung, die Berechtigung und der Betrag müssen geprüft werden, bevor Sie irgendetwas tun."
+        "a": "Es bedeutet, dass Alpha Bank die Forderung wahrscheinlich an eine Zweckgesellschaft (Fonds) übertragen und die Verwaltung einem Kreditverwaltungsunternehmen (Servicer) übertragen hat, etwa, je nach Portfolio, Cepal, doValue, Intrum oder QQuant. Es bedeutet nicht, dass die Schuld selbstverständlich oder korrekt berechnet ist. Die Übertragung, die Berechtigung und der Betrag müssen geprüft werden, bevor Sie irgendetwas tun."
       },
       {
         "q": "Kann Alpha Bank oder der Servicer meine Immobilie versteigern lassen?",
-        "a": "Nur mit einem vollstreckbaren Titel und einem vollständig rechtmäßigen Verfahren — beides wird gerichtlich überprüft. Die Berechtigung der vollstreckenden Partei, die Höhe der Forderung und jede Vollstreckungshandlung haben Anfechtungspunkte mit bestimmten Fristen."
+        "a": "Nur mit einem vollstreckbaren Titel und einem vollständig rechtmäßigen Verfahren, und beides wird gerichtlich überprüft. Die Berechtigung der vollstreckenden Partei, die Höhe der Forderung und jede Vollstreckungshandlung haben Anfechtungspunkte mit bestimmten Fristen."
       },
       {
         "q": "Lohnt es sich, allein mit Alpha Bank oder dem Servicer zu verhandeln?",
-        "a": "Es ist gefährlich. Ihnen gegenüber steht ein spezialisierter Mechanismus, der Tausende von Fällen verhandelt — Sie haben einen. Ohne Aktenprüfung wissen Sie nicht einmal, ob der geforderte Betrag korrekt ist, noch wie groß Ihre tatsächliche Verhandlungsmacht ist."
+        "a": "Es ist gefährlich. Ihnen gegenüber steht ein spezialisierter Mechanismus, der Tausende von Fällen verhandelt, während Sie einen haben. Ohne Aktenprüfung wissen Sie nicht einmal, ob der geforderte Betrag korrekt ist, noch wie groß Ihre tatsächliche Verhandlungsmacht ist."
       },
       {
         "q": "Die Versteigerung ist sehr nah. Gibt es noch Hoffnung?",
-        "a": "Es hängt von der Akte ab — aber die Antwort wird erst gegeben, nachdem wir sie gesehen haben, und schnell. Verfahrensmängel können auch in den letzten Tagen noch Grund für Maßnahmen bieten. Rufen Sie sofort +30 2310 545 261 an."
+        "a": "Es hängt von der Akte ab, und die Antwort gibt es erst, nachdem wir sie gesehen haben, und zwar schnell. Verfahrensmängel können auch in den letzten Tagen noch Grund für Maßnahmen bieten. Rufen Sie sofort +30 2310 545 261 an."
       },
       {
         "q": "Welche Dokumente benötigen Sie für die Prüfung?",
@@ -497,7 +499,7 @@
       }
     ],
     "ctaTitle": "Alpha Bank und die Servicer verhandeln jeden Tag. Wir prozessieren jeden Tag.",
-    "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Viele Alpha-Bank-Darlehen wurden über Verbriefungen übertragen — die Übertragungskette ist oft der schwächste Punkt der Gegenseite. Aufgrund strenger Fristen wird Ihre Akte vordringlich bewertet — heute, nicht „irgendwann\".",
+    "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Aufgrund strenger Fristen wird Ihre Akte vordringlich bewertet, denn die Fristen warten nicht.",
     "ctaButton": "Sofortige Aktenprüfung",
     "ctaPhone": "Jetzt anrufen: +30 2310 545 261"
   },
@@ -509,10 +511,10 @@
     "heroSubtitle": "Einspruch · Aussetzung · Verhandlung über Schuldenschnitt",
     "intro": "Wenn Sie ein notleidendes Piraeus Bank-Darlehen haben oder eine außergerichtliche Aufforderung, eine Kündigung des Vertrags, einen Zahlungsbefehl, einen Vollstreckungstitel, einen Pfändungsbericht oder ein Versteigerungsprogramm erhalten haben, befindet sich Ihr Fall nicht mehr in einem theoretischen Stadium. In manchen Fällen wird die Forderung noch von Piraeus Bank selbst verfolgt. In anderen wurde das Darlehen an eine Zweckgesellschaft (Fonds) übertragen und die Verwaltung einem Kreditverwaltungsunternehmen (Servicer) übertragen. Das Erste, was wir prüfen, ist genau das: wer Sie heute verfolgt und mit welcher Berechtigung. Ioannis Papaioannou, Rechtsberater des Verbands der Kreditnehmer und für Verbraucherschutz Nordgriechenlands, verteidigt seit über 25 Jahren Kreditnehmer gegenüber Banken und Servicern. Wir wissen, wie Piraeus Bank in der Praxis vorgeht, welche Dokumente vorgelegt werden müssen und welche Punkte des Falles geprüft werden müssen, bevor der Schuldner aus Angst in einen Vergleich oder ohne echte Verteidigung in eine Versteigerung gedrängt wird.",
     "whatTitle": "Piraeus Bank, Fonds und Servicer: wer Ihr Darlehen wirklich verfolgt",
-    "whatText": "Ein Piraeus Bank-Darlehen kann sich heute in anderen Händen befinden als bei der Unterzeichnung. Mal bleibt es bei der Bank, mal wurde es über eine Verbriefung an eine Zweckgesellschaft (Fonds) übertragen, mit der Verwaltung durch einen Servicer. Das ist in der Praxis von Bedeutung. In jedem Fall muss geprüft werden, wer heute der wahre Gläubiger der Forderung ist, wann und wie das Darlehen von Piraeus Bank übertragen wurde, mit welchen Dokumenten die Übertragung und die Verwaltungsbeauftragung nachgewiesen werden, ob die vollstreckende Partei im konkreten Verfahren berechtigt ist und ob der geforderte Betrag rechtmäßig, klar und überprüfbar zustande kommt. Ein Dokument — von Piraeus Bank oder von einem Servicer — bedeutet nicht, dass alles feststeht. Es bedeutet, dass der Fall sofort geprüft werden muss. Vor jeder Gespräch über einen Vergleich müssen wir wissen, was gefordert wird, von wem, mit welcher Berechtigung und mit welcher Berechnung. Wenn die Verwaltung von einem bestimmten Unternehmen übernommen wurde — wie Intrum, doValue, Cepal oder QQuant — sehen Sie sich auch unsere entsprechende Seite an.",
+    "whatText": "Ein Piraeus Bank-Darlehen kann sich heute in anderen Händen befinden als bei der Unterzeichnung. Mal bleibt es bei der Bank, mal wurde es über eine Verbriefung an eine Zweckgesellschaft (Fonds) übertragen, mit der Verwaltung durch einen Servicer. Das ist in der Praxis von Bedeutung. In jedem Fall muss geprüft werden, wer heute der wahre Gläubiger der Forderung ist, wann und wie das Darlehen von Piraeus Bank übertragen wurde, mit welchen Dokumenten die Übertragung und die Verwaltungsbeauftragung nachgewiesen werden, ob die vollstreckende Partei im konkreten Verfahren berechtigt ist und ob der geforderte Betrag rechtmäßig, klar und überprüfbar zustande kommt. Ein Dokument, ob von Piraeus Bank oder von einem Servicer, bedeutet nicht, dass alles feststeht. Es bedeutet, dass der Fall sofort geprüft werden muss. Vor jeder Gespräch über einen Vergleich müssen wir wissen, was gefordert wird, von wem, mit welcher Berechtigung und mit welcher Berechnung. Wenn die Verwaltung von einem bestimmten Unternehmen übernommen wurde, etwa Intrum, doValue, Cepal oder QQuant, sehen Sie sich auch unsere entsprechende Seite an.",
     "protectTitle": "Schutz Ihres Zuhauses vor einer Zwangsversteigerung bei einem Piraeus Bank-Darlehen",
     "protectText": "Keine Immobilie geht verloren, weil ein Brief eingetroffen ist. Sie ist gefährdet, wenn der Fall nicht rechtzeitig geprüft wird und die rechtlichen Verteidigungsmöglichkeiten ungenutzt bleiben. Von der Kündigung des Vertrags über den Zahlungsbefehl, den Vollstreckungstitel, die Pfändung bis zur Versteigerung hat jede Phase ihre eigene Bedeutung. Wir prüfen, ob Raum für einen Einspruch, einen Aussetzungsantrag, die Aufnahme in den außergerichtlichen Mechanismus, eine direkte Verhandlung oder eine andere gezielte Maßnahme besteht. Wir behandeln keine Versteigerung als beschlossene Sache. Von Anfang an prüfen wir die Berechtigung der vollstreckenden Partei, die Übertragung der Forderung von Piraeus Bank, die Höhe der Schuld, die Zinsen, die Gebühren, die missbräuchlichen Klauseln und jede Vollstreckungshandlung. Dort, in den Details, die oft nicht geprüft werden, kann sich der Verlauf eines Falles ändern. Das Ziel ist nicht, einfach schnell zu handeln. Das Ziel ist, richtig zu handeln, bevor die Vollstreckung als einziger Weg erscheint.",
-    "deadlinesTitle": "Ich habe eine außergerichtliche Aufforderung, einen Zahlungsbefehl oder eine Pfändung zu einem Piraeus Bank-Darlehen erhalten — Die Fristen, die Sie nicht versäumen dürfen",
+    "deadlinesTitle": "Ich habe eine außergerichtliche Aufforderung, einen Zahlungsbefehl oder eine Pfändung zu einem Piraeus Bank-Darlehen erhalten: Die Fristen, die Sie nicht versäumen dürfen",
     "deadlinesIntro": "Nicht jedes Dokument hat dasselbe rechtliche Gewicht. Die Kündigung des Vertrags ist eine Sache, der Zahlungsbefehl eine andere und die Pfändung noch eine andere. Aber jede Phase zeigt, dass der Fall voranschreitet und die Reaktionszeit kürzer wird.",
     "deadlines": [
       {
@@ -528,20 +530,20 @@
         "desc": "Die Pfändung ist die Phase, in der die Vollstreckung bereits begonnen hat und bei Immobilien bereits eine Versteigerung angesetzt ist. Ein Einspruch gegen die Vollstreckung, aus Gründen, die die Forderung, den Titel, das Verfahren und die Pfändung betreffen, wird innerhalb von fünfundvierzig Tagen ab dem Tag der Pfändung eingelegt. Ist auch eine Aussetzung der Versteigerung erforderlich, wird dieser Schritt gesondert geprüft und muss rechtzeitig erfolgen."
       }
     ],
-    "deadlinesWarning": "Bei der Kündigung bleiben wir nicht untätig. Beim Zahlungsbefehl handeln wir sofort. Bei der Pfändung gibt es keinen Raum für Versuche. Verteidigungsfristen warten nicht, bis sich der Schuldner vom Schock erholt hat.",
+    "deadlinesWarning": "Keine dieser Fristen verlängert sich, weil der Schuldner Zeit brauchte, um sich vom Schock zu erholen. Deshalb sollte die Akte geprüft werden, sobald das erste Dokument eintrifft, und nicht erst, wenn die Versteigerung bereits nahe ist.",
     "cta1Title": "Haben Sie ein Piraeus Bank- oder Servicer-Dokument vor sich?",
-    "cta1Text": "Eine sofortige erste Einschätzung: was Ihnen zugestellt wurde, welche Frist läuft, welche Schritte verfügbar sind. Die Piraeus Bank und ihre Servicer handeln mit strengen, standardisierten Vollstreckungsverfahren — die gerade deshalb formal angefochten werden können. Rufen Sie +30 2310 545 261 an oder senden Sie das Formular.",
-    "negotiationTitle": "Verhandlungsstrategie für Piraeus Bank-Darlehen — Ein Vergleich mit dem Ziel eines Schuldenschnitts (Haircut), wo der Fall es zulässt",
-    "negotiationIntro": "Ob Sie Piraeus Bank oder dem Servicer gegenüberstehen, der die Forderung verwaltet — Sie gehen nicht hin, um um Gnade zu bitten. Sie gehen hin, um eine Position darzulegen. Welche Seite den Fall besser kennt, hat den stärkeren Verhandlungsvorteil. Unsere Aufgabe ist es, diesen Vorteil dem Schuldner zu verschaffen. Vor jedem Kontakt prüfen wir die Berechtigung der verfolgenden Partei, den wahren Gläubiger der Forderung, die Übertragung von Piraeus Bank, den Saldo, die Zinsen, die Gebühren und jedes Element, das den Betrag beeinflusst. Ein nicht überprüfter Betrag darf nicht zum Ausgangspunkt einer Verhandlung werden.",
+    "cta1Text": "Eine sofortige erste Einschätzung: was Ihnen zugestellt wurde, welche Frist läuft, welche Schritte verfügbar sind. Rufen Sie +30 2310 545 261 an oder senden Sie das Formular.",
+    "negotiationTitle": "Verhandlungsstrategie für Piraeus Bank-Darlehen: Ein Vergleich mit dem Ziel eines Schuldenschnitts (Haircut), wo der Fall es zulässt",
+    "negotiationIntro": "Ob Sie Piraeus Bank oder dem Servicer gegenüberstehen, der die Forderung verwaltet: Sie gehen nicht hin, um um Gnade zu bitten. Sie gehen hin, um eine Position darzulegen. Welche Seite den Fall besser kennt, hat den stärkeren Verhandlungsvorteil. Unsere Aufgabe ist es, diesen Vorteil dem Schuldner zu verschaffen. Vor jedem Kontakt prüfen wir die Berechtigung der verfolgenden Partei, den wahren Gläubiger der Forderung, die Übertragung von Piraeus Bank, den Saldo, die Zinsen, die Gebühren und jedes Element, das den Betrag beeinflusst. Ein nicht überprüfter Betrag darf nicht zum Ausgangspunkt einer Verhandlung werden.",
     "negotiationPoints": [
       "Der Vergleich muss der Zeit standhalten. Eine Vereinbarung, die auf dem Papier gut aussieht, aber bei der zweiten oder dritten Rate zusammenbricht, ist wertlos. Der Vorschlag muss mit der tatsächlichen finanziellen Leistungsfähigkeit des Schuldners, dem Wert der Sicherheit, dem Verlauf der Forderung und den Daten des Falles verbunden sein.",
-      "Ein Schuldenschnitt (Haircut) wird nicht als Wunsch formuliert. Er wird als Verhandlungsziel aufgebaut, wenn die Elemente des Falles es zulassen.",
+      "Ein Schuldenschnitt (Haircut) wird nicht als Wunsch geäußert; er wird als Verhandlungsziel belegt, wenn die Elemente des Falles es zulassen.",
       "Der Preis, zu dem der Fonds das Darlehen von Piraeus Bank erworben hat, die Geschichte des Portfolios, die Aussicht auf Beitreibung, der Wert der Immobilie und das Bestehen einer gerichtlichen Anfechtung sind Faktoren, die die Diskussion verändern können.",
-      "Die beste Verhandlung findet statt, wenn der Schuldner seine Rechte bereits ausgeübt hat oder bereit ist, sie auszuüben. Ein begründeter Einspruch, ein Aussetzungsantrag oder eine ernsthafte gerichtliche Anfechtung verwandelt die Verhandlung von einer bloßen Bitte in einen Wettstreit der Positionen."
+      "Die beste Verhandlung findet statt, wenn der Schuldner seine Rechte bereits ausgeübt hat oder bereit ist, sie auszuüben. Ein begründeter Einspruch, ein Aussetzungsantrag oder eine ernsthafte gerichtliche Anfechtung verändert die Grundlage des Gesprächs: die Gegenseite weiß, dass der Fall vor Gericht entschieden wird, wenn es keine Einigung gibt."
     ],
-    "negotiationOutro": "Es geht nicht darum, dass ein Vorschlag gehört wird. Es geht darum, dass er Bestand hat. Ein Vergleich, der bezahlt wird. Ein Schuldenschnitt (Haircut), wenn er belegt ist. Gerichtlicher Druck, wo nötig. Denn gegenüber einer Bank oder einem Servicer werden die besten Konditionen nicht geschenkt. Sie werden mit Kontrolle, Strategie und richtig aufgebautem Druck gewonnen.",
-    "cta2Title": "Bevor Sie Piraeus Bank oder dem Servicer etwas beantworten oder unterschreiben — sprechen Sie mit uns.",
-    "cta2Text": "Die Piraeus Bank und ihre Servicer handeln mit strengen, standardisierten Vollstreckungsverfahren — die gerade deshalb formal angefochten werden können. Eine voreilige Schuldanerkennung kann Türen schließen, die heute offen sind. Erst die Prüfung, dann die Antwort.",
+    "negotiationOutro": "Ein Vorschlag muss nicht nur gehört werden, er muss auch Bestand haben. Das heißt ein Vergleich, der tatsächlich bezahlt werden kann, ein Schuldenschnitt, wo er belegt ist, und gerichtlicher Druck, wo er nötig ist. Gegenüber einer Bank oder einem Servicer schenkt niemand die guten Konditionen; sie werden durch Kontrolle der Akte und sorgfältige Vorbereitung gewonnen.",
+    "cta2Title": "Bevor Sie Piraeus Bank oder dem Servicer etwas beantworten oder unterschreiben, sprechen Sie zuerst mit uns.",
+    "cta2Text": "Die Piraeus Bank und ihre Servicer arbeiten mit standardisierten Massenvollstreckungsverfahren, in denen sich dieselben formalen Fehler wiederholen und erkennen lassen. Eine voreilige Schuldanerkennung kann Türen schließen, die heute offen sind. Erst die Prüfung, dann die Antwort.",
     "anakopiTitle": "Einspruch und Aussetzung der Versteigerung vor den Gerichten in Thessaloniki und ganz Griechenland",
     "anakopiText1": "Die Zwangsvollstreckung wird nicht mit allgemeinen Protesten beantwortet, sondern mit einer gezielten verfahrensrechtlichen Prüfung jeder Handlung, jedes Dokuments und jedes Betrags, auf den sich die verfolgende Seite beruft.\n\nUnsere Anwaltskanzlei bearbeitet täglich Fälle von Einsprüchen, Aussetzungsanträgen und Versteigerungen vor den Gerichten in Thessaloniki und im gesamten griechischen Hoheitsgebiet.\n\nIn jedem Fall prüfen wir umfassend den Zahlungstitel, den Pfändungsbericht, die Dokumente der Übertragung der Forderung, die Verwaltungsbeauftragung, die Analyse der Schuld, die Zinsen, die Gebühren, die Zustellungen und die Einhaltung der gesetzlichen Fristen. Ein Einspruch darf kein routinemäßiger Verteidigungsschriftsatz sein. Er muss verfahrensrechtlich präzise, beweisrechtlich belegt und an die tatsächlichen Daten der konkreten Akte angepasst sein.",
     "anakopiPoints": [],
@@ -550,19 +552,19 @@
     "faq": [
       {
         "q": "Mein Darlehen war bei Piraeus Bank, aber jetzt ruft mich eine andere Firma an. Was bedeutet das?",
-        "a": "Es bedeutet, dass Piraeus Bank die Forderung wahrscheinlich an eine Zweckgesellschaft (Fonds) übertragen und die Verwaltung einem Kreditverwaltungsunternehmen (Servicer) übertragen hat — wie, je nach Portfolio, Intrum, doValue, Cepal oder QQuant. Es bedeutet nicht, dass die Schuld selbstverständlich oder korrekt berechnet ist. Die Übertragung, die Berechtigung und der Betrag müssen geprüft werden, bevor Sie irgendetwas tun."
+        "a": "Es bedeutet, dass Piraeus Bank die Forderung wahrscheinlich an eine Zweckgesellschaft (Fonds) übertragen und die Verwaltung einem Kreditverwaltungsunternehmen (Servicer) übertragen hat, etwa, je nach Portfolio, Intrum, doValue, Cepal oder QQuant. Es bedeutet nicht, dass die Schuld selbstverständlich oder korrekt berechnet ist. Die Übertragung, die Berechtigung und der Betrag müssen geprüft werden, bevor Sie irgendetwas tun."
       },
       {
         "q": "Kann Piraeus Bank oder der Servicer meine Immobilie versteigern lassen?",
-        "a": "Nur mit einem vollstreckbaren Titel und einem vollständig rechtmäßigen Verfahren — beides wird gerichtlich überprüft. Die Berechtigung der vollstreckenden Partei, die Höhe der Forderung und jede Vollstreckungshandlung haben Anfechtungspunkte mit bestimmten Fristen."
+        "a": "Nur mit einem vollstreckbaren Titel und einem vollständig rechtmäßigen Verfahren, und beides wird gerichtlich überprüft. Die Berechtigung der vollstreckenden Partei, die Höhe der Forderung und jede Vollstreckungshandlung haben Anfechtungspunkte mit bestimmten Fristen."
       },
       {
         "q": "Lohnt es sich, allein mit Piraeus Bank oder dem Servicer zu verhandeln?",
-        "a": "Es ist gefährlich. Ihnen gegenüber steht ein spezialisierter Mechanismus, der Tausende von Fällen verhandelt — Sie haben einen. Ohne Aktenprüfung wissen Sie nicht einmal, ob der geforderte Betrag korrekt ist, noch wie groß Ihre tatsächliche Verhandlungsmacht ist."
+        "a": "Es ist gefährlich. Ihnen gegenüber steht ein spezialisierter Mechanismus, der Tausende von Fällen verhandelt, während Sie einen haben. Ohne Aktenprüfung wissen Sie nicht einmal, ob der geforderte Betrag korrekt ist, noch wie groß Ihre tatsächliche Verhandlungsmacht ist."
       },
       {
         "q": "Die Versteigerung ist sehr nah. Gibt es noch Hoffnung?",
-        "a": "Es hängt von der Akte ab — aber die Antwort wird erst gegeben, nachdem wir sie gesehen haben, und schnell. Verfahrensmängel können auch in den letzten Tagen noch Grund für Maßnahmen bieten. Rufen Sie sofort +30 2310 545 261 an."
+        "a": "Es hängt von der Akte ab, und die Antwort gibt es erst, nachdem wir sie gesehen haben, und zwar schnell. Verfahrensmängel können auch in den letzten Tagen noch Grund für Maßnahmen bieten. Rufen Sie sofort +30 2310 545 261 an."
       },
       {
         "q": "Welche Dokumente benötigen Sie für die Prüfung?",
@@ -570,20 +572,20 @@
       }
     ],
     "ctaTitle": "Piraeus Bank und die Servicer verhandeln jeden Tag. Wir prozessieren jeden Tag.",
-    "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Die Piraeus Bank und ihre Servicer handeln mit strengen, standardisierten Vollstreckungsverfahren — die gerade deshalb formal angefochten werden können. Aufgrund strenger Fristen wird Ihre Akte vordringlich bewertet — heute, nicht „irgendwann\".",
+    "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Aufgrund strenger Fristen wird Ihre Akte vordringlich bewertet, denn die Fristen warten nicht.",
     "ctaButton": "Sofortige Aktenprüfung",
     "ctaPhone": "Jetzt anrufen: +30 2310 545 261"
   },
   "business": {
     "title": "Unternehmen und Selbstständige",
-    "text": "Die Zwangsvollstreckung betrifft nicht nur Wohnungsbaudarlehen. Gewerbe- und Unternehmensdarlehen, Betriebskapital, Kontokorrentkredite, Anleihedarlehen und persönliche Bürgschaften von Geschäftsführern und Gesellschaftern führen ebenso zu Zahlungsbefehlen, Pfändungen und Versteigerungen — oft mit höheren Beträgen und komplexeren Akten. Die Logik der Verteidigung bleibt dieselbe, aber es gibt mehr zu prüfen.",
+    "text": "Die Zwangsvollstreckung betrifft nicht nur Wohnungsbaudarlehen. Gewerbe- und Unternehmensdarlehen, Betriebskapital, Kontokorrentkredite, Anleihedarlehen und persönliche Bürgschaften von Geschäftsführern und Gesellschaftern führen ebenso zu Zahlungsbefehlen, Pfändungen und Versteigerungen, oft mit höheren Beträgen und komplexeren Akten. Die Logik der Verteidigung bleibt dieselbe, aber es gibt mehr zu prüfen.",
     "points": [
       "Gewerbe- und Unternehmensdarlehen: Prüfung des Vertrags, der Sicherheiten, des Saldos und der Berechtigung der verfolgenden Partei.",
-      "Persönliche Bürgschaften: Wenn der Unternehmer, Geschäftsführer oder Gesellschafter gebürgt hat, werden Umfang und Grenzen der Haftung gesondert geprüft — eine Bürgschaft ist nicht immer unbegrenzt oder gültig.",
+      "Persönliche Bürgschaften: Wenn der Unternehmer, Geschäftsführer oder Gesellschafter gebürgt hat, werden Umfang und Grenzen der Haftung gesondert geprüft. Eine Bürgschaft ist nicht immer unbegrenzt oder gültig.",
       "Betriebsvermögen und Ausrüstung: Die Pfändung von Geschäftsräumen, Maschinen oder Waren wird mit einem Einspruch und einem Aussetzungsantrag begegnet, ebenso wie beim Wohnhaus.",
       "Außergerichtlicher Mechanismus für Unternehmen: Regelung von Schulden gegenüber Banken, Fonds, Sozialversicherung (EFKA) und Finanzamt in einem einheitlichen Rahmen, sofern die Voraussetzungen vorliegen."
     ],
-    "outro": "Für Unternehmen und Selbstständige zählen Zeit und die richtige Organisation der Akte doppelt — die Beträge sind höher und die Folgen für die Existenzfähigkeit unmittelbar.",
+    "outro": "Für Unternehmen und Selbstständige zählen Zeit und die richtige Organisation der Akte doppelt, denn die Beträge sind höher und die Folgen für die Existenzfähigkeit unmittelbar.",
     "toBusinessCta": "Seite für Unternehmen & Selbstständige",
     "toIndividualCta": "Privatperson? Sehen Sie die Seite für Privatpersonen"
   },
@@ -601,7 +603,7 @@
     "heroCity": "Thessaloniki · Leontos Sofou 12",
     "heroTitle": "Anwalt für Bankdarlehen und Zwangsversteigerungen",
     "heroSubtitle": "Eurobank · Alpha Bank · Piraeus Bank · National Bank of Greece",
-    "intro": "Wenn ein Bankdarlehen in Verzug gerät, bleibt der Fall selten bei der Bank selbst. Oft wird er an eine Zweckgesellschaft (Fonds) übertragen und die Verwaltung von einem Kreditverwaltungsunternehmen (Servicer) übernommen. Welche Bank auch immer — die Logik der Verteidigung ist dieselbe: Prüfung der Berechtigung, der Übertragung, des Betrags und jeder Vollstreckungshandlung, innerhalb der laufenden Fristen. Wählen Sie Ihre Bank für detaillierte Informationen.",
+    "intro": "Wenn ein Bankdarlehen in Verzug gerät, bleibt der Fall selten bei der Bank selbst. Oft wird er an eine Zweckgesellschaft (Fonds) übertragen und die Verwaltung von einem Kreditverwaltungsunternehmen (Servicer) übernommen. Welche Bank auch immer, die Logik der Verteidigung ist dieselbe: Prüfung der Berechtigung, der Übertragung, des Betrags und jeder Vollstreckungshandlung, innerhalb der laufenden Fristen. Wählen Sie Ihre Bank für detaillierte Informationen.",
     "cardsTitle": "Wählen Sie Ihre Bank",
     "cardCta": "Zur Seite",
     "cards": [
@@ -618,7 +620,7 @@
       {
         "slug": "piraeus",
         "name": "Piraeus Bank",
-        "desc": "Piraeus-Bank-Darlehen. Strenge, standardisierte Vollstreckungsverfahren — die gerade deshalb formal angefochten werden können."
+        "desc": "Piraeus-Bank-Darlehen. Standardisierte Massenvollstreckungsverfahren, in denen sich dieselben formalen Fehler wiederholen und erkennen lassen."
       },
       {
         "slug": "ethniki",
@@ -631,8 +633,8 @@
     "servicersNoteCta": "Seiten für Fonds & Servicer",
     "urgencyTitle": "Jedes Dokument hat eine Frist",
     "urgencyText": "Außergerichtliche Aufforderungen, Zahlungsbefehle, Pfändungen und Versteigerungen haben strenge Verteidigungsfristen. Je früher die Akte geprüft wird, desto mehr Schritte bleiben verfügbar.",
-    "ctaTitle": "Welche Bank auch immer — erst die Prüfung, dann die Strategie.",
-    "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Ihre Akte wird aufgrund der Fristen vordringlich bewertet.",
+    "ctaTitle": "Welche Bank auch immer: erst die Prüfung, dann die Strategie.",
+    "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Aufgrund der Fristen wird Ihre Akte vordringlich bewertet.",
     "ctaButton": "Sofortige Aktenprüfung"
   },
   "ethniki": {
@@ -643,10 +645,10 @@
     "heroSubtitle": "Einspruch · Aussetzung · Verhandlung über Schuldenschnitt",
     "intro": "Wenn Sie ein notleidendes National Bank of Greece-Darlehen haben oder eine außergerichtliche Aufforderung, eine Kündigung des Vertrags, einen Zahlungsbefehl, einen Vollstreckungstitel, einen Pfändungsbericht oder ein Versteigerungsprogramm erhalten haben, befindet sich Ihr Fall nicht mehr in einem theoretischen Stadium. In manchen Fällen wird die Forderung noch von National Bank of Greece selbst verfolgt. In anderen wurde das Darlehen an eine Zweckgesellschaft (Fonds) übertragen und die Verwaltung einem Kreditverwaltungsunternehmen (Servicer) übertragen. Das Erste, was wir prüfen, ist genau das: wer Sie heute verfolgt und mit welcher Berechtigung. Ioannis Papaioannou, Rechtsberater des Verbands der Kreditnehmer und für Verbraucherschutz Nordgriechenlands, verteidigt seit über 25 Jahren Kreditnehmer gegenüber Banken und Servicern. Wir wissen, wie National Bank of Greece in der Praxis vorgeht, welche Dokumente vorgelegt werden müssen und welche Punkte des Falles geprüft werden müssen, bevor der Schuldner aus Angst in einen Vergleich oder ohne echte Verteidigung in eine Versteigerung gedrängt wird.",
     "whatTitle": "National Bank of Greece, Fonds und Servicer: wer Ihr Darlehen wirklich verfolgt",
-    "whatText": "Ein National Bank of Greece-Darlehen kann sich heute in anderen Händen befinden als bei der Unterzeichnung. Mal bleibt es bei der Bank, mal wurde es über eine Verbriefung an eine Zweckgesellschaft (Fonds) übertragen, mit der Verwaltung durch einen Servicer. Das ist in der Praxis von Bedeutung. In jedem Fall muss geprüft werden, wer heute der wahre Gläubiger der Forderung ist, wann und wie das Darlehen von National Bank of Greece übertragen wurde, mit welchen Dokumenten die Übertragung und die Verwaltungsbeauftragung nachgewiesen werden, ob die vollstreckende Partei im konkreten Verfahren berechtigt ist und ob der geforderte Betrag rechtmäßig, klar und überprüfbar zustande kommt. Ein Dokument — von National Bank of Greece oder von einem Servicer — bedeutet nicht, dass alles feststeht. Es bedeutet, dass der Fall sofort geprüft werden muss. Vor jeder Gespräch über einen Vergleich müssen wir wissen, was gefordert wird, von wem, mit welcher Berechtigung und mit welcher Berechnung. Wenn die Verwaltung von einem bestimmten Unternehmen übernommen wurde — wie QQuant, doValue, Intrum oder Cepal — sehen Sie sich auch unsere entsprechende Seite an.",
+    "whatText": "Ein National Bank of Greece-Darlehen kann sich heute in anderen Händen befinden als bei der Unterzeichnung. Mal bleibt es bei der Bank, mal wurde es über eine Verbriefung an eine Zweckgesellschaft (Fonds) übertragen, mit der Verwaltung durch einen Servicer. Das ist in der Praxis von Bedeutung. In jedem Fall muss geprüft werden, wer heute der wahre Gläubiger der Forderung ist, wann und wie das Darlehen von National Bank of Greece übertragen wurde, mit welchen Dokumenten die Übertragung und die Verwaltungsbeauftragung nachgewiesen werden, ob die vollstreckende Partei im konkreten Verfahren berechtigt ist und ob der geforderte Betrag rechtmäßig, klar und überprüfbar zustande kommt. Ein Dokument, ob von National Bank of Greece oder von einem Servicer, bedeutet nicht, dass alles feststeht. Es bedeutet, dass der Fall sofort geprüft werden muss. Vor jeder Gespräch über einen Vergleich müssen wir wissen, was gefordert wird, von wem, mit welcher Berechtigung und mit welcher Berechnung. Wenn die Verwaltung von einem bestimmten Unternehmen übernommen wurde, etwa QQuant, doValue, Intrum oder Cepal, sehen Sie sich auch unsere entsprechende Seite an.",
     "protectTitle": "Schutz Ihres Zuhauses vor einer Zwangsversteigerung bei einem National Bank of Greece-Darlehen",
     "protectText": "Keine Immobilie geht verloren, weil ein Brief eingetroffen ist. Sie ist gefährdet, wenn der Fall nicht rechtzeitig geprüft wird und die rechtlichen Verteidigungsmöglichkeiten ungenutzt bleiben. Von der Kündigung des Vertrags über den Zahlungsbefehl, den Vollstreckungstitel, die Pfändung bis zur Versteigerung hat jede Phase ihre eigene Bedeutung. Wir prüfen, ob Raum für einen Einspruch, einen Aussetzungsantrag, die Aufnahme in den außergerichtlichen Mechanismus, eine direkte Verhandlung oder eine andere gezielte Maßnahme besteht. Wir behandeln keine Versteigerung als beschlossene Sache. Von Anfang an prüfen wir die Berechtigung der vollstreckenden Partei, die Übertragung der Forderung von National Bank of Greece, die Höhe der Schuld, die Zinsen, die Gebühren, die missbräuchlichen Klauseln und jede Vollstreckungshandlung. Dort, in den Details, die oft nicht geprüft werden, kann sich der Verlauf eines Falles ändern. Das Ziel ist nicht, einfach schnell zu handeln. Das Ziel ist, richtig zu handeln, bevor die Vollstreckung als einziger Weg erscheint.",
-    "deadlinesTitle": "Ich habe eine außergerichtliche Aufforderung, einen Zahlungsbefehl oder eine Pfändung zu einem National Bank of Greece-Darlehen erhalten — Die Fristen, die Sie nicht versäumen dürfen",
+    "deadlinesTitle": "Ich habe eine außergerichtliche Aufforderung, einen Zahlungsbefehl oder eine Pfändung zu einem National Bank of Greece-Darlehen erhalten: Die Fristen, die Sie nicht versäumen dürfen",
     "deadlinesIntro": "Nicht jedes Dokument hat dasselbe rechtliche Gewicht. Die Kündigung des Vertrags ist eine Sache, der Zahlungsbefehl eine andere und die Pfändung noch eine andere. Aber jede Phase zeigt, dass der Fall voranschreitet und die Reaktionszeit kürzer wird.",
     "deadlines": [
       {
@@ -662,19 +664,19 @@
         "desc": "Die Pfändung ist die Phase, in der die Vollstreckung bereits begonnen hat und bei Immobilien bereits eine Versteigerung angesetzt ist. Ein Einspruch gegen die Vollstreckung, aus Gründen, die die Forderung, den Titel, das Verfahren und die Pfändung betreffen, wird innerhalb von fünfundvierzig Tagen ab dem Tag der Pfändung eingelegt. Ist auch eine Aussetzung der Versteigerung erforderlich, wird dieser Schritt gesondert geprüft und muss rechtzeitig erfolgen."
       }
     ],
-    "deadlinesWarning": "Bei der Kündigung bleiben wir nicht untätig. Beim Zahlungsbefehl handeln wir sofort. Bei der Pfändung gibt es keinen Raum für Versuche. Verteidigungsfristen warten nicht, bis sich der Schuldner vom Schock erholt hat.",
+    "deadlinesWarning": "Keine dieser Fristen verlängert sich, weil der Schuldner Zeit brauchte, um sich vom Schock zu erholen. Deshalb sollte die Akte geprüft werden, sobald das erste Dokument eintrifft, und nicht erst, wenn die Versteigerung bereits nahe ist.",
     "cta1Title": "Haben Sie ein National Bank of Greece- oder Servicer-Dokument vor sich?",
-    "cta1Text": "Eine sofortige erste Einschätzung: was Ihnen zugestellt wurde, welche Frist läuft, welche Schritte verfügbar sind. Bei älteren Darlehen der National Bank of Greece sind Verjährung und Übertragungskette oft die stärksten Verteidigungspunkte. Rufen Sie +30 2310 545 261 an oder senden Sie das Formular.",
-    "negotiationTitle": "Verhandlungsstrategie für National Bank of Greece-Darlehen — Ein Vergleich mit dem Ziel eines Schuldenschnitts (Haircut), wo der Fall es zulässt",
-    "negotiationIntro": "Ob Sie National Bank of Greece oder dem Servicer gegenüberstehen, der die Forderung verwaltet — Sie gehen nicht hin, um um Gnade zu bitten. Sie gehen hin, um eine Position darzulegen. Welche Seite den Fall besser kennt, hat den stärkeren Verhandlungsvorteil. Unsere Aufgabe ist es, diesen Vorteil dem Schuldner zu verschaffen. Vor jedem Kontakt prüfen wir die Berechtigung der verfolgenden Partei, den wahren Gläubiger der Forderung, die Übertragung von National Bank of Greece, den Saldo, die Zinsen, die Gebühren und jedes Element, das den Betrag beeinflusst. Ein nicht überprüfter Betrag darf nicht zum Ausgangspunkt einer Verhandlung werden.",
+    "cta1Text": "Eine sofortige erste Einschätzung: was Ihnen zugestellt wurde, welche Frist läuft, welche Schritte verfügbar sind. Rufen Sie +30 2310 545 261 an oder senden Sie das Formular.",
+    "negotiationTitle": "Verhandlungsstrategie für National Bank of Greece-Darlehen: Ein Vergleich mit dem Ziel eines Schuldenschnitts (Haircut), wo der Fall es zulässt",
+    "negotiationIntro": "Ob Sie National Bank of Greece oder dem Servicer gegenüberstehen, der die Forderung verwaltet: Sie gehen nicht hin, um um Gnade zu bitten. Sie gehen hin, um eine Position darzulegen. Welche Seite den Fall besser kennt, hat den stärkeren Verhandlungsvorteil. Unsere Aufgabe ist es, diesen Vorteil dem Schuldner zu verschaffen. Vor jedem Kontakt prüfen wir die Berechtigung der verfolgenden Partei, den wahren Gläubiger der Forderung, die Übertragung von National Bank of Greece, den Saldo, die Zinsen, die Gebühren und jedes Element, das den Betrag beeinflusst. Ein nicht überprüfter Betrag darf nicht zum Ausgangspunkt einer Verhandlung werden.",
     "negotiationPoints": [
       "Der Vergleich muss der Zeit standhalten. Eine Vereinbarung, die auf dem Papier gut aussieht, aber bei der zweiten oder dritten Rate zusammenbricht, ist wertlos. Der Vorschlag muss mit der tatsächlichen finanziellen Leistungsfähigkeit des Schuldners, dem Wert der Sicherheit, dem Verlauf der Forderung und den Daten des Falles verbunden sein.",
-      "Ein Schuldenschnitt (Haircut) wird nicht als Wunsch formuliert. Er wird als Verhandlungsziel aufgebaut, wenn die Elemente des Falles es zulassen.",
+      "Ein Schuldenschnitt (Haircut) wird nicht als Wunsch geäußert; er wird als Verhandlungsziel belegt, wenn die Elemente des Falles es zulassen.",
       "Der Preis, zu dem der Fonds das Darlehen von National Bank of Greece erworben hat, die Geschichte des Portfolios, die Aussicht auf Beitreibung, der Wert der Immobilie und das Bestehen einer gerichtlichen Anfechtung sind Faktoren, die die Diskussion verändern können.",
-      "Die beste Verhandlung findet statt, wenn der Schuldner seine Rechte bereits ausgeübt hat oder bereit ist, sie auszuüben. Ein begründeter Einspruch, ein Aussetzungsantrag oder eine ernsthafte gerichtliche Anfechtung verwandelt die Verhandlung von einer bloßen Bitte in einen Wettstreit der Positionen."
+      "Die beste Verhandlung findet statt, wenn der Schuldner seine Rechte bereits ausgeübt hat oder bereit ist, sie auszuüben. Ein begründeter Einspruch, ein Aussetzungsantrag oder eine ernsthafte gerichtliche Anfechtung verändert die Grundlage des Gesprächs: die Gegenseite weiß, dass der Fall vor Gericht entschieden wird, wenn es keine Einigung gibt."
     ],
-    "negotiationOutro": "Es geht nicht darum, dass ein Vorschlag gehört wird. Es geht darum, dass er Bestand hat. Ein Vergleich, der bezahlt wird. Ein Schuldenschnitt (Haircut), wenn er belegt ist. Gerichtlicher Druck, wo nötig. Denn gegenüber einer Bank oder einem Servicer werden die besten Konditionen nicht geschenkt. Sie werden mit Kontrolle, Strategie und richtig aufgebautem Druck gewonnen.",
-    "cta2Title": "Bevor Sie National Bank of Greece oder dem Servicer etwas beantworten oder unterschreiben — sprechen Sie mit uns.",
+    "negotiationOutro": "Ein Vorschlag muss nicht nur gehört werden, er muss auch Bestand haben. Das heißt ein Vergleich, der tatsächlich bezahlt werden kann, ein Schuldenschnitt, wo er belegt ist, und gerichtlicher Druck, wo er nötig ist. Gegenüber einer Bank oder einem Servicer schenkt niemand die guten Konditionen; sie werden durch Kontrolle der Akte und sorgfältige Vorbereitung gewonnen.",
+    "cta2Title": "Bevor Sie National Bank of Greece oder dem Servicer etwas beantworten oder unterschreiben, sprechen Sie zuerst mit uns.",
     "cta2Text": "Bei älteren Darlehen der National Bank of Greece sind Verjährung und Übertragungskette oft die stärksten Verteidigungspunkte. Eine voreilige Schuldanerkennung kann Türen schließen, die heute offen sind. Erst die Prüfung, dann die Antwort.",
     "anakopiTitle": "Einspruch und Aussetzung der Versteigerung vor den Gerichten in Thessaloniki und ganz Griechenland",
     "anakopiText1": "Die Zwangsvollstreckung wird nicht mit allgemeinen Protesten beantwortet, sondern mit einer gezielten verfahrensrechtlichen Prüfung jeder Handlung, jedes Dokuments und jedes Betrags, auf den sich die verfolgende Seite beruft.\n\nUnsere Anwaltskanzlei bearbeitet täglich Fälle von Einsprüchen, Aussetzungsanträgen und Versteigerungen vor den Gerichten in Thessaloniki und im gesamten griechischen Hoheitsgebiet.\n\nIn jedem Fall prüfen wir umfassend den Zahlungstitel, den Pfändungsbericht, die Dokumente der Übertragung der Forderung, die Verwaltungsbeauftragung, die Analyse der Schuld, die Zinsen, die Gebühren, die Zustellungen und die Einhaltung der gesetzlichen Fristen. Ein Einspruch darf kein routinemäßiger Verteidigungsschriftsatz sein. Er muss verfahrensrechtlich präzise, beweisrechtlich belegt und an die tatsächlichen Daten der konkreten Akte angepasst sein.",
@@ -684,19 +686,19 @@
     "faq": [
       {
         "q": "Mein Darlehen war bei National Bank of Greece, aber jetzt ruft mich eine andere Firma an. Was bedeutet das?",
-        "a": "Es bedeutet, dass National Bank of Greece die Forderung wahrscheinlich an eine Zweckgesellschaft (Fonds) übertragen und die Verwaltung einem Kreditverwaltungsunternehmen (Servicer) übertragen hat — wie, je nach Portfolio, QQuant, doValue, Intrum oder Cepal. Es bedeutet nicht, dass die Schuld selbstverständlich oder korrekt berechnet ist. Die Übertragung, die Berechtigung und der Betrag müssen geprüft werden, bevor Sie irgendetwas tun."
+        "a": "Es bedeutet, dass National Bank of Greece die Forderung wahrscheinlich an eine Zweckgesellschaft (Fonds) übertragen und die Verwaltung einem Kreditverwaltungsunternehmen (Servicer) übertragen hat, etwa, je nach Portfolio, QQuant, doValue, Intrum oder Cepal. Es bedeutet nicht, dass die Schuld selbstverständlich oder korrekt berechnet ist. Die Übertragung, die Berechtigung und der Betrag müssen geprüft werden, bevor Sie irgendetwas tun."
       },
       {
         "q": "Kann National Bank of Greece oder der Servicer meine Immobilie versteigern lassen?",
-        "a": "Nur mit einem vollstreckbaren Titel und einem vollständig rechtmäßigen Verfahren — beides wird gerichtlich überprüft. Die Berechtigung der vollstreckenden Partei, die Höhe der Forderung und jede Vollstreckungshandlung haben Anfechtungspunkte mit bestimmten Fristen."
+        "a": "Nur mit einem vollstreckbaren Titel und einem vollständig rechtmäßigen Verfahren, und beides wird gerichtlich überprüft. Die Berechtigung der vollstreckenden Partei, die Höhe der Forderung und jede Vollstreckungshandlung haben Anfechtungspunkte mit bestimmten Fristen."
       },
       {
         "q": "Lohnt es sich, allein mit National Bank of Greece oder dem Servicer zu verhandeln?",
-        "a": "Es ist gefährlich. Ihnen gegenüber steht ein spezialisierter Mechanismus, der Tausende von Fällen verhandelt — Sie haben einen. Ohne Aktenprüfung wissen Sie nicht einmal, ob der geforderte Betrag korrekt ist, noch wie groß Ihre tatsächliche Verhandlungsmacht ist."
+        "a": "Es ist gefährlich. Ihnen gegenüber steht ein spezialisierter Mechanismus, der Tausende von Fällen verhandelt, während Sie einen haben. Ohne Aktenprüfung wissen Sie nicht einmal, ob der geforderte Betrag korrekt ist, noch wie groß Ihre tatsächliche Verhandlungsmacht ist."
       },
       {
         "q": "Die Versteigerung ist sehr nah. Gibt es noch Hoffnung?",
-        "a": "Es hängt von der Akte ab — aber die Antwort wird erst gegeben, nachdem wir sie gesehen haben, und schnell. Verfahrensmängel können auch in den letzten Tagen noch Grund für Maßnahmen bieten. Rufen Sie sofort +30 2310 545 261 an."
+        "a": "Es hängt von der Akte ab, und die Antwort gibt es erst, nachdem wir sie gesehen haben, und zwar schnell. Verfahrensmängel können auch in den letzten Tagen noch Grund für Maßnahmen bieten. Rufen Sie sofort +30 2310 545 261 an."
       },
       {
         "q": "Welche Dokumente benötigen Sie für die Prüfung?",
@@ -704,7 +706,7 @@
       }
     ],
     "ctaTitle": "National Bank of Greece und die Servicer verhandeln jeden Tag. Wir prozessieren jeden Tag.",
-    "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Bei älteren Darlehen der National Bank of Greece sind Verjährung und Übertragungskette oft die stärksten Verteidigungspunkte. Aufgrund strenger Fristen wird Ihre Akte vordringlich bewertet — heute, nicht „irgendwann\".",
+    "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Aufgrund strenger Fristen wird Ihre Akte vordringlich bewertet, denn die Fristen warten nicht.",
     "ctaButton": "Sofortige Aktenprüfung",
     "ctaPhone": "Jetzt anrufen: +30 2310 545 261"
   },
@@ -716,10 +718,10 @@
     "heroSubtitle": "Einspruch · Aussetzung · Verhandlung über Schuldenschnitt",
     "intro": "Wenn Sie ein notleidendes Eurobank-Darlehen haben oder eine außergerichtliche Aufforderung, eine Kündigung des Vertrags, einen Zahlungsbefehl, einen Vollstreckungstitel, einen Pfändungsbericht oder ein Versteigerungsprogramm erhalten haben, befindet sich Ihr Fall nicht mehr in einem theoretischen Stadium. In manchen Fällen wird die Forderung noch von Eurobank selbst verfolgt. In anderen wurde das Darlehen an eine Zweckgesellschaft (Fonds) übertragen und die Verwaltung einem Kreditverwaltungsunternehmen (Servicer) übertragen. Das Erste, was wir prüfen, ist genau das: wer Sie heute verfolgt und mit welcher Berechtigung. Ioannis Papaioannou, Rechtsberater des Verbands der Kreditnehmer und für Verbraucherschutz Nordgriechenlands, verteidigt seit über 25 Jahren Kreditnehmer gegenüber Banken und Servicern. Wir wissen, wie Eurobank in der Praxis vorgeht, welche Dokumente vorgelegt werden müssen und welche Punkte des Falles geprüft werden müssen, bevor der Schuldner aus Angst in einen Vergleich oder ohne echte Verteidigung in eine Versteigerung gedrängt wird.",
     "whatTitle": "Eurobank, Fonds und Servicer: wer Ihr Darlehen wirklich verfolgt",
-    "whatText": "Ein Eurobank-Darlehen kann sich heute in anderen Händen befinden als bei der Unterzeichnung. Mal bleibt es bei der Bank, mal wurde es über eine Verbriefung an eine Zweckgesellschaft (Fonds) übertragen, mit der Verwaltung durch einen Servicer. Das ist in der Praxis von Bedeutung. In jedem Fall muss geprüft werden, wer heute der wahre Gläubiger der Forderung ist, wann und wie das Darlehen von Eurobank übertragen wurde, mit welchen Dokumenten die Übertragung und die Verwaltungsbeauftragung nachgewiesen werden, ob die vollstreckende Partei im konkreten Verfahren berechtigt ist und ob der geforderte Betrag rechtmäßig, klar und überprüfbar zustande kommt. Ein Dokument — von Eurobank oder von einem Servicer — bedeutet nicht, dass alles feststeht. Es bedeutet, dass der Fall sofort geprüft werden muss. Vor jeder Gespräch über einen Vergleich müssen wir wissen, was gefordert wird, von wem, mit welcher Berechtigung und mit welcher Berechnung. Wenn die Verwaltung von einem bestimmten Unternehmen übernommen wurde — wie doValue, Intrum, Cepal oder QQuant — sehen Sie sich auch unsere entsprechende Seite an.",
+    "whatText": "Ein Eurobank-Darlehen kann sich heute in anderen Händen befinden als bei der Unterzeichnung. Mal bleibt es bei der Bank, mal wurde es über eine Verbriefung an eine Zweckgesellschaft (Fonds) übertragen, mit der Verwaltung durch einen Servicer. Das ist in der Praxis von Bedeutung. In jedem Fall muss geprüft werden, wer heute der wahre Gläubiger der Forderung ist, wann und wie das Darlehen von Eurobank übertragen wurde, mit welchen Dokumenten die Übertragung und die Verwaltungsbeauftragung nachgewiesen werden, ob die vollstreckende Partei im konkreten Verfahren berechtigt ist und ob der geforderte Betrag rechtmäßig, klar und überprüfbar zustande kommt. Ein Dokument, ob von Eurobank oder von einem Servicer, bedeutet nicht, dass alles feststeht. Es bedeutet, dass der Fall sofort geprüft werden muss. Vor jeder Gespräch über einen Vergleich müssen wir wissen, was gefordert wird, von wem, mit welcher Berechtigung und mit welcher Berechnung. Wenn die Verwaltung von einem bestimmten Unternehmen übernommen wurde, etwa doValue, Intrum, Cepal oder QQuant, sehen Sie sich auch unsere entsprechende Seite an.",
     "protectTitle": "Schutz Ihres Zuhauses vor einer Zwangsversteigerung bei einem Eurobank-Darlehen",
     "protectText": "Keine Immobilie geht verloren, weil ein Brief eingetroffen ist. Sie ist gefährdet, wenn der Fall nicht rechtzeitig geprüft wird und die rechtlichen Verteidigungsmöglichkeiten ungenutzt bleiben. Von der Kündigung des Vertrags über den Zahlungsbefehl, den Vollstreckungstitel, die Pfändung bis zur Versteigerung hat jede Phase ihre eigene Bedeutung. Wir prüfen, ob Raum für einen Einspruch, einen Aussetzungsantrag, die Aufnahme in den außergerichtlichen Mechanismus, eine direkte Verhandlung oder eine andere gezielte Maßnahme besteht. Wir behandeln keine Versteigerung als beschlossene Sache. Von Anfang an prüfen wir die Berechtigung der vollstreckenden Partei, die Übertragung der Forderung von Eurobank, die Höhe der Schuld, die Zinsen, die Gebühren, die missbräuchlichen Klauseln und jede Vollstreckungshandlung. Dort, in den Details, die oft nicht geprüft werden, kann sich der Verlauf eines Falles ändern. Das Ziel ist nicht, einfach schnell zu handeln. Das Ziel ist, richtig zu handeln, bevor die Vollstreckung als einziger Weg erscheint.",
-    "deadlinesTitle": "Ich habe eine außergerichtliche Aufforderung, einen Zahlungsbefehl oder eine Pfändung zu einem Eurobank-Darlehen erhalten — Die Fristen, die Sie nicht versäumen dürfen",
+    "deadlinesTitle": "Ich habe eine außergerichtliche Aufforderung, einen Zahlungsbefehl oder eine Pfändung zu einem Eurobank-Darlehen erhalten: Die Fristen, die Sie nicht versäumen dürfen",
     "deadlinesIntro": "Nicht jedes Dokument hat dasselbe rechtliche Gewicht. Die Kündigung des Vertrags ist eine Sache, der Zahlungsbefehl eine andere und die Pfändung noch eine andere. Aber jede Phase zeigt, dass der Fall voranschreitet und die Reaktionszeit kürzer wird.",
     "deadlines": [
       {
@@ -735,20 +737,20 @@
         "desc": "Die Pfändung ist die Phase, in der die Vollstreckung bereits begonnen hat und bei Immobilien bereits eine Versteigerung angesetzt ist. Ein Einspruch gegen die Vollstreckung, aus Gründen, die die Forderung, den Titel, das Verfahren und die Pfändung betreffen, wird innerhalb von fünfundvierzig Tagen ab dem Tag der Pfändung eingelegt. Ist auch eine Aussetzung der Versteigerung erforderlich, wird dieser Schritt gesondert geprüft und muss rechtzeitig erfolgen."
       }
     ],
-    "deadlinesWarning": "Bei der Kündigung bleiben wir nicht untätig. Beim Zahlungsbefehl handeln wir sofort. Bei der Pfändung gibt es keinen Raum für Versuche. Verteidigungsfristen warten nicht, bis sich der Schuldner vom Schock erholt hat.",
+    "deadlinesWarning": "Keine dieser Fristen verlängert sich, weil der Schuldner Zeit brauchte, um sich vom Schock zu erholen. Deshalb sollte die Akte geprüft werden, sobald das erste Dokument eintrifft, und nicht erst, wenn die Versteigerung bereits nahe ist.",
     "cta1Title": "Haben Sie ein Eurobank- oder Servicer-Dokument vor sich?",
-    "cta1Text": "Eine sofortige erste Einschätzung: was Ihnen zugestellt wurde, welche Frist läuft, welche Schritte verfügbar sind. Bei Eurobank-Fällen ist das Portfoliovolumen groß und das Verfahren läuft schnell — die Geschwindigkeit Ihrer Reaktion zählt. Rufen Sie +30 2310 545 261 an oder senden Sie das Formular.",
-    "negotiationTitle": "Verhandlungsstrategie für Eurobank-Darlehen — Ein Vergleich mit dem Ziel eines Schuldenschnitts (Haircut), wo der Fall es zulässt",
-    "negotiationIntro": "Ob Sie Eurobank oder dem Servicer gegenüberstehen, der die Forderung verwaltet — Sie gehen nicht hin, um um Gnade zu bitten. Sie gehen hin, um eine Position darzulegen. Welche Seite den Fall besser kennt, hat den stärkeren Verhandlungsvorteil. Unsere Aufgabe ist es, diesen Vorteil dem Schuldner zu verschaffen. Vor jedem Kontakt prüfen wir die Berechtigung der verfolgenden Partei, den wahren Gläubiger der Forderung, die Übertragung von Eurobank, den Saldo, die Zinsen, die Gebühren und jedes Element, das den Betrag beeinflusst. Ein nicht überprüfter Betrag darf nicht zum Ausgangspunkt einer Verhandlung werden.",
+    "cta1Text": "Eine sofortige erste Einschätzung: was Ihnen zugestellt wurde, welche Frist läuft, welche Schritte verfügbar sind. Rufen Sie +30 2310 545 261 an oder senden Sie das Formular.",
+    "negotiationTitle": "Verhandlungsstrategie für Eurobank-Darlehen: Ein Vergleich mit dem Ziel eines Schuldenschnitts (Haircut), wo der Fall es zulässt",
+    "negotiationIntro": "Ob Sie Eurobank oder dem Servicer gegenüberstehen, der die Forderung verwaltet: Sie gehen nicht hin, um um Gnade zu bitten. Sie gehen hin, um eine Position darzulegen. Welche Seite den Fall besser kennt, hat den stärkeren Verhandlungsvorteil. Unsere Aufgabe ist es, diesen Vorteil dem Schuldner zu verschaffen. Vor jedem Kontakt prüfen wir die Berechtigung der verfolgenden Partei, den wahren Gläubiger der Forderung, die Übertragung von Eurobank, den Saldo, die Zinsen, die Gebühren und jedes Element, das den Betrag beeinflusst. Ein nicht überprüfter Betrag darf nicht zum Ausgangspunkt einer Verhandlung werden.",
     "negotiationPoints": [
       "Der Vergleich muss der Zeit standhalten. Eine Vereinbarung, die auf dem Papier gut aussieht, aber bei der zweiten oder dritten Rate zusammenbricht, ist wertlos. Der Vorschlag muss mit der tatsächlichen finanziellen Leistungsfähigkeit des Schuldners, dem Wert der Sicherheit, dem Verlauf der Forderung und den Daten des Falles verbunden sein.",
-      "Ein Schuldenschnitt (Haircut) wird nicht als Wunsch formuliert. Er wird als Verhandlungsziel aufgebaut, wenn die Elemente des Falles es zulassen.",
+      "Ein Schuldenschnitt (Haircut) wird nicht als Wunsch geäußert; er wird als Verhandlungsziel belegt, wenn die Elemente des Falles es zulassen.",
       "Der Preis, zu dem der Fonds das Darlehen von Eurobank erworben hat, die Geschichte des Portfolios, die Aussicht auf Beitreibung, der Wert der Immobilie und das Bestehen einer gerichtlichen Anfechtung sind Faktoren, die die Diskussion verändern können.",
-      "Die beste Verhandlung findet statt, wenn der Schuldner seine Rechte bereits ausgeübt hat oder bereit ist, sie auszuüben. Ein begründeter Einspruch, ein Aussetzungsantrag oder eine ernsthafte gerichtliche Anfechtung verwandelt die Verhandlung von einer bloßen Bitte in einen Wettstreit der Positionen."
+      "Die beste Verhandlung findet statt, wenn der Schuldner seine Rechte bereits ausgeübt hat oder bereit ist, sie auszuüben. Ein begründeter Einspruch, ein Aussetzungsantrag oder eine ernsthafte gerichtliche Anfechtung verändert die Grundlage des Gesprächs: die Gegenseite weiß, dass der Fall vor Gericht entschieden wird, wenn es keine Einigung gibt."
     ],
-    "negotiationOutro": "Es geht nicht darum, dass ein Vorschlag gehört wird. Es geht darum, dass er Bestand hat. Ein Vergleich, der bezahlt wird. Ein Schuldenschnitt (Haircut), wenn er belegt ist. Gerichtlicher Druck, wo nötig. Denn gegenüber einer Bank oder einem Servicer werden die besten Konditionen nicht geschenkt. Sie werden mit Kontrolle, Strategie und richtig aufgebautem Druck gewonnen.",
-    "cta2Title": "Bevor Sie Eurobank oder dem Servicer etwas beantworten oder unterschreiben — sprechen Sie mit uns.",
-    "cta2Text": "Bei Eurobank-Fällen ist das Portfoliovolumen groß und das Verfahren läuft schnell — die Geschwindigkeit Ihrer Reaktion zählt. Eine voreilige Schuldanerkennung kann Türen schließen, die heute offen sind. Erst die Prüfung, dann die Antwort.",
+    "negotiationOutro": "Ein Vorschlag muss nicht nur gehört werden, er muss auch Bestand haben. Das heißt ein Vergleich, der tatsächlich bezahlt werden kann, ein Schuldenschnitt, wo er belegt ist, und gerichtlicher Druck, wo er nötig ist. Gegenüber einer Bank oder einem Servicer schenkt niemand die guten Konditionen; sie werden durch Kontrolle der Akte und sorgfältige Vorbereitung gewonnen.",
+    "cta2Title": "Bevor Sie Eurobank oder dem Servicer etwas beantworten oder unterschreiben, sprechen Sie zuerst mit uns.",
+    "cta2Text": "Bei Eurobank-Fällen ist das Portfoliovolumen groß und das Verfahren läuft schnell, sodass auch die Geschwindigkeit Ihrer eigenen Reaktion zählt. Eine voreilige Schuldanerkennung kann Türen schließen, die heute offen sind. Erst die Prüfung, dann die Antwort.",
     "anakopiTitle": "Einspruch und Aussetzung der Versteigerung vor den Gerichten in Thessaloniki und ganz Griechenland",
     "anakopiText1": "Die Zwangsvollstreckung wird nicht mit allgemeinen Protesten beantwortet, sondern mit einer gezielten verfahrensrechtlichen Prüfung jeder Handlung, jedes Dokuments und jedes Betrags, auf den sich die verfolgende Seite beruft.\n\nUnsere Anwaltskanzlei bearbeitet täglich Fälle von Einsprüchen, Aussetzungsanträgen und Versteigerungen vor den Gerichten in Thessaloniki und im gesamten griechischen Hoheitsgebiet.\n\nIn jedem Fall prüfen wir umfassend den Zahlungstitel, den Pfändungsbericht, die Dokumente der Übertragung der Forderung, die Verwaltungsbeauftragung, die Analyse der Schuld, die Zinsen, die Gebühren, die Zustellungen und die Einhaltung der gesetzlichen Fristen. Ein Einspruch darf kein routinemäßiger Verteidigungsschriftsatz sein. Er muss verfahrensrechtlich präzise, beweisrechtlich belegt und an die tatsächlichen Daten der konkreten Akte angepasst sein.",
     "anakopiPoints": [],
@@ -757,19 +759,19 @@
     "faq": [
       {
         "q": "Mein Darlehen war bei Eurobank, aber jetzt ruft mich eine andere Firma an. Was bedeutet das?",
-        "a": "Es bedeutet, dass Eurobank die Forderung wahrscheinlich an eine Zweckgesellschaft (Fonds) übertragen und die Verwaltung einem Kreditverwaltungsunternehmen (Servicer) übertragen hat — wie, je nach Portfolio, doValue, Intrum, Cepal oder QQuant. Es bedeutet nicht, dass die Schuld selbstverständlich oder korrekt berechnet ist. Die Übertragung, die Berechtigung und der Betrag müssen geprüft werden, bevor Sie irgendetwas tun."
+        "a": "Es bedeutet, dass Eurobank die Forderung wahrscheinlich an eine Zweckgesellschaft (Fonds) übertragen und die Verwaltung einem Kreditverwaltungsunternehmen (Servicer) übertragen hat, etwa, je nach Portfolio, doValue, Intrum, Cepal oder QQuant. Es bedeutet nicht, dass die Schuld selbstverständlich oder korrekt berechnet ist. Die Übertragung, die Berechtigung und der Betrag müssen geprüft werden, bevor Sie irgendetwas tun."
       },
       {
         "q": "Kann Eurobank oder der Servicer meine Immobilie versteigern lassen?",
-        "a": "Nur mit einem vollstreckbaren Titel und einem vollständig rechtmäßigen Verfahren — beides wird gerichtlich überprüft. Die Berechtigung der vollstreckenden Partei, die Höhe der Forderung und jede Vollstreckungshandlung haben Anfechtungspunkte mit bestimmten Fristen."
+        "a": "Nur mit einem vollstreckbaren Titel und einem vollständig rechtmäßigen Verfahren, und beides wird gerichtlich überprüft. Die Berechtigung der vollstreckenden Partei, die Höhe der Forderung und jede Vollstreckungshandlung haben Anfechtungspunkte mit bestimmten Fristen."
       },
       {
         "q": "Lohnt es sich, allein mit Eurobank oder dem Servicer zu verhandeln?",
-        "a": "Es ist gefährlich. Ihnen gegenüber steht ein spezialisierter Mechanismus, der Tausende von Fällen verhandelt — Sie haben einen. Ohne Aktenprüfung wissen Sie nicht einmal, ob der geforderte Betrag korrekt ist, noch wie groß Ihre tatsächliche Verhandlungsmacht ist."
+        "a": "Es ist gefährlich. Ihnen gegenüber steht ein spezialisierter Mechanismus, der Tausende von Fällen verhandelt, während Sie einen haben. Ohne Aktenprüfung wissen Sie nicht einmal, ob der geforderte Betrag korrekt ist, noch wie groß Ihre tatsächliche Verhandlungsmacht ist."
       },
       {
         "q": "Die Versteigerung ist sehr nah. Gibt es noch Hoffnung?",
-        "a": "Es hängt von der Akte ab — aber die Antwort wird erst gegeben, nachdem wir sie gesehen haben, und schnell. Verfahrensmängel können auch in den letzten Tagen noch Grund für Maßnahmen bieten. Rufen Sie sofort +30 2310 545 261 an."
+        "a": "Es hängt von der Akte ab, und die Antwort gibt es erst, nachdem wir sie gesehen haben, und zwar schnell. Verfahrensmängel können auch in den letzten Tagen noch Grund für Maßnahmen bieten. Rufen Sie sofort +30 2310 545 261 an."
       },
       {
         "q": "Welche Dokumente benötigen Sie für die Prüfung?",
@@ -777,7 +779,7 @@
       }
     ],
     "ctaTitle": "Eurobank und die Servicer verhandeln jeden Tag. Wir prozessieren jeden Tag.",
-    "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Bei Eurobank-Fällen ist das Portfoliovolumen groß und das Verfahren läuft schnell — die Geschwindigkeit Ihrer Reaktion zählt. Aufgrund strenger Fristen wird Ihre Akte vordringlich bewertet — heute, nicht „irgendwann\".",
+    "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Aufgrund strenger Fristen wird Ihre Akte vordringlich bewertet, denn die Fristen warten nicht.",
     "ctaButton": "Sofortige Aktenprüfung",
     "ctaPhone": "Jetzt anrufen: +30 2310 545 261"
   },
@@ -1367,14 +1369,14 @@
     "seoTitle": "Anwalt für Eurobank-Unternehmensdarlehen – Firmen in Thessaloniki",
     "seoDescription": "Unternehmen oder Selbstständiger mit Unternehmensdarlehen oder persönlicher Bürgschaft bei Eurobank? Prüfung der Bürgschaft, des Betriebsvermögens, Einspruch, Aussetzung und außergerichtlicher Mechanismus für Unternehmen. Tel: +30 2310 545 261.",
     "heroCity": "Thessaloniki · Leontos Sofou 12",
-    "heroTitle": "Anwalt für Eurobank-Gewerbe- und Unternehmensdarlehen — Unternehmen und Selbstständige",
+    "heroTitle": "Anwalt für Eurobank-Gewerbe- und Unternehmensdarlehen: Unternehmen und Selbstständige",
     "heroSubtitle": "Unternehmensdarlehen · Persönliche Bürgschaften · Außergerichtlicher Mechanismus",
-    "intro": "Diese Seite richtet sich an Unternehmen, Gesellschaften und Selbstständige mit Schulden gegenüber Eurobank. Gewerbe- und Unternehmensdarlehen, Betriebskapital, Kontokorrentkredite, Anleihedarlehen und vor allem die persönlichen Bürgschaften von Geschäftsführern und Gesellschaftern führen zu Zahlungsbefehlen, Pfändungen und Versteigerungen — oft mit höheren Beträgen und unmittelbaren Folgen für die Existenzfähigkeit. Ioannis Papaioannou verteidigt seit über 25 Jahren Unternehmen und Selbstständige gegenüber Banken, Fonds und Servicern.",
+    "intro": "Diese Seite richtet sich an Unternehmen, Gesellschaften und Selbstständige mit Schulden gegenüber Eurobank. Gewerbe- und Unternehmensdarlehen, Betriebskapital, Kontokorrentkredite, Anleihedarlehen und vor allem die persönlichen Bürgschaften von Geschäftsführern und Gesellschaftern führen zu Zahlungsbefehlen, Pfändungen und Versteigerungen, oft mit höheren Beträgen und unmittelbaren Folgen für die Existenzfähigkeit. Ioannis Papaioannou verteidigt seit über 25 Jahren Unternehmen und Selbstständige gegenüber Banken, Fonds und Servicern.",
     "whatTitle": "Unternehmensdarlehen und Bürgschaften: was wir zuerst prüfen",
-    "whatText": "Bei einer geschäftlichen Schuld gegenüber Eurobank ist die Akte fast immer komplexer als bei einem Wohnungsfall. Wir prüfen den Darlehens- oder Kreditvertrag, die Sicherheiten (Vormerkungen, Pfandrechte, Abtretungen), die Höhe der Forderung und die Berechtigung der heute verfolgenden Partei — also, ob die Forderung bei der Bank blieb oder an einen Fonds mit Verwaltungsgesellschaft übertragen wurde. Besonderes Gewicht haben persönliche Bürgschaften: Wenn der Unternehmer, Geschäftsführer oder Gesellschafter gebürgt hat, werden Umfang und Grenzen seiner Haftung gesondert geprüft. Eine Bürgschaft ist nicht immer unbegrenzt und nicht immer gültig.",
+    "whatText": "Bei einer geschäftlichen Schuld gegenüber Eurobank ist die Akte fast immer komplexer als bei einem Wohnungsfall. Wir prüfen den Darlehens- oder Kreditvertrag, die Sicherheiten (Vormerkungen, Pfandrechte, Abtretungen), die Höhe der Forderung und die Berechtigung der heute verfolgenden Partei, also, ob die Forderung bei der Bank blieb oder an einen Fonds mit Verwaltungsgesellschaft übertragen wurde. Besonderes Gewicht haben persönliche Bürgschaften: Wenn der Unternehmer, Geschäftsführer oder Gesellschafter gebürgt hat, werden Umfang und Grenzen seiner Haftung gesondert geprüft. Eine Bürgschaft ist nicht immer unbegrenzt und nicht immer gültig.",
     "protectTitle": "Schutz von Betriebsvermögen und Ausrüstung",
-    "protectText": "In Geschäftsfällen ist nicht nur das Wohnhaus gefährdet, sondern auch die Geschäftsräume, die Maschinen, die Waren, die Geschäftskonten und die Fortführung der Tätigkeit selbst. Jede Vollstreckungshandlung — Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen — wird mit einem Einspruch und, wo nötig, einem Aussetzungsantrag begegnet. Von Anfang an prüfen wir die Berechtigung, die Übertragung der Forderung, die Höhe der Schuld, die Zinsen, die Gebühren und jede Vollstreckungshandlung, mit dem Ziel, das Unternehmen am Leben zu halten, während über die Substanz entschieden wird.",
-    "deadlinesTitle": "Ich habe eine außergerichtliche Aufforderung, einen Zahlungsbefehl oder eine Pfändung zu einem Eurobank-Darlehen erhalten — Die Fristen, die Sie nicht versäumen dürfen",
+    "protectText": "In Geschäftsfällen ist nicht nur das Wohnhaus gefährdet, sondern auch die Geschäftsräume, die Maschinen, die Waren, die Geschäftskonten und die Fortführung der Tätigkeit selbst. Jede Vollstreckungshandlung (Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen) wird mit einem Einspruch und, wo nötig, einem Aussetzungsantrag begegnet. Von Anfang an prüfen wir die Berechtigung, die Übertragung der Forderung, die Höhe der Schuld, die Zinsen, die Gebühren und jede Vollstreckungshandlung, mit dem Ziel, das Unternehmen am Leben zu halten, während über die Substanz entschieden wird.",
+    "deadlinesTitle": "Ich habe eine außergerichtliche Aufforderung, einen Zahlungsbefehl oder eine Pfändung zu einem Eurobank-Darlehen erhalten: Die Fristen, die Sie nicht versäumen dürfen",
     "deadlinesIntro": "Nicht jedes Dokument hat dasselbe rechtliche Gewicht. Die Kündigung des Vertrags ist eine Sache, der Zahlungsbefehl eine andere und die Pfändung noch eine andere. Aber jede Phase zeigt, dass der Fall voranschreitet und die Reaktionszeit kürzer wird.",
     "deadlines": [
       {
@@ -1390,25 +1392,25 @@
         "desc": "Die Pfändung ist die Phase, in der die Vollstreckung bereits begonnen hat und bei Immobilien bereits eine Versteigerung angesetzt ist. Ein Einspruch gegen die Vollstreckung, aus Gründen, die die Forderung, den Titel, das Verfahren und die Pfändung betreffen, wird innerhalb von fünfundvierzig Tagen ab dem Tag der Pfändung eingelegt. Ist auch eine Aussetzung der Versteigerung erforderlich, wird dieser Schritt gesondert geprüft und muss rechtzeitig erfolgen."
       }
     ],
-    "deadlinesWarning": "Bei der Kündigung bleiben wir nicht untätig. Beim Zahlungsbefehl handeln wir sofort. Bei der Pfändung gibt es keinen Raum für Versuche. Verteidigungsfristen warten nicht, bis sich der Schuldner vom Schock erholt hat.",
+    "deadlinesWarning": "Keine dieser Fristen verlängert sich, weil der Schuldner Zeit brauchte, um sich vom Schock zu erholen. Deshalb sollte die Akte geprüft werden, sobald das erste Dokument eintrifft, und nicht erst, wenn die Versteigerung bereits nahe ist.",
     "cta1Title": "Hat Ihr Unternehmen ein Dokument von Eurobank?",
     "cta1Text": "Eine sofortige erste Bewertung der Akte: Unternehmensdarlehen, Bürgschaften, Sicherheiten, Fristen. Rufen Sie +30 2310 545 261 an oder senden Sie das Formular.",
-    "negotiationTitle": "Verhandlung und Regelung von Unternehmensschulden — mit Blick auf die Existenzfähigkeit",
+    "negotiationTitle": "Verhandlung und Regelung von Unternehmensschulden, mit Blick auf die Existenzfähigkeit",
     "negotiationIntro": "Bei einer Unternehmensschuld ist ein Vergleich nicht bloß eine Frage der Raten. Es ist eine Frage der Existenzfähigkeit. Vor jedem Kontakt mit Eurobank prüfen wir die Berechtigung, den realen Saldo, die Bürgschaften und die Daten des Unternehmens, damit der Vorschlag auf belastbaren Zahlen beruht. Ziel ist ein Vergleich, der aus realem Cashflow bedient wird, mit einem Schuldenschnitt (Haircut), wo belegt, und einem kontrollierten Umfang der persönlichen Bürgschaften.",
     "negotiationPoints": [
       "Der Vergleich muss der Zeit standhalten. Eine Vereinbarung, die auf dem Papier gut aussieht, aber bei der zweiten oder dritten Rate zusammenbricht, ist wertlos. Der Vorschlag muss mit der tatsächlichen finanziellen Leistungsfähigkeit des Schuldners, dem Wert der Sicherheit, dem Verlauf der Forderung und den Daten des Falles verbunden sein.",
-      "Ein Schuldenschnitt (Haircut) wird nicht als Wunsch formuliert. Er wird als Verhandlungsziel aufgebaut, wenn die Elemente des Falles es zulassen.",
+      "Ein Schuldenschnitt (Haircut) wird nicht als Wunsch geäußert; er wird als Verhandlungsziel belegt, wenn die Elemente des Falles es zulassen.",
       "Der Preis, zu dem der Fonds das Darlehen von Eurobank erworben hat, die Geschichte des Portfolios, die Aussicht auf Beitreibung, der Wert der Immobilie und das Bestehen einer gerichtlichen Anfechtung sind Faktoren, die die Diskussion verändern können.",
-      "Die beste Verhandlung findet statt, wenn der Schuldner seine Rechte bereits ausgeübt hat oder bereit ist, sie auszuüben. Ein begründeter Einspruch, ein Aussetzungsantrag oder eine ernsthafte gerichtliche Anfechtung verwandelt die Verhandlung von einer bloßen Bitte in einen Wettstreit der Positionen."
+      "Die beste Verhandlung findet statt, wenn der Schuldner seine Rechte bereits ausgeübt hat oder bereit ist, sie auszuüben. Ein begründeter Einspruch, ein Aussetzungsantrag oder eine ernsthafte gerichtliche Anfechtung verändert die Grundlage des Gesprächs: die Gegenseite weiß, dass der Fall vor Gericht entschieden wird, wenn es keine Einigung gibt."
     ],
     "negotiationOutro": "Für Unternehmen ist der beste Deal derjenige, der dem Unternehmen die Fortführung ermöglicht. Ein Vergleich, der bedient wird, Bürgschaften, die begrenzt werden, gerichtlicher Druck, wo nötig.",
-    "cta2Title": "Bevor Sie einen Vergleich unterschreiben oder eine Unternehmensschuld anerkennen — sprechen Sie mit uns.",
+    "cta2Title": "Bevor Sie einen Vergleich unterschreiben oder eine Unternehmensschuld anerkennen, sprechen Sie zuerst mit uns.",
     "cta2Text": "Bei Unternehmensschulden kann eine voreilige Unterschrift persönliche Bürgschaften auslösen oder einen Betrag anerkennen, der angefochten werden könnte. Erst die Prüfung, dann die Antwort.",
     "anakopiTitle": "Einspruch und Aussetzung der Versteigerung vor den Gerichten in Thessaloniki und ganz Griechenland",
     "anakopiText1": "Die Zwangsvollstreckung wird nicht mit allgemeinen Protesten beantwortet, sondern mit einer gezielten verfahrensrechtlichen Prüfung jeder Handlung, jedes Dokuments und jedes Betrags, auf den sich die verfolgende Seite beruft.\n\nUnsere Anwaltskanzlei bearbeitet täglich Fälle von Einsprüchen, Aussetzungsanträgen und Versteigerungen vor den Gerichten in Thessaloniki und im gesamten griechischen Hoheitsgebiet.\n\nIn jedem Fall prüfen wir umfassend den Zahlungstitel, den Pfändungsbericht, die Dokumente der Übertragung der Forderung, die Verwaltungsbeauftragung, die Analyse der Schuld, die Zinsen, die Gebühren, die Zustellungen und die Einhaltung der gesetzlichen Fristen. Ein Einspruch darf kein routinemäßiger Verteidigungsschriftsatz sein. Er muss verfahrensrechtlich präzise, beweisrechtlich belegt und an die tatsächlichen Daten der konkreten Akte angepasst sein.",
     "anakopiPoints": [],
     "anakopiText2": "Wo erforderlich, wird der Einspruch von einem Aussetzungsantrag begleitet, um die Versteigerung vorübergehend abzuwenden, bis über die Substanz des Streits entschieden ist. Die Aussetzung ist nicht bloß ein Mittel der Verzögerung. Sie ist ein verfahrensrechtliches Schutzinstrument, wenn ein ernsthafter Grund zur Aufhebung der Vollstreckung und die Gefahr eines irreparablen Schadens durch die sofortige Durchführung der Versteigerung besteht.\n\nUnser Ziel ist die sofortige und vollständige Bewertung der Akte, die Hervorhebung der materiellen und verfahrensrechtlichen Mängel und die Bildung einer konkreten Strategie, entweder um die Vollstreckung gerichtlich zu kippen oder um eine starke Verhandlungsposition gegenüber der Bank, dem Forderungserwerbsunternehmen oder dem Kreditverwaltungsunternehmen aufzubauen.\n\nIn Versteigerungsfällen ist die Zeit entscheidend. Die rechtzeitige Vorlage der Dokumente und die sofortige rechtliche Prüfung können bestimmen, ob es realen Raum für Einspruch, Aussetzung oder eine außergerichtliche Beilegung gibt.",
-    "faqTitle": "FAQ — Unternehmen und Eurobank",
+    "faqTitle": "FAQ: Unternehmen und Eurobank",
     "faq": [
       {
         "q": "Ich habe persönlich für ein Unternehmensdarlehen gegenüber Eurobank gebürgt. Ist mein Privatvermögen gefährdet?",
@@ -1416,7 +1418,7 @@
       },
       {
         "q": "Können mein Geschäftskonto oder meine Ausrüstung gepfändet werden?",
-        "a": "Mit einem vollstreckbaren Titel und einem rechtmäßigen Verfahren ja — aber jede Vollstreckungshandlung (Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen) hat Anfechtungspunkte mit bestimmten Fristen. Ein sofortiger Einspruch und Aussetzungsantrag kann das Unternehmen am Leben halten."
+        "a": "Mit einem vollstreckbaren Titel und einem rechtmäßigen Verfahren ja, aber jede Vollstreckungshandlung (Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen) hat Anfechtungspunkte mit bestimmten Fristen. Ein sofortiger Einspruch und Aussetzungsantrag kann das Unternehmen am Leben halten."
       },
       {
         "q": "Mein Unternehmen schuldet Banken, Sozialversicherung und Finanzamt zugleich. Was passiert?",
@@ -1424,15 +1426,15 @@
       },
       {
         "q": "Das Unternehmen hat den Betrieb eingestellt. Lohnt sich eine Verteidigung noch?",
-        "a": "Ja — besonders zur Begrenzung persönlicher Bürgschaften und zum Schutz des Privatvermögens von Bürgen und Geschäftsführern. Auch wenn die Gesellschaft geschlossen wurde, können die Bürgschaften und Schulden Sie persönlich verfolgen."
+        "a": "Ja, besonders zur Begrenzung persönlicher Bürgschaften und zum Schutz des Privatvermögens von Bürgen und Geschäftsführern. Auch wenn die Gesellschaft geschlossen wurde, können die Bürgschaften und Schulden Sie persönlich verfolgen."
       },
       {
         "q": "Welche Dokumente benötigen Sie für die Prüfung?",
-        "a": "Den Darlehens-/Kreditvertrag, die Bürgschaftsverträge, die Sicherheitsdokumente, die Briefe und jedes Dokument von Eurobank oder der Bank — außergerichtliche Aufforderungen, Kündigung, Zahlungsbefehl, Pfändungsbericht. Am wichtigsten: die Zustellungsdaten."
+        "a": "Den Darlehens-/Kreditvertrag, die Bürgschaftsverträge, die Sicherheitsdokumente, die Briefe und jedes Dokument von Eurobank oder der Bank: außergerichtliche Aufforderungen, Kündigung, Zahlungsbefehl, Pfändungsbericht. Am wichtigsten: die Zustellungsdaten."
       }
     ],
-    "ctaTitle": "Für Ihr Unternehmen — erst die Prüfung, dann die Strategie.",
-    "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Bei Unternehmensschulden sind die Beträge hoch und die Fristen streng — die Akte wird vordringlich bewertet.",
+    "ctaTitle": "Für Ihr Unternehmen: erst die Prüfung, dann die Strategie.",
+    "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Bei Unternehmensschulden sind die Beträge hoch und die Fristen streng, sodass die Akte vordringlich bewertet wird.",
     "ctaButton": "Sofortige Aktenprüfung",
     "ctaPhone": "Jetzt anrufen: +30 2310 545 261"
   },
@@ -1440,14 +1442,14 @@
     "seoTitle": "Anwalt für Alpha Bank-Unternehmensdarlehen – Firmen in Thessaloniki",
     "seoDescription": "Unternehmen oder Selbstständiger mit Unternehmensdarlehen oder persönlicher Bürgschaft bei Alpha Bank? Prüfung der Bürgschaft, des Betriebsvermögens, Einspruch, Aussetzung und außergerichtlicher Mechanismus für Unternehmen. Tel: +30 2310 545 261.",
     "heroCity": "Thessaloniki · Leontos Sofou 12",
-    "heroTitle": "Anwalt für Alpha Bank-Gewerbe- und Unternehmensdarlehen — Unternehmen und Selbstständige",
+    "heroTitle": "Anwalt für Alpha Bank-Gewerbe- und Unternehmensdarlehen: Unternehmen und Selbstständige",
     "heroSubtitle": "Unternehmensdarlehen · Persönliche Bürgschaften · Außergerichtlicher Mechanismus",
-    "intro": "Diese Seite richtet sich an Unternehmen, Gesellschaften und Selbstständige mit Schulden gegenüber Alpha Bank. Gewerbe- und Unternehmensdarlehen, Betriebskapital, Kontokorrentkredite, Anleihedarlehen und vor allem die persönlichen Bürgschaften von Geschäftsführern und Gesellschaftern führen zu Zahlungsbefehlen, Pfändungen und Versteigerungen — oft mit höheren Beträgen und unmittelbaren Folgen für die Existenzfähigkeit. Ioannis Papaioannou verteidigt seit über 25 Jahren Unternehmen und Selbstständige gegenüber Banken, Fonds und Servicern.",
+    "intro": "Diese Seite richtet sich an Unternehmen, Gesellschaften und Selbstständige mit Schulden gegenüber Alpha Bank. Gewerbe- und Unternehmensdarlehen, Betriebskapital, Kontokorrentkredite, Anleihedarlehen und vor allem die persönlichen Bürgschaften von Geschäftsführern und Gesellschaftern führen zu Zahlungsbefehlen, Pfändungen und Versteigerungen, oft mit höheren Beträgen und unmittelbaren Folgen für die Existenzfähigkeit. Ioannis Papaioannou verteidigt seit über 25 Jahren Unternehmen und Selbstständige gegenüber Banken, Fonds und Servicern.",
     "whatTitle": "Unternehmensdarlehen und Bürgschaften: was wir zuerst prüfen",
-    "whatText": "Bei einer geschäftlichen Schuld gegenüber Alpha Bank ist die Akte fast immer komplexer als bei einem Wohnungsfall. Wir prüfen den Darlehens- oder Kreditvertrag, die Sicherheiten (Vormerkungen, Pfandrechte, Abtretungen), die Höhe der Forderung und die Berechtigung der heute verfolgenden Partei — also, ob die Forderung bei der Bank blieb oder an einen Fonds mit Verwaltungsgesellschaft übertragen wurde. Besonderes Gewicht haben persönliche Bürgschaften: Wenn der Unternehmer, Geschäftsführer oder Gesellschafter gebürgt hat, werden Umfang und Grenzen seiner Haftung gesondert geprüft. Eine Bürgschaft ist nicht immer unbegrenzt und nicht immer gültig.",
+    "whatText": "Bei einer geschäftlichen Schuld gegenüber Alpha Bank ist die Akte fast immer komplexer als bei einem Wohnungsfall. Wir prüfen den Darlehens- oder Kreditvertrag, die Sicherheiten (Vormerkungen, Pfandrechte, Abtretungen), die Höhe der Forderung und die Berechtigung der heute verfolgenden Partei, also, ob die Forderung bei der Bank blieb oder an einen Fonds mit Verwaltungsgesellschaft übertragen wurde. Besonderes Gewicht haben persönliche Bürgschaften: Wenn der Unternehmer, Geschäftsführer oder Gesellschafter gebürgt hat, werden Umfang und Grenzen seiner Haftung gesondert geprüft. Eine Bürgschaft ist nicht immer unbegrenzt und nicht immer gültig.",
     "protectTitle": "Schutz von Betriebsvermögen und Ausrüstung",
-    "protectText": "In Geschäftsfällen ist nicht nur das Wohnhaus gefährdet, sondern auch die Geschäftsräume, die Maschinen, die Waren, die Geschäftskonten und die Fortführung der Tätigkeit selbst. Jede Vollstreckungshandlung — Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen — wird mit einem Einspruch und, wo nötig, einem Aussetzungsantrag begegnet. Von Anfang an prüfen wir die Berechtigung, die Übertragung der Forderung, die Höhe der Schuld, die Zinsen, die Gebühren und jede Vollstreckungshandlung, mit dem Ziel, das Unternehmen am Leben zu halten, während über die Substanz entschieden wird.",
-    "deadlinesTitle": "Ich habe eine außergerichtliche Aufforderung, einen Zahlungsbefehl oder eine Pfändung zu einem Alpha Bank-Darlehen erhalten — Die Fristen, die Sie nicht versäumen dürfen",
+    "protectText": "In Geschäftsfällen ist nicht nur das Wohnhaus gefährdet, sondern auch die Geschäftsräume, die Maschinen, die Waren, die Geschäftskonten und die Fortführung der Tätigkeit selbst. Jede Vollstreckungshandlung (Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen) wird mit einem Einspruch und, wo nötig, einem Aussetzungsantrag begegnet. Von Anfang an prüfen wir die Berechtigung, die Übertragung der Forderung, die Höhe der Schuld, die Zinsen, die Gebühren und jede Vollstreckungshandlung, mit dem Ziel, das Unternehmen am Leben zu halten, während über die Substanz entschieden wird.",
+    "deadlinesTitle": "Ich habe eine außergerichtliche Aufforderung, einen Zahlungsbefehl oder eine Pfändung zu einem Alpha Bank-Darlehen erhalten: Die Fristen, die Sie nicht versäumen dürfen",
     "deadlinesIntro": "Nicht jedes Dokument hat dasselbe rechtliche Gewicht. Die Kündigung des Vertrags ist eine Sache, der Zahlungsbefehl eine andere und die Pfändung noch eine andere. Aber jede Phase zeigt, dass der Fall voranschreitet und die Reaktionszeit kürzer wird.",
     "deadlines": [
       {
@@ -1463,25 +1465,25 @@
         "desc": "Die Pfändung ist die Phase, in der die Vollstreckung bereits begonnen hat und bei Immobilien bereits eine Versteigerung angesetzt ist. Ein Einspruch gegen die Vollstreckung, aus Gründen, die die Forderung, den Titel, das Verfahren und die Pfändung betreffen, wird innerhalb von fünfundvierzig Tagen ab dem Tag der Pfändung eingelegt. Ist auch eine Aussetzung der Versteigerung erforderlich, wird dieser Schritt gesondert geprüft und muss rechtzeitig erfolgen."
       }
     ],
-    "deadlinesWarning": "Bei der Kündigung bleiben wir nicht untätig. Beim Zahlungsbefehl handeln wir sofort. Bei der Pfändung gibt es keinen Raum für Versuche. Verteidigungsfristen warten nicht, bis sich der Schuldner vom Schock erholt hat.",
+    "deadlinesWarning": "Keine dieser Fristen verlängert sich, weil der Schuldner Zeit brauchte, um sich vom Schock zu erholen. Deshalb sollte die Akte geprüft werden, sobald das erste Dokument eintrifft, und nicht erst, wenn die Versteigerung bereits nahe ist.",
     "cta1Title": "Hat Ihr Unternehmen ein Dokument von Alpha Bank?",
     "cta1Text": "Eine sofortige erste Bewertung der Akte: Unternehmensdarlehen, Bürgschaften, Sicherheiten, Fristen. Rufen Sie +30 2310 545 261 an oder senden Sie das Formular.",
-    "negotiationTitle": "Verhandlung und Regelung von Unternehmensschulden — mit Blick auf die Existenzfähigkeit",
+    "negotiationTitle": "Verhandlung und Regelung von Unternehmensschulden, mit Blick auf die Existenzfähigkeit",
     "negotiationIntro": "Bei einer Unternehmensschuld ist ein Vergleich nicht bloß eine Frage der Raten. Es ist eine Frage der Existenzfähigkeit. Vor jedem Kontakt mit Alpha Bank prüfen wir die Berechtigung, den realen Saldo, die Bürgschaften und die Daten des Unternehmens, damit der Vorschlag auf belastbaren Zahlen beruht. Ziel ist ein Vergleich, der aus realem Cashflow bedient wird, mit einem Schuldenschnitt (Haircut), wo belegt, und einem kontrollierten Umfang der persönlichen Bürgschaften.",
     "negotiationPoints": [
       "Der Vergleich muss der Zeit standhalten. Eine Vereinbarung, die auf dem Papier gut aussieht, aber bei der zweiten oder dritten Rate zusammenbricht, ist wertlos. Der Vorschlag muss mit der tatsächlichen finanziellen Leistungsfähigkeit des Schuldners, dem Wert der Sicherheit, dem Verlauf der Forderung und den Daten des Falles verbunden sein.",
-      "Ein Schuldenschnitt (Haircut) wird nicht als Wunsch formuliert. Er wird als Verhandlungsziel aufgebaut, wenn die Elemente des Falles es zulassen.",
+      "Ein Schuldenschnitt (Haircut) wird nicht als Wunsch geäußert; er wird als Verhandlungsziel belegt, wenn die Elemente des Falles es zulassen.",
       "Der Preis, zu dem der Fonds das Darlehen von Alpha Bank erworben hat, die Geschichte des Portfolios, die Aussicht auf Beitreibung, der Wert der Immobilie und das Bestehen einer gerichtlichen Anfechtung sind Faktoren, die die Diskussion verändern können.",
-      "Die beste Verhandlung findet statt, wenn der Schuldner seine Rechte bereits ausgeübt hat oder bereit ist, sie auszuüben. Ein begründeter Einspruch, ein Aussetzungsantrag oder eine ernsthafte gerichtliche Anfechtung verwandelt die Verhandlung von einer bloßen Bitte in einen Wettstreit der Positionen."
+      "Die beste Verhandlung findet statt, wenn der Schuldner seine Rechte bereits ausgeübt hat oder bereit ist, sie auszuüben. Ein begründeter Einspruch, ein Aussetzungsantrag oder eine ernsthafte gerichtliche Anfechtung verändert die Grundlage des Gesprächs: die Gegenseite weiß, dass der Fall vor Gericht entschieden wird, wenn es keine Einigung gibt."
     ],
     "negotiationOutro": "Für Unternehmen ist der beste Deal derjenige, der dem Unternehmen die Fortführung ermöglicht. Ein Vergleich, der bedient wird, Bürgschaften, die begrenzt werden, gerichtlicher Druck, wo nötig.",
-    "cta2Title": "Bevor Sie einen Vergleich unterschreiben oder eine Unternehmensschuld anerkennen — sprechen Sie mit uns.",
+    "cta2Title": "Bevor Sie einen Vergleich unterschreiben oder eine Unternehmensschuld anerkennen, sprechen Sie zuerst mit uns.",
     "cta2Text": "Bei Unternehmensschulden kann eine voreilige Unterschrift persönliche Bürgschaften auslösen oder einen Betrag anerkennen, der angefochten werden könnte. Erst die Prüfung, dann die Antwort.",
     "anakopiTitle": "Einspruch und Aussetzung der Versteigerung vor den Gerichten in Thessaloniki und ganz Griechenland",
     "anakopiText1": "Die Zwangsvollstreckung wird nicht mit allgemeinen Protesten beantwortet, sondern mit einer gezielten verfahrensrechtlichen Prüfung jeder Handlung, jedes Dokuments und jedes Betrags, auf den sich die verfolgende Seite beruft.\n\nUnsere Anwaltskanzlei bearbeitet täglich Fälle von Einsprüchen, Aussetzungsanträgen und Versteigerungen vor den Gerichten in Thessaloniki und im gesamten griechischen Hoheitsgebiet.\n\nIn jedem Fall prüfen wir umfassend den Zahlungstitel, den Pfändungsbericht, die Dokumente der Übertragung der Forderung, die Verwaltungsbeauftragung, die Analyse der Schuld, die Zinsen, die Gebühren, die Zustellungen und die Einhaltung der gesetzlichen Fristen. Ein Einspruch darf kein routinemäßiger Verteidigungsschriftsatz sein. Er muss verfahrensrechtlich präzise, beweisrechtlich belegt und an die tatsächlichen Daten der konkreten Akte angepasst sein.",
     "anakopiPoints": [],
     "anakopiText2": "Wo erforderlich, wird der Einspruch von einem Aussetzungsantrag begleitet, um die Versteigerung vorübergehend abzuwenden, bis über die Substanz des Streits entschieden ist. Die Aussetzung ist nicht bloß ein Mittel der Verzögerung. Sie ist ein verfahrensrechtliches Schutzinstrument, wenn ein ernsthafter Grund zur Aufhebung der Vollstreckung und die Gefahr eines irreparablen Schadens durch die sofortige Durchführung der Versteigerung besteht.\n\nUnser Ziel ist die sofortige und vollständige Bewertung der Akte, die Hervorhebung der materiellen und verfahrensrechtlichen Mängel und die Bildung einer konkreten Strategie, entweder um die Vollstreckung gerichtlich zu kippen oder um eine starke Verhandlungsposition gegenüber der Bank, dem Forderungserwerbsunternehmen oder dem Kreditverwaltungsunternehmen aufzubauen.\n\nIn Versteigerungsfällen ist die Zeit entscheidend. Die rechtzeitige Vorlage der Dokumente und die sofortige rechtliche Prüfung können bestimmen, ob es realen Raum für Einspruch, Aussetzung oder eine außergerichtliche Beilegung gibt.",
-    "faqTitle": "FAQ — Unternehmen und Alpha Bank",
+    "faqTitle": "FAQ: Unternehmen und Alpha Bank",
     "faq": [
       {
         "q": "Ich habe persönlich für ein Unternehmensdarlehen gegenüber Alpha Bank gebürgt. Ist mein Privatvermögen gefährdet?",
@@ -1489,7 +1491,7 @@
       },
       {
         "q": "Können mein Geschäftskonto oder meine Ausrüstung gepfändet werden?",
-        "a": "Mit einem vollstreckbaren Titel und einem rechtmäßigen Verfahren ja — aber jede Vollstreckungshandlung (Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen) hat Anfechtungspunkte mit bestimmten Fristen. Ein sofortiger Einspruch und Aussetzungsantrag kann das Unternehmen am Leben halten."
+        "a": "Mit einem vollstreckbaren Titel und einem rechtmäßigen Verfahren ja, aber jede Vollstreckungshandlung (Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen) hat Anfechtungspunkte mit bestimmten Fristen. Ein sofortiger Einspruch und Aussetzungsantrag kann das Unternehmen am Leben halten."
       },
       {
         "q": "Mein Unternehmen schuldet Banken, Sozialversicherung und Finanzamt zugleich. Was passiert?",
@@ -1497,15 +1499,15 @@
       },
       {
         "q": "Das Unternehmen hat den Betrieb eingestellt. Lohnt sich eine Verteidigung noch?",
-        "a": "Ja — besonders zur Begrenzung persönlicher Bürgschaften und zum Schutz des Privatvermögens von Bürgen und Geschäftsführern. Auch wenn die Gesellschaft geschlossen wurde, können die Bürgschaften und Schulden Sie persönlich verfolgen."
+        "a": "Ja, besonders zur Begrenzung persönlicher Bürgschaften und zum Schutz des Privatvermögens von Bürgen und Geschäftsführern. Auch wenn die Gesellschaft geschlossen wurde, können die Bürgschaften und Schulden Sie persönlich verfolgen."
       },
       {
         "q": "Welche Dokumente benötigen Sie für die Prüfung?",
-        "a": "Den Darlehens-/Kreditvertrag, die Bürgschaftsverträge, die Sicherheitsdokumente, die Briefe und jedes Dokument von Alpha Bank oder der Bank — außergerichtliche Aufforderungen, Kündigung, Zahlungsbefehl, Pfändungsbericht. Am wichtigsten: die Zustellungsdaten."
+        "a": "Den Darlehens-/Kreditvertrag, die Bürgschaftsverträge, die Sicherheitsdokumente, die Briefe und jedes Dokument von Alpha Bank oder der Bank: außergerichtliche Aufforderungen, Kündigung, Zahlungsbefehl, Pfändungsbericht. Am wichtigsten: die Zustellungsdaten."
       }
     ],
-    "ctaTitle": "Für Ihr Unternehmen — erst die Prüfung, dann die Strategie.",
-    "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Bei Unternehmensschulden sind die Beträge hoch und die Fristen streng — die Akte wird vordringlich bewertet.",
+    "ctaTitle": "Für Ihr Unternehmen: erst die Prüfung, dann die Strategie.",
+    "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Bei Unternehmensschulden sind die Beträge hoch und die Fristen streng, sodass die Akte vordringlich bewertet wird.",
     "ctaButton": "Sofortige Aktenprüfung",
     "ctaPhone": "Jetzt anrufen: +30 2310 545 261"
   },
@@ -1513,14 +1515,14 @@
     "seoTitle": "Anwalt für Piraeus Bank-Unternehmensdarlehen – Firmen in Thessaloniki",
     "seoDescription": "Unternehmen oder Selbstständiger mit Unternehmensdarlehen oder persönlicher Bürgschaft bei Piraeus Bank? Prüfung der Bürgschaft, des Betriebsvermögens, Einspruch, Aussetzung und außergerichtlicher Mechanismus für Unternehmen. Tel: +30 2310 545 261.",
     "heroCity": "Thessaloniki · Leontos Sofou 12",
-    "heroTitle": "Anwalt für Piraeus Bank-Gewerbe- und Unternehmensdarlehen — Unternehmen und Selbstständige",
+    "heroTitle": "Anwalt für Piraeus Bank-Gewerbe- und Unternehmensdarlehen: Unternehmen und Selbstständige",
     "heroSubtitle": "Unternehmensdarlehen · Persönliche Bürgschaften · Außergerichtlicher Mechanismus",
-    "intro": "Diese Seite richtet sich an Unternehmen, Gesellschaften und Selbstständige mit Schulden gegenüber Piraeus Bank. Gewerbe- und Unternehmensdarlehen, Betriebskapital, Kontokorrentkredite, Anleihedarlehen und vor allem die persönlichen Bürgschaften von Geschäftsführern und Gesellschaftern führen zu Zahlungsbefehlen, Pfändungen und Versteigerungen — oft mit höheren Beträgen und unmittelbaren Folgen für die Existenzfähigkeit. Ioannis Papaioannou verteidigt seit über 25 Jahren Unternehmen und Selbstständige gegenüber Banken, Fonds und Servicern.",
+    "intro": "Diese Seite richtet sich an Unternehmen, Gesellschaften und Selbstständige mit Schulden gegenüber Piraeus Bank. Gewerbe- und Unternehmensdarlehen, Betriebskapital, Kontokorrentkredite, Anleihedarlehen und vor allem die persönlichen Bürgschaften von Geschäftsführern und Gesellschaftern führen zu Zahlungsbefehlen, Pfändungen und Versteigerungen, oft mit höheren Beträgen und unmittelbaren Folgen für die Existenzfähigkeit. Ioannis Papaioannou verteidigt seit über 25 Jahren Unternehmen und Selbstständige gegenüber Banken, Fonds und Servicern.",
     "whatTitle": "Unternehmensdarlehen und Bürgschaften: was wir zuerst prüfen",
-    "whatText": "Bei einer geschäftlichen Schuld gegenüber Piraeus Bank ist die Akte fast immer komplexer als bei einem Wohnungsfall. Wir prüfen den Darlehens- oder Kreditvertrag, die Sicherheiten (Vormerkungen, Pfandrechte, Abtretungen), die Höhe der Forderung und die Berechtigung der heute verfolgenden Partei — also, ob die Forderung bei der Bank blieb oder an einen Fonds mit Verwaltungsgesellschaft übertragen wurde. Besonderes Gewicht haben persönliche Bürgschaften: Wenn der Unternehmer, Geschäftsführer oder Gesellschafter gebürgt hat, werden Umfang und Grenzen seiner Haftung gesondert geprüft. Eine Bürgschaft ist nicht immer unbegrenzt und nicht immer gültig.",
+    "whatText": "Bei einer geschäftlichen Schuld gegenüber Piraeus Bank ist die Akte fast immer komplexer als bei einem Wohnungsfall. Wir prüfen den Darlehens- oder Kreditvertrag, die Sicherheiten (Vormerkungen, Pfandrechte, Abtretungen), die Höhe der Forderung und die Berechtigung der heute verfolgenden Partei, also, ob die Forderung bei der Bank blieb oder an einen Fonds mit Verwaltungsgesellschaft übertragen wurde. Besonderes Gewicht haben persönliche Bürgschaften: Wenn der Unternehmer, Geschäftsführer oder Gesellschafter gebürgt hat, werden Umfang und Grenzen seiner Haftung gesondert geprüft. Eine Bürgschaft ist nicht immer unbegrenzt und nicht immer gültig.",
     "protectTitle": "Schutz von Betriebsvermögen und Ausrüstung",
-    "protectText": "In Geschäftsfällen ist nicht nur das Wohnhaus gefährdet, sondern auch die Geschäftsräume, die Maschinen, die Waren, die Geschäftskonten und die Fortführung der Tätigkeit selbst. Jede Vollstreckungshandlung — Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen — wird mit einem Einspruch und, wo nötig, einem Aussetzungsantrag begegnet. Von Anfang an prüfen wir die Berechtigung, die Übertragung der Forderung, die Höhe der Schuld, die Zinsen, die Gebühren und jede Vollstreckungshandlung, mit dem Ziel, das Unternehmen am Leben zu halten, während über die Substanz entschieden wird.",
-    "deadlinesTitle": "Ich habe eine außergerichtliche Aufforderung, einen Zahlungsbefehl oder eine Pfändung zu einem Piraeus Bank-Darlehen erhalten — Die Fristen, die Sie nicht versäumen dürfen",
+    "protectText": "In Geschäftsfällen ist nicht nur das Wohnhaus gefährdet, sondern auch die Geschäftsräume, die Maschinen, die Waren, die Geschäftskonten und die Fortführung der Tätigkeit selbst. Jede Vollstreckungshandlung (Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen) wird mit einem Einspruch und, wo nötig, einem Aussetzungsantrag begegnet. Von Anfang an prüfen wir die Berechtigung, die Übertragung der Forderung, die Höhe der Schuld, die Zinsen, die Gebühren und jede Vollstreckungshandlung, mit dem Ziel, das Unternehmen am Leben zu halten, während über die Substanz entschieden wird.",
+    "deadlinesTitle": "Ich habe eine außergerichtliche Aufforderung, einen Zahlungsbefehl oder eine Pfändung zu einem Piraeus Bank-Darlehen erhalten: Die Fristen, die Sie nicht versäumen dürfen",
     "deadlinesIntro": "Nicht jedes Dokument hat dasselbe rechtliche Gewicht. Die Kündigung des Vertrags ist eine Sache, der Zahlungsbefehl eine andere und die Pfändung noch eine andere. Aber jede Phase zeigt, dass der Fall voranschreitet und die Reaktionszeit kürzer wird.",
     "deadlines": [
       {
@@ -1536,25 +1538,25 @@
         "desc": "Die Pfändung ist die Phase, in der die Vollstreckung bereits begonnen hat und bei Immobilien bereits eine Versteigerung angesetzt ist. Ein Einspruch gegen die Vollstreckung, aus Gründen, die die Forderung, den Titel, das Verfahren und die Pfändung betreffen, wird innerhalb von fünfundvierzig Tagen ab dem Tag der Pfändung eingelegt. Ist auch eine Aussetzung der Versteigerung erforderlich, wird dieser Schritt gesondert geprüft und muss rechtzeitig erfolgen."
       }
     ],
-    "deadlinesWarning": "Bei der Kündigung bleiben wir nicht untätig. Beim Zahlungsbefehl handeln wir sofort. Bei der Pfändung gibt es keinen Raum für Versuche. Verteidigungsfristen warten nicht, bis sich der Schuldner vom Schock erholt hat.",
+    "deadlinesWarning": "Keine dieser Fristen verlängert sich, weil der Schuldner Zeit brauchte, um sich vom Schock zu erholen. Deshalb sollte die Akte geprüft werden, sobald das erste Dokument eintrifft, und nicht erst, wenn die Versteigerung bereits nahe ist.",
     "cta1Title": "Hat Ihr Unternehmen ein Dokument von Piraeus Bank?",
     "cta1Text": "Eine sofortige erste Bewertung der Akte: Unternehmensdarlehen, Bürgschaften, Sicherheiten, Fristen. Rufen Sie +30 2310 545 261 an oder senden Sie das Formular.",
-    "negotiationTitle": "Verhandlung und Regelung von Unternehmensschulden — mit Blick auf die Existenzfähigkeit",
+    "negotiationTitle": "Verhandlung und Regelung von Unternehmensschulden, mit Blick auf die Existenzfähigkeit",
     "negotiationIntro": "Bei einer Unternehmensschuld ist ein Vergleich nicht bloß eine Frage der Raten. Es ist eine Frage der Existenzfähigkeit. Vor jedem Kontakt mit Piraeus Bank prüfen wir die Berechtigung, den realen Saldo, die Bürgschaften und die Daten des Unternehmens, damit der Vorschlag auf belastbaren Zahlen beruht. Ziel ist ein Vergleich, der aus realem Cashflow bedient wird, mit einem Schuldenschnitt (Haircut), wo belegt, und einem kontrollierten Umfang der persönlichen Bürgschaften.",
     "negotiationPoints": [
       "Der Vergleich muss der Zeit standhalten. Eine Vereinbarung, die auf dem Papier gut aussieht, aber bei der zweiten oder dritten Rate zusammenbricht, ist wertlos. Der Vorschlag muss mit der tatsächlichen finanziellen Leistungsfähigkeit des Schuldners, dem Wert der Sicherheit, dem Verlauf der Forderung und den Daten des Falles verbunden sein.",
-      "Ein Schuldenschnitt (Haircut) wird nicht als Wunsch formuliert. Er wird als Verhandlungsziel aufgebaut, wenn die Elemente des Falles es zulassen.",
+      "Ein Schuldenschnitt (Haircut) wird nicht als Wunsch geäußert; er wird als Verhandlungsziel belegt, wenn die Elemente des Falles es zulassen.",
       "Der Preis, zu dem der Fonds das Darlehen von Piraeus Bank erworben hat, die Geschichte des Portfolios, die Aussicht auf Beitreibung, der Wert der Immobilie und das Bestehen einer gerichtlichen Anfechtung sind Faktoren, die die Diskussion verändern können.",
-      "Die beste Verhandlung findet statt, wenn der Schuldner seine Rechte bereits ausgeübt hat oder bereit ist, sie auszuüben. Ein begründeter Einspruch, ein Aussetzungsantrag oder eine ernsthafte gerichtliche Anfechtung verwandelt die Verhandlung von einer bloßen Bitte in einen Wettstreit der Positionen."
+      "Die beste Verhandlung findet statt, wenn der Schuldner seine Rechte bereits ausgeübt hat oder bereit ist, sie auszuüben. Ein begründeter Einspruch, ein Aussetzungsantrag oder eine ernsthafte gerichtliche Anfechtung verändert die Grundlage des Gesprächs: die Gegenseite weiß, dass der Fall vor Gericht entschieden wird, wenn es keine Einigung gibt."
     ],
     "negotiationOutro": "Für Unternehmen ist der beste Deal derjenige, der dem Unternehmen die Fortführung ermöglicht. Ein Vergleich, der bedient wird, Bürgschaften, die begrenzt werden, gerichtlicher Druck, wo nötig.",
-    "cta2Title": "Bevor Sie einen Vergleich unterschreiben oder eine Unternehmensschuld anerkennen — sprechen Sie mit uns.",
+    "cta2Title": "Bevor Sie einen Vergleich unterschreiben oder eine Unternehmensschuld anerkennen, sprechen Sie zuerst mit uns.",
     "cta2Text": "Bei Unternehmensschulden kann eine voreilige Unterschrift persönliche Bürgschaften auslösen oder einen Betrag anerkennen, der angefochten werden könnte. Erst die Prüfung, dann die Antwort.",
     "anakopiTitle": "Einspruch und Aussetzung der Versteigerung vor den Gerichten in Thessaloniki und ganz Griechenland",
     "anakopiText1": "Die Zwangsvollstreckung wird nicht mit allgemeinen Protesten beantwortet, sondern mit einer gezielten verfahrensrechtlichen Prüfung jeder Handlung, jedes Dokuments und jedes Betrags, auf den sich die verfolgende Seite beruft.\n\nUnsere Anwaltskanzlei bearbeitet täglich Fälle von Einsprüchen, Aussetzungsanträgen und Versteigerungen vor den Gerichten in Thessaloniki und im gesamten griechischen Hoheitsgebiet.\n\nIn jedem Fall prüfen wir umfassend den Zahlungstitel, den Pfändungsbericht, die Dokumente der Übertragung der Forderung, die Verwaltungsbeauftragung, die Analyse der Schuld, die Zinsen, die Gebühren, die Zustellungen und die Einhaltung der gesetzlichen Fristen. Ein Einspruch darf kein routinemäßiger Verteidigungsschriftsatz sein. Er muss verfahrensrechtlich präzise, beweisrechtlich belegt und an die tatsächlichen Daten der konkreten Akte angepasst sein.",
     "anakopiPoints": [],
     "anakopiText2": "Wo erforderlich, wird der Einspruch von einem Aussetzungsantrag begleitet, um die Versteigerung vorübergehend abzuwenden, bis über die Substanz des Streits entschieden ist. Die Aussetzung ist nicht bloß ein Mittel der Verzögerung. Sie ist ein verfahrensrechtliches Schutzinstrument, wenn ein ernsthafter Grund zur Aufhebung der Vollstreckung und die Gefahr eines irreparablen Schadens durch die sofortige Durchführung der Versteigerung besteht.\n\nUnser Ziel ist die sofortige und vollständige Bewertung der Akte, die Hervorhebung der materiellen und verfahrensrechtlichen Mängel und die Bildung einer konkreten Strategie, entweder um die Vollstreckung gerichtlich zu kippen oder um eine starke Verhandlungsposition gegenüber der Bank, dem Forderungserwerbsunternehmen oder dem Kreditverwaltungsunternehmen aufzubauen.\n\nIn Versteigerungsfällen ist die Zeit entscheidend. Die rechtzeitige Vorlage der Dokumente und die sofortige rechtliche Prüfung können bestimmen, ob es realen Raum für Einspruch, Aussetzung oder eine außergerichtliche Beilegung gibt.",
-    "faqTitle": "FAQ — Unternehmen und Piraeus Bank",
+    "faqTitle": "FAQ: Unternehmen und Piraeus Bank",
     "faq": [
       {
         "q": "Ich habe persönlich für ein Unternehmensdarlehen gegenüber Piraeus Bank gebürgt. Ist mein Privatvermögen gefährdet?",
@@ -1562,7 +1564,7 @@
       },
       {
         "q": "Können mein Geschäftskonto oder meine Ausrüstung gepfändet werden?",
-        "a": "Mit einem vollstreckbaren Titel und einem rechtmäßigen Verfahren ja — aber jede Vollstreckungshandlung (Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen) hat Anfechtungspunkte mit bestimmten Fristen. Ein sofortiger Einspruch und Aussetzungsantrag kann das Unternehmen am Leben halten."
+        "a": "Mit einem vollstreckbaren Titel und einem rechtmäßigen Verfahren ja, aber jede Vollstreckungshandlung (Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen) hat Anfechtungspunkte mit bestimmten Fristen. Ein sofortiger Einspruch und Aussetzungsantrag kann das Unternehmen am Leben halten."
       },
       {
         "q": "Mein Unternehmen schuldet Banken, Sozialversicherung und Finanzamt zugleich. Was passiert?",
@@ -1570,15 +1572,15 @@
       },
       {
         "q": "Das Unternehmen hat den Betrieb eingestellt. Lohnt sich eine Verteidigung noch?",
-        "a": "Ja — besonders zur Begrenzung persönlicher Bürgschaften und zum Schutz des Privatvermögens von Bürgen und Geschäftsführern. Auch wenn die Gesellschaft geschlossen wurde, können die Bürgschaften und Schulden Sie persönlich verfolgen."
+        "a": "Ja, besonders zur Begrenzung persönlicher Bürgschaften und zum Schutz des Privatvermögens von Bürgen und Geschäftsführern. Auch wenn die Gesellschaft geschlossen wurde, können die Bürgschaften und Schulden Sie persönlich verfolgen."
       },
       {
         "q": "Welche Dokumente benötigen Sie für die Prüfung?",
-        "a": "Den Darlehens-/Kreditvertrag, die Bürgschaftsverträge, die Sicherheitsdokumente, die Briefe und jedes Dokument von Piraeus Bank oder der Bank — außergerichtliche Aufforderungen, Kündigung, Zahlungsbefehl, Pfändungsbericht. Am wichtigsten: die Zustellungsdaten."
+        "a": "Den Darlehens-/Kreditvertrag, die Bürgschaftsverträge, die Sicherheitsdokumente, die Briefe und jedes Dokument von Piraeus Bank oder der Bank: außergerichtliche Aufforderungen, Kündigung, Zahlungsbefehl, Pfändungsbericht. Am wichtigsten: die Zustellungsdaten."
       }
     ],
-    "ctaTitle": "Für Ihr Unternehmen — erst die Prüfung, dann die Strategie.",
-    "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Bei Unternehmensschulden sind die Beträge hoch und die Fristen streng — die Akte wird vordringlich bewertet.",
+    "ctaTitle": "Für Ihr Unternehmen: erst die Prüfung, dann die Strategie.",
+    "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Bei Unternehmensschulden sind die Beträge hoch und die Fristen streng, sodass die Akte vordringlich bewertet wird.",
     "ctaButton": "Sofortige Aktenprüfung",
     "ctaPhone": "Jetzt anrufen: +30 2310 545 261"
   },
@@ -1586,14 +1588,14 @@
     "seoTitle": "Anwalt für National Bank of Greece-Unternehmensdarlehen – Firmen in Thessaloniki",
     "seoDescription": "Unternehmen oder Selbstständiger mit Unternehmensdarlehen oder persönlicher Bürgschaft bei National Bank of Greece? Prüfung der Bürgschaft, des Betriebsvermögens, Einspruch, Aussetzung und außergerichtlicher Mechanismus für Unternehmen. Tel: +30 2310 545 261.",
     "heroCity": "Thessaloniki · Leontos Sofou 12",
-    "heroTitle": "Anwalt für National Bank of Greece-Gewerbe- und Unternehmensdarlehen — Unternehmen und Selbstständige",
+    "heroTitle": "Anwalt für National Bank of Greece-Gewerbe- und Unternehmensdarlehen: Unternehmen und Selbstständige",
     "heroSubtitle": "Unternehmensdarlehen · Persönliche Bürgschaften · Außergerichtlicher Mechanismus",
-    "intro": "Diese Seite richtet sich an Unternehmen, Gesellschaften und Selbstständige mit Schulden gegenüber National Bank of Greece. Gewerbe- und Unternehmensdarlehen, Betriebskapital, Kontokorrentkredite, Anleihedarlehen und vor allem die persönlichen Bürgschaften von Geschäftsführern und Gesellschaftern führen zu Zahlungsbefehlen, Pfändungen und Versteigerungen — oft mit höheren Beträgen und unmittelbaren Folgen für die Existenzfähigkeit. Ioannis Papaioannou verteidigt seit über 25 Jahren Unternehmen und Selbstständige gegenüber Banken, Fonds und Servicern.",
+    "intro": "Diese Seite richtet sich an Unternehmen, Gesellschaften und Selbstständige mit Schulden gegenüber National Bank of Greece. Gewerbe- und Unternehmensdarlehen, Betriebskapital, Kontokorrentkredite, Anleihedarlehen und vor allem die persönlichen Bürgschaften von Geschäftsführern und Gesellschaftern führen zu Zahlungsbefehlen, Pfändungen und Versteigerungen, oft mit höheren Beträgen und unmittelbaren Folgen für die Existenzfähigkeit. Ioannis Papaioannou verteidigt seit über 25 Jahren Unternehmen und Selbstständige gegenüber Banken, Fonds und Servicern.",
     "whatTitle": "Unternehmensdarlehen und Bürgschaften: was wir zuerst prüfen",
-    "whatText": "Bei einer geschäftlichen Schuld gegenüber National Bank of Greece ist die Akte fast immer komplexer als bei einem Wohnungsfall. Wir prüfen den Darlehens- oder Kreditvertrag, die Sicherheiten (Vormerkungen, Pfandrechte, Abtretungen), die Höhe der Forderung und die Berechtigung der heute verfolgenden Partei — also, ob die Forderung bei der Bank blieb oder an einen Fonds mit Verwaltungsgesellschaft übertragen wurde. Besonderes Gewicht haben persönliche Bürgschaften: Wenn der Unternehmer, Geschäftsführer oder Gesellschafter gebürgt hat, werden Umfang und Grenzen seiner Haftung gesondert geprüft. Eine Bürgschaft ist nicht immer unbegrenzt und nicht immer gültig.",
+    "whatText": "Bei einer geschäftlichen Schuld gegenüber National Bank of Greece ist die Akte fast immer komplexer als bei einem Wohnungsfall. Wir prüfen den Darlehens- oder Kreditvertrag, die Sicherheiten (Vormerkungen, Pfandrechte, Abtretungen), die Höhe der Forderung und die Berechtigung der heute verfolgenden Partei, also, ob die Forderung bei der Bank blieb oder an einen Fonds mit Verwaltungsgesellschaft übertragen wurde. Besonderes Gewicht haben persönliche Bürgschaften: Wenn der Unternehmer, Geschäftsführer oder Gesellschafter gebürgt hat, werden Umfang und Grenzen seiner Haftung gesondert geprüft. Eine Bürgschaft ist nicht immer unbegrenzt und nicht immer gültig.",
     "protectTitle": "Schutz von Betriebsvermögen und Ausrüstung",
-    "protectText": "In Geschäftsfällen ist nicht nur das Wohnhaus gefährdet, sondern auch die Geschäftsräume, die Maschinen, die Waren, die Geschäftskonten und die Fortführung der Tätigkeit selbst. Jede Vollstreckungshandlung — Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen — wird mit einem Einspruch und, wo nötig, einem Aussetzungsantrag begegnet. Von Anfang an prüfen wir die Berechtigung, die Übertragung der Forderung, die Höhe der Schuld, die Zinsen, die Gebühren und jede Vollstreckungshandlung, mit dem Ziel, das Unternehmen am Leben zu halten, während über die Substanz entschieden wird.",
-    "deadlinesTitle": "Ich habe eine außergerichtliche Aufforderung, einen Zahlungsbefehl oder eine Pfändung zu einem National Bank of Greece-Darlehen erhalten — Die Fristen, die Sie nicht versäumen dürfen",
+    "protectText": "In Geschäftsfällen ist nicht nur das Wohnhaus gefährdet, sondern auch die Geschäftsräume, die Maschinen, die Waren, die Geschäftskonten und die Fortführung der Tätigkeit selbst. Jede Vollstreckungshandlung (Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen) wird mit einem Einspruch und, wo nötig, einem Aussetzungsantrag begegnet. Von Anfang an prüfen wir die Berechtigung, die Übertragung der Forderung, die Höhe der Schuld, die Zinsen, die Gebühren und jede Vollstreckungshandlung, mit dem Ziel, das Unternehmen am Leben zu halten, während über die Substanz entschieden wird.",
+    "deadlinesTitle": "Ich habe eine außergerichtliche Aufforderung, einen Zahlungsbefehl oder eine Pfändung zu einem National Bank of Greece-Darlehen erhalten: Die Fristen, die Sie nicht versäumen dürfen",
     "deadlinesIntro": "Nicht jedes Dokument hat dasselbe rechtliche Gewicht. Die Kündigung des Vertrags ist eine Sache, der Zahlungsbefehl eine andere und die Pfändung noch eine andere. Aber jede Phase zeigt, dass der Fall voranschreitet und die Reaktionszeit kürzer wird.",
     "deadlines": [
       {
@@ -1609,25 +1611,25 @@
         "desc": "Die Pfändung ist die Phase, in der die Vollstreckung bereits begonnen hat und bei Immobilien bereits eine Versteigerung angesetzt ist. Ein Einspruch gegen die Vollstreckung, aus Gründen, die die Forderung, den Titel, das Verfahren und die Pfändung betreffen, wird innerhalb von fünfundvierzig Tagen ab dem Tag der Pfändung eingelegt. Ist auch eine Aussetzung der Versteigerung erforderlich, wird dieser Schritt gesondert geprüft und muss rechtzeitig erfolgen."
       }
     ],
-    "deadlinesWarning": "Bei der Kündigung bleiben wir nicht untätig. Beim Zahlungsbefehl handeln wir sofort. Bei der Pfändung gibt es keinen Raum für Versuche. Verteidigungsfristen warten nicht, bis sich der Schuldner vom Schock erholt hat.",
+    "deadlinesWarning": "Keine dieser Fristen verlängert sich, weil der Schuldner Zeit brauchte, um sich vom Schock zu erholen. Deshalb sollte die Akte geprüft werden, sobald das erste Dokument eintrifft, und nicht erst, wenn die Versteigerung bereits nahe ist.",
     "cta1Title": "Hat Ihr Unternehmen ein Dokument von National Bank of Greece?",
     "cta1Text": "Eine sofortige erste Bewertung der Akte: Unternehmensdarlehen, Bürgschaften, Sicherheiten, Fristen. Rufen Sie +30 2310 545 261 an oder senden Sie das Formular.",
-    "negotiationTitle": "Verhandlung und Regelung von Unternehmensschulden — mit Blick auf die Existenzfähigkeit",
+    "negotiationTitle": "Verhandlung und Regelung von Unternehmensschulden, mit Blick auf die Existenzfähigkeit",
     "negotiationIntro": "Bei einer Unternehmensschuld ist ein Vergleich nicht bloß eine Frage der Raten. Es ist eine Frage der Existenzfähigkeit. Vor jedem Kontakt mit National Bank of Greece prüfen wir die Berechtigung, den realen Saldo, die Bürgschaften und die Daten des Unternehmens, damit der Vorschlag auf belastbaren Zahlen beruht. Ziel ist ein Vergleich, der aus realem Cashflow bedient wird, mit einem Schuldenschnitt (Haircut), wo belegt, und einem kontrollierten Umfang der persönlichen Bürgschaften.",
     "negotiationPoints": [
       "Der Vergleich muss der Zeit standhalten. Eine Vereinbarung, die auf dem Papier gut aussieht, aber bei der zweiten oder dritten Rate zusammenbricht, ist wertlos. Der Vorschlag muss mit der tatsächlichen finanziellen Leistungsfähigkeit des Schuldners, dem Wert der Sicherheit, dem Verlauf der Forderung und den Daten des Falles verbunden sein.",
-      "Ein Schuldenschnitt (Haircut) wird nicht als Wunsch formuliert. Er wird als Verhandlungsziel aufgebaut, wenn die Elemente des Falles es zulassen.",
+      "Ein Schuldenschnitt (Haircut) wird nicht als Wunsch geäußert; er wird als Verhandlungsziel belegt, wenn die Elemente des Falles es zulassen.",
       "Der Preis, zu dem der Fonds das Darlehen von National Bank of Greece erworben hat, die Geschichte des Portfolios, die Aussicht auf Beitreibung, der Wert der Immobilie und das Bestehen einer gerichtlichen Anfechtung sind Faktoren, die die Diskussion verändern können.",
-      "Die beste Verhandlung findet statt, wenn der Schuldner seine Rechte bereits ausgeübt hat oder bereit ist, sie auszuüben. Ein begründeter Einspruch, ein Aussetzungsantrag oder eine ernsthafte gerichtliche Anfechtung verwandelt die Verhandlung von einer bloßen Bitte in einen Wettstreit der Positionen."
+      "Die beste Verhandlung findet statt, wenn der Schuldner seine Rechte bereits ausgeübt hat oder bereit ist, sie auszuüben. Ein begründeter Einspruch, ein Aussetzungsantrag oder eine ernsthafte gerichtliche Anfechtung verändert die Grundlage des Gesprächs: die Gegenseite weiß, dass der Fall vor Gericht entschieden wird, wenn es keine Einigung gibt."
     ],
     "negotiationOutro": "Für Unternehmen ist der beste Deal derjenige, der dem Unternehmen die Fortführung ermöglicht. Ein Vergleich, der bedient wird, Bürgschaften, die begrenzt werden, gerichtlicher Druck, wo nötig.",
-    "cta2Title": "Bevor Sie einen Vergleich unterschreiben oder eine Unternehmensschuld anerkennen — sprechen Sie mit uns.",
+    "cta2Title": "Bevor Sie einen Vergleich unterschreiben oder eine Unternehmensschuld anerkennen, sprechen Sie zuerst mit uns.",
     "cta2Text": "Bei Unternehmensschulden kann eine voreilige Unterschrift persönliche Bürgschaften auslösen oder einen Betrag anerkennen, der angefochten werden könnte. Erst die Prüfung, dann die Antwort.",
     "anakopiTitle": "Einspruch und Aussetzung der Versteigerung vor den Gerichten in Thessaloniki und ganz Griechenland",
     "anakopiText1": "Die Zwangsvollstreckung wird nicht mit allgemeinen Protesten beantwortet, sondern mit einer gezielten verfahrensrechtlichen Prüfung jeder Handlung, jedes Dokuments und jedes Betrags, auf den sich die verfolgende Seite beruft.\n\nUnsere Anwaltskanzlei bearbeitet täglich Fälle von Einsprüchen, Aussetzungsanträgen und Versteigerungen vor den Gerichten in Thessaloniki und im gesamten griechischen Hoheitsgebiet.\n\nIn jedem Fall prüfen wir umfassend den Zahlungstitel, den Pfändungsbericht, die Dokumente der Übertragung der Forderung, die Verwaltungsbeauftragung, die Analyse der Schuld, die Zinsen, die Gebühren, die Zustellungen und die Einhaltung der gesetzlichen Fristen. Ein Einspruch darf kein routinemäßiger Verteidigungsschriftsatz sein. Er muss verfahrensrechtlich präzise, beweisrechtlich belegt und an die tatsächlichen Daten der konkreten Akte angepasst sein.",
     "anakopiPoints": [],
     "anakopiText2": "Wo erforderlich, wird der Einspruch von einem Aussetzungsantrag begleitet, um die Versteigerung vorübergehend abzuwenden, bis über die Substanz des Streits entschieden ist. Die Aussetzung ist nicht bloß ein Mittel der Verzögerung. Sie ist ein verfahrensrechtliches Schutzinstrument, wenn ein ernsthafter Grund zur Aufhebung der Vollstreckung und die Gefahr eines irreparablen Schadens durch die sofortige Durchführung der Versteigerung besteht.\n\nUnser Ziel ist die sofortige und vollständige Bewertung der Akte, die Hervorhebung der materiellen und verfahrensrechtlichen Mängel und die Bildung einer konkreten Strategie, entweder um die Vollstreckung gerichtlich zu kippen oder um eine starke Verhandlungsposition gegenüber der Bank, dem Forderungserwerbsunternehmen oder dem Kreditverwaltungsunternehmen aufzubauen.\n\nIn Versteigerungsfällen ist die Zeit entscheidend. Die rechtzeitige Vorlage der Dokumente und die sofortige rechtliche Prüfung können bestimmen, ob es realen Raum für Einspruch, Aussetzung oder eine außergerichtliche Beilegung gibt.",
-    "faqTitle": "FAQ — Unternehmen und National Bank of Greece",
+    "faqTitle": "FAQ: Unternehmen und National Bank of Greece",
     "faq": [
       {
         "q": "Ich habe persönlich für ein Unternehmensdarlehen gegenüber National Bank of Greece gebürgt. Ist mein Privatvermögen gefährdet?",
@@ -1635,7 +1637,7 @@
       },
       {
         "q": "Können mein Geschäftskonto oder meine Ausrüstung gepfändet werden?",
-        "a": "Mit einem vollstreckbaren Titel und einem rechtmäßigen Verfahren ja — aber jede Vollstreckungshandlung (Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen) hat Anfechtungspunkte mit bestimmten Fristen. Ein sofortiger Einspruch und Aussetzungsantrag kann das Unternehmen am Leben halten."
+        "a": "Mit einem vollstreckbaren Titel und einem rechtmäßigen Verfahren ja, aber jede Vollstreckungshandlung (Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen) hat Anfechtungspunkte mit bestimmten Fristen. Ein sofortiger Einspruch und Aussetzungsantrag kann das Unternehmen am Leben halten."
       },
       {
         "q": "Mein Unternehmen schuldet Banken, Sozialversicherung und Finanzamt zugleich. Was passiert?",
@@ -1643,15 +1645,15 @@
       },
       {
         "q": "Das Unternehmen hat den Betrieb eingestellt. Lohnt sich eine Verteidigung noch?",
-        "a": "Ja — besonders zur Begrenzung persönlicher Bürgschaften und zum Schutz des Privatvermögens von Bürgen und Geschäftsführern. Auch wenn die Gesellschaft geschlossen wurde, können die Bürgschaften und Schulden Sie persönlich verfolgen."
+        "a": "Ja, besonders zur Begrenzung persönlicher Bürgschaften und zum Schutz des Privatvermögens von Bürgen und Geschäftsführern. Auch wenn die Gesellschaft geschlossen wurde, können die Bürgschaften und Schulden Sie persönlich verfolgen."
       },
       {
         "q": "Welche Dokumente benötigen Sie für die Prüfung?",
-        "a": "Den Darlehens-/Kreditvertrag, die Bürgschaftsverträge, die Sicherheitsdokumente, die Briefe und jedes Dokument von National Bank of Greece oder der Bank — außergerichtliche Aufforderungen, Kündigung, Zahlungsbefehl, Pfändungsbericht. Am wichtigsten: die Zustellungsdaten."
+        "a": "Den Darlehens-/Kreditvertrag, die Bürgschaftsverträge, die Sicherheitsdokumente, die Briefe und jedes Dokument von National Bank of Greece oder der Bank: außergerichtliche Aufforderungen, Kündigung, Zahlungsbefehl, Pfändungsbericht. Am wichtigsten: die Zustellungsdaten."
       }
     ],
-    "ctaTitle": "Für Ihr Unternehmen — erst die Prüfung, dann die Strategie.",
-    "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Bei Unternehmensschulden sind die Beträge hoch und die Fristen streng — die Akte wird vordringlich bewertet.",
+    "ctaTitle": "Für Ihr Unternehmen: erst die Prüfung, dann die Strategie.",
+    "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Bei Unternehmensschulden sind die Beträge hoch und die Fristen streng, sodass die Akte vordringlich bewertet wird.",
     "ctaButton": "Sofortige Aktenprüfung",
     "ctaPhone": "Jetzt anrufen: +30 2310 545 261"
   },
@@ -1659,13 +1661,13 @@
     "seoTitle": "Anwalt für Intrum-Unternehmensdarlehen – Firmen in Thessaloniki",
     "seoDescription": "Unternehmen oder Selbstständiger mit Unternehmensdarlehen oder persönlicher Bürgschaft bei Intrum? Prüfung der Bürgschaft, des Betriebsvermögens, Einspruch, Aussetzung und außergerichtlicher Mechanismus für Unternehmen. Tel: +30 2310 545 261.",
     "heroCity": "Thessaloniki · Leontos Sofou 12",
-    "heroTitle": "Anwalt für Intrum-Gewerbe- und Unternehmensdarlehen — Unternehmen und Selbstständige",
+    "heroTitle": "Anwalt für Intrum-Gewerbe- und Unternehmensdarlehen: Unternehmen und Selbstständige",
     "heroSubtitle": "Unternehmensdarlehen · Persönliche Bürgschaften · Außergerichtlicher Mechanismus",
-    "intro": "Diese Seite richtet sich an Unternehmen, Gesellschaften und Selbstständige mit Schulden gegenüber dem Servicer Intrum. Gewerbe- und Unternehmensdarlehen, Betriebskapital, Kontokorrentkredite, Anleihedarlehen und vor allem die persönlichen Bürgschaften von Geschäftsführern und Gesellschaftern führen zu Zahlungsbefehlen, Pfändungen und Versteigerungen — oft mit höheren Beträgen und unmittelbaren Folgen für die Existenzfähigkeit. Ioannis Papaioannou verteidigt seit über 25 Jahren Unternehmen und Selbstständige gegenüber Banken, Fonds und Servicern.",
+    "intro": "Diese Seite richtet sich an Unternehmen, Gesellschaften und Selbstständige mit Schulden gegenüber dem Servicer Intrum. Gewerbe- und Unternehmensdarlehen, Betriebskapital, Kontokorrentkredite, Anleihedarlehen und vor allem die persönlichen Bürgschaften von Geschäftsführern und Gesellschaftern führen zu Zahlungsbefehlen, Pfändungen und Versteigerungen, oft mit höheren Beträgen und unmittelbaren Folgen für die Existenzfähigkeit. Ioannis Papaioannou verteidigt seit über 25 Jahren Unternehmen und Selbstständige gegenüber Banken, Fonds und Servicern.",
     "whatTitle": "Unternehmensdarlehen und Bürgschaften: was wir zuerst prüfen",
-    "whatText": "Bei einer geschäftlichen Schuld gegenüber dem Servicer Intrum ist die Akte fast immer komplexer als bei einem Wohnungsfall. Wir prüfen den Darlehens- oder Kreditvertrag, die Sicherheiten (Vormerkungen, Pfandrechte, Abtretungen), die Höhe der Forderung und die Berechtigung der heute verfolgenden Partei — also, ob die Forderung bei der Bank blieb oder an einen Fonds mit Verwaltungsgesellschaft übertragen wurde. Besonderes Gewicht haben persönliche Bürgschaften: Wenn der Unternehmer, Geschäftsführer oder Gesellschafter gebürgt hat, werden Umfang und Grenzen seiner Haftung gesondert geprüft. Eine Bürgschaft ist nicht immer unbegrenzt und nicht immer gültig.",
+    "whatText": "Bei einer geschäftlichen Schuld gegenüber dem Servicer Intrum ist die Akte fast immer komplexer als bei einem Wohnungsfall. Wir prüfen den Darlehens- oder Kreditvertrag, die Sicherheiten (Vormerkungen, Pfandrechte, Abtretungen), die Höhe der Forderung und die Berechtigung der heute verfolgenden Partei, also, ob die Forderung bei der Bank blieb oder an einen Fonds mit Verwaltungsgesellschaft übertragen wurde. Besonderes Gewicht haben persönliche Bürgschaften: Wenn der Unternehmer, Geschäftsführer oder Gesellschafter gebürgt hat, werden Umfang und Grenzen seiner Haftung gesondert geprüft. Eine Bürgschaft ist nicht immer unbegrenzt und nicht immer gültig.",
     "protectTitle": "Schutz von Betriebsvermögen und Ausrüstung",
-    "protectText": "In Geschäftsfällen ist nicht nur das Wohnhaus gefährdet, sondern auch die Geschäftsräume, die Maschinen, die Waren, die Geschäftskonten und die Fortführung der Tätigkeit selbst. Jede Vollstreckungshandlung — Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen — wird mit einem Einspruch und, wo nötig, einem Aussetzungsantrag begegnet. Von Anfang an prüfen wir die Berechtigung, die Übertragung der Forderung, die Höhe der Schuld, die Zinsen, die Gebühren und jede Vollstreckungshandlung, mit dem Ziel, das Unternehmen am Leben zu halten, während über die Substanz entschieden wird.",
+    "protectText": "In Geschäftsfällen ist nicht nur das Wohnhaus gefährdet, sondern auch die Geschäftsräume, die Maschinen, die Waren, die Geschäftskonten und die Fortführung der Tätigkeit selbst. Jede Vollstreckungshandlung (Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen) wird mit einem Einspruch und, wo nötig, einem Aussetzungsantrag begegnet. Von Anfang an prüfen wir die Berechtigung, die Übertragung der Forderung, die Höhe der Schuld, die Zinsen, die Gebühren und jede Vollstreckungshandlung, mit dem Ziel, das Unternehmen am Leben zu halten, während über die Substanz entschieden wird.",
     "deadlinesTitle": "Mahnung, Zahlungsbefehl oder Pfändung von Intrum erhalten — Die Fristen, die nicht verstreichen dürfen",
     "deadlinesIntro": "Nicht jedes Dokument von Intrum hat dasselbe rechtliche Gewicht. Eine außergerichtliche Vertragskündigung, ein Zahlungsbefehl und eine Pfändung haben jeweils eine andere Wirkung. Doch jede Stufe zeigt, dass der Fall voranschreitet und die Reaktionszeit kürzer wird.",
     "deadlines": [
@@ -1685,7 +1687,7 @@
     "deadlinesWarning": "Bei der Vertragskündigung bleiben wir nicht untätig. Beim Zahlungsbefehl handeln wir sofort. Bei der Pfändung gibt es keinen Raum für halbe Schritte. Verteidigungsfristen warten nicht darauf, dass der Schuldner sich vom Schock erholt.",
     "cta1Title": "Hat Ihr Unternehmen ein Dokument von dem Servicer Intrum?",
     "cta1Text": "Eine sofortige erste Bewertung der Akte: Unternehmensdarlehen, Bürgschaften, Sicherheiten, Fristen. Rufen Sie +30 2310 545 261 an oder senden Sie das Formular.",
-    "negotiationTitle": "Verhandlung und Regelung von Unternehmensschulden — mit Blick auf die Existenzfähigkeit",
+    "negotiationTitle": "Verhandlung und Regelung von Unternehmensschulden, mit Blick auf die Existenzfähigkeit",
     "negotiationIntro": "Bei einer Unternehmensschuld ist ein Vergleich nicht bloß eine Frage der Raten. Es ist eine Frage der Existenzfähigkeit. Vor jedem Kontakt mit dem Servicer Intrum prüfen wir die Berechtigung, den realen Saldo, die Bürgschaften und die Daten des Unternehmens, damit der Vorschlag auf belastbaren Zahlen beruht. Ziel ist ein Vergleich, der aus realem Cashflow bedient wird, mit einem Schuldenschnitt (Haircut), wo belegt, und einem kontrollierten Umfang der persönlichen Bürgschaften.",
     "negotiationPoints": [
       "Ein Vergleich muss über die Zeit Bestand haben. Eine Vereinbarung, die auf dem Papier gut aussieht und bei der zweiten oder dritten Rate zusammenbricht, hat keinen Wert. Der Vorschlag muss an die reale Leistungsfähigkeit des Schuldners, den Wert der Sicherheit, den Verlauf der Forderung und die Umstände des Falls anknüpfen.",
@@ -1694,7 +1696,7 @@
       "Die beste Verhandlung findet statt, wenn der Schuldner seine Rechte bereits geltend gemacht hat oder bereit ist, dies zu tun. Ein gut begründeter Widerspruch, ein Aussetzungsantrag oder eine ernsthafte gerichtliche Anfechtung verwandelt die Verhandlung von einem bloßen Bitten in ein Kräftemessen."
     ],
     "negotiationOutro": "Für Unternehmen ist der beste Deal derjenige, der dem Unternehmen die Fortführung ermöglicht. Ein Vergleich, der bedient wird, Bürgschaften, die begrenzt werden, gerichtlicher Druck, wo nötig.",
-    "cta2Title": "Bevor Sie einen Vergleich unterschreiben oder eine Unternehmensschuld anerkennen — sprechen Sie mit uns.",
+    "cta2Title": "Bevor Sie einen Vergleich unterschreiben oder eine Unternehmensschuld anerkennen, sprechen Sie zuerst mit uns.",
     "cta2Text": "Bei Unternehmensschulden kann eine voreilige Unterschrift persönliche Bürgschaften auslösen oder einen Betrag anerkennen, der angefochten werden könnte. Erst die Prüfung, dann die Antwort.",
     "anakopiTitle": "Widerspruch und Aussetzung der Zwangsversteigerung vor den Gerichten von Thessaloniki",
     "anakopiText1": "Wir arbeiten dort, wo diese Fälle entschieden werden: am Amtsgericht und am Landgericht Thessaloniki, täglich. Kenntnis der lokalen Rechtsprechung und Praxis ist keine Lebenslauf-Dekoration — sie macht aus einem Widerspruch eine echte Verteidigung statt einer Formalität. Die Gründe, die gegen Servicer wie Intrum am häufigsten durchdringen:",
@@ -1705,7 +1707,7 @@
       "Verfahrensfehler: mangelhafte Zustellungen, Fehler im Pfändungsprotokoll, versäumte Fristen."
     ],
     "anakopiText2": "Wo der Fall es erfordert, wird der Widerspruch mit einem Aussetzungsantrag verbunden, sodass die Versteigerung auf Eis liegt, bis in der Sache entschieden ist. Das gewinnt Zeit und Verhandlungsgewicht zugleich.",
-    "faqTitle": "FAQ — Unternehmen und Intrum",
+    "faqTitle": "FAQ: Unternehmen und Intrum",
     "faq": [
       {
         "q": "Ich habe persönlich für ein Unternehmensdarlehen gegenüber dem Servicer Intrum gebürgt. Ist mein Privatvermögen gefährdet?",
@@ -1713,7 +1715,7 @@
       },
       {
         "q": "Können mein Geschäftskonto oder meine Ausrüstung gepfändet werden?",
-        "a": "Mit einem vollstreckbaren Titel und einem rechtmäßigen Verfahren ja — aber jede Vollstreckungshandlung (Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen) hat Anfechtungspunkte mit bestimmten Fristen. Ein sofortiger Einspruch und Aussetzungsantrag kann das Unternehmen am Leben halten."
+        "a": "Mit einem vollstreckbaren Titel und einem rechtmäßigen Verfahren ja, aber jede Vollstreckungshandlung (Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen) hat Anfechtungspunkte mit bestimmten Fristen. Ein sofortiger Einspruch und Aussetzungsantrag kann das Unternehmen am Leben halten."
       },
       {
         "q": "Mein Unternehmen schuldet Banken, Sozialversicherung und Finanzamt zugleich. Was passiert?",
@@ -1721,15 +1723,15 @@
       },
       {
         "q": "Das Unternehmen hat den Betrieb eingestellt. Lohnt sich eine Verteidigung noch?",
-        "a": "Ja — besonders zur Begrenzung persönlicher Bürgschaften und zum Schutz des Privatvermögens von Bürgen und Geschäftsführern. Auch wenn die Gesellschaft geschlossen wurde, können die Bürgschaften und Schulden Sie persönlich verfolgen."
+        "a": "Ja, besonders zur Begrenzung persönlicher Bürgschaften und zum Schutz des Privatvermögens von Bürgen und Geschäftsführern. Auch wenn die Gesellschaft geschlossen wurde, können die Bürgschaften und Schulden Sie persönlich verfolgen."
       },
       {
         "q": "Welche Dokumente benötigen Sie für die Prüfung?",
-        "a": "Den Darlehens-/Kreditvertrag, die Bürgschaftsverträge, die Sicherheitsdokumente, die Briefe und jedes Dokument von dem Servicer Intrum oder der Bank — außergerichtliche Aufforderungen, Kündigung, Zahlungsbefehl, Pfändungsbericht. Am wichtigsten: die Zustellungsdaten."
+        "a": "Den Darlehens-/Kreditvertrag, die Bürgschaftsverträge, die Sicherheitsdokumente, die Briefe und jedes Dokument von dem Servicer Intrum oder der Bank: außergerichtliche Aufforderungen, Kündigung, Zahlungsbefehl, Pfändungsbericht. Am wichtigsten: die Zustellungsdaten."
       }
     ],
-    "ctaTitle": "Für Ihr Unternehmen — erst die Prüfung, dann die Strategie.",
-    "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Bei Unternehmensschulden sind die Beträge hoch und die Fristen streng — die Akte wird vordringlich bewertet.",
+    "ctaTitle": "Für Ihr Unternehmen: erst die Prüfung, dann die Strategie.",
+    "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Bei Unternehmensschulden sind die Beträge hoch und die Fristen streng, sodass die Akte vordringlich bewertet wird.",
     "ctaButton": "Sofortige Aktenprüfung",
     "ctaPhone": "Jetzt anrufen: +30 2310 545 261"
   },
@@ -1737,13 +1739,13 @@
     "seoTitle": "Anwalt für doValue-Unternehmensdarlehen – Firmen in Thessaloniki",
     "seoDescription": "Unternehmen oder Selbstständiger mit Unternehmensdarlehen oder persönlicher Bürgschaft bei doValue? Prüfung der Bürgschaft, des Betriebsvermögens, Einspruch, Aussetzung und außergerichtlicher Mechanismus für Unternehmen. Tel: +30 2310 545 261.",
     "heroCity": "Thessaloniki · Leontos Sofou 12",
-    "heroTitle": "Anwalt für doValue-Gewerbe- und Unternehmensdarlehen — Unternehmen und Selbstständige",
+    "heroTitle": "Anwalt für doValue-Gewerbe- und Unternehmensdarlehen: Unternehmen und Selbstständige",
     "heroSubtitle": "Unternehmensdarlehen · Persönliche Bürgschaften · Außergerichtlicher Mechanismus",
-    "intro": "Diese Seite richtet sich an Unternehmen, Gesellschaften und Selbstständige mit Schulden gegenüber dem Servicer doValue. Gewerbe- und Unternehmensdarlehen, Betriebskapital, Kontokorrentkredite, Anleihedarlehen und vor allem die persönlichen Bürgschaften von Geschäftsführern und Gesellschaftern führen zu Zahlungsbefehlen, Pfändungen und Versteigerungen — oft mit höheren Beträgen und unmittelbaren Folgen für die Existenzfähigkeit. Ioannis Papaioannou verteidigt seit über 25 Jahren Unternehmen und Selbstständige gegenüber Banken, Fonds und Servicern.",
+    "intro": "Diese Seite richtet sich an Unternehmen, Gesellschaften und Selbstständige mit Schulden gegenüber dem Servicer doValue. Gewerbe- und Unternehmensdarlehen, Betriebskapital, Kontokorrentkredite, Anleihedarlehen und vor allem die persönlichen Bürgschaften von Geschäftsführern und Gesellschaftern führen zu Zahlungsbefehlen, Pfändungen und Versteigerungen, oft mit höheren Beträgen und unmittelbaren Folgen für die Existenzfähigkeit. Ioannis Papaioannou verteidigt seit über 25 Jahren Unternehmen und Selbstständige gegenüber Banken, Fonds und Servicern.",
     "whatTitle": "Unternehmensdarlehen und Bürgschaften: was wir zuerst prüfen",
-    "whatText": "Bei einer geschäftlichen Schuld gegenüber dem Servicer doValue ist die Akte fast immer komplexer als bei einem Wohnungsfall. Wir prüfen den Darlehens- oder Kreditvertrag, die Sicherheiten (Vormerkungen, Pfandrechte, Abtretungen), die Höhe der Forderung und die Berechtigung der heute verfolgenden Partei — also, ob die Forderung bei der Bank blieb oder an einen Fonds mit Verwaltungsgesellschaft übertragen wurde. Besonderes Gewicht haben persönliche Bürgschaften: Wenn der Unternehmer, Geschäftsführer oder Gesellschafter gebürgt hat, werden Umfang und Grenzen seiner Haftung gesondert geprüft. Eine Bürgschaft ist nicht immer unbegrenzt und nicht immer gültig.",
+    "whatText": "Bei einer geschäftlichen Schuld gegenüber dem Servicer doValue ist die Akte fast immer komplexer als bei einem Wohnungsfall. Wir prüfen den Darlehens- oder Kreditvertrag, die Sicherheiten (Vormerkungen, Pfandrechte, Abtretungen), die Höhe der Forderung und die Berechtigung der heute verfolgenden Partei, also, ob die Forderung bei der Bank blieb oder an einen Fonds mit Verwaltungsgesellschaft übertragen wurde. Besonderes Gewicht haben persönliche Bürgschaften: Wenn der Unternehmer, Geschäftsführer oder Gesellschafter gebürgt hat, werden Umfang und Grenzen seiner Haftung gesondert geprüft. Eine Bürgschaft ist nicht immer unbegrenzt und nicht immer gültig.",
     "protectTitle": "Schutz von Betriebsvermögen und Ausrüstung",
-    "protectText": "In Geschäftsfällen ist nicht nur das Wohnhaus gefährdet, sondern auch die Geschäftsräume, die Maschinen, die Waren, die Geschäftskonten und die Fortführung der Tätigkeit selbst. Jede Vollstreckungshandlung — Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen — wird mit einem Einspruch und, wo nötig, einem Aussetzungsantrag begegnet. Von Anfang an prüfen wir die Berechtigung, die Übertragung der Forderung, die Höhe der Schuld, die Zinsen, die Gebühren und jede Vollstreckungshandlung, mit dem Ziel, das Unternehmen am Leben zu halten, während über die Substanz entschieden wird.",
+    "protectText": "In Geschäftsfällen ist nicht nur das Wohnhaus gefährdet, sondern auch die Geschäftsräume, die Maschinen, die Waren, die Geschäftskonten und die Fortführung der Tätigkeit selbst. Jede Vollstreckungshandlung (Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen) wird mit einem Einspruch und, wo nötig, einem Aussetzungsantrag begegnet. Von Anfang an prüfen wir die Berechtigung, die Übertragung der Forderung, die Höhe der Schuld, die Zinsen, die Gebühren und jede Vollstreckungshandlung, mit dem Ziel, das Unternehmen am Leben zu halten, während über die Substanz entschieden wird.",
     "deadlinesTitle": "Mahnung, Zahlungsbefehl oder Pfändung von doValue erhalten — Die Fristen, die nicht verstreichen dürfen",
     "deadlinesIntro": "Nicht jedes Dokument hat dasselbe rechtliche Gewicht. Eine außergerichtliche Vertragskündigung, ein Zahlungsbefehl und eine Pfändung haben jeweils eine andere Wirkung. Doch jede Stufe zeigt, dass der Fall voranschreitet und die Reaktionszeit kürzer wird.",
     "deadlines": [
@@ -1763,7 +1765,7 @@
     "deadlinesWarning": "Die Schlussfolgerung ist einfach. Bei einer Vertragskündigung bleiben wir nicht untätig. Beim Zahlungsbefehl handeln wir ohne Verzögerung. Bei der Pfändung muss die Reaktion sofort erfolgen, denn mit ihr liegt die Versteigerung bereits auf dem Tisch.",
     "cta1Title": "Hat Ihr Unternehmen ein Dokument von dem Servicer doValue?",
     "cta1Text": "Eine sofortige erste Bewertung der Akte: Unternehmensdarlehen, Bürgschaften, Sicherheiten, Fristen. Rufen Sie +30 2310 545 261 an oder senden Sie das Formular.",
-    "negotiationTitle": "Verhandlung und Regelung von Unternehmensschulden — mit Blick auf die Existenzfähigkeit",
+    "negotiationTitle": "Verhandlung und Regelung von Unternehmensschulden, mit Blick auf die Existenzfähigkeit",
     "negotiationIntro": "Bei einer Unternehmensschuld ist ein Vergleich nicht bloß eine Frage der Raten. Es ist eine Frage der Existenzfähigkeit. Vor jedem Kontakt mit dem Servicer doValue prüfen wir die Berechtigung, den realen Saldo, die Bürgschaften und die Daten des Unternehmens, damit der Vorschlag auf belastbaren Zahlen beruht. Ziel ist ein Vergleich, der aus realem Cashflow bedient wird, mit einem Schuldenschnitt (Haircut), wo belegt, und einem kontrollierten Umfang der persönlichen Bürgschaften.",
     "negotiationPoints": [
       "Der Vergleich ist das erste Ziel, aber nicht zu beliebigen Bedingungen. Er muss tragfähig sein, auf der realen Leistungsfähigkeit des Schuldners beruhen und darf nicht nach wenigen Monaten zu einer neuen Zahlungsunfähigkeit führen.",
@@ -1772,7 +1774,7 @@
       "Ein Widerspruch, ein Aussetzungsantrag oder eine ernsthafte Anfechtung der Forderung verschiebt die Kräfteverhältnisse und zwingt die Gegenseite, den Fall anders zu sehen."
     ],
     "negotiationOutro": "Für Unternehmen ist der beste Deal derjenige, der dem Unternehmen die Fortführung ermöglicht. Ein Vergleich, der bedient wird, Bürgschaften, die begrenzt werden, gerichtlicher Druck, wo nötig.",
-    "cta2Title": "Bevor Sie einen Vergleich unterschreiben oder eine Unternehmensschuld anerkennen — sprechen Sie mit uns.",
+    "cta2Title": "Bevor Sie einen Vergleich unterschreiben oder eine Unternehmensschuld anerkennen, sprechen Sie zuerst mit uns.",
     "cta2Text": "Bei Unternehmensschulden kann eine voreilige Unterschrift persönliche Bürgschaften auslösen oder einen Betrag anerkennen, der angefochten werden könnte. Erst die Prüfung, dann die Antwort.",
     "anakopiTitle": "Widerspruch und Aussetzung der Zwangsversteigerung vor den Gerichten von Thessaloniki",
     "anakopiText1": "Unsere Fälle werden dort verhandelt, wo wir täglich arbeiten: am Amtsgericht und am Landgericht Thessaloniki. Erfahrung an genau diesen Gerichten — mit ihrer Rechtsprechung, ihrer Praxis — unterscheidet einen Widerspruch, der nur eingereicht wurde, von einem, der gewonnen wurde. Die Gründe, die gegen Servicer am häufigsten durchdringen:",
@@ -1783,7 +1785,7 @@
       "Verfahrensfehler bei der Vollstreckung: mangelhafte Zustellungen, Fehler im Pfändungsprotokoll, versäumte Fristen."
     ],
     "anakopiText2": "Wo erforderlich, wird der Widerspruch mit einem Aussetzungsantrag kombiniert — die Versteigerung wird eingefroren, bis in der Sache entschieden ist. Das Ziel ist doppelt: Zeit gewinnen und Verhandlungsposition aufbauen.",
-    "faqTitle": "FAQ — Unternehmen und doValue",
+    "faqTitle": "FAQ: Unternehmen und doValue",
     "faq": [
       {
         "q": "Ich habe persönlich für ein Unternehmensdarlehen gegenüber dem Servicer doValue gebürgt. Ist mein Privatvermögen gefährdet?",
@@ -1791,7 +1793,7 @@
       },
       {
         "q": "Können mein Geschäftskonto oder meine Ausrüstung gepfändet werden?",
-        "a": "Mit einem vollstreckbaren Titel und einem rechtmäßigen Verfahren ja — aber jede Vollstreckungshandlung (Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen) hat Anfechtungspunkte mit bestimmten Fristen. Ein sofortiger Einspruch und Aussetzungsantrag kann das Unternehmen am Leben halten."
+        "a": "Mit einem vollstreckbaren Titel und einem rechtmäßigen Verfahren ja, aber jede Vollstreckungshandlung (Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen) hat Anfechtungspunkte mit bestimmten Fristen. Ein sofortiger Einspruch und Aussetzungsantrag kann das Unternehmen am Leben halten."
       },
       {
         "q": "Mein Unternehmen schuldet Banken, Sozialversicherung und Finanzamt zugleich. Was passiert?",
@@ -1799,15 +1801,15 @@
       },
       {
         "q": "Das Unternehmen hat den Betrieb eingestellt. Lohnt sich eine Verteidigung noch?",
-        "a": "Ja — besonders zur Begrenzung persönlicher Bürgschaften und zum Schutz des Privatvermögens von Bürgen und Geschäftsführern. Auch wenn die Gesellschaft geschlossen wurde, können die Bürgschaften und Schulden Sie persönlich verfolgen."
+        "a": "Ja, besonders zur Begrenzung persönlicher Bürgschaften und zum Schutz des Privatvermögens von Bürgen und Geschäftsführern. Auch wenn die Gesellschaft geschlossen wurde, können die Bürgschaften und Schulden Sie persönlich verfolgen."
       },
       {
         "q": "Welche Dokumente benötigen Sie für die Prüfung?",
-        "a": "Den Darlehens-/Kreditvertrag, die Bürgschaftsverträge, die Sicherheitsdokumente, die Briefe und jedes Dokument von dem Servicer doValue oder der Bank — außergerichtliche Aufforderungen, Kündigung, Zahlungsbefehl, Pfändungsbericht. Am wichtigsten: die Zustellungsdaten."
+        "a": "Den Darlehens-/Kreditvertrag, die Bürgschaftsverträge, die Sicherheitsdokumente, die Briefe und jedes Dokument von dem Servicer doValue oder der Bank: außergerichtliche Aufforderungen, Kündigung, Zahlungsbefehl, Pfändungsbericht. Am wichtigsten: die Zustellungsdaten."
       }
     ],
-    "ctaTitle": "Für Ihr Unternehmen — erst die Prüfung, dann die Strategie.",
-    "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Bei Unternehmensschulden sind die Beträge hoch und die Fristen streng — die Akte wird vordringlich bewertet.",
+    "ctaTitle": "Für Ihr Unternehmen: erst die Prüfung, dann die Strategie.",
+    "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Bei Unternehmensschulden sind die Beträge hoch und die Fristen streng, sodass die Akte vordringlich bewertet wird.",
     "ctaButton": "Sofortige Aktenprüfung",
     "ctaPhone": "Jetzt anrufen: +30 2310 545 261"
   },
@@ -1815,13 +1817,13 @@
     "seoTitle": "Anwalt für Cepal-Unternehmensdarlehen – Firmen in Thessaloniki",
     "seoDescription": "Unternehmen oder Selbstständiger mit Unternehmensdarlehen oder persönlicher Bürgschaft bei Cepal? Prüfung der Bürgschaft, des Betriebsvermögens, Einspruch, Aussetzung und außergerichtlicher Mechanismus für Unternehmen. Tel: +30 2310 545 261.",
     "heroCity": "Thessaloniki · Leontos Sofou 12",
-    "heroTitle": "Anwalt für Cepal-Gewerbe- und Unternehmensdarlehen — Unternehmen und Selbstständige",
+    "heroTitle": "Anwalt für Cepal-Gewerbe- und Unternehmensdarlehen: Unternehmen und Selbstständige",
     "heroSubtitle": "Unternehmensdarlehen · Persönliche Bürgschaften · Außergerichtlicher Mechanismus",
-    "intro": "Diese Seite richtet sich an Unternehmen, Gesellschaften und Selbstständige mit Schulden gegenüber dem Servicer Cepal. Gewerbe- und Unternehmensdarlehen, Betriebskapital, Kontokorrentkredite, Anleihedarlehen und vor allem die persönlichen Bürgschaften von Geschäftsführern und Gesellschaftern führen zu Zahlungsbefehlen, Pfändungen und Versteigerungen — oft mit höheren Beträgen und unmittelbaren Folgen für die Existenzfähigkeit. Ioannis Papaioannou verteidigt seit über 25 Jahren Unternehmen und Selbstständige gegenüber Banken, Fonds und Servicern.",
+    "intro": "Diese Seite richtet sich an Unternehmen, Gesellschaften und Selbstständige mit Schulden gegenüber dem Servicer Cepal. Gewerbe- und Unternehmensdarlehen, Betriebskapital, Kontokorrentkredite, Anleihedarlehen und vor allem die persönlichen Bürgschaften von Geschäftsführern und Gesellschaftern führen zu Zahlungsbefehlen, Pfändungen und Versteigerungen, oft mit höheren Beträgen und unmittelbaren Folgen für die Existenzfähigkeit. Ioannis Papaioannou verteidigt seit über 25 Jahren Unternehmen und Selbstständige gegenüber Banken, Fonds und Servicern.",
     "whatTitle": "Unternehmensdarlehen und Bürgschaften: was wir zuerst prüfen",
-    "whatText": "Bei einer geschäftlichen Schuld gegenüber dem Servicer Cepal ist die Akte fast immer komplexer als bei einem Wohnungsfall. Wir prüfen den Darlehens- oder Kreditvertrag, die Sicherheiten (Vormerkungen, Pfandrechte, Abtretungen), die Höhe der Forderung und die Berechtigung der heute verfolgenden Partei — also, ob die Forderung bei der Bank blieb oder an einen Fonds mit Verwaltungsgesellschaft übertragen wurde. Besonderes Gewicht haben persönliche Bürgschaften: Wenn der Unternehmer, Geschäftsführer oder Gesellschafter gebürgt hat, werden Umfang und Grenzen seiner Haftung gesondert geprüft. Eine Bürgschaft ist nicht immer unbegrenzt und nicht immer gültig.",
+    "whatText": "Bei einer geschäftlichen Schuld gegenüber dem Servicer Cepal ist die Akte fast immer komplexer als bei einem Wohnungsfall. Wir prüfen den Darlehens- oder Kreditvertrag, die Sicherheiten (Vormerkungen, Pfandrechte, Abtretungen), die Höhe der Forderung und die Berechtigung der heute verfolgenden Partei, also, ob die Forderung bei der Bank blieb oder an einen Fonds mit Verwaltungsgesellschaft übertragen wurde. Besonderes Gewicht haben persönliche Bürgschaften: Wenn der Unternehmer, Geschäftsführer oder Gesellschafter gebürgt hat, werden Umfang und Grenzen seiner Haftung gesondert geprüft. Eine Bürgschaft ist nicht immer unbegrenzt und nicht immer gültig.",
     "protectTitle": "Schutz von Betriebsvermögen und Ausrüstung",
-    "protectText": "In Geschäftsfällen ist nicht nur das Wohnhaus gefährdet, sondern auch die Geschäftsräume, die Maschinen, die Waren, die Geschäftskonten und die Fortführung der Tätigkeit selbst. Jede Vollstreckungshandlung — Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen — wird mit einem Einspruch und, wo nötig, einem Aussetzungsantrag begegnet. Von Anfang an prüfen wir die Berechtigung, die Übertragung der Forderung, die Höhe der Schuld, die Zinsen, die Gebühren und jede Vollstreckungshandlung, mit dem Ziel, das Unternehmen am Leben zu halten, während über die Substanz entschieden wird.",
+    "protectText": "In Geschäftsfällen ist nicht nur das Wohnhaus gefährdet, sondern auch die Geschäftsräume, die Maschinen, die Waren, die Geschäftskonten und die Fortführung der Tätigkeit selbst. Jede Vollstreckungshandlung (Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen) wird mit einem Einspruch und, wo nötig, einem Aussetzungsantrag begegnet. Von Anfang an prüfen wir die Berechtigung, die Übertragung der Forderung, die Höhe der Schuld, die Zinsen, die Gebühren und jede Vollstreckungshandlung, mit dem Ziel, das Unternehmen am Leben zu halten, während über die Substanz entschieden wird.",
     "deadlinesTitle": "Mahnung, Zahlungsbefehl oder Pfändung von Cepal erhalten — Die Fristen, die nicht verstreichen dürfen",
     "deadlinesIntro": "Nicht alle Dokumente von Cepal haben dasselbe rechtliche Gewicht. Eine außergerichtliche Vertragskündigung ist der erste ernsthafte Warnschritt. Ein Zahlungsbefehl macht die Forderung zum gerichtlichen Titel. Eine Pfändung bedeutet, dass die Zwangsvollstreckung bereits begonnen hat und, wenn sie eine Immobilie betrifft, ist mit ihr auch der Versteigerungstermin festgesetzt.",
     "deadlines": [
@@ -1841,7 +1843,7 @@
     "deadlinesWarning": "Das griechische Recht wartet nicht, bis sich der Schuldner vom Schock erholt. Jede Stufe öffnet ein Handlungsfenster, das irgendwann schließt. Deshalb muss die Akte von Grund auf geprüft werden, bevor die Zwangsvollstreckung als einziger Weg erscheint.",
     "cta1Title": "Hat Ihr Unternehmen ein Dokument von dem Servicer Cepal?",
     "cta1Text": "Eine sofortige erste Bewertung der Akte: Unternehmensdarlehen, Bürgschaften, Sicherheiten, Fristen. Rufen Sie +30 2310 545 261 an oder senden Sie das Formular.",
-    "negotiationTitle": "Verhandlung und Regelung von Unternehmensschulden — mit Blick auf die Existenzfähigkeit",
+    "negotiationTitle": "Verhandlung und Regelung von Unternehmensschulden, mit Blick auf die Existenzfähigkeit",
     "negotiationIntro": "Bei einer Unternehmensschuld ist ein Vergleich nicht bloß eine Frage der Raten. Es ist eine Frage der Existenzfähigkeit. Vor jedem Kontakt mit dem Servicer Cepal prüfen wir die Berechtigung, den realen Saldo, die Bürgschaften und die Daten des Unternehmens, damit der Vorschlag auf belastbaren Zahlen beruht. Ziel ist ein Vergleich, der aus realem Cashflow bedient wird, mit einem Schuldenschnitt (Haircut), wo belegt, und einem kontrollierten Umfang der persönlichen Bürgschaften.",
     "negotiationPoints": [
       "Der Vergleich muss an die reale Rückzahlungsfähigkeit angepasst sein. Ziel ist nicht eine Vereinbarung, die auf dem Papier gut aussieht und nach wenigen Monaten zusammenbricht. Ziel ist ein Vergleich, der über die Zeit Bestand hat, mit konkreten Zahlen, einer konkreten wirtschaftlichen Grundlage und einer klaren Strategie.",
@@ -1850,7 +1852,7 @@
       "Die beste Verhandlung findet statt, wenn der Schuldner seine Rechte bereits geltend gemacht hat oder bereit ist, dies zu tun. Ein gut begründeter Widerspruch, ein Aussetzungsantrag oder eine ernsthafte gerichtliche Anfechtung wirkt als Verhandlungshebel. Der Forderungsverwalter erkennt, dass ihm kein verängstigter Schuldner gegenübersteht, sondern ein rechtlich vertretener Gegner."
     ],
     "negotiationOutro": "Für Unternehmen ist der beste Deal derjenige, der dem Unternehmen die Fortführung ermöglicht. Ein Vergleich, der bedient wird, Bürgschaften, die begrenzt werden, gerichtlicher Druck, wo nötig.",
-    "cta2Title": "Bevor Sie einen Vergleich unterschreiben oder eine Unternehmensschuld anerkennen — sprechen Sie mit uns.",
+    "cta2Title": "Bevor Sie einen Vergleich unterschreiben oder eine Unternehmensschuld anerkennen, sprechen Sie zuerst mit uns.",
     "cta2Text": "Bei Unternehmensschulden kann eine voreilige Unterschrift persönliche Bürgschaften auslösen oder einen Betrag anerkennen, der angefochten werden könnte. Erst die Prüfung, dann die Antwort.",
     "anakopiTitle": "Widerspruch und Aussetzung von Cepal-Versteigerungen in Thessaloniki",
     "anakopiText1": "Das hohe Fallvolumen von Cepal macht es besonders anfällig für Verfahrensmängel. Häufige Grundlagen für Widersprüche und Aussetzungen in Cepal-Fällen:",
@@ -1861,7 +1863,7 @@
       "Formelle Vollstreckungsmängel: fehlerhafte Zustellungen, falsche Beträge im Pfändungsprotokoll, Nichtbeachtung gesetzlicher Fristen."
     ],
     "anakopiText2": "Wenn der Fall es erfordert, wird der Widerspruch von einem sofortigen Aussetzungsantrag begleitet, damit die Versteigerung bis zur gerichtlichen Entscheidung ausgesetzt bleibt. Diese Kombination — rechtliche Verteidigung und parallele Verhandlung — ist in der Regel der wirkungsvollste Ansatz.",
-    "faqTitle": "FAQ — Unternehmen und Cepal",
+    "faqTitle": "FAQ: Unternehmen und Cepal",
     "faq": [
       {
         "q": "Ich habe persönlich für ein Unternehmensdarlehen gegenüber dem Servicer Cepal gebürgt. Ist mein Privatvermögen gefährdet?",
@@ -1869,7 +1871,7 @@
       },
       {
         "q": "Können mein Geschäftskonto oder meine Ausrüstung gepfändet werden?",
-        "a": "Mit einem vollstreckbaren Titel und einem rechtmäßigen Verfahren ja — aber jede Vollstreckungshandlung (Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen) hat Anfechtungspunkte mit bestimmten Fristen. Ein sofortiger Einspruch und Aussetzungsantrag kann das Unternehmen am Leben halten."
+        "a": "Mit einem vollstreckbaren Titel und einem rechtmäßigen Verfahren ja, aber jede Vollstreckungshandlung (Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen) hat Anfechtungspunkte mit bestimmten Fristen. Ein sofortiger Einspruch und Aussetzungsantrag kann das Unternehmen am Leben halten."
       },
       {
         "q": "Mein Unternehmen schuldet Banken, Sozialversicherung und Finanzamt zugleich. Was passiert?",
@@ -1877,15 +1879,15 @@
       },
       {
         "q": "Das Unternehmen hat den Betrieb eingestellt. Lohnt sich eine Verteidigung noch?",
-        "a": "Ja — besonders zur Begrenzung persönlicher Bürgschaften und zum Schutz des Privatvermögens von Bürgen und Geschäftsführern. Auch wenn die Gesellschaft geschlossen wurde, können die Bürgschaften und Schulden Sie persönlich verfolgen."
+        "a": "Ja, besonders zur Begrenzung persönlicher Bürgschaften und zum Schutz des Privatvermögens von Bürgen und Geschäftsführern. Auch wenn die Gesellschaft geschlossen wurde, können die Bürgschaften und Schulden Sie persönlich verfolgen."
       },
       {
         "q": "Welche Dokumente benötigen Sie für die Prüfung?",
-        "a": "Den Darlehens-/Kreditvertrag, die Bürgschaftsverträge, die Sicherheitsdokumente, die Briefe und jedes Dokument von dem Servicer Cepal oder der Bank — außergerichtliche Aufforderungen, Kündigung, Zahlungsbefehl, Pfändungsbericht. Am wichtigsten: die Zustellungsdaten."
+        "a": "Den Darlehens-/Kreditvertrag, die Bürgschaftsverträge, die Sicherheitsdokumente, die Briefe und jedes Dokument von dem Servicer Cepal oder der Bank: außergerichtliche Aufforderungen, Kündigung, Zahlungsbefehl, Pfändungsbericht. Am wichtigsten: die Zustellungsdaten."
       }
     ],
-    "ctaTitle": "Für Ihr Unternehmen — erst die Prüfung, dann die Strategie.",
-    "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Bei Unternehmensschulden sind die Beträge hoch und die Fristen streng — die Akte wird vordringlich bewertet.",
+    "ctaTitle": "Für Ihr Unternehmen: erst die Prüfung, dann die Strategie.",
+    "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Bei Unternehmensschulden sind die Beträge hoch und die Fristen streng, sodass die Akte vordringlich bewertet wird.",
     "ctaButton": "Sofortige Aktenprüfung",
     "ctaPhone": "Jetzt anrufen: 2310 545 261"
   },
@@ -1893,13 +1895,13 @@
     "seoTitle": "Anwalt für QQuant-Unternehmensdarlehen – Firmen in Thessaloniki",
     "seoDescription": "Unternehmen oder Selbstständiger mit Unternehmensdarlehen oder persönlicher Bürgschaft bei QQuant? Prüfung der Bürgschaft, des Betriebsvermögens, Einspruch, Aussetzung und außergerichtlicher Mechanismus für Unternehmen. Tel: +30 2310 545 261.",
     "heroCity": "Thessaloniki · Leontos Sofou 12",
-    "heroTitle": "Anwalt für QQuant-Gewerbe- und Unternehmensdarlehen — Unternehmen und Selbstständige",
+    "heroTitle": "Anwalt für QQuant-Gewerbe- und Unternehmensdarlehen: Unternehmen und Selbstständige",
     "heroSubtitle": "Unternehmensdarlehen · Persönliche Bürgschaften · Außergerichtlicher Mechanismus",
-    "intro": "Diese Seite richtet sich an Unternehmen, Gesellschaften und Selbstständige mit Schulden gegenüber dem Servicer QQuant. Gewerbe- und Unternehmensdarlehen, Betriebskapital, Kontokorrentkredite, Anleihedarlehen und vor allem die persönlichen Bürgschaften von Geschäftsführern und Gesellschaftern führen zu Zahlungsbefehlen, Pfändungen und Versteigerungen — oft mit höheren Beträgen und unmittelbaren Folgen für die Existenzfähigkeit. Ioannis Papaioannou verteidigt seit über 25 Jahren Unternehmen und Selbstständige gegenüber Banken, Fonds und Servicern.",
+    "intro": "Diese Seite richtet sich an Unternehmen, Gesellschaften und Selbstständige mit Schulden gegenüber dem Servicer QQuant. Gewerbe- und Unternehmensdarlehen, Betriebskapital, Kontokorrentkredite, Anleihedarlehen und vor allem die persönlichen Bürgschaften von Geschäftsführern und Gesellschaftern führen zu Zahlungsbefehlen, Pfändungen und Versteigerungen, oft mit höheren Beträgen und unmittelbaren Folgen für die Existenzfähigkeit. Ioannis Papaioannou verteidigt seit über 25 Jahren Unternehmen und Selbstständige gegenüber Banken, Fonds und Servicern.",
     "whatTitle": "Unternehmensdarlehen und Bürgschaften: was wir zuerst prüfen",
-    "whatText": "Bei einer geschäftlichen Schuld gegenüber dem Servicer QQuant ist die Akte fast immer komplexer als bei einem Wohnungsfall. Wir prüfen den Darlehens- oder Kreditvertrag, die Sicherheiten (Vormerkungen, Pfandrechte, Abtretungen), die Höhe der Forderung und die Berechtigung der heute verfolgenden Partei — also, ob die Forderung bei der Bank blieb oder an einen Fonds mit Verwaltungsgesellschaft übertragen wurde. Besonderes Gewicht haben persönliche Bürgschaften: Wenn der Unternehmer, Geschäftsführer oder Gesellschafter gebürgt hat, werden Umfang und Grenzen seiner Haftung gesondert geprüft. Eine Bürgschaft ist nicht immer unbegrenzt und nicht immer gültig.",
+    "whatText": "Bei einer geschäftlichen Schuld gegenüber dem Servicer QQuant ist die Akte fast immer komplexer als bei einem Wohnungsfall. Wir prüfen den Darlehens- oder Kreditvertrag, die Sicherheiten (Vormerkungen, Pfandrechte, Abtretungen), die Höhe der Forderung und die Berechtigung der heute verfolgenden Partei, also, ob die Forderung bei der Bank blieb oder an einen Fonds mit Verwaltungsgesellschaft übertragen wurde. Besonderes Gewicht haben persönliche Bürgschaften: Wenn der Unternehmer, Geschäftsführer oder Gesellschafter gebürgt hat, werden Umfang und Grenzen seiner Haftung gesondert geprüft. Eine Bürgschaft ist nicht immer unbegrenzt und nicht immer gültig.",
     "protectTitle": "Schutz von Betriebsvermögen und Ausrüstung",
-    "protectText": "In Geschäftsfällen ist nicht nur das Wohnhaus gefährdet, sondern auch die Geschäftsräume, die Maschinen, die Waren, die Geschäftskonten und die Fortführung der Tätigkeit selbst. Jede Vollstreckungshandlung — Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen — wird mit einem Einspruch und, wo nötig, einem Aussetzungsantrag begegnet. Von Anfang an prüfen wir die Berechtigung, die Übertragung der Forderung, die Höhe der Schuld, die Zinsen, die Gebühren und jede Vollstreckungshandlung, mit dem Ziel, das Unternehmen am Leben zu halten, während über die Substanz entschieden wird.",
+    "protectText": "In Geschäftsfällen ist nicht nur das Wohnhaus gefährdet, sondern auch die Geschäftsräume, die Maschinen, die Waren, die Geschäftskonten und die Fortführung der Tätigkeit selbst. Jede Vollstreckungshandlung (Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen) wird mit einem Einspruch und, wo nötig, einem Aussetzungsantrag begegnet. Von Anfang an prüfen wir die Berechtigung, die Übertragung der Forderung, die Höhe der Schuld, die Zinsen, die Gebühren und jede Vollstreckungshandlung, mit dem Ziel, das Unternehmen am Leben zu halten, während über die Substanz entschieden wird.",
     "deadlinesTitle": "Mahnung, Zahlungsbefehl oder Pfändung von QQuant erhalten — Die Fristen, die nicht verstreichen dürfen",
     "deadlinesIntro": "Auch bei einer alten, bestrittenen oder möglicherweise verjährten Schuld laufen die Verfahrensfristen normal weiter. Verjährung, fehlende Legitimation oder die Anfechtung des Betrags reichen für sich allein nicht aus, wenn sie nicht richtig und rechtzeitig vorgebracht werden.",
     "deadlines": [
@@ -1919,7 +1921,7 @@
     "deadlinesWarning": "Die richtige Reihenfolge ist nicht verhandelbar. Zuerst Prüfung, dann Antwort, dann Verhandlung. Die umgekehrte Reihenfolge kann Geld verschenken, das vielleicht gar nicht geschuldet wird.",
     "cta1Title": "Hat Ihr Unternehmen ein Dokument von dem Servicer QQuant?",
     "cta1Text": "Eine sofortige erste Bewertung der Akte: Unternehmensdarlehen, Bürgschaften, Sicherheiten, Fristen. Rufen Sie +30 2310 545 261 an oder senden Sie das Formular.",
-    "negotiationTitle": "Verhandlung und Regelung von Unternehmensschulden — mit Blick auf die Existenzfähigkeit",
+    "negotiationTitle": "Verhandlung und Regelung von Unternehmensschulden, mit Blick auf die Existenzfähigkeit",
     "negotiationIntro": "Bei einer Unternehmensschuld ist ein Vergleich nicht bloß eine Frage der Raten. Es ist eine Frage der Existenzfähigkeit. Vor jedem Kontakt mit dem Servicer QQuant prüfen wir die Berechtigung, den realen Saldo, die Bürgschaften und die Daten des Unternehmens, damit der Vorschlag auf belastbaren Zahlen beruht. Ziel ist ein Vergleich, der aus realem Cashflow bedient wird, mit einem Schuldenschnitt (Haircut), wo belegt, und einem kontrollierten Umfang der persönlichen Bürgschaften.",
     "negotiationPoints": [
       "Der Betrag wird bereinigt, bevor er besprochen wird. Bei Schulden, die nach Jahren wieder auftauchen, können Zinsen, Gebühren und Zinseszinsen den Saldo erheblich aufgebläht haben. Ein nicht verifizierter Betrag darf nicht zur Grundlage eines Vergleichs werden.",
@@ -1928,7 +1930,7 @@
       "Die beste Verhandlung findet statt, wenn der Schuldner seine Rechte bereits geltend gemacht hat oder bereit ist, dies zu tun. Ein gut begründeter Widerspruch, ein Aussetzungsantrag, eine ernsthafte Verjährungseinrede oder eine belegte Anfechtung der Legitimation verwandelt das Gespräch von einem Bitten in ein Kräftemessen."
     ],
     "negotiationOutro": "Für Unternehmen ist der beste Deal derjenige, der dem Unternehmen die Fortführung ermöglicht. Ein Vergleich, der bedient wird, Bürgschaften, die begrenzt werden, gerichtlicher Druck, wo nötig.",
-    "cta2Title": "Bevor Sie einen Vergleich unterschreiben oder eine Unternehmensschuld anerkennen — sprechen Sie mit uns.",
+    "cta2Title": "Bevor Sie einen Vergleich unterschreiben oder eine Unternehmensschuld anerkennen, sprechen Sie zuerst mit uns.",
     "cta2Text": "Bei Unternehmensschulden kann eine voreilige Unterschrift persönliche Bürgschaften auslösen oder einen Betrag anerkennen, der angefochten werden könnte. Erst die Prüfung, dann die Antwort.",
     "anakopiTitle": "Widerspruch und Aussetzung von QQuant-Vollstreckungen in Thessaloniki",
     "anakopiText1": "Vor den Gerichten in Thessaloniki, wo wir täglich prozessieren, werden QQuant-Fälle an den Details der Akte entschieden. Die Widerspruchsgründe, die am häufigsten Erfolg haben:",
@@ -1939,7 +1941,7 @@
       "Verfahrensmängel: fehlerhafte Zustellungen, Fehler im Pfändungsprotokoll, Nichtbeachtung gesetzlicher Fristen und Formvorschriften."
     ],
     "anakopiText2": "Wenn der Fall es erfordert, wird der Widerspruch mit einem Aussetzungsantrag verbunden, damit keine Vollstreckungshandlung vor der Entscheidung in der Sache voranschreitet. Parallel dient das anhängige Verfahren als Hebel für eine realistische Regulierung.",
-    "faqTitle": "FAQ — Unternehmen und QQuant",
+    "faqTitle": "FAQ: Unternehmen und QQuant",
     "faq": [
       {
         "q": "Ich habe persönlich für ein Unternehmensdarlehen gegenüber dem Servicer QQuant gebürgt. Ist mein Privatvermögen gefährdet?",
@@ -1947,7 +1949,7 @@
       },
       {
         "q": "Können mein Geschäftskonto oder meine Ausrüstung gepfändet werden?",
-        "a": "Mit einem vollstreckbaren Titel und einem rechtmäßigen Verfahren ja — aber jede Vollstreckungshandlung (Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen) hat Anfechtungspunkte mit bestimmten Fristen. Ein sofortiger Einspruch und Aussetzungsantrag kann das Unternehmen am Leben halten."
+        "a": "Mit einem vollstreckbaren Titel und einem rechtmäßigen Verfahren ja, aber jede Vollstreckungshandlung (Drittpfändung, Kontosperrung, Versteigerung von Anlagevermögen) hat Anfechtungspunkte mit bestimmten Fristen. Ein sofortiger Einspruch und Aussetzungsantrag kann das Unternehmen am Leben halten."
       },
       {
         "q": "Mein Unternehmen schuldet Banken, Sozialversicherung und Finanzamt zugleich. Was passiert?",
@@ -1955,15 +1957,15 @@
       },
       {
         "q": "Das Unternehmen hat den Betrieb eingestellt. Lohnt sich eine Verteidigung noch?",
-        "a": "Ja — besonders zur Begrenzung persönlicher Bürgschaften und zum Schutz des Privatvermögens von Bürgen und Geschäftsführern. Auch wenn die Gesellschaft geschlossen wurde, können die Bürgschaften und Schulden Sie persönlich verfolgen."
+        "a": "Ja, besonders zur Begrenzung persönlicher Bürgschaften und zum Schutz des Privatvermögens von Bürgen und Geschäftsführern. Auch wenn die Gesellschaft geschlossen wurde, können die Bürgschaften und Schulden Sie persönlich verfolgen."
       },
       {
         "q": "Welche Dokumente benötigen Sie für die Prüfung?",
-        "a": "Den Darlehens-/Kreditvertrag, die Bürgschaftsverträge, die Sicherheitsdokumente, die Briefe und jedes Dokument von dem Servicer QQuant oder der Bank — außergerichtliche Aufforderungen, Kündigung, Zahlungsbefehl, Pfändungsbericht. Am wichtigsten: die Zustellungsdaten."
+        "a": "Den Darlehens-/Kreditvertrag, die Bürgschaftsverträge, die Sicherheitsdokumente, die Briefe und jedes Dokument von dem Servicer QQuant oder der Bank: außergerichtliche Aufforderungen, Kündigung, Zahlungsbefehl, Pfändungsbericht. Am wichtigsten: die Zustellungsdaten."
       }
     ],
-    "ctaTitle": "Für Ihr Unternehmen — erst die Prüfung, dann die Strategie.",
-    "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Bei Unternehmensschulden sind die Beträge hoch und die Fristen streng — die Akte wird vordringlich bewertet.",
+    "ctaTitle": "Für Ihr Unternehmen: erst die Prüfung, dann die Strategie.",
+    "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Bei Unternehmensschulden sind die Beträge hoch und die Fristen streng, sodass die Akte vordringlich bewertet wird.",
     "ctaButton": "Sofortige Aktenprüfung",
     "ctaPhone": "Jetzt anrufen: 2310 545 261"
   }

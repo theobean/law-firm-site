@@ -29,7 +29,7 @@ export default function EurobankBizPage({
       locale={locale}
       namespace="eurobankBiz"
       audience="business"
-      counterpartHref={`/${locale}/banks/eurobank`}
+      counterpartHref={`/banks/eurobank`}
     />
   );
 }

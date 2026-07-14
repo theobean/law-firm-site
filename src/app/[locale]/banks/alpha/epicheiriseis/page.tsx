@@ -29,7 +29,7 @@ export default function AlphaBizPage({
       locale={locale}
       namespace="alphaBiz"
       audience="business"
-      counterpartHref={`/${locale}/banks/alpha`}
+      counterpartHref={`/banks/alpha`}
     />
   );
 }
