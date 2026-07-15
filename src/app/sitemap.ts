@@ -21,13 +21,16 @@ const staticPaths = [
   "/funds/intrum",
   "/funds/cepal",
   "/funds/qquant",
-  // Bank pages — content under revision, currently 308 → /contact
-  // Keep in sitemap so Google retains crawl signal until new content is ready
+  // Bank loan pages: hub + retail (idiotes) and business (epicheiriseis) per bank
   "/banks",
   "/banks/eurobank",
+  "/banks/eurobank/epicheiriseis",
   "/banks/alpha",
+  "/banks/alpha/epicheiriseis",
   "/banks/piraeus",
+  "/banks/piraeus/epicheiriseis",
   "/banks/ethniki",
+  "/banks/ethniki/epicheiriseis",
 ];
 const practiceAreas = [
   "banking",
