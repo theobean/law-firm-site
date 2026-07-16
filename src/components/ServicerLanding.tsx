@@ -75,7 +75,14 @@ export default function ServicerLanding({
           </ScrollReveal>
         )}
         <ScrollReveal direction="up" delay={0}>
-          <p className="text-gray-700 text-lg leading-relaxed mb-12">{t("intro")}</p>
+          {t("intro").split("\n\n").map((para, i, arr) => (
+            <p
+              key={i}
+              className={`text-gray-700 text-lg leading-relaxed ${i === arr.length - 1 ? "mb-12" : "mb-6"}`}
+            >
+              {para}
+            </p>
+          ))}
         </ScrollReveal>
 
         {/* What is the servicer */}
@@ -83,7 +90,11 @@ export default function ServicerLanding({
           <h2 className="text-2xl font-playfair font-bold text-primary mb-6 border-l-4 border-accent pl-4">
             {t("whatTitle")}
           </h2>
-          <p className="text-gray-600 leading-relaxed mb-16">{t("whatText")}</p>
+          {t("whatText").split("\n\n").map((para, i, arr) => (
+            <p key={i} className={`text-gray-600 leading-relaxed ${i === arr.length - 1 ? "mb-16" : "mb-6"}`}>
+              {para}
+            </p>
+          ))}
         </ScrollReveal>
 
         {/* H2: Protection of primary residence */}
@@ -91,7 +102,11 @@ export default function ServicerLanding({
           <h2 className="text-2xl font-playfair font-bold text-primary mb-6 border-l-4 border-accent pl-4">
             {t("protectTitle")}
           </h2>
-          <p className="text-gray-600 leading-relaxed mb-16">{t("protectText")}</p>
+          {t("protectText").split("\n\n").map((para, i, arr) => (
+            <p key={i} className={`text-gray-600 leading-relaxed ${i === arr.length - 1 ? "mb-16" : "mb-6"}`}>
+              {para}
+            </p>
+          ))}
         </ScrollReveal>
 
         {/* Businesses & professionals — shown only on the individual-focused page */}
