@@ -248,6 +248,7 @@ export default function ServicerLanding({
             <div className="grid sm:grid-cols-2 gap-3">
               {[
                 { href: `/practice-areas/banking`, label: tr("bankingLaw") },
+                { href: `/banks`, label: tr("banks") },
                 { href: `/practice-areas/extrajudicial`, label: tr("extrajudicial") },
                 { href: `/pleistariasmos`, label: tr("foreclosure") },
                 { href: `/funds`, label: tr("funds") },

@@ -7,6 +7,8 @@
     "bankingLaw": "Banking Law",
     "funds": "NPL Funds",
     "banks": "Banks",
+    "individuals": "Individuals",
+    "businesses": "Businesses",
     "pleistariasmos": "Foreclosure",
     "exodikastikos": "Out-of-Court Mechanism",
     "blog": "Articles",
@@ -434,12 +436,12 @@
     "heroCity": "Thessaloniki · 12 Leontos Sofou St.",
     "heroTitle": "Lawyer for Alpha Bank loans and foreclosures in Thessaloniki and across Greece",
     "heroSubtitle": "Objection · Suspension · Haircut Negotiation",
-    "intro": "If you have a non-performing Alpha Bank loan, or you have received an extrajudicial notice, termination of the contract, a payment order, a writ of execution, a seizure report or an auction programme, your case is no longer at a theoretical stage. In some cases the claim is still pursued by Alpha Bank itself. In others, the loan has been transferred to a special purpose vehicle (fund) and management has been assigned to a credit servicing company (servicer). The first thing we check is exactly that: who is pursuing you today and with what legal standing. Ioannis Papaioannou, Legal Advisor to the Association of Borrowers and Consumer Protection of Northern Greece, has been defending borrowers against banks and servicers for 25+ years. We know how Alpha Bank works in practice, which documents must be produced, and which points of the case must be checked before the borrower is pushed into a settlement out of fear or into an auction without a real defence.",
+    "intro": "If you have a non-performing Alpha Bank loan, or you have received an extrajudicial notice, termination of the contract, a payment order, a writ of execution, a seizure report or an auction programme, your case is no longer at a theoretical stage. In some cases the claim is still pursued by Alpha Bank itself. In others, the loan has been transferred to a special purpose vehicle (fund) and management has been assigned to a credit servicing company (servicer). The first thing we check is exactly that: who is pursuing you today and with what legal standing. Ioannis Papaioannou, Legal Advisor to the Association of Borrowers and Consumer Protection of Northern Greece, has been defending borrowers against banks and servicers for more than 25 years. We know how Alpha Bank works in practice, which documents must be produced, and which points of the case must be checked before the borrower is pushed into a settlement out of fear or into an auction without a real defence.",
     "whatTitle": "Alpha Bank, funds and servicers: who really pursues your loan",
-    "whatText": "A Alpha Bank loan may today be in different hands than when it was signed. Sometimes it remains with the bank and sometimes it has been transferred, through securitisation, to a special purpose vehicle (fund), with management assigned to a servicer. This matters in practice. In every case we must check who is the real beneficiary of the claim today, when and how the loan was transferred from Alpha Bank, with which documents the transfer and the servicing assignment are proven, whether the party enforcing has legal standing in the specific procedure, and whether the amount demanded arises in a lawful, clear and verifiable way. A document — from Alpha Bank or from a servicer — does not mean everything is settled. It means the case must be checked immediately. Before any discussion of a settlement, we must know what is demanded, by whom, with what standing and with what calculation. If management has been taken over by a specific company — such as Cepal, doValue, Intrum or QQuant — see our dedicated page on it too.",
-    "protectTitle": "Protecting your home from a foreclosure on a Alpha Bank loan",
+    "whatText": "An Alpha Bank loan may today be in different hands than when it was signed. Sometimes it remains with the bank and sometimes it has been transferred, through securitisation, to a special purpose vehicle (fund), with management assigned to a servicer. This matters in practice. In every case we must check who is the real beneficiary of the claim today, when and how the loan was transferred from Alpha Bank, with which documents the transfer and the servicing assignment are proven, whether the party enforcing has legal standing in the specific procedure, and whether the amount demanded arises in a lawful, clear and verifiable way. A document, whether from Alpha Bank or from a servicer, does not mean everything is settled. It means the case must be checked immediately. Before any discussion of a settlement, we must know what is demanded, by whom, with what standing and with what calculation. If management has been taken over by a specific company, such as Cepal, doValue, Intrum or QQuant, see our dedicated page on it too.",
+    "protectTitle": "Protecting your home from a foreclosure on an Alpha Bank loan",
     "protectText": "No property is lost because a letter arrived. It is at risk when the case is not checked in time and the lawful means of defence are left unused. From the termination of the contract to the payment order, the writ of execution, the seizure and the auction, each stage has its own significance. We examine whether there is room for an objection, an application for suspension, inclusion in the out-of-court mechanism, direct negotiation or another targeted action. We treat no auction as a foregone conclusion. From the outset we check the legal standing of the party enforcing, the transfer of the claim from Alpha Bank, the amount of the debt, the interest, the charges, the abusive terms and every act of enforcement. There, in the details that are often not checked, the course of a case can change. The aim is not simply to move fast. The aim is to move correctly, before enforcement appears to be the only road.",
-    "deadlinesTitle": "I received an extrajudicial notice, payment order or seizure on a Alpha Bank loan — The deadlines you must not miss",
+    "deadlinesTitle": "I received an extrajudicial notice, payment order or seizure on an Alpha Bank loan: the deadlines you must not miss",
     "deadlinesIntro": "Not every document has the same legal weight. The termination of the contract is one thing, the payment order another and the seizure yet another. But each stage shows the case is moving and the time to react is shrinking.",
     "deadlines": [
       {
@@ -455,20 +457,20 @@
         "desc": "Seizure is the stage at which enforcement has already begun and, for real estate, an auction is already set. An objection to enforcement, on grounds concerning the claim, the writ, the procedure and the seizure, is filed within forty-five days of the seizure. If a suspension of the auction is also needed, that move is examined separately and must be made in good time."
       }
     ],
-    "deadlinesWarning": "With the termination we do not stand still. With the payment order we move immediately. With the seizure there is no room for trial and error. Defence deadlines do not wait for the borrower to recover from the shock.",
-    "cta1Title": "Do you have a Alpha Bank or servicer document in front of you?",
-    "cta1Text": "An immediate first assessment: what was served on you, which deadline is running, which moves are available. Many Alpha Bank loans were transferred through securitisations — the chain of transfer is often the weakest point of the other side. Call +30 2310 545 261 or send the form.",
-    "negotiationTitle": "Negotiation strategy for Alpha Bank loans — A settlement aiming at a debt write-off (haircut), where the case allows it",
+    "deadlinesWarning": "None of these deadlines is extended because the borrower needed time to recover from the shock. That is why the file should be reviewed the moment the first document arrives, not when the auction is already close.",
+    "cta1Title": "Do you have an Alpha Bank or servicer document in front of you?",
+    "cta1Text": "An immediate first assessment: what was served on you, which deadline is running, which moves are available. Call +30 2310 545 261 or send the form.",
+    "negotiationTitle": "Negotiation strategy for Alpha Bank loans: a settlement aiming at a debt write-off (haircut), where the case allows it",
     "negotiationIntro": "Whether you are facing Alpha Bank or the servicer managing the claim, you do not go to ask for mercy. You go to present a position. Whichever side knows the case better holds the stronger negotiating advantage. Our job is to pass that advantage to the borrower. Before any contact we check the legal standing of the party pursuing, the real beneficiary of the claim, the transfer from Alpha Bank, the balance, the interest, the charges and every element affecting the amount. An amount that has not been verified must not become the starting point of a negotiation.",
     "negotiationPoints": [
       "The settlement must withstand time. A deal that looks good on paper but collapses on the second or third instalment is worthless. The proposal must be linked to the borrower's real financial capacity, the value of the security, the course of the claim and the data of the case.",
-      "A debt write-off (haircut) is not posed as a wish. It is built as a negotiating goal, when the elements of the case allow it.",
+      "A debt write-off (haircut) is not asked for as a wish; it is documented as a negotiating goal when the elements of the case allow it.",
       "The price at which the fund acquired the loan from Alpha Bank, the history of the portfolio, the prospect of recovery, the value of the property and the existence of a judicial challenge are factors that can change the discussion.",
-      "The best negotiation takes place when the borrower has already exercised, or is ready to exercise, their rights. A well-founded objection, an application for suspension or a serious judicial challenge turns the negotiation from a mere request into a contest of positions."
+      "The best negotiation takes place when the borrower has already exercised, or is ready to exercise, their rights. A well-founded objection, an application for suspension or a serious judicial challenge changes the basis of the discussion: the other side knows that, if there is no agreement, the case will be decided in court."
     ],
-    "negotiationOutro": "The point is not for a proposal to be heard. It is for it to stand. A settlement that gets paid. A write-off (haircut) when documented. Judicial pressure where needed. Because against a bank or a servicer, the best terms are not given. They are won with control, strategy and properly built pressure.",
-    "cta2Title": "Before you reply to or sign anything with Alpha Bank or the servicer — talk to us.",
-    "cta2Text": "Many Alpha Bank loans were transferred through securitisations — the chain of transfer is often the weakest point of the other side. A hasty acknowledgment of debt can close doors that are open today. First the check, then the answer.",
+    "negotiationOutro": "A proposal is not enough to be heard; it has to hold. That means a settlement that can actually be paid, a write-off where it is documented, and judicial pressure where it is needed. Against a bank or a servicer, no one hands you the good terms; they are won through control of the file and proper preparation.",
+    "cta2Title": "Before you reply to or sign anything with Alpha Bank or the servicer, talk to us first.",
+    "cta2Text": "Many Alpha Bank loans were transferred through securitisations, and the chain of transfer is often the weakest point of the other side. A hasty acknowledgment of debt can close doors that are open today. First the check, then the answer.",
     "anakopiTitle": "Objection and Suspension of Auction before the Courts of Thessaloniki and across Greece",
     "anakopiText1": "Enforcement is not met with general protests, but with a targeted procedural review of every act, every document and every amount invoked by the pursuing side.\n\nOur Law Office handles, on a daily basis, cases of objections, applications for suspension and auctions before the Courts of Thessaloniki and across Greek territory.\n\nIn every case we fully review the writ of payment, the seizure report, the documents of transfer of the claim, the servicing assignment, the analysis of the debt, the interest, the charges, the services and compliance with the lawful deadlines. An objection must not be a routine defence pleading. It must be procedurally precise, evidentially documented and adapted to the actual data of the specific file.",
     "anakopiPoints": [],
@@ -477,19 +479,19 @@
     "faq": [
       {
         "q": "My loan was with Alpha Bank but now another company is calling me. What does this mean?",
-        "a": "It means Alpha Bank probably transferred the claim to a special purpose vehicle (fund) and assigned management to a credit servicing company (servicer) — such as, depending on the portfolio, Cepal, doValue, Intrum or QQuant. It does not mean the debt is self-evident or correctly calculated. The transfer, the legal standing and the amount must be checked before you do anything."
+        "a": "It means Alpha Bank probably transferred the claim to a special purpose vehicle (fund) and assigned management to a credit servicing company (servicer), such as, depending on the portfolio, Cepal, doValue, Intrum or QQuant. It does not mean the debt is self-evident or correctly calculated. The transfer, the legal standing and the amount must be checked before you do anything."
       },
       {
         "q": "Can Alpha Bank or the servicer put my property up for auction?",
-        "a": "Only with an enforceable title and an entirely lawful procedure — both of which are reviewed in court. The standing of the party enforcing, the amount of the claim and every act of enforcement have points of challenge with specific deadlines."
+        "a": "Only with an enforceable title and an entirely lawful procedure, and both are reviewed in court. The standing of the party enforcing, the amount of the claim and every act of enforcement have points of challenge with specific deadlines."
       },
       {
         "q": "Is it worth negotiating with Alpha Bank or the servicer on my own?",
-        "a": "It is dangerous. Across from you stands a specialised mechanism that negotiates thousands of cases — you have one. Without a file review you do not even know whether the amount demanded is correct, nor what your real negotiating power is."
+        "a": "It is dangerous. Across from you stands a specialised mechanism that negotiates thousands of cases, while you have one. Without a file review you do not even know whether the amount demanded is correct, nor what your real negotiating power is."
       },
       {
         "q": "The auction is very close. Is there still hope?",
-        "a": "It depends on the file — but the answer is given only after we see it, and quickly. Procedural defects may provide grounds for action even in the last days. Call immediately at +30 2310 545 261."
+        "a": "It depends on the file, and the answer comes only after we see it, quickly. Procedural defects may provide grounds for action even in the last days. Call immediately at +30 2310 545 261."
       },
       {
         "q": "What documents do you need for the review?",
@@ -497,7 +499,7 @@
       }
     ],
     "ctaTitle": "Alpha Bank and the servicers negotiate every day. We litigate every day.",
-    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. Many Alpha Bank loans were transferred through securitisations — the chain of transfer is often the weakest point of the other side. Due to strict deadlines, your file is assessed as a matter of urgency — today, not \"at some point\".",
+    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. Due to strict deadlines, your file is assessed as a priority, because the deadlines do not wait.",
     "ctaButton": "Immediate File Review",
     "ctaPhone": "Call now: +30 2310 545 261"
   },
@@ -507,12 +509,12 @@
     "heroCity": "Thessaloniki · 12 Leontos Sofou St.",
     "heroTitle": "Lawyer for Piraeus Bank loans and foreclosures in Thessaloniki and across Greece",
     "heroSubtitle": "Objection · Suspension · Haircut Negotiation",
-    "intro": "If you have a non-performing Piraeus Bank loan, or you have received an extrajudicial notice, termination of the contract, a payment order, a writ of execution, a seizure report or an auction programme, your case is no longer at a theoretical stage. In some cases the claim is still pursued by Piraeus Bank itself. In others, the loan has been transferred to a special purpose vehicle (fund) and management has been assigned to a credit servicing company (servicer). The first thing we check is exactly that: who is pursuing you today and with what legal standing. Ioannis Papaioannou, Legal Advisor to the Association of Borrowers and Consumer Protection of Northern Greece, has been defending borrowers against banks and servicers for 25+ years. We know how Piraeus Bank works in practice, which documents must be produced, and which points of the case must be checked before the borrower is pushed into a settlement out of fear or into an auction without a real defence.",
+    "intro": "If you have a non-performing Piraeus Bank loan, or you have received an extrajudicial notice, termination of the contract, a payment order, a writ of execution, a seizure report or an auction programme, your case is no longer at a theoretical stage. In some cases the claim is still pursued by Piraeus Bank itself. In others, the loan has been transferred to a special purpose vehicle (fund) and management has been assigned to a credit servicing company (servicer). The first thing we check is exactly that: who is pursuing you today and with what legal standing. Ioannis Papaioannou, Legal Advisor to the Association of Borrowers and Consumer Protection of Northern Greece, has been defending borrowers against banks and servicers for more than 25 years. We know how Piraeus Bank works in practice, which documents must be produced, and which points of the case must be checked before the borrower is pushed into a settlement out of fear or into an auction without a real defence.",
     "whatTitle": "Piraeus Bank, funds and servicers: who really pursues your loan",
-    "whatText": "A Piraeus Bank loan may today be in different hands than when it was signed. Sometimes it remains with the bank and sometimes it has been transferred, through securitisation, to a special purpose vehicle (fund), with management assigned to a servicer. This matters in practice. In every case we must check who is the real beneficiary of the claim today, when and how the loan was transferred from Piraeus Bank, with which documents the transfer and the servicing assignment are proven, whether the party enforcing has legal standing in the specific procedure, and whether the amount demanded arises in a lawful, clear and verifiable way. A document — from Piraeus Bank or from a servicer — does not mean everything is settled. It means the case must be checked immediately. Before any discussion of a settlement, we must know what is demanded, by whom, with what standing and with what calculation. If management has been taken over by a specific company — such as Intrum, doValue, Cepal or QQuant — see our dedicated page on it too.",
+    "whatText": "A Piraeus Bank loan may today be in different hands than when it was signed. Sometimes it remains with the bank and sometimes it has been transferred, through securitisation, to a special purpose vehicle (fund), with management assigned to a servicer. This matters in practice. In every case we must check who is the real beneficiary of the claim today, when and how the loan was transferred from Piraeus Bank, with which documents the transfer and the servicing assignment are proven, whether the party enforcing has legal standing in the specific procedure, and whether the amount demanded arises in a lawful, clear and verifiable way. A document, whether from Piraeus Bank or from a servicer, does not mean everything is settled. It means the case must be checked immediately. Before any discussion of a settlement, we must know what is demanded, by whom, with what standing and with what calculation. If management has been taken over by a specific company, such as Intrum, doValue, Cepal or QQuant, see our dedicated page on it too.",
     "protectTitle": "Protecting your home from a foreclosure on a Piraeus Bank loan",
     "protectText": "No property is lost because a letter arrived. It is at risk when the case is not checked in time and the lawful means of defence are left unused. From the termination of the contract to the payment order, the writ of execution, the seizure and the auction, each stage has its own significance. We examine whether there is room for an objection, an application for suspension, inclusion in the out-of-court mechanism, direct negotiation or another targeted action. We treat no auction as a foregone conclusion. From the outset we check the legal standing of the party enforcing, the transfer of the claim from Piraeus Bank, the amount of the debt, the interest, the charges, the abusive terms and every act of enforcement. There, in the details that are often not checked, the course of a case can change. The aim is not simply to move fast. The aim is to move correctly, before enforcement appears to be the only road.",
-    "deadlinesTitle": "I received an extrajudicial notice, payment order or seizure on a Piraeus Bank loan — The deadlines you must not miss",
+    "deadlinesTitle": "I received an extrajudicial notice, payment order or seizure on a Piraeus Bank loan: the deadlines you must not miss",
     "deadlinesIntro": "Not every document has the same legal weight. The termination of the contract is one thing, the payment order another and the seizure yet another. But each stage shows the case is moving and the time to react is shrinking.",
     "deadlines": [
       {
@@ -528,20 +530,20 @@
         "desc": "Seizure is the stage at which enforcement has already begun and, for real estate, an auction is already set. An objection to enforcement, on grounds concerning the claim, the writ, the procedure and the seizure, is filed within forty-five days of the seizure. If a suspension of the auction is also needed, that move is examined separately and must be made in good time."
       }
     ],
-    "deadlinesWarning": "With the termination we do not stand still. With the payment order we move immediately. With the seizure there is no room for trial and error. Defence deadlines do not wait for the borrower to recover from the shock.",
+    "deadlinesWarning": "None of these deadlines is extended because the borrower needed time to recover from the shock. That is why the file should be reviewed the moment the first document arrives, not when the auction is already close.",
     "cta1Title": "Do you have a Piraeus Bank or servicer document in front of you?",
-    "cta1Text": "An immediate first assessment: what was served on you, which deadline is running, which moves are available. Piraeus Bank and its servicers act through strict, standardised enforcement procedures — which for that very reason can be challenged on formal grounds. Call +30 2310 545 261 or send the form.",
-    "negotiationTitle": "Negotiation strategy for Piraeus Bank loans — A settlement aiming at a debt write-off (haircut), where the case allows it",
+    "cta1Text": "An immediate first assessment: what was served on you, which deadline is running, which moves are available. Call +30 2310 545 261 or send the form.",
+    "negotiationTitle": "Negotiation strategy for Piraeus Bank loans: a settlement aiming at a debt write-off (haircut), where the case allows it",
     "negotiationIntro": "Whether you are facing Piraeus Bank or the servicer managing the claim, you do not go to ask for mercy. You go to present a position. Whichever side knows the case better holds the stronger negotiating advantage. Our job is to pass that advantage to the borrower. Before any contact we check the legal standing of the party pursuing, the real beneficiary of the claim, the transfer from Piraeus Bank, the balance, the interest, the charges and every element affecting the amount. An amount that has not been verified must not become the starting point of a negotiation.",
     "negotiationPoints": [
       "The settlement must withstand time. A deal that looks good on paper but collapses on the second or third instalment is worthless. The proposal must be linked to the borrower's real financial capacity, the value of the security, the course of the claim and the data of the case.",
-      "A debt write-off (haircut) is not posed as a wish. It is built as a negotiating goal, when the elements of the case allow it.",
+      "A debt write-off (haircut) is not asked for as a wish; it is documented as a negotiating goal when the elements of the case allow it.",
       "The price at which the fund acquired the loan from Piraeus Bank, the history of the portfolio, the prospect of recovery, the value of the property and the existence of a judicial challenge are factors that can change the discussion.",
-      "The best negotiation takes place when the borrower has already exercised, or is ready to exercise, their rights. A well-founded objection, an application for suspension or a serious judicial challenge turns the negotiation from a mere request into a contest of positions."
+      "The best negotiation takes place when the borrower has already exercised, or is ready to exercise, their rights. A well-founded objection, an application for suspension or a serious judicial challenge changes the basis of the discussion: the other side knows that, if there is no agreement, the case will be decided in court."
     ],
-    "negotiationOutro": "The point is not for a proposal to be heard. It is for it to stand. A settlement that gets paid. A write-off (haircut) when documented. Judicial pressure where needed. Because against a bank or a servicer, the best terms are not given. They are won with control, strategy and properly built pressure.",
-    "cta2Title": "Before you reply to or sign anything with Piraeus Bank or the servicer — talk to us.",
-    "cta2Text": "Piraeus Bank and its servicers act through strict, standardised enforcement procedures — which for that very reason can be challenged on formal grounds. A hasty acknowledgment of debt can close doors that are open today. First the check, then the answer.",
+    "negotiationOutro": "A proposal is not enough to be heard; it has to hold. That means a settlement that can actually be paid, a write-off where it is documented, and judicial pressure where it is needed. Against a bank or a servicer, no one hands you the good terms; they are won through control of the file and proper preparation.",
+    "cta2Title": "Before you reply to or sign anything with Piraeus Bank or the servicer, talk to us first.",
+    "cta2Text": "Piraeus Bank and its servicers work through standardised, high-volume enforcement procedures, where the same formal errors recur and can be spotted. A hasty acknowledgment of debt can close doors that are open today. First the check, then the answer.",
     "anakopiTitle": "Objection and Suspension of Auction before the Courts of Thessaloniki and across Greece",
     "anakopiText1": "Enforcement is not met with general protests, but with a targeted procedural review of every act, every document and every amount invoked by the pursuing side.\n\nOur Law Office handles, on a daily basis, cases of objections, applications for suspension and auctions before the Courts of Thessaloniki and across Greek territory.\n\nIn every case we fully review the writ of payment, the seizure report, the documents of transfer of the claim, the servicing assignment, the analysis of the debt, the interest, the charges, the services and compliance with the lawful deadlines. An objection must not be a routine defence pleading. It must be procedurally precise, evidentially documented and adapted to the actual data of the specific file.",
     "anakopiPoints": [],
@@ -550,19 +552,19 @@
     "faq": [
       {
         "q": "My loan was with Piraeus Bank but now another company is calling me. What does this mean?",
-        "a": "It means Piraeus Bank probably transferred the claim to a special purpose vehicle (fund) and assigned management to a credit servicing company (servicer) — such as, depending on the portfolio, Intrum, doValue, Cepal or QQuant. It does not mean the debt is self-evident or correctly calculated. The transfer, the legal standing and the amount must be checked before you do anything."
+        "a": "It means Piraeus Bank probably transferred the claim to a special purpose vehicle (fund) and assigned management to a credit servicing company (servicer), such as, depending on the portfolio, Intrum, doValue, Cepal or QQuant. It does not mean the debt is self-evident or correctly calculated. The transfer, the legal standing and the amount must be checked before you do anything."
       },
       {
         "q": "Can Piraeus Bank or the servicer put my property up for auction?",
-        "a": "Only with an enforceable title and an entirely lawful procedure — both of which are reviewed in court. The standing of the party enforcing, the amount of the claim and every act of enforcement have points of challenge with specific deadlines."
+        "a": "Only with an enforceable title and an entirely lawful procedure, and both are reviewed in court. The standing of the party enforcing, the amount of the claim and every act of enforcement have points of challenge with specific deadlines."
       },
       {
         "q": "Is it worth negotiating with Piraeus Bank or the servicer on my own?",
-        "a": "It is dangerous. Across from you stands a specialised mechanism that negotiates thousands of cases — you have one. Without a file review you do not even know whether the amount demanded is correct, nor what your real negotiating power is."
+        "a": "It is dangerous. Across from you stands a specialised mechanism that negotiates thousands of cases, while you have one. Without a file review you do not even know whether the amount demanded is correct, nor what your real negotiating power is."
       },
       {
         "q": "The auction is very close. Is there still hope?",
-        "a": "It depends on the file — but the answer is given only after we see it, and quickly. Procedural defects may provide grounds for action even in the last days. Call immediately at +30 2310 545 261."
+        "a": "It depends on the file, and the answer comes only after we see it, quickly. Procedural defects may provide grounds for action even in the last days. Call immediately at +30 2310 545 261."
       },
       {
         "q": "What documents do you need for the review?",
@@ -570,20 +572,20 @@
       }
     ],
     "ctaTitle": "Piraeus Bank and the servicers negotiate every day. We litigate every day.",
-    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. Piraeus Bank and its servicers act through strict, standardised enforcement procedures — which for that very reason can be challenged on formal grounds. Due to strict deadlines, your file is assessed as a matter of urgency — today, not \"at some point\".",
+    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. Due to strict deadlines, your file is assessed as a priority, because the deadlines do not wait.",
     "ctaButton": "Immediate File Review",
     "ctaPhone": "Call now: +30 2310 545 261"
   },
   "business": {
     "title": "Businesses and Self-Employed Professionals",
-    "text": "Enforcement does not concern home loans only. Professional and corporate loans, working capital, current accounts, bond loans and personal guarantees of managers and partners equally lead to payment orders, seizures and auctions — often with larger amounts and more complex files. The logic of the defence stays the same, but the points to check are more.",
+    "text": "Enforcement does not concern home loans only. Professional and corporate loans, working capital, current accounts, bond loans and personal guarantees of managers and partners equally lead to payment orders, seizures and auctions, often with larger amounts and more complex files. The logic of the defence stays the same, but the points to check are more.",
     "points": [
       "Professional and corporate loans: review of the contract, the securities, the balance and the legal standing of the party pursuing.",
-      "Personal guarantees: when the entrepreneur, manager or partner has guaranteed, the extent and limits of liability are checked separately — a guarantee is not always unlimited or valid.",
+      "Personal guarantees: when the entrepreneur, manager or partner has guaranteed, the extent and limits of liability are checked separately. A guarantee is not always unlimited or valid.",
       "Business property and equipment: seizure of business premises, machinery or goods is met with an objection and an application for suspension, just like a home.",
       "Out-of-court mechanism for businesses: settlement of debts to banks, funds, social security (EFKA) and the tax office in a single framework, where the conditions are met."
     ],
-    "outro": "For businesses and professionals, time and the proper organisation of the file count double — the amounts are larger and the consequences for viability immediate.",
+    "outro": "For businesses and professionals, time and the proper organisation of the file count double, because the amounts are larger and the consequences for viability immediate.",
     "toBusinessCta": "Page for Businesses & Professionals",
     "toIndividualCta": "An individual? See the page for individuals"
   },
@@ -613,17 +615,17 @@
       {
         "slug": "alpha",
         "name": "Alpha Bank",
-        "desc": "Alpha Bank loans and securitisations. Checking the chain of transfer is often the weakest point of the other side."
+        "desc": "Alpha Bank loans and securitisations. The chain of transfer is often the weakest point of the other side."
       },
       {
         "slug": "piraeus",
         "name": "Piraeus Bank",
-        "desc": "Piraeus Bank loans. Strict, standardised enforcement procedures — which for that very reason can be challenged on formal grounds."
+        "desc": "Piraeus Bank loans. Standardised, high-volume enforcement procedures, where the same formal errors recur and get spotted."
       },
       {
         "slug": "ethniki",
         "name": "National Bank of Greece",
-        "desc": "National Bank of Greece loans, often older ones. Limitation periods and the chain of transfers are often the strongest defence points."
+        "desc": "National Bank of Greece loans, often older, where limitation periods and the chain of transfers give the strongest defence points."
       }
     ],
     "servicersNoteTitle": "Is a servicer pursuing you instead of the bank?",
@@ -631,8 +633,8 @@
     "servicersNoteCta": "Pages for funds & servicers",
     "urgencyTitle": "Every document has a deadline",
     "urgencyText": "Extrajudicial notices, payment orders, seizures and auctions have strict defence deadlines. The earlier the file is checked, the more moves remain available.",
-    "ctaTitle": "Whatever the bank — first the check, then the strategy.",
-    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. Your file is assessed as a matter of urgency, due to the deadlines.",
+    "ctaTitle": "Whatever the bank: first the check, then the strategy.",
+    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. Because of the deadlines, your file is assessed as a priority.",
     "ctaButton": "Immediate File Review"
   },
   "ethniki": {
@@ -641,12 +643,12 @@
     "heroCity": "Thessaloniki · 12 Leontos Sofou St.",
     "heroTitle": "Lawyer for National Bank of Greece loans and foreclosures in Thessaloniki and across Greece",
     "heroSubtitle": "Objection · Suspension · Haircut Negotiation",
-    "intro": "If you have a non-performing National Bank of Greece loan, or you have received an extrajudicial notice, termination of the contract, a payment order, a writ of execution, a seizure report or an auction programme, your case is no longer at a theoretical stage. In some cases the claim is still pursued by National Bank of Greece itself. In others, the loan has been transferred to a special purpose vehicle (fund) and management has been assigned to a credit servicing company (servicer). The first thing we check is exactly that: who is pursuing you today and with what legal standing. Ioannis Papaioannou, Legal Advisor to the Association of Borrowers and Consumer Protection of Northern Greece, has been defending borrowers against banks and servicers for 25+ years. We know how National Bank of Greece works in practice, which documents must be produced, and which points of the case must be checked before the borrower is pushed into a settlement out of fear or into an auction without a real defence.",
+    "intro": "If you have a non-performing National Bank of Greece loan, or you have received an extrajudicial notice, termination of the contract, a payment order, a writ of execution, a seizure report or an auction programme, your case is no longer at a theoretical stage. In some cases the claim is still pursued by National Bank of Greece itself. In others, the loan has been transferred to a special purpose vehicle (fund) and management has been assigned to a credit servicing company (servicer). The first thing we check is exactly that: who is pursuing you today and with what legal standing. Ioannis Papaioannou, Legal Advisor to the Association of Borrowers and Consumer Protection of Northern Greece, has been defending borrowers against banks and servicers for more than 25 years. We know how National Bank of Greece works in practice, which documents must be produced, and which points of the case must be checked before the borrower is pushed into a settlement out of fear or into an auction without a real defence.",
     "whatTitle": "National Bank of Greece, funds and servicers: who really pursues your loan",
-    "whatText": "A National Bank of Greece loan may today be in different hands than when it was signed. Sometimes it remains with the bank and sometimes it has been transferred, through securitisation, to a special purpose vehicle (fund), with management assigned to a servicer. This matters in practice. In every case we must check who is the real beneficiary of the claim today, when and how the loan was transferred from National Bank of Greece, with which documents the transfer and the servicing assignment are proven, whether the party enforcing has legal standing in the specific procedure, and whether the amount demanded arises in a lawful, clear and verifiable way. A document — from National Bank of Greece or from a servicer — does not mean everything is settled. It means the case must be checked immediately. Before any discussion of a settlement, we must know what is demanded, by whom, with what standing and with what calculation. If management has been taken over by a specific company — such as QQuant, doValue, Intrum or Cepal — see our dedicated page on it too.",
+    "whatText": "A National Bank of Greece loan may today be in different hands than when it was signed. Sometimes it remains with the bank and sometimes it has been transferred, through securitisation, to a special purpose vehicle (fund), with management assigned to a servicer. This matters in practice. In every case we must check who is the real beneficiary of the claim today, when and how the loan was transferred from National Bank of Greece, with which documents the transfer and the servicing assignment are proven, whether the party enforcing has legal standing in the specific procedure, and whether the amount demanded arises in a lawful, clear and verifiable way. A document, whether from National Bank of Greece or from a servicer, does not mean everything is settled. It means the case must be checked immediately. Before any discussion of a settlement, we must know what is demanded, by whom, with what standing and with what calculation. If management has been taken over by a specific company, such as QQuant, doValue, Intrum or Cepal, see our dedicated page on it too.",
     "protectTitle": "Protecting your home from a foreclosure on a National Bank of Greece loan",
     "protectText": "No property is lost because a letter arrived. It is at risk when the case is not checked in time and the lawful means of defence are left unused. From the termination of the contract to the payment order, the writ of execution, the seizure and the auction, each stage has its own significance. We examine whether there is room for an objection, an application for suspension, inclusion in the out-of-court mechanism, direct negotiation or another targeted action. We treat no auction as a foregone conclusion. From the outset we check the legal standing of the party enforcing, the transfer of the claim from National Bank of Greece, the amount of the debt, the interest, the charges, the abusive terms and every act of enforcement. There, in the details that are often not checked, the course of a case can change. The aim is not simply to move fast. The aim is to move correctly, before enforcement appears to be the only road.",
-    "deadlinesTitle": "I received an extrajudicial notice, payment order or seizure on a National Bank of Greece loan — The deadlines you must not miss",
+    "deadlinesTitle": "I received an extrajudicial notice, payment order or seizure on a National Bank of Greece loan: the deadlines you must not miss",
     "deadlinesIntro": "Not every document has the same legal weight. The termination of the contract is one thing, the payment order another and the seizure yet another. But each stage shows the case is moving and the time to react is shrinking.",
     "deadlines": [
       {
@@ -662,19 +664,19 @@
         "desc": "Seizure is the stage at which enforcement has already begun and, for real estate, an auction is already set. An objection to enforcement, on grounds concerning the claim, the writ, the procedure and the seizure, is filed within forty-five days of the seizure. If a suspension of the auction is also needed, that move is examined separately and must be made in good time."
       }
     ],
-    "deadlinesWarning": "With the termination we do not stand still. With the payment order we move immediately. With the seizure there is no room for trial and error. Defence deadlines do not wait for the borrower to recover from the shock.",
+    "deadlinesWarning": "None of these deadlines is extended because the borrower needed time to recover from the shock. That is why the file should be reviewed the moment the first document arrives, not when the auction is already close.",
     "cta1Title": "Do you have a National Bank of Greece or servicer document in front of you?",
-    "cta1Text": "An immediate first assessment: what was served on you, which deadline is running, which moves are available. In older National Bank of Greece loans, limitation periods and the chain of transfers are often the strongest defence points. Call +30 2310 545 261 or send the form.",
-    "negotiationTitle": "Negotiation strategy for National Bank of Greece loans — A settlement aiming at a debt write-off (haircut), where the case allows it",
+    "cta1Text": "An immediate first assessment: what was served on you, which deadline is running, which moves are available. Call +30 2310 545 261 or send the form.",
+    "negotiationTitle": "Negotiation strategy for National Bank of Greece loans: a settlement aiming at a debt write-off (haircut), where the case allows it",
     "negotiationIntro": "Whether you are facing National Bank of Greece or the servicer managing the claim, you do not go to ask for mercy. You go to present a position. Whichever side knows the case better holds the stronger negotiating advantage. Our job is to pass that advantage to the borrower. Before any contact we check the legal standing of the party pursuing, the real beneficiary of the claim, the transfer from National Bank of Greece, the balance, the interest, the charges and every element affecting the amount. An amount that has not been verified must not become the starting point of a negotiation.",
     "negotiationPoints": [
       "The settlement must withstand time. A deal that looks good on paper but collapses on the second or third instalment is worthless. The proposal must be linked to the borrower's real financial capacity, the value of the security, the course of the claim and the data of the case.",
-      "A debt write-off (haircut) is not posed as a wish. It is built as a negotiating goal, when the elements of the case allow it.",
+      "A debt write-off (haircut) is not asked for as a wish; it is documented as a negotiating goal when the elements of the case allow it.",
       "The price at which the fund acquired the loan from National Bank of Greece, the history of the portfolio, the prospect of recovery, the value of the property and the existence of a judicial challenge are factors that can change the discussion.",
-      "The best negotiation takes place when the borrower has already exercised, or is ready to exercise, their rights. A well-founded objection, an application for suspension or a serious judicial challenge turns the negotiation from a mere request into a contest of positions."
+      "The best negotiation takes place when the borrower has already exercised, or is ready to exercise, their rights. A well-founded objection, an application for suspension or a serious judicial challenge changes the basis of the discussion: the other side knows that, if there is no agreement, the case will be decided in court."
     ],
-    "negotiationOutro": "The point is not for a proposal to be heard. It is for it to stand. A settlement that gets paid. A write-off (haircut) when documented. Judicial pressure where needed. Because against a bank or a servicer, the best terms are not given. They are won with control, strategy and properly built pressure.",
-    "cta2Title": "Before you reply to or sign anything with National Bank of Greece or the servicer — talk to us.",
+    "negotiationOutro": "A proposal is not enough to be heard; it has to hold. That means a settlement that can actually be paid, a write-off where it is documented, and judicial pressure where it is needed. Against a bank or a servicer, no one hands you the good terms; they are won through control of the file and proper preparation.",
+    "cta2Title": "Before you reply to or sign anything with National Bank of Greece or the servicer, talk to us first.",
     "cta2Text": "In older National Bank of Greece loans, limitation periods and the chain of transfers are often the strongest defence points. A hasty acknowledgment of debt can close doors that are open today. First the check, then the answer.",
     "anakopiTitle": "Objection and Suspension of Auction before the Courts of Thessaloniki and across Greece",
     "anakopiText1": "Enforcement is not met with general protests, but with a targeted procedural review of every act, every document and every amount invoked by the pursuing side.\n\nOur Law Office handles, on a daily basis, cases of objections, applications for suspension and auctions before the Courts of Thessaloniki and across Greek territory.\n\nIn every case we fully review the writ of payment, the seizure report, the documents of transfer of the claim, the servicing assignment, the analysis of the debt, the interest, the charges, the services and compliance with the lawful deadlines. An objection must not be a routine defence pleading. It must be procedurally precise, evidentially documented and adapted to the actual data of the specific file.",
@@ -684,19 +686,19 @@
     "faq": [
       {
         "q": "My loan was with National Bank of Greece but now another company is calling me. What does this mean?",
-        "a": "It means National Bank of Greece probably transferred the claim to a special purpose vehicle (fund) and assigned management to a credit servicing company (servicer) — such as, depending on the portfolio, QQuant, doValue, Intrum or Cepal. It does not mean the debt is self-evident or correctly calculated. The transfer, the legal standing and the amount must be checked before you do anything."
+        "a": "It means National Bank of Greece probably transferred the claim to a special purpose vehicle (fund) and assigned management to a credit servicing company (servicer), such as, depending on the portfolio, QQuant, doValue, Intrum or Cepal. It does not mean the debt is self-evident or correctly calculated. The transfer, the legal standing and the amount must be checked before you do anything."
       },
       {
         "q": "Can National Bank of Greece or the servicer put my property up for auction?",
-        "a": "Only with an enforceable title and an entirely lawful procedure — both of which are reviewed in court. The standing of the party enforcing, the amount of the claim and every act of enforcement have points of challenge with specific deadlines."
+        "a": "Only with an enforceable title and an entirely lawful procedure, and both are reviewed in court. The standing of the party enforcing, the amount of the claim and every act of enforcement have points of challenge with specific deadlines."
       },
       {
         "q": "Is it worth negotiating with National Bank of Greece or the servicer on my own?",
-        "a": "It is dangerous. Across from you stands a specialised mechanism that negotiates thousands of cases — you have one. Without a file review you do not even know whether the amount demanded is correct, nor what your real negotiating power is."
+        "a": "It is dangerous. Across from you stands a specialised mechanism that negotiates thousands of cases, while you have one. Without a file review you do not even know whether the amount demanded is correct, nor what your real negotiating power is."
       },
       {
         "q": "The auction is very close. Is there still hope?",
-        "a": "It depends on the file — but the answer is given only after we see it, and quickly. Procedural defects may provide grounds for action even in the last days. Call immediately at +30 2310 545 261."
+        "a": "It depends on the file, and the answer comes only after we see it, quickly. Procedural defects may provide grounds for action even in the last days. Call immediately at +30 2310 545 261."
       },
       {
         "q": "What documents do you need for the review?",
@@ -704,7 +706,7 @@
       }
     ],
     "ctaTitle": "National Bank of Greece and the servicers negotiate every day. We litigate every day.",
-    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. In older National Bank of Greece loans, limitation periods and the chain of transfers are often the strongest defence points. Due to strict deadlines, your file is assessed as a matter of urgency — today, not \"at some point\".",
+    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. Due to strict deadlines, your file is assessed as a priority, because the deadlines do not wait.",
     "ctaButton": "Immediate File Review",
     "ctaPhone": "Call now: +30 2310 545 261"
   },
@@ -714,12 +716,12 @@
     "heroCity": "Thessaloniki · 12 Leontos Sofou St.",
     "heroTitle": "Lawyer for Eurobank loans and foreclosures in Thessaloniki and across Greece",
     "heroSubtitle": "Objection · Suspension · Haircut Negotiation",
-    "intro": "If you have a non-performing Eurobank loan, or you have received an extrajudicial notice, termination of the contract, a payment order, a writ of execution, a seizure report or an auction programme, your case is no longer at a theoretical stage. In some cases the claim is still pursued by Eurobank itself. In others, the loan has been transferred to a special purpose vehicle (fund) and management has been assigned to a credit servicing company (servicer). The first thing we check is exactly that: who is pursuing you today and with what legal standing. Ioannis Papaioannou, Legal Advisor to the Association of Borrowers and Consumer Protection of Northern Greece, has been defending borrowers against banks and servicers for 25+ years. We know how Eurobank works in practice, which documents must be produced, and which points of the case must be checked before the borrower is pushed into a settlement out of fear or into an auction without a real defence.",
+    "intro": "If you have a non-performing Eurobank loan, or you have received an extrajudicial notice, termination of the contract, a payment order, a writ of execution, a seizure report or an auction programme, your case is no longer at a theoretical stage. In some cases the claim is still pursued by Eurobank itself. In others, the loan has been transferred to a special purpose vehicle (fund) and management has been assigned to a credit servicing company (servicer). The first thing we check is exactly that: who is pursuing you today and with what legal standing. Ioannis Papaioannou, Legal Advisor to the Association of Borrowers and Consumer Protection of Northern Greece, has been defending borrowers against banks and servicers for more than 25 years. We know how Eurobank works in practice, which documents must be produced, and which points of the case must be checked before the borrower is pushed into a settlement out of fear or into an auction without a real defence.",
     "whatTitle": "Eurobank, funds and servicers: who really pursues your loan",
-    "whatText": "A Eurobank loan may today be in different hands than when it was signed. Sometimes it remains with the bank and sometimes it has been transferred, through securitisation, to a special purpose vehicle (fund), with management assigned to a servicer. This matters in practice. In every case we must check who is the real beneficiary of the claim today, when and how the loan was transferred from Eurobank, with which documents the transfer and the servicing assignment are proven, whether the party enforcing has legal standing in the specific procedure, and whether the amount demanded arises in a lawful, clear and verifiable way. A document — from Eurobank or from a servicer — does not mean everything is settled. It means the case must be checked immediately. Before any discussion of a settlement, we must know what is demanded, by whom, with what standing and with what calculation. If management has been taken over by a specific company — such as doValue, Intrum, Cepal or QQuant — see our dedicated page on it too.",
+    "whatText": "A Eurobank loan may today be in different hands than when it was signed. Sometimes it remains with the bank and sometimes it has been transferred, through securitisation, to a special purpose vehicle (fund), with management assigned to a servicer. This matters in practice. In every case we must check who is the real beneficiary of the claim today, when and how the loan was transferred from Eurobank, with which documents the transfer and the servicing assignment are proven, whether the party enforcing has legal standing in the specific procedure, and whether the amount demanded arises in a lawful, clear and verifiable way. A document, whether from Eurobank or from a servicer, does not mean everything is settled. It means the case must be checked immediately. Before any discussion of a settlement, we must know what is demanded, by whom, with what standing and with what calculation. If management has been taken over by a specific company, such as doValue, Intrum, Cepal or QQuant, see our dedicated page on it too.",
     "protectTitle": "Protecting your home from a foreclosure on a Eurobank loan",
     "protectText": "No property is lost because a letter arrived. It is at risk when the case is not checked in time and the lawful means of defence are left unused. From the termination of the contract to the payment order, the writ of execution, the seizure and the auction, each stage has its own significance. We examine whether there is room for an objection, an application for suspension, inclusion in the out-of-court mechanism, direct negotiation or another targeted action. We treat no auction as a foregone conclusion. From the outset we check the legal standing of the party enforcing, the transfer of the claim from Eurobank, the amount of the debt, the interest, the charges, the abusive terms and every act of enforcement. There, in the details that are often not checked, the course of a case can change. The aim is not simply to move fast. The aim is to move correctly, before enforcement appears to be the only road.",
-    "deadlinesTitle": "I received an extrajudicial notice, payment order or seizure on a Eurobank loan — The deadlines you must not miss",
+    "deadlinesTitle": "I received an extrajudicial notice, payment order or seizure on a Eurobank loan: the deadlines you must not miss",
     "deadlinesIntro": "Not every document has the same legal weight. The termination of the contract is one thing, the payment order another and the seizure yet another. But each stage shows the case is moving and the time to react is shrinking.",
     "deadlines": [
       {
@@ -735,20 +737,20 @@
         "desc": "Seizure is the stage at which enforcement has already begun and, for real estate, an auction is already set. An objection to enforcement, on grounds concerning the claim, the writ, the procedure and the seizure, is filed within forty-five days of the seizure. If a suspension of the auction is also needed, that move is examined separately and must be made in good time."
       }
     ],
-    "deadlinesWarning": "With the termination we do not stand still. With the payment order we move immediately. With the seizure there is no room for trial and error. Defence deadlines do not wait for the borrower to recover from the shock.",
+    "deadlinesWarning": "None of these deadlines is extended because the borrower needed time to recover from the shock. That is why the file should be reviewed the moment the first document arrives, not when the auction is already close.",
     "cta1Title": "Do you have a Eurobank or servicer document in front of you?",
-    "cta1Text": "An immediate first assessment: what was served on you, which deadline is running, which moves are available. In Eurobank cases the portfolio volume is large and the process moves fast — the speed of your response matters. Call +30 2310 545 261 or send the form.",
-    "negotiationTitle": "Negotiation strategy for Eurobank loans — A settlement aiming at a debt write-off (haircut), where the case allows it",
+    "cta1Text": "An immediate first assessment: what was served on you, which deadline is running, which moves are available. Call +30 2310 545 261 or send the form.",
+    "negotiationTitle": "Negotiation strategy for Eurobank loans: a settlement aiming at a debt write-off (haircut), where the case allows it",
     "negotiationIntro": "Whether you are facing Eurobank or the servicer managing the claim, you do not go to ask for mercy. You go to present a position. Whichever side knows the case better holds the stronger negotiating advantage. Our job is to pass that advantage to the borrower. Before any contact we check the legal standing of the party pursuing, the real beneficiary of the claim, the transfer from Eurobank, the balance, the interest, the charges and every element affecting the amount. An amount that has not been verified must not become the starting point of a negotiation.",
     "negotiationPoints": [
       "The settlement must withstand time. A deal that looks good on paper but collapses on the second or third instalment is worthless. The proposal must be linked to the borrower's real financial capacity, the value of the security, the course of the claim and the data of the case.",
-      "A debt write-off (haircut) is not posed as a wish. It is built as a negotiating goal, when the elements of the case allow it.",
+      "A debt write-off (haircut) is not asked for as a wish; it is documented as a negotiating goal when the elements of the case allow it.",
       "The price at which the fund acquired the loan from Eurobank, the history of the portfolio, the prospect of recovery, the value of the property and the existence of a judicial challenge are factors that can change the discussion.",
-      "The best negotiation takes place when the borrower has already exercised, or is ready to exercise, their rights. A well-founded objection, an application for suspension or a serious judicial challenge turns the negotiation from a mere request into a contest of positions."
+      "The best negotiation takes place when the borrower has already exercised, or is ready to exercise, their rights. A well-founded objection, an application for suspension or a serious judicial challenge changes the basis of the discussion: the other side knows that, if there is no agreement, the case will be decided in court."
     ],
-    "negotiationOutro": "The point is not for a proposal to be heard. It is for it to stand. A settlement that gets paid. A write-off (haircut) when documented. Judicial pressure where needed. Because against a bank or a servicer, the best terms are not given. They are won with control, strategy and properly built pressure.",
-    "cta2Title": "Before you reply to or sign anything with Eurobank or the servicer — talk to us.",
-    "cta2Text": "In Eurobank cases the portfolio volume is large and the process moves fast — the speed of your response matters. A hasty acknowledgment of debt can close doors that are open today. First the check, then the answer.",
+    "negotiationOutro": "A proposal is not enough to be heard; it has to hold. That means a settlement that can actually be paid, a write-off where it is documented, and judicial pressure where it is needed. Against a bank or a servicer, no one hands you the good terms; they are won through control of the file and proper preparation.",
+    "cta2Title": "Before you reply to or sign anything with Eurobank or the servicer, talk to us first.",
+    "cta2Text": "In Eurobank cases the portfolio is large and the procedures move quickly, so the speed of your own response matters too. A hasty acknowledgment of debt can close doors that are open today. First the check, then the answer.",
     "anakopiTitle": "Objection and Suspension of Auction before the Courts of Thessaloniki and across Greece",
     "anakopiText1": "Enforcement is not met with general protests, but with a targeted procedural review of every act, every document and every amount invoked by the pursuing side.\n\nOur Law Office handles, on a daily basis, cases of objections, applications for suspension and auctions before the Courts of Thessaloniki and across Greek territory.\n\nIn every case we fully review the writ of payment, the seizure report, the documents of transfer of the claim, the servicing assignment, the analysis of the debt, the interest, the charges, the services and compliance with the lawful deadlines. An objection must not be a routine defence pleading. It must be procedurally precise, evidentially documented and adapted to the actual data of the specific file.",
     "anakopiPoints": [],
@@ -757,19 +759,19 @@
     "faq": [
       {
         "q": "My loan was with Eurobank but now another company is calling me. What does this mean?",
-        "a": "It means Eurobank probably transferred the claim to a special purpose vehicle (fund) and assigned management to a credit servicing company (servicer) — such as, depending on the portfolio, doValue, Intrum, Cepal or QQuant. It does not mean the debt is self-evident or correctly calculated. The transfer, the legal standing and the amount must be checked before you do anything."
+        "a": "It means Eurobank probably transferred the claim to a special purpose vehicle (fund) and assigned management to a credit servicing company (servicer), such as, depending on the portfolio, doValue, Intrum, Cepal or QQuant. It does not mean the debt is self-evident or correctly calculated. The transfer, the legal standing and the amount must be checked before you do anything."
       },
       {
         "q": "Can Eurobank or the servicer put my property up for auction?",
-        "a": "Only with an enforceable title and an entirely lawful procedure — both of which are reviewed in court. The standing of the party enforcing, the amount of the claim and every act of enforcement have points of challenge with specific deadlines."
+        "a": "Only with an enforceable title and an entirely lawful procedure, and both are reviewed in court. The standing of the party enforcing, the amount of the claim and every act of enforcement have points of challenge with specific deadlines."
       },
       {
         "q": "Is it worth negotiating with Eurobank or the servicer on my own?",
-        "a": "It is dangerous. Across from you stands a specialised mechanism that negotiates thousands of cases — you have one. Without a file review you do not even know whether the amount demanded is correct, nor what your real negotiating power is."
+        "a": "It is dangerous. Across from you stands a specialised mechanism that negotiates thousands of cases, while you have one. Without a file review you do not even know whether the amount demanded is correct, nor what your real negotiating power is."
       },
       {
         "q": "The auction is very close. Is there still hope?",
-        "a": "It depends on the file — but the answer is given only after we see it, and quickly. Procedural defects may provide grounds for action even in the last days. Call immediately at +30 2310 545 261."
+        "a": "It depends on the file, and the answer comes only after we see it, quickly. Procedural defects may provide grounds for action even in the last days. Call immediately at +30 2310 545 261."
       },
       {
         "q": "What documents do you need for the review?",
@@ -777,7 +779,7 @@
       }
     ],
     "ctaTitle": "Eurobank and the servicers negotiate every day. We litigate every day.",
-    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. In Eurobank cases the portfolio volume is large and the process moves fast — the speed of your response matters. Due to strict deadlines, your file is assessed as a matter of urgency — today, not \"at some point\".",
+    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. Due to strict deadlines, your file is assessed as a priority, because the deadlines do not wait.",
     "ctaButton": "Immediate File Review",
     "ctaPhone": "Call now: +30 2310 545 261"
   },
@@ -843,7 +845,7 @@
       },
       {
         "q": "Is it worth negotiating with Intrum on my own?",
-        "a": "It is risky. You are facing a specialised operation that negotiates thousands of cases — you have one. Without a file review you don't even know whether the amount demanded is correct, or what your real bargaining power is."
+        "a": "It is risky. You are facing a specialised operation that negotiates thousands of cases, while you have one. Without a file review you don't even know whether the amount demanded is correct, or what your real bargaining power is."
       },
       {
         "q": "The auction is very close. Is there still hope?",
@@ -1363,14 +1365,14 @@
     "seoTitle": "Lawyer for Eurobank Business Loans – Companies in Thessaloniki",
     "seoDescription": "Company or professional with a corporate loan or personal guarantee at Eurobank? Review of the guarantee, business property, objection, suspension and the out-of-court mechanism for businesses. Tel: +30 2310 545 261.",
     "heroCity": "Thessaloniki · 12 Leontos Sofou St.",
-    "heroTitle": "Lawyer for Eurobank Professional and Corporate Loans — Businesses and Professionals",
+    "heroTitle": "Lawyer for Eurobank Professional and Corporate Loans: Businesses and Professionals",
     "heroSubtitle": "Corporate loans · Personal guarantees · Out-of-court mechanism for businesses",
-    "intro": "This page is for businesses, companies and self-employed professionals with debts to Eurobank. Professional and corporate loans, working capital, current accounts, bond loans and above all the personal guarantees of managers and partners lead to payment orders, seizures and auctions — often with larger amounts and immediate consequences for viability. Ioannis Papaioannou has defended businesses and professionals against banks, funds and servicers for 25+ years.",
+    "intro": "This page is for businesses, companies and self-employed professionals with debts to Eurobank. Professional and corporate loans, working capital, current accounts, bond loans and above all the personal guarantees of managers and partners lead to payment orders, seizures and auctions, often with larger amounts and immediate consequences for viability. Ioannis Papaioannou has defended businesses and professionals against banks, funds and servicers for more than 25 years.",
     "whatTitle": "Corporate loans and guarantees: what we check first",
-    "whatText": "In a business debt to Eurobank, the file is almost always more complex than a residential case. We review the loan or credit agreement, the securities (prenotations, pledges, assignments), the amount of the claim and the legal standing of the party pursuing today — that is, whether the claim stayed with the bank or was transferred to a fund with a servicing company. Personal guarantees carry particular weight: when the entrepreneur, manager or partner has guaranteed, the extent and limits of their liability are checked separately. A guarantee is not always unlimited, nor always valid.",
+    "whatText": "In a business debt to Eurobank, the file is almost always more complex than a residential case. We review the loan or credit agreement, the securities (prenotations, pledges, assignments), the amount of the claim and the legal standing of the party pursuing today, that is, whether the claim stayed with the bank or was transferred to a fund with a servicing company. Personal guarantees carry particular weight: when the entrepreneur, manager or partner has guaranteed, the extent and limits of their liability are checked separately. A guarantee is not always unlimited, nor always valid.",
     "protectTitle": "Protecting business property and equipment",
-    "protectText": "In business cases not only the home is at risk, but also the business premises, the machinery, the goods, the business accounts and the very continuation of the activity. Every act of enforcement — garnishment, freezing of accounts, auction of fixed assets — is met with an objection and, where needed, an application for suspension. From the outset we check the legal standing, the transfer of the claim, the amount of the debt, the interest, the charges and every act of enforcement, aiming to keep the business standing while the substance is judged.",
-    "deadlinesTitle": "I received an extrajudicial notice, payment order or seizure on a Eurobank loan — The deadlines you must not miss",
+    "protectText": "In business cases not only the home is at risk, but also the business premises, the machinery, the goods, the business accounts and the very continuation of the activity. Every act of enforcement (garnishment, freezing of accounts, auction of fixed assets) is met with an objection and, where needed, an application for suspension. From the outset we check the legal standing, the transfer of the claim, the amount of the debt, the interest, the charges and every act of enforcement, aiming to keep the business standing while the substance is judged.",
+    "deadlinesTitle": "I received an extrajudicial notice, payment order or seizure on a Eurobank loan: the deadlines you must not miss",
     "deadlinesIntro": "Not every document has the same legal weight. The termination of the contract is one thing, the payment order another and the seizure yet another. But each stage shows the case is moving and the time to react is shrinking.",
     "deadlines": [
       {
@@ -1386,25 +1388,25 @@
         "desc": "Seizure is the stage at which enforcement has already begun and, for real estate, an auction is already set. An objection to enforcement, on grounds concerning the claim, the writ, the procedure and the seizure, is filed within forty-five days of the seizure. If a suspension of the auction is also needed, that move is examined separately and must be made in good time."
       }
     ],
-    "deadlinesWarning": "With the termination we do not stand still. With the payment order we move immediately. With the seizure there is no room for trial and error. Defence deadlines do not wait for the borrower to recover from the shock.",
+    "deadlinesWarning": "None of these deadlines is extended because the borrower needed time to recover from the shock. That is why the file should be reviewed the moment the first document arrives, not when the auction is already close.",
     "cta1Title": "Does your business have a document from Eurobank?",
     "cta1Text": "An immediate first assessment of the file: corporate loan, guarantees, securities, deadlines. Call +30 2310 545 261 or send the form.",
-    "negotiationTitle": "Negotiation and settlement of corporate debts — aiming at viability",
+    "negotiationTitle": "Negotiation and settlement of corporate debts, aiming at viability",
     "negotiationIntro": "In a business debt, a settlement is not merely a matter of instalments. It is a matter of viability. Before any contact with Eurobank we check the legal standing, the real balance, the guarantees and the data of the business, so that the proposal rests on numbers that hold. The goal is a settlement served by real cash flow, with a debt write-off (haircut) where documented and a controlled extent of personal guarantees.",
     "negotiationPoints": [
       "The settlement must withstand time. A deal that looks good on paper but collapses on the second or third instalment is worthless. The proposal must be linked to the borrower's real financial capacity, the value of the security, the course of the claim and the data of the case.",
-      "A debt write-off (haircut) is not posed as a wish. It is built as a negotiating goal, when the elements of the case allow it.",
+      "A debt write-off (haircut) is not asked for as a wish; it is documented as a negotiating goal when the elements of the case allow it.",
       "The price at which the fund acquired the loan from Eurobank, the history of the portfolio, the prospect of recovery, the value of the property and the existence of a judicial challenge are factors that can change the discussion.",
-      "The best negotiation takes place when the borrower has already exercised, or is ready to exercise, their rights. A well-founded objection, an application for suspension or a serious judicial challenge turns the negotiation from a mere request into a contest of positions."
+      "The best negotiation takes place when the borrower has already exercised, or is ready to exercise, their rights. A well-founded objection, an application for suspension or a serious judicial challenge changes the basis of the discussion: the other side knows that, if there is no agreement, the case will be decided in court."
     ],
     "negotiationOutro": "For businesses, the best deal is the one that lets the business continue. A settlement that is served, guarantees that are bounded, judicial pressure where needed.",
-    "cta2Title": "Before you sign a settlement or acknowledge a corporate debt — talk to us.",
+    "cta2Title": "Before you sign a settlement or acknowledge a corporate debt, talk to us first.",
     "cta2Text": "In business debts, a hasty signature can trigger personal guarantees or acknowledge an amount that could be challenged. First the check, then the answer.",
     "anakopiTitle": "Objection and Suspension of Auction before the Courts of Thessaloniki and across Greece",
     "anakopiText1": "Enforcement is not met with general protests, but with a targeted procedural review of every act, every document and every amount invoked by the pursuing side.\n\nOur Law Office handles, on a daily basis, cases of objections, applications for suspension and auctions before the Courts of Thessaloniki and across Greek territory.\n\nIn every case we fully review the writ of payment, the seizure report, the documents of transfer of the claim, the servicing assignment, the analysis of the debt, the interest, the charges, the services and compliance with the lawful deadlines. An objection must not be a routine defence pleading. It must be procedurally precise, evidentially documented and adapted to the actual data of the specific file.",
     "anakopiPoints": [],
     "anakopiText2": "Where required, the objection is accompanied by an application for suspension, aiming to temporarily avert the auction until the substance of the dispute is judged. Suspension is not merely a means of delay. It is a procedural tool of protection, when there is a serious ground to annul the enforcement and a risk of irreparable harm from the immediate conduct of the auction.\n\nOur goal is the immediate and full assessment of the file, the highlighting of the substantive and procedural defects, and the formation of a concrete strategy either to overturn the enforcement in court or to create a strong negotiating position against the bank, the claims acquisition company or the credit servicing company.\n\nIn auction cases, time is critical. The timely submission of documents and the immediate legal review can determine whether there is real room for objection, suspension or an out-of-court settlement.",
-    "faqTitle": "FAQ — Businesses and Eurobank",
+    "faqTitle": "FAQ: Businesses and Eurobank",
     "faq": [
       {
         "q": "I have personally guaranteed a corporate loan to Eurobank. Is my personal property at risk?",
@@ -1412,7 +1414,7 @@
       },
       {
         "q": "Can my business account or equipment be seized?",
-        "a": "With an enforceable title and a lawful procedure, yes — but every act of enforcement (garnishment, freezing of accounts, auction of fixed assets) has points of challenge with specific deadlines. An immediate objection and application for suspension can keep the business standing."
+        "a": "With an enforceable title and a lawful procedure, yes, but every act of enforcement (garnishment, freezing of accounts, auction of fixed assets) has points of challenge with specific deadlines. An immediate objection and application for suspension can keep the business standing."
       },
       {
         "q": "My business owes banks, social security and the tax office at once. What happens?",
@@ -1420,15 +1422,15 @@
       },
       {
         "q": "The business has stopped operating. Is a defence still worthwhile?",
-        "a": "It is — especially to limit personal guarantees and protect the personal property of guarantors and managers. Even if the company closed, the guarantees and debts may follow you personally."
+        "a": "It is, especially to limit personal guarantees and protect the personal property of guarantors and managers. Even if the company closed, the guarantees and debts may follow you personally."
       },
       {
         "q": "What documents do you need for the review?",
-        "a": "The loan/credit agreement, the guarantee contracts, the security documents, the letters and every document from Eurobank or the bank — extrajudicial notices, termination, payment order, seizure report. Most important: the dates of service."
+        "a": "The loan/credit agreement, the guarantee contracts, the security documents, the letters and every document from Eurobank: extrajudicial notices, termination, payment order, seizure report. Most important: the dates of service."
       }
     ],
-    "ctaTitle": "For your business — first the check, then the strategy.",
-    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. In business debts the amounts are large and the deadlines strict — the file is assessed as a matter of urgency.",
+    "ctaTitle": "For your business: first the check, then the strategy.",
+    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. In business debts the amounts are large and the deadlines strict, so the file is assessed as a priority.",
     "ctaButton": "Immediate File Review",
     "ctaPhone": "Call now: +30 2310 545 261"
   },
@@ -1436,14 +1438,14 @@
     "seoTitle": "Lawyer for Alpha Bank Business Loans – Companies in Thessaloniki",
     "seoDescription": "Company or professional with a corporate loan or personal guarantee at Alpha Bank? Review of the guarantee, business property, objection, suspension and the out-of-court mechanism for businesses. Tel: +30 2310 545 261.",
     "heroCity": "Thessaloniki · 12 Leontos Sofou St.",
-    "heroTitle": "Lawyer for Alpha Bank Professional and Corporate Loans — Businesses and Professionals",
+    "heroTitle": "Lawyer for Alpha Bank Professional and Corporate Loans: Businesses and Professionals",
     "heroSubtitle": "Corporate loans · Personal guarantees · Out-of-court mechanism for businesses",
-    "intro": "This page is for businesses, companies and self-employed professionals with debts to Alpha Bank. Professional and corporate loans, working capital, current accounts, bond loans and above all the personal guarantees of managers and partners lead to payment orders, seizures and auctions — often with larger amounts and immediate consequences for viability. Ioannis Papaioannou has defended businesses and professionals against banks, funds and servicers for 25+ years.",
+    "intro": "This page is for businesses, companies and self-employed professionals with debts to Alpha Bank. Professional and corporate loans, working capital, current accounts, bond loans and above all the personal guarantees of managers and partners lead to payment orders, seizures and auctions, often with larger amounts and immediate consequences for viability. Ioannis Papaioannou has defended businesses and professionals against banks, funds and servicers for more than 25 years.",
     "whatTitle": "Corporate loans and guarantees: what we check first",
-    "whatText": "In a business debt to Alpha Bank, the file is almost always more complex than a residential case. We review the loan or credit agreement, the securities (prenotations, pledges, assignments), the amount of the claim and the legal standing of the party pursuing today — that is, whether the claim stayed with the bank or was transferred to a fund with a servicing company. Personal guarantees carry particular weight: when the entrepreneur, manager or partner has guaranteed, the extent and limits of their liability are checked separately. A guarantee is not always unlimited, nor always valid.",
+    "whatText": "In a business debt to Alpha Bank, the file is almost always more complex than a residential case. We review the loan or credit agreement, the securities (prenotations, pledges, assignments), the amount of the claim and the legal standing of the party pursuing today, that is, whether the claim stayed with the bank or was transferred to a fund with a servicing company. Personal guarantees carry particular weight: when the entrepreneur, manager or partner has guaranteed, the extent and limits of their liability are checked separately. A guarantee is not always unlimited, nor always valid.",
     "protectTitle": "Protecting business property and equipment",
-    "protectText": "In business cases not only the home is at risk, but also the business premises, the machinery, the goods, the business accounts and the very continuation of the activity. Every act of enforcement — garnishment, freezing of accounts, auction of fixed assets — is met with an objection and, where needed, an application for suspension. From the outset we check the legal standing, the transfer of the claim, the amount of the debt, the interest, the charges and every act of enforcement, aiming to keep the business standing while the substance is judged.",
-    "deadlinesTitle": "I received an extrajudicial notice, payment order or seizure on a Alpha Bank loan — The deadlines you must not miss",
+    "protectText": "In business cases not only the home is at risk, but also the business premises, the machinery, the goods, the business accounts and the very continuation of the activity. Every act of enforcement (garnishment, freezing of accounts, auction of fixed assets) is met with an objection and, where needed, an application for suspension. From the outset we check the legal standing, the transfer of the claim, the amount of the debt, the interest, the charges and every act of enforcement, aiming to keep the business standing while the substance is judged.",
+    "deadlinesTitle": "I received an extrajudicial notice, payment order or seizure on an Alpha Bank loan: the deadlines you must not miss",
     "deadlinesIntro": "Not every document has the same legal weight. The termination of the contract is one thing, the payment order another and the seizure yet another. But each stage shows the case is moving and the time to react is shrinking.",
     "deadlines": [
       {
@@ -1459,25 +1461,25 @@
         "desc": "Seizure is the stage at which enforcement has already begun and, for real estate, an auction is already set. An objection to enforcement, on grounds concerning the claim, the writ, the procedure and the seizure, is filed within forty-five days of the seizure. If a suspension of the auction is also needed, that move is examined separately and must be made in good time."
       }
     ],
-    "deadlinesWarning": "With the termination we do not stand still. With the payment order we move immediately. With the seizure there is no room for trial and error. Defence deadlines do not wait for the borrower to recover from the shock.",
+    "deadlinesWarning": "None of these deadlines is extended because the borrower needed time to recover from the shock. That is why the file should be reviewed the moment the first document arrives, not when the auction is already close.",
     "cta1Title": "Does your business have a document from Alpha Bank?",
     "cta1Text": "An immediate first assessment of the file: corporate loan, guarantees, securities, deadlines. Call +30 2310 545 261 or send the form.",
-    "negotiationTitle": "Negotiation and settlement of corporate debts — aiming at viability",
+    "negotiationTitle": "Negotiation and settlement of corporate debts, aiming at viability",
     "negotiationIntro": "In a business debt, a settlement is not merely a matter of instalments. It is a matter of viability. Before any contact with Alpha Bank we check the legal standing, the real balance, the guarantees and the data of the business, so that the proposal rests on numbers that hold. The goal is a settlement served by real cash flow, with a debt write-off (haircut) where documented and a controlled extent of personal guarantees.",
     "negotiationPoints": [
       "The settlement must withstand time. A deal that looks good on paper but collapses on the second or third instalment is worthless. The proposal must be linked to the borrower's real financial capacity, the value of the security, the course of the claim and the data of the case.",
-      "A debt write-off (haircut) is not posed as a wish. It is built as a negotiating goal, when the elements of the case allow it.",
+      "A debt write-off (haircut) is not asked for as a wish; it is documented as a negotiating goal when the elements of the case allow it.",
       "The price at which the fund acquired the loan from Alpha Bank, the history of the portfolio, the prospect of recovery, the value of the property and the existence of a judicial challenge are factors that can change the discussion.",
-      "The best negotiation takes place when the borrower has already exercised, or is ready to exercise, their rights. A well-founded objection, an application for suspension or a serious judicial challenge turns the negotiation from a mere request into a contest of positions."
+      "The best negotiation takes place when the borrower has already exercised, or is ready to exercise, their rights. A well-founded objection, an application for suspension or a serious judicial challenge changes the basis of the discussion: the other side knows that, if there is no agreement, the case will be decided in court."
     ],
     "negotiationOutro": "For businesses, the best deal is the one that lets the business continue. A settlement that is served, guarantees that are bounded, judicial pressure where needed.",
-    "cta2Title": "Before you sign a settlement or acknowledge a corporate debt — talk to us.",
+    "cta2Title": "Before you sign a settlement or acknowledge a corporate debt, talk to us first.",
     "cta2Text": "In business debts, a hasty signature can trigger personal guarantees or acknowledge an amount that could be challenged. First the check, then the answer.",
     "anakopiTitle": "Objection and Suspension of Auction before the Courts of Thessaloniki and across Greece",
     "anakopiText1": "Enforcement is not met with general protests, but with a targeted procedural review of every act, every document and every amount invoked by the pursuing side.\n\nOur Law Office handles, on a daily basis, cases of objections, applications for suspension and auctions before the Courts of Thessaloniki and across Greek territory.\n\nIn every case we fully review the writ of payment, the seizure report, the documents of transfer of the claim, the servicing assignment, the analysis of the debt, the interest, the charges, the services and compliance with the lawful deadlines. An objection must not be a routine defence pleading. It must be procedurally precise, evidentially documented and adapted to the actual data of the specific file.",
     "anakopiPoints": [],
     "anakopiText2": "Where required, the objection is accompanied by an application for suspension, aiming to temporarily avert the auction until the substance of the dispute is judged. Suspension is not merely a means of delay. It is a procedural tool of protection, when there is a serious ground to annul the enforcement and a risk of irreparable harm from the immediate conduct of the auction.\n\nOur goal is the immediate and full assessment of the file, the highlighting of the substantive and procedural defects, and the formation of a concrete strategy either to overturn the enforcement in court or to create a strong negotiating position against the bank, the claims acquisition company or the credit servicing company.\n\nIn auction cases, time is critical. The timely submission of documents and the immediate legal review can determine whether there is real room for objection, suspension or an out-of-court settlement.",
-    "faqTitle": "FAQ — Businesses and Alpha Bank",
+    "faqTitle": "FAQ: Businesses and Alpha Bank",
     "faq": [
       {
         "q": "I have personally guaranteed a corporate loan to Alpha Bank. Is my personal property at risk?",
@@ -1485,7 +1487,7 @@
       },
       {
         "q": "Can my business account or equipment be seized?",
-        "a": "With an enforceable title and a lawful procedure, yes — but every act of enforcement (garnishment, freezing of accounts, auction of fixed assets) has points of challenge with specific deadlines. An immediate objection and application for suspension can keep the business standing."
+        "a": "With an enforceable title and a lawful procedure, yes, but every act of enforcement (garnishment, freezing of accounts, auction of fixed assets) has points of challenge with specific deadlines. An immediate objection and application for suspension can keep the business standing."
       },
       {
         "q": "My business owes banks, social security and the tax office at once. What happens?",
@@ -1493,15 +1495,15 @@
       },
       {
         "q": "The business has stopped operating. Is a defence still worthwhile?",
-        "a": "It is — especially to limit personal guarantees and protect the personal property of guarantors and managers. Even if the company closed, the guarantees and debts may follow you personally."
+        "a": "It is, especially to limit personal guarantees and protect the personal property of guarantors and managers. Even if the company closed, the guarantees and debts may follow you personally."
       },
       {
         "q": "What documents do you need for the review?",
-        "a": "The loan/credit agreement, the guarantee contracts, the security documents, the letters and every document from Alpha Bank or the bank — extrajudicial notices, termination, payment order, seizure report. Most important: the dates of service."
+        "a": "The loan/credit agreement, the guarantee contracts, the security documents, the letters and every document from Alpha Bank: extrajudicial notices, termination, payment order, seizure report. Most important: the dates of service."
       }
     ],
-    "ctaTitle": "For your business — first the check, then the strategy.",
-    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. In business debts the amounts are large and the deadlines strict — the file is assessed as a matter of urgency.",
+    "ctaTitle": "For your business: first the check, then the strategy.",
+    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. In business debts the amounts are large and the deadlines strict, so the file is assessed as a priority.",
     "ctaButton": "Immediate File Review",
     "ctaPhone": "Call now: +30 2310 545 261"
   },
@@ -1509,14 +1511,14 @@
     "seoTitle": "Lawyer for Piraeus Bank Business Loans – Companies in Thessaloniki",
     "seoDescription": "Company or professional with a corporate loan or personal guarantee at Piraeus Bank? Review of the guarantee, business property, objection, suspension and the out-of-court mechanism for businesses. Tel: +30 2310 545 261.",
     "heroCity": "Thessaloniki · 12 Leontos Sofou St.",
-    "heroTitle": "Lawyer for Piraeus Bank Professional and Corporate Loans — Businesses and Professionals",
+    "heroTitle": "Lawyer for Piraeus Bank Professional and Corporate Loans: Businesses and Professionals",
     "heroSubtitle": "Corporate loans · Personal guarantees · Out-of-court mechanism for businesses",
-    "intro": "This page is for businesses, companies and self-employed professionals with debts to Piraeus Bank. Professional and corporate loans, working capital, current accounts, bond loans and above all the personal guarantees of managers and partners lead to payment orders, seizures and auctions — often with larger amounts and immediate consequences for viability. Ioannis Papaioannou has defended businesses and professionals against banks, funds and servicers for 25+ years.",
+    "intro": "This page is for businesses, companies and self-employed professionals with debts to Piraeus Bank. Professional and corporate loans, working capital, current accounts, bond loans and above all the personal guarantees of managers and partners lead to payment orders, seizures and auctions, often with larger amounts and immediate consequences for viability. Ioannis Papaioannou has defended businesses and professionals against banks, funds and servicers for more than 25 years.",
     "whatTitle": "Corporate loans and guarantees: what we check first",
-    "whatText": "In a business debt to Piraeus Bank, the file is almost always more complex than a residential case. We review the loan or credit agreement, the securities (prenotations, pledges, assignments), the amount of the claim and the legal standing of the party pursuing today — that is, whether the claim stayed with the bank or was transferred to a fund with a servicing company. Personal guarantees carry particular weight: when the entrepreneur, manager or partner has guaranteed, the extent and limits of their liability are checked separately. A guarantee is not always unlimited, nor always valid.",
+    "whatText": "In a business debt to Piraeus Bank, the file is almost always more complex than a residential case. We review the loan or credit agreement, the securities (prenotations, pledges, assignments), the amount of the claim and the legal standing of the party pursuing today, that is, whether the claim stayed with the bank or was transferred to a fund with a servicing company. Personal guarantees carry particular weight: when the entrepreneur, manager or partner has guaranteed, the extent and limits of their liability are checked separately. A guarantee is not always unlimited, nor always valid.",
     "protectTitle": "Protecting business property and equipment",
-    "protectText": "In business cases not only the home is at risk, but also the business premises, the machinery, the goods, the business accounts and the very continuation of the activity. Every act of enforcement — garnishment, freezing of accounts, auction of fixed assets — is met with an objection and, where needed, an application for suspension. From the outset we check the legal standing, the transfer of the claim, the amount of the debt, the interest, the charges and every act of enforcement, aiming to keep the business standing while the substance is judged.",
-    "deadlinesTitle": "I received an extrajudicial notice, payment order or seizure on a Piraeus Bank loan — The deadlines you must not miss",
+    "protectText": "In business cases not only the home is at risk, but also the business premises, the machinery, the goods, the business accounts and the very continuation of the activity. Every act of enforcement (garnishment, freezing of accounts, auction of fixed assets) is met with an objection and, where needed, an application for suspension. From the outset we check the legal standing, the transfer of the claim, the amount of the debt, the interest, the charges and every act of enforcement, aiming to keep the business standing while the substance is judged.",
+    "deadlinesTitle": "I received an extrajudicial notice, payment order or seizure on a Piraeus Bank loan: the deadlines you must not miss",
     "deadlinesIntro": "Not every document has the same legal weight. The termination of the contract is one thing, the payment order another and the seizure yet another. But each stage shows the case is moving and the time to react is shrinking.",
     "deadlines": [
       {
@@ -1532,25 +1534,25 @@
         "desc": "Seizure is the stage at which enforcement has already begun and, for real estate, an auction is already set. An objection to enforcement, on grounds concerning the claim, the writ, the procedure and the seizure, is filed within forty-five days of the seizure. If a suspension of the auction is also needed, that move is examined separately and must be made in good time."
       }
     ],
-    "deadlinesWarning": "With the termination we do not stand still. With the payment order we move immediately. With the seizure there is no room for trial and error. Defence deadlines do not wait for the borrower to recover from the shock.",
+    "deadlinesWarning": "None of these deadlines is extended because the borrower needed time to recover from the shock. That is why the file should be reviewed the moment the first document arrives, not when the auction is already close.",
     "cta1Title": "Does your business have a document from Piraeus Bank?",
     "cta1Text": "An immediate first assessment of the file: corporate loan, guarantees, securities, deadlines. Call +30 2310 545 261 or send the form.",
-    "negotiationTitle": "Negotiation and settlement of corporate debts — aiming at viability",
+    "negotiationTitle": "Negotiation and settlement of corporate debts, aiming at viability",
     "negotiationIntro": "In a business debt, a settlement is not merely a matter of instalments. It is a matter of viability. Before any contact with Piraeus Bank we check the legal standing, the real balance, the guarantees and the data of the business, so that the proposal rests on numbers that hold. The goal is a settlement served by real cash flow, with a debt write-off (haircut) where documented and a controlled extent of personal guarantees.",
     "negotiationPoints": [
       "The settlement must withstand time. A deal that looks good on paper but collapses on the second or third instalment is worthless. The proposal must be linked to the borrower's real financial capacity, the value of the security, the course of the claim and the data of the case.",
-      "A debt write-off (haircut) is not posed as a wish. It is built as a negotiating goal, when the elements of the case allow it.",
+      "A debt write-off (haircut) is not asked for as a wish; it is documented as a negotiating goal when the elements of the case allow it.",
       "The price at which the fund acquired the loan from Piraeus Bank, the history of the portfolio, the prospect of recovery, the value of the property and the existence of a judicial challenge are factors that can change the discussion.",
-      "The best negotiation takes place when the borrower has already exercised, or is ready to exercise, their rights. A well-founded objection, an application for suspension or a serious judicial challenge turns the negotiation from a mere request into a contest of positions."
+      "The best negotiation takes place when the borrower has already exercised, or is ready to exercise, their rights. A well-founded objection, an application for suspension or a serious judicial challenge changes the basis of the discussion: the other side knows that, if there is no agreement, the case will be decided in court."
     ],
     "negotiationOutro": "For businesses, the best deal is the one that lets the business continue. A settlement that is served, guarantees that are bounded, judicial pressure where needed.",
-    "cta2Title": "Before you sign a settlement or acknowledge a corporate debt — talk to us.",
+    "cta2Title": "Before you sign a settlement or acknowledge a corporate debt, talk to us first.",
     "cta2Text": "In business debts, a hasty signature can trigger personal guarantees or acknowledge an amount that could be challenged. First the check, then the answer.",
     "anakopiTitle": "Objection and Suspension of Auction before the Courts of Thessaloniki and across Greece",
     "anakopiText1": "Enforcement is not met with general protests, but with a targeted procedural review of every act, every document and every amount invoked by the pursuing side.\n\nOur Law Office handles, on a daily basis, cases of objections, applications for suspension and auctions before the Courts of Thessaloniki and across Greek territory.\n\nIn every case we fully review the writ of payment, the seizure report, the documents of transfer of the claim, the servicing assignment, the analysis of the debt, the interest, the charges, the services and compliance with the lawful deadlines. An objection must not be a routine defence pleading. It must be procedurally precise, evidentially documented and adapted to the actual data of the specific file.",
     "anakopiPoints": [],
     "anakopiText2": "Where required, the objection is accompanied by an application for suspension, aiming to temporarily avert the auction until the substance of the dispute is judged. Suspension is not merely a means of delay. It is a procedural tool of protection, when there is a serious ground to annul the enforcement and a risk of irreparable harm from the immediate conduct of the auction.\n\nOur goal is the immediate and full assessment of the file, the highlighting of the substantive and procedural defects, and the formation of a concrete strategy either to overturn the enforcement in court or to create a strong negotiating position against the bank, the claims acquisition company or the credit servicing company.\n\nIn auction cases, time is critical. The timely submission of documents and the immediate legal review can determine whether there is real room for objection, suspension or an out-of-court settlement.",
-    "faqTitle": "FAQ — Businesses and Piraeus Bank",
+    "faqTitle": "FAQ: Businesses and Piraeus Bank",
     "faq": [
       {
         "q": "I have personally guaranteed a corporate loan to Piraeus Bank. Is my personal property at risk?",
@@ -1558,7 +1560,7 @@
       },
       {
         "q": "Can my business account or equipment be seized?",
-        "a": "With an enforceable title and a lawful procedure, yes — but every act of enforcement (garnishment, freezing of accounts, auction of fixed assets) has points of challenge with specific deadlines. An immediate objection and application for suspension can keep the business standing."
+        "a": "With an enforceable title and a lawful procedure, yes, but every act of enforcement (garnishment, freezing of accounts, auction of fixed assets) has points of challenge with specific deadlines. An immediate objection and application for suspension can keep the business standing."
       },
       {
         "q": "My business owes banks, social security and the tax office at once. What happens?",
@@ -1566,15 +1568,15 @@
       },
       {
         "q": "The business has stopped operating. Is a defence still worthwhile?",
-        "a": "It is — especially to limit personal guarantees and protect the personal property of guarantors and managers. Even if the company closed, the guarantees and debts may follow you personally."
+        "a": "It is, especially to limit personal guarantees and protect the personal property of guarantors and managers. Even if the company closed, the guarantees and debts may follow you personally."
       },
       {
         "q": "What documents do you need for the review?",
-        "a": "The loan/credit agreement, the guarantee contracts, the security documents, the letters and every document from Piraeus Bank or the bank — extrajudicial notices, termination, payment order, seizure report. Most important: the dates of service."
+        "a": "The loan/credit agreement, the guarantee contracts, the security documents, the letters and every document from Piraeus Bank: extrajudicial notices, termination, payment order, seizure report. Most important: the dates of service."
       }
     ],
-    "ctaTitle": "For your business — first the check, then the strategy.",
-    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. In business debts the amounts are large and the deadlines strict — the file is assessed as a matter of urgency.",
+    "ctaTitle": "For your business: first the check, then the strategy.",
+    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. In business debts the amounts are large and the deadlines strict, so the file is assessed as a priority.",
     "ctaButton": "Immediate File Review",
     "ctaPhone": "Call now: +30 2310 545 261"
   },
@@ -1582,14 +1584,14 @@
     "seoTitle": "Lawyer for National Bank of Greece Business Loans – Companies in Thessaloniki",
     "seoDescription": "Company or professional with a corporate loan or personal guarantee at National Bank of Greece? Review of the guarantee, business property, objection, suspension and the out-of-court mechanism for businesses. Tel: +30 2310 545 261.",
     "heroCity": "Thessaloniki · 12 Leontos Sofou St.",
-    "heroTitle": "Lawyer for National Bank of Greece Professional and Corporate Loans — Businesses and Professionals",
+    "heroTitle": "Lawyer for National Bank of Greece Professional and Corporate Loans: Businesses and Professionals",
     "heroSubtitle": "Corporate loans · Personal guarantees · Out-of-court mechanism for businesses",
-    "intro": "This page is for businesses, companies and self-employed professionals with debts to National Bank of Greece. Professional and corporate loans, working capital, current accounts, bond loans and above all the personal guarantees of managers and partners lead to payment orders, seizures and auctions — often with larger amounts and immediate consequences for viability. Ioannis Papaioannou has defended businesses and professionals against banks, funds and servicers for 25+ years.",
+    "intro": "This page is for businesses, companies and self-employed professionals with debts to National Bank of Greece. Professional and corporate loans, working capital, current accounts, bond loans and above all the personal guarantees of managers and partners lead to payment orders, seizures and auctions, often with larger amounts and immediate consequences for viability. Ioannis Papaioannou has defended businesses and professionals against banks, funds and servicers for more than 25 years.",
     "whatTitle": "Corporate loans and guarantees: what we check first",
-    "whatText": "In a business debt to National Bank of Greece, the file is almost always more complex than a residential case. We review the loan or credit agreement, the securities (prenotations, pledges, assignments), the amount of the claim and the legal standing of the party pursuing today — that is, whether the claim stayed with the bank or was transferred to a fund with a servicing company. Personal guarantees carry particular weight: when the entrepreneur, manager or partner has guaranteed, the extent and limits of their liability are checked separately. A guarantee is not always unlimited, nor always valid.",
+    "whatText": "In a business debt to National Bank of Greece, the file is almost always more complex than a residential case. We review the loan or credit agreement, the securities (prenotations, pledges, assignments), the amount of the claim and the legal standing of the party pursuing today, that is, whether the claim stayed with the bank or was transferred to a fund with a servicing company. Personal guarantees carry particular weight: when the entrepreneur, manager or partner has guaranteed, the extent and limits of their liability are checked separately. A guarantee is not always unlimited, nor always valid.",
     "protectTitle": "Protecting business property and equipment",
-    "protectText": "In business cases not only the home is at risk, but also the business premises, the machinery, the goods, the business accounts and the very continuation of the activity. Every act of enforcement — garnishment, freezing of accounts, auction of fixed assets — is met with an objection and, where needed, an application for suspension. From the outset we check the legal standing, the transfer of the claim, the amount of the debt, the interest, the charges and every act of enforcement, aiming to keep the business standing while the substance is judged.",
-    "deadlinesTitle": "I received an extrajudicial notice, payment order or seizure on a National Bank of Greece loan — The deadlines you must not miss",
+    "protectText": "In business cases not only the home is at risk, but also the business premises, the machinery, the goods, the business accounts and the very continuation of the activity. Every act of enforcement (garnishment, freezing of accounts, auction of fixed assets) is met with an objection and, where needed, an application for suspension. From the outset we check the legal standing, the transfer of the claim, the amount of the debt, the interest, the charges and every act of enforcement, aiming to keep the business standing while the substance is judged.",
+    "deadlinesTitle": "I received an extrajudicial notice, payment order or seizure on a National Bank of Greece loan: the deadlines you must not miss",
     "deadlinesIntro": "Not every document has the same legal weight. The termination of the contract is one thing, the payment order another and the seizure yet another. But each stage shows the case is moving and the time to react is shrinking.",
     "deadlines": [
       {
@@ -1605,25 +1607,25 @@
         "desc": "Seizure is the stage at which enforcement has already begun and, for real estate, an auction is already set. An objection to enforcement, on grounds concerning the claim, the writ, the procedure and the seizure, is filed within forty-five days of the seizure. If a suspension of the auction is also needed, that move is examined separately and must be made in good time."
       }
     ],
-    "deadlinesWarning": "With the termination we do not stand still. With the payment order we move immediately. With the seizure there is no room for trial and error. Defence deadlines do not wait for the borrower to recover from the shock.",
+    "deadlinesWarning": "None of these deadlines is extended because the borrower needed time to recover from the shock. That is why the file should be reviewed the moment the first document arrives, not when the auction is already close.",
     "cta1Title": "Does your business have a document from National Bank of Greece?",
     "cta1Text": "An immediate first assessment of the file: corporate loan, guarantees, securities, deadlines. Call +30 2310 545 261 or send the form.",
-    "negotiationTitle": "Negotiation and settlement of corporate debts — aiming at viability",
+    "negotiationTitle": "Negotiation and settlement of corporate debts, aiming at viability",
     "negotiationIntro": "In a business debt, a settlement is not merely a matter of instalments. It is a matter of viability. Before any contact with National Bank of Greece we check the legal standing, the real balance, the guarantees and the data of the business, so that the proposal rests on numbers that hold. The goal is a settlement served by real cash flow, with a debt write-off (haircut) where documented and a controlled extent of personal guarantees.",
     "negotiationPoints": [
       "The settlement must withstand time. A deal that looks good on paper but collapses on the second or third instalment is worthless. The proposal must be linked to the borrower's real financial capacity, the value of the security, the course of the claim and the data of the case.",
-      "A debt write-off (haircut) is not posed as a wish. It is built as a negotiating goal, when the elements of the case allow it.",
+      "A debt write-off (haircut) is not asked for as a wish; it is documented as a negotiating goal when the elements of the case allow it.",
       "The price at which the fund acquired the loan from National Bank of Greece, the history of the portfolio, the prospect of recovery, the value of the property and the existence of a judicial challenge are factors that can change the discussion.",
-      "The best negotiation takes place when the borrower has already exercised, or is ready to exercise, their rights. A well-founded objection, an application for suspension or a serious judicial challenge turns the negotiation from a mere request into a contest of positions."
+      "The best negotiation takes place when the borrower has already exercised, or is ready to exercise, their rights. A well-founded objection, an application for suspension or a serious judicial challenge changes the basis of the discussion: the other side knows that, if there is no agreement, the case will be decided in court."
     ],
     "negotiationOutro": "For businesses, the best deal is the one that lets the business continue. A settlement that is served, guarantees that are bounded, judicial pressure where needed.",
-    "cta2Title": "Before you sign a settlement or acknowledge a corporate debt — talk to us.",
+    "cta2Title": "Before you sign a settlement or acknowledge a corporate debt, talk to us first.",
     "cta2Text": "In business debts, a hasty signature can trigger personal guarantees or acknowledge an amount that could be challenged. First the check, then the answer.",
     "anakopiTitle": "Objection and Suspension of Auction before the Courts of Thessaloniki and across Greece",
     "anakopiText1": "Enforcement is not met with general protests, but with a targeted procedural review of every act, every document and every amount invoked by the pursuing side.\n\nOur Law Office handles, on a daily basis, cases of objections, applications for suspension and auctions before the Courts of Thessaloniki and across Greek territory.\n\nIn every case we fully review the writ of payment, the seizure report, the documents of transfer of the claim, the servicing assignment, the analysis of the debt, the interest, the charges, the services and compliance with the lawful deadlines. An objection must not be a routine defence pleading. It must be procedurally precise, evidentially documented and adapted to the actual data of the specific file.",
     "anakopiPoints": [],
     "anakopiText2": "Where required, the objection is accompanied by an application for suspension, aiming to temporarily avert the auction until the substance of the dispute is judged. Suspension is not merely a means of delay. It is a procedural tool of protection, when there is a serious ground to annul the enforcement and a risk of irreparable harm from the immediate conduct of the auction.\n\nOur goal is the immediate and full assessment of the file, the highlighting of the substantive and procedural defects, and the formation of a concrete strategy either to overturn the enforcement in court or to create a strong negotiating position against the bank, the claims acquisition company or the credit servicing company.\n\nIn auction cases, time is critical. The timely submission of documents and the immediate legal review can determine whether there is real room for objection, suspension or an out-of-court settlement.",
-    "faqTitle": "FAQ — Businesses and National Bank of Greece",
+    "faqTitle": "FAQ: Businesses and National Bank of Greece",
     "faq": [
       {
         "q": "I have personally guaranteed a corporate loan to National Bank of Greece. Is my personal property at risk?",
@@ -1631,7 +1633,7 @@
       },
       {
         "q": "Can my business account or equipment be seized?",
-        "a": "With an enforceable title and a lawful procedure, yes — but every act of enforcement (garnishment, freezing of accounts, auction of fixed assets) has points of challenge with specific deadlines. An immediate objection and application for suspension can keep the business standing."
+        "a": "With an enforceable title and a lawful procedure, yes, but every act of enforcement (garnishment, freezing of accounts, auction of fixed assets) has points of challenge with specific deadlines. An immediate objection and application for suspension can keep the business standing."
       },
       {
         "q": "My business owes banks, social security and the tax office at once. What happens?",
@@ -1639,15 +1641,15 @@
       },
       {
         "q": "The business has stopped operating. Is a defence still worthwhile?",
-        "a": "It is — especially to limit personal guarantees and protect the personal property of guarantors and managers. Even if the company closed, the guarantees and debts may follow you personally."
+        "a": "It is, especially to limit personal guarantees and protect the personal property of guarantors and managers. Even if the company closed, the guarantees and debts may follow you personally."
       },
       {
         "q": "What documents do you need for the review?",
-        "a": "The loan/credit agreement, the guarantee contracts, the security documents, the letters and every document from National Bank of Greece or the bank — extrajudicial notices, termination, payment order, seizure report. Most important: the dates of service."
+        "a": "The loan/credit agreement, the guarantee contracts, the security documents, the letters and every document from National Bank of Greece: extrajudicial notices, termination, payment order, seizure report. Most important: the dates of service."
       }
     ],
-    "ctaTitle": "For your business — first the check, then the strategy.",
-    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. In business debts the amounts are large and the deadlines strict — the file is assessed as a matter of urgency.",
+    "ctaTitle": "For your business: first the check, then the strategy.",
+    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. In business debts the amounts are large and the deadlines strict, so the file is assessed as a priority.",
     "ctaButton": "Immediate File Review",
     "ctaPhone": "Call now: +30 2310 545 261"
   },
@@ -1655,13 +1657,13 @@
     "seoTitle": "Lawyer for Intrum Business Loans – Companies in Thessaloniki",
     "seoDescription": "Company or professional with a corporate loan or personal guarantee at Intrum? Review of the guarantee, business property, objection, suspension and the out-of-court mechanism for businesses. Tel: +30 2310 545 261.",
     "heroCity": "Thessaloniki · 12 Leontos Sofou St.",
-    "heroTitle": "Lawyer for Intrum Professional and Corporate Loans — Businesses and Professionals",
+    "heroTitle": "Lawyer for Intrum Professional and Corporate Loans: Businesses and Professionals",
     "heroSubtitle": "Corporate loans · Personal guarantees · Out-of-court mechanism for businesses",
-    "intro": "This page is for businesses, companies and self-employed professionals with debts to the servicer Intrum. Professional and corporate loans, working capital, current accounts, bond loans and above all the personal guarantees of managers and partners lead to payment orders, seizures and auctions — often with larger amounts and immediate consequences for viability. Ioannis Papaioannou has defended businesses and professionals against banks, funds and servicers for 25+ years.",
+    "intro": "This page is for businesses, companies and self-employed professionals with debts to the servicer Intrum. Professional and corporate loans, working capital, current accounts, bond loans and above all the personal guarantees of managers and partners lead to payment orders, seizures and auctions, often with larger amounts and immediate consequences for viability. Ioannis Papaioannou has defended businesses and professionals against banks, funds and servicers for more than 25 years.",
     "whatTitle": "Corporate loans and guarantees: what we check first",
-    "whatText": "In a business debt to the servicer Intrum, the file is almost always more complex than a residential case. We review the loan or credit agreement, the securities (prenotations, pledges, assignments), the amount of the claim and the legal standing of the party pursuing today — that is, whether the claim stayed with the bank or was transferred to a fund with a servicing company. Personal guarantees carry particular weight: when the entrepreneur, manager or partner has guaranteed, the extent and limits of their liability are checked separately. A guarantee is not always unlimited, nor always valid.",
+    "whatText": "In a business debt to the servicer Intrum, the file is almost always more complex than a residential case. We review the loan or credit agreement, the securities (prenotations, pledges, assignments), the amount of the claim and the legal standing of the party pursuing today, that is, whether the claim stayed with the bank or was transferred to a fund with a servicing company. Personal guarantees carry particular weight: when the entrepreneur, manager or partner has guaranteed, the extent and limits of their liability are checked separately. A guarantee is not always unlimited, nor always valid.",
     "protectTitle": "Protecting business property and equipment",
-    "protectText": "In business cases not only the home is at risk, but also the business premises, the machinery, the goods, the business accounts and the very continuation of the activity. Every act of enforcement — garnishment, freezing of accounts, auction of fixed assets — is met with an objection and, where needed, an application for suspension. From the outset we check the legal standing, the transfer of the claim, the amount of the debt, the interest, the charges and every act of enforcement, aiming to keep the business standing while the substance is judged.",
+    "protectText": "In business cases not only the home is at risk, but also the business premises, the machinery, the goods, the business accounts and the very continuation of the activity. Every act of enforcement (garnishment, freezing of accounts, auction of fixed assets) is met with an objection and, where needed, an application for suspension. From the outset we check the legal standing, the transfer of the claim, the amount of the debt, the interest, the charges and every act of enforcement, aiming to keep the business standing while the substance is judged.",
     "deadlinesTitle": "Received a Notice, Payment Order or Seizure from Intrum — The Deadlines That Must Not Be Missed",
     "deadlinesIntro": "Not every document from Intrum carries the same legal weight. A formal notice terminating the contract, a payment order and a seizure each have a different effect. But every stage shows that the case is moving forward and that the time to react is shrinking.",
     "deadlines": [
@@ -1681,7 +1683,7 @@
     "deadlinesWarning": "With the notice, we do not stay idle. With the payment order, we act immediately. With seizure, there is no room for half-measures. Defence deadlines do not wait for the debtor to recover from the shock.",
     "cta1Title": "Does your business have a document from the servicer Intrum?",
     "cta1Text": "An immediate first assessment of the file: corporate loan, guarantees, securities, deadlines. Call +30 2310 545 261 or send the form.",
-    "negotiationTitle": "Negotiation and settlement of corporate debts — aiming at viability",
+    "negotiationTitle": "Negotiation and settlement of corporate debts, aiming at viability",
     "negotiationIntro": "In a business debt, a settlement is not merely a matter of instalments. It is a matter of viability. Before any contact with the servicer Intrum we check the legal standing, the real balance, the guarantees and the data of the business, so that the proposal rests on numbers that hold. The goal is a settlement served by real cash flow, with a debt write-off (haircut) where documented and a controlled extent of personal guarantees.",
     "negotiationPoints": [
       "A settlement must hold up over time. An agreement that looks good on paper but collapses by the second or third instalment has no value. The proposal must be linked to the debtor's real financial capacity, the value of the security, the trajectory of the claim and the facts of the case.",
@@ -1690,7 +1692,7 @@
       "The best negotiation happens when the debtor has already exercised, or is ready to exercise, their rights. A well-founded objection, a suspension application or a serious judicial challenge turns the negotiation from a simple plea into a contest of positions."
     ],
     "negotiationOutro": "For businesses, the best deal is the one that lets the business continue. A settlement that is served, guarantees that are bounded, judicial pressure where needed.",
-    "cta2Title": "Before you sign a settlement or acknowledge a corporate debt — talk to us.",
+    "cta2Title": "Before you sign a settlement or acknowledge a corporate debt, talk to us first.",
     "cta2Text": "In business debts, a hasty signature can trigger personal guarantees or acknowledge an amount that could be challenged. First the check, then the answer.",
     "anakopiTitle": "Objection and Suspension of Foreclosure in the Courts of Thessaloniki",
     "anakopiText1": "We work where these cases are decided: the Magistrates' Court and the Court of First Instance of Thessaloniki, daily. Knowledge of local case law and practice is not CV decoration — it is what turns an objection from a formality into a real defence. The grounds that most often succeed against servicers like Intrum:",
@@ -1701,7 +1703,7 @@
       "Procedural defects: defective service, errors in the seizure report, missed deadlines."
     ],
     "anakopiText2": "Where the case requires it, the objection is paired with a suspension application, keeping the auction on ice until the merits are decided. That wins both time and negotiating weight.",
-    "faqTitle": "FAQ — Businesses and Intrum",
+    "faqTitle": "FAQ: Businesses and Intrum",
     "faq": [
       {
         "q": "I have personally guaranteed a corporate loan to the servicer Intrum. Is my personal property at risk?",
@@ -1709,7 +1711,7 @@
       },
       {
         "q": "Can my business account or equipment be seized?",
-        "a": "With an enforceable title and a lawful procedure, yes — but every act of enforcement (garnishment, freezing of accounts, auction of fixed assets) has points of challenge with specific deadlines. An immediate objection and application for suspension can keep the business standing."
+        "a": "With an enforceable title and a lawful procedure, yes, but every act of enforcement (garnishment, freezing of accounts, auction of fixed assets) has points of challenge with specific deadlines. An immediate objection and application for suspension can keep the business standing."
       },
       {
         "q": "My business owes banks, social security and the tax office at once. What happens?",
@@ -1717,15 +1719,15 @@
       },
       {
         "q": "The business has stopped operating. Is a defence still worthwhile?",
-        "a": "It is — especially to limit personal guarantees and protect the personal property of guarantors and managers. Even if the company closed, the guarantees and debts may follow you personally."
+        "a": "It is, especially to limit personal guarantees and protect the personal property of guarantors and managers. Even if the company closed, the guarantees and debts may follow you personally."
       },
       {
         "q": "What documents do you need for the review?",
-        "a": "The loan/credit agreement, the guarantee contracts, the security documents, the letters and every document from the servicer Intrum or the bank — extrajudicial notices, termination, payment order, seizure report. Most important: the dates of service."
+        "a": "The loan/credit agreement, the guarantee contracts, the security documents, the letters and every document from the servicer Intrum: extrajudicial notices, termination, payment order, seizure report. Most important: the dates of service."
       }
     ],
-    "ctaTitle": "For your business — first the check, then the strategy.",
-    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. In business debts the amounts are large and the deadlines strict — the file is assessed as a matter of urgency.",
+    "ctaTitle": "For your business: first the check, then the strategy.",
+    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. In business debts the amounts are large and the deadlines strict, so the file is assessed as a priority.",
     "ctaButton": "Immediate File Review",
     "ctaPhone": "Call now: +30 2310 545 261"
   },
@@ -1733,13 +1735,13 @@
     "seoTitle": "Lawyer for doValue Business Loans – Companies in Thessaloniki",
     "seoDescription": "Company or professional with a corporate loan or personal guarantee at doValue? Review of the guarantee, business property, objection, suspension and the out-of-court mechanism for businesses. Tel: +30 2310 545 261.",
     "heroCity": "Thessaloniki · 12 Leontos Sofou St.",
-    "heroTitle": "Lawyer for doValue Professional and Corporate Loans — Businesses and Professionals",
+    "heroTitle": "Lawyer for doValue Professional and Corporate Loans: Businesses and Professionals",
     "heroSubtitle": "Corporate loans · Personal guarantees · Out-of-court mechanism for businesses",
-    "intro": "This page is for businesses, companies and self-employed professionals with debts to the servicer doValue. Professional and corporate loans, working capital, current accounts, bond loans and above all the personal guarantees of managers and partners lead to payment orders, seizures and auctions — often with larger amounts and immediate consequences for viability. Ioannis Papaioannou has defended businesses and professionals against banks, funds and servicers for 25+ years.",
+    "intro": "This page is for businesses, companies and self-employed professionals with debts to the servicer doValue. Professional and corporate loans, working capital, current accounts, bond loans and above all the personal guarantees of managers and partners lead to payment orders, seizures and auctions, often with larger amounts and immediate consequences for viability. Ioannis Papaioannou has defended businesses and professionals against banks, funds and servicers for more than 25 years.",
     "whatTitle": "Corporate loans and guarantees: what we check first",
-    "whatText": "In a business debt to the servicer doValue, the file is almost always more complex than a residential case. We review the loan or credit agreement, the securities (prenotations, pledges, assignments), the amount of the claim and the legal standing of the party pursuing today — that is, whether the claim stayed with the bank or was transferred to a fund with a servicing company. Personal guarantees carry particular weight: when the entrepreneur, manager or partner has guaranteed, the extent and limits of their liability are checked separately. A guarantee is not always unlimited, nor always valid.",
+    "whatText": "In a business debt to the servicer doValue, the file is almost always more complex than a residential case. We review the loan or credit agreement, the securities (prenotations, pledges, assignments), the amount of the claim and the legal standing of the party pursuing today, that is, whether the claim stayed with the bank or was transferred to a fund with a servicing company. Personal guarantees carry particular weight: when the entrepreneur, manager or partner has guaranteed, the extent and limits of their liability are checked separately. A guarantee is not always unlimited, nor always valid.",
     "protectTitle": "Protecting business property and equipment",
-    "protectText": "In business cases not only the home is at risk, but also the business premises, the machinery, the goods, the business accounts and the very continuation of the activity. Every act of enforcement — garnishment, freezing of accounts, auction of fixed assets — is met with an objection and, where needed, an application for suspension. From the outset we check the legal standing, the transfer of the claim, the amount of the debt, the interest, the charges and every act of enforcement, aiming to keep the business standing while the substance is judged.",
+    "protectText": "In business cases not only the home is at risk, but also the business premises, the machinery, the goods, the business accounts and the very continuation of the activity. Every act of enforcement (garnishment, freezing of accounts, auction of fixed assets) is met with an objection and, where needed, an application for suspension. From the outset we check the legal standing, the transfer of the claim, the amount of the debt, the interest, the charges and every act of enforcement, aiming to keep the business standing while the substance is judged.",
     "deadlinesTitle": "Received a Notice, Payment Order or Seizure from doValue — The Deadlines That Must Not Be Missed",
     "deadlinesIntro": "Not every document carries the same legal weight. A formal notice terminating the contract, a payment order and a seizure each have a different effect. But every stage shows that the case is moving forward and that the time to react is shrinking.",
     "deadlines": [
@@ -1759,7 +1761,7 @@
     "deadlinesWarning": "The conclusion is simple. With a notice terminating the contract, we do not stay idle. With a payment order, we act without delay. With a seizure, the response must be immediate, because with it the auction is already on the table.",
     "cta1Title": "Does your business have a document from the servicer doValue?",
     "cta1Text": "An immediate first assessment of the file: corporate loan, guarantees, securities, deadlines. Call +30 2310 545 261 or send the form.",
-    "negotiationTitle": "Negotiation and settlement of corporate debts — aiming at viability",
+    "negotiationTitle": "Negotiation and settlement of corporate debts, aiming at viability",
     "negotiationIntro": "In a business debt, a settlement is not merely a matter of instalments. It is a matter of viability. Before any contact with the servicer doValue we check the legal standing, the real balance, the guarantees and the data of the business, so that the proposal rests on numbers that hold. The goal is a settlement served by real cash flow, with a debt write-off (haircut) where documented and a controlled extent of personal guarantees.",
     "negotiationPoints": [
       "Settlement is the first goal, but not on any terms. It must be sustainable, based on the debtor's real financial capacity, and must not lead to a fresh inability to pay a few months later.",
@@ -1768,7 +1770,7 @@
       "An objection, a suspension application or a serious challenge to the claim shifts the balance and forces the other side to see the case differently."
     ],
     "negotiationOutro": "For businesses, the best deal is the one that lets the business continue. A settlement that is served, guarantees that are bounded, judicial pressure where needed.",
-    "cta2Title": "Before you sign a settlement or acknowledge a corporate debt — talk to us.",
+    "cta2Title": "Before you sign a settlement or acknowledge a corporate debt, talk to us first.",
     "cta2Text": "In business debts, a hasty signature can trigger personal guarantees or acknowledge an amount that could be challenged. First the check, then the answer.",
     "anakopiTitle": "Objection and Suspension of Foreclosure in the Courts of Thessaloniki",
     "anakopiText1": "Our cases are heard where we work every day: the Magistrates' Court and the Court of First Instance of Thessaloniki. Experience in these specific courts — their case law, their practice — is what separates an objection that was merely filed from an objection that was won. The grounds that most often succeed against servicers:",
@@ -1779,7 +1781,7 @@
       "Procedural defects in enforcement: defective service, errors in the seizure report, missed statutory deadlines."
     ],
     "anakopiText2": "Where needed, the objection is combined with a suspension application — freezing the auction until the merits are decided. The goal is twofold: win time and build negotiating leverage.",
-    "faqTitle": "FAQ — Businesses and doValue",
+    "faqTitle": "FAQ: Businesses and doValue",
     "faq": [
       {
         "q": "I have personally guaranteed a corporate loan to the servicer doValue. Is my personal property at risk?",
@@ -1787,7 +1789,7 @@
       },
       {
         "q": "Can my business account or equipment be seized?",
-        "a": "With an enforceable title and a lawful procedure, yes — but every act of enforcement (garnishment, freezing of accounts, auction of fixed assets) has points of challenge with specific deadlines. An immediate objection and application for suspension can keep the business standing."
+        "a": "With an enforceable title and a lawful procedure, yes, but every act of enforcement (garnishment, freezing of accounts, auction of fixed assets) has points of challenge with specific deadlines. An immediate objection and application for suspension can keep the business standing."
       },
       {
         "q": "My business owes banks, social security and the tax office at once. What happens?",
@@ -1795,15 +1797,15 @@
       },
       {
         "q": "The business has stopped operating. Is a defence still worthwhile?",
-        "a": "It is — especially to limit personal guarantees and protect the personal property of guarantors and managers. Even if the company closed, the guarantees and debts may follow you personally."
+        "a": "It is, especially to limit personal guarantees and protect the personal property of guarantors and managers. Even if the company closed, the guarantees and debts may follow you personally."
       },
       {
         "q": "What documents do you need for the review?",
-        "a": "The loan/credit agreement, the guarantee contracts, the security documents, the letters and every document from the servicer doValue or the bank — extrajudicial notices, termination, payment order, seizure report. Most important: the dates of service."
+        "a": "The loan/credit agreement, the guarantee contracts, the security documents, the letters and every document from the servicer doValue: extrajudicial notices, termination, payment order, seizure report. Most important: the dates of service."
       }
     ],
-    "ctaTitle": "For your business — first the check, then the strategy.",
-    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. In business debts the amounts are large and the deadlines strict — the file is assessed as a matter of urgency.",
+    "ctaTitle": "For your business: first the check, then the strategy.",
+    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. In business debts the amounts are large and the deadlines strict, so the file is assessed as a priority.",
     "ctaButton": "Immediate File Review",
     "ctaPhone": "Call now: +30 2310 545 261"
   },
@@ -1811,13 +1813,13 @@
     "seoTitle": "Lawyer for Cepal Business Loans – Companies in Thessaloniki",
     "seoDescription": "Company or professional with a corporate loan or personal guarantee at Cepal? Review of the guarantee, business property, objection, suspension and the out-of-court mechanism for businesses. Tel: +30 2310 545 261.",
     "heroCity": "Thessaloniki · 12 Leontos Sofou St.",
-    "heroTitle": "Lawyer for Cepal Professional and Corporate Loans — Businesses and Professionals",
+    "heroTitle": "Lawyer for Cepal Professional and Corporate Loans: Businesses and Professionals",
     "heroSubtitle": "Corporate loans · Personal guarantees · Out-of-court mechanism for businesses",
-    "intro": "This page is for businesses, companies and self-employed professionals with debts to the servicer Cepal. Professional and corporate loans, working capital, current accounts, bond loans and above all the personal guarantees of managers and partners lead to payment orders, seizures and auctions — often with larger amounts and immediate consequences for viability. Ioannis Papaioannou has defended businesses and professionals against banks, funds and servicers for 25+ years.",
+    "intro": "This page is for businesses, companies and self-employed professionals with debts to the servicer Cepal. Professional and corporate loans, working capital, current accounts, bond loans and above all the personal guarantees of managers and partners lead to payment orders, seizures and auctions, often with larger amounts and immediate consequences for viability. Ioannis Papaioannou has defended businesses and professionals against banks, funds and servicers for more than 25 years.",
     "whatTitle": "Corporate loans and guarantees: what we check first",
-    "whatText": "In a business debt to the servicer Cepal, the file is almost always more complex than a residential case. We review the loan or credit agreement, the securities (prenotations, pledges, assignments), the amount of the claim and the legal standing of the party pursuing today — that is, whether the claim stayed with the bank or was transferred to a fund with a servicing company. Personal guarantees carry particular weight: when the entrepreneur, manager or partner has guaranteed, the extent and limits of their liability are checked separately. A guarantee is not always unlimited, nor always valid.",
+    "whatText": "In a business debt to the servicer Cepal, the file is almost always more complex than a residential case. We review the loan or credit agreement, the securities (prenotations, pledges, assignments), the amount of the claim and the legal standing of the party pursuing today, that is, whether the claim stayed with the bank or was transferred to a fund with a servicing company. Personal guarantees carry particular weight: when the entrepreneur, manager or partner has guaranteed, the extent and limits of their liability are checked separately. A guarantee is not always unlimited, nor always valid.",
     "protectTitle": "Protecting business property and equipment",
-    "protectText": "In business cases not only the home is at risk, but also the business premises, the machinery, the goods, the business accounts and the very continuation of the activity. Every act of enforcement — garnishment, freezing of accounts, auction of fixed assets — is met with an objection and, where needed, an application for suspension. From the outset we check the legal standing, the transfer of the claim, the amount of the debt, the interest, the charges and every act of enforcement, aiming to keep the business standing while the substance is judged.",
+    "protectText": "In business cases not only the home is at risk, but also the business premises, the machinery, the goods, the business accounts and the very continuation of the activity. Every act of enforcement (garnishment, freezing of accounts, auction of fixed assets) is met with an objection and, where needed, an application for suspension. From the outset we check the legal standing, the transfer of the claim, the amount of the debt, the interest, the charges and every act of enforcement, aiming to keep the business standing while the substance is judged.",
     "deadlinesTitle": "Received a Notice, Payment Order or Seizure from Cepal — The Deadlines That Must Not Be Missed",
     "deadlinesIntro": "Not all documents from Cepal carry the same legal weight. A formal notice terminating the contract is the first serious warning step. A payment order turns the claim into a judicial title. A seizure means enforcement has already begun and, when it concerns real property, an auction is set along with it.",
     "deadlines": [
@@ -1837,7 +1839,7 @@
     "deadlinesWarning": "Greek law does not wait for the debtor to recover from the shock. Every stage opens a window for action that closes at some point. That is why the case must be reviewed from the start, before enforcement appears as the only road.",
     "cta1Title": "Does your business have a document from the servicer Cepal?",
     "cta1Text": "An immediate first assessment of the file: corporate loan, guarantees, securities, deadlines. Call +30 2310 545 261 or send the form.",
-    "negotiationTitle": "Negotiation and settlement of corporate debts — aiming at viability",
+    "negotiationTitle": "Negotiation and settlement of corporate debts, aiming at viability",
     "negotiationIntro": "In a business debt, a settlement is not merely a matter of instalments. It is a matter of viability. Before any contact with the servicer Cepal we check the legal standing, the real balance, the guarantees and the data of the business, so that the proposal rests on numbers that hold. The goal is a settlement served by real cash flow, with a debt write-off (haircut) where documented and a controlled extent of personal guarantees.",
     "negotiationPoints": [
       "The settlement must be tailored to actual repayment capacity. The goal is not an agreement that looks good on paper and collapses after a few months. The goal is a settlement that holds up over time, with specific numbers, a specific financial basis and a clear strategy.",
@@ -1846,7 +1848,7 @@
       "The best negotiation happens when the debtor has already exercised, or is ready to exercise, their rights. A well-founded objection, a suspension application or a serious judicial challenge works as a negotiating lever. The claim manager realises it is not facing a frightened debtor but a legally represented counterparty."
     ],
     "negotiationOutro": "For businesses, the best deal is the one that lets the business continue. A settlement that is served, guarantees that are bounded, judicial pressure where needed.",
-    "cta2Title": "Before you sign a settlement or acknowledge a corporate debt — talk to us.",
+    "cta2Title": "Before you sign a settlement or acknowledge a corporate debt, talk to us first.",
     "cta2Text": "In business debts, a hasty signature can trigger personal guarantees or acknowledge an amount that could be challenged. First the check, then the answer.",
     "anakopiTitle": "Objection and Suspension of Cepal Auctions in Thessaloniki",
     "anakopiText1": "Cepal's high case volume makes it particularly exposed to procedural defects. Grounds that typically support objections and suspensions in Cepal cases:",
@@ -1857,7 +1859,7 @@
       "Formal enforcement defects: irregular service of process, incorrect amounts in the seizure report, failure to observe mandatory intervals."
     ],
     "anakopiText2": "Where the case requires it, an objection is accompanied by an immediate suspension application so that the auction is stayed until a court decision is issued. This combination — legal defence and parallel negotiation — is usually the most effective approach.",
-    "faqTitle": "FAQ — Businesses and Cepal",
+    "faqTitle": "FAQ: Businesses and Cepal",
     "faq": [
       {
         "q": "I have personally guaranteed a corporate loan to the servicer Cepal. Is my personal property at risk?",
@@ -1865,7 +1867,7 @@
       },
       {
         "q": "Can my business account or equipment be seized?",
-        "a": "With an enforceable title and a lawful procedure, yes — but every act of enforcement (garnishment, freezing of accounts, auction of fixed assets) has points of challenge with specific deadlines. An immediate objection and application for suspension can keep the business standing."
+        "a": "With an enforceable title and a lawful procedure, yes, but every act of enforcement (garnishment, freezing of accounts, auction of fixed assets) has points of challenge with specific deadlines. An immediate objection and application for suspension can keep the business standing."
       },
       {
         "q": "My business owes banks, social security and the tax office at once. What happens?",
@@ -1873,15 +1875,15 @@
       },
       {
         "q": "The business has stopped operating. Is a defence still worthwhile?",
-        "a": "It is — especially to limit personal guarantees and protect the personal property of guarantors and managers. Even if the company closed, the guarantees and debts may follow you personally."
+        "a": "It is, especially to limit personal guarantees and protect the personal property of guarantors and managers. Even if the company closed, the guarantees and debts may follow you personally."
       },
       {
         "q": "What documents do you need for the review?",
-        "a": "The loan/credit agreement, the guarantee contracts, the security documents, the letters and every document from the servicer Cepal or the bank — extrajudicial notices, termination, payment order, seizure report. Most important: the dates of service."
+        "a": "The loan/credit agreement, the guarantee contracts, the security documents, the letters and every document from the servicer Cepal: extrajudicial notices, termination, payment order, seizure report. Most important: the dates of service."
       }
     ],
-    "ctaTitle": "For your business — first the check, then the strategy.",
-    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. In business debts the amounts are large and the deadlines strict — the file is assessed as a matter of urgency.",
+    "ctaTitle": "For your business: first the check, then the strategy.",
+    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. In business debts the amounts are large and the deadlines strict, so the file is assessed as a priority.",
     "ctaButton": "Immediate File Review",
     "ctaPhone": "Call now: 2310 545 261"
   },
@@ -1889,13 +1891,13 @@
     "seoTitle": "Lawyer for QQuant Business Loans – Companies in Thessaloniki",
     "seoDescription": "Company or professional with a corporate loan or personal guarantee at QQuant? Review of the guarantee, business property, objection, suspension and the out-of-court mechanism for businesses. Tel: +30 2310 545 261.",
     "heroCity": "Thessaloniki · 12 Leontos Sofou St.",
-    "heroTitle": "Lawyer for QQuant Professional and Corporate Loans — Businesses and Professionals",
+    "heroTitle": "Lawyer for QQuant Professional and Corporate Loans: Businesses and Professionals",
     "heroSubtitle": "Corporate loans · Personal guarantees · Out-of-court mechanism for businesses",
-    "intro": "This page is for businesses, companies and self-employed professionals with debts to the servicer QQuant. Professional and corporate loans, working capital, current accounts, bond loans and above all the personal guarantees of managers and partners lead to payment orders, seizures and auctions — often with larger amounts and immediate consequences for viability. Ioannis Papaioannou has defended businesses and professionals against banks, funds and servicers for 25+ years.",
+    "intro": "This page is for businesses, companies and self-employed professionals with debts to the servicer QQuant. Professional and corporate loans, working capital, current accounts, bond loans and above all the personal guarantees of managers and partners lead to payment orders, seizures and auctions, often with larger amounts and immediate consequences for viability. Ioannis Papaioannou has defended businesses and professionals against banks, funds and servicers for more than 25 years.",
     "whatTitle": "Corporate loans and guarantees: what we check first",
-    "whatText": "In a business debt to the servicer QQuant, the file is almost always more complex than a residential case. We review the loan or credit agreement, the securities (prenotations, pledges, assignments), the amount of the claim and the legal standing of the party pursuing today — that is, whether the claim stayed with the bank or was transferred to a fund with a servicing company. Personal guarantees carry particular weight: when the entrepreneur, manager or partner has guaranteed, the extent and limits of their liability are checked separately. A guarantee is not always unlimited, nor always valid.",
+    "whatText": "In a business debt to the servicer QQuant, the file is almost always more complex than a residential case. We review the loan or credit agreement, the securities (prenotations, pledges, assignments), the amount of the claim and the legal standing of the party pursuing today, that is, whether the claim stayed with the bank or was transferred to a fund with a servicing company. Personal guarantees carry particular weight: when the entrepreneur, manager or partner has guaranteed, the extent and limits of their liability are checked separately. A guarantee is not always unlimited, nor always valid.",
     "protectTitle": "Protecting business property and equipment",
-    "protectText": "In business cases not only the home is at risk, but also the business premises, the machinery, the goods, the business accounts and the very continuation of the activity. Every act of enforcement — garnishment, freezing of accounts, auction of fixed assets — is met with an objection and, where needed, an application for suspension. From the outset we check the legal standing, the transfer of the claim, the amount of the debt, the interest, the charges and every act of enforcement, aiming to keep the business standing while the substance is judged.",
+    "protectText": "In business cases not only the home is at risk, but also the business premises, the machinery, the goods, the business accounts and the very continuation of the activity. Every act of enforcement (garnishment, freezing of accounts, auction of fixed assets) is met with an objection and, where needed, an application for suspension. From the outset we check the legal standing, the transfer of the claim, the amount of the debt, the interest, the charges and every act of enforcement, aiming to keep the business standing while the substance is judged.",
     "deadlinesTitle": "Received a Notice, Payment Order or Seizure from QQuant — The Deadlines That Must Not Be Missed",
     "deadlinesIntro": "Even for an old, disputed or possibly time-barred debt, procedural deadlines run normally. Limitation, lack of standing or a challenge to the amount are not enough on their own if they are not raised correctly and in time.",
     "deadlines": [
@@ -1915,7 +1917,7 @@
     "deadlinesWarning": "The correct order is non-negotiable. First review, then response, then negotiation. Reversing that order can give away money that may not even be owed.",
     "cta1Title": "Does your business have a document from the servicer QQuant?",
     "cta1Text": "An immediate first assessment of the file: corporate loan, guarantees, securities, deadlines. Call +30 2310 545 261 or send the form.",
-    "negotiationTitle": "Negotiation and settlement of corporate debts — aiming at viability",
+    "negotiationTitle": "Negotiation and settlement of corporate debts, aiming at viability",
     "negotiationIntro": "In a business debt, a settlement is not merely a matter of instalments. It is a matter of viability. Before any contact with the servicer QQuant we check the legal standing, the real balance, the guarantees and the data of the business, so that the proposal rests on numbers that hold. The goal is a settlement served by real cash flow, with a debt write-off (haircut) where documented and a controlled extent of personal guarantees.",
     "negotiationPoints": [
       "The amount is cleaned up before it is discussed. In debts that resurface after years, interest, charges and compounding may have inflated the balance significantly. An amount that has not been verified must not become the basis of a settlement.",
@@ -1924,7 +1926,7 @@
       "The best negotiation happens when the debtor has already exercised, or is ready to exercise, their rights. A well-founded objection, a suspension application, a serious limitation argument or a documented challenge to standing turns the conversation from a plea into a contest of positions."
     ],
     "negotiationOutro": "For businesses, the best deal is the one that lets the business continue. A settlement that is served, guarantees that are bounded, judicial pressure where needed.",
-    "cta2Title": "Before you sign a settlement or acknowledge a corporate debt — talk to us.",
+    "cta2Title": "Before you sign a settlement or acknowledge a corporate debt, talk to us first.",
     "cta2Text": "In business debts, a hasty signature can trigger personal guarantees or acknowledge an amount that could be challenged. First the check, then the answer.",
     "anakopiTitle": "Objection and Suspension of QQuant Enforcement in Thessaloniki",
     "anakopiText1": "At the Thessaloniki courts, where we litigate daily, QQuant cases are decided on the details of the file. The grounds of objection that most often succeed:",
@@ -1935,7 +1937,7 @@
       "Procedural defects: irregular service, errors in the seizure report, failure to observe statutory deadlines and formalities."
     ],
     "anakopiText2": "Where the case requires it, the objection is combined with a suspension application so that no enforcement act proceeds before the merits are decided. In parallel, the pending case serves as leverage for a realistic settlement.",
-    "faqTitle": "FAQ — Businesses and QQuant",
+    "faqTitle": "FAQ: Businesses and QQuant",
     "faq": [
       {
         "q": "I have personally guaranteed a corporate loan to the servicer QQuant. Is my personal property at risk?",
@@ -1943,7 +1945,7 @@
       },
       {
         "q": "Can my business account or equipment be seized?",
-        "a": "With an enforceable title and a lawful procedure, yes — but every act of enforcement (garnishment, freezing of accounts, auction of fixed assets) has points of challenge with specific deadlines. An immediate objection and application for suspension can keep the business standing."
+        "a": "With an enforceable title and a lawful procedure, yes, but every act of enforcement (garnishment, freezing of accounts, auction of fixed assets) has points of challenge with specific deadlines. An immediate objection and application for suspension can keep the business standing."
       },
       {
         "q": "My business owes banks, social security and the tax office at once. What happens?",
@@ -1951,15 +1953,15 @@
       },
       {
         "q": "The business has stopped operating. Is a defence still worthwhile?",
-        "a": "It is — especially to limit personal guarantees and protect the personal property of guarantors and managers. Even if the company closed, the guarantees and debts may follow you personally."
+        "a": "It is, especially to limit personal guarantees and protect the personal property of guarantors and managers. Even if the company closed, the guarantees and debts may follow you personally."
       },
       {
         "q": "What documents do you need for the review?",
-        "a": "The loan/credit agreement, the guarantee contracts, the security documents, the letters and every document from the servicer QQuant or the bank — extrajudicial notices, termination, payment order, seizure report. Most important: the dates of service."
+        "a": "The loan/credit agreement, the guarantee contracts, the security documents, the letters and every document from the servicer QQuant: extrajudicial notices, termination, payment order, seizure report. Most important: the dates of service."
       }
     ],
-    "ctaTitle": "For your business — first the check, then the strategy.",
-    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. In business debts the amounts are large and the deadlines strict — the file is assessed as a matter of urgency.",
+    "ctaTitle": "For your business: first the check, then the strategy.",
+    "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. In business debts the amounts are large and the deadlines strict, so the file is assessed as a priority.",
     "ctaButton": "Immediate File Review",
     "ctaPhone": "Call now: 2310 545 261"
   }

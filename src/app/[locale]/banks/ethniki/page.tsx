@@ -24,5 +24,5 @@ export default function EthnikiBankPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = use(params);
-  return <ServicerLanding locale={locale} namespace="ethniki" counterpartHref={`/${locale}/banks/ethniki/epicheiriseis`} />;
+  return <ServicerLanding locale={locale} namespace="ethniki" counterpartHref={`/banks/ethniki/epicheiriseis`} />;
 }

@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { Link } from "@/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
-import { Menu, X, Scale, ChevronDown, ChevronRight, FileText, Tv, BookOpen, Landmark, Handshake } from "lucide-react";
+import { Menu, X, Scale, ChevronDown, ChevronRight, FileText, Tv, BookOpen, Gavel, Handshake, Landmark } from "lucide-react";
 
 const localeConfig = {
   el: { flag: "/flags/gr.svg", label: "ΕΛ" },
@@ -70,6 +70,101 @@ function LangDropdown({ switchLocale }: { switchLocale: (l: string) => void }) {
   );
 }
 
+type SubLink = { href: string; label: string; subLinks?: SubLink[] };
+
+// Per-depth group names. Nested Tailwind groups MUST use distinct names, otherwise
+// `group-hover/x` matches ANY ancestor with `group/x` and every level opens at once.
+// Literal strings so the JIT compiler picks them up.
+const FLY_GROUP = ["group/f0", "group/f1", "group/f2", "group/f3"];
+const FLY_SHOW = [
+  "group-hover/f0:opacity-100 group-hover/f0:translate-x-0 group-hover/f0:pointer-events-auto",
+  "group-hover/f1:opacity-100 group-hover/f1:translate-x-0 group-hover/f1:pointer-events-auto",
+  "group-hover/f2:opacity-100 group-hover/f2:translate-x-0 group-hover/f2:pointer-events-auto",
+  "group-hover/f3:opacity-100 group-hover/f3:translate-x-0 group-hover/f3:pointer-events-auto",
+];
+
+// Recursive item for the mobile accordion. Collapsed by default so deep trees stay
+// compact: the label stays a navigable link, a chevron toggles the children.
+const MOBILE_PAD = ["pl-4", "pl-8", "pl-12", "pl-16"];
+function MobileNode({ item, depth, onNavigate }: { item: SubLink; depth: number; onNavigate: () => void }) {
+  const [open, setOpen] = useState(false);
+  const pad = MOBILE_PAD[Math.min(depth, MOBILE_PAD.length - 1)];
+  const tone = depth <= 1 ? "text-white/70" : "text-white/60";
+  const hasChildren = !!item.subLinks?.length;
+
+  return (
+    <>
+      <div className="flex items-center border-b border-white/5">
+        <Link
+          href={item.href}
+          onClick={onNavigate}
+          className={`flex-1 flex items-center gap-2 ${tone} hover:text-accent transition-colors text-sm py-2 ${pad}`}
+        >
+          <ChevronRight size={11} className="shrink-0 opacity-50" />
+          {item.label}
+        </Link>
+        {hasChildren && (
+          <button
+            onClick={() => setOpen(!open)}
+            aria-label={item.label}
+            className="px-4 py-2 text-white/40 hover:text-accent transition-colors"
+          >
+            <ChevronDown size={15} className={`transition-transform duration-200 ${open ? "rotate-180 text-accent" : ""}`} />
+          </button>
+        )}
+      </div>
+      {hasChildren && open &&
+        item.subLinks!.map((s) => (
+          <MobileNode key={`${s.href}-${s.label}`} item={s} depth={depth + 1} onNavigate={onNavigate} />
+        ))}
+    </>
+  );
+}
+
+// Recursive flyout item for the desktop Services menu (supports arbitrary depth).
+function FlyoutNode({
+  item,
+  depth,
+  pathname,
+  locale,
+  onNavigate,
+}: {
+  item: SubLink;
+  depth: number;
+  pathname: string;
+  locale: string;
+  onNavigate: () => void;
+}) {
+  const localed = `/${locale}${item.href}`;
+  const active = item.subLinks ? pathname.startsWith(localed) : pathname === localed;
+  const cls = `flex items-center px-4 py-2.5 text-sm font-medium transition-colors ${
+    active ? "text-accent bg-accent/10" : "text-white/80 hover:text-accent hover:bg-white/5"
+  }`;
+
+  if (!item.subLinks) {
+    return (
+      <Link href={item.href} onClick={onNavigate} className={`${cls} border-b border-white/5 last:border-0`}>
+        {item.label}
+      </Link>
+    );
+  }
+
+  const d = Math.min(depth, FLY_GROUP.length - 1);
+  return (
+    <div className={`relative ${FLY_GROUP[d]} border-b border-white/5 last:border-0`}>
+      <Link href={item.href} onClick={onNavigate} className={cls}>
+        {item.label}
+        <ChevronRight size={12} className="ml-auto shrink-0 opacity-60" />
+      </Link>
+      <div className={`absolute left-full top-0 w-44 bg-primary border border-white/10 shadow-xl rounded-sm opacity-0 -translate-x-1 pointer-events-none transition-all duration-150 ${FLY_SHOW[d]}`}>
+        {item.subLinks.map((s) => (
+          <FlyoutNode key={`${s.href}-${s.label}`} item={s} depth={depth + 1} pathname={pathname} locale={locale} onNavigate={onNavigate} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function Navbar() {
   const t = useTranslations();
   const tNav = useTranslations("nav");
@@ -103,22 +198,37 @@ export default function Navbar() {
     { href: `/contact`, label: tNav("contact") },
   ];
 
-  const fundsSubLinks = [
+  const fundsSubLinks: SubLink[] = [
     { href: `/funds/dovalue`, label: "doValue" },
     { href: `/funds/intrum`, label: "Intrum" },
     { href: `/funds/cepal`, label: "Cepal" },
     { href: `/funds/qquant`, label: "QQuant" },
   ];
 
-  const bankingLawSubLinks = [
+  const banksSubLinks: SubLink[] = (t.raw("banks.cards") as { slug: string; name: string }[]).map(
+    (c) => ({
+      href: `/banks/${c.slug}`,
+      label: c.name,
+      subLinks: [
+        { href: `/banks/${c.slug}`, label: tNav("individuals") },
+        { href: `/banks/${c.slug}/epicheiriseis`, label: tNav("businesses") },
+      ],
+    })
+  );
+
+  const bankingSubLinks: SubLink[] = [
+    { href: `/banks`, label: tNav("banks"), subLinks: banksSubLinks },
     { href: `/funds`, label: tNav("funds"), subLinks: fundsSubLinks },
-    { href: `/pleistariasmos`, label: tNav("pleistariasmos"), subLinks: null },
   ];
 
   const servicesLinks = [
-    { href: `/practice-areas/banking`, label: tNav("bankingLaw"), icon: Landmark, subLinks: bankingLawSubLinks },
+    { href: `/practice-areas/banking`, label: tNav("bankingLaw"), icon: Landmark, subLinks: bankingSubLinks },
+    { href: `/pleistariasmos`, label: tNav("pleistariasmos"), icon: Gavel, subLinks: null },
     { href: `/exodikastikos`, label: tNav("exodikastikos"), icon: Handshake, subLinks: null },
-  ];
+  ] as { href: string; label: string; icon: typeof Gavel; subLinks: SubLink[] | null }[];
+
+  const servicesActiveHrefs = [`/practice-areas/banking`, `/banks`, `/funds`, `/pleistariasmos`, `/exodikastikos`];
+  const isServicesActive = servicesActiveHrefs.some((h) => pathname.startsWith(`/${locale}${h}`) || pathname.startsWith(h));
 
   const updatesLinks = [
     { href: `/blog`, label: tNav("blog"), icon: BookOpen },
@@ -198,7 +308,7 @@ export default function Navbar() {
             onMouseLeave={handleServicesMouseLeave}
           >
             <button className={`flex items-center gap-1 text-sm font-medium whitespace-nowrap transition-colors ${
-              servicesLinks.some((l) => pathname.startsWith(l.href)) ? "text-accent" : "text-white/80 hover:text-accent"
+              isServicesActive ? "text-accent" : "text-white/80 hover:text-accent"
             }`}>
               {tNav("services")}
               <ChevronDown
@@ -212,7 +322,7 @@ export default function Navbar() {
             }`}>
               {servicesLinks.map(({ href, label, icon: Icon, subLinks }) => {
                 const itemClass = `flex items-center gap-2.5 px-4 py-3 text-sm font-medium transition-colors ${
-                  pathname.startsWith(href) ? "text-accent bg-accent/10" : "text-white/80 hover:text-accent hover:bg-white/5"
+                  pathname.startsWith(`/${locale}${href}`) ? "text-accent bg-accent/10" : "text-white/80 hover:text-accent hover:bg-white/5"
                 }`;
                 if (!subLinks) {
                   return (
@@ -228,7 +338,7 @@ export default function Navbar() {
                   );
                 }
                 return (
-                  <div key={href} className="relative group/sub border-b border-white/5 last:border-0">
+                  <div key={href} className="relative group/f0 border-b border-white/5 last:border-0">
                     <Link
                       href={href}
                       onClick={() => setServicesDropdownOpen(false)}
@@ -238,43 +348,17 @@ export default function Navbar() {
                       {label}
                       <ChevronRight size={12} className="ml-auto shrink-0 opacity-60" />
                     </Link>
-                    {/* Flyout submenu */}
-                    <div className="absolute left-full top-0 w-36 bg-primary border border-white/10 shadow-xl rounded-sm opacity-0 -translate-x-1 pointer-events-none transition-all duration-150 group-hover/sub:opacity-100 group-hover/sub:translate-x-0 group-hover/sub:pointer-events-auto">
-                      {subLinks.map((sub) => {
-                        const subClass = `flex items-center gap-2 px-4 py-2.5 text-sm font-medium transition-colors border-b border-white/5 last:border-0 ${
-                          pathname.startsWith(sub.href) ? "text-accent bg-accent/10" : "text-white/80 hover:text-accent hover:bg-white/5"
-                        }`;
-                        if (!sub.subLinks) {
-                          return (
-                            <Link key={sub.href} href={sub.href} onClick={() => setServicesDropdownOpen(false)} className={subClass}>
-                              {sub.label}
-                            </Link>
-                          );
-                        }
-                        return (
-                          <div key={sub.href} className="relative group/sub2 border-b border-white/5 last:border-0">
-                            <Link href={sub.href} onClick={() => setServicesDropdownOpen(false)} className={subClass}>
-                              {sub.label}
-                              <ChevronRight size={11} className="ml-auto shrink-0 opacity-60" />
-                            </Link>
-                            {/* Nested flyout: named funds */}
-                            <div className="absolute left-full top-0 w-32 bg-primary border border-white/10 shadow-xl rounded-sm overflow-hidden opacity-0 -translate-x-1 pointer-events-none transition-all duration-150 group-hover/sub2:opacity-100 group-hover/sub2:translate-x-0 group-hover/sub2:pointer-events-auto">
-                              {sub.subLinks.map((leaf) => (
-                                <Link
-                                  key={leaf.href}
-                                  href={leaf.href}
-                                  onClick={() => setServicesDropdownOpen(false)}
-                                  className={`block px-4 py-2.5 text-sm font-medium transition-colors border-b border-white/5 last:border-0 ${
-                                    pathname.startsWith(leaf.href) ? "text-accent bg-accent/10" : "text-white/80 hover:text-accent hover:bg-white/5"
-                                  }`}
-                                >
-                                  {leaf.label}
-                                </Link>
-                              ))}
-                            </div>
-                          </div>
-                        );
-                      })}
+                    <div className="absolute left-full top-0 w-44 bg-primary border border-white/10 shadow-xl rounded-sm opacity-0 -translate-x-1 pointer-events-none transition-all duration-150 group-hover/f0:opacity-100 group-hover/f0:translate-x-0 group-hover/f0:pointer-events-auto">
+                      {subLinks.map((sub) => (
+                        <FlyoutNode
+                          key={`${sub.href}-${sub.label}`}
+                          item={sub}
+                          depth={1}
+                          pathname={pathname}
+                          locale={locale}
+                          onNavigate={() => setServicesDropdownOpen(false)}
+                        />
+                      ))}
                     </div>
                   </div>
                 );
@@ -347,8 +431,8 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div
-        className={`md:hidden bg-primary border-t border-white/10 overflow-hidden transition-all duration-300 ease-in-out ${
-          open ? "max-h-[40rem] opacity-100" : "max-h-0 opacity-0"
+        className={`md:hidden bg-primary border-t border-white/10 transition-all duration-300 ease-in-out ${
+          open ? "max-h-[85vh] opacity-100 overflow-y-auto" : "max-h-0 opacity-0 overflow-hidden"
         }`}
       >
         <div className="max-w-6xl mx-auto px-6 pt-4 pb-8 flex flex-col gap-1">
@@ -367,7 +451,7 @@ export default function Navbar() {
           <button
             onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
             className={`flex items-center justify-between w-full font-medium py-2.5 border-b border-white/10 transition-colors ${
-              servicesLinks.some((l) => pathname.startsWith(l.href)) ? "text-accent" : "text-white/80"
+              isServicesActive ? "text-accent" : "text-white/80"
             }`}
           >
             {tNav("services")}
@@ -376,7 +460,7 @@ export default function Navbar() {
               className={`transition-transform duration-200 ${mobileServicesOpen ? "rotate-180 text-accent" : "text-white/40"}`}
             />
           </button>
-          <div className={`overflow-hidden transition-all duration-200 ${mobileServicesOpen ? "max-h-[32rem] opacity-100" : "max-h-0 opacity-0"}`}>
+          <div className={`overflow-hidden transition-all duration-200 ${mobileServicesOpen ? "max-h-[60rem] opacity-100" : "max-h-0 opacity-0"}`}>
             {servicesLinks.map(({ href, label, icon: Icon, subLinks }) => (
               <div key={href}>
                 <Link
@@ -387,31 +471,14 @@ export default function Navbar() {
                   <Icon size={13} className="shrink-0" />
                   {label}
                 </Link>
-                {subLinks &&
-                  subLinks.map((sub) => (
-                    <div key={sub.href}>
-                      <Link
-                        href={sub.href}
-                        onClick={() => { setOpen(false); setMobileServicesOpen(false); }}
-                        className="flex items-center gap-2 text-white/60 hover:text-accent transition-colors text-sm py-2 pl-10 border-b border-white/5"
-                      >
-                        <ChevronRight size={11} className="shrink-0 opacity-60" />
-                        {sub.label}
-                      </Link>
-                      {sub.subLinks &&
-                        sub.subLinks.map((leaf) => (
-                          <Link
-                            key={leaf.href}
-                            href={leaf.href}
-                            onClick={() => { setOpen(false); setMobileServicesOpen(false); }}
-                            className="flex items-center gap-2 text-white/50 hover:text-accent transition-colors text-sm py-2 pl-16 border-b border-white/5"
-                          >
-                            <ChevronRight size={10} className="shrink-0 opacity-50" />
-                            {leaf.label}
-                          </Link>
-                        ))}
-                    </div>
-                  ))}
+                {subLinks?.map((sub) => (
+                  <MobileNode
+                    key={`${sub.href}-${sub.label}`}
+                    item={sub}
+                    depth={1}
+                    onNavigate={() => { setOpen(false); setMobileServicesOpen(false); }}
+                  />
+                ))}
               </div>
             ))}
           </div>

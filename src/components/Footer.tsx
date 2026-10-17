@@ -100,6 +100,10 @@ export default function Footer() {
               {[
                 { href: `/pleistariasmos`, label: t("nav.pleistariasmos") },
                 { href: `/exodikastikos`, label: t("nav.exodikastikos") },
+                { href: `/banks`, label: t("nav.banks") },
+                ...(t.raw("banks.cards") as { slug: string; name: string }[]).map(
+                  (c) => ({ href: `/banks/${c.slug}`, label: c.name })
+                ),
                 { href: `/funds`, label: t("nav.funds") },
                 { href: `/funds/intrum`, label: "Intrum" },
                 { href: `/funds/dovalue`, label: "doValue" },

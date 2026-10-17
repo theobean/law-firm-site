@@ -29,7 +29,7 @@ export default function EthnikiBizPage({
       locale={locale}
       namespace="ethnikiBiz"
       audience="business"
-      counterpartHref={`/${locale}/banks/ethniki`}
+      counterpartHref={`/banks/ethniki`}
     />
   );
 }

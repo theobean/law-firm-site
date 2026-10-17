@@ -29,7 +29,7 @@ export default function PiraeusBizPage({
       locale={locale}
       namespace="piraeusBiz"
       audience="business"
-      counterpartHref={`/${locale}/banks/piraeus`}
+      counterpartHref={`/banks/piraeus`}
     />
   );
 }

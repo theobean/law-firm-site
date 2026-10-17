@@ -3,10 +3,14 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
-// CSP without unsafe-eval — used for all public pages
+// In development, Next.js/React needs 'unsafe-eval' (source maps, error overlay).
+// Production stays strict — React never uses eval() in production.
+const devEval = process.env.NODE_ENV === "production" ? "" : " 'unsafe-eval'";
+
+// CSP without unsafe-eval in production — used for all public pages
 const publicCSP = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
+  `script-src 'self' 'unsafe-inline'${devEval} https://www.googletagmanager.com`,
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
   "img-src 'self' data: blob: https://cdn.sanity.io https://www.google-analytics.com https://www.googletagmanager.com https://img.youtube.com",
@@ -35,9 +39,6 @@ const baseHeaders = [
 const nextConfig: NextConfig = {
   async redirects() {
     return [
-      // Bank pages withdrawn (content not approved) — already indexed, so 308 → contact
-      { source: "/:locale/banks", destination: "/:locale/contact", permanent: true },
-      { source: "/:locale/banks/:path*", destination: "/:locale/contact", permanent: true },
       // WordPress post ID URLs: /?p=123
       { source: "/", has: [{ type: "query", key: "p" }], destination: "/el", permanent: true },
       // WordPress page ID URLs: /?page_id=123
