@@ -103,6 +103,22 @@ application state από το Responses API· δεν ισοδυναμεί με �
 τον πάροχο για ελέγχους κατάχρησης. Δες τα επίσημα
 [data controls](https://developers.openai.com/api/docs/guides/your-data).
 
+Το `/api/chat` λειτουργεί ως backend proxy: ελέγχει consent, locale, ρόλους και
+μέγεθος ιστορικού και επιλέγει μόνο τα επιτρεπόμενα πεδία πριν από την αποστολή
+στο μοντέλο. Τα κείμενα κανονικοποιούνται σε Unicode NFC και LF, αφαιρούνται μη
+εκτυπώσιμοι χαρακτήρες ελέγχου και direction overrides, και απορρίπτονται κενά,
+υπερμεγέθη ή κακοσχηματισμένα Unicode μηνύματα. Τα JSON request/response bodies
+περιορίζονται σε **64 KiB πραγματικών bytes**, ακόμη και χωρίς Content-Length.
+Ελέγχονται ξανά οι απαντήσεις στον server και στον browser, μαζί με τα μήκη,
+τους τύπους πεδίων και τους HTTPS συνδέσμους χωρίς credentials.
+
+Τα μηνύματα και οι τίτλοι πηγών εμφανίζονται από το `ChatText` ως απλά React text
+children, με escaping στο DOM boundary. Δεν χρησιμοποιείται HTML injection,
+Markdown-to-HTML ή `dangerouslySetInnerHTML` για περιεχόμενο συνομιλίας. Το
+[React documentation](https://react.dev/reference/react-dom/components/common#dangerously-setting-the-inner-html)
+εξηγεί τον κίνδυνο των raw HTML sinks. Η κανονικοποίηση κειμένου δεν αποτελεί
+εγγύηση προστασίας από semantic prompt injection ή λανθασμένες νομικές απαντήσεις.
+
 Οι απαντήσεις περιορίζονται σε επιλεγμένες πληροφορίες του γραφείου και γενικές
 εξηγήσεις από επίσημες πηγές. Δεν γίνεται ζωντανή νομική έρευνα. Ο server
 επιτρέπει μόνο αναγνωριστικά της δικής του βάσης πηγών και απορρίπτει απαντήσεις
@@ -116,8 +132,9 @@ npm run test:chat
 ```
 
 Οι έλεγχοι χρησιμοποιούν mock του API, χωρίς κλειδί ή χρέωση. Καλύπτουν όρια
-input/history, consent, roles, πηγές, incomplete/refused output, origin,
-streamed body size, rate limits και `store: false`. Δεν αποτελούν αξιολόγηση
+input/history, Unicode, consent, roles, πηγές, XSS payloads στον πραγματικό React
+text renderer, incomplete/refused output, origin, streamed body size, rate limits
+και `store: false`. Δεν αποτελούν αξιολόγηση
 πραγματικών απαντήσεων μοντέλου. Τα transcripts μένουν μόνο στη μνήμη της
 καρτέλας μέχρι ανανέωση, αλλαγή γλώσσας ή νέα συνομιλία.
 

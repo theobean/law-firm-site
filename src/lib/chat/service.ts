@@ -1,3 +1,5 @@
+import { parseChatResponse, prepareChatText, readBoundedJson } from "./protocol.mjs";
+
 export type ChatLocale = "el" | "en" | "de";
 export type ChatMessage = { role: "user" | "assistant"; content: string };
 export type ChatInput = { locale: ChatLocale; messages: ChatMessage[]; consent: true };
@@ -32,19 +34,21 @@ export function parseChatInput(value: unknown): ChatInput {
   }
 
   let characters = 0;
+  let originalCharacters = 0;
   const messages: ChatMessage[] = value.messages.map((message: unknown, index: number) => {
     const role = index % 2 === 0 ? "user" : "assistant";
     if (!isRecord(message) || message.role !== role || typeof message.content !== "string") {
       throw new ChatFailure("invalid_request", 400);
     }
-    const content = message.content.trim();
-    if (!content || content.length > (role === "user" ? 1200 : 4000)) {
+    const content = prepareChatText(message.content, role === "user" ? 1200 : 4000);
+    if (!content) {
       throw new ChatFailure("invalid_request", 400);
     }
     characters += content.length;
+    originalCharacters += message.content.length;
     return { role, content };
   });
-  if (characters > 20000) throw new ChatFailure("request_too_large", 413);
+  if (characters > 20000 || originalCharacters > 20000) throw new ChatFailure("request_too_large", 413);
 
   return { locale: value.locale as ChatLocale, messages, consent: true };
 }
@@ -101,11 +105,13 @@ export function parseChatReply(value: unknown, sources: ChatSource[], locale: Ch
     }[locale];
     return { answer: value.kind === "greeting" ? text.greeting : text.handoff, sources: [], suggestContact: value.kind !== "greeting" };
   }
-  return {
-    answer: value.answer.trim(),
+  const reply = parseChatResponse({
+    answer: value.answer,
     sources: selected.map((source) => ({ title: source!.title, url: source!.url })),
     suggestContact: value.suggestContact,
-  };
+  });
+  if (!reply) throw new ChatFailure("upstream", 502);
+  return reply;
 }
 
 export async function generateChatReply(
@@ -113,6 +119,8 @@ export async function generateChatReply(
   sources: ChatSource[],
   options: { apiKey: string; model?: string; fetcher?: typeof fetch; signal?: AbortSignal },
 ): Promise<ChatReply> {
+  // Validate at the provider boundary as well as at the HTTP entry point.
+  const safeInput = parseChatInput(input);
   const response = await (options.fetcher ?? fetch)("https://api.openai.com/v1/responses", {
     method: "POST",
     headers: { Authorization: `Bearer ${options.apiKey}`, "Content-Type": "application/json" },
@@ -125,8 +133,8 @@ export async function generateChatReply(
       store: false,
       max_output_tokens: 1800,
       reasoning: { effort: "low" },
-      instructions: chatInstructions(input.locale, sources),
-      input: input.messages,
+      instructions: chatInstructions(safeInput.locale, sources),
+      input: safeInput.messages,
       text: {
         format: {
           type: "json_schema",
@@ -149,7 +157,12 @@ export async function generateChatReply(
   });
   if (!response.ok) throw new ChatFailure("upstream", 502);
 
-  const payload: unknown = await response.json();
+  let payload: unknown;
+  try {
+    payload = await readBoundedJson(response);
+  } catch {
+    throw new ChatFailure("upstream", 502);
+  }
   if (!isRecord(payload) || payload.status !== "completed" || !Array.isArray(payload.output)) {
     throw new ChatFailure("upstream", 502);
   }
@@ -160,7 +173,7 @@ export async function generateChatReply(
     );
   }).join("");
   try {
-    return parseChatReply(JSON.parse(text), sources, input.locale);
+    return parseChatReply(JSON.parse(text), sources, safeInput.locale);
   } catch {
     throw new ChatFailure("upstream", 502);
   }

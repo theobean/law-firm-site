@@ -4,6 +4,8 @@ import { useEffect, useId, useRef, useState, type CSSProperties, type FormEvent 
 import { useLocale, useTranslations } from "next-intl";
 import { ArrowRight, ExternalLink, LoaderCircle, MessageCircle, Phone, RotateCcw, Send, ShieldCheck, X } from "lucide-react";
 import { Link } from "@/navigation";
+import { parseChatResponse, readBoundedJson } from "@/lib/chat/protocol.mjs";
+import ChatText from "./ChatText";
 import styles from "./ChatAssistant.module.css";
 
 type ChatSource = { title: string; url: string };
@@ -17,19 +19,6 @@ type ChatMessage = {
 type ChatError = "unavailable" | "rate_limit" | "invalid_request" | "request_too_large" | "forbidden" | "upstream";
 const MAX_MESSAGE_LENGTH = 1200;
 const ERROR_CODES = new Set<ChatError>(["unavailable", "rate_limit", "invalid_request", "request_too_large", "forbidden", "upstream"]);
-
-function safeSources(value: unknown): ChatSource[] {
-  if (!Array.isArray(value)) return [];
-  return value.filter((source): source is ChatSource => {
-    if (!source || typeof source.title !== "string" || typeof source.url !== "string") return false;
-    try {
-      const url = new URL(source.url);
-      return url.protocol === "https:" && !url.username && !url.password;
-    } catch {
-      return false;
-    }
-  }).slice(0, 5);
-}
 
 export default function ChatAssistant() {
   const t = useTranslations("chat");
@@ -136,10 +125,13 @@ export default function ChatAssistant() {
         }),
         signal: controller.signal,
       });
-      const data = await response.json().catch(() => null);
+      const data = await readBoundedJson(response).catch(() => null);
       if (controllerRef.current !== controller) return;
-      if (!response.ok || !data || typeof data.answer !== "string" || !data.answer.trim()) {
-        const code: ChatError = ERROR_CODES.has(data?.error) ? data.error : "upstream";
+      const reply = parseChatResponse(data);
+      if (!response.ok || !reply) {
+        const receivedError = data && typeof data === "object" && "error" in data ? data.error : null;
+        const code: ChatError = typeof receivedError === "string" && ERROR_CODES.has(receivedError as ChatError)
+          ? receivedError as ChatError : "upstream";
         setMessages(history.slice(0, -1));
         setDraft(content);
         setFailedQuestion(content);
@@ -149,9 +141,9 @@ export default function ChatAssistant() {
       setMessages([...history, {
         id: ++sequenceRef.current,
         role: "assistant",
-        content: data.answer,
-        sources: safeSources(data.sources),
-        suggestContact: data.suggestContact === true,
+        content: reply.answer,
+        sources: reply.sources,
+        suggestContact: reply.suggestContact,
       }]);
     } catch {
       if (controller.signal.aborted || controllerRef.current !== controller) return;
@@ -229,13 +221,13 @@ export default function ChatAssistant() {
                 {messages.map((message) => (
                   <div key={message.id} className={message.role === "user" ? styles.userMessage : styles.assistantMessage}>
                     <span className={styles.speaker}>{t(message.role === "user" ? "youLabel" : "assistantLabel")}</span>
-                    <p className={styles.messageText}>{message.content}</p>
+                    <ChatText className={styles.messageText} text={message.content} />
                     {!!message.sources?.length && (
                       <div className={styles.sources}>
                         <p>{t("sources")}</p>
                         {message.sources.map((source) => (
                           <a key={source.url} href={source.url} target="_blank" rel="noopener noreferrer">
-                            {source.title} <ExternalLink size={12} aria-hidden="true" />
+                            <ChatText as="span" text={source.title} /> <ExternalLink size={12} aria-hidden="true" />
                           </a>
                         ))}
                       </div>

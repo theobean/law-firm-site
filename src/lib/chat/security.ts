@@ -1,4 +1,5 @@
 import { createHash, randomBytes } from "node:crypto";
+import { readBoundedJson } from "./protocol.mjs";
 
 export function isSameOrigin(request: Request): boolean {
   const origin = request.headers.get("origin");
@@ -11,43 +12,7 @@ export function isSameOrigin(request: Request): boolean {
 }
 
 export async function readChatBody(request: Request): Promise<unknown> {
-  if (request.headers.get("content-type")?.split(";")[0].trim().toLowerCase() !== "application/json") {
-    throw new Error("invalid_request");
-  }
-  const limit = 64 * 1024;
-  const declaredLength = request.headers.get("content-length");
-  if (declaredLength && (!/^\d+$/.test(declaredLength) || Number(declaredLength) > limit)) {
-    throw new Error("request_too_large");
-  }
-  if (!request.body) throw new Error("invalid_request");
-  const reader = request.body.getReader();
-  const chunks: Uint8Array[] = [];
-  let size = 0;
-  try {
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      size += value.byteLength;
-      if (size > limit) {
-        await reader.cancel();
-        throw new Error("request_too_large");
-      }
-      chunks.push(value);
-    }
-  } finally {
-    reader.releaseLock();
-  }
-  const bytes = new Uint8Array(size);
-  let offset = 0;
-  for (const chunk of chunks) {
-    bytes.set(chunk, offset);
-    offset += chunk.byteLength;
-  }
-  try {
-    return JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes));
-  } catch {
-    throw new Error("invalid_request");
-  }
+  return readBoundedJson(request);
 }
 
 // Best-effort per-instance protection. Configure a shared Vercel Firewall rate
