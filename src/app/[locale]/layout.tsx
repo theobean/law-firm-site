@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
 import UrgentCTABar from "@/components/UrgentCTABar";
 import ScrollToTop from "@/components/ScrollToTop";
+import ChatAssistant from "@/components/ChatAssistant";
 import { Analytics } from "@vercel/analytics/next";
 import "../globals.css";
 
@@ -197,11 +198,12 @@ export default async function LocaleLayout({
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />
-          <div className="fixed inset-x-0 bottom-0 z-50 flex flex-col">
+          <div id="site-bottom-overlays" className="fixed inset-x-0 bottom-0 z-50 flex flex-col">
             <UrgentCTABar />
             <CookieBanner />
           </div>
-          <ScrollToTop />
+          <ScrollToTop hasChatAssistant={process.env.CHATBOT_ENABLED === "true"} />
+          {process.env.CHATBOT_ENABLED === "true" && <ChatAssistant />}
         </NextIntlClientProvider>
         <Analytics />
       </body>

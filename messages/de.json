@@ -380,7 +380,9 @@
     "termsSection4Title": "4. Haftungsbeschränkung",
     "termsSection4": "Wir bemühen uns um die Richtigkeit und Aktualität der Inhalte, garantieren jedoch nicht, dass diese stets vollständig oder fehlerfrei sind. Die Nutzung der Website erfolgt auf eigene Verantwortung des Nutzers.",
     "termsSection5Title": "5. Anwendbares Recht",
-    "termsSection5": "Diese Bedingungen unterliegen griechischem Recht. Die Gerichte in Thessaloniki sind ausschließlich zuständig für etwaige Streitigkeiten."
+    "termsSection5": "Diese Bedingungen unterliegen griechischem Recht. Die Gerichte in Thessaloniki sind ausschließlich zuständig für etwaige Streitigkeiten.",
+    "privacySection8Title": "8. Digitaler KI-Assistent",
+    "privacySection8": "Die Nutzung des digitalen Assistenten ist freiwillig. Erst nachdem Sie ein Gespräch starten und eine Frage absenden, werden Ihre Nachricht und der jüngste Chatverlauf zur Erstellung einer Antwort an die OpenAI API übermittelt. Die Website speichert den Chatinhalt weder in einer Datenbank noch dauerhaft im Browser; er verbleibt vorübergehend im Arbeitsspeicher des geöffneten Fensters und wird bei einem neuen Gespräch oder beim Neuladen der Seite entfernt. OpenAI wird aufgefordert, die Antwort nicht als gespeicherten Gesprächsverlauf aufzubewahren. Dies schließt eine Aufbewahrung durch den Anbieter zur Missbrauchsüberwachung gemäß den Kontoeinstellungen und seinen Richtlinien nicht aus. Geben Sie keine persönlichen oder sensiblen Daten, Dokumente oder Informationen zu einem konkreten Fall ein. Die Antworten dienen der allgemeinen Information, sind keine Rechtsberatung und begründen kein Mandatsverhältnis. Sie können die Kanzlei jederzeit direkt kontaktieren, anstatt den Assistenten zu nutzen."
   },
   "team": {
     "sectionTitle": "Unser Team",
@@ -1968,5 +1970,45 @@
     "ctaText": "Kanzlei Leontos Sofou 12, Thessaloniki. Bei Unternehmensschulden sind die Beträge hoch und die Fristen streng, sodass die Akte vordringlich bewertet wird.",
     "ctaButton": "Sofortige Aktenprüfung",
     "ctaPhone": "Jetzt anrufen: 2310 545 261"
+  },
+  "chat": {
+    "regionLabel": "Digitaler Assistent der Kanzlei",
+    "title": "Digitaler Assistent",
+    "subtitle": "Allgemeine Informationen · KI-Assistent",
+    "officeName": "Ioannis Papaioannou & Partner",
+    "introTitle": "Wie können wir Ihnen helfen?",
+    "introDescription": "Fragen Sie nach unserer Kanzlei, unseren Leistungen oder allgemeinen Rechtsthemen. Der digitale Assistent informiert Sie und hilft Ihnen, einen Anwalt zu kontaktieren.",
+    "privacyNotice": "Sie sprechen mit einer KI, nicht mit einem Anwalt. Die Antworten sind keine individuelle Rechtsberatung. Geben Sie keine Namen, persönlichen oder sensiblen Daten, Dokumente oder Einzelheiten eines Falls ein.",
+    "processingNotice": "Wenn Sie eine Frage absenden, werden Ihre Nachricht und der jüngste Chatverlauf zur Beantwortung an OpenAI übermittelt. Mit dem Start des Gesprächs wählen Sie diese Verarbeitung.",
+    "privacyLink": "Datenschutzerklärung",
+    "start": "Gespräch starten",
+    "contactInstead": "Ich möchte die Kanzlei kontaktieren",
+    "close": "Digitalen Assistenten schließen",
+    "open": "Digitalen Assistenten öffnen",
+    "reset": "Neues Gespräch — Verlauf löschen",
+    "conversation": "Gespräch mit dem digitalen Assistenten",
+    "assistantLabel": "Digitaler Assistent · KI",
+    "youLabel": "Sie",
+    "welcome": "Willkommen. Ich kann Sie über die Kanzlei informieren und allgemeine Rechtsthemen erklären. Was möchten Sie wissen?",
+    "starterOffice": "Welche Fälle übernimmt die Kanzlei?",
+    "starterLegal": "Was ist der außergerichtliche Schuldenregulierungsmechanismus?",
+    "starterAppointment": "Wie kann ich einen Termin anfragen?",
+    "sources": "Quellen zur Antwort",
+    "contactOffice": "Kanzlei kontaktieren",
+    "thinking": "Die Antwort wird vorbereitet…",
+    "retry": "Erneut versuchen",
+    "inputLabel": "Ihre Frage",
+    "placeholder": "Stellen Sie eine allgemeine Frage…",
+    "send": "Frage senden",
+    "inputHint": "Keine persönlichen Daten · Enter zum Senden",
+    "footerNotice": "Besprechen Sie Ihren Fall mit einem Anwalt.",
+    "errors": {
+      "unavailable": "Der Assistent ist derzeit nicht verfügbar. Sie können die Kanzlei direkt kontaktieren.",
+      "rate_limit": "In kurzer Zeit wurden mehrere Fragen gestellt. Bitte warten Sie, bevor Sie es erneut versuchen, oder kontaktieren Sie die Kanzlei.",
+      "invalid_request": "Ihre Frage konnte nicht gesendet werden. Beginnen Sie ein neues Gespräch mit einer kurzen, allgemeinen Frage.",
+      "request_too_large": "Die Nachricht oder der Chatverlauf ist zu lang. Starten Sie ein neues Gespräch mit einer kürzeren Frage.",
+      "forbidden": "Das Gespräch konnte von dieser Seite aus nicht gestartet werden. Laden Sie die Seite neu oder kontaktieren Sie die Kanzlei.",
+      "upstream": "Die Antwort konnte nicht abgeschlossen werden. Ihre Frage steht weiterhin im Eingabefeld, damit Sie es erneut versuchen können."
+    }
   }
 }

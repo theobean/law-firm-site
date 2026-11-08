@@ -380,7 +380,9 @@
     "termsSection4Title": "4. Limitation of liability",
     "termsSection4": "We make every effort to ensure the accuracy and timeliness of the content; however, we do not guarantee that it is always complete or error-free. Use of the website is at the user's sole responsibility.",
     "termsSection5Title": "5. Governing law",
-    "termsSection5": "These terms are governed by Greek law. The courts of Thessaloniki have exclusive jurisdiction over any disputes."
+    "termsSection5": "These terms are governed by Greek law. The courts of Thessaloniki have exclusive jurisdiction over any disputes.",
+    "privacySection8Title": "8. AI digital assistant",
+    "privacySection8": "Using the digital assistant is optional. Only after you choose to start a conversation and submit a question are your message and recent chat history sent to the OpenAI API to generate an answer. The website does not save chat content in a database or persistent browser storage; it remains temporarily in the open window’s memory and is removed when you start a new conversation or reload the page. OpenAI is requested not to retain the response as stored conversation history. This does not exclude the provider retaining data for abuse monitoring under the account settings and its policies. Do not enter personal or sensitive data, documents or information about a specific case. Answers are general information, do not constitute legal advice and do not create a lawyer–client engagement. You can always contact the office directly instead of using the assistant."
   },
   "team": {
     "sectionTitle": "Our Team",
@@ -1964,5 +1966,45 @@
     "ctaText": "Office at 12 Leontos Sofou St., Thessaloniki. In business debts the amounts are large and the deadlines strict, so the file is assessed as a priority.",
     "ctaButton": "Immediate File Review",
     "ctaPhone": "Call now: 2310 545 261"
+  },
+  "chat": {
+    "regionLabel": "Law office digital assistant",
+    "title": "Digital assistant",
+    "subtitle": "General information · AI assistant",
+    "officeName": "Ioannis Papaioannou & Associates",
+    "introTitle": "How can we help?",
+    "introDescription": "Ask about our office, our services or general legal topics. The digital assistant provides information and helps you contact a lawyer.",
+    "privacyNotice": "You are chatting with AI, not a lawyer. Answers are not personalised legal advice. Do not enter names, personal or sensitive information, documents or details of a case.",
+    "processingNotice": "When you submit a question, your message and recent chat history are sent to OpenAI to generate an answer. By starting the conversation, you choose this processing.",
+    "privacyLink": "Privacy policy",
+    "start": "Start conversation",
+    "contactInstead": "I prefer to contact the office",
+    "close": "Close digital assistant",
+    "open": "Open digital assistant",
+    "reset": "New conversation — clear history",
+    "conversation": "Conversation with the digital assistant",
+    "assistantLabel": "Digital assistant · AI",
+    "youLabel": "You",
+    "welcome": "Welcome. I can tell you about the office and explain general legal topics. What would you like to ask?",
+    "starterOffice": "What cases does the office handle?",
+    "starterLegal": "What is the out-of-court debt settlement mechanism?",
+    "starterAppointment": "How can I request an appointment?",
+    "sources": "Answer sources",
+    "contactOffice": "Contact the office",
+    "thinking": "Preparing an answer…",
+    "retry": "Try again",
+    "inputLabel": "Your question",
+    "placeholder": "Type a general question…",
+    "send": "Send question",
+    "inputHint": "No personal information · Enter to send",
+    "footerNotice": "For your own case, speak to a lawyer.",
+    "errors": {
+      "unavailable": "The assistant is currently unavailable. You can contact the office directly.",
+      "rate_limit": "Several questions have been sent in a short time. Please wait before trying again, or contact the office.",
+      "invalid_request": "Your question could not be submitted. Try a new conversation with a short, general question.",
+      "request_too_large": "The message or chat history is too long. Start a new conversation with a shorter question.",
+      "forbidden": "The conversation could not start from this page. Refresh the page or contact the office.",
+      "upstream": "The answer could not be completed. Your question is still in the input field so you can try again."
+    }
   }
 }
