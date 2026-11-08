@@ -14,6 +14,8 @@ instructions cannot create another principal or widen the scope.
 Optional OIDC verification selects a request/token quota tier only; it does not
 replace this public data principal or enable private case access. Redis holds
 quota counters, not legal context. See [quota configuration](chatbot-quotas.md).
+The model has no executable API/database tools; see the
+[capability policy and human-approval requirements](chatbot-capabilities.md).
 
 `src/lib/chat/access.mjs` implements default-deny source access before content
 readers run. An entry needs a known approved ID, public visibility and published

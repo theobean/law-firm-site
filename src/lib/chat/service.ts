@@ -170,6 +170,10 @@ export function prepareChatModelRequest(
       store: false,
       max_output_tokens: MAX_CHAT_OUTPUT_TOKENS,
       reasoning: { effort: "low" },
+      // This information assistant has no tool or action capabilities. These
+      // server-owned settings cannot be supplied by chat text or request fields.
+      tools: [],
+      tool_choice: "none",
       instructions: chatInstructions(safeInput.locale),
       // Never promote browser-supplied assistant history or reference prose to
       // trusted API instructions/roles. XML is a data-format mitigation only.
@@ -223,6 +227,7 @@ export async function generatePreparedChatReply(
       ? AbortSignal.any([options.signal, AbortSignal.timeout(30000)])
       : AbortSignal.timeout(30000),
     cache: "no-store",
+    redirect: "error",
     body: snapshot.body,
   });
   if (!response.ok) throw new ChatFailure("upstream", 502);
@@ -237,10 +242,18 @@ export async function generatePreparedChatReply(
     throw new ChatFailure("upstream", 502);
   }
   const text = payload.output.flatMap((item: unknown) => {
-    if (!isRecord(item) || item.type !== "message" || !Array.isArray(item.content)) return [];
-    return item.content.flatMap((part: unknown) =>
-      isRecord(part) && part.type === "output_text" && typeof part.text === "string" ? [part.text] : [],
-    );
+    // Positive allowlist: a tool/action result must fail closed, even when an
+    // otherwise valid answer accompanies it. There is deliberately no executor,
+    // dispatch table or follow-up tool-call loop in this service.
+    if (!isRecord(item)) throw new ChatFailure("upstream", 502);
+    if (item.type === "reasoning") return [];
+    if (item.type !== "message" || !Array.isArray(item.content)) throw new ChatFailure("upstream", 502);
+    return item.content.map((part: unknown) => {
+      if (!isRecord(part) || part.type !== "output_text" || typeof part.text !== "string") {
+        throw new ChatFailure("upstream", 502);
+      }
+      return part.text;
+    });
   }).join("");
   try {
     return parseChatReply(JSON.parse(text), snapshot.sources, snapshot.locale);

@@ -139,7 +139,8 @@ test("the LLM boundary forwards normalized whitelisted message fields only", asy
   ].join("\n") }]);
   assert.notEqual(forwarded.model, "injected-client-model");
   assert.notEqual(forwarded.instructions, "injected-client-instructions");
-  assert.equal(forwarded.tools, undefined);
+  assert.deepEqual(forwarded.tools, []);
+  assert.equal(forwarded.tool_choice, "none");
 });
 
 test("invalid user input never reaches the provider even when calling the service directly", async () => {
