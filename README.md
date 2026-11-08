@@ -133,6 +133,16 @@ Markdown-to-HTML ή `dangerouslySetInnerHTML` για περιεχόμενο συ
 εξηγεί τον κίνδυνο των raw HTML sinks. Η κανονικοποίηση κειμένου δεν αποτελεί
 εγγύηση προστασίας από semantic prompt injection ή λανθασμένες νομικές απαντήσεις.
 
+Το πεδίο `instructions` περιέχει μόνο το σταθερό template και την ελεγμένη
+γλώσσα, μέσα σε `<assistant_instructions>`. Πηγές, ιστορικό και τρέχον ερώτημα
+αποστέλλονται σε ξεχωριστά blocks `<reference_material>`,
+`<conversation_history>` και `<user_input>` ενός user message. Τα δυναμικά κείμενα
+περνούν από XML escaping, ώστε πλαστά closing tags να παραμένουν περιεχόμενο.
+Ακόμη και μηνύματα ιστορικού με ρόλο assistant αντιμετωπίζονται ως δεδομένα από
+τον browser. Τα quotas υπολογίζονται στο τελικό escaped payload. Οι delimiters
+είναι συμπληρωματική βοήθεια προς το μοντέλο, όχι όριο εξουσιοδότησης ή εγγύηση
+κατά του prompt injection· δες [τα prompt boundaries](docs/chatbot-content.md#prompt-data-boundaries).
+
 Η πρόσβαση στο context επιβάλλεται στον server μέσω του `src/lib/chat/access.mjs`,
 πριν κληθούν οι readers περιεχομένου. Ο δημόσιος βοηθός έχει μόνο τον server-issued
 ρόλο `public` και άδεια ανάγνωσης των 13 ρητά εγκεκριμένων, δημοσιευμένων δημόσιων
@@ -204,7 +214,7 @@ npm run build
 npm run start
 ```
 
-Το production build περιλαμβάνει έλεγχο TypeScript. Τα διαθέσιμα npm scripts είναι `dev`, `build` και `start`· δεν υπάρχει ξεχωριστό test ή lint script.
+Το production build περιλαμβάνει έλεγχο TypeScript. Οι έλεγχοι συνομιλίας εκτελούνται με `npm run test:chat`· δεν υπάρχει ξεχωριστό lint script.
 
 Έλεγξε πριν από δημοσίευση:
 

@@ -41,6 +41,38 @@ the corresponding least privilege. Filtering a fully fetched private dataset or
 telling the model to hide it is not an authorization boundary. See the
 [OWASP authorization guidance](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html).
 
+## Prompt data boundaries
+
+The Responses API `instructions` field contains only the static application
+template and the language selected from the validated locale enum. Its
+`<assistant_instructions>` wrapper separates scope/grounding and instruction
+integrity rules. No reference prose or conversation text is interpolated into
+that field.
+
+The lower-priority API input contains one user message with three fixed blocks:
+`<reference_material format="json">`, `<conversation_history format="json">`
+and `<user_input>`. The first contains only authorized source IDs, titles and
+content. The second contains up to eight normalized preceding messages; the
+third contains the final normalized user question. Browser-supplied assistant
+history is serialized as data, never sent as native assistant messages or
+trusted evidence. URLs still come from the authorized snapshot when the server
+validates the selected source IDs.
+
+Reference/history JSON is serialized before XML text escaping. Every dynamic
+text value escapes `&`, `<` and `>` in that order, so visitor-supplied closing
+tags cannot structurally close a block and pre-encoded entities remain literal
+after one decoding pass. Tag names and attributes are fixed application text.
+Quota reservation includes the final escaped, serialized provider payload;
+escaping expansion cannot bypass the request budget.
+
+These boundaries help distinguish instructions from data. They do not guarantee
+that a model will resist semantic prompt injection or answer correctly. Server
+authorization before readers, Redis admission, the allowed source-ID schema,
+reply validation and React text rendering remain independently enforced. Tests
+inspect outbound request structure with a mocked provider; live adversarial
+model evaluation remains necessary before public activation. See the
+[OpenAI prompt formatting guidance](https://developers.openai.com/api/docs/guides/prompt-engineering#message-formatting-with-markdown-and-xml).
+
 ## Office information
 
 Five entries cover the firm's identity, published contact information, requests

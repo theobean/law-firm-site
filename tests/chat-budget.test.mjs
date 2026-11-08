@@ -3,7 +3,7 @@ import { test } from "node:test";
 import { createAuthorizedChatContext, getPublicChatPrincipal } from "../src/lib/chat/access.mjs";
 import {
   CHAT_TOKEN_FRAMING_ALLOWANCE, MAX_CHAT_OUTPUT_TOKENS, MAX_CHAT_RESERVED_TOKENS,
-  generateChatReply, generatePreparedChatReply, prepareChatModelRequest,
+  generateChatReply, generatePreparedChatReply, parseChatInput, prepareChatModelRequest,
 } from "../src/lib/chat/service.ts";
 
 const source = (id = "office-contact", content = "The office is in Thessaloniki.") => ({
@@ -29,7 +29,8 @@ test("reserves the full exact serialized request, protocol headroom and all gene
   assert.equal(prepared.reservedTokens, new TextEncoder().encode(sent).byteLength + CHAT_TOKEN_FRAMING_ALLOWANCE + MAX_CHAT_OUTPUT_TOKENS);
   assert.equal(body.max_output_tokens, 1800);
   assert.equal(body.store, false);
-  assert.ok(body.instructions.includes("The office is in Thessaloniki."));
+  assert.ok(!body.instructions.includes("The office is in Thessaloniki."));
+  assert.ok(body.input[0].content.includes('"content":"The office is in Thessaloniki."'));
   assert.deepEqual(body.text.format.schema.properties.sourceIds.items.enum, ["office-contact"]);
   assert.ok(prepared.reservedTokens < MAX_CHAT_RESERVED_TOKENS);
 });
@@ -56,7 +57,8 @@ test("the reserved snapshot cannot change after preparation or through a fake pr
   const options = { apiKey: "test-only-key", fetcher: async (_url, options) => {
     calls += 1;
     const sent = JSON.parse(options.body);
-    assert.equal(sent.input[0].content, "Where is the office?");
+    assert.match(sent.input[0].content, /<user_input>\nWhere is the office\?\n<\/user_input>$/);
+    assert.ok(!sent.input[0].content.includes("Changed after the reservation"));
     assert.equal(sent.model, "gpt-5.4-mini");
     return response();
   } };
@@ -92,5 +94,21 @@ test("large context and multibyte history spikes are rejected before any provide
   let calls = 0;
   await assert.rejects(generateChatReply(input, authorized(), { apiKey: "test-only-key", fetcher: async () => { calls += 1; return response(); } }),
     (error) => error.code === "request_too_large" && error.status === 413);
+  assert.equal(calls, 0);
+});
+
+test("escape-expanded valid history is rejected by the final request reservation before any provider call", async () => {
+  const input = validInput();
+  input.messages = Array.from({ length: 9 }, (_, index) => ({
+    role: index % 2 ? "assistant" : "user", content: "&".repeat(index % 2 ? 3500 : 1000),
+  }));
+  assert.equal(input.messages.reduce((sum, { content }) => sum + content.length, 0), 19000);
+  assert.deepEqual(parseChatInput(input), input, "unescaped messages satisfy the per-message and total input limits");
+  const sameSizePlainInput = { ...input, messages: input.messages.map(({ role, content }) => ({ role, content: "a".repeat(content.length) })) };
+  assert.ok(prepareChatModelRequest(sameSizePlainInput, authorized()).reservedTokens < MAX_CHAT_RESERVED_TOKENS);
+  let calls = 0;
+  await assert.rejects(generateChatReply(input, authorized(), {
+    apiKey: "test-only-key", fetcher: async () => { calls += 1; return response(); },
+  }), (error) => error.code === "request_too_large" && error.status === 413);
   assert.equal(calls, 0);
 });

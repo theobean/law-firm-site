@@ -130,7 +130,13 @@ test("the LLM boundary forwards normalized whitelisted message fields only", asy
     forwarded = JSON.parse(options.body);
     return Response.json(modelReply());
   } });
-  assert.deepEqual(forwarded.input, [{ role: "user", content: "café\nquestion" }]);
+  assert.deepEqual(forwarded.input, [{ role: "user", content: [
+    '<reference_material format="json">',
+    JSON.stringify(sources.map(({ id, title, content }) => ({ id, title, content }))),
+    "</reference_material>", "",
+    '<conversation_history format="json">', "[]", "</conversation_history>", "",
+    "<user_input>", "café\nquestion", "</user_input>",
+  ].join("\n") }]);
   assert.notEqual(forwarded.model, "injected-client-model");
   assert.notEqual(forwarded.instructions, "injected-client-instructions");
   assert.equal(forwarded.tools, undefined);
