@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { ChatFailure, generateChatReply, parseChatInput, parseChatReply } from "../src/lib/chat/service.ts";
-import { createChatLimiter, isSameOrigin, readChatBody } from "../src/lib/chat/security.ts";
+import { isSameOrigin, readChatBody } from "../src/lib/chat/security.ts";
 import { createAuthorizedChatContext, getPublicChatPrincipal } from "../src/lib/chat/access.mjs";
 
 const sources = [{ id: "office-contact", title: "Office", url: "https://www.ioannispapaioannou.lawyer/el/contact", content: "Thessaloniki office." }];
@@ -117,13 +117,4 @@ test("bounds actual streamed bytes as well as declared length and validates JSON
   await assert.rejects(readChatBody(request("{")), /invalid_request/);
   await assert.rejects(readChatBody(request("{}", { "content-length": "65537" })), /request_too_large/);
   await assert.rejects(readChatBody(request(JSON.stringify({ text: "x".repeat(65536) }))), /request_too_large/);
-});
-
-test("limits bursts, resets expired windows and fails closed when bucket capacity is full", () => {
-  const limiter = createChatLimiter(2, 10000, 1);
-  assert.equal(limiter("visitor-a", 1000), 0);
-  assert.equal(limiter("visitor-a", 1001), 0);
-  assert.equal(limiter("visitor-a", 1002), 10);
-  assert.equal(limiter("visitor-b", 1003), 10);
-  assert.equal(limiter("visitor-b", 11000), 0);
 });

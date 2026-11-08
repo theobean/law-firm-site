@@ -11,6 +11,19 @@ export type ChatReply = {
   suggestContact: boolean;
 };
 
+export const MAX_CHAT_OUTPUT_TOKENS = 1800;
+export const CHAT_TOKEN_FRAMING_ALLOWANCE = 4096;
+export const MAX_CHAT_RESERVED_TOKENS = 64000;
+export type PreparedChatModelRequest = Readonly<{ reservedTokens: number }>;
+
+type PreparedRequestSnapshot = {
+  body: string;
+  locale: ChatLocale;
+  sources: readonly ChatSource[];
+};
+
+const preparedRequests = new WeakMap<object, PreparedRequestSnapshot>();
+
 export class ChatFailure extends Error {
   status: number;
   code: string;
@@ -115,25 +128,21 @@ export function parseChatReply(value: unknown, sources: readonly ChatSource[], l
   return reply;
 }
 
-export async function generateChatReply(
+/** Prepare once before quota reservation. The provider will send this exact
+ * serialized snapshot after the shared quota store authorizes its cost.
+ */
+export function prepareChatModelRequest(
   input: ChatInput,
   context: AuthorizedChatContext,
-  options: { apiKey: string; model?: string; fetcher?: typeof fetch; signal?: AbortSignal },
-): Promise<ChatReply> {
+  model?: string,
+): PreparedChatModelRequest {
   const sources = readAuthorizedChatSources(context);
   // Validate at the provider boundary as well as at the HTTP entry point.
   const safeInput = parseChatInput(input);
-  const response = await (options.fetcher ?? fetch)("https://api.openai.com/v1/responses", {
-    method: "POST",
-    headers: { Authorization: `Bearer ${options.apiKey}`, "Content-Type": "application/json" },
-    signal: options.signal
-      ? AbortSignal.any([options.signal, AbortSignal.timeout(30000)])
-      : AbortSignal.timeout(30000),
-    cache: "no-store",
-    body: JSON.stringify({
-      model: options.model || "gpt-5.4-mini",
+  const body = JSON.stringify({
+      model: model || "gpt-5.4-mini",
       store: false,
-      max_output_tokens: 1800,
+      max_output_tokens: MAX_CHAT_OUTPUT_TOKENS,
       reasoning: { effort: "low" },
       instructions: chatInstructions(safeInput.locale, sources),
       input: safeInput.messages,
@@ -155,7 +164,38 @@ export async function generateChatReply(
           },
         },
       },
-    }),
+    });
+  // Conservative quota units, not an exact tokenizer or billing measurement:
+  // count every UTF-8 byte of the entire body (including instructions, context,
+  // history and schema), plus protocol headroom and the full generated-token
+  // allowance. max_output_tokens also caps non-visible/reasoning output.
+  const reservedTokens = new TextEncoder().encode(body).byteLength +
+    CHAT_TOKEN_FRAMING_ALLOWANCE + MAX_CHAT_OUTPUT_TOKENS;
+  if (reservedTokens > MAX_CHAT_RESERVED_TOKENS) throw new ChatFailure("request_too_large", 413);
+
+  const prepared = Object.freeze({ reservedTokens });
+  preparedRequests.set(prepared, { body, locale: safeInput.locale, sources });
+  return prepared;
+}
+
+/** A prepared request is process-local and single-use. JSON, copied objects or
+ * replays cannot bypass preparation or reuse a previously reserved operation.
+ */
+export async function generatePreparedChatReply(
+  prepared: PreparedChatModelRequest,
+  options: { apiKey: string; fetcher?: typeof fetch; signal?: AbortSignal },
+): Promise<ChatReply> {
+  const snapshot = prepared && typeof prepared === "object" ? preparedRequests.get(prepared) : undefined;
+  if (!snapshot) throw new ChatFailure("forbidden", 403);
+  preparedRequests.delete(prepared);
+  const response = await (options.fetcher ?? fetch)("https://api.openai.com/v1/responses", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${options.apiKey}`, "Content-Type": "application/json" },
+    signal: options.signal
+      ? AbortSignal.any([options.signal, AbortSignal.timeout(30000)])
+      : AbortSignal.timeout(30000),
+    cache: "no-store",
+    body: snapshot.body,
   });
   if (!response.ok) throw new ChatFailure("upstream", 502);
 
@@ -175,8 +215,17 @@ export async function generateChatReply(
     );
   }).join("");
   try {
-    return parseChatReply(JSON.parse(text), sources, safeInput.locale);
+    return parseChatReply(JSON.parse(text), snapshot.sources, snapshot.locale);
   } catch {
     throw new ChatFailure("upstream", 502);
   }
+}
+
+export async function generateChatReply(
+  input: ChatInput,
+  context: AuthorizedChatContext,
+  options: { apiKey: string; model?: string; fetcher?: typeof fetch; signal?: AbortSignal },
+): Promise<ChatReply> {
+  const prepared = prepareChatModelRequest(input, context, options.model);
+  return generatePreparedChatReply(prepared, options);
 }

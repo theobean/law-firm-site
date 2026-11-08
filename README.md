@@ -59,6 +59,13 @@ npm run dev
 | `CHATBOT_ENABLED` | Ο βοηθός εμφανίζεται και το `/api/chat` ενεργοποιείται μόνο με την ακριβή τιμή `true`. Προεπιλογή: απενεργοποιημένος. Αλλαγή χρειάζεται νέο build. |
 | `OPENAI_API_KEY` | Ιδιωτικό server-side κλειδί OpenAI API για τον ψηφιακό βοηθό. Ποτέ με πρόθεμα `NEXT_PUBLIC_`. |
 | `OPENAI_CHAT_MODEL` | Προαιρετικό μοντέλο Responses με structured outputs και reasoning effort `low`. Προεπιλογή: `gpt-5.4-mini`. |
+| `UPSTASH_REDIS_REST_URL` | HTTPS REST endpoint του μόνιμου Redis για κοινά rate limits και quotas. |
+| `UPSTASH_REDIS_REST_TOKEN` | Ιδιωτικό read/write Redis REST token. Χρειάζεται EVAL και οι εντολές του limiter. |
+| `CHAT_RATE_LIMIT_SECRET` | Ιδιωτικό σταθερό μυστικό 32+ χαρακτήρων για HMAC αναγνωριστικά, κοινό σε όλα τα instances. |
+| `CHAT_QUOTA_NAMESPACE` | Προαιρετικό σταθερό namespace· προεπιλογή `law-firm-site-chat`. Όχι τυχαία τιμή ανά deployment. |
+| `CHAT_AUTH_ISSUER` | Προαιρετικός HTTPS issuer του παρόχου OpenID Connect. Μαζί με τα δύο επόμενα. |
+| `CHAT_AUTH_AUDIENCE` | Αναμενόμενο audience του JWT access token για το chat API. |
+| `CHAT_AUTH_JWKS_URL` | Σταθερό HTTPS JWKS endpoint για επαλήθευση υπογραφών RS256/ES256. |
 
 Πρόσθεσε τις server-side μεταβλητές τοπικά μόνο όταν χρειάζεσαι τις αντίστοιχες διασυνδέσεις. Οι μεταβλητές `NEXT_PUBLIC_*` ενσωματώνονται στον κώδικα του browser κατά το build· δεν πρέπει να περιέχουν ιδιωτικά API keys ή secrets.
 
@@ -83,17 +90,24 @@ npm run dev
 μήνυμα προσωρινής μη διαθεσιμότητας με άμεση επικοινωνία με το γραφείο. Δεν
 υπάρχουν προσομοιωμένες απαντήσεις AI στο πραγματικό περιβάλλον.
 
-Για ενεργοποίηση στο Vercel, πρόσθεσε το ιδιωτικό `OPENAI_API_KEY` και το
-`CHATBOT_ENABLED=true` στις μεταβλητές του κατάλληλου environment και κάνε νέο
+Για ενεργοποίηση στο Vercel, πρόσθεσε `OPENAI_API_KEY`, τα δύο `UPSTASH_REDIS_REST_*`,
+το ιδιωτικό σταθερό `CHAT_RATE_LIMIT_SECRET` και `CHATBOT_ENABLED=true` στις
+μεταβλητές του κατάλληλου environment και κάνε νέο
 deployment. Δημιούργησε το κλειδί στο [OpenAI API dashboard](https://platform.openai.com/api-keys)
 με λογαριασμό που έχει πρόσβαση API / διαθέσιμη χρέωση. Μην το καταχωρίζεις σε
 GitHub, κώδικα browser, μηνύματα ή `NEXT_PUBLIC_*`. Ξεκίνα από Preview.
 
-Πριν από δημόσια ενεργοποίηση, ρύθμισε κοινό rate limit για το `/api/chat` στο
-Vercel Firewall. Τα ενσωματωμένα όρια (10 αιτήματα ανά επισκέπτη / 5 λεπτά και
-120 αιτήματα ανά ώρα) είναι **ανά server instance**· δεν αποτελούν συνολικό όριο
-σε όλα τα instances ούτε εγγυημένο όριο δαπάνης. Το feature flag επιτρέπει άμεση
-απενεργοποίηση με επόμενο deployment.
+Τα rate limits και quotas εφαρμόζονται ατομικά σε κοινό Redis πριν από κάθε κλήση
+μοντέλου, με διαφορετικά όρια για ανώνυμους και επαληθευμένους χρήστες. Ελλιπής
+ρύθμιση ή βλάβη Redis επιστρέφει **503**, χωρίς fallback στη μνήμη ή κλήση LLM.
+Περιλαμβάνονται token buckets, ημερήσια quotas και leases ταυτόχρονων αιτημάτων,
+ανά ταυτότητα, δίκτυο και συνολικά. Διατήρησε το edge/WAF για γενική HTTP κατάχρηση.
+Δες [ρυθμίσεις και ακριβή όρια](docs/chatbot-quotas.md).
+
+Ο τρέχων βοηθός του browser λειτουργεί ανώνυμα. Το backend μπορεί να επαληθεύσει
+Bearer access tokens όταν ρυθμιστούν και οι τρεις `CHAT_AUTH_*` μεταβλητές και
+συνδεθεί ο client με πραγματικό πάροχο σύνδεσης. Δεν δημιουργείται αυτόματα login
+portal. Η επαλήθευση αλλάζει μόνο quota, όχι πρόσβαση σε ιδιωτικά δεδομένα.
 
 Η συνομιλία αρχίζει μετά από ρητή επιλογή του επισκέπτη. Στην OpenAI αποστέλλεται
 το ερώτημα, έως οκτώ πρόσφατα μηνύματα και η επιλεγμένη βάση πηγών. Ο κώδικας
@@ -129,7 +143,8 @@ snapshot. Το LLM service δέχεται μόνο context που εξουσιο
 όχι αυθαίρετους πίνακες πηγών ή αντικείμενα από JSON. Οι οδηγίες του system prompt
 δεν αποτελούν μηχανισμό εξουσιοδότησης.
 
-Το chat δεν συνδέεται με ιδιωτική βάση, φακέλους πελατών ή queries στο Sanity.
+Η ανάκτηση context δεν συνδέεται με βάση ιδιωτικών υποθέσεων, φακέλους πελατών
+ή queries στο Sanity. Το Redis χρησιμοποιείται μόνο για quotas.
 Δεν υπάρχει authenticated client/staff portal ή database RBAC για τέτοια δεδομένα.
 Πριν προστεθεί οποιαδήποτε τέτοια διασύνδεση, απαιτείται ξεχωριστή υλοποίηση με
 επαληθευμένη server-side ταυτότητα, tenant/case permissions και περιορισμούς στο
@@ -156,6 +171,11 @@ text renderer, incomplete/refused output, origin, streamed body size, rate limit
 περνούν στο provider request. Δεν αποτελούν αξιολόγηση
 πραγματικών απαντήσεων μοντέλου. Τα transcripts μένουν μόνο στη μνήμη της
 καρτέλας μέχρι ανανέωση, αλλαγή γλώσσας ή νέα συνομιλία.
+
+Το `npm run test:chat:redis` είναι ξεχωριστός έλεγχος εναντίον πραγματικού,
+δοκιμαστικού Redis και απαιτεί ρητό `CHAT_REDIS_TEST_DATABASE=true`. Δεν καλεί LLM.
+Χρησιμοποίησε δοκιμαστικά credentials· οι συνήθεις unit έλεγχοι δεν χρειάζονται
+εξωτερική υπηρεσία. Ο έλεγχος δημιουργεί μόνο δικά του τυχαία namespaces.
 
 ### Φόρμα επικοινωνίας
 

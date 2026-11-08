@@ -381,6 +381,8 @@
     "termsSection4": "Wir bemühen uns um die Richtigkeit und Aktualität der Inhalte, garantieren jedoch nicht, dass diese stets vollständig oder fehlerfrei sind. Die Nutzung der Website erfolgt auf eigene Verantwortung des Nutzers.",
     "termsSection5Title": "5. Anwendbares Recht",
     "termsSection5": "Diese Bedingungen unterliegen griechischem Recht. Die Gerichte in Thessaloniki sind ausschließlich zuständig für etwaige Streitigkeiten.",
+    "privacySection9Title": "9. Nutzungslimits und optionale Anmeldung",
+    "privacySection9": "Zum Schutz vor Missbrauch speichert der Server pseudonymisierte Kennungen sowie Anfrage- und Token-Budgetzähler in Upstash Redis. Diese Schlüssel enthalten weder Nachrichteninhalte noch ursprüngliche IP-Adressen oder Kontokennungen. Die Quoteneinträge der Anwendung verfallen spätestens 48 Stunden nach der letzten Aktualisierung; kurzlebige Einträge für gleichzeitige Anfragen innerhalb von zwei Minuten. Wenn eine Anmeldung konfiguriert ist, prüft der Server das signierte Token des Identitätsanbieters zur Auswahl des Nutzungslimits. Die Anmeldung gewährt über den Assistenten keinen Zugriff auf private Fallakten. Diese Kontrollen sind von der Speicherung des Gesprächs getrennt.",
     "privacySection8Title": "8. Digitaler KI-Assistent",
     "privacySection8": "Die Nutzung des digitalen Assistenten ist freiwillig. Erst nachdem Sie ein Gespräch starten und eine Frage absenden, werden Ihre Nachricht und der jüngste Chatverlauf zur Erstellung einer Antwort an die OpenAI API übermittelt. Die Website speichert den Chatinhalt weder in einer Datenbank noch dauerhaft im Browser; er verbleibt vorübergehend im Arbeitsspeicher des geöffneten Fensters und wird bei einem neuen Gespräch oder beim Neuladen der Seite entfernt. OpenAI wird aufgefordert, die Antwort nicht als gespeicherten Gesprächsverlauf aufzubewahren. Dies schließt eine Aufbewahrung durch den Anbieter zur Missbrauchsüberwachung gemäß den Kontoeinstellungen und seinen Richtlinien nicht aus. Geben Sie keine persönlichen oder sensiblen Daten, Dokumente oder Informationen zu einem konkreten Fall ein. Die Antworten dienen der allgemeinen Information, sind keine Rechtsberatung und begründen kein Mandatsverhältnis. Sie können die Kanzlei jederzeit direkt kontaktieren, anstatt den Assistenten zu nutzen."
   },
@@ -2004,7 +2006,8 @@
     "footerNotice": "Besprechen Sie Ihren Fall mit einem Anwalt.",
     "errors": {
       "unavailable": "Der Assistent ist derzeit nicht verfügbar. Sie können die Kanzlei direkt kontaktieren.",
-      "rate_limit": "In kurzer Zeit wurden mehrere Fragen gestellt. Bitte warten Sie, bevor Sie es erneut versuchen, oder kontaktieren Sie die Kanzlei.",
+      "unauthorized": "Ihre Anmeldung konnte nicht überprüft werden. Melden Sie sich erneut an oder kontaktieren Sie die Kanzlei.",
+      "rate_limit": "Das Anfrage- oder Nutzungslimit des Assistenten wurde erreicht. Versuchen Sie es später erneut oder kontaktieren Sie die Kanzlei.",
       "invalid_request": "Ihre Frage konnte nicht gesendet werden. Beginnen Sie ein neues Gespräch mit einer kurzen, allgemeinen Frage.",
       "request_too_large": "Die Nachricht oder der Chatverlauf ist zu lang. Starten Sie ein neues Gespräch mit einer kürzeren Frage.",
       "forbidden": "Das Gespräch konnte von dieser Seite aus nicht gestartet werden. Laden Sie die Seite neu oder kontaktieren Sie die Kanzlei.",

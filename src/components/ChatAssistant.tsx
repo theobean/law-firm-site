@@ -16,9 +16,9 @@ type ChatMessage = {
   sources?: ChatSource[];
   suggestContact?: boolean;
 };
-type ChatError = "unavailable" | "rate_limit" | "invalid_request" | "request_too_large" | "forbidden" | "upstream";
+type ChatError = "unavailable" | "unauthorized" | "rate_limit" | "invalid_request" | "request_too_large" | "forbidden" | "upstream";
 const MAX_MESSAGE_LENGTH = 1200;
-const ERROR_CODES = new Set<ChatError>(["unavailable", "rate_limit", "invalid_request", "request_too_large", "forbidden", "upstream"]);
+const ERROR_CODES = new Set<ChatError>(["unavailable", "unauthorized", "rate_limit", "invalid_request", "request_too_large", "forbidden", "upstream"]);
 
 export default function ChatAssistant() {
   const t = useTranslations("chat");

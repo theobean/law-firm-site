@@ -7,10 +7,13 @@ web at runtime, and a citation is not evidence of real-time legal verification.
 ## Server-enforced access boundary
 
 The chatbot uses a source-controlled public snapshot. It performs no database,
-Sanity, case-file, contact-list or private-document queries. The public endpoint
+Sanity, case-file, contact-list or private-document queries to fetch AI context. The public endpoint
 always receives the server-issued `public` principal, with `chat:read:public`
 permission. HTTP headers, request-body roles, conversation roles, IDs and model
 instructions cannot create another principal or widen the scope.
+Optional OIDC verification selects a request/token quota tier only; it does not
+replace this public data principal or enable private case access. Redis holds
+quota counters, not legal context. See [quota configuration](chatbot-quotas.md).
 
 `src/lib/chat/access.mjs` implements default-deny source access before content
 readers run. An entry needs a known approved ID, public visibility and published

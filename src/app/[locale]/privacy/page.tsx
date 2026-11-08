@@ -31,6 +31,7 @@ export default function PrivacyPage() {
         { title: t("privacySection6Title"), body: t("privacySection6") },
         { title: t("privacySection7Title"), body: t("privacySection7") },
         { title: t("privacySection8Title"), body: t("privacySection8") },
+        { title: t("privacySection9Title"), body: t("privacySection9") },
       ]}
     />
   );
