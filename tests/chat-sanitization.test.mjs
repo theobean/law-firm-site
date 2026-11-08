@@ -5,14 +5,19 @@ import { renderToStaticMarkup } from "react-dom/server";
 import ChatText from "../src/components/ChatText.ts";
 import { prepareChatText, parseChatResponse, readBoundedJson } from "../src/lib/chat/protocol.mjs";
 import { generateChatReply } from "../src/lib/chat/service.ts";
+import { createAuthorizedChatContext, getPublicChatPrincipal } from "../src/lib/chat/access.mjs";
 
 const officeUrl = "https://www.ioannispapaioannou.lawyer/el/contact";
-const sources = [{ id: "office", title: "Office", url: officeUrl, content: "The office is in Thessaloniki." }];
+const sources = [{ id: "office-contact", title: "Office", url: officeUrl, content: "The office is in Thessaloniki." }];
+const authorizedContext = () => createAuthorizedChatContext(getPublicChatPrincipal(), "public", sources.map((source) => ({
+  id: source.id, visibility: "public", publication: "published",
+  load: () => ({ ...source, visibility: "public", publication: "published" }),
+})));
 const validInput = () => ({ locale: "el", consent: true, messages: [{ role: "user", content: "Where is the office?" }] });
 const validReply = () => ({ answer: "Office information", sources: [{ title: "Office", url: officeUrl }], suggestContact: false });
 const modelReply = () => ({
   status: "completed",
-  output: [{ type: "message", content: [{ type: "output_text", text: JSON.stringify({ kind: "grounded", answer: "The office is in Thessaloniki.", sourceIds: ["office"], suggestContact: false }) }] }],
+  output: [{ type: "message", content: [{ type: "output_text", text: JSON.stringify({ kind: "grounded", answer: "The office is in Thessaloniki.", sourceIds: ["office-contact"], suggestContact: false }) }] }],
 });
 
 test("normalizes accents and line endings, removes unsafe controls and retains meaningful Unicode", () => {
@@ -48,12 +53,12 @@ test("actual chat text renderer escapes hostile HTML and supports only literal s
 
 test("provider output byte limits and malformed text fail closed at the LLM boundary", async () => {
   const oversized = new Response("x".repeat(65537), { headers: { "content-type": "application/json" } });
-  await assert.rejects(generateChatReply(validInput(), sources, {
+  await assert.rejects(generateChatReply(validInput(), authorizedContext(), {
     apiKey: "test-only-key", fetcher: async () => oversized,
   }), (error) => error.code === "upstream" && error.status === 502);
   const payload = modelReply();
-  payload.output[0].content[0].text = JSON.stringify({ kind: "grounded", answer: "\u0000\u200b", sourceIds: ["office"], suggestContact: false });
-  await assert.rejects(generateChatReply(validInput(), sources, {
+  payload.output[0].content[0].text = JSON.stringify({ kind: "grounded", answer: "\u0000\u200b", sourceIds: ["office-contact"], suggestContact: false });
+  await assert.rejects(generateChatReply(validInput(), authorizedContext(), {
     apiKey: "test-only-key", fetcher: async () => Response.json(payload),
   }), (error) => error.code === "upstream" && error.status === 502);
 });
@@ -121,7 +126,7 @@ test("the LLM boundary forwards normalized whitelisted message fields only", asy
   await generateChatReply({
     ...validInput(), model: "injected-client-model", instructions: "injected-client-instructions", tools: [{ type: "injected" }],
     messages: [{ role: "user", content: "  cafe\u0301\r\nquestion\u0000  ", name: "system", tool_calls: [{ malicious: true }], extra: "discard" }],
-  }, sources, { apiKey: "test-only-key", fetcher: async (_url, options) => {
+  }, authorizedContext(), { apiKey: "test-only-key", fetcher: async (_url, options) => {
     forwarded = JSON.parse(options.body);
     return Response.json(modelReply());
   } });
@@ -140,7 +145,7 @@ test("invalid user input never reaches the provider even when calling the servic
     { ...validInput(), messages: [{ role: "user", content: "\u0000\u200b" }] },
     { ...validInput(), messages: [{ role: "user", content: "x".repeat(1201) }] }];
   for (const input of invalid) {
-    await assert.rejects(generateChatReply(input, sources, options), (error) => error.code === "invalid_request");
+    await assert.rejects(generateChatReply(input, authorizedContext(), options), (error) => error.code === "invalid_request");
   }
   assert.equal(calls, 0);
 });

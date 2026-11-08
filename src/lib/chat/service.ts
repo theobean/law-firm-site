@@ -1,4 +1,5 @@
 import { parseChatResponse, prepareChatText, readBoundedJson } from "./protocol.mjs";
+import { readAuthorizedChatSources, type AuthorizedChatContext } from "./access.mjs";
 
 export type ChatLocale = "el" | "en" | "de";
 export type ChatMessage = { role: "user" | "assistant"; content: string };
@@ -53,7 +54,7 @@ export function parseChatInput(value: unknown): ChatInput {
   return { locale: value.locale as ChatLocale, messages, consent: true };
 }
 
-export function chatInstructions(locale: ChatLocale, sources: ChatSource[]): string {
+export function chatInstructions(locale: ChatLocale, sources: readonly ChatSource[]): string {
   const language = { el: "Greek", en: "English", de: "German" }[locale];
   return `You are the clearly identified AI information assistant of the Ioannis Papaioannou law office in Thessaloniki, Greece.
 Answer in ${language}, in a calm, professional, helpful tone. Use plain text, short paragraphs, and at most 180 words. Do not use Markdown, HTML, raw URLs or citation markers in the answer; the application displays your selected sources separately.
@@ -74,7 +75,7 @@ REFERENCE MATERIAL
 ${JSON.stringify(sources.map(({ id, title, content }) => ({ id, title, content })))}`;
 }
 
-export function parseChatReply(value: unknown, sources: ChatSource[], locale: ChatLocale = "el"): ChatReply {
+export function parseChatReply(value: unknown, sources: readonly ChatSource[], locale: ChatLocale = "el"): ChatReply {
   if (!isRecord(value) || typeof value.answer !== "string" ||
       !value.answer.trim() || value.answer.length > 4000 ||
       typeof value.suggestContact !== "boolean" ||
@@ -116,9 +117,10 @@ export function parseChatReply(value: unknown, sources: ChatSource[], locale: Ch
 
 export async function generateChatReply(
   input: ChatInput,
-  sources: ChatSource[],
+  context: AuthorizedChatContext,
   options: { apiKey: string; model?: string; fetcher?: typeof fetch; signal?: AbortSignal },
 ): Promise<ChatReply> {
+  const sources = readAuthorizedChatSources(context);
   // Validate at the provider boundary as well as at the HTTP entry point.
   const safeInput = parseChatInput(input);
   const response = await (options.fetcher ?? fetch)("https://api.openai.com/v1/responses", {

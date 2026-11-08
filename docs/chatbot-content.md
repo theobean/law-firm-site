@@ -4,6 +4,40 @@
 Sources were inspected on **8 November 2026**. The assistant does not browse the
 web at runtime, and a citation is not evidence of real-time legal verification.
 
+## Server-enforced access boundary
+
+The chatbot uses a source-controlled public snapshot. It performs no database,
+Sanity, case-file, contact-list or private-document queries. The public endpoint
+always receives the server-issued `public` principal, with `chat:read:public`
+permission. HTTP headers, request-body roles, conversation roles, IDs and model
+instructions cannot create another principal or widen the scope.
+
+`src/lib/chat/access.mjs` implements default-deny source access before content
+readers run. An entry needs a known approved ID, public visibility and published
+state. Private, draft and unknown entries have no reader invocation. Reader
+results are checked against that authorization and projected to exactly `id`,
+`title`, `url`, `content`; extra internal notes, identifiers and metadata are not
+sent to the model. The projected snapshot is frozen, and the provider accepts only
+an opaque context authorized in that server process. A raw array, copied object
+or JSON-shaped context fails with `403` before any model call. The knowledge
+module also has a Next.js `server-only` import guard.
+
+| Principal / resource | Access |
+| --- | --- |
+| Server-issued public principal + approved published public snapshot | Read the projected fields |
+| Private, unpublished or unknown source | Denied before reader invocation |
+| Forged, missing or unsupported principal / scope | Denied before reader invocation |
+| Client-supplied role, permissions, record IDs or context | Cannot grant access |
+
+This is public-only authorization, not database RBAC for a nonexistent private
+integration. Do not add privileged database/CMS readers behind these public
+factories. A future authenticated data integration must verify identity on the
+server, enforce tenant/case membership and field permissions in its query or
+database row-level policy before fetching any context, and use credentials with
+the corresponding least privilege. Filtering a fully fetched private dataset or
+telling the model to hide it is not an authorization boundary. See the
+[OWASP authorization guidance](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html).
+
 ## Office information
 
 Five entries cover the firm's identity, published contact information, requests
@@ -45,3 +79,8 @@ the underlying subject or an office detail changes. Verify each source, update
 the wording and record the new review date. Avoid importing complete webpages:
 they may include outdated rules, unrelated material or unsupported promises.
 Keep user case facts, uploaded documents and conversation logs out of this file.
+New source IDs must be explicitly approved in the access policy as well as the
+catalog. Publishing/editing data alone does not expand the allowlist. The public
+classifications are trusted, reviewed application configuration; the policy is
+not a classifier that can discover confidential prose mislabeled as public by a
+developer.

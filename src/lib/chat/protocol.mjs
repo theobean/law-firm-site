@@ -37,6 +37,14 @@ function sourceUrl(value) {
   }
 }
 
+/** @param {unknown} value @returns {ChatSourceLink | null} */
+export function parseChatSourceLink(value) {
+  if (!isRecord(value)) return null;
+  const title = prepareChatText(value.title, 200);
+  const url = sourceUrl(value.url);
+  return title && url ? { title, url } : null;
+}
+
 /** Validate both server output and the browser's received payload.
  * @param {unknown} value
  * @returns {ChatResponse | null}
@@ -49,11 +57,9 @@ export function parseChatResponse(value) {
   /** @type {ChatSourceLink[]} */
   const sources = [];
   for (const source of value.sources) {
-    if (!isRecord(source)) return null;
-    const title = prepareChatText(source.title, 200);
-    const url = sourceUrl(source.url);
-    if (!title || !url) return null;
-    sources.push({ title, url });
+    const link = parseChatSourceLink(source);
+    if (!link) return null;
+    sources.push(link);
   }
   // Select fields explicitly; extra provider/client properties never become props.
   return { answer, sources, suggestContact: value.suggestContact };

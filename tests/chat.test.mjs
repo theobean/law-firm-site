@@ -2,8 +2,13 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { ChatFailure, generateChatReply, parseChatInput, parseChatReply } from "../src/lib/chat/service.ts";
 import { createChatLimiter, isSameOrigin, readChatBody } from "../src/lib/chat/security.ts";
+import { createAuthorizedChatContext, getPublicChatPrincipal } from "../src/lib/chat/access.mjs";
 
-const sources = [{ id: "office", title: "Office", url: "https://www.ioannispapaioannou.lawyer/el/contact", content: "Thessaloniki office." }];
+const sources = [{ id: "office-contact", title: "Office", url: "https://www.ioannispapaioannou.lawyer/el/contact", content: "Thessaloniki office." }];
+const authorizedContext = () => createAuthorizedChatContext(getPublicChatPrincipal(), "public", sources.map((source) => ({
+  id: source.id, visibility: "public", publication: "published",
+  load: () => ({ ...source, visibility: "public", publication: "published" }),
+})));
 const valid = () => ({ locale: "el", consent: true, messages: [{ role: "user", content: "Πού είναι το γραφείο;" }] });
 const failsWith = (code) => (error) => error instanceof ChatFailure && error.code === code;
 
@@ -38,7 +43,7 @@ test("bounds conversation history and permits complete assistant answers", () =>
 });
 
 test("returns only source URLs supplied by the server and rejects invented IDs", () => {
-  const reply = parseChatReply({ kind: "grounded", answer: "Office information", sourceIds: ["office", "office"], suggestContact: true }, sources);
+  const reply = parseChatReply({ kind: "grounded", answer: "Office information", sourceIds: ["office-contact", "office-contact"], suggestContact: true }, sources);
   assert.deepEqual(reply.sources, [{ title: sources[0].title, url: sources[0].url }]);
   assert.throws(() => parseChatReply({ kind: "grounded", answer: "text", sourceIds: ["https://phishing.invalid"], suggestContact: false }, sources), failsWith("upstream"));
   assert.throws(() => parseChatReply({ kind: "grounded", answer: "", sourceIds: [], suggestContact: false }, sources), failsWith("upstream"));
@@ -66,14 +71,14 @@ test("calls Responses with server-only authentication, bounded output and storag
     sent = JSON.parse(options.body);
     return Response.json({ status: "completed", output: [
       { type: "reasoning", summary: [] },
-      { type: "message", content: [{ type: "output_text", text: JSON.stringify({ kind: "grounded", answer: "The office is in Thessaloniki.", sourceIds: ["office"], suggestContact: false }) }] },
+      { type: "message", content: [{ type: "output_text", text: JSON.stringify({ kind: "grounded", answer: "The office is in Thessaloniki.", sourceIds: ["office-contact"], suggestContact: false }) }] },
     ] });
   };
-  const reply = await generateChatReply(parseChatInput(valid()), sources, { apiKey: "test-only-key", fetcher });
+  const reply = await generateChatReply(parseChatInput(valid()), authorizedContext(), { apiKey: "test-only-key", fetcher });
   assert.equal(sent.store, false);
   assert.equal(sent.max_output_tokens, 1800);
   assert.equal(sent.text.format.strict, true);
-  assert.deepEqual(sent.text.format.schema.properties.sourceIds.items.enum, ["office"]);
+  assert.deepEqual(sent.text.format.schema.properties.sourceIds.items.enum, ["office-contact"]);
   assert.match(sent.instructions, /not a live search/i);
   assert.equal(reply.sources[0].url, sources[0].url);
 });
@@ -86,11 +91,11 @@ test("does not present partial, refused, malformed or unsuccessful provider outp
     { status: "completed", output: [{ type: "message", content: [{ type: "output_text", text: JSON.stringify({ kind: "grounded", answer: "text", sourceIds: ["invented"], suggestContact: false }) }] }] },
   ];
   for (const payload of payloads) {
-    await assert.rejects(generateChatReply(parseChatInput(valid()), sources, {
+    await assert.rejects(generateChatReply(parseChatInput(valid()), authorizedContext(), {
       apiKey: "test-only-key", fetcher: async () => Response.json(payload),
     }), failsWith("upstream"));
   }
-  await assert.rejects(generateChatReply(parseChatInput(valid()), sources, {
+  await assert.rejects(generateChatReply(parseChatInput(valid()), authorizedContext(), {
     apiKey: "test-only-key", fetcher: async () => Response.json({ error: "secret-provider-detail" }, { status: 401 }),
   }), (error) => error.code === "upstream" && !error.message.includes("secret-provider-detail"));
 });
