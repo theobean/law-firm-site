@@ -76,7 +76,7 @@
 .startButton:hover { background: #d6a03c; }
 .alternativeLink { display: block; padding: 4px; text-align: center; font-size: 11px; color: #596f79; text-decoration: underline; text-underline-offset: 3px; }
 
-.log { flex: 1; min-height: 120px; overflow-y: auto; padding: 18px 16px; background: #f5f7f8; overscroll-behavior: contain; }
+.log { flex: 1; min-height: 0; overflow-y: auto; padding: 18px 16px; background: #f5f7f8; overscroll-behavior: contain; }
 .assistantMessage, .userMessage { width: fit-content; max-width: 94%; margin-bottom: 14px; padding: 13px 14px; border: 1px solid #e2e7e9; border-radius: 5px; background: #fff; }
 .userMessage { margin-left: auto; background: #0d2d3a; border-color: #0d2d3a; color: #fff; }
 .speaker { display: block; margin-bottom: 6px; font-size: 9px; font-weight: 700; letter-spacing: .03em; color: #7f652f; }

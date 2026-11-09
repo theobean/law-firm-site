@@ -74,7 +74,7 @@ export default function ChatAssistant() {
 
   useEffect(() => {
     if (!open) return;
-    if (activated && !loading && !verificationBlocked) inputRef.current?.focus();
+    if (activated && !loading && !verificationBlocked) inputRef.current?.focus({ preventScroll: true });
     else panelRef.current?.focus({ preventScroll: true });
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -150,7 +150,7 @@ export default function ChatAssistant() {
     setFailedQuestion("");
     setLoading(false);
     if (VERIFICATION_ENABLED) verification.reset();
-    inputRef.current?.focus();
+    inputRef.current?.focus({ preventScroll: true });
   }
 
   async function sendQuestion(question: string) {
