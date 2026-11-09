@@ -1,6 +1,6 @@
 # Anonymous chat protection and API budget
 
-LEXI has no visitor registration or login. Turnstile and a signed first-party
+ΔικAIsis has no visitor registration or login. Turnstile and a signed first-party
 cookie add anonymous browser continuity to the existing network/global limits.
 They do not provide hardware identity or an unbreakable per-person allowance.
 

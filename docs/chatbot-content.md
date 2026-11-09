@@ -94,13 +94,16 @@ model evaluation remains necessary before public activation. See the
 
 ## Office information
 
-Five entries cover the firm's identity, published contact information, requests
-for appointments, published practice areas and nationwide coverage. Localized
+Six entries cover the firm's identity, published contact information, requests
+for appointments, published practice areas, nationwide coverage and a selected
+FAQ summary about case duration and office follow-up channels. Localized
 fields are selected explicitly from `messages/el.json`, `messages/en.json` and
 `messages/de.json`. Canonical office URLs use
 `https://ioannispapaioannou.lawyer/{locale}/…`.
 
-The full FAQ and marketing copy are deliberately not ingested. In particular,
+The full FAQ and marketing copy are deliberately not ingested. Office FAQ facts
+have priority only for office information, not over legal-source or privacy
+boundaries. In particular,
 the chatbot does not inherit the FAQ's 24-hour response promise or blanket
 confidentiality statement. It has no booking calendar, matter-management access,
 case-status access or authority to accept an engagement. Fees and free initial
@@ -122,7 +125,7 @@ source-ID data. Greek accent/inflection and English/German vocabulary are covere
 by explicit terms; topic diversity and matching original Gazette references are
 preferred. Selection does not treat a matching keyword as evidence of an answer.
 Unrelated or empty queries supply no legal excerpts, and missing material still
-requires a handoff. The five office entries remain available.
+requires a handoff. The six office entries remain available.
 
 The route computes its exact static reservation using the same current question
 and selection as the final context. Only after shared quota/monetary admission
@@ -138,12 +141,13 @@ and the general subject against [AADE circular E.2041/2025](https://aade.gr/egky
 These sources do not authorize this summary to decide present-day admission,
 new applications, residence protection, payment terms or an individual case.
 
-Four primary references use National Printing Office originals:
+Five primary references use National Printing Office originals:
 
 - [Ν. 3869/2010, ΦΕΚ Α΄ 130/03.08.2010](https://api.et.gr/apiLAW/1/2010/3869/pdf).
 - [Ν. 4738/2020, ΦΕΚ Α΄ 207/27.10.2020](https://api.et.gr/apiLAW/1/2020/4738/pdf).
 - [Ν. 5072/2023, ΦΕΚ Α΄ 198/04.12.2023](https://api.et.gr/apiLAW/1/2023/5072/pdf).
 - [Ν. 4619/2019, ΦΕΚ Α΄ 95/11.06.2019](https://api.et.gr/apiLAW/1/2019/4619/pdf).
+- [Ν. 4354/2015, ΦΕΚ Α΄ 176/16.12.2015](https://api.et.gr/apiFEK/1/2015/176/pdf).
 
 These are initial gazette publications, not consolidated texts including later
 amendments. They support the statute's identity and general subject. The prompt
@@ -164,7 +168,7 @@ envelope and the exact final serialized-request size check. Lookup failure contr
 does not enable answers from model memory. The model receives dated excerpts
 labelled as office commentary, never a claim that all current law was searched.
 
-The dialogue displays a permanent notice stating that LEXI's answers are general
+The dialogue displays a permanent notice stating that ΔικAIsis's answers are general
 information and do not constitute legal advice. Source checks remain internal;
 the visitor interface does not show a source list.
 
@@ -176,12 +180,19 @@ procedural pages support stable definitions only; old court names, implementatio
 dates, monetary thresholds and procedural deadlines are not imported as current
 law. A consultation draft is not treated as enacted legislation.
 
-No entry supplies statutory deadlines, monetary thresholds, eligibility tests,
-specific remedies, predictions or guarantees. Questions beyond these limited
+No entry calculates personal statutory deadlines, monetary eligibility tests,
+specific remedies, predictions or guarantees. A dated Ministry guidance entry
+can explain conditional published instalment maximums for the extrajudicial
+mechanism; it never establishes the visitor's number of instalments, payment
+amount, write-off or eligibility. Questions beyond these limited
 explanations need clarification or referral to the office. A user mentioning
 served documents or a pending auction should be directed promptly to the firm
 without computing a deadline in chat. Different languages do not change the
 jurisdiction to a different country.
+
+See [assistant behavior](chatbot-behavior.md) for the ΔικAIsis persona,
+appointment-request flow, urgent document handoff and the boundaries around
+court decisions and case studies.
 
 ## Maintaining the snapshot
 

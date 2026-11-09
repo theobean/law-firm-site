@@ -101,6 +101,23 @@ test("law-topic comparison keeps both original statutes and their explanatory gu
   assert.equal(selected.length, 4);
 });
 
+test("historical servicing legislation is retrieved explicitly without replacing later references in a general funds question", () => {
+  const explicit = select("Τι αφορά ο Ν. 4354/2015;");
+  assert.ok(ids(explicit).includes("legislation-4354-2015"));
+  assert.ok(explicit.find(({ id }) => id === "legislation-4354-2015").content.includes("ΑΡΧΙΚΟ"));
+  const generic = ids(select("Ποια είναι η διαφορά fund και servicer;"));
+  assert.ok(generic.includes("legislation-5072-2023"));
+  assert.ok(!generic.includes("legislation-4354-2015"));
+});
+
+test("instalment questions retrieve the identified mechanism and conditional official guidance", () => {
+  const selected = select("Τι σημαίνουν οι 240 δόσεις του εξωδικαστικού;");
+  assert.ok(ids(selected).includes("legislation-4738-2020"));
+  assert.ok(ids(selected).includes("legal-extrajudicial-installments"));
+  assert.ok(selected.length <= MAX_LEGAL_SOURCES);
+  assert.ok(legalContextBytes(selected) <= MAX_LEGAL_CONTEXT_BYTES);
+});
+
 test("empty, unrelated and office-only questions do not fall back to the entire legal catalog", () => {
   for (const question of ["", " ", "Hello", "Weather tomorrow", "What is the office phone number?", "fundamental theory", "willing participants", "και την των", null, {}]) {
     assert.deepEqual(select(question), [], String(question));

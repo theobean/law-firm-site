@@ -1,6 +1,6 @@
-# LEXI source review — 9 November 2026
+# ΔικAIsis source review — 9 November 2026
 
-The catalog contains 38 reviewed official legal excerpts: four original National Printing Office gazettes and 34 official guidance excerpts. Five office fact entries and the existing 13 individually registered public office articles remain separate. Counts are excerpts, not a claim to cover all Greek law.
+The catalog contains 40 reviewed official legal excerpts: 5 original National Printing Office gazettes and 35 official guidance excerpts. Six office fact/selected-FAQ entries and the existing 13 individually registered public office articles remain separate. Counts are excerpts, not a claim to cover all Greek law.
 
 Source inspection is not certification of current consolidated legislation. The implementation stores bounded paraphrases and selects relevant whole excerpts; it does not download these official pages at chat runtime, browse the open web, ingest personal case documents, or add provider tools. The model may use only facts actually present in the selected reference text. The independent source-ID allowlist, existing article publication/author checks, prompt data boundaries and output validation still apply.
 
@@ -19,6 +19,8 @@ Source inspection is not certification of current consolidated legislation. The 
 | legal-labor-disputes | [Επιθεώρηση Εργασίας — Εργατική διαφορά](https://www.hli.gov.gr/ergasiakes-scheseis/ergazomenoi-ergasiakes-scheseis/ergatiki-diafora/ergatiki-diafora-2/) | Official guidance | 2026-11-09 | labor |
 | legal-land-registry | [Ελληνικό Κτηματολόγιο — Κτηματολογικό φύλλο](https://www.ktimatologio.gr/pliroforiako-yliko/ktimatologio-se-leitourgia/21) | Official guidance | 2026-11-09 | property |
 | legal-inheritance-tax | [ΑΑΔΕ — Δήλωση φόρου κληρονομιάς](https://www.aade.gr/exypiretisi-enimerosi/hristikoi-odigoi/hristikos-odigos-taktopoiisis-forologikon-ypohreoseon-poy-prokyptoyn-apo-tin-apoleia-2) | Official guidance | 2026-11-09 | inheritance |
+| legislation-4354-2015 | [Εθνικό Τυπογραφείο — Ν. 4354/2015, ΦΕΚ Α΄ 176/16.12.2015](https://api.et.gr/apiFEK/1/2015/176/pdf) | Original Gazette | 2026-11-09 | credit-servicers-history |
+| legal-extrajudicial-installments | [Υπουργείο Οικονομικών — Ανώτατες δόσεις εξωδικαστικού μηχανισμού](https://minfin.gov.gr/diacheirisi-idiotikou-xreous/rythmisi-ofeilon/exodikastikos-michanismos-rythmisis-ofeilon/) | Official guidance | 2026-11-09 | debt-settlement |
 | legal-electronic-auctions | [Ευρωπαϊκή ηλεκτρονική δικαιοσύνη — Ηλεκτρονικοί πλειστηριασμοί στην Ελλάδα](https://e-justice.europa.eu/topics/taking-legal-action/my-e-justice-space/el_el) | Official guidance | 2026-11-09 | enforcement |
 | legislation-5072-2023 | [Εθνικό Τυπογραφείο — Ν. 5072/2023, ΦΕΚ Α΄ 198/04.12.2023](https://api.et.gr/apiLAW/1/2023/5072/pdf) | Original Gazette | 2026-11-09 | credit-servicers |
 | legislation-4619-2019 | [Εθνικό Τυπογραφείο — Ν. 4619/2019, Ποινικός Κώδικας](https://api.et.gr/apiLAW/1/2019/4619/pdf) | Original Gazette | 2026-11-09 | criminal |
@@ -50,11 +52,12 @@ Source inspection is not certification of current consolidated legislation. The 
 ## Boundaries found during review
 
 - Original gazettes establish statute identity and the original published subject. They do not incorporate subsequent amendments. Guidance and office commentary do not silently upgrade them into current consolidated law.
+- Law 4354/2015 is retrieved for an explicit historical-statute question; it does not replace the later Law 5072/2023 reference in a general servicer question. The Ministry's dated instalment summary describes conditional program maximums, not an individual offer, eligibility decision or guaranteed write-off.
 - Some official procedural pages retain old court names, code references, transitional dates or implementation announcements. Their excerpts retain stable general concepts only; they do not supply current filing instructions, statutory deadlines or thresholds.
 - The Hellenic Labour Inspectorate workplace-harassment excerpt comes from its expressly dated 2023 report. It supports the described general concepts, not proof of every later legislative change.
 - Old inheritance procedural instructions and 2026 consultation material were not promoted as current enacted procedure. This catalog does not determine present-day will-publication competence or an individual's inheritance position.
-- Supervision, a complaint, debt information and a request for settlement are distinct from a court ruling, accepted settlement or suspension of enforcement. LEXI cannot access personal credit reports, submit forms, book official appointments or place auction bids.
-- All individual legal assessments, served documents and approaching deadlines still require prompt direct contact with a lawyer. The visible legal-advice disclaimer remains in the chat; source lists remain hidden there.
+- Supervision, a complaint, debt information and a request for settlement are distinct from a court ruling, accepted settlement or suspension of enforcement. ΔικAIsis cannot access personal credit reports, submit forms, book official appointments or place auction bids.
+- All individual legal assessments, served documents and approaching deadlines still require prompt direct contact with a lawyer. The visible legal-advice disclaimer remains in the chat; source lists remain hidden there. Court decisions and case-study claims are not automatically ingested from the public site or inferred from an article.
 
 ## Review questions
 

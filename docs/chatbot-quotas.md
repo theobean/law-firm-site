@@ -5,7 +5,7 @@ token for every question and resolves a signed anonymous browser identity.
 It authorizes static public context and reserves conservative token units and
 EUR cost together in Neon Postgres before live article retrieval. It then
 prepares an immutable final request, checks that its exact token-unit cost fits
-the reservation, and sends that captured request. LEXI has no visitor accounts,
+the reservation, and sends that captured request. ΔικAIsis has no visitor accounts,
 registration or login. The AI context remains public-only, and there is no
 in-memory admission fallback.
 

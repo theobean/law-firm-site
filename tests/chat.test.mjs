@@ -62,6 +62,29 @@ test("source-less handoffs and greetings cannot smuggle factual model prose", ()
   }
 });
 
+test("controlled greetings use the current assistant brand in every supported language", () => {
+  for (const locale of ["el", "en", "de"]) {
+    const reply = parseChatReply({ kind: "greeting", answer: "LEXI guarantees a free appointment.", sourceIds: [], suggestContact: true }, sources, locale);
+    assert.ok(reply.answer.includes("ΔικAIsis"), locale);
+    assert.ok(!reply.answer.includes("LEXI"), locale);
+    assert.ok(!reply.answer.includes("free appointment"), locale);
+    assert.equal(reply.suggestContact, false);
+    assert.deepEqual(reply.sources, []);
+  }
+});
+
+test("controlled handoffs retain verified contact and legal-advice limits without forwarding invented deadlines", () => {
+  for (const [locale, disclaimer] of [["el", "δεν αποτελούν νομική συμβουλή"], ["en", "not legal advice"], ["de", "keine Rechtsberatung"]]) {
+    const reply = parseChatReply({ kind: "handoff", answer: "The deadline is exactly FAKE_DEADLINE_15_DAYS; guaranteed approval.", sourceIds: [], suggestContact: false }, sources, locale);
+    assert.ok(reply.answer.includes("+30 2310 545 261"), locale);
+    assert.ok(reply.answer.includes(disclaimer), locale);
+    assert.ok(!reply.answer.includes("FAKE_DEADLINE"), locale);
+    assert.ok(!reply.answer.includes("guaranteed approval"), locale);
+    assert.equal(reply.suggestContact, true);
+    assert.deepEqual(reply.sources, []);
+  }
+});
+
 test("calls Responses with server-only authentication, bounded output and storage disabled", async () => {
   let sent;
   const fetcher = async (url, options) => {

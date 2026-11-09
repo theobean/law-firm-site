@@ -1,7 +1,7 @@
 # Reader-facing privacy notice
 
 The public privacy page uses six short sections: controller, contact/newsletter,
-LEXI, cookies/external services, retention, and rights. Recipient names and the
+ΔικAIsis, cookies/external services, retention, and rights. Recipient names and the
 meaningful choices remain visible. Optional provider/reference links are in a
 native disclosure below the notice.
 

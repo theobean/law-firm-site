@@ -15,7 +15,7 @@ The answer still passes the existing reply/source checks and React text renderer
 
 | Component | Permitted access | Unavailable through chat |
 | --- | --- | --- |
-| Model context | Approved office/legal summaries, two original et.gr gazettes and up to two registered public article excerpts | Case files, private CMS/database records, arbitrary URLs or documents |
+| Model context | Approved office/legal summaries, reviewed original et.gr gazettes and up to two registered public article excerpts | Case files, private CMS/database records, arbitrary URLs or documents |
 | Model tools | None | Functions, MCP, browsing, shell, file search and write actions |
 | Chat backend | One bounded model request; fixed tokenless published-article read; configured public JWKS lookup when OIDC is enabled | Model-chosen destinations or API credentials in context |
 | Quota backend | Two parameterized SQL function calls reserving counters and releasing owned leases | Direct table access, model-selected SQL, private case data or database administration |
