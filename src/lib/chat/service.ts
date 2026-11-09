@@ -2,6 +2,7 @@ import { parseChatResponse, prepareChatText, readBoundedJson } from "./protocol.
 import { readAuthorizedChatSources, type AuthorizedChatContext } from "./access.mjs";
 import { CHAT_BUDGET_MODEL } from "./money.mjs";
 import { buildEvidenceChoices, buildEvidenceSchema } from "./evidence-schema.mjs";
+import { qualifyPoliceContactAnswer } from "./contact-output.mjs";
 import { containsProceduralDeadline, isProceduralDeadlineQuestion } from "./deadline-policy.mjs";
 import { appointmentReply, classifyAppointmentRequest } from "./booking-policy.mjs";
 import { classifyInformationQuestion, informationReply, INFORMATION_REPLY_KINDS, needsPersonalLawyerContact } from "./response-policy.mjs";
@@ -120,6 +121,7 @@ Answer in ${language}, in a calm, professional and understandable tone. Explain 
 - Never give a numeric, spelled-out, dated or calculated procedural/legal deadline. This also forbids repeating a deadline from an office article or other reference, quoting it, presenting it as historical information, or adding a caveat after it. Select legal_deadline instead; its wording is supplied by the application. This restriction does not prevent verified office opening hours or identifying a statute by number/year.
 - Classify the reply kind according to the question's meaning, not first-person wording alone. A grounded reply MUST select at least one sourceId that supports its factual content. Use grounded for a supported general explanation, including the supported general part of a mixed personal/general question. If no useful supported general explanation is available and the visitor requests an individual outcome, assessment or next step, use personal_handoff and suggestContact=true. Use handoff for an unsupported general question. Use office_fees for unknown office prices; never estimate a fee. Use legal_deadline for procedural time limits, office_hours for verified office hours and appointment for requests to book, change or cancel an appointment or ask how to request one. Use out_of_scope for unrelated requests, foreign_jurisdiction for applying these Greek materials to another country's law, action_request for asking you to submit/send something, private_access for requests for client files and chat_privacy for uploads/confidentiality of this chat. Greetings use greeting. Non-grounded wording is supplied by the application; return answer="", an empty sourceIds list, evidence=[] and suggestContact=true except for greetings, unrelated topics and foreign-law scope. Do not answer legal questions from model memory or invent statutory articles, court decisions, rights, eligibility criteria, amounts, or time limits.
 - A personal description does not by itself require a referral-only reply. When references support a useful general explanation, give one or two supported sentences with kind=grounded, then briefly distinguish that information from an assessment of the visitor's case and give neutral verified office contact when useful. Do not answer the individual outcome or suggest a course of action. If nothing relevant is supported, use personal_handoff without further case questions. Never compute a legal deadline, predict a court outcome, promise protection or give a definitive personal legal conclusion. Do not propose a strategy or imply that a strong defence always exists.
+- When a visitor has stated a plan to create a company, a follow-up asking whether one business form is better than another requests an individual choice. Use personal_handoff without asking for financial details. Supported definitions of a business form or its formation service remain general information.
 - Do not begin with an unqualified "yes" or "no" when asked whether this visitor's particular entry, document, entitlement or outcome is valid or achievable. Explain only the supported general possibility and explicitly leave the individual conclusion to a lawyer. For a cadastral error, saying that correction procedures exist generally does not establish that this entry can be corrected.
 - Explain a document's name only as a basic general concept supported by the supplied references. Do not infer its legal effect, a uniform deadline or an appropriate procedural remedy. Do not ask whether a document has been served, when it was served, or for its content or an upload.
 - If a different country is mentioned, clarify that this material concerns Greece. Do not apply Greek law to another jurisdiction.
@@ -396,19 +398,7 @@ export async function generatePreparedChatReply(
     }
     let reply = parseChatReply(answerPayload, snapshot.sources, snapshot.locale);
     if (snapshot.needsLawyerContact && answerPayload.kind === "grounded") {
-      const fullContact = {
-        el: "Για τη συγκεκριμένη κλήση, επικοινωνήστε άμεσα με δικηγόρο στο +30 2310 545 261 ή μέσω της σελίδας επικοινωνίας.",
-        en: "For this police call, contact a lawyer promptly at +30 2310 545 261 or through the contact page.",
-        de: "Wenden Sie sich wegen dieser polizeilichen Ladung umgehend an einen Rechtsanwalt unter +30 2310 545 261 oder über die Kontaktseite.",
-      }[snapshot.locale];
-      const shortContact = {
-        el: "Για τη συγκεκριμένη κλήση χρειάζεται άμεση συνεννόηση με δικηγόρο.",
-        en: "For this police call, consult a lawyer promptly.",
-        de: "Wenden Sie sich wegen dieser polizeilichen Ladung umgehend an einen Rechtsanwalt.",
-      }[snapshot.locale];
-      const contact = reply.answer.includes("2310 545 261") ? shortContact : fullContact;
-      const alreadyQualified = reply.answer.endsWith(fullContact) || reply.answer.endsWith(shortContact);
-      const withContact = parseChatResponse({ ...reply, answer: alreadyQualified ? reply.answer : `${reply.answer}\n\n${contact}`, suggestContact: true });
+      const withContact = parseChatResponse({ ...reply, answer: qualifyPoliceContactAnswer(reply.answer, snapshot.locale), suggestContact: true });
       if (!withContact) throw new ChatFailure("upstream", 502, "reply_contract");
       reply = withContact;
     }

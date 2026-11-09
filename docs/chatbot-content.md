@@ -220,6 +220,19 @@ renunciation, decide inherited-debt liability or earlier acceptance, identify
 the competent court for a visitor, or provide a time limit. Adding this card
 does not make every inheritance question answerable.
 
+The tax-appeal card retains its existing ID, main AADE URL and retrieval
+metadata. Its general concepts are checked against the
+[AADE service page](https://www.aade.gr/endikofaneis-prosfyges) and the linked
+[official FAQ updated 30 November 2022](https://www.aade.gr/sites/default/files/2022-11/FAQs_endikofaneis.pdf),
+questions 2–4, 16 and 22. The card distinguishes administrative review from
+court proceedings for covered acts with exceptions, and a stay request from
+its approval. Conditional or temporary collection effects are not denied by
+a blanket rule. No amounts, percentages, procedural deadlines or personal
+payment conclusion are supplied. This remains dated general guidance, not a
+verification of all current consolidated law. The source review is recorded in
+`outputs/dikaisis-tax-source-review.json`; this content correction itself is not
+a live-answer pass.
+
 The Katseli-law entry covers only the purpose of Law 3869/2010 and conditional
 debt discharge. The common name was checked against the
 [government's 2019 announcement](https://www.government.gov.gr/to-ipourgio-ikonomikon-energopii-tin-ilektroniki-platforma-gia-ta-iperchreomena-nikokiria/)

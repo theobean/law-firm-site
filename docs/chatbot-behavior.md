@@ -223,7 +223,8 @@ not retried: its atomic database call may have committed once or retained the
 full reservation. Request/token abuse buckets are never refunded; removing the
 owned concurrency lease is separate.
 
-Existing ledger charges are preserved. In particular, the dashboard's observed
+Existing same-day ledger charges are preserved until normal UTC-day rollover.
+In particular, the dashboard's observed
 `$0.41` total is not a settlement input and does not justify clearing older
 reservations. The shared €5/day ceiling remains unchanged. This is conservative
 API-usage accounting, not a promise of the final tax/card/FX invoice amount.
@@ -233,16 +234,15 @@ requests, evidence provenance, contextual retrieval and whole-answer deadline
 replacement. They do not prove model compliance or semantic support for every
 future answer. Prompt word targets are not guarantees.
 
-The frozen `d587666` baseline completed 30 synthetic Greek visitor questions
-on 9 November 2026. It exposed wrong office-hours routing, lost general-topic
-follow-ups, definition/qualification problems and unsuitable generic handoffs.
-The current changes address those findings; the baseline is not a live pass
-for the revised version. Offline retrieval fixtures likewise measure selection,
-not model-answer quality. A subsequent frozen `8ff68b4` attempt stopped at Q10
-with an evidence-quote validation error. A `271536f` attempt stopped at Q01 with
-a provider HTTP error. These partial runs predate the flat passage-ID version
-and are not completed evaluations. A revised 30-question
-live run has not yet been recorded for these changes. Future-only settlement
-permits only normal admitted
-requests under the unchanged cap; it neither resets older charges nor makes the
-baseline a pass for the revised version.
+Live evaluations must identify their frozen deployment and retain displayed
+answers, failed attempts and manual content assessments separately. Earlier
+baseline or interrupted-run results cannot validate a newer implementation.
+Offline retrieval fixtures measure source selection, not model-answer quality.
+Successful transport and an exact passage binding do not establish that every
+claim is semantically supported or that a legal procedure is current.
+
+The police-call qualification normalizes only recognized affirmative closing
+contact sentences before adding the application-owned direction once. Unknown,
+negated, quoted or non-final prose is not stripped. A remaining phone number
+can shorten the direction but cannot suppress it; final response-size validation
+still rejects overflow without clipping a qualification.
