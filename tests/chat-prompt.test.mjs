@@ -95,6 +95,7 @@ test("the actual provider request separates trusted instructions from one user d
       required: ["kind", "answer", "sourceIds", "suggestContact"],
     },
   });
+  assert.equal(body.text.verbosity, "low");
   assert.deepEqual(reply, { answer: "The office is in Thessaloniki.", sources: [{ title: records[0].title, url: records[0].url }], suggestContact: false });
 });
 
