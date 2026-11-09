@@ -30,6 +30,7 @@ export default function ChatAssistant() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [draft, setDraft] = useState("");
   const [loading, setLoading] = useState(false);
+  const [typingReply, setTypingReply] = useState<{ id: number; text: string } | null>(null);
   const [error, setError] = useState<ChatError | null>(null);
   const [failedQuestion, setFailedQuestion] = useState("");
   const [bottomOffset, setBottomOffset] = useState(20);
@@ -40,6 +41,8 @@ export default function ChatAssistant() {
   const controllerRef = useRef<AbortController | null>(null);
   const requestPendingRef = useRef(false);
   const sequenceRef = useRef(0);
+  const typingFrameRef = useRef<number | null>(null);
+  const followReplyRef = useRef(true);
 
   useEffect(() => {
     const overlays = document.getElementById("site-bottom-overlays");
@@ -55,6 +58,7 @@ export default function ChatAssistant() {
     controllerRef.current?.abort();
     controllerRef.current = null;
     requestPendingRef.current = false;
+    if (typingFrameRef.current !== null) cancelAnimationFrame(typingFrameRef.current);
   }, []);
 
   useEffect(() => {
@@ -73,8 +77,51 @@ export default function ChatAssistant() {
 
   useEffect(() => {
     const log = logRef.current;
+    followReplyRef.current = true;
     if (log) log.scrollTo({ top: log.scrollHeight, behavior: "instant" });
   }, [messages, loading, error, open]);
+
+  useEffect(() => {
+    const log = logRef.current;
+    // Keep following the reply unless the visitor has scrolled up to read.
+    if (log && followReplyRef.current) {
+      log.scrollTo({ top: log.scrollHeight, behavior: "instant" });
+    }
+  }, [typingReply]);
+
+  function finishTyping() {
+    if (typingFrameRef.current !== null) cancelAnimationFrame(typingFrameRef.current);
+    typingFrameRef.current = null;
+    setTypingReply(null);
+  }
+
+  function animateReply(id: number, text: string) {
+    finishTyping();
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (reducedMotion.matches) return;
+    // Reveal complete graphemes so accents and joined emoji stay intact.
+    const characters = typeof Intl.Segmenter === "function"
+      ? Array.from(new Intl.Segmenter(locale, { granularity: "grapheme" }).segment(text), ({ segment }) => segment)
+      : Array.from(text);
+    const duration = Math.min(6000, Math.max(500, characters.length * 14));
+    const started = performance.now();
+    let previousCount = 0;
+    setTypingReply({ id, text: "" });
+    const reveal = (now: number) => {
+      const count = Math.min(characters.length, Math.floor((now - started) / duration * characters.length));
+      if (reducedMotion.matches || count >= characters.length) {
+        typingFrameRef.current = null;
+        setTypingReply(null);
+        return;
+      }
+      if (count !== previousCount) {
+        previousCount = count;
+        setTypingReply({ id, text: characters.slice(0, count).join("") });
+      }
+      typingFrameRef.current = requestAnimationFrame(reveal);
+    };
+    typingFrameRef.current = requestAnimationFrame(reveal);
+  }
 
   function closePanel() {
     setOpen(false);
@@ -82,6 +129,7 @@ export default function ChatAssistant() {
   }
 
   function resetConversation() {
+    finishTyping();
     controllerRef.current?.abort();
     controllerRef.current = null;
     requestPendingRef.current = false;
@@ -96,6 +144,7 @@ export default function ChatAssistant() {
   async function sendQuestion(question: string) {
     const content = question.trim();
     if (!activated || requestPendingRef.current || !content || content.length > MAX_MESSAGE_LENGTH) return;
+    finishTyping();
     requestPendingRef.current = true;
     const controller = new AbortController();
     controllerRef.current = controller;
@@ -138,13 +187,15 @@ export default function ChatAssistant() {
         setError(code);
         return;
       }
+      const replyId = ++sequenceRef.current;
       setMessages([...history, {
-        id: ++sequenceRef.current,
+        id: replyId,
         role: "assistant",
         content: reply.answer,
         sources: reply.sources,
         suggestContact: reply.suggestContact,
       }]);
+      animateReply(replyId, reply.answer);
     } catch {
       if (controller.signal.aborted || controllerRef.current !== controller) return;
       setMessages(history.slice(0, -1));
@@ -204,7 +255,11 @@ export default function ChatAssistant() {
             </div>
           ) : (
             <>
-              <div ref={logRef} className={styles.log} role="log" aria-live="polite" aria-relevant="additions text" aria-label={t("conversation")} aria-busy={loading}>
+              <div ref={logRef} className={styles.log} role="log" aria-live="polite" aria-relevant="additions text" aria-label={t("conversation")} aria-busy={loading || typingReply !== null}
+                onScroll={(event) => {
+                  const log = event.currentTarget;
+                  followReplyRef.current = log.scrollHeight - log.scrollTop - log.clientHeight < 80;
+                }}>
                 <div className={styles.assistantMessage}>
                   <span className={styles.speaker}>{t("assistantLabel")}</span>
                   <p className={styles.messageText}>{t("welcome")}</p>
@@ -221,8 +276,15 @@ export default function ChatAssistant() {
                 {messages.map((message) => (
                   <div key={message.id} className={message.role === "user" ? styles.userMessage : styles.assistantMessage}>
                     <span className={styles.speaker}>{t(message.role === "user" ? "youLabel" : "assistantLabel")}</span>
-                    <ChatText className={styles.messageText} text={message.content} />
-                    {!!message.sources?.length && (
+                    {typingReply?.id === message.id ? (
+                      <>
+                        <div className={styles.typingText} aria-hidden="true">
+                          <ChatText className={styles.messageText} text={typingReply.text} />
+                        </div>
+                        <ChatText className={styles.srOnly} text={message.content} />
+                      </>
+                    ) : <ChatText className={styles.messageText} text={message.content} />}
+                    {typingReply?.id !== message.id && !!message.sources?.length && (
                       <div className={styles.sources}>
                         <p>{t("sources")}</p>
                         {message.sources.map((source) => (
@@ -232,7 +294,7 @@ export default function ChatAssistant() {
                         ))}
                       </div>
                     )}
-                    {message.suggestContact && <Link href="/contact" className={styles.messageContact}>{t("contactOffice")} <ArrowRight size={13} aria-hidden="true" /></Link>}
+                    {typingReply?.id !== message.id && message.suggestContact && <Link href="/contact" className={styles.messageContact}>{t("contactOffice")} <ArrowRight size={13} aria-hidden="true" /></Link>}
                   </div>
                 ))}
                 {loading && <p className={styles.loading}><LoaderCircle size={15} className={styles.spinner} aria-hidden="true" />{t("thinking")}</p>}

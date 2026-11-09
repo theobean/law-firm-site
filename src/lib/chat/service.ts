@@ -70,7 +70,7 @@ export function parseChatInput(value: unknown): ChatInput {
 export function chatInstructions(locale: ChatLocale): string {
   const language = { el: "Greek", en: "English", de: "German" }[locale];
   return `<assistant_instructions>
-You are the clearly identified AI information assistant of the Ioannis Papaioannou law office in Thessaloniki, Greece.
+Your name is lexi. You are the clearly identified AI information assistant of the Ioannis Papaioannou law office in Thessaloniki, Greece.
 Answer in ${language}, in a calm, professional, helpful tone. Use plain text, short paragraphs, and at most 180 words. Do not use Markdown, HTML, raw URLs or citation markers in the answer; the application displays your selected sources separately.
 
 <scope_and_grounding>
@@ -131,15 +131,15 @@ export function parseChatReply(value: unknown, sources: readonly ChatSource[], l
     // as a greeting or handoff. These messages are controlled by the application.
     const text = {
       el: {
-        greeting: "Γεια σας! Μπορώ να σας ενημερώσω για το γραφείο και να εξηγήσω γενικές νομικές έννοιες με βάση τις διαθέσιμες πηγές. Πώς μπορώ να βοηθήσω;",
+        greeting: "Γεια σας! Είμαι η lexi, η βοηθός AI του γραφείου. Μπορώ να σας ενημερώσω για το γραφείο και να εξηγήσω γενικές νομικές έννοιες με βάση τις διαθέσιμες πηγές. Πώς μπορώ να βοηθήσω;",
         handoff: "Οι διαθέσιμες πηγές δεν επαρκούν για αξιόπιστη απάντηση στο ερώτημά σας. Για διευκρινίσεις ή εξέταση συγκεκριμένης υπόθεσης, επικοινωνήστε απευθείας με το γραφείο. Μην καταχωρίζετε προσωπικά στοιχεία ή έγγραφα εδώ.",
       },
       en: {
-        greeting: "Hello! I can provide information about the office and explain general legal concepts using the available sources. How can I help?",
+        greeting: "Hello! I'm lexi, the office's AI assistant. I can provide information about the office and explain general legal concepts using the available sources. How can I help?",
         handoff: "The available sources are not sufficient for a reliable answer to your question. For clarification or an assessment of a specific case, please contact the office directly. Do not enter personal details or documents here.",
       },
       de: {
-        greeting: "Guten Tag! Ich kann Sie über die Kanzlei informieren und allgemeine Rechtsbegriffe anhand der verfügbaren Quellen erklären. Wie kann ich helfen?",
+        greeting: "Guten Tag! Ich bin lexi, der KI-Assistent der Kanzlei. Ich kann Sie über die Kanzlei informieren und allgemeine Rechtsbegriffe anhand der verfügbaren Quellen erklären. Wie kann ich helfen?",
         handoff: "Die verfügbaren Quellen reichen für eine verlässliche Antwort auf Ihre Frage nicht aus. Für Rückfragen oder die Prüfung eines konkreten Falls kontaktieren Sie bitte direkt die Kanzlei. Geben Sie hier keine persönlichen Daten oder Dokumente ein.",
       },
     }[locale];

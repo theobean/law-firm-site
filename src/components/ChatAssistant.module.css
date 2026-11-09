@@ -78,6 +78,8 @@
 .speaker { display: block; margin-bottom: 6px; font-size: 9px; font-weight: 700; letter-spacing: .03em; color: #7f652f; }
 .userMessage .speaker { color: #dfb86e; }
 .messageText { margin: 0; font-size: 12px; line-height: 1.85; white-space: pre-wrap; overflow-wrap: anywhere; }
+.typingText .messageText::after { content: ""; display: inline-block; height: 1em; margin-left: 2px; border-left: 2px solid #967023; vertical-align: -.12em; animation: caret .8s step-end infinite; }
+@keyframes caret { 50% { opacity: 0; } }
 .starters { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin: 0 0 18px; }
 .starters button { display: flex; max-width: 100%; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 12px; border: 1px solid #d6c9aa; border-radius: 4px; background: #fff; color: #374e59; font-size: 11px; text-align: left; line-height: 1.6; }
 .starters button:hover { background: #fbf8f1; border-color: #c8922a; }
@@ -121,4 +123,5 @@
 
 @media (prefers-reduced-motion: reduce) {
   .spinner { animation: none; }
+  .typingText .messageText::after { animation: none; }
 }
