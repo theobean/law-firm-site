@@ -21,13 +21,12 @@ type TurnstileOptions = {
   "before-interactive-callback": () => void;
 };
 type Turnstile = {
-  ready: (callback: () => void) => void;
   render: (container: HTMLElement, options: TurnstileOptions) => string;
   execute: (widgetId: string) => void;
   reset: (widgetId: string) => void;
   remove: (widgetId: string) => void;
 };
-type TurnstileWindow = Window & { turnstile?: Turnstile };
+type TurnstileWindow = Window & { turnstile?: unknown };
 type Widget = { api: Turnstile; id: string };
 type PendingVerification = { resolve: (token: string) => void; reject: (error: Error) => void };
 
@@ -41,6 +40,14 @@ function abortError() {
   return new DOMException("Security check cancelled", "AbortError");
 }
 
+function getTurnstileApi(): Turnstile | null {
+  const api = (window as TurnstileWindow).turnstile;
+  if (!api || (typeof api !== "object" && typeof api !== "function")) return null;
+  const methods = api as Record<string, unknown>;
+  if (!["render", "execute", "reset", "remove"].every((method) => typeof methods[method] === "function")) return null;
+  return api as Turnstile;
+}
+
 // Called only after the visitor chooses to start the assistant. Share the script
 // across mounts; a failed download may be retried without adding duplicate tags.
 function loadTurnstile(): Promise<Turnstile> {
@@ -48,7 +55,7 @@ function loadTurnstile(): Promise<Turnstile> {
 
   scriptPromise = new Promise<Turnstile>((resolve, reject) => {
     let settled = false;
-    const existingApi = (window as TurnstileWindow).turnstile;
+    const existingApi = getTurnstileApi();
     const existing = document.getElementById(SCRIPT_ID) as HTMLScriptElement | null;
     const script = existing ?? document.createElement("script");
     const finish = (error?: Error, api?: Turnstile) => {
@@ -65,16 +72,10 @@ function loadTurnstile(): Promise<Turnstile> {
       }
     };
     const onLoad = () => {
-      const api = (window as TurnstileWindow).turnstile;
-      if (!api) {
-        finish(new Error("Security check unavailable"));
-        return;
-      }
-      try {
-        api.ready(() => finish(undefined, api));
-      } catch {
-        finish(new Error("Security check unavailable"));
-      }
+      // Native script load is the readiness boundary for explicit rendering.
+      // Do not depend on ready(), which is unnecessary after api.js executes.
+      const api = getTurnstileApi();
+      finish(api ? undefined : new Error("Security check unavailable"), api ?? undefined);
     };
     const onError = () => finish(new Error("Security check unavailable"));
     const timeout = window.setTimeout(onError, LOAD_TIMEOUT_MS);
