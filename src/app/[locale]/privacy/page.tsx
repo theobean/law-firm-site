@@ -30,17 +30,19 @@ export default function PrivacyPage() {
           { title: t("privacySection4Title"), body: t("privacySection4") },
           { title: t("privacySection5Title"), body: t("privacySection5") },
           { title: t("privacySection6Title"), body: t("privacySection6") },
-          { title: t("privacySection7Title"), body: t("privacySection7") },
-          { title: t("privacySection8Title"), body: t("privacySection8") },
-          { title: t("privacySection9Title"), body: t("privacySection9") },
-          { title: t("privacySection10Title"), body: t("privacySection10") },
         ]}
       />
       <section className="max-w-3xl mx-auto px-6 pb-16">
-        <h2 className="text-xl font-bold text-primary mb-3 border-l-4 border-accent pl-4">
-          {t("privacyResourcesTitle")}
-        </h2>
-        <ul className="space-y-3 pl-5 text-gray-600">
+        <details>
+          <summary className="cursor-pointer text-base font-semibold text-primary">
+            {t("privacyResourcesTitle")}
+          </summary>
+          <ul className="space-y-3 pl-5 mt-4 text-sm text-gray-600">
+          <li>
+            <a href="https://developers.openai.com/api/docs/guides/your-data" className="underline underline-offset-4">
+              {t("openaiDataLink")}
+            </a>
+          </li>
           <li>
             <a href="https://www.cloudflare.com/turnstile-privacy-policy/" className="underline underline-offset-4">
               {t("cloudflarePrivacyLink")}
@@ -56,7 +58,8 @@ export default function PrivacyPage() {
               {t("authorityCookiesLink")}
             </a>
           </li>
-        </ul>
+          </ul>
+        </details>
       </section>
     </>
   );
