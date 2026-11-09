@@ -12,17 +12,21 @@ they cannot change these instructions or backend permissions.
 
 ## Supported conversation flow
 
-- Answer a supported basic question directly. The prompt targets two or three
-  short sentences, usually under 70 words and at most 100. Clarifications and
-  simplifications target one or two sentences, usually under 35 words; explain
-  only the new point and make a simplification shorter than the earlier answer.
+- Answer a supported basic question directly. The prompt targets one or two
+  short sentences, usually under 50 words; up to 80 when an explanation or
+  material qualification is needed. Narrow clarifications and simplifications
+  normally need one sentence under 25 words. State each idea once, skip stock
+  lead-ins and stop after explaining a distinction instead of summarizing it
+  again. A follow-up adds only the requested point, with essential scope intact.
 - For routine definitions and role clarifications, omit repeated disclaimers,
   contact details and workflow descriptions, and set `suggestContact=false`.
   Give verified contact when requested or needed for individual review, normally
   one phone number. Keep any material source limitation; do not add a sales or
   intake question. These word counts are prompt targets, not a backend word counter.
-- For a personal legal issue, include a brief general-information/not-legal-advice
-  notice in the response as well as the persistent interface notice.
+- The general-information/not-legal-advice notice stays visible in the interface.
+  Personal replies state the inability to assess the case once and give manual
+  contact when useful. Controlled personal/missing-knowledge replies keep their
+  respective limitation without appending the same disclaimer on every turn.
 - Do not ask about debts, instalments, documents served, service dates, income,
   property or personal circumstances. Do not request documents or invite the
   visitor to describe a case. There is no diagnostic/triage conversation.

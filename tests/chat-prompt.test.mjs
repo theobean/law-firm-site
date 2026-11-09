@@ -112,7 +112,7 @@ test("provider instructions distinguish supported general answers from personal 
   assert.match(body.instructions, /Do not infer validity, procedural stage, danger or safety of the home/u);
   assert.match(body.instructions, /Use office_fees for unknown office prices/u);
   assert.match(body.instructions, /forbids repeating a deadline from an office article/u);
-  assert.match(body.instructions, /one or two short sentences, usually under 35 words/u);
+  assert.match(body.instructions, /normally be one sentence, under 25 words/u);
   assert.match(body.instructions, /set suggestContact=false and omit phone numbers, email addresses and opening hours/u);
   assert.match(body.instructions, /Non-grounded wording is supplied by the application; return answer=""/u);
   assert.match(body.instructions, /Do not conduct case intake or ask diagnostic\/qualification questions/u);

@@ -73,11 +73,11 @@ test("controlled greetings use the current assistant brand in every supported la
   }
 });
 
-test("controlled handoffs retain verified contact and legal-advice limits without forwarding invented deadlines", () => {
-  for (const [locale, disclaimer] of [["el", "δεν αποτελούν νομική συμβουλή"], ["en", "not legal advice"], ["de", "keine Rechtsberatung"]]) {
+test("controlled handoffs retain verified contact and the knowledge limit without forwarding invented deadlines", () => {
+  for (const [locale, limitation] of [["el", "Δεν έχω αρκετές πληροφορίες"], ["en", "I don't have enough information"], ["de", "fehlen mir verlässliche Informationen"]]) {
     const reply = parseChatReply({ kind: "handoff", answer: "The deadline is exactly FAKE_DEADLINE_15_DAYS; guaranteed approval.", sourceIds: [], suggestContact: false }, sources, locale);
     assert.ok(reply.answer.includes("+30 2310 545 261"), locale);
-    assert.ok(reply.answer.includes(disclaimer), locale);
+    assert.ok(reply.answer.includes(limitation), locale);
     assert.ok(!reply.answer.includes("FAKE_DEADLINE"), locale);
     assert.ok(!reply.answer.includes("guaranteed approval"), locale);
     assert.equal(reply.suggestContact, true);
@@ -86,7 +86,7 @@ test("controlled handoffs retain verified contact and legal-advice limits withou
 });
 
 test("personal next-step handoffs stay distinct from unsupported knowledge in every locale", () => {
-  for (const [locale, disclaimer] of [["el", "δεν αποτελούν νομική συμβουλή"], ["en", "not legal advice"], ["de", "keine Rechtsberatung"]]) {
+  for (const [locale, limitation] of [["el", "Δεν μπορώ να αξιολογήσω"], ["en", "I can't assess your individual case"], ["de", "Fall kann ich hier nicht beurteilen"]]) {
     const untrusted = {
       answer: "File within FAKE_DEADLINE_15_DAYS. Your appointment is booked. What date was the paper served?",
       sourceIds: ["office-contact"], suggestContact: false,
@@ -94,7 +94,7 @@ test("personal next-step handoffs stay distinct from unsupported knowledge in ev
     const reply = parseChatReply({ ...untrusted, kind: "personal_handoff" }, sources, locale);
     const missingKnowledge = parseChatReply({ ...untrusted, kind: "handoff" }, sources, locale);
     assert.ok(reply.answer.includes("+30 2310 545 261"), locale);
-    assert.ok(reply.answer.includes(disclaimer), locale);
+    assert.ok(reply.answer.includes(limitation), locale);
     assert.ok(!reply.answer.includes("FAKE_DEADLINE"), locale);
     assert.ok(!reply.answer.includes("booked"), locale);
     assert.ok(!reply.answer.includes("served"), locale);
