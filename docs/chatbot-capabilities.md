@@ -18,7 +18,7 @@ The answer still passes the existing reply/source checks and React text renderer
 | Model context | Projected fields of 13 approved public sources | Case files, private CMS/database records, arbitrary URLs or documents |
 | Model tools | None | Functions, MCP, browsing, shell, file search and write actions |
 | Chat backend | One bounded model request; configured public JWKS lookup when OIDC is enabled | Model-chosen destinations or API credentials in context |
-| Quota backend | Fixed Lua scripts updating quota counters and concurrency leases | Model-selected commands, keys or arbitrary data queries |
+| Quota backend | Two parameterized SQL function calls reserving counters and releasing owned leases | Direct table access, model-selected SQL, private case data or database administration |
 | Visitor interface | Text questions, source links, direct-contact links | Sending messages, confirming bookings, accepting cases, payments, filing or deleting records |
 
 Clicking the contact link opens the existing contact page. `suggestContact` is a
@@ -29,27 +29,34 @@ capability boundary, not operating-system or network sandboxing.
 
 ## Deployment credentials
 
-Use a dedicated OpenAI project service account with the minimum model-request
-role and a restricted key; keep files, vector stores, assistants, batches and
-organization administration out of its permissions. Model-request permissions
-can cover multiple model endpoints, so this is not a claim of a Responses-only
-credential scope. Restrict supported key scopes and allowed models further in
-the provider dashboard, and isolate preview/production projects. The application
-uses only the fixed endpoint above. Credentials remain server-only, outside
+Use a service account and restrict its key to Responses creation, keeping files,
+vector stores, other model endpoints and administration out of its effective
+permissions. The current dashboard's Responses Write selection may bundle
+Responses Read; that does not justify enabling other API resources. Prefer a
+matching narrow role where the account supports its assignment, and verify the
+key's actual endpoint permissions. The application uses only the fixed endpoint
+above. Isolate preview/production credentials. Credentials remain server-only, outside
 prompts, browser code, logs and source control. See official
 [API credentials](https://developers.openai.com/api/docs/guides/api-keys) and
 [RBAC permissions](https://developers.openai.com/api/docs/guides/rbac).
 
-Redis needs writes to enforce quotas; a read-only token cannot reserve budgets
-or release leases. Provision a dedicated quota database and an ACL REST token
-limited to the deployed environment's key prefix and the commands listed in
-[quota setup](chatbot-quotas.md#least-privilege-redis-access). A key namespace is
-not a credential permission boundary. Do not put office/client data in this
-store or use a credential shared with another application. Never provide
-Upstash account-management credentials to the application.
+Neon Postgres needs controlled writes to reserve budgets and release leases.
+Provision a dedicated Free quota database. Deploy only a SQL-created runtime
+role with connection/schema usage and execution of the two quota functions,
+with no table read/write, schema creation, temporary-table or administration
+rights. The database binds its login role to one namespace/environment. The
+non-login function owner and setup administrator are separate from the
+application credential. See
+[quota setup](chatbot-quotas.md#least-privilege-database-access).
+No office/client records belong in this store. Its credentials are never model
+context or tools, and owner/admin database credentials never belong in the
+deployed application's environment. Marketplace resource administration is a
+separate trusted control plane; its automatic owner-URL project injection is skipped.
 
-Provider permissions must be configured and verified when issuing permanent
-credentials. They have not been changed or verified by these code changes.
+Provider permissions must be configured and tested when issuing credentials;
+code and mocked transport tests alone do not prove the grants on a deployed
+database or API key. Keep the Neon Free plan; the setup does not authorize a
+paid upgrade or billing activation.
 
 ## Human approval for future actions
 

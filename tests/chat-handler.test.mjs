@@ -69,7 +69,7 @@ test("API admission reserves the exact prepared snapshot cost before its sole mo
   assert.equal(h.state.charged, h.prepared.reservedTokens);
 });
 
-test("quota denial returns 429 and Redis Retry-After without entering the model or cleanup", async () => {
+test("quota denial returns 429 and database Retry-After without entering the model or cleanup", async () => {
   const h = harness({ reserveChatQuota: async () => { throw new QuotaError("rate_limit", 429, 61); } });
   const response = await h.handler(request());
   assert.equal(response.status, 429);
@@ -80,7 +80,7 @@ test("quota denial returns 429 and Redis Retry-After without entering the model 
   assert.equal(h.state.charged, 0);
 });
 
-test("Redis outage fails closed with 503 instead of falling through to a model request", async () => {
+test("database outage fails closed with 503 instead of falling through to a model request", async () => {
   const h = harness({ reserveChatQuota: async () => { throw new QuotaError("unavailable", 503); } });
   const response = await h.handler(request());
   assert.equal(response.status, 503);
@@ -89,7 +89,7 @@ test("Redis outage fails closed with 503 instead of falling through to a model r
   assert.equal(h.state.released, 0);
 });
 
-test("bad authentication exits with 401 before context loading, Redis reservation or model work", async () => {
+test("bad authentication exits with 401 before context loading, database reservation or model work", async () => {
   const h = harness({ resolveQuotaIdentity: async () => { throw new QuotaIdentityError("unauthorized"); } });
   const response = await h.handler(request());
   assert.equal(response.status, 401);

@@ -57,7 +57,7 @@ export function createChatHandler(dependencies) {
       } finally {
         // Release concurrency only; the store does not refund abuse budgets.
         // Cleanup failure cannot replace a successful answer or provider error.
-        try { await lease.release(); } catch { /* Lease expires in shared Redis. */ }
+        try { await lease.release(); } catch { /* Lease expires in the shared database. */ }
       }
     } catch (error) {
       // Classification returns only stable public codes, never upstream detail.

@@ -12,7 +12,7 @@ always receives the server-issued `public` principal, with `chat:read:public`
 permission. HTTP headers, request-body roles, conversation roles, IDs and model
 instructions cannot create another principal or widen the scope.
 Optional OIDC verification selects a request/token quota tier only; it does not
-replace this public data principal or enable private case access. Redis holds
+replace this public data principal or enable private case access. Neon Postgres holds
 quota counters, not legal context. See [quota configuration](chatbot-quotas.md).
 The model has no executable API/database tools; see the
 [capability policy and human-approval requirements](chatbot-capabilities.md).
@@ -69,7 +69,7 @@ escaping expansion cannot bypass the request budget.
 
 These boundaries help distinguish instructions from data. They do not guarantee
 that a model will resist semantic prompt injection or answer correctly. Server
-authorization before readers, Redis admission, the allowed source-ID schema,
+authorization before readers, database admission, the allowed source-ID schema,
 reply validation and React text rendering remain independently enforced. Tests
 inspect outbound request structure with a mocked provider; live adversarial
 model evaluation remains necessary before public activation. See the

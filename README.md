@@ -59,10 +59,8 @@ npm run dev
 | `CHATBOT_ENABLED` | Ο βοηθός εμφανίζεται και το `/api/chat` ενεργοποιείται μόνο με την ακριβή τιμή `true`. Προεπιλογή: απενεργοποιημένος. Αλλαγή χρειάζεται νέο build. |
 | `OPENAI_API_KEY` | Ιδιωτικό server-side κλειδί OpenAI API για τον ψηφιακό βοηθό. Ποτέ με πρόθεμα `NEXT_PUBLIC_`. |
 | `OPENAI_CHAT_MODEL` | Προαιρετικό μοντέλο Responses με structured outputs και reasoning effort `low`. Προεπιλογή: `gpt-5.4-mini`. |
-| `UPSTASH_REDIS_REST_URL` | HTTPS REST endpoint του μόνιμου Redis για κοινά rate limits και quotas. |
-| `UPSTASH_REDIS_REST_TOKEN` | Ιδιωτικό read/write Redis REST token. Χρειάζεται EVAL και οι εντολές του limiter. |
+| `CHAT_DATABASE_URL` | Ιδιωτικό Neon Postgres URL του περιορισμένου runtime ρόλου, με TLS. Ο ρόλος καλεί μόνο τις συναρτήσεις quotas. Ποτέ owner/admin URL. |
 | `CHAT_RATE_LIMIT_SECRET` | Ιδιωτικό σταθερό μυστικό 32+ χαρακτήρων για HMAC αναγνωριστικά, κοινό σε όλα τα instances. |
-| `CHAT_QUOTA_NAMESPACE` | Προαιρετικό σταθερό namespace· προεπιλογή `law-firm-site-chat`. Όχι τυχαία τιμή ανά deployment. |
 | `CHAT_AUTH_ISSUER` | Προαιρετικός HTTPS issuer του παρόχου OpenID Connect. Μαζί με τα δύο επόμενα. |
 | `CHAT_AUTH_AUDIENCE` | Αναμενόμενο audience του JWT access token για το chat API. |
 | `CHAT_AUTH_JWKS_URL` | Σταθερό HTTPS JWKS endpoint για επαλήθευση υπογραφών RS256/ES256. |
@@ -90,19 +88,29 @@ npm run dev
 μήνυμα προσωρινής μη διαθεσιμότητας με άμεση επικοινωνία με το γραφείο. Δεν
 υπάρχουν προσομοιωμένες απαντήσεις AI στο πραγματικό περιβάλλον.
 
-Για ενεργοποίηση στο Vercel, πρόσθεσε `OPENAI_API_KEY`, τα δύο `UPSTASH_REDIS_REST_*`,
+Για ενεργοποίηση στο Vercel, πρόσθεσε `OPENAI_API_KEY`, το scoped `CHAT_DATABASE_URL`,
 το ιδιωτικό σταθερό `CHAT_RATE_LIMIT_SECRET` και `CHATBOT_ENABLED=true` στις
 μεταβλητές του κατάλληλου environment και κάνε νέο
 deployment. Δημιούργησε το κλειδί στο [OpenAI API dashboard](https://platform.openai.com/api-keys)
 με λογαριασμό που έχει πρόσβαση API / διαθέσιμη χρέωση. Μην το καταχωρίζεις σε
 GitHub, κώδικα browser, μηνύματα ή `NEXT_PUBLIC_*`. Ξεκίνα από Preview.
 
-Τα rate limits και quotas εφαρμόζονται ατομικά σε κοινό Redis πριν από κάθε κλήση
+Τα rate limits και quotas εφαρμόζονται ατομικά σε Neon Postgres πριν από κάθε κλήση
 μοντέλου, με διαφορετικά όρια για ανώνυμους και επαληθευμένους χρήστες. Ελλιπής
-ρύθμιση ή βλάβη Redis επιστρέφει **503**, χωρίς fallback στη μνήμη ή κλήση LLM.
+ρύθμιση, εξάντληση δωρεάν πόρων ή βλάβη βάσης επιστρέφει **503**, χωρίς fallback
+στη μνήμη ή κλήση LLM.
 Περιλαμβάνονται token buckets, ημερήσια quotas και leases ταυτόχρονων αιτημάτων,
 ανά ταυτότητα, δίκτυο και συνολικά. Διατήρησε το edge/WAF για γενική HTTP κατάχρηση.
 Δες [ρυθμίσεις και ακριβή όρια](docs/chatbot-quotas.md).
+
+Η βάση παραμένει σε Neon **Free**, χωρίς ενεργοποίηση πληρωμένου πλάνου.
+Τα SQL scripts δημιουργούν ξεχωριστό λογαριασμό με δικαίωμα εκτέλεσης μόνο των
+`chat_quota.reserve` και `chat_quota.release`, χωρίς πρόσβαση στους πίνακες ή
+διαχειριστικά δικαιώματα. Το namespace/environment συνδέεται με τον λογαριασμό
+μέσα στη βάση. Το owner credential χρησιμοποιείται για setup/διαχείριση και δεν
+περνά στις μεταβλητές ή στο runtime του site. Κάθε environment χρειάζεται δικό
+του runtime credential. Η διαχείριση της βάσης μέσω Marketplace παραμένει
+ξεχωριστή από τα δικαιώματα της εφαρμογής.
 
 Το μοντέλο έχει ρητά `tools: []` και `tool_choice: "none"`. Δεν μπορεί να στείλει
 μηνύματα, να κλείσει ραντεβού, να αλλάξει/διαγράψει στοιχεία ή να καλέσει APIs.
@@ -164,7 +172,7 @@ snapshot. Το LLM service δέχεται μόνο context που εξουσιο
 δεν αποτελούν μηχανισμό εξουσιοδότησης.
 
 Η ανάκτηση context δεν συνδέεται με βάση ιδιωτικών υποθέσεων, φακέλους πελατών
-ή queries στο Sanity. Το Redis χρησιμοποιείται μόνο για quotas.
+ή queries στο Sanity. Το Neon Postgres χρησιμοποιείται μόνο για μετρητές quotas.
 Δεν υπάρχει authenticated client/staff portal ή database RBAC για τέτοια δεδομένα.
 Πριν προστεθεί οποιαδήποτε τέτοια διασύνδεση, απαιτείται ξεχωριστή υλοποίηση με
 επαληθευμένη server-side ταυτότητα, tenant/case permissions και περιορισμούς στο
@@ -192,10 +200,11 @@ text renderer, incomplete/refused output, origin, streamed body size, rate limit
 πραγματικών απαντήσεων μοντέλου. Τα transcripts μένουν μόνο στη μνήμη της
 καρτέλας μέχρι ανανέωση, αλλαγή γλώσσας ή νέα συνομιλία.
 
-Το `npm run test:chat:redis` είναι ξεχωριστός έλεγχος εναντίον πραγματικού,
-δοκιμαστικού Redis και απαιτεί ρητό `CHAT_REDIS_TEST_DATABASE=true`. Δεν καλεί LLM.
-Χρησιμοποίησε δοκιμαστικά credentials· οι συνήθεις unit έλεγχοι δεν χρειάζονται
-εξωτερική υπηρεσία. Ο έλεγχος δημιουργεί μόνο δικά του τυχαία namespaces.
+Το `npm run test:chat:neon` είναι ξεχωριστός έλεγχος εναντίον πραγματικού,
+δοκιμαστικού Neon Postgres. Δεν καλεί LLM. Χρησιμοποιεί απομονωμένους test ρόλους
+και namespaces, με διαφορετικό administrative credential για fixtures και
+περιορισμένο credential για τα πραγματικά αιτήματα. Οι συνήθεις unit έλεγχοι
+δεν χρειάζονται εξωτερική υπηρεσία. Δες το explicit opt-in στο αντίστοιχο script.
 
 ### Φόρμα επικοινωνίας
 

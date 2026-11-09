@@ -7,7 +7,9 @@ import { QuotaError, reserveChatQuota } from "@/lib/chat/quota.mjs";
 import { createChatHandler } from "@/lib/chat/handler.mjs";
 
 export const runtime = "nodejs";
-export const maxDuration = 40;
+// Includes quota admission, optional JWKS lookup, the 30s provider deadline and
+// bounded lease cleanup, with headroom for a sleeping Neon Free compute.
+export const maxDuration = 50;
 
 export const POST = createChatHandler({
   env: process.env,
