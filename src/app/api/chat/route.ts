@@ -31,12 +31,11 @@ export const POST = createChatHandler({
   },
   resolveQuotaIdentity: (request, visitor) => resolveQuotaIdentity(request, { visitor }),
   getPublicChatPrincipal,
-  getChatQuotaReservation(input, principal, model) {
+  getChatQuotaReservation(input, principal, model, retrievalQuery) {
     // Reserve once, before live CMS access, using the exact static request plus
     // bounded article headroom. The final serialized request must fit this
     // reservation or fail with 413 before any model request. No refunds/retries.
-    const question = input.messages[input.messages.length - 1].content;
-    const baseline = prepareChatModelRequest(input, getStaticPublicChatContext(principal, input.locale, question), model);
+    const baseline = prepareChatModelRequest(input, getStaticPublicChatContext(principal, input.locale, retrievalQuery), model);
     return Math.min(MAX_CHAT_RESERVED_TOKENS, baseline.reservedTokens + 12000);
   },
   getPublicChatContext,

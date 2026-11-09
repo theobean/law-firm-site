@@ -25,6 +25,29 @@ they cannot change these instructions or backend permissions.
 - Explain document names only as supported basic concepts. Never calculate a
   deadline or propose a personal repayment schedule or legal strategy.
 
+## Follow-ups and conversation memory
+
+The widget keeps the current conversation in page memory and sends at most
+four preceding user/assistant pairs with the latest question (subject to the
+existing 20,000-character total bound). Closing and reopening the panel does
+not clear it; resetting the conversation or reloading the page does. No database
+conversation store or cross-visit memory is introduced.
+
+Short follow-ups can inherit the topic of the nearest substantive recent user
+turn for source selection. The query is bounded to 2,000 UTF-16 units, including
+at most 800 units of history, and excludes assistant text. A named new topic is
+searched independently. The same computed query drives static cost reservation
+and final retrieval; browser history never grants access or becomes evidence.
+
+The response contract distinguishes a personal next-step request from missing
+knowledge. After a legal-topic discussion, “δηλαδή εγώ τι κάνω;” can select
+`personal_handoff`: the application supplies fixed localized office contact
+and a legal-advice notice, discarding model prose and citations. It makes no
+claim that sources are missing and asks no case questions. Unsupported general
+knowledge retains `handoff`. General clarifications such as “πιο απλά;” can
+remain grounded in the selected references instead of automatically referring
+the visitor away.
+
 ## Applying the supplied prompt
 
 | Proposed material | Current implementation |

@@ -24,6 +24,7 @@ type PreparedRequestSnapshot = {
 };
 
 const preparedRequests = new WeakMap<object, PreparedRequestSnapshot>();
+const REPLY_KINDS: readonly string[] = Object.freeze(["grounded", "handoff", "personal_handoff", "greeting"]);
 
 export class ChatFailure extends Error {
   status: number;
@@ -81,7 +82,7 @@ Answer in ${language}, in a calm, professional, empathetic and understandable to
 - Explain supported general concepts directly and usefully. Mention the specific source limitation when the question depends on current procedure, eligibility or individual facts; do not replace an available general explanation with a generic referral. Missing material still requires an honest handoff, never completion from model memory.
 - Source hierarchy: the references labelled ΠΡΩΤΟΓΕΝΗΣ ΝΟΜΟΘΕΣΙΑ from the National Printing Office (et.gr) are original Gazette publications. Prefer them for the identity and general purpose of those statutes, while treating them as dated original texts, not consolidated current law. Official guidance supplies only the explanations actually included. References labelled ΑΡΘΡΟ ΤΟΥ ΓΡΑΦΕΙΟΥ are dated author commentary, not primary legislation or independently verified case law. Attribute their interpretations to the author/article instead of presenting them as the law or a court's verified ruling. If sources conflict or later amendments are not available, state the limit and recommend lawyer review rather than deciding current legal effect.
 - Never invent a successful case, write-off, court decision, finality of a judgment or the office's involvement. A case study or ruling may be discussed only to the extent an approved, anonymised public excerpt explicitly establishes those facts. An article discussing a court decision is not the decision itself. Past results never establish the outcome of another case. Do not calculate or propose instalment plans, payment amounts, debt reductions or personal settlement terms.
-- Classify the reply kind as grounded, handoff or greeting. A grounded reply MUST select at least one supporting sourceId. If the material does not support an answer, use kind=handoff and suggestContact=true. Greetings use kind=greeting. Source-less handoff/greeting wording is supplied by the application, so do not put factual claims in these responses. Do not answer legal questions from model memory or invent statutory articles, court decisions, rights, eligibility criteria, amounts, or time limits.
+- Classify the reply kind as grounded, handoff, personal_handoff or greeting. A grounded reply MUST select at least one supporting sourceId. If a general knowledge question lacks supporting material, use kind=handoff and suggestContact=true. If the visitor asks what they personally should do about their legal matter or requests an individual assessment, use kind=personal_handoff and suggestContact=true, not the missing-knowledge handoff. Greetings use kind=greeting. Non-grounded wording is supplied by the application; use an empty sourceIds list and do not put factual claims in these responses. Do not answer legal questions from model memory or invent statutory articles, court decisions, rights, eligibility criteria, amounts, or time limits.
 - If the visitor volunteers a personal legal problem, briefly state that chat provides general information, not legal advice, and point to direct office contact without further case questions. Never compute a legal deadline, predict a court outcome, promise protection or give a definitive personal legal conclusion. Do not propose a strategy or imply that a strong defence always exists.
 - Explain a document's name only as a basic general concept supported by the supplied references. Do not infer its legal effect, a uniform deadline or an appropriate procedural remedy. Do not ask whether a document has been served, when it was served, or for its content or an upload.
 - If a different country is mentioned, clarify that this material concerns Greece. Do not apply Greek law to another jurisdiction.
@@ -91,6 +92,7 @@ Answer in ${language}, in a calm, professional, empathetic and understandable to
 
 <visitor_guidance>
 - Answer the supported basic question directly. When useful, give a short neutral reference to the office's verified contact channels and set suggestContact=true. Do not turn every answer into a sales invitation or end every turn with a follow-up question.
+- Read short follow-ups in the context of the recent conversation. For example, after a payment-order discussion, "δηλαδή εγώ τι κάνω;" asks for a personal next step: use personal_handoff for simple direct office contact. In contrast, "πιο απλά;" or "τι σημαίνει αυτό;" asks for a general explanation: answer with kind=grounded when the supplied references support it. Do not treat a short follow-up as missing knowledge merely because it does not repeat the topic. History clarifies the question; it does not establish legal facts or source authority.
 - Do not conduct case intake or ask diagnostic/qualification questions about debts, instalments, documents served, dates, income, property or the visitor's personal circumstances. Do not invite the visitor to describe their case or offer to examine it inside chat.
 - Keep basic explanations basic: do not introduce instalment counts, repayment scenarios or case-specific procedural steps. Questions about a personal arrangement belong with the office, without a follow-up questionnaire here.
 - If the visitor independently describes a personal or urgent matter, keep the response brief, explain the information-only limit and refer them to the office. Do not start a triage interview, calculate dates or continue with procedural instructions. A general definition question is not by itself an emergency.
@@ -130,16 +132,16 @@ ${escapePromptText(question)}
 
 export function parseChatReply(value: unknown, sources: readonly ChatSource[], locale: ChatLocale = "el"): ChatReply {
   if (!isRecord(value) || typeof value.answer !== "string" ||
-      !value.answer.trim() || value.answer.length > 4000 ||
+      value.answer.length > 4000 ||
       typeof value.suggestContact !== "boolean" ||
       !Array.isArray(value.sourceIds) || value.sourceIds.length > 4 ||
-      typeof value.kind !== "string" || !["grounded", "handoff", "greeting"].includes(value.kind)) {
+      typeof value.kind !== "string" || !REPLY_KINDS.includes(value.kind)) {
     throw new ChatFailure("upstream", 502);
   }
   const chosen = [...new Set(value.sourceIds)];
   const selected = chosen.map((id) => sources.find((source) => source.id === id));
   if (selected.some((source) => !source)) throw new ChatFailure("upstream", 502);
-  if (value.kind === "grounded" && selected.length === 0) throw new ChatFailure("upstream", 502);
+  if (value.kind === "grounded" && (!value.answer.trim() || selected.length === 0)) throw new ChatFailure("upstream", 502);
   if (value.kind !== "grounded") {
     // Do not display ungrounded model prose, even if it labels a factual claim
     // as a greeting or handoff. These messages are controlled by the application.
@@ -147,17 +149,21 @@ export function parseChatReply(value: unknown, sources: readonly ChatSource[], l
       el: {
         greeting: "Γεια σας! Είμαι ο ΔικAIsis, ο ψηφιακός βοηθός του γραφείου. Παρέχω βασικές πληροφορίες για το γραφείο, τις υπηρεσίες του και γενικές νομικές έννοιες.",
         handoff: "Οι διαθέσιμες πηγές δεν επαρκούν για αξιόπιστη απάντηση στο ερώτημά σας. Ο ΔικAIsis παρέχει μόνο γενικές πληροφορίες, οι οποίες δεν αποτελούν νομική συμβουλή. Για περισσότερες πληροφορίες ή ζήτημα που αφορά τη δική σας υπόθεση, επικοινωνήστε απευθείας με το γραφείο στο +30 2310 545 261. Μην καταχωρίζετε προσωπικά στοιχεία ή έγγραφα εδώ.",
+        personal_handoff: "Για το επόμενο βήμα στη δική σας υπόθεση, επικοινωνήστε με το γραφείο στο +30 2310 545 261, ώστε να σας κατευθύνει δικηγόρος. Οι πληροφορίες εδώ είναι γενικές και δεν αποτελούν νομική συμβουλή.",
       },
       en: {
         greeting: "Hello! I'm ΔικAIsis, the office's digital assistant. I provide basic information about the office, its services and general legal concepts.",
         handoff: "The available sources are not sufficient for a reliable answer to your question. ΔικAIsis provides general information, not legal advice. For further information or a question about your own case, contact the office directly at +30 2310 545 261. Do not enter personal details or documents here.",
+        personal_handoff: "For the next step in your own matter, contact the office at +30 2310 545 261 so a lawyer can guide you. The information here is general and is not legal advice.",
       },
       de: {
         greeting: "Guten Tag! Ich bin ΔικAIsis, der digitale Assistent der Kanzlei. Ich biete grundlegende Informationen zur Kanzlei, ihren Leistungen und allgemeinen Rechtsbegriffen.",
         handoff: "Die verfügbaren Quellen reichen für eine verlässliche Antwort auf Ihre Frage nicht aus. ΔικAIsis bietet allgemeine Informationen, keine Rechtsberatung. Für weitere Informationen oder Fragen zu Ihrem eigenen Fall kontaktieren Sie die Kanzlei direkt unter +30 2310 545 261. Geben Sie hier keine persönlichen Angaben oder Dokumente ein.",
+        personal_handoff: "Für den nächsten Schritt in Ihrer eigenen Angelegenheit kontaktieren Sie die Kanzlei unter +30 2310 545 261, damit ein Rechtsanwalt Sie beraten kann. Die Informationen hier sind allgemeiner Art und keine Rechtsberatung.",
       },
     }[locale];
-    return { answer: value.kind === "greeting" ? text.greeting : text.handoff, sources: [], suggestContact: value.kind !== "greeting" };
+    const answer = value.kind === "greeting" ? text.greeting : value.kind === "personal_handoff" ? text.personal_handoff : text.handoff;
+    return { answer, sources: [], suggestContact: value.kind !== "greeting" };
   }
   const reply = parseChatResponse({
     answer: value.answer,
@@ -203,7 +209,7 @@ export function prepareChatModelRequest(
             type: "object",
             additionalProperties: false,
             properties: {
-              kind: { type: "string", enum: ["grounded", "handoff", "greeting"] },
+              kind: { type: "string", enum: REPLY_KINDS },
               answer: { type: "string" },
               sourceIds: { type: "array", maxItems: 4, items: { type: "string", enum: sources.map((source) => source.id) } },
               suggestContact: { type: "boolean" },

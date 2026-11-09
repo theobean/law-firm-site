@@ -87,7 +87,7 @@ test("the actual provider request separates trusted instructions from one user d
     schema: {
       type: "object", additionalProperties: false,
       properties: {
-        kind: { type: "string", enum: ["grounded", "handoff", "greeting"] },
+        kind: { type: "string", enum: ["grounded", "handoff", "personal_handoff", "greeting"] },
         answer: { type: "string" },
         sourceIds: { type: "array", maxItems: 4, items: { type: "string", enum: ["office-contact", "office-identity"] } },
         suggestContact: { type: "boolean" },

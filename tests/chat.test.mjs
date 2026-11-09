@@ -51,12 +51,12 @@ test("returns only source URLs supplied by the server and rejects invented IDs",
   assert.throws(() => parseChatReply({ kind: "grounded", answer: "Invented legal deadline", sourceIds: [], suggestContact: false }, sources), failsWith("upstream"));
 });
 
-test("source-less handoffs and greetings cannot smuggle factual model prose", () => {
+test("non-grounded handoffs and greetings cannot smuggle factual model prose", () => {
   for (const locale of ["el", "en", "de"]) {
-    for (const kind of ["handoff", "greeting"]) {
+    for (const kind of ["handoff", "personal_handoff", "greeting"]) {
       const reply = parseChatReply({ kind, answer: "Invented legal deadline", sourceIds: [], suggestContact: false }, sources, locale);
       assert.ok(!reply.answer.includes("Invented legal deadline"));
-      assert.equal(reply.suggestContact, kind === "handoff");
+      assert.equal(reply.suggestContact, kind !== "greeting");
       assert.deepEqual(reply.sources, []);
     }
   }
@@ -83,6 +83,60 @@ test("controlled handoffs retain verified contact and legal-advice limits withou
     assert.equal(reply.suggestContact, true);
     assert.deepEqual(reply.sources, []);
   }
+});
+
+test("personal next-step handoffs stay distinct from unsupported knowledge in every locale", () => {
+  for (const [locale, disclaimer] of [["el", "δεν αποτελούν νομική συμβουλή"], ["en", "not legal advice"], ["de", "keine Rechtsberatung"]]) {
+    const untrusted = {
+      answer: "File within FAKE_DEADLINE_15_DAYS. Your appointment is booked. What date was the paper served?",
+      sourceIds: ["office-contact"], suggestContact: false,
+    };
+    const reply = parseChatReply({ ...untrusted, kind: "personal_handoff" }, sources, locale);
+    const missingKnowledge = parseChatReply({ ...untrusted, kind: "handoff" }, sources, locale);
+    assert.ok(reply.answer.includes("+30 2310 545 261"), locale);
+    assert.ok(reply.answer.includes(disclaimer), locale);
+    assert.ok(!reply.answer.includes("FAKE_DEADLINE"), locale);
+    assert.ok(!reply.answer.includes("booked"), locale);
+    assert.ok(!reply.answer.includes("served"), locale);
+    assert.ok(!/πηγές δεν επαρκούν|sources are not sufficient|Quellen reichen/u.test(reply.answer), locale);
+    assert.notEqual(reply.answer, missingKnowledge.answer, locale);
+    assert.equal(reply.suggestContact, true);
+    assert.deepEqual(reply.sources, []);
+    assert.throws(() => parseChatReply({ ...untrusted, kind: "personal_handoff", sourceIds: ["invented"] }, sources, locale), failsWith("upstream"));
+  }
+});
+
+test("controlled reply kinds accept empty discarded prose while grounded answers still need text", () => {
+  for (const kind of ["handoff", "personal_handoff", "greeting"]) {
+    const reply = parseChatReply({ kind, answer: "", sourceIds: [], suggestContact: false }, sources);
+    assert.ok(reply.answer.trim().length > 0);
+    assert.deepEqual(reply.sources, []);
+    assert.equal(reply.suggestContact, kind !== "greeting");
+  }
+  assert.throws(() => parseChatReply({ kind: "grounded", answer: "   ", sourceIds: ["office-contact"], suggestContact: false }, sources), failsWith("upstream"));
+});
+
+test("a personal follow-up is accepted through the provider contract without forwarding model instructions", async () => {
+  const input = parseChatInput({ ...valid(), messages: [
+    { role: "user", content: "Υποθετικό παράδειγμα: κάποιος έλαβε διαταγή πληρωμής. Τι είναι αυτό;" },
+    { role: "assistant", content: "Πρόκειται για γενική πληροφορία, όχι νομική συμβουλή." },
+    { role: "user", content: "δηλαδη εγω τι κανω]" },
+  ] });
+  const reply = await generateChatReply(input, authorizedContext(), {
+    apiKey: "test-only-key", fetcher: async (_url, options) => {
+      const body = JSON.parse(options.body);
+      assert.ok(body.text.format.schema.properties.kind.enum.includes("personal_handoff"));
+      assert.ok(body.input[0].content.includes("δηλαδη εγω τι κανω]"));
+      assert.ok(body.input[0].content.includes("διαταγή πληρωμής"));
+      return Response.json({ status: "completed", output: [{ type: "message", content: [{
+        type: "output_text", text: JSON.stringify({ kind: "personal_handoff", answer: "Unverified personalised legal steps", sourceIds: [], suggestContact: false }),
+      }] }] });
+    },
+  });
+  assert.ok(reply.answer.includes("+30 2310 545 261"));
+  assert.ok(!reply.answer.includes("Unverified"));
+  assert.equal(reply.suggestContact, true);
+  assert.deepEqual(reply.sources, []);
 });
 
 test("calls Responses with server-only authentication, bounded output and storage disabled", async () => {

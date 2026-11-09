@@ -127,7 +127,14 @@ preferred. Selection does not treat a matching keyword as evidence of an answer.
 Unrelated or empty queries supply no legal excerpts, and missing material still
 requires a handoff. The six office entries remain available.
 
-The route computes its exact static reservation using the same current question
+`retrieval-query.mjs` computes one bounded query from the current question and,
+for a short generic follow-up, the nearest substantive recent user turn. It
+never uses assistant text as retrieval evidence. It retains the complete latest
+question and at most 800 UTF-16 units of history within a 2,000-unit bound;
+new named topics stand alone. Conversation history is untrusted search data,
+not a source of legal facts or authorization.
+
+The route computes its exact static reservation using that same query
 and selection as the final context. Only after shared quota/monetary admission
 does the existing bounded office-article reader run. The final serialized request
 must still fit the reservation. Expanding the source catalog does not send the

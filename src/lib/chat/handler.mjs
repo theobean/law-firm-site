@@ -1,3 +1,5 @@
+import { buildChatRetrievalQuery } from "./retrieval-query.mjs";
+
 /** @typedef {import("./service").ChatInput} ChatInput */
 /** @typedef {import("./service").ChatReply} ChatReply */
 /** @typedef {import("./service").PreparedChatModelRequest} PreparedChatModelRequest */
@@ -12,7 +14,7 @@
  * getChatVisitor: (request: Request, rawBody: unknown) => Promise<{visitor: unknown, cookieHeader?: string}>,
  * resolveQuotaIdentity: (request: Request, visitor?: unknown) => Promise<QuotaIdentity>,
  * getPublicChatPrincipal: () => unknown,
- * getChatQuotaReservation: (input: ChatInput, principal: unknown, model?: string) => number,
+ * getChatQuotaReservation: (input: ChatInput, principal: unknown, model: string | undefined, retrievalQuery: string) => number,
  * getChatBudgetReservation: (reservedTokens: number, model?: string) => Promise<number>,
  * getPublicChatContext: (principal: unknown, locale: ChatInput["locale"], question: string) => AuthorizedChatContext | Promise<AuthorizedChatContext>,
  * prepareChatModelRequest: (input: ChatInput, context: AuthorizedChatContext, model?: string) => PreparedChatModelRequest,
@@ -58,7 +60,10 @@ export function createChatHandler(dependencies) {
       // Quota identity cannot change the public context permission.
       const principal = dependencies.getPublicChatPrincipal();
       const model = dependencies.env.OPENAI_CHAT_MODEL?.trim();
-      const reservedTokens = dependencies.getChatQuotaReservation(input, principal, model);
+      // Resolve a follow-up's bounded user-only search context once, so static
+      // pricing and post-admission article retrieval cannot select different data.
+      const retrievalQuery = buildChatRetrievalQuery(input.messages);
+      const reservedTokens = dependencies.getChatQuotaReservation(input, principal, model, retrievalQuery);
       if (!Number.isInteger(reservedTokens) || reservedTokens < 1 || reservedTokens > 64000) {
         throw new Error("Invalid chat quota reservation");
       }
@@ -69,7 +74,7 @@ export function createChatHandler(dependencies) {
       // Shared admission bounds both context retrieval and the provider request.
       const lease = await dependencies.reserveChatQuota(identity, reservedTokens, reservedCostEurMicros);
       try {
-        const context = await dependencies.getPublicChatContext(principal, input.locale, input.messages[input.messages.length - 1].content);
+        const context = await dependencies.getPublicChatContext(principal, input.locale, retrievalQuery);
         const prepared = dependencies.prepareChatModelRequest(input, context, model);
         if (prepared.reservedTokens > reservedTokens) return failure("request_too_large", 413, undefined, cookieHeader);
         const reply = await dependencies.generatePreparedChatReply(prepared, { apiKey, signal: request.signal });
