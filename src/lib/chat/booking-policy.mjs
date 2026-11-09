@@ -64,9 +64,9 @@ export function classifyAppointmentRequest(messages) {
 }
 
 const copy = Object.freeze({
-  el: "Δεν μπορώ να κλείσω, να αλλάξω ή να ακυρώσω ραντεβού, ούτε να ελέγξω διαθεσιμότητα. Για συνεννόηση, καλέστε απευθείας το γραφείο στο +30 2310 545 261.",
-  en: "I cannot book, change or cancel appointments, or check availability. Please call the office directly at +30 2310 545 261 to make arrangements.",
-  de: "Ich kann keine Termine buchen, ändern oder absagen und keine Verfügbarkeit prüfen. Zur Abstimmung rufen Sie die Kanzlei direkt unter +30 2310 545 261 an.",
+  el: "Δεν μπορώ να κλείσω, να αλλάξω ή να ακυρώσω ραντεβού, ούτε να ελέγξω διαθεσιμότητα. Για συνεννόηση, καλέστε στο +30 2310 545 261 ή χρησιμοποιήστε τη σελίδα επικοινωνίας του γραφείου.",
+  en: "I cannot book, change or cancel appointments, or check availability. Please call +30 2310 545 261 or use the office's contact page to make arrangements.",
+  de: "Ich kann keine Termine buchen, ändern oder absagen und keine Verfügbarkeit prüfen. Zur Abstimmung nutzen Sie die Kontaktseite der Kanzlei oder rufen Sie +30 2310 545 261 an.",
 });
 
 /** Application-owned wording; no date, name or other question text is echoed.

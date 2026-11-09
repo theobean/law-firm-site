@@ -9,6 +9,12 @@ const ambiguousKeywords = new Set([
   "συμβολαιογραφ", "notar", "notary", "δικηγορ", "lawyer", "anwalt",
   "εταιρει", "company", "gesellschaft", "συσταση", "ιδρυση", "εγγραφ", "διορθωσ", "παραπον", "αρμοδιοτ",
 ]);
+const exactTerms = new Set(["δεδ", "δεκ", "ααδε", "απδπχ", "γκπδ", "gdpr", "γεμη", "υμσ", "ικε", "επε", "κμπ", "κευδ", "γευδ"]);
+const phraseGlue = new Set((
+  "ο η το οι τα τον την του τησ των ενα εναν μια στο στον στη στην σε να με για απο μου μασ τουσ " +
+  "a an the of to for my our your " +
+  "der die das den dem des ein eine einen einer einem fur von zu mein meine meinen"
+).split(" "));
 
 function words(text) {
   return text.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase()
@@ -20,7 +26,30 @@ function matches(word, stem) {
   // These complete English terms are not stems for "fundamental"/"willing".
   if (stem === "fund" || stem === "will") return word === stem || word === `${stem}s`;
   if (["φαντ", "φουντ", "intrum", "cepal", "dovalue", "qquant"].includes(stem)) return word === stem;
+  if (exactTerms.has(stem) || phraseGlue.has(stem)) return word === stem;
+  // μίσθωση/μισθωτής concern tenancy, not the salary/employee sense of μισθός.
+  if (stem === "μισθ" && /^μισθω(?:σ|μ|τ[ηρ])/u.test(word)) return false;
+  if (stem === "μισθω" && (word === "μισθων" || /^μισθωτ[οω]/u.test(word))) return false;
   return /^\d+$/u.test(stem) ? word === stem : word.startsWith(stem);
+}
+
+function phraseMatch(queryWords, terms, offset) {
+  if (!matches(queryWords[offset], terms[0])) return null;
+  const positions = [offset];
+  let cursor = offset + 1;
+  let gaps = 0;
+  for (const term of terms.slice(1)) {
+    let localGaps = 0;
+    while (cursor < queryWords.length && !matches(queryWords[cursor], term) &&
+        phraseGlue.has(queryWords[cursor]) && localGaps < 2 && gaps < 4) {
+      cursor++;
+      localGaps++;
+      gaps++;
+    }
+    if (cursor >= queryWords.length || !matches(queryWords[cursor], term)) return null;
+    positions.push(cursor++);
+  }
+  return positions;
 }
 
 function matchMetadata(source, queryWords) {
@@ -32,9 +61,10 @@ function matchMetadata(source, queryWords) {
     if (!terms.length) continue;
     let found = false;
     for (let offset = 0; offset <= queryWords.length - terms.length; offset++) {
-      if (!terms.every((term, index) => matches(queryWords[offset + index], term))) continue;
+      const positions = phraseMatch(queryWords, terms, offset);
+      if (!positions) continue;
       found = true;
-      terms.forEach((_, index) => covered.add(offset + index));
+      positions.forEach((index) => covered.add(index));
     }
     if (found) {
       matchedKeywords.push(terms.join(" "));
@@ -77,6 +107,24 @@ export function getReviewedLegalTopicMatches(principal, question, { sources = RE
     .filter(({ score, explicit }) => score > 0 && explicit)
     .sort((a, b) => b.score - a.score || a.source.id.localeCompare(b.source.id, "en"))
     .map(({ source, score }) => Object.freeze({ id: source.id, topics: Object.freeze([...source.topics]), score })));
+}
+
+/** Partial compound-keyword metadata can resolve a dependent user question only
+ * against an existing topic. It never selects factual context on its own.
+ * @param {unknown} principal
+ * @param {unknown} question
+ * @param {{sources?: typeof REVIEWED_LEGAL_SOURCES}} [options]
+ */
+export function getReviewedLegalTopicHints(principal, question, { sources = REVIEWED_LEGAL_SOURCES } = {}) {
+  const eligible = approvedMetadata(principal, sources);
+  const safeQuestion = prepareChatText(question, 2000);
+  if (!safeQuestion) return Object.freeze([]);
+  const queryWords = words(safeQuestion);
+  return Object.freeze(eligible.filter((source) => source.keywords.some((keyword) => {
+    const terms = words(keyword);
+    return terms.length > 1 && terms.some((term) => term.length >= 4 && !/^\d+$/u.test(term) &&
+      !phraseGlue.has(term) && !ambiguousKeywords.has(term) && queryWords.some((word) => matches(word, term)));
+  })).map((source) => Object.freeze({ id: source.id, topics: Object.freeze([...source.topics]) })));
 }
 
 /** Count the same JSON/XML-escaped reference fields sent to the provider, plus

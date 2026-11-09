@@ -3,8 +3,9 @@
 The visitor-facing name is **ΔικAIsis** in Greek, English and German. Its role
 is basic information only: office/services, simple supported legal concepts
 and existing office contact channels. It does not assess cases, qualify leads
-or interview visitors. The neutral contact link opens the contact page;
-it does not book an appointment, accept a case or submit a form.
+or interview visitors. Chat contact links are labelled as contact pages
+(Greek: **Σελίδα επικοινωνίας**) and open the existing contact page;
+the links do not book an appointment, accept a case or submit a form.
 
 The static instruction template is in `src/lib/chat/service.ts`. Reference
 material and browser-supplied history remain lower-priority, escaped data;
@@ -44,8 +45,20 @@ they cannot change these instructions or backend permissions.
   transfer, validity, procedural stage, danger or safety from an unseen letter,
   even with “usually” or “possibly”. Never propose a personal repayment schedule
   or legal strategy.
+- Ground each factual sentence and its qualifications, rather than citing a
+  related topic. Distinguish a definition from a notification duty and a general
+  possibility from a finding. Do not begin with an unqualified yes/no about a
+  visitor's particular document, entry, entitlement or outcome. Do not invent
+  exclusive contact rules or current procedural guarantees.
 
-## Controlled deadline and appointment replies
+Grounded replies require internal exact-substring evidence for each selected
+source ID, in addition to the existing source/schema checks. Evidence is not
+displayed. Matching a source quote establishes provenance, not semantic
+entailment, complete claim coverage or current legal accuracy; the wording
+still needs representative live review. See [content boundaries](chatbot-content.md)
+for the evidence limits and corrected source definitions.
+
+## Controlled scope and capability replies
 
 `deadline-policy.mjs` detects common procedural-time-limit requests in the
 validated current question and bounded recent user context. `booking-policy.mjs`
@@ -54,8 +67,17 @@ to request one, from the latest user question only. Appointment fees, common
 completed/negated statements and time-only follow-ups are outside that classifier.
 Neither classifier uses assistant prose as authority or collects dates/details.
 
+`response-policy.mjs` adds bounded current-question classification for office
+hours, this chat's uploads/confidentiality, requests to send or submit something,
+client-file access, unrelated topics and applying Greek materials abroad. These
+are scoped lexical patterns, not a general intent or legal classifier. Recognized
+patterns receive application-owned wording; ambiguous cases remain subject to
+authorized context and the model's validated reply kind. An intent does not
+grant a tool, file reader, calendar or other action.
+
 `prepareChatModelRequest` records a recognized controlled kind in its opaque,
-single-use snapshot; deadline classification takes precedence. When the final
+single-use snapshot; deadlines take precedence, followed by appointments and
+the other recognized information kinds. When the final
 snapshot is consumed, a recognized request returns fixed localized wording
 without calling OpenAI. Normal identity/security checks, shared quota admission,
 authorized context and the exact request-size check still apply. A public article
@@ -75,9 +97,25 @@ the complete grounded prose for recognized deadline patterns. A match replaces
 the entire answer with the controlled deadline reply, rather than clipping a
 sentence or displaying a partially unsafe answer. Unknown source IDs remain an
 error and cannot be hidden by a controlled reply. Non-grounded kinds discard
-all model prose; model-selected `legal_deadline` and `appointment` also map to
-fixed wording. These bounded lexical checks cover tested patterns, not every
+all model prose; model-selected controlled kinds also map to fixed wording.
+These bounded lexical checks cover tested patterns, not every
 possible paraphrase, and do not prove arbitrary output safe or factually correct.
+
+Office-hours wording is read from the authorized `office-contact` fact and
+includes Greek local time. Missing/changed framing fails closed rather than
+inventing hours; it does not establish bank, court or other third-party hours.
+Privacy wording says there are no chat uploads and no guarantee of absolute
+confidentiality with AI providers, without inviting documents into chat.
+Action/private-file wording states the actual capability limit and points to
+manual contact without claiming phone/email are the only office channels.
+Unrelated-topic wording explains scope instead of sending a recipe request to a
+lawyer; foreign-jurisdiction wording states that the materials concern Greece.
+
+For a recognized concrete police call and authorized criminal-rights context,
+the application preserves a fixed immediate lawyer-contact qualification on
+the grounded branch after response validation. This does not decide the
+visitor's status, propose testimony, calculate a deadline or start an interview.
+General/hypothetical rights questions are not automatically personal emergencies.
 
 ## Follow-ups and conversation memory
 
@@ -87,10 +125,12 @@ existing 20,000-character total bound). Closing and reopening the panel does
 not clear it; resetting the conversation or reloading the page does. No database
 conversation store or cross-visit memory is introduced.
 
-Topic selection examines the bounded validated user history and approved public
-catalog metadata. A role clarification such as a notary/two-lawyer question can
-retain the established divorce topic; it does not erase that topic for the next
-follow-up. An explicit new topic switches the context, and unrelated substantive
+Topic selection examines bounded validated user history and approved public
+catalog metadata. Roles, process actors/effects, partial access and language
+needs can retain an established topic without repeating its name. Partial
+compound-keyword hints can inherit only from compatible approved topic metadata
+in earlier user text; they do not create knowledge on their own. Explicit new
+topics and discourse resets switch or end context, and unrelated substantive
 questions prevent older topics from being recovered. Assistant text never supplies
 the retrieval anchor. The query remains bounded to 2,000 UTF-16 units, including
 at most 800 units of history. The same computed query drives static cost reservation
@@ -99,7 +139,8 @@ and final retrieval; browser history never grants access or becomes evidence.
 The response contract distinguishes a personal next-step request from missing
 knowledge. After a legal-topic discussion, “δηλαδή εγώ τι κάνω;” can select
 `personal_handoff`: the application supplies fixed localized office contact
-and a legal-advice notice, discarding model prose and citations. It makes no
+and an individual-assessment limitation, discarding model prose and citations.
+The legal-advice notice remains pinned in the interface. The handoff makes no
 claim that sources are missing and asks no case questions. Unsupported general
 knowledge retains a concise `handoff`. Unknown office prices use the controlled
 `office_fees` reply: verified manual contact without invented quotes or a
@@ -126,7 +167,7 @@ including after a page reload.
 | Proposed material | Current implementation |
 | --- | --- |
 | Office FAQs | Six curated office fact/FAQ entries. Priority applies to office information; privacy and legal-source boundaries remain. Raw response-time and absolute-confidentiality promises are not imported into AI chat. |
-| Legislation and official guidance | Thirty-nine reviewed legal excerpts, including five original gazettes. Law 4354/2015 is explicitly historical context, not a complete current law of funds or proof of standing. |
+| Legislation and official guidance | Forty reviewed legal excerpts: five original gazettes and 35 official guidance cards. Corrected employment/harassment definitions and a bounded renunciation concept do not expand personal-case advice. Law 4354/2015 remains historical context. |
 | Personal debt/instalment enquiries | No instalment questionnaire, calculator, personal plan or offer. The assistant stays with basic concepts and office contact. |
 | Office articles | The thirteen registered published article bindings remain; at most two relevant bounded excerpts are retrieved. Commentary is attributed to its author. |
 | Court decisions and success stories | No blanket decision/CMS/file access is enabled. A future record needs a separately reviewed, anonymised public summary and explicit source-ID authorization before inclusion. Article commentary does not establish primary case law, finality or the office's involvement. |
@@ -146,10 +187,15 @@ reservation, monetary admission, schema validation and escaped text rendering
 remain independently enforced.
 
 Mocked regressions cover parser/source/transport checks, controlled pre-provider
-requests and whole-answer deadline replacement. The 9 November 2026 Preview
-rerun completed the same ten synthetic divorce/fund prompts: short follow-ups
-kept their topic, the deadline request returned no time limit, and the appointment
-request clearly required manual contact without a booking. One extra rate-denied
-attempt was retried only after its cooldown. Some repetition remains, and these
-observations do not establish universal lexical coverage, legal accuracy or model
-compliance. Prompt word targets are not guarantees.
+requests, evidence provenance, contextual retrieval and whole-answer deadline
+replacement. They do not prove model compliance or semantic support for every
+future answer. Prompt word targets are not guarantees.
+
+The frozen `d587666` baseline completed 30 synthetic Greek visitor questions
+on 9 November 2026. It exposed wrong office-hours routing, lost general-topic
+follow-ups, definition/qualification problems and unsuitable generic handoffs.
+The current changes address those findings; the baseline is not a live pass
+for the revised version. Offline retrieval fixtures likewise measure selection,
+not model-answer quality. A new 30-question live run is pending the normal
+00:00 UTC 10 November monetary-day rollover; no increase or bypass of the
+existing €5 daily budget is authorized by that pending test.

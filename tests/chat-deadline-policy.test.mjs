@@ -107,6 +107,53 @@ test("verified office phones and opening hours remain safe beside general legal 
   ]) assert.equal(containsProceduralDeadline(answer), false, answer);
 });
 
+test("the exact office-hours follow-up stays outside the question classifier", () => {
+  const messages = [
+    { role: "user", content: "Πού βρίσκεται το γραφείο και πώς μπορώ να επικοινωνήσω;" },
+    { role: "assistant", content: "Το γραφείο βρίσκεται στη Λέοντος Σοφού 12, 54625, Θεσσαλονίκη. Μπορείτε να επικοινωνήσετε στο +30 2310 545 261 ή στο iopapaio@gmail.com." },
+    { role: "user", content: "Ποιες ώρες είστε ανοιχτά;" },
+  ];
+  assert.equal(isProceduralDeadlineQuestion(messages), false);
+});
+
+test("complete weekday/hour schedules do not need a literal office word", () => {
+  for (const answer of [
+    "Δευτέρα έως Παρασκευή,9:00–17:00.",
+    "Δευτέρα–Παρασκευή από 9:00 έως 17:00.",
+    "Είμαστε ανοιχτά Δευτέρα έως Παρασκευή, 9:00–17:00.",
+    "Μπορείτε να καλέσετε Δευτέρα–Παρασκευή από 9:00 έως 17:00.",
+    "Ώρες λειτουργίας: 9:00 έως 17:00.",
+    "Δευτέρα έως Παρασκευή, 9 έως 17 ώρες.",
+    "Δευτέρα έως Παρασκευή, ９:００–１７:００.",
+    "Δευτέρα έως Παρασκευή, 9:\u200b00–17:\u200b00.",
+    "Monday to Friday, from 9:00 until 17:00.",
+    "Open Monday until Friday, 9:00–17:00.",
+    "Office hours: nine to seventeen.",
+    "Montag bis Freitag, von 9:00 bis 17:00 Uhr.",
+    "Die Kanzlei ist Montag bis Freitag von 9:00 bis 17:00 Uhr geöffnet.",
+  ]) assert.equal(containsProceduralDeadline(answer), false, answer);
+});
+
+test("weekday schedules and office suffixes cannot hide procedural rules or date deadlines", () => {
+  for (const answer of [
+    "Η ανακοπή πρέπει να ασκηθεί μέχρι τις 17:00. Δευτέρα έως Παρασκευή, 9:00–17:00.",
+    "Η προθεσμία είναι 15 εργάσιμες ημέρες. Το γραφείο είναι ανοικτό Δευτέρα έως Παρασκευή, 9:00–17:00.",
+    "Στο άρθρο του γραφείου αναφέρονται δεκαπέντε εργάσιμες ημέρες, αλλά δεν το υπολογίζω. Δευτέρα–Παρασκευή 9:00–17:00.",
+    "Η προθεσμία είναι １５ εργάσιμες ημέρες· γραφείο ανοιχτό Δευτέρα–Παρασκευή 9:00–17:00.",
+    "Η προθεσμία είναι 15\u200bεργάσιμες\u200bημέρες. Γραφείο ανοιχτό.",
+    "Μέχρι 15/11/2026. Το γραφείο είναι ανοιχτό Δευτέρα–Παρασκευή 9:00–17:00.",
+    "Μέχρι 17:00, γραφείο ανοιχτό Δευτέρα έως Παρασκευή 9:00–17:00.",
+    "Δεν λέω ότι είναι προθεσμία ανακοπής: Δευτέρα έως Παρασκευή 9:00–17:00.",
+    "Δεν δίνω προθεσμία ανακοπής. Δευτέρα έως Παρασκευή, 9:00–17:00.",
+    "You have fifteen hours. Office hours: Monday to Friday, 9:00 until 17:00.",
+    "The appeal deadline is Monday at 17:00. Open Monday to Friday, 9:00–17:00.",
+    "This is not an appeal deadline: Monday to Friday, 9:00 until 17:00.",
+    "This is not an appeal deadline. Monday to Friday, 9:00 until 17:00.",
+    "Montag bis Freitag 9:00-17:00 für den Widerspruch; Kanzlei geöffnet.",
+    "Keine Einspruchsfrist: Montag bis Freitag, 9:00 bis 17:00 Uhr.",
+  ]) assert.equal(containsProceduralDeadline(answer), true, answer);
+});
+
 test("bounded policy helpers reject malformed input and never mutate valid conversations", () => {
   const turns = conversation("Τι είναι ανακοπή;", "πόσες μέρες έχω;");
   const before = structuredClone(turns);

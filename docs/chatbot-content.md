@@ -7,6 +7,10 @@ introduction, National Printing Office originals and public article registry
 were checked on **9 November 2026**. The assistant does not perform open-web
 research at runtime. A dated source is not proof of current consolidated law.
 The broader banking and general-practice catalog was inspected on the same date.
+It now contains **40 legal excerpts: five original gazettes and 35 official
+guidance cards**. The later corrections distinguish the employment definition
+from an employer's notification duty, use the Labour Inspectorate's 2025
+harassment definition and add a bounded inheritance-renunciation explanation.
 Exact URLs, classifications, limitations and question examples are recorded in
 [the source review](chatbot-source-review.md).
 
@@ -62,11 +66,13 @@ telling the model to hide it is not an authorization boundary. See the
 
 ## Prompt data boundaries
 
-The Responses API `instructions` field contains only the static application
-template and the language selected from the validated locale enum. Its
+The Responses API `instructions` field contains the static application template,
+the language selected from the validated locale enum and, for a recognized
+concrete police call with authorized rights context, a fixed application-owned
+contact-qualification instruction. Its
 `<assistant_instructions>` wrapper separates scope/grounding and instruction
 integrity rules. No reference prose or conversation text is interpolated into
-that field.
+that field; the optional block is selected by policy, not composed from user text.
 
 The lower-priority API input contains one user message with three fixed blocks:
 `<reference_material format="json">`, `<conversation_history format="json">`
@@ -91,6 +97,17 @@ reply validation and React text rendering remain independently enforced. Tests
 inspect outbound request structure with a mocked provider; live adversarial
 model evaluation remains necessary before public activation. See the
 [OpenAI prompt formatting guidance](https://developers.openai.com/api/docs/guides/prompt-engineering#message-formatting-with-markdown-and-xml).
+
+Grounded provider output also contains internal evidence: one entry for each
+selected source ID, with a quote of 20–400 characters. After normalizing text,
+the parser requires each quote to be an exact substring of that selected source,
+rejects unknown/repeated evidence IDs and requires every selected ID to be
+represented. Missing, invented or mismatched evidence fails before rendering.
+The model is instructed to choose passages supporting every factual sentence,
+including qualifications, and not a provenance label alone. The backend check
+establishes quote provenance; it does **not** prove that the quote entails the
+paraphrase, that all claims are supported or that the law is current. Evidence
+and source lists stay internal and are not visitor-facing citations.
 
 ## Office information
 
@@ -126,12 +143,20 @@ by explicit terms; topic diversity and matching original Gazette references are
 preferred. Selection does not treat a matching keyword as evidence of an answer.
 Unrelated or empty queries supply no legal excerpts, and missing material still
 requires a handoff. The six office entries remain available.
+Compound phrases tolerate bounded grammatical words, while complete authority
+acronyms and the salary/tenancy senses of Greek `μισθ…` are distinguished to
+avoid the observed unrelated tax/employment matches. Scoped aliases cover
+ordinary company, consumer-product and personal-data wording; a bare company
+or complaint word does not establish the corresponding topic.
 
 `retrieval-query.mjs` computes one bounded query from the current question and
 approved topic metadata matched against the validated user history. Generic
-clarifications and topic-specific role questions can preserve a recent topic;
-explicit topic changes replace it, while unrelated substantive turns block older
-anchors. It never uses assistant text as retrieval evidence. It retains the complete
+clarifications, role questions and dependent questions about process actors,
+effects, partial access or language needs can preserve a recent topic. Partial
+compound-keyword hints can use a prior user anchor only when approved topic
+metadata is compatible; a hint alone does not supply legal facts. Explicit topic
+changes replace the anchor, while discourse resets and unrelated substantive
+turns block older anchors. It never uses assistant text as retrieval evidence. It retains the complete
 latest question and at most 800 UTF-16 units of history within a 2,000-unit bound.
 Conversation history is untrusted search data, not a source of legal facts or
 authorization. Everyday aliases help locate reviewed summaries; a company name
@@ -144,6 +169,28 @@ does the existing bounded office-article reader run. The final serialized reques
 must still fit the reservation. Expanding the source catalog does not send the
 entire legal library in every question, introduce a vector database or enable an
 open-web/model-selected reader.
+
+## Definition and coverage corrections
+
+The [Ministry of Labour's employment page](https://ypergasias.gov.gr/ergasiakes-scheseis/atomikes-ergasiakes-sxeseis/symvasi-exartimenis-ergasias/)
+separately describes personal paid work under lawful directions, supervision
+and control, and the employer's duty to communicate essential terms. The card
+now preserves that distinction. Recording or notifying terms is not supplied
+as the definition, and the assistant does not classify an individual arrangement.
+
+The [Labour Inspectorate's 2025 report](https://www.hli.gov.gr/wp-content/uploads/2026/03/ΕΤΗΣΙΑ-ΕΚΘΕΣΗ-ΑΥΤΟΤΕΛΟΥΣ-2025.pdf)
+supplies the harassment card's dignity/environment elements. Its scope includes
+work-related communications and travel, without equating every pressure or
+disagreement with a legal finding. It remains dated guidance; no incident,
+remedy, compensation or procedural time limit is determined.
+
+The new `legal-inheritance-renunciation` card uses the
+[Court of First Instance of Achaia's official guidance](https://www.protodikeio-achaias.gov.gr/apopoiisi-apodoxi-klironomias)
+for the basic formal non-acceptance/declaration concept. Court-local appointment
+and document instructions are excluded. It does not choose acceptance or
+renunciation, decide inherited-debt liability or earlier acceptance, identify
+the competent court for a visitor, or provide a time limit. Adding this card
+does not make every inheritance question answerable.
 
 The Katseli-law entry covers only the purpose of Law 3869/2010 and conditional
 debt discharge. The common name was checked against the
@@ -186,7 +233,8 @@ the visitor interface does not show a source list.
 Sources include the Ministry of Economy and Finance, Bank of Greece and its
 Central Credit Register, European Commission/e-Justice, Mitos, Ministry of
 Justice, Ministry of Labour, Hellenic Labour Inspectorate, Hellenic Cadastre,
-AADE, GEMI, Consumer Ombudsman and Hellenic Data Protection Authority. Dated
+AADE, GEMI, Consumer Ombudsman, Hellenic Data Protection Authority and the
+Court of First Instance of Achaia. Dated
 procedural pages support stable definitions only; old court names, implementation
 dates, monetary thresholds and procedural deadlines are not imported as current
 law. A consultation draft is not treated as enacted legislation.

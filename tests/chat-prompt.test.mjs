@@ -49,8 +49,9 @@ async function capture(chatInput = input(), records = [record()]) {
     apiKey: "test-only-key",
     fetcher: async (_url, options) => {
       serialized = options.body;
+      const actualSource = readData(JSON.parse(serialized)).sources.find((source) => source.id === "office-contact");
       return Response.json({ status: "completed", output: [{ type: "message", content: [{
-        type: "output_text", text: JSON.stringify({ kind: "grounded", answer: "The office is in Thessaloniki.", sourceIds: ["office-contact"], suggestContact: false }),
+        type: "output_text", text: JSON.stringify({ kind: "grounded", answer: "The office is in Thessaloniki.", sourceIds: ["office-contact"], evidence: [{ sourceId: "office-contact", quote: actualSource.content.slice(0,400) }], suggestContact: false }),
       }] }] });
     },
   });
@@ -87,12 +88,17 @@ test("the actual provider request separates trusted instructions from one user d
     schema: {
       type: "object", additionalProperties: false,
       properties: {
-        kind: { type: "string", enum: ["grounded", "handoff", "personal_handoff", "office_fees", "legal_deadline", "appointment", "greeting"] },
+        kind: { type: "string", enum: ["grounded", "handoff", "personal_handoff", "office_fees", "legal_deadline", "appointment", "greeting", "office_hours", "out_of_scope", "foreign_jurisdiction", "action_request", "private_access", "chat_privacy"] },
         answer: { type: "string" },
         sourceIds: { type: "array", maxItems: 4, items: { type: "string", enum: ["office-contact", "office-identity"] } },
+        evidence: { type: "array", maxItems: 4, items: {
+          type: "object", additionalProperties: false,
+          properties: { sourceId: { type: "string", enum: ["office-contact", "office-identity"] }, quote: { type: "string", minLength: 20, maxLength: 400 } },
+          required: ["sourceId", "quote"],
+        } },
         suggestContact: { type: "boolean" },
       },
-      required: ["kind", "answer", "sourceIds", "suggestContact"],
+      required: ["kind", "answer", "sourceIds", "evidence", "suggestContact"],
     },
   });
   assert.equal(body.text.verbosity, "low");

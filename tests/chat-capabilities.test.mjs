@@ -11,7 +11,7 @@ const context = () => createAuthorizedChatContext(getPublicChatPrincipal(), "pub
   id: source.id, visibility: "public", publication: "published", load: () => source,
 }]);
 const input = () => ({ locale: "el", consent: true, messages: [{ role: "user", content: "Where is the office?" }] });
-const answer = { kind: "grounded", answer: "The office is in Thessaloniki.", sourceIds: ["office-contact"], suggestContact: false };
+const answer = { kind: "grounded", answer: "The office is in Thessaloniki.", sourceIds: ["office-contact"], evidence: [{ sourceId: source.id, quote: source.content }], suggestContact: false };
 const textPart = () => ({ type: "output_text", text: JSON.stringify(answer) });
 const message = (content = [textPart()]) => ({ type: "message", content });
 const response = (output = [message()]) => ({ status: "completed", output });

@@ -1,6 +1,6 @@
 import { prepareChatText } from "./protocol.mjs";
 import { getPublicChatPrincipal } from "./access.mjs";
-import { getReviewedLegalTopicMatches } from "./legal-retrieval.mjs";
+import { getReviewedLegalTopicHints, getReviewedLegalTopicMatches } from "./legal-retrieval.mjs";
 
 export const MAX_RETRIEVAL_QUERY_LENGTH = 2000;
 export const MAX_RETRIEVAL_HISTORY_LENGTH = 800;
@@ -37,6 +37,10 @@ function normalizedWords(text) {
     .replace(/ς/g, "σ").replace(/ß/g, "ss").match(/[\p{L}\p{N}]+/gu) ?? [];
 }
 
+function isDiscourseReset(text) {
+  return /αλλαζ\p{L}* θεμα|ασχετο|αλλο θεμα|different topic|another topic|unrelated|anderes thema|themenwechsel/u.test(normalizedWords(text).join(" "));
+}
+
 function isFollowUp(text) {
   if (text.length > MAX_FOLLOW_UP_LENGTH) return false;
   const words = normalizedWords(text);
@@ -50,13 +54,29 @@ function isContextualFollowUp(text) {
   const words = normalizedWords(text);
   if (!words.length || words.length > MAX_FOLLOW_UP_WORDS) return false;
   const normalized = words.join(" ");
+  // An explicit discourse reset is a barrier even if it contains a pronoun or
+  // process word. Canonical new legal topics are handled independently above.
+  if (isDiscourseReset(text)) return false;
   // Natural clarification phrases need not consist entirely of generic words.
   if (/πιο απλα|απλα λογια|more simply|simpler words|plain words|einfacher|einfach erklar/u.test(normalized)) return true;
   // Roles and immediate questions about the same process do not establish a
   // different legal topic. Explicit approved-topic matches take priority above.
   const contextualStem = /^(?:δικηγορ|συμβολαιογραφ|συμφων|συναινε|υπογρα|απαντη|lawyer|attorney|notar|agree|sign|respond|reply|anwalt|zustimm|einig|unterschreib|antwort)/u;
-  return words.some((word) => contextualStem.test(word)) &&
-    (/[;?;]/u.test(text) || /^(?:και|δηλαδη|χρειαζ|πρεπει|μπορ|θελει|and|so|do|does|is|are|can|should|how|what|und|also|brauche|muss|kann|was|wie)/u.test(normalized));
+  const questionLike = /[;?;]/u.test(text) || /^(?:και|δηλαδη|αρα|ποιο|ποια|τι|πωσ|που|χρειαζ|πρεπει|μπορ|θελει|and|so|do|does|is|are|can|should|how|what|who|where|und|also|brauche|muss|kann|was|wie|wer|wo)/u.test(normalized);
+  if (words.some((word) => contextualStem.test(word)) && questionLike) return true;
+
+  // Dependent questions can introduce a process detail without repeating the
+  // legal topic: actors, effects, partial access and language needs. These are
+  // semantic categories across the reviewed topics, not complete prompt strings.
+  const deictic = /^(?:αυτο|αυτοσ|αυτη|αυτα|αυτεσ|εκ(?:εινο|εινη|εινα)|ετσι|that|this|it|those|these|das|dies|diese|dessen)$/u;
+  const processEntity = /^(?:διαδικασ|αιτησ|αποφασ|κρισ|υπηρεσ|εγγραφ|φακελ|δικαστηρ|πληρωμ|process|procedure|application|decision|authority|document|file|court|payment|verfahren|antrag|entscheidung|behorde|dokument|akte|gericht|zahlung)/u;
+  const processDetail = /^(?:ξεκιν|εκκιν|αρχιζ|υποβαλ|ολοκληρ|διορθω|δεσμευ|υποχρεωτικ|αυτοματ|σταματ|κομματ|μερικ|μιλ|καταλαβαιν|γλωσσ|μεταφρα|διερμην|initiat|start|begin|submit|complet|finish|correct|binding|compulsory|automatic|partial|speak|understand|language|translat|interpret|beginn|einreich|abschliess|korrigier|verbindlich|automatisch|teilweis|sprech|versteh|sprache|ubersetz|dolmetsch)/u;
+  const otherPeople = /(?:^| )(?:των αλλων|σε αλλουσ|αλλων ανθρωπων|other people|others|anderen|anderer)(?: |$)/u.test(normalized);
+  const possessive = /(?:^| )(?:του|τησ|τουσ|its|their|dessen|deren)(?: |$)/u.test(normalized);
+  const contextualRelation = words.some((word) => deictic.test(word)) || otherPeople ||
+    (words.some((word) => processEntity.test(word)) && (possessive || questionLike)) ||
+    (words.some((word) => processDetail.test(word)) && questionLike);
+  return questionLike && contextualRelation;
 }
 
 function clipHistory(text, limit, fromEnd = false) {
@@ -87,15 +107,24 @@ export function buildChatRetrievalQuery(messages) {
   const latest = Array.isArray(messages) ? messages[messages.length - 1] : null;
   const question = latest?.role === "user" ? prepareChatText(latest.content, 1200) : null;
   if (!question) throw new TypeError("Invalid chat retrieval input");
+  if (isDiscourseReset(question)) return question;
   const principal = getPublicChatPrincipal();
   const topicCache = new Map();
+  const hintCache = new Map();
   const topics = (text) => {
     if (!topicCache.has(text)) topicCache.set(text, getReviewedLegalTopicMatches(principal, text));
     return topicCache.get(text);
   };
+  const hintedTopics = (text) => {
+    if (!hintCache.has(text)) hintCache.set(text, new Set(getReviewedLegalTopicHints(principal, text).flatMap(({ topics }) => topics)));
+    return hintCache.get(text);
+  };
   // Canonical current topics always win, even after "and/και/und". A bare
   // notary/lawyer/company term is not a canonical topic in the approved catalog.
-  if (topics(question).length || !isContextualFollowUp(question)) return question;
+  if (topics(question).length) return question;
+  const contextual = isContextualFollowUp(question);
+  let requiredTopics = contextual ? null : hintedTopics(question);
+  if (!contextual && (question.length > MAX_FOLLOW_UP_LENGTH || normalizedWords(question).length > MAX_FOLLOW_UP_WORDS || !requiredTopics.size)) return question;
 
   let inspectedUserTurns = 0;
   for (let index = messages.length - 2; index >= 0 && inspectedUserTurns < MAX_RECENT_USER_TURNS; index--) {
@@ -105,7 +134,21 @@ export function buildChatRetrievalQuery(messages) {
     const previous = prepareChatText(message.content, 1200);
     if (!previous) continue;
     const previousTopics = topics(previous);
-    if (!previousTopics.length && isContextualFollowUp(previous)) continue;
+    if (!previousTopics.length && isDiscourseReset(previous)) return question;
+    if (previousTopics.length) {
+      if (requiredTopics && !previousTopics.some(({ topics }) => topics.some((topic) => requiredTopics.has(topic)))) return question;
+    } else {
+      if (isContextualFollowUp(previous)) continue;
+      const hints = hintedTopics(previous);
+      if (hints.size) {
+        requiredTopics = requiredTopics ? new Set([...requiredTopics].filter((topic) => hints.has(topic))) : hints;
+        if (!requiredTopics.size) return question;
+        continue;
+      }
+      // A substantive unrelated user turn remains a barrier. A partial-topic
+      // question cannot borrow that unrelated text as if it established its topic.
+      if (requiredTopics) return question;
+    }
     const room = Math.min(MAX_RETRIEVAL_HISTORY_LENGTH, MAX_RETRIEVAL_QUERY_LENGTH - question.length - 1);
     let anchor = clipHistory(previous, room);
     if (previousTopics.length && previous.length > room) {

@@ -15,7 +15,7 @@ const authorized = (records = [source()]) => createAuthorizedChatContext(getPubl
 })));
 const validInput = (content = "Where is the office?") => ({ locale: "el", consent: true, messages: [{ role: "user", content }] });
 const response = () => Response.json({ status: "completed", output: [{ type: "message", content: [{
-  type: "output_text", text: JSON.stringify({ kind: "grounded", answer: "The office is in Thessaloniki.", sourceIds: ["office-contact"], suggestContact: false }),
+  type: "output_text", text: JSON.stringify({ kind: "grounded", answer: "The office is in Thessaloniki.", sourceIds: ["office-contact"], evidence: [{ sourceId: "office-contact", quote: source().content }], suggestContact: false }),
 }] }] });
 
 test("reserves the full exact serialized request, protocol headroom and all generated-token allowance", async () => {

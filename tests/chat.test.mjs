@@ -4,7 +4,11 @@ import { ChatFailure, generateChatReply, parseChatInput, parseChatReply } from "
 import { isSameOrigin, readChatBody } from "../src/lib/chat/security.ts";
 import { createAuthorizedChatContext, getPublicChatPrincipal } from "../src/lib/chat/access.mjs";
 
-const sources = [{ id: "office-contact", title: "Office", url: "https://www.ioannispapaioannou.lawyer/el/contact", content: "Thessaloniki office." }];
+const sources = [{ id: "office-contact", title: "Office", url: "https://www.ioannispapaioannou.lawyer/el/contact", content: "The office is in Thessaloniki." }];
+const sourceEvidence = () => [{ sourceId: sources[0].id, quote: sources[0].content }];
+const controlledKinds = ["handoff", "personal_handoff", "office_fees", "legal_deadline", "appointment", "greeting",
+  "office_hours", "out_of_scope", "foreign_jurisdiction", "action_request", "private_access", "chat_privacy"];
+const noContactKinds = new Set(["greeting", "out_of_scope", "foreign_jurisdiction"]);
 const authorizedContext = () => createAuthorizedChatContext(getPublicChatPrincipal(), "public", sources.map((source) => ({
   id: source.id, visibility: "public", publication: "published",
   load: () => ({ ...source, visibility: "public", publication: "published" }),
@@ -43,20 +47,20 @@ test("bounds conversation history and permits complete assistant answers", () =>
 });
 
 test("returns only source URLs supplied by the server and rejects invented IDs", () => {
-  const reply = parseChatReply({ kind: "grounded", answer: "Office information", sourceIds: ["office-contact", "office-contact"], suggestContact: true }, sources);
+  const reply = parseChatReply({ kind: "grounded", answer: "Office information", sourceIds: ["office-contact", "office-contact"], evidence: sourceEvidence(), suggestContact: true }, sources);
   assert.deepEqual(reply.sources, [{ title: sources[0].title, url: sources[0].url }]);
-  assert.throws(() => parseChatReply({ kind: "grounded", answer: "text", sourceIds: ["https://phishing.invalid"], suggestContact: false }, sources), failsWith("upstream"));
-  assert.throws(() => parseChatReply({ kind: "grounded", answer: "", sourceIds: [], suggestContact: false }, sources), failsWith("upstream"));
-  assert.throws(() => parseChatReply({ kind: "grounded", answer: "x".repeat(4001), sourceIds: [], suggestContact: false }, sources), failsWith("upstream"));
-  assert.throws(() => parseChatReply({ kind: "grounded", answer: "Invented legal deadline", sourceIds: [], suggestContact: false }, sources), failsWith("upstream"));
+  assert.throws(() => parseChatReply({ kind: "grounded", answer: "text", sourceIds: ["https://phishing.invalid"], evidence: [], suggestContact: false }, sources), failsWith("upstream"));
+  assert.throws(() => parseChatReply({ kind: "grounded", answer: "", sourceIds: [], evidence: [], suggestContact: false }, sources), failsWith("upstream"));
+  assert.throws(() => parseChatReply({ kind: "grounded", answer: "x".repeat(4001), sourceIds: [], evidence: [], suggestContact: false }, sources), failsWith("upstream"));
+  assert.throws(() => parseChatReply({ kind: "grounded", answer: "Invented legal deadline", sourceIds: [], evidence: [], suggestContact: false }, sources), failsWith("upstream"));
 });
 
 test("all controlled reply kinds discard factual model prose", () => {
   for (const locale of ["el", "en", "de"]) {
-    for (const kind of ["handoff", "personal_handoff", "office_fees", "legal_deadline", "appointment", "greeting"]) {
-      const reply = parseChatReply({ kind, answer: "Invented legal deadline", sourceIds: [], suggestContact: false }, sources, locale);
+    for (const kind of controlledKinds) {
+      const reply = parseChatReply({ kind, answer: "Invented legal deadline", sourceIds: [], evidence: [], suggestContact: false }, sources, locale);
       assert.ok(!reply.answer.includes("Invented legal deadline"));
-      assert.equal(reply.suggestContact, kind !== "greeting");
+      assert.equal(reply.suggestContact, !noContactKinds.has(kind));
       assert.deepEqual(reply.sources, []);
     }
   }
@@ -64,7 +68,7 @@ test("all controlled reply kinds discard factual model prose", () => {
 
 test("controlled greetings use the current assistant brand in every supported language", () => {
   for (const locale of ["el", "en", "de"]) {
-    const reply = parseChatReply({ kind: "greeting", answer: "LEXI guarantees a free appointment.", sourceIds: [], suggestContact: true }, sources, locale);
+    const reply = parseChatReply({ kind: "greeting", answer: "LEXI guarantees a free appointment.", sourceIds: [], evidence: [], suggestContact: true }, sources, locale);
     assert.ok(reply.answer.includes("ΔικAIsis"), locale);
     assert.ok(!reply.answer.includes("LEXI"), locale);
     assert.ok(!reply.answer.includes("free appointment"), locale);
@@ -75,7 +79,7 @@ test("controlled greetings use the current assistant brand in every supported la
 
 test("controlled handoffs retain verified contact and the knowledge limit without forwarding invented deadlines", () => {
   for (const [locale, limitation] of [["el", "Δεν έχω αρκετές πληροφορίες"], ["en", "I don't have enough information"], ["de", "fehlen mir verlässliche Informationen"]]) {
-    const reply = parseChatReply({ kind: "handoff", answer: "The deadline is exactly FAKE_DEADLINE_15_DAYS; guaranteed approval.", sourceIds: [], suggestContact: false }, sources, locale);
+    const reply = parseChatReply({ kind: "handoff", answer: "The deadline is exactly FAKE_DEADLINE_15_DAYS; guaranteed approval.", sourceIds: [], evidence: [], suggestContact: false }, sources, locale);
     assert.ok(reply.answer.includes("+30 2310 545 261"), locale);
     assert.ok(reply.answer.includes(limitation), locale);
     assert.ok(!reply.answer.includes("FAKE_DEADLINE"), locale);
@@ -89,7 +93,7 @@ test("personal next-step handoffs stay distinct from unsupported knowledge in ev
   for (const [locale, limitation] of [["el", "Δεν μπορώ να αξιολογήσω"], ["en", "I can't assess your individual case"], ["de", "Fall kann ich hier nicht beurteilen"]]) {
     const untrusted = {
       answer: "File within FAKE_DEADLINE_15_DAYS. Your appointment is booked. What date was the paper served?",
-      sourceIds: ["office-contact"], suggestContact: false,
+      sourceIds: ["office-contact"], evidence: [], suggestContact: false,
     };
     const reply = parseChatReply({ ...untrusted, kind: "personal_handoff" }, sources, locale);
     const missingKnowledge = parseChatReply({ ...untrusted, kind: "handoff" }, sources, locale);
@@ -110,7 +114,7 @@ test("office fee replies give only controlled manual contact in every locale", (
   for (const locale of ["el", "en", "de"]) {
     const untrusted = {
       answer: "The office charges FAKE_PRICE_100_EURO. What is your income? Your appointment is booked.",
-      sourceIds: ["office-contact"], suggestContact: false,
+      sourceIds: ["office-contact"], evidence: [], suggestContact: false,
     };
     const reply = parseChatReply({ ...untrusted, kind: "office_fees" }, sources, locale);
     assert.ok(reply.answer.includes("+30 2310 545 261"), locale);
@@ -123,22 +127,22 @@ test("office fee replies give only controlled manual contact in every locale", (
 });
 
 test("every reply kind rejects unknown source IDs before controlled text is substituted", () => {
-  for (const kind of ["grounded", "handoff", "personal_handoff", "office_fees", "legal_deadline", "appointment", "greeting"]) {
+  for (const kind of ["grounded", ...controlledKinds]) {
     for (const sourceIds of [["invented"], ["office-contact", "invented"], [null]]) {
-      assert.throws(() => parseChatReply({ kind, answer: "Untrusted text", sourceIds, suggestContact: true }, sources), failsWith("upstream"));
+      assert.throws(() => parseChatReply({ kind, answer: "Untrusted text", sourceIds, evidence: [], suggestContact: true }, sources), failsWith("upstream"));
     }
   }
-  assert.throws(() => parseChatReply({ kind: "office-fees", answer: "", sourceIds: [], suggestContact: true }, sources), failsWith("upstream"));
+  assert.throws(() => parseChatReply({ kind: "office-fees", answer: "", sourceIds: [], evidence: [], suggestContact: true }, sources), failsWith("upstream"));
 });
 
 test("controlled reply kinds accept empty discarded prose while grounded answers still need text", () => {
-  for (const kind of ["handoff", "personal_handoff", "office_fees", "legal_deadline", "appointment", "greeting"]) {
-    const reply = parseChatReply({ kind, answer: "", sourceIds: [], suggestContact: false }, sources);
+  for (const kind of controlledKinds) {
+    const reply = parseChatReply({ kind, answer: "", sourceIds: [], evidence: [], suggestContact: false }, sources);
     assert.ok(reply.answer.trim().length > 0);
     assert.deepEqual(reply.sources, []);
-    assert.equal(reply.suggestContact, kind !== "greeting");
+    assert.equal(reply.suggestContact, !noContactKinds.has(kind));
   }
-  assert.throws(() => parseChatReply({ kind: "grounded", answer: "   ", sourceIds: ["office-contact"], suggestContact: false }, sources), failsWith("upstream"));
+  assert.throws(() => parseChatReply({ kind: "grounded", answer: "   ", sourceIds: ["office-contact"], evidence: sourceEvidence(), suggestContact: false }, sources), failsWith("upstream"));
 });
 
 test("an unknown office fee uses the provider schema and controlled answer without a fabricated quote", async () => {
@@ -148,7 +152,7 @@ test("an unknown office fee uses the provider schema and controlled answer witho
       const body = JSON.parse(options.body);
       assert.ok(body.text.format.schema.properties.kind.enum.includes("office_fees"));
       return Response.json({ status: "completed", output: [{ type: "message", content: [{
-        type: "output_text", text: JSON.stringify({ kind: "office_fees", answer: "FAKE_PRICE_100_EURO", sourceIds: [], suggestContact: false }),
+        type: "output_text", text: JSON.stringify({ kind: "office_fees", answer: "FAKE_PRICE_100_EURO", sourceIds: [], evidence: [], suggestContact: false }),
       }] }] });
     },
   });
@@ -172,7 +176,7 @@ test("a personal follow-up is accepted through the provider contract without for
       assert.ok(body.input[0].content.includes("δηλαδη εγω τι κανω]"));
       assert.ok(body.input[0].content.includes("διαταγή πληρωμής"));
       return Response.json({ status: "completed", output: [{ type: "message", content: [{
-        type: "output_text", text: JSON.stringify({ kind: "personal_handoff", answer: "Unverified personalised legal steps", sourceIds: [], suggestContact: false }),
+        type: "output_text", text: JSON.stringify({ kind: "personal_handoff", answer: "Unverified personalised legal steps", sourceIds: [], evidence: [], suggestContact: false }),
       }] }] });
     },
   });
@@ -191,7 +195,7 @@ test("calls Responses with server-only authentication, bounded output and storag
     sent = JSON.parse(options.body);
     return Response.json({ status: "completed", output: [
       { type: "reasoning", summary: [] },
-      { type: "message", content: [{ type: "output_text", text: JSON.stringify({ kind: "grounded", answer: "The office is in Thessaloniki.", sourceIds: ["office-contact"], suggestContact: false }) }] },
+      { type: "message", content: [{ type: "output_text", text: JSON.stringify({ kind: "grounded", answer: "The office is in Thessaloniki.", sourceIds: ["office-contact"], evidence: sourceEvidence(), suggestContact: false }) }] },
     ] });
   };
   const reply = await generateChatReply(parseChatInput(valid()), authorizedContext(), { apiKey: "test-only-key", fetcher });
@@ -208,7 +212,7 @@ test("does not present partial, refused, malformed or unsuccessful provider outp
     { status: "incomplete", output: [] },
     { status: "completed", output: [{ type: "message", content: [{ type: "refusal", refusal: "refused" }] }] },
     { status: "completed", output: [{ type: "message", content: [{ type: "output_text", text: "invalid json" }] }] },
-    { status: "completed", output: [{ type: "message", content: [{ type: "output_text", text: JSON.stringify({ kind: "grounded", answer: "text", sourceIds: ["invented"], suggestContact: false }) }] }] },
+    { status: "completed", output: [{ type: "message", content: [{ type: "output_text", text: JSON.stringify({ kind: "grounded", answer: "text", sourceIds: ["invented"], evidence: [], suggestContact: false }) }] }] },
   ];
   for (const payload of payloads) {
     await assert.rejects(generateChatReply(parseChatInput(valid()), authorizedContext(), {

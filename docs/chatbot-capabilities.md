@@ -5,20 +5,26 @@ executable tools. `service.ts` constructs every Responses API request with
 `tools: []` and `tool_choice: "none"`; request fields and conversation text
 cannot supply another capability catalog. The model branch makes at most one
 request to the fixed `https://api.openai.com/v1/responses` endpoint and rejects
-redirects. Recognized deadline/appointment requests can return application-owned
-wording before that request. There is no model-driven dispatcher or tool-result
+redirects. Recognized deadline, appointment, office-hours and narrow scope/action
+questions can return application-owned wording before that request. There is no model-driven dispatcher or tool-result
 execution loop. See the official
 [tool-choice documentation](https://developers.openai.com/api/docs/guides/function-calling#tool-choice).
 
 Provider output accepts only reasoning items and text message items. Unknown
 item types, tool/action items and malformed or non-text message content fail with `502`, even
 when accompanied by a valid answer. Reasoning text is not displayed or executed.
-Reply structure and selected source IDs are checked before the whole grounded
+Reply structure, selected source IDs and internal evidence are checked before the whole grounded
 answer is screened for recognized procedural deadlines. A match replaces the
 entire answer with fixed refusal/contact wording; no partial answer is displayed.
 Quoted, attributed, historical and caveated deadlines have no exemption.
 Non-grounded kinds discard model prose. The final answer uses the React text
-renderer; source-ID validation alone is not proof that every claim is supported.
+renderer. A grounded reply needs one 20–400-character exact content quote for
+every selected source, without duplicate, missing, unknown or unselected IDs.
+Quotes are checked against the immutable authorized source snapshot and never
+forwarded to the visitor. Missing or invented evidence fails closed with `502`,
+without an extra model retry. This verifies source provenance, not semantic
+entailment of every paraphrase. Structured output can still contain factual
+mistakes; see the official [structured-output limitations](https://developers.openai.com/api/docs/guides/structured-outputs).
 
 | Component | Permitted access | Unavailable through chat |
 | --- | --- | --- |
@@ -41,7 +47,7 @@ capability boundary, not operating-system or network sandboxing.
 ## Controlled replies and output limits
 
 The prepared request owns a single-use snapshot of validated input and authorized
-sources. It records recognized deadline or appointment intent, with deadline
+sources. It records recognized deadline, appointment or information-policy intent, with deadline
 precedence. Consuming that snapshot can return fixed localized text without an
 OpenAI call, while preserving identity/security checks, quota admission, context
 authorization and exact size validation. CMS lookup may already have occurred;
@@ -51,12 +57,29 @@ handles cannot invoke this branch.
 Deadline detection uses the current user question and bounded user history.
 Appointment detection uses only the explicit current user request, not assistant
 claims or a time-only follow-up. Its reply states that bookings, changes,
-cancellations and availability checks are unavailable, then gives manual office
-contact. Recognizing an intent grants no action capability and does not send a
+cancellations and availability checks are unavailable, then gives the phone and
+contact-page alternative. The localized interface explicitly labels its fixed
+`/contact` link as the contact page. Recognizing an intent grants no action capability and does not send a
 message or collect appointment details. A model-selected controlled kind uses
 the same application wording after source-ID validation.
 There is no general output detector for every fabricated booking claim; the
 absence of an action capability does not certify arbitrary model wording.
+
+Office hours use the bounded hours field from the authorized `office-contact`
+fact; absent or changed framing does not permit guessing. The output deadline
+guard separately allows complete ordinary schedule clauses, not a procedural
+rule disguised by adding an office word. Narrow current-question policies
+distinguish unrelated topics, another country's law, bot send/submit requests,
+private files and this chat's upload/privacy limitations. Ambiguous legal and
+third-party questions remain with authorized retrieval. These lexical policies
+are not general semantic classifiers or access grants.
+
+For a concrete user-described police call, when the authorized criminal-rights
+source is present, the snapshot owns a manual lawyer-contact qualification.
+The model receives a fixed instruction to omit duplicate contact copy; the
+application preserves the qualification and contact-page flag after complete
+reply validation. Mere phone-number presence cannot suppress it. This is not a
+general emergency classifier, intake interview or personal defence assessment.
 
 The deadline request/output guards are bounded lexical rules, not a calculator
 or semantic safety proof. They reject common numeric, spelled-out and dated

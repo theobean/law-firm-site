@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { buildChatRetrievalQuery, MAX_RETRIEVAL_HISTORY_LENGTH, MAX_RETRIEVAL_QUERY_LENGTH } from "../src/lib/chat/retrieval-query.mjs";
-import { getReviewedLegalTopicMatches, legalContextBytes, MAX_LEGAL_CONTEXT_BYTES, MAX_LEGAL_SOURCES, selectReviewedLegalSources } from "../src/lib/chat/legal-retrieval.mjs";
+import { getReviewedLegalTopicHints, getReviewedLegalTopicMatches, legalContextBytes, MAX_LEGAL_CONTEXT_BYTES, MAX_LEGAL_SOURCES, selectReviewedLegalSources } from "../src/lib/chat/legal-retrieval.mjs";
 import { ChatAccessError, getPublicChatPrincipal } from "../src/lib/chat/access.mjs";
 import { REVIEWED_LEGAL_SOURCES } from "../src/lib/chat/legal-catalog.mjs";
 
@@ -135,4 +135,135 @@ test("bounded user-text windows preserve late explicit topics, full latest text 
   assert.ok(legalContextBytes(selected) <= MAX_LEGAL_CONTEXT_BYTES);
   const fullLatest = "🙂".repeat(600);
   assert.equal(query(divorce, fullLatest), fullLatest);
+});
+
+test("dependent process questions preserve distinct approved topics beyond role and generic-word lists", () => {
+  for (const [first, followUps, expected] of [
+    ["Τι είναι ο ψηφιακός φάκελος μεταβίβασης;", ["Ποιος ξεκινά τη διαδικασία;", "Ποιος υποβάλλει την αίτηση;", "Ποιος αρχίζει;"], "legal-property-transfer"],
+    ["Τι είναι το πρόδηλο σφάλμα στο Κτηματολόγιο;", ["Διορθώνεται πάντα έτσι;", "Αυτό ολοκληρώνεται αυτόματα;", "Μπορώ να διορθώσω κάτι;"], "legal-cadastral-corrections"],
+    ["Τι κάνει ο Συνήγορος του Καταναλωτή;", ["Η απόφασή του είναι υποχρεωτική;", "Οι συστάσεις του δεσμεύουν την εταιρεία;"], "legal-consumer-ombudsman"],
+    ["Τι είναι η ενδικοφανής προσφυγή στη ΔΕΔ;", ["Και σταματάει αυτόματα η πληρωμή;", "Η απόφαση της υπηρεσίας είναι δεσμευτική;"], "legal-tax-administrative-appeal"],
+    ["Ποια δικαιώματα έχει ένας ύποπτος;", ["Και αν δεν μιλάει ελληνικά;", "Τι γίνεται με τη μετάφραση;", "Και αν μιλάει μόνο γαλλικά;"], "legal-criminal-defence-rights"],
+    ["Τι είναι το δικαίωμα πρόσβασης σε προσωπικά δεδομένα;", ["Άρα μπορώ να δω και των άλλων;", "Αυτό καλύπτει και άλλους ανθρώπους;"], "legal-data-access"],
+    ["Τι είναι η πρόσβαση σε δημόσια έγγραφα;", ["Μπορεί η υπηρεσία να κρύψει μόνο ένα κομμάτι;", "Η υπηρεσία δίνει μερικό αντίγραφο;"], "legal-public-documents"],
+    ["Τι είναι το Ευρωπαϊκό Κληρονομητήριο;", ["Αυτό υπολογίζει και τον φόρο;", "Η διαδικασία δίνει ίδια αποτελέσματα παντού;"], "legal-cross-border-inheritance"],
+    ["Τι είναι η εργατική διαφορά;", ["Και χρειάζεται να πάω δικαστήριο;", "Η διαδικασία της υπηρεσίας είναι δικαστήριο;"], "legal-labor-disputes"],
+  ]) {
+    for (const latest of followUps) {
+      const combined = query(first, latest);
+      assert.equal(combined, `${latest}\n${first}`, latest);
+      assert.ok(ids(combined).includes(expected), latest);
+    }
+  }
+});
+
+test("process-effect and language follow-ups work in English and German", () => {
+  for (const [first, latest, expected] of [
+    ["What is a tax appeal?", "Does the payment stop automatically?", "legal-tax-administrative-appeal"],
+    ["What does the consumer ombudsman do?", "Is its decision binding?", "legal-consumer-ombudsman"],
+    ["What are a suspect's rights?", "What if they do not speak the language?", "legal-criminal-defence-rights"],
+    ["What are a suspect's rights?", "What if they only speak French?", "legal-criminal-defence-rights"],
+    ["Was ist die Akteneinsicht?", "Gibt die Behörde nur einen Teil des Dokuments?", "legal-public-documents"],
+    ["Was ist ein Steuerbescheid?", "Stoppt die Zahlung automatisch?", "legal-tax-administrative-appeal"],
+  ]) {
+    assert.equal(query(first, latest), `${latest}\n${first}`, latest);
+    assert.ok(ids(query(first, latest)).includes(expected), latest);
+  }
+});
+
+test("new explicit topics, unrelated subjects and discourse resets remain continuity barriers", () => {
+  const first = "Τι είναι η πρόσβαση σε δημόσια έγγραφα;";
+  for (const latest of ["Και πώς φτιάχνω μια πίτσα;", "Και τι καιρό θα κάνει αύριο;", "Πόσα γκολ έβαλε η ομάδα;", "Άσχετο: ποιος ξεκινά τη διαδικασία;", "Different topic: who starts the process?"]) {
+    assert.equal(query(first, latest), latest, latest);
+    const continued = query(first, latest, "Και μετά;");
+    assert.ok(!continued.includes(first), latest);
+  }
+  const newTopic = "Αυτό ισχύει και για την ενδικοφανή προσφυγή στη ΔΕΔ;";
+  assert.equal(query(first, newTopic), newTopic);
+  assert.ok(!ids(query(first, newTopic)).includes("legal-public-documents"));
+});
+
+test("salary and rental senses of μισθ do not contaminate each other's contexts", () => {
+  for (const question of ["Τι είναι η ηλεκτρονική δήλωση μίσθωσης;", "Ποιοι είναι οι όροι μιας μίσθωσης;", "Τι είναι ο μισθωτής;", "Τι είναι το μίσθωμα;"]) {
+    const selected = ids(question);
+    assert.ok(selected.includes("legal-rental-declarations"), question);
+    assert.ok(!selected.includes("legal-employment-terms"), question);
+  }
+  for (const question of ["Τι αναφέρεται για τον μισθό;", "Τι ισχύει γενικά για την καταβολή μισθών;", "Τι είναι ο μισθωτός;"]) {
+    const selected = ids(question);
+    assert.ok(selected.includes("legal-employment-terms"), question);
+    assert.ok(!selected.includes("legal-rental-declarations"), question);
+  }
+});
+
+test("short authority acronyms require complete words rather than prefix collisions", () => {
+  for (const question of ["Τι είναι τα προσωπικά δεδομένα;", "Τι είναι η πρόσβαση στα δεδομένα μου;", "Τι σημαίνουν τα δεδουλευμένα;"]) {
+    assert.ok(!ids(question).includes("legal-tax-administrative-appeal"), question);
+  }
+  assert.ok(ids("Τι είναι η ΔΕΔ;").includes("legal-tax-administrative-appeal"));
+  assert.ok(ids("Τι είναι η δεδ;").includes("legal-tax-administrative-appeal"));
+  assert.ok(!ids("Τι είναι δεκάδες;").includes("legal-banking-code-process"));
+});
+
+test("keyword phrases tolerate bounded grammatical glue but never arbitrary intervening topics", () => {
+  assert.ok(ids("Θέλω να ιδρύσω μια εταιρεία.").includes("legal-company-formation"));
+  assert.ok(ids("Τι είναι ο κώδικας της δεοντολογίας;").includes("legal-banking-code"));
+  const base = REVIEWED_LEGAL_SOURCES.find(({ id }) => id === "legal-company-formation");
+  const sources = [{ ...base, keywords: ["ιδρυ εταιρει"] }];
+  assert.ok(selectReviewedLegalSources(principal, "Θέλω να ιδρύσω μια εταιρεία", { sources }).length);
+  assert.deepEqual(selectReviewedLegalSources(principal, "Θέλω να ιδρύσω ένα μουσείο δίπλα στην εταιρεία", { sources }), []);
+  assert.deepEqual(selectReviewedLegalSources(principal, "ιδρύσω ο η το οι τα των μια εταιρεία", { sources }), []);
+});
+
+test("partial approved keyword hints require a compatible user topic and never select context alone", () => {
+  const company = "Θέλω να ιδρύσω μια ΙΚΕ.";
+  const fragment = "Και το καταστατικό;";
+  assert.deepEqual(getReviewedLegalTopicMatches(principal, fragment), []);
+  assert.ok(getReviewedLegalTopicHints(principal, fragment).some(({ id }) => id === "legal-company-formation"));
+  assert.deepEqual(ids(fragment), []);
+  assert.equal(query(company, fragment), `${fragment}\n${company}`);
+  assert.ok(ids(query(company, fragment)).includes("legal-company-formation"));
+  assert.equal(query(divorce, fragment), fragment, "a compound-keyword fragment is not permission to borrow an incompatible topic");
+  assert.equal(query(divorce, fragment, "πιο απλά;"), "πιο απλά;", "a partial new topic is a barrier to the older divorce topic");
+  assert.deepEqual(getReviewedLegalTopicHints(principal, "Σκέφτομαι το 2020"), [], "numbers alone do not create partial topic hints");
+});
+
+test("explicit discourse resets cannot revive a compatible old topic through metadata hints", () => {
+  const company = "Θέλω να ιδρύσω εταιρεία.";
+  const reset = "Άσχετο: τι είναι το καταστατικό;";
+  assert.equal(query(company, reset), reset);
+  assert.equal(query(company, reset, "Και μετά;"), "Και μετά;");
+});
+
+test("partial topic hints obey the same source-ID and principal authorization before metadata reads", () => {
+  const base = REVIEWED_LEGAL_SOURCES.find(({ id }) => id === "legal-company-formation");
+  const denied = { ...base, id: "private-company-file", get keywords() { throw new Error("unapproved metadata read"); } };
+  assert.deepEqual(getReviewedLegalTopicHints(principal, "καταστατικό", { sources: [denied] }), []);
+  assert.throws(() => getReviewedLegalTopicHints({ ...principal }, "καταστατικό", { sources: [base] }), ChatAccessError);
+});
+
+test("scoped colloquial aliases retrieve company, consumer and data-access context without broad collisions", () => {
+  for (const [question, expected] of [
+    ["Θέλω να ιδρύσω μια εταιρία, γίνεται ηλεκτρονικά;", "legal-company-formation"],
+    ["Μπορώ να ιδρύσω την εταιρία ηλεκτρονικά;", "legal-company-formation"],
+    ["Αγόρασα χαλασμένο πλυντήριο. Πού μπορώ να παραπονεθώ;", "legal-consumer-ombudsman"],
+    ["Έχω ένα χαλασμένο κινητό. Πού γίνονται παράπονα;", "legal-consumer-ombudsman"],
+    ["Μπορώ να δω τι στοιχεία κρατάει για μένα μια εταιρία;", "legal-data-access"],
+    ["Τι γνωρίζει για μένα η εταιρεία;", "legal-data-access"],
+  ]) {
+    assert.ok(ids(question).includes(expected), question);
+  }
+  for (const question of ["Θέλω να ανοίξω μια κονσέρβα.", "Έχω χαλασμένο κώδικα στο πρόγραμμα."]) {
+    assert.deepEqual(ids(question), [], question);
+  }
+});
+
+test("renunciation wording remains scoped to inheritance and never becomes a generic waiver source", () => {
+  const explicit = "Τι είναι η αποποίηση κληρονομιάς;";
+  assert.ok(ids(explicit).includes("legal-inheritance-renunciation"));
+  assert.deepEqual(ids("Τι σημαίνει αποποίηση ευθύνης;"), []);
+  const partial = "Και αν θέλω να αποποιηθώ;";
+  const inheritance = "Τι είναι η κληρονομιά;";
+  assert.equal(query(inheritance, partial), `${partial}\n${inheritance}`);
+  assert.equal(query("Τι είναι η εργατική διαφορά;", partial), partial, "inheritance keyword fragments cannot borrow an unrelated employment anchor");
 });

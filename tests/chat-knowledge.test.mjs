@@ -73,6 +73,9 @@ test("expanded official topics are reachable in realistic questions without load
     ["Was ist Mobbing am Arbeitsplatz?", "legal-workplace-harassment"],
     ["What is a tax appeal?", "legal-tax-administrative-appeal"],
     ["What is access to public documents?", "legal-public-documents"],
+    ["Τι είναι η αποποίηση κληρονομιάς;", "legal-inheritance-renunciation"],
+    ["What is renunciation of inheritance?", "legal-inheritance-renunciation"],
+    ["Was ist eine Erbausschlagung?", "legal-inheritance-renunciation"],
   ]) {
     const selected = select(question);
     assert.ok(ids(selected).includes(expected), question);

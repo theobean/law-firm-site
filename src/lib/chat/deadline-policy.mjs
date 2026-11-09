@@ -38,6 +38,16 @@ const questionWords = new Set("ποσεσ ποσα ποσων ποσο ποτε 
 const durationStem = /^(?:διαρκ|διαρκε|χρειαζ|take|takes|taking|lasts|lasting|dauert|dauern)/u;
 const relativeDay = /^(?:αυριο|μεθαυριο|αυθημερον|σημερα|tomorrow|today|morgen|heute|ubermorgen)$/u;
 const monthStem = /^(?:ιαν|φεβ|μαρτ|απρ|μαιου|μαιο|ιουν|ιουλ|αυγ|σεπ|οκτ|νοε|δεκ|jan|feb|march|marz|apr|may|mai|jun|jul|aug|sep|oct|okt|nov|dec|dez)/u;
+const weekdayStem = /^(?:δευτερα|τριτη|τεταρτη|πεμπτη|παρασκευη|σαββατο|κυριακη|monday|tuesday|wednesday|thursday|friday|saturday|sunday|montag|dienstag|mittwoch|donnerstag|freitag|samstag|sonntag)/u;
+const contactStem = /^(?:καλεσ|καλεσετ|καλει|τηλεφων|επικοινων|call|contact|reach|erreich|anruf)/u;
+const hourUnitStem = /^(?:ωρα|ωρεσ|ωρων|hour|stunde|uhr)/u;
+const scheduleWords = new Set((
+  "το η τισ τησ των και απο εωσ μεχρι στισ στην στη για ειναι ειμαστε ωρα ωρεσ ωρων τοπικη ελλαδασ καθημερινα " +
+  "μπορειτε να μασ στο στον στα με εμασ " +
+  "the a an and from to until at in on are is we us you can hours local time greece greek " +
+  "die der das und von bis um ist sind wir sie uns konnen uhr ortszeit griechenland"
+).split(" "));
+const scheduleLeadIns = new Set("το η the a an die der das ειναι ειμαστε we are wir sind μπορειτε να you can sie konnen".split(" "));
 const numberWords = new Set((
   "μια μιασ ενα ενοσ εναν δυο δυο τρεισ τρια τριων τεσσερισ τεσσερα τεσσαρεσ πεντε εξι επτα εφτα οκτω οχτω εννεα εννια " +
   "δεκα ενδεκα εντεκα δωδεκα δεκατρεισ δεκατρια δεκατεσσερισ δεκαπεντε δεκαεξι δεκαεπτα δεκαοκτω δεκαεννεα " +
@@ -61,6 +71,27 @@ function hasLegalContext(tokens) {
 }
 function isNumber(word) {
   return /^\p{N}+$/u.test(word) || numberWords.has(word) || compoundNumber.test(word) || ordinalNumber.test(word);
+}
+
+// Exempt a complete opening-hours clause, never merely an appended office word.
+// Literal procedural/deadline language still wins when negated or quoted.
+function isOpeningHoursClause(tokens, text) {
+  if (!tokens.length || hasProcedure(tokens) || any(tokens, deadlineStem) || any(tokens, actionStem) ||
+      any(tokens, /^(?:ληγ|ληξ|εκπνε|τελευται|εντοσ|οφειλ|πρεπει|expire|expir|within|before|must|binnen|innerhalb|spatesten|ablauf|endet|muss)/u)) return false;
+  const first = tokens.find(({ word }) => !scheduleLeadIns.has(word));
+  if (!first || ![weekdayStem, officeStem, openingStem, contactStem, hourUnitStem].some((pattern) => pattern.test(first.word))) return false;
+  if (!any(tokens, weekdayStem) && !(any(tokens, officeStem) && (any(tokens, openingStem) || any(tokens, hourUnitStem))) &&
+      !(any(tokens, openingStem) && any(tokens, hourUnitStem))) return false;
+  if (!tokens.every(({ word }) => isNumber(word) || scheduleWords.has(word) ||
+      [weekdayStem, officeStem, openingStem, contactStem].some((pattern) => pattern.test(word)))) return false;
+  const clauseText = text.slice(tokens[0].index, tokens[tokens.length - 1].index + tokens[tokens.length - 1].word.length);
+  if (/\p{Nd}{1,2}(?::\p{Nd}{2})?\s*(?:[-‐‑‒–—]|εωσ|μεχρι|to|until|bis)\s*(?:τισ\s+)?\p{Nd}{1,2}(?::\p{Nd}{2})?/u.test(clauseText)) return true;
+  if (any(tokens, officeStem) && any(tokens, openingStem) &&
+      /(?:εωσ|μεχρι|until|bis)\s+(?:τισ\s+)?\p{Nd}{1,2}:\p{Nd}{2}/u.test(clauseText)) return true;
+  // Spelled-out hours stay bounded to one short range such as nine to seventeen.
+  return tokens.some((token, index) => isNumber(token.word) &&
+    tokens.slice(index + 1, index + 5).some((end, offset) => isNumber(end.word) &&
+      tokens.slice(index + 1, index + offset + 1).some(({ word }) => ["εωσ", "μεχρι", "to", "until", "bis"].includes(word))));
 }
 function timeQuestion(tokens) {
   const text = words(tokens);
@@ -125,6 +156,7 @@ export function containsProceduralDeadline(value) {
   const clauseInfo = new Map([...clauses].map(([id, local]) => [id, {
     procedural: hasProcedure(local), deadline: any(local, deadlineStem),
     limit: any(local, limitStem), office: any(local, officeStem),
+    openingHours: isOpeningHoursClause(local, text),
     possession: local.some(({ word }) => possession.has(word)),
     personalPossession: /(?:^| )(?:εχω|εχεισ|εχετε|εχουμε|you have|i have|we have|sie haben|du hast|ich habe)(?: |$)/u.test(words(local)),
   }]));
@@ -134,7 +166,7 @@ export function containsProceduralDeadline(value) {
     const context = tokens.slice(Math.max(0, index - 16), index + 17);
     const explicitLimit = info.deadline || info.limit;
     const officeHours = /^(?:ωρα|ωρεσ|ωρων|hour|stunde)/u.test(token.word) &&
-      info.office && !info.procedural && !info.deadline;
+      info.openingHours;
     if (unitStem.test(token.word)) {
       const quantity = tokens.slice(Math.max(0, index - 5), index + 3)
         .some((candidate) => candidate.clause === token.clause && isNumber(candidate.word));
@@ -164,11 +196,12 @@ export function containsProceduralDeadline(value) {
     const firstDigit = match.index + match[0].search(/\p{Nd}/u);
     const first = tokens.find((token) => token.index >= firstDigit);
     const local = clauses.get(first?.clause) ?? context;
-    if (any(local, openingStem) && any(local, officeStem) && !hasProcedure(local) && !any(local, deadlineStem)) continue;
+    const numericPart = match[0].slice(match[0].search(/\p{Nd}/u));
+    const clockRangePart = /^\p{Nd}{1,2}:\p{Nd}{2}$/u.test(numericPart) || /^\p{Nd}{1,2}-\p{Nd}{1,2}$/u.test(numericPart);
+    if (clockRangePart && !any(context, deadlineStem) && isOpeningHoursClause(local, text)) continue;
     const procedural = hasProcedure(context);
-    if (any(context, openingStem) && any(context, officeStem) && !procedural && !any(context, deadlineStem)) continue;
-    if (any(context, deadlineStem) || any(context, limitStem) && (procedural || !any(context, officeStem)) ||
-        procedural && any(context, actionStem)) return true;
+    if (any(context, deadlineStem) || any(context, limitStem) ||
+        procedural && (clockRangePart || any(context, actionStem))) return true;
   }
   return false;
 }

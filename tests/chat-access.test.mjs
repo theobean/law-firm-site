@@ -21,7 +21,8 @@ const forbidden = (error) => error instanceof ChatAccessError && error.code === 
 const validInput = () => ({ locale: "el", consent: true, messages: [{ role: "user", content: "Where is the office?" }] });
 const modelReply = () => Response.json({ status: "completed", output: [{
   type: "message", content: [{ type: "output_text", text: JSON.stringify({
-    kind: "grounded", answer: "The office is in Thessaloniki.", sourceIds: ["office-contact"], suggestContact: false,
+    kind: "grounded", answer: "The office is in Thessaloniki.", sourceIds: ["office-contact"],
+    evidence: [{ sourceId: "office-contact", quote: publicRecord().content }], suggestContact: false,
   }) }],
 }] });
 

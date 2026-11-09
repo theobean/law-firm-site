@@ -17,7 +17,7 @@ const APPROVED_PUBLIC_SOURCE_IDS = new Set([
   "office-identity", "office-contact", "office-appointments", "office-services", "office-nationwide",
   "office-faq-guidance", "legislation-4354-2015",
   "legal-katseli-law", "legal-debt-settlement", "legal-banking-code", "legal-credit-servicers", "legal-payment-order",
-  "legal-mediation", "legal-labor-disputes", "legal-land-registry", "legal-inheritance-tax",
+  "legal-mediation", "legal-labor-disputes", "legal-land-registry", "legal-inheritance-tax", "legal-inheritance-renunciation",
   "legislation-3869-2010", "legislation-4738-2020",
   "legislation-5072-2023", "legislation-4619-2019", "legal-enforcement-concepts",
   "legal-bilateral-settlement", "legal-banking-code-process", "legal-bank-transparency",

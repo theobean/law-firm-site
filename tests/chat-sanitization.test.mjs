@@ -17,7 +17,7 @@ const validInput = () => ({ locale: "el", consent: true, messages: [{ role: "use
 const validReply = () => ({ answer: "Office information", sources: [{ title: "Office", url: officeUrl }], suggestContact: false });
 const modelReply = () => ({
   status: "completed",
-  output: [{ type: "message", content: [{ type: "output_text", text: JSON.stringify({ kind: "grounded", answer: "The office is in Thessaloniki.", sourceIds: ["office-contact"], suggestContact: false }) }] }],
+  output: [{ type: "message", content: [{ type: "output_text", text: JSON.stringify({ kind: "grounded", answer: "The office is in Thessaloniki.", sourceIds: ["office-contact"], evidence: [{ sourceId: sources[0].id, quote: sources[0].content }], suggestContact: false }) }] }],
 });
 
 test("normalizes accents and line endings, removes unsafe controls and retains meaningful Unicode", () => {
@@ -57,7 +57,7 @@ test("provider output byte limits and malformed text fail closed at the LLM boun
     apiKey: "test-only-key", fetcher: async () => oversized,
   }), (error) => error.code === "upstream" && error.status === 502);
   const payload = modelReply();
-  payload.output[0].content[0].text = JSON.stringify({ kind: "grounded", answer: "\u0000\u200b", sourceIds: ["office-contact"], suggestContact: false });
+  payload.output[0].content[0].text = JSON.stringify({ kind: "grounded", answer: "\u0000\u200b", sourceIds: ["office-contact"], evidence: [{ sourceId: sources[0].id, quote: sources[0].content }], suggestContact: false });
   await assert.rejects(generateChatReply(validInput(), authorizedContext(), {
     apiKey: "test-only-key", fetcher: async () => Response.json(payload),
   }), (error) => error.code === "upstream" && error.status === 502);
