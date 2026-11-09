@@ -144,8 +144,10 @@ application state από το Responses API· δεν ισοδυναμεί με �
 Ελέγχονται ξανά οι απαντήσεις στον server και στον browser, μαζί με τα μήκη,
 τους τύπους πεδίων και τους HTTPS συνδέσμους χωρίς credentials.
 
-Τα μηνύματα και οι τίτλοι πηγών εμφανίζονται από το `ChatText` ως απλά React text
-children, με escaping στο DOM boundary. Δεν χρησιμοποιείται HTML injection,
+Τα μηνύματα εμφανίζονται από το `ChatText` ως απλά React text children, με
+escaping στο DOM boundary. Η LEXI εμφανίζεται αριστερά με περιγραφή «Ο προσωπικός
+σου βοηθός» και εφέ typewriter. Οι πηγές ελέγχονται στον server και στον browser,
+χωρίς να εμφανίζεται λίστα παραπομπών στη συνομιλία. Δεν χρησιμοποιείται HTML injection,
 Markdown-to-HTML ή `dangerouslySetInnerHTML` για περιεχόμενο συνομιλίας. Το
 [React documentation](https://react.dev/reference/react-dom/components/common#dangerously-setting-the-inner-html)
 εξηγεί τον κίνδυνο των raw HTML sinks. Η κανονικοποίηση κειμένου δεν αποτελεί

@@ -2,18 +2,16 @@
 
 import { useEffect, useId, useRef, useState, type CSSProperties, type FormEvent } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { ArrowRight, ExternalLink, LoaderCircle, MessageCircle, Phone, RotateCcw, Send, ShieldCheck, X } from "lucide-react";
+import { ArrowRight, LoaderCircle, MessageCircle, Phone, RotateCcw, Send, ShieldCheck, X } from "lucide-react";
 import { Link } from "@/navigation";
 import { parseChatResponse, readBoundedJson } from "@/lib/chat/protocol.mjs";
 import ChatText from "./ChatText";
 import styles from "./ChatAssistant.module.css";
 
-type ChatSource = { title: string; url: string };
 type ChatMessage = {
   id: number;
   role: "user" | "assistant";
   content: string;
-  sources?: ChatSource[];
   suggestContact?: boolean;
 };
 type ChatError = "unavailable" | "unauthorized" | "rate_limit" | "invalid_request" | "request_too_large" | "forbidden" | "upstream";
@@ -192,7 +190,6 @@ export default function ChatAssistant() {
         id: replyId,
         role: "assistant",
         content: reply.answer,
-        sources: reply.sources,
         suggestContact: reply.suggestContact,
       }]);
       animateReply(replyId, reply.answer);
@@ -284,16 +281,6 @@ export default function ChatAssistant() {
                         <ChatText className={styles.srOnly} text={message.content} />
                       </>
                     ) : <ChatText className={styles.messageText} text={message.content} />}
-                    {typingReply?.id !== message.id && !!message.sources?.length && (
-                      <div className={styles.sources}>
-                        <p>{t("sources")}</p>
-                        {message.sources.map((source) => (
-                          <a key={source.url} href={source.url} target="_blank" rel="noopener noreferrer">
-                            <ChatText as="span" text={source.title} /> <ExternalLink size={12} aria-hidden="true" />
-                          </a>
-                        ))}
-                      </div>
-                    )}
                     {typingReply?.id !== message.id && message.suggestContact && <Link href="/contact" className={styles.messageContact}>{t("contactOffice")} <ArrowRight size={13} aria-hidden="true" /></Link>}
                   </div>
                 ))}
@@ -351,7 +338,10 @@ export default function ChatAssistant() {
 
       <button ref={triggerRef} type="button" onClick={() => open ? closePanel() : setOpen(true)} className={styles.trigger} aria-expanded={open} aria-controls={panelId} aria-label={open ? t("close") : t("open")}>
         {open ? <X size={22} aria-hidden="true" /> : <MessageCircle size={22} aria-hidden="true" />}
-        <span>{t("title")}</span>
+        <span className={styles.triggerCopy}>
+          <span className={styles.triggerName}>{t("title")}</span>
+          <span className={styles.triggerTagline}>{t("triggerTagline")}</span>
+        </span>
       </button>
     </aside>
   );

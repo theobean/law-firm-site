@@ -19,9 +19,10 @@ The answer still passes the existing reply/source checks and React text renderer
 | Model tools | None | Functions, MCP, browsing, shell, file search and write actions |
 | Chat backend | One bounded model request; configured public JWKS lookup when OIDC is enabled | Model-chosen destinations or API credentials in context |
 | Quota backend | Two parameterized SQL function calls reserving counters and releasing owned leases | Direct table access, model-selected SQL, private case data or database administration |
-| Visitor interface | Text questions, source links, direct-contact links | Sending messages, confirming bookings, accepting cases, payments, filing or deleting records |
+| Visitor interface | Text questions, progressively revealed answers, direct-contact links | Sending messages, confirming bookings, accepting cases, payments, filing or deleting records |
 
-Clicking the contact link opens the existing contact page. `suggestContact` is a
+Source IDs and URLs remain validated in the backend and response parser; the
+visitor interface does not display source lists. Clicking the contact link opens the existing contact page. `suggestContact` is a
 display flag, not authorization or an instruction to submit anything. Existing
 site forms and administrative routes are not exposed as chatbot tools. The
 server process still has normal network access; this policy is an application
