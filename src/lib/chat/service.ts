@@ -41,14 +41,20 @@ function deadlineReply(locale: ChatLocale): ChatReply {
   return { answer, sources: [], suggestContact: true };
 }
 
+type ChatFailureDiagnostic = "reply_shape" | "source_id" | "grounded_empty" | "evidence_shape" |
+  "evidence_quote" | "evidence_missing" | "reply_contract" | "provider_http" | "provider_payload" |
+  "provider_output_limit" | "provider_incomplete" | "provider_item" | "reply_json";
+
 export class ChatFailure extends Error {
   status: number;
   code: string;
+  diagnostic?: ChatFailureDiagnostic;
 
-  constructor(code: string, status: number) {
+  constructor(code: string, status: number, diagnostic?: ChatFailureDiagnostic) {
     super(code);
     this.code = code;
     this.status = status;
+    this.diagnostic = diagnostic;
   }
 }
 
@@ -176,28 +182,28 @@ export function parseChatReply(value: unknown, sources: readonly ChatSource[], l
       typeof value.suggestContact !== "boolean" ||
       !Array.isArray(value.sourceIds) || value.sourceIds.length > 4 ||
       typeof value.kind !== "string" || !REPLY_KINDS.includes(value.kind)) {
-    throw new ChatFailure("upstream", 502);
+    throw new ChatFailure("upstream", 502, "reply_shape");
   }
   const chosen = [...new Set(value.sourceIds)];
   const selected = chosen.map((id) => sources.find((source) => source.id === id));
-  if (selected.some((source) => !source)) throw new ChatFailure("upstream", 502);
-  if (value.kind === "grounded" && (!value.answer.trim() || selected.length === 0)) throw new ChatFailure("upstream", 502);
+  if (selected.some((source) => !source)) throw new ChatFailure("upstream", 502, "source_id");
+  if (value.kind === "grounded" && (!value.answer.trim() || selected.length === 0)) throw new ChatFailure("upstream", 502, "grounded_empty");
   // Evidence is internal and never rendered. Exact source text is a provenance
   // check, not a semantic proof that every paraphrase is entailed by that text.
   const evidence = value.evidence === undefined && value.kind !== "grounded" ? [] : value.evidence;
-  if (!Array.isArray(evidence) || evidence.length > 4) throw new ChatFailure("upstream", 502);
+  if (!Array.isArray(evidence) || evidence.length > 4) throw new ChatFailure("upstream", 502, "evidence_shape");
   const supportedIds = new Set();
   for (const item of evidence) {
     if (!isRecord(item) || typeof item.sourceId !== "string" || Object.keys(item).length !== 2 ||
-        !Object.hasOwn(item, "quote")) throw new ChatFailure("upstream", 502);
+        !Object.hasOwn(item, "quote")) throw new ChatFailure("upstream", 502, "evidence_shape");
     const quote = prepareChatText(item.quote, 400);
     const source = selected.find((source) => source?.id === item.sourceId);
     if (!quote || quote.length < 20 || !source || !source.content.includes(quote) || supportedIds.has(item.sourceId)) {
-      throw new ChatFailure("upstream", 502);
+      throw new ChatFailure("upstream", 502, "evidence_quote");
     }
     supportedIds.add(item.sourceId);
   }
-  if (value.kind === "grounded" && (supportedIds.size !== selected.length || !supportedIds.size)) throw new ChatFailure("upstream", 502);
+  if (value.kind === "grounded" && (supportedIds.size !== selected.length || !supportedIds.size)) throw new ChatFailure("upstream", 502, "evidence_missing");
   // A permitted citation ID does not authorize procedural time-limit advice.
   // Inspect the complete prose before rendering; never clip off a caveat or
   // display a partial unsafe answer. Controlled kinds discard all model prose.
@@ -238,7 +244,7 @@ export function parseChatReply(value: unknown, sources: readonly ChatSource[], l
     sources: selected.map((source) => ({ title: source!.title, url: source!.url })),
     suggestContact: value.suggestContact,
   });
-  if (!reply) throw new ChatFailure("upstream", 502);
+  if (!reply) throw new ChatFailure("upstream", 502, "reply_contract");
   return reply;
 }
 
@@ -344,27 +350,27 @@ export async function generatePreparedChatReply(
     redirect: "error",
     body: snapshot.body,
   });
-  if (!response.ok) throw new ChatFailure("upstream", 502);
+  if (!response.ok) throw new ChatFailure("upstream", 502, "provider_http");
 
   let payload: unknown;
   try {
     payload = await readBoundedJson(response);
   } catch {
-    throw new ChatFailure("upstream", 502);
+    throw new ChatFailure("upstream", 502, "provider_payload");
   }
   if (!isRecord(payload) || payload.status !== "completed" || !Array.isArray(payload.output)) {
-    throw new ChatFailure("upstream", 502);
+    throw new ChatFailure("upstream", 502, isRecord(payload) && isRecord(payload.incomplete_details) && payload.incomplete_details.reason === "max_output_tokens" ? "provider_output_limit" : "provider_incomplete");
   }
   const text = payload.output.flatMap((item: unknown) => {
     // Positive allowlist: a tool/action result must fail closed, even when an
     // otherwise valid answer accompanies it. There is deliberately no executor,
     // dispatch table or follow-up tool-call loop in this service.
-    if (!isRecord(item)) throw new ChatFailure("upstream", 502);
+    if (!isRecord(item)) throw new ChatFailure("upstream", 502, "provider_item");
     if (item.type === "reasoning") return [];
-    if (item.type !== "message" || !Array.isArray(item.content)) throw new ChatFailure("upstream", 502);
+    if (item.type !== "message" || !Array.isArray(item.content)) throw new ChatFailure("upstream", 502, "provider_item");
     return item.content.map((part: unknown) => {
       if (!isRecord(part) || part.type !== "output_text" || typeof part.text !== "string") {
-        throw new ChatFailure("upstream", 502);
+        throw new ChatFailure("upstream", 502, "provider_item");
       }
       return part.text;
     });
@@ -386,7 +392,7 @@ export async function generatePreparedChatReply(
       const contact = reply.answer.includes("2310 545 261") ? shortContact : fullContact;
       const alreadyQualified = reply.answer.endsWith(fullContact) || reply.answer.endsWith(shortContact);
       const withContact = parseChatResponse({ ...reply, answer: alreadyQualified ? reply.answer : `${reply.answer}\n\n${contact}`, suggestContact: true });
-      if (!withContact) throw new ChatFailure("upstream", 502);
+      if (!withContact) throw new ChatFailure("upstream", 502, "reply_contract");
       reply = withContact;
     }
     // Only this completed, validated, server-issued provider result can report
@@ -403,8 +409,9 @@ export async function generatePreparedChatReply(
       options.onUsage?.(Object.freeze({ inputTokens: usage.input_tokens, outputTokens: usage.output_tokens }));
     }
     return reply;
-  } catch {
-    throw new ChatFailure("upstream", 502);
+  } catch (error) {
+    if (error instanceof ChatFailure) throw error;
+    throw new ChatFailure("upstream", 502, "reply_json");
   }
 }
 

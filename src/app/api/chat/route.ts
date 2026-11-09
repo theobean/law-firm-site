@@ -50,7 +50,12 @@ export const POST = createChatHandler({
     if (error instanceof QuotaIdentityError) return { code: error.code, status: error.status };
     if (error instanceof TurnstileError || error instanceof VisitorCookieError || error instanceof MonetaryBudgetError) return { code: error.code, status: error.status };
     if (error instanceof QuotaError) return { code: error.code, status: error.status, retryAfter: error.retryAfter };
-    if (error instanceof ChatFailure) return { code: error.code, status: error.status };
+    if (error instanceof ChatFailure) {
+      // Fixed stage labels only: no message, history, quote, identifier, key or
+      // provider payload is logged or exposed in the public error response.
+      if (error.diagnostic) console.warn("chatbot_failure", error.diagnostic);
+      return { code: error.code, status: error.status };
+    }
     if (error instanceof Error && error.message === "request_too_large") {
       return { code: "request_too_large", status: 413 };
     }
