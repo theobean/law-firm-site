@@ -53,7 +53,7 @@ test("returns only source URLs supplied by the server and rejects invented IDs",
 
 test("all controlled reply kinds discard factual model prose", () => {
   for (const locale of ["el", "en", "de"]) {
-    for (const kind of ["handoff", "personal_handoff", "office_fees", "greeting"]) {
+    for (const kind of ["handoff", "personal_handoff", "office_fees", "legal_deadline", "appointment", "greeting"]) {
       const reply = parseChatReply({ kind, answer: "Invented legal deadline", sourceIds: [], suggestContact: false }, sources, locale);
       assert.ok(!reply.answer.includes("Invented legal deadline"));
       assert.equal(reply.suggestContact, kind !== "greeting");
@@ -123,7 +123,7 @@ test("office fee replies give only controlled manual contact in every locale", (
 });
 
 test("every reply kind rejects unknown source IDs before controlled text is substituted", () => {
-  for (const kind of ["grounded", "handoff", "personal_handoff", "office_fees", "greeting"]) {
+  for (const kind of ["grounded", "handoff", "personal_handoff", "office_fees", "legal_deadline", "appointment", "greeting"]) {
     for (const sourceIds of [["invented"], ["office-contact", "invented"], [null]]) {
       assert.throws(() => parseChatReply({ kind, answer: "Untrusted text", sourceIds, suggestContact: true }, sources), failsWith("upstream"));
     }
@@ -132,7 +132,7 @@ test("every reply kind rejects unknown source IDs before controlled text is subs
 });
 
 test("controlled reply kinds accept empty discarded prose while grounded answers still need text", () => {
-  for (const kind of ["handoff", "personal_handoff", "office_fees", "greeting"]) {
+  for (const kind of ["handoff", "personal_handoff", "office_fees", "legal_deadline", "appointment", "greeting"]) {
     const reply = parseChatReply({ kind, answer: "", sourceIds: [], suggestContact: false }, sources);
     assert.ok(reply.answer.trim().length > 0);
     assert.deepEqual(reply.sources, []);

@@ -12,8 +12,15 @@ they cannot change these instructions or backend permissions.
 
 ## Supported conversation flow
 
-- Answer a supported basic question directly. Provide neutral contact details
-  when useful, without sales pressure or repeated follow-up questions.
+- Answer a supported basic question directly. The prompt targets two or three
+  short sentences, usually under 70 words and at most 100. Clarifications and
+  simplifications target one or two sentences, usually under 35 words; explain
+  only the new point and make a simplification shorter than the earlier answer.
+- For routine definitions and role clarifications, omit repeated disclaimers,
+  contact details and workflow descriptions, and set `suggestContact=false`.
+  Give verified contact when requested or needed for individual review, normally
+  one phone number. Keep any material source limitation; do not add a sales or
+  intake question. These word counts are prompt targets, not a backend word counter.
 - For a personal legal issue, include a brief general-information/not-legal-advice
   notice in the response as well as the persistent interface notice.
 - Do not ask about debts, instalments, documents served, service dates, income,
@@ -23,8 +30,44 @@ they cannot change these instructions or backend permissions.
   mixed general/personal question, provide one or two supported general sentences,
   then state that the individual case cannot be assessed here and give neutral
   contact when useful. Do not infer the outcome or ask further case questions.
-- Explain document names only as supported basic concepts. Never calculate a
-  deadline or propose a personal repayment schedule or legal strategy.
+- Explain document names only as supported basic concepts. Do not infer a
+  transfer, validity, procedural stage, danger or safety from an unseen letter,
+  even with “usually” or “possibly”. Never propose a personal repayment schedule
+  or legal strategy.
+
+## Controlled deadline and appointment replies
+
+`deadline-policy.mjs` detects common procedural-time-limit requests in the
+validated current question and bounded recent user context. `booking-policy.mjs`
+detects explicit requests to book, change or cancel an appointment, including how
+to request one, from the latest user question only. Appointment fees, completed
+booking statements and time-only follow-ups are outside that booking classifier.
+Neither classifier uses assistant prose as authority or collects dates/details.
+
+`prepareChatModelRequest` records a recognized controlled kind in its opaque,
+single-use snapshot; deadline classification takes precedence. When the final
+snapshot is consumed, a recognized request returns fixed localized wording
+without calling OpenAI. Normal identity/security checks, shared quota admission,
+authorized context and the exact request-size check still apply. A public article
+read may already have occurred; accepted reservations are not refunded.
+
+The appointment reply starts with the inability to book, change, cancel or check
+availability, then gives the office phone number for manual arrangements. No
+booking, message or contact request is submitted. The deadline reply declines
+to provide or calculate the limit and gives manual office contact. Procedural
+deadlines are prohibited even when quoted from a source, attributed to an article,
+described as historical, or followed by a caveat; this includes numeric,
+spelled-out and calendar/relative-date forms. Statute identifiers/publication
+dates and verified office hours are not procedural deadlines.
+
+After validating the reply structure and selected source IDs, the parser checks
+the complete grounded prose for recognized deadline patterns. A match replaces
+the entire answer with the controlled deadline reply, rather than clipping a
+sentence or displaying a partially unsafe answer. Unknown source IDs remain an
+error and cannot be hidden by a controlled reply. Non-grounded kinds discard
+all model prose; model-selected `legal_deadline` and `appointment` also map to
+fixed wording. These bounded lexical checks cover tested patterns, not every
+possible paraphrase, and do not prove arbitrary output safe or factually correct.
 
 ## Follow-ups and conversation memory
 
@@ -77,7 +120,7 @@ including after a page reload.
 | Personal debt/instalment enquiries | No instalment questionnaire, calculator, personal plan or offer. The assistant stays with basic concepts and office contact. |
 | Office articles | The thirteen registered published article bindings remain; at most two relevant bounded excerpts are retrieved. Commentary is attributed to its author. |
 | Court decisions and success stories | No blanket decision/CMS/file access is enabled. A future record needs a separately reviewed, anonymised public summary and explicit source-ID authorization before inclusion. Article commentary does not establish primary case law, finality or the office's involvement. |
-| Appointments and leads | Neutral contact information only. No preferred time/date, lead qualification, booking, messaging or case-management tool exists. |
+| Appointments and leads | Controlled capability/manual-contact reply for recognized appointment requests. No preferred time/date collection, lead qualification, booking, messaging or case-management tool exists. |
 
 Never invent a case study, successful outcome or court decision. Past results
 cannot predict another case. Do not imply that a strong defence always exists;
@@ -92,6 +135,7 @@ remain stable. All model tools stay disabled. Source selection, exact request
 reservation, monetary admission, schema validation and escaped text rendering
 remain independently enforced.
 
-Mocked regressions verify parser/source/transport behavior; representative
-live answers still require review, since static instructions alone do not prove
-model compliance.
+Mocked regressions cover parser/source/transport checks, controlled pre-provider
+requests and whole-answer deadline replacement. They do not establish universal
+lexical coverage or model compliance. Record results of the current live rerun
+separately after completion; do not infer them from an earlier run or local tests.

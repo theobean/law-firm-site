@@ -200,6 +200,14 @@ served documents or a pending auction should be directed promptly to the firm
 without computing a deadline in chat. Different languages do not change the
 jurisdiction to a different country.
 
+A citation does not authorize a procedural deadline: the response policy also
+blocks repeating numeric, spelled-out or dated limits from an office article,
+including attributed or historical quotations with caveats. Recognized deadline
+questions receive application-owned manual-contact wording before a model call;
+a separate bounded lexical check replaces matching provider prose in full after
+schema/source validation. These checks are conservative safeguards, not exhaustive
+semantic verification. See the behavior document for their limits.
+
 See [assistant behavior](chatbot-behavior.md) for the ΔικAIsis persona,
 basic information-only flow and the boundaries around
 court decisions and case studies.

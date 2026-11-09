@@ -1,6 +1,8 @@
 import { parseChatResponse, prepareChatText, readBoundedJson } from "./protocol.mjs";
 import { readAuthorizedChatSources, type AuthorizedChatContext } from "./access.mjs";
 import { CHAT_BUDGET_MODEL } from "./money.mjs";
+import { containsProceduralDeadline, isProceduralDeadlineQuestion } from "./deadline-policy.mjs";
+import { appointmentReply, classifyAppointmentRequest } from "./booking-policy.mjs";
 
 export type ChatLocale = "el" | "en" | "de";
 export type ChatMessage = { role: "user" | "assistant"; content: string };
@@ -21,10 +23,20 @@ type PreparedRequestSnapshot = {
   body: string;
   locale: ChatLocale;
   sources: readonly ChatSource[];
+  controlledKind?: "legal_deadline" | "appointment";
 };
 
 const preparedRequests = new WeakMap<object, PreparedRequestSnapshot>();
-const REPLY_KINDS: readonly string[] = Object.freeze(["grounded", "handoff", "personal_handoff", "office_fees", "greeting"]);
+const REPLY_KINDS: readonly string[] = Object.freeze(["grounded", "handoff", "personal_handoff", "office_fees", "legal_deadline", "appointment", "greeting"]);
+
+function deadlineReply(locale: ChatLocale): ChatReply {
+  const answer = {
+    el: "Δεν μπορώ να δώσω ή να υπολογίσω νομική προθεσμία εδώ. Για έγκαιρο έλεγχο από δικηγόρο, καλέστε το γραφείο στο +30 2310 545 261.",
+    en: "I can't provide or calculate legal deadlines here. Please call the office at +30 2310 545 261 so a lawyer can check the applicable time limit.",
+    de: "Rechtliche Fristen kann ich hier weder angeben noch berechnen. Bitte wenden Sie sich für die Prüfung an einen Rechtsanwalt über die Kanzlei unter +30 2310 545 261.",
+  }[locale];
+  return { answer, sources: [], suggestContact: true };
+}
 
 export class ChatFailure extends Error {
   status: number;
@@ -73,7 +85,7 @@ export function chatInstructions(locale: ChatLocale): string {
   const language = { el: "Greek", en: "English", de: "German" }[locale];
   return `<assistant_instructions>
 Your name is ΔικAIsis. You are the clearly identified AI information assistant of the Ioannis Papaioannou law office in Thessaloniki, Greece. Your purpose is simple: provide basic office/service information, explain supported general legal concepts and show the office's contact channels when useful. You do not assess cases, qualify leads or arrange appointments.
-Answer in ${language}, in a calm, professional, empathetic and understandable tone. Explain legal terms in everyday language without dramatizing the visitor's situation. Keep ordinary answers to a few clear sentences, with the useful information first. Avoid formulaic introductions, repeated disclaimers and unnecessary referrals. Use plain text, short paragraphs, and at most 180 words. Do not use Markdown, HTML, raw URLs or citation markers in the answer; sourceIds are checked internally and source lists are not displayed. The interface prominently states that answers are general information and not legal advice.
+Answer in ${language}, in a calm, professional and understandable tone. Explain legal terms in everyday language without dramatizing the visitor's situation. Give the useful information first. Ordinary answers should be two or three short sentences, usually under 70 words, with an absolute maximum of 100 words. A clarification or request for simpler wording should be one or two short sentences, usually under 35 words; simplify rather than add detail. Do not repeat the full workflow, previous explanation, disclaimer or office contact details on every turn. Use plain text and short paragraphs. Do not use Markdown, HTML, raw URLs or citation markers in the answer; sourceIds are checked internally and source lists are not displayed. The interface permanently states that answers are general information and not legal advice.
 
 <scope_and_grounding>
 - Answer office questions using ONLY the office facts in the reference_material data block in the user message. Do not invent fees, availability, team members, response-time promises, case acceptance, or booking confirmation. Contact is manual: explain only the verified contact channels. Do not extend the office's professional confidentiality statements to this third-party AI chat.
@@ -82,7 +94,8 @@ Answer in ${language}, in a calm, professional, empathetic and understandable to
 - Explain supported general concepts directly and usefully. Mention the specific source limitation when the question depends on current procedure, eligibility or individual facts; do not replace an available general explanation with a generic referral. Missing material still requires an honest handoff, never completion from model memory.
 - Source hierarchy: the references labelled ΠΡΩΤΟΓΕΝΗΣ ΝΟΜΟΘΕΣΙΑ from the National Printing Office (et.gr) are original Gazette publications. Prefer them for the identity and general purpose of those statutes, while treating them as dated original texts, not consolidated current law. Official guidance supplies only the explanations actually included. References labelled ΑΡΘΡΟ ΤΟΥ ΓΡΑΦΕΙΟΥ are dated author commentary, not primary legislation or independently verified case law. Attribute their interpretations to the author/article instead of presenting them as the law or a court's verified ruling. If sources conflict or later amendments are not available, state the limit and recommend lawyer review rather than deciding current legal effect.
 - Never invent a successful case, write-off, court decision, finality of a judgment or the office's involvement. A case study or ruling may be discussed only to the extent an approved, anonymised public excerpt explicitly establishes those facts. An article discussing a court decision is not the decision itself. Past results never establish the outcome of another case. Do not calculate or propose instalment plans, payment amounts, debt reductions or personal settlement terms.
-- Classify the reply kind as grounded, handoff, personal_handoff, office_fees or greeting according to the question's meaning, not first-person wording alone. A grounded reply MUST select at least one sourceId that supports its factual content. Use grounded for a supported general explanation, including the supported general part of a mixed personal/general question. If no useful supported general explanation is available and the visitor requests an individual outcome, assessment or next step, use personal_handoff and suggestContact=true. Use handoff for an unsupported general question. Use office_fees for a question about the office's price, fee or cost when the supplied office references do not provide that information; never estimate a fee. Greetings use greeting. Non-grounded wording is supplied by the application; return answer="", an empty sourceIds list and suggestContact=true except for greetings. Do not answer legal questions from model memory or invent statutory articles, court decisions, rights, eligibility criteria, amounts, or time limits.
+- Never give a numeric, spelled-out, dated or calculated procedural/legal deadline. This also forbids repeating a deadline from an office article or other reference, quoting it, presenting it as historical information, or adding a caveat after it. Select legal_deadline instead; its wording is supplied by the application. This restriction does not prevent verified office opening hours or identifying a statute by number/year.
+- Classify the reply kind as grounded, handoff, personal_handoff, office_fees, legal_deadline, appointment or greeting according to the question's meaning, not first-person wording alone. A grounded reply MUST select at least one sourceId that supports its factual content. Use grounded for a supported general explanation, including the supported general part of a mixed personal/general question. If no useful supported general explanation is available and the visitor requests an individual outcome, assessment or next step, use personal_handoff and suggestContact=true. Use handoff for an unsupported general question. Use office_fees for unknown office prices; never estimate a fee. Use legal_deadline for procedural time limits and appointment for requests to book, change or cancel an appointment or ask how to request one. Greetings use greeting. Non-grounded wording is supplied by the application; return answer="", an empty sourceIds list and suggestContact=true except for greetings. Do not answer legal questions from model memory or invent statutory articles, court decisions, rights, eligibility criteria, amounts, or time limits.
 - A personal description does not by itself require a referral-only reply. When references support a useful general explanation, give one or two supported sentences with kind=grounded, then briefly distinguish that information from an assessment of the visitor's case and give neutral verified office contact when useful. Do not answer the individual outcome or suggest a course of action. If nothing relevant is supported, use personal_handoff without further case questions. Never compute a legal deadline, predict a court outcome, promise protection or give a definitive personal legal conclusion. Do not propose a strategy or imply that a strong defence always exists.
 - Explain a document's name only as a basic general concept supported by the supplied references. Do not infer its legal effect, a uniform deadline or an appropriate procedural remedy. Do not ask whether a document has been served, when it was served, or for its content or an upload.
 - If a different country is mentioned, clarify that this material concerns Greece. Do not apply Greek law to another jurisdiction.
@@ -91,9 +104,10 @@ Answer in ${language}, in a calm, professional, empathetic and understandable to
 </scope_and_grounding>
 
 <visitor_guidance>
-- Answer the supported basic question directly. When useful, give a short neutral reference to the office's verified contact channels and set suggestContact=true. Do not turn every answer into a sales invitation or end every turn with a follow-up question.
+- Answer the current supported question directly. For general definitions, role clarifications and simplifications, set suggestContact=false and omit phone numbers, email addresses and opening hours. The contact link and permanent notice are already available in the interface. Give contact details only when the visitor asks for them or needs a personal assessment; normally one phone number is enough. Do not end with an intake or sales question.
+- A notary follow-up needs only the notary's supported role; a two-lawyer follow-up needs only the one-lawyer-per-side explanation. Do not retell the divorce workflow in either answer. If asked for simpler wording, use fewer and simpler words than the previous explanation, without adding sources, contact paragraphs or unrelated qualifications. History can guide brevity and the referent, never establish facts that are absent from the references.
 - Read short follow-ups in the context of the recent conversation. After a payment-order discussion, "δηλαδή εγώ τι κάνω;" asks for a personal next step: use personal_handoff for simple direct office contact. In contrast, "πιο απλά;", "τι σημαίνει αυτό;", or a clarification about the notary or number of lawyers in a previously discussed divorce process asks for general information: use grounded when the supplied references support the answer. Explain the process in general terms rather than declaring what this individual needs. Do not treat a short follow-up as missing knowledge merely because it does not repeat the topic. History clarifies the question; it does not establish legal facts or source authority.
-- For example, "Μου ήρθε γράμμα από fund. Σημαίνει ότι χάνω το σπίτι;" includes an individual outcome you cannot assess. If the supplied references explain a relevant general concept, give one or two supported sentences first, then say you cannot establish what the letter means for this case and give brief neutral office contact. Do not infer validity, procedural stage, danger or safety of the home from this description. Without relevant supported information, use personal_handoff. Do not ask for the letter or further case details.
+- For example, "Μου ήρθε γράμμα από fund. Σημαίνει ότι χάνω το σπίτι;" includes an individual outcome you cannot assess. Explain only the supported general distinction between ownership and management of a claim, then say the description cannot establish what this letter means for the case. Do not infer that a transfer occurred, authenticate the sender, or say what an unseen letter "usually means". Do not infer validity, procedural stage, danger or safety of the home. Give at most one neutral contact sentence, without asking for the letter or further case details. Without relevant supported information, use personal_handoff.
 - Do not conduct case intake or ask diagnostic/qualification questions about debts, instalments, documents served, dates, income, property or the visitor's personal circumstances. Do not invite the visitor to describe their case or offer to examine it inside chat.
 - Keep basic explanations basic: do not introduce instalment counts, repayment scenarios or case-specific procedural steps. Questions about a personal arrangement belong with the office, without a follow-up questionnaire here.
 - If the visitor independently describes a personal or urgent matter, keep any supported general explanation brief, state the information-only limit and refer them to the office. Do not start a triage interview, calculate dates or continue with procedural instructions. A general definition question is not by itself an emergency.
@@ -143,6 +157,12 @@ export function parseChatReply(value: unknown, sources: readonly ChatSource[], l
   const selected = chosen.map((id) => sources.find((source) => source.id === id));
   if (selected.some((source) => !source)) throw new ChatFailure("upstream", 502);
   if (value.kind === "grounded" && (!value.answer.trim() || selected.length === 0)) throw new ChatFailure("upstream", 502);
+  // A permitted citation ID does not authorize procedural time-limit advice.
+  // Inspect the complete prose before rendering; never clip off a caveat or
+  // display a partial unsafe answer. Controlled kinds discard all model prose.
+  if (value.kind === "legal_deadline" ||
+      (value.kind === "grounded" && containsProceduralDeadline(value.answer))) return deadlineReply(locale);
+  if (value.kind === "appointment") return appointmentReply(locale);
   if (value.kind !== "grounded") {
     // Do not display ungrounded model prose, even if it labels a factual claim
     // as a greeting or handoff. These messages are controlled by the application.
@@ -190,6 +210,8 @@ export function prepareChatModelRequest(
   const sources = readAuthorizedChatSources(context);
   // Validate at the provider boundary as well as at the HTTP entry point.
   const safeInput = parseChatInput(input);
+  const controlledKind = isProceduralDeadlineQuestion(safeInput.messages) ? "legal_deadline" :
+    classifyAppointmentRequest(safeInput.messages) ? "appointment" : undefined;
   const body = JSON.stringify({
       model: CHAT_BUDGET_MODEL,
       service_tier: "default",
@@ -232,7 +254,7 @@ export function prepareChatModelRequest(
   if (reservedTokens > MAX_CHAT_RESERVED_TOKENS) throw new ChatFailure("request_too_large", 413);
 
   const prepared = Object.freeze({ reservedTokens });
-  preparedRequests.set(prepared, { body, locale: safeInput.locale, sources });
+  preparedRequests.set(prepared, { body, locale: safeInput.locale, sources, controlledKind });
   return prepared;
 }
 
@@ -246,6 +268,11 @@ export async function generatePreparedChatReply(
   const snapshot = prepared && typeof prepared === "object" ? preparedRequests.get(prepared) : undefined;
   if (!snapshot) throw new ChatFailure("forbidden", 403);
   preparedRequests.delete(prepared);
+  // These snapshots still pass the handler's identity, admission, authorized
+  // context and exact budget checks. They have no provider/tool side effects.
+  if (snapshot.controlledKind) {
+    return parseChatReply({ kind: snapshot.controlledKind, answer: "", sourceIds: [], suggestContact: true }, snapshot.sources, snapshot.locale);
+  }
   const response = await (options.fetcher ?? fetch)("https://api.openai.com/v1/responses", {
     method: "POST",
     headers: { Authorization: `Bearer ${options.apiKey}`, "Content-Type": "application/json" },

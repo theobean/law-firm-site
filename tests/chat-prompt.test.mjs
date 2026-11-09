@@ -87,7 +87,7 @@ test("the actual provider request separates trusted instructions from one user d
     schema: {
       type: "object", additionalProperties: false,
       properties: {
-        kind: { type: "string", enum: ["grounded", "handoff", "personal_handoff", "office_fees", "greeting"] },
+        kind: { type: "string", enum: ["grounded", "handoff", "personal_handoff", "office_fees", "legal_deadline", "appointment", "greeting"] },
         answer: { type: "string" },
         sourceIds: { type: "array", maxItems: 4, items: { type: "string", enum: ["office-contact", "office-identity"] } },
         suggestContact: { type: "boolean" },
@@ -110,7 +110,10 @@ test("provider instructions distinguish supported general answers from personal 
   assert.match(body.instructions, /supported general part of a mixed personal\/general question/u);
   assert.match(body.instructions, /clarification about the notary or number of lawyers/u);
   assert.match(body.instructions, /Do not infer validity, procedural stage, danger or safety of the home/u);
-  assert.match(body.instructions, /Use office_fees for a question about the office's price, fee or cost/u);
+  assert.match(body.instructions, /Use office_fees for unknown office prices/u);
+  assert.match(body.instructions, /forbids repeating a deadline from an office article/u);
+  assert.match(body.instructions, /one or two short sentences, usually under 35 words/u);
+  assert.match(body.instructions, /set suggestContact=false and omit phone numbers, email addresses and opening hours/u);
   assert.match(body.instructions, /Non-grounded wording is supplied by the application; return answer=""/u);
   assert.match(body.instructions, /Do not conduct case intake or ask diagnostic\/qualification questions/u);
   assert.match(body.instructions, /Do not ask for a preferred appointment date\/time or contact details/u);
