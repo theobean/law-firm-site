@@ -1,7 +1,8 @@
 # Chatbot content scope
 
 `src/lib/chat/knowledge.ts` supplies a small, curated snapshot to the assistant.
-Sources were inspected on **8 November 2026**. The assistant does not browse the
+The initial sources were inspected on **8 November 2026**; the Katseli-law
+introduction was added and checked on **9 November 2026**. The assistant does not browse the
 web at runtime, and a citation is not evidence of real-time legal verification.
 
 ## Server-enforced access boundary
@@ -91,10 +92,17 @@ consultations are not specified in the curated data.
 
 ## General information
 
-Eight entries provide brief, paraphrased explanations of debt settlement, the
+Nine entries provide brief, paraphrased explanations of the Katseli law, debt settlement, the
 banking Code of Conduct, credit servicers, the Greek national payment-order
 procedure, mediation, labor disputes, land-registry records and inheritance-tax
 declarations. Each entry carries its exact supporting primary-source URL.
+
+The Katseli-law entry covers only the purpose of Law 3869/2010 and conditional
+debt discharge. The common name was checked against the
+[government's 2019 announcement](https://www.government.gov.gr/to-ipourgio-ikonomikon-energopii-tin-ilektroniki-platforma-gia-ta-iperchreomena-nikokiria/)
+and the general subject against [AADE circular E.2041/2025](https://aade.gr/egkyklioi-kai-apofaseis/e-2041-08-07-2025).
+These sources do not authorize this summary to decide present-day admission,
+new applications, residence protection, payment terms or an individual case.
 
 Sources are the Ministry of Economy and Finance, Bank of Greece, European
 e-Justice Portal / European Judicial Network, Ministry of Justice, Hellenic Labour

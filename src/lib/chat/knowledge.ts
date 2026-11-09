@@ -15,11 +15,19 @@ const translations = { el, en, de };
 const officeOrigin = "https://ioannispapaioannou.lawyer";
 
 /**
- * Curated explanatory excerpts, reviewed against the linked primary sources on
- * 2026-11-08. These are a bounded snapshot, not live legal research. Keep amounts,
+ * Curated explanatory excerpts; review dates are recorded in docs/chatbot-content.md.
+ * These are a bounded snapshot, not live legal research. Keep amounts,
  * deadlines, eligibility decisions and case-specific remedies out of this data.
  */
 const legalKnowledge: readonly KnowledgeSource[] = [
+  {
+    // Reviewed 2026-11-09; a general explanation, not current eligibility advice.
+    id: "legal-katseli-law",
+    title: "ΑΑΔΕ — Ν. 3869/2010 και απαλλαγή οφειλετών",
+    url: "https://aade.gr/egkyklioi-kai-apofaseis/e-2041-08-07-2025",
+    content:
+      "Ο νόμος Κατσέλη είναι η συνήθης ονομασία του Ν. 3869/2010 για τη ρύθμιση οφειλών υπερχρεωμένων φυσικών προσώπων. Πρόκειται για δικαστικό πλαίσιο ρύθμισης χρεών, με δυνατότητα απαλλαγής από το υπόλοιπο των οφειλών υπό τις νόμιμες προϋποθέσεις. Διαφέρει από τον εξωδικαστικό μηχανισμό ρύθμισης οφειλών. Η γενική αυτή περιγραφή εξηγεί το αντικείμενο του νόμου: δεν επιβεβαιώνει δυνατότητα σημερινής υπαγωγής ή υποβολής νέας αίτησης, προστασία κατοικίας, διαγραφή χρέους, συγκεκριμένες δόσεις ή προθεσμίες. Για την εφαρμογή του σε υφιστάμενη αίτηση, δικαστική απόφαση ή προσωπική υπόθεση απαιτείται έλεγχος από δικηγόρο.",
+  },
   {
     id: "legal-debt-settlement",
     title: "Υπουργείο Οικονομικών — Εξωδικαστικός μηχανισμός",

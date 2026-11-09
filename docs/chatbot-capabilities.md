@@ -15,7 +15,7 @@ The answer still passes the existing reply/source checks and React text renderer
 
 | Component | Permitted access | Unavailable through chat |
 | --- | --- | --- |
-| Model context | Projected fields of 13 approved public sources | Case files, private CMS/database records, arbitrary URLs or documents |
+| Model context | Projected fields of 14 approved public sources | Case files, private CMS/database records, arbitrary URLs or documents |
 | Model tools | None | Functions, MCP, browsing, shell, file search and write actions |
 | Chat backend | One bounded model request; configured public JWKS lookup when OIDC is enabled | Model-chosen destinations or API credentials in context |
 | Quota backend | Two parameterized SQL function calls reserving counters and releasing owned leases | Direct table access, model-selected SQL, private case data or database administration |
