@@ -89,7 +89,7 @@ export const ADDITIONAL_BANKING_SOURCES = [
     reviewedAt: "2026-11-09",
     kind: "official-guidance",
     topics: ["consumer-complaints"],
-    keywords: ["καταγγελια καταναλωτ", "προστασια καταναλωτ", "εισπρακτικ", "εταιρειες ενημερωσης", "τηλεφωνικες οχλησ", "παρενοχληση απο εισπρακτικ", "consumer complaint", "debt collector", "collection call", "debt collection harassment", "verbraucherbeschwerde", "inkasso", "inkassounternehmen", "belastigung durch inkasso"],
+    keywords: ["καταγγελια καταναλωτ", "προστασια καταναλωτ", "εισπρακτικ", "εταιρειες ενημερωσης", "τηλεφωνικες οχλησ", "παρενοχληση απο εισπρακτικ", "επιστολ εισπρακτικ", "γραμμα εισπρακτικ", "consumer complaint", "debt collector", "collection call", "debt collection letter", "collection letter", "debt collection notice", "debt collection harassment", "verbraucherbeschwerde", "inkasso", "inkassounternehmen", "belastigung durch inkasso"],
     content: "Ο επίσημος οδηγός της Γενικής Γραμματείας Εμπορίου διαχωρίζει τις καταγγελίες και τα ερωτήματα σε κατηγορίες, μεταξύ των οποίων τραπεζικές υπηρεσίες, εταιρείες ενημέρωσης οφειλετών, ρύθμιση χρεών και προστασία προσωπικών δεδομένων. Αυτή η διάκριση δείχνει ότι ζητήματα επικοινωνίας για οφειλές, συμβάσεων και δεδομένων μπορεί να ακολουθούν διαφορετική αρμόδια διαδρομή. Η σελίδα αποτελεί οδηγό κατεύθυνσης, όχι απόφαση ότι συγκεκριμένη συμπεριφορά είναι παράνομη. Η υποβολή καταγγελίας δεν παρουσιάζεται ως αυτόματη ακύρωση χρέους, δικαστική προσφυγή ή αναστολή πλειστηριασμού. Η επιλογή φορέα για προσωπική υπόθεση απαιτεί έλεγχο του αντικειμένου της.",
   },
 ];

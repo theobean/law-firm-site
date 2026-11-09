@@ -1979,7 +1979,7 @@
     "officeName": "Ioannis Papaioannou & Associates",
     "introTitle": "How can we help?",
     "introDescription": "ΔικAIsis provides basic information about our office and services and explains general legal concepts.",
-    "legalDisclaimer": "ΔικAIsis's answers provide general information and do not constitute legal advice. Consult a lawyer about your own case.",
+    "legalDisclaimer": "General information from AI. Not legal advice.",
     "privacyNotice": "You are chatting with AI, not a lawyer. Answers do not constitute legal advice. Do not enter names, personal or sensitive information, documents or details of a case.",
     "processingNotice": "Starting ΔικAIsis loads Cloudflare Turnstile, which receives your IP address and browser security signals. After a successful check, the website sets a 24-hour security cookie for anonymous usage limits. Sending a question shares your message and recent chat history with OpenAI to generate an answer. You can contact the office without using chat.",
     "privacyLink": "Privacy policy",
@@ -2003,6 +2003,8 @@
     "placeholder": "Type a general question…",
     "send": "Send question",
     "inputHint": "No personal information · Enter to send",
+    "retryAt": "You can try again at {time} (local time).",
+    "inputTooLong": "Your message must be no longer than {limit} characters.",
     "footerNotice": "For your own case, speak to a lawyer.",
     "verification": {
       "loading": "Loading security check…",

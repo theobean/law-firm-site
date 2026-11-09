@@ -51,9 +51,9 @@ test("returns only source URLs supplied by the server and rejects invented IDs",
   assert.throws(() => parseChatReply({ kind: "grounded", answer: "Invented legal deadline", sourceIds: [], suggestContact: false }, sources), failsWith("upstream"));
 });
 
-test("non-grounded handoffs and greetings cannot smuggle factual model prose", () => {
+test("all controlled reply kinds discard factual model prose", () => {
   for (const locale of ["el", "en", "de"]) {
-    for (const kind of ["handoff", "personal_handoff", "greeting"]) {
+    for (const kind of ["handoff", "personal_handoff", "office_fees", "greeting"]) {
       const reply = parseChatReply({ kind, answer: "Invented legal deadline", sourceIds: [], suggestContact: false }, sources, locale);
       assert.ok(!reply.answer.includes("Invented legal deadline"));
       assert.equal(reply.suggestContact, kind !== "greeting");
@@ -106,14 +106,57 @@ test("personal next-step handoffs stay distinct from unsupported knowledge in ev
   }
 });
 
+test("office fee replies give only controlled manual contact in every locale", () => {
+  for (const locale of ["el", "en", "de"]) {
+    const untrusted = {
+      answer: "The office charges FAKE_PRICE_100_EURO. What is your income? Your appointment is booked.",
+      sourceIds: ["office-contact"], suggestContact: false,
+    };
+    const reply = parseChatReply({ ...untrusted, kind: "office_fees" }, sources, locale);
+    assert.ok(reply.answer.includes("+30 2310 545 261"), locale);
+    assert.ok(!/FAKE_PRICE|income|booked|\?/u.test(reply.answer), locale);
+    assert.notEqual(reply.answer, parseChatReply({ ...untrusted, kind: "handoff" }, sources, locale).answer, locale);
+    assert.notEqual(reply.answer, parseChatReply({ ...untrusted, kind: "personal_handoff" }, sources, locale).answer, locale);
+    assert.equal(reply.suggestContact, true);
+    assert.deepEqual(reply.sources, []);
+  }
+});
+
+test("every reply kind rejects unknown source IDs before controlled text is substituted", () => {
+  for (const kind of ["grounded", "handoff", "personal_handoff", "office_fees", "greeting"]) {
+    for (const sourceIds of [["invented"], ["office-contact", "invented"], [null]]) {
+      assert.throws(() => parseChatReply({ kind, answer: "Untrusted text", sourceIds, suggestContact: true }, sources), failsWith("upstream"));
+    }
+  }
+  assert.throws(() => parseChatReply({ kind: "office-fees", answer: "", sourceIds: [], suggestContact: true }, sources), failsWith("upstream"));
+});
+
 test("controlled reply kinds accept empty discarded prose while grounded answers still need text", () => {
-  for (const kind of ["handoff", "personal_handoff", "greeting"]) {
+  for (const kind of ["handoff", "personal_handoff", "office_fees", "greeting"]) {
     const reply = parseChatReply({ kind, answer: "", sourceIds: [], suggestContact: false }, sources);
     assert.ok(reply.answer.trim().length > 0);
     assert.deepEqual(reply.sources, []);
     assert.equal(reply.suggestContact, kind !== "greeting");
   }
   assert.throws(() => parseChatReply({ kind: "grounded", answer: "   ", sourceIds: ["office-contact"], suggestContact: false }, sources), failsWith("upstream"));
+});
+
+test("an unknown office fee uses the provider schema and controlled answer without a fabricated quote", async () => {
+  const input = parseChatInput({ ...valid(), messages: [{ role: "user", content: "Πόσο κοστίζει ένα διαζύγιο στο γραφείο σας;" }] });
+  const reply = await generateChatReply(input, authorizedContext(), {
+    apiKey: "test-only-key", fetcher: async (_url, options) => {
+      const body = JSON.parse(options.body);
+      assert.ok(body.text.format.schema.properties.kind.enum.includes("office_fees"));
+      return Response.json({ status: "completed", output: [{ type: "message", content: [{
+        type: "output_text", text: JSON.stringify({ kind: "office_fees", answer: "FAKE_PRICE_100_EURO", sourceIds: [], suggestContact: false }),
+      }] }] });
+    },
+  });
+  assert.ok(reply.answer.includes("αμοιβή"));
+  assert.ok(reply.answer.includes("+30 2310 545 261"));
+  assert.ok(!reply.answer.includes("FAKE_PRICE"));
+  assert.equal(reply.suggestContact, true);
+  assert.deepEqual(reply.sources, []);
 });
 
 test("a personal follow-up is accepted through the provider contract without forwarding model instructions", async () => {

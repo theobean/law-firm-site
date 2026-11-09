@@ -38,6 +38,7 @@
   transition: transform 160ms cubic-bezier(.2, .8, .2, 1), box-shadow 160ms ease, background-color 160ms ease;
 }
 .trigger svg { color: #dfb86e; flex: 0 0 auto; }
+.trigger[hidden] { display: none; }
 .trigger:hover { background: #184557; }
 .trigger:active {
   transform: translateY(2px) scale(.97);
@@ -53,7 +54,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: min(620px, calc(100dvh - var(--chat-bottom, 20px) - 88px));
+  height: min(700px, calc(100dvh - var(--chat-bottom, 20px) - 12px));
   min-height: 0;
   overflow: auto;
   border: 1px solid #d9dfe2;
@@ -104,6 +105,9 @@
 .error p { margin: 0; font-size: 11px; line-height: 1.8; }
 .error div { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; }
 .error button, .error a { border: 0; padding: 3px 0; background: transparent; color: #74322e; font-size: 10px; text-decoration: underline; text-underline-offset: 3px; }
+.cooldown, .lengthError { margin: 0 0 8px; font-size: 11px; line-height: 1.6; }
+.cooldown { color: #5e512f; }
+.lengthError { color: #863c37; }
 .verification { flex: 0 0 auto; padding: 10px 14px; border-top: 1px solid #e5e9eb; background: #fbf8f1; }
 .verificationIdle { padding: 0 14px; border-top: 0; }
 .verificationStatus { display: flex; align-items: flex-start; gap: 8px; margin: 0; color: #5e512f; font-size: 11px; line-height: 1.65; }
@@ -115,7 +119,7 @@
 
 .composer { flex: 0 0 auto; padding: 13px 14px 10px; border-top: 1px solid #e5e9eb; background: #fff; }
 .inputRow { display: flex; align-items: flex-end; gap: 9px; }
-.inputRow textarea { min-width: 0; flex: 1; min-height: 56px; max-height: 120px; resize: vertical; border: 1px solid #cdd6dc; border-radius: 4px; padding: 10px 11px; outline: none; color: #17333e; background: #fff; font: inherit; font-size: 12px; line-height: 1.6; }
+.inputRow textarea { min-width: 0; flex: 1; min-height: 48px; max-height: 120px; resize: vertical; border: 1px solid #cdd6dc; border-radius: 4px; padding: 10px 11px; outline: none; color: #17333e; background: #fff; font: inherit; font-size: 12px; line-height: 1.6; }
 .inputRow textarea:focus { border-color: #9c7428; box-shadow: 0 0 0 2px #c8922a26; }
 .inputRow textarea::placeholder { color: #798b93; }
 .inputRow button { display: flex; flex: 0 0 auto; align-items: center; justify-content: center; width: 40px; height: 40px; border: 0; border-radius: 4px; background: #0d2d3a; color: #fff; }
@@ -129,9 +133,9 @@
 @media (max-width: 639px) {
   .container { left: 12px; width: calc(100% - 24px); gap: 8px; }
   .trigger { min-height: 48px; padding: 11px 14px; font-size: 11px; }
-  .panel { height: min(600px, calc(100dvh - var(--chat-bottom, 20px) - 76px)); }
+  .panel { height: min(680px, calc(100dvh - var(--chat-bottom, 20px) - 8px)); }
   .intro { padding: 20px; }
-  .header { padding: 12px; gap: 8px; }
+  .header { padding: 10px 12px; gap: 8px; }
   .heading h2 { font-size: 13px; }
   .brandIcon { width: 32px; height: 32px; }
   .inputRow textarea { font-size: 16px; }

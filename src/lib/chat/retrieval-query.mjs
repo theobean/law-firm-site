@@ -1,8 +1,11 @@
 import { prepareChatText } from "./protocol.mjs";
+import { getPublicChatPrincipal } from "./access.mjs";
+import { getReviewedLegalTopicMatches } from "./legal-retrieval.mjs";
 
 export const MAX_RETRIEVAL_QUERY_LENGTH = 2000;
 export const MAX_RETRIEVAL_HISTORY_LENGTH = 800;
-const MAX_RECENT_USER_TURNS = 3;
+// The validated nine-message conversation has at most four prior user turns.
+const MAX_RECENT_USER_TURNS = 4;
 const MAX_FOLLOW_UP_LENGTH = 240;
 const MAX_FOLLOW_UP_WORDS = 24;
 
@@ -14,7 +17,7 @@ const followUpWords = new Set((
   "κανω κανωμε κανουμε κανετε γινεται γινει σημαινει εννοεισ εννοειτε εννοω " +
   "να θα πρεπει μπορω μπορει μπορουμε μπορεισ μπορειτε ειναι ισχυει αφορα " +
   "το τον την τα του τησ στο στη στην σε για απο με αυτο τοσο πιο λιγο απλα λογια περισσοτερα " +
-  "πεσ πειτε εξηγησε εξηγεισ εξηγησεισ εξηγησετε παρακαλω ναι ποιο ποια ποιοσ περιπτωση δικη δικο " +
+  "πεσ πεισ πειτε εξηγησε εξηγεισ εξηγησεισ εξηγησετε παρακαλω ναι ποιο ποια ποιοσ περιπτωση δικη δικο " +
   "and so then now what how why i me my we us you it this that these those " +
   "do does did should can could would will am is are be mean means apply work works " +
   "to for about in on of the a an next more please explain tell put simply simple simpler plain words yes " +
@@ -41,25 +44,42 @@ function isFollowUp(text) {
     words.every((word) => followUpWords.has(word)) && words.some((word) => followUpCues.has(word));
 }
 
-function clipHistory(text, limit) {
+function isContextualFollowUp(text) {
+  if (isFollowUp(text)) return true;
+  if (text.length > MAX_FOLLOW_UP_LENGTH) return false;
+  const words = normalizedWords(text);
+  if (!words.length || words.length > MAX_FOLLOW_UP_WORDS) return false;
+  const normalized = words.join(" ");
+  // Natural clarification phrases need not consist entirely of generic words.
+  if (/πιο απλα|απλα λογια|more simply|simpler words|plain words|einfacher|einfach erklar/u.test(normalized)) return true;
+  // Roles and immediate questions about the same process do not establish a
+  // different legal topic. Explicit approved-topic matches take priority above.
+  const contextualStem = /^(?:δικηγορ|συμβολαιογραφ|συμφων|συναινε|υπογρα|απαντη|lawyer|attorney|notar|agree|sign|respond|reply|anwalt|zustimm|einig|unterschreib|antwort)/u;
+  return words.some((word) => contextualStem.test(word)) &&
+    (/[;?;]/u.test(text) || /^(?:και|δηλαδη|χρειαζ|πρεπει|μπορ|θελει|and|so|do|does|is|are|can|should|how|what|und|also|brauche|muss|kann|was|wie)/u.test(normalized));
+}
+
+function clipHistory(text, limit, fromEnd = false) {
   // Count UTF-16 units while preserving graphemes where supported. The fallback
   // still preserves complete code points, including surrogate-pair emoji.
   const segments = typeof Intl.Segmenter === "function"
-    ? new Intl.Segmenter("und", { granularity: "grapheme" }).segment(text)
+    ? Array.from(new Intl.Segmenter("und", { granularity: "grapheme" }).segment(text), ({ segment }) => segment)
     : Array.from(text);
+  if (fromEnd) segments.reverse();
   let clipped = "";
-  for (const item of segments) {
-    const segment = typeof item === "string" ? item : item.segment;
+  for (const segment of segments) {
     if (clipped.length + segment.length > limit) break;
-    clipped += segment;
+    clipped = fromEnd ? segment + clipped : clipped + segment;
   }
   return clipped;
 }
 
 /** Build one bounded lexical query from already validated conversation turns.
  * History is untrusted search data, never instructions, evidence or permission.
- * Only clearly elliptical follow-ups inherit the nearest substantive user turn;
- * assistant content is never read, and old topics cannot override a new one.
+ * Approved metadata establishes topics without reading factual source content.
+ * Clarification/role follow-ups retain that user-established topic, while a new
+ * explicit topic or unrelated substantive turn replaces it. Assistant content
+ * is never read, and history cannot authorize sources or grant permissions.
  * @param {readonly {role: string, content: string}[]} messages
  * @returns {string}
  */
@@ -67,7 +87,15 @@ export function buildChatRetrievalQuery(messages) {
   const latest = Array.isArray(messages) ? messages[messages.length - 1] : null;
   const question = latest?.role === "user" ? prepareChatText(latest.content, 1200) : null;
   if (!question) throw new TypeError("Invalid chat retrieval input");
-  if (!isFollowUp(question)) return question;
+  const principal = getPublicChatPrincipal();
+  const topicCache = new Map();
+  const topics = (text) => {
+    if (!topicCache.has(text)) topicCache.set(text, getReviewedLegalTopicMatches(principal, text));
+    return topicCache.get(text);
+  };
+  // Canonical current topics always win, even after "and/και/und". A bare
+  // notary/lawyer/company term is not a canonical topic in the approved catalog.
+  if (topics(question).length || !isContextualFollowUp(question)) return question;
 
   let inspectedUserTurns = 0;
   for (let index = messages.length - 2; index >= 0 && inspectedUserTurns < MAX_RECENT_USER_TURNS; index--) {
@@ -75,9 +103,19 @@ export function buildChatRetrievalQuery(messages) {
     if (message?.role !== "user") continue;
     inspectedUserTurns++;
     const previous = prepareChatText(message.content, 1200);
-    if (!previous || isFollowUp(previous)) continue;
+    if (!previous) continue;
+    const previousTopics = topics(previous);
+    if (!previousTopics.length && isContextualFollowUp(previous)) continue;
     const room = Math.min(MAX_RETRIEVAL_HISTORY_LENGTH, MAX_RETRIEVAL_QUERY_LENGTH - question.length - 1);
-    const anchor = clipHistory(previous, room);
+    let anchor = clipHistory(previous, room);
+    if (previousTopics.length && previous.length > room) {
+      // A long user turn may name its topic near the end. Retain a bounded
+      // user-text window containing that topic instead of silently losing it.
+      const relevantIds = new Set(previousTopics.map(({ id }) => id));
+      const score = (text) => topics(text).reduce((sum, match) => sum + (relevantIds.has(match.id) ? match.score : 0), 0);
+      const suffix = clipHistory(previous, room, true);
+      if (score(suffix) > score(anchor)) anchor = suffix;
+    }
     return anchor ? `${question}\n${anchor}` : question;
   }
   return question;

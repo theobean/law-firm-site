@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { ArrowRight, LoaderCircle, MessageCircle, Phone, RotateCcw, Send, ShieldCheck, X } from "lucide-react";
 import { Link } from "@/navigation";
 import { parseChatResponse, readBoundedJson } from "@/lib/chat/protocol.mjs";
+import { chatRetryDeadline, isChatCoolingDown } from "@/lib/chat/retry-after.mjs";
 import ChatText from "./ChatText";
 import useChatVerification from "./useChatVerification";
 import styles from "./ChatAssistant.module.css";
@@ -34,6 +35,7 @@ export default function ChatAssistant() {
   const [typingReply, setTypingReply] = useState<{ id: number; text: string } | null>(null);
   const [error, setError] = useState<ChatError | null>(null);
   const [failedQuestion, setFailedQuestion] = useState("");
+  const [retryAt, setRetryAt] = useState<number | null>(null);
   const [bottomOffset, setBottomOffset] = useState(20);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLElement>(null);
@@ -51,6 +53,11 @@ export default function ChatAssistant() {
     locale,
   });
   const verificationBlocked = VERIFICATION_ENABLED && verification.status !== "ready";
+  const coolingDown = isChatCoolingDown(retryAt, Date.now());
+  const draftTooLong = draft.length > MAX_MESSAGE_LENGTH;
+  const retryTime = retryAt === null ? "" : new Intl.DateTimeFormat(locale, {
+    day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", second: "2-digit",
+  }).format(retryAt);
   const verificationMessage = verification.status === "loading" || verification.status === "checking" || verification.status === "interactive"
     || verification.status === "failed" || verification.status === "expired" || verification.status === "unavailable"
     ? verification.status : null;
@@ -64,6 +71,13 @@ export default function ChatAssistant() {
     observer.observe(overlays);
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (retryAt === null) return;
+    // This only re-enables manual submission. Nothing is sent automatically.
+    const timer = window.setTimeout(() => setRetryAt(null), Math.max(0, retryAt - Date.now()));
+    return () => window.clearTimeout(timer);
+  }, [retryAt]);
 
   useEffect(() => () => {
     controllerRef.current?.abort();
@@ -136,7 +150,9 @@ export default function ChatAssistant() {
   function closePanel() {
     if (VERIFICATION_ENABLED) controllerRef.current?.abort();
     setOpen(false);
-    triggerRef.current?.focus();
+    // The launcher is hidden while the panel is open; restore focus after it
+    // becomes visible in the next render.
+    requestAnimationFrame(() => triggerRef.current?.focus());
   }
 
   function resetConversation() {
@@ -155,7 +171,8 @@ export default function ChatAssistant() {
 
   async function sendQuestion(question: string) {
     const content = question.trim();
-    if (!activated || requestPendingRef.current || verificationBlocked || !content || content.length > MAX_MESSAGE_LENGTH) return;
+    if (!activated || requestPendingRef.current || verificationBlocked ||
+        isChatCoolingDown(retryAt, Date.now()) || !content || question.length > MAX_MESSAGE_LENGTH) return;
     finishTyping();
     requestPendingRef.current = true;
     const controller = new AbortController();
@@ -205,6 +222,9 @@ export default function ChatAssistant() {
         setDraft(content);
         setFailedQuestion(content);
         setError(code);
+        if (response.status === 429 && code === "rate_limit") {
+          setRetryAt(chatRetryDeadline(response.headers.get("Retry-After"), Date.now()));
+        }
         return;
       }
       const replyId = ++sequenceRef.current;
@@ -291,7 +311,7 @@ export default function ChatAssistant() {
                 {messages.length === 0 && (
                   <div className={styles.starters}>
                     {["starterOffice", "starterLegal", "starterAppointment"].map((key) => (
-                      <button key={key} type="button" onClick={() => void sendQuestion(t(key))} disabled={loading || verificationBlocked}>
+                      <button key={key} type="button" onClick={() => void sendQuestion(t(key))} disabled={loading || verificationBlocked || coolingDown}>
                         {t(key)} <ArrowRight size={14} aria-hidden="true" />
                       </button>
                     ))}
@@ -316,7 +336,7 @@ export default function ChatAssistant() {
                   <div className={styles.error} role="alert">
                     <p>{t(VERIFICATION_ENABLED && error === "unauthorized" ? "verification.failed" : `errors.${error}`)}</p>
                     <div>
-                      <button type="button" onClick={() => void sendQuestion(failedQuestion)} disabled={loading || verificationBlocked}>{t("retry")}</button>
+                      <button type="button" onClick={() => void sendQuestion(failedQuestion)} disabled={loading || verificationBlocked || coolingDown}>{t("retry")}</button>
                       <Link href="/contact">{t("contactOffice")}</Link>
                     </div>
                   </div>
@@ -342,6 +362,8 @@ export default function ChatAssistant() {
               )}
 
               <form onSubmit={onSubmit} className={styles.composer}>
+                {coolingDown && <p id={`${inputId}-cooldown`} className={styles.cooldown} role="status">{t("retryAt", { time: retryTime })}</p>}
+                {draftTooLong && <p id={`${inputId}-length`} className={styles.lengthError} role="alert">{t("inputTooLong", { limit: MAX_MESSAGE_LENGTH })}</p>}
                 <label className={styles.srOnly} htmlFor={inputId}>{t("inputLabel")}</label>
                 <div className={styles.inputRow}>
                   <textarea
@@ -357,12 +379,13 @@ export default function ChatAssistant() {
                     }}
                     placeholder={t("placeholder")}
                     maxLength={MAX_MESSAGE_LENGTH}
-                    rows={2}
+                    rows={1}
                     disabled={loading || (VERIFICATION_ENABLED && verification.status === "unavailable")}
                     autoComplete="off"
-                    aria-describedby={`${inputId}-hint${VERIFICATION_ENABLED && verificationMessage ? ` ${inputId}-verification` : ""}`}
+                    aria-invalid={draftTooLong || undefined}
+                    aria-describedby={`${inputId}-hint${VERIFICATION_ENABLED && verificationMessage ? ` ${inputId}-verification` : ""}${coolingDown ? ` ${inputId}-cooldown` : ""}${draftTooLong ? ` ${inputId}-length` : ""}`}
                   />
-                  <button type="submit" disabled={loading || verificationBlocked || !draft.trim()} aria-label={t("send")} title={t("send")}>
+                  <button type="submit" disabled={loading || verificationBlocked || coolingDown || draftTooLong || !draft.trim()} aria-label={t("send")} title={t("send")}>
                     {loading ? <LoaderCircle size={18} className={styles.spinner} /> : <Send size={18} />}
                   </button>
                 </div>
@@ -381,7 +404,7 @@ export default function ChatAssistant() {
         </section>
       )}
 
-      <button ref={triggerRef} type="button" onClick={() => open ? closePanel() : setOpen(true)} className={styles.trigger} aria-expanded={open} aria-controls={panelId} aria-label={open ? t("close") : t("open")}>
+      <button ref={triggerRef} hidden={open} type="button" onClick={() => setOpen(true)} className={styles.trigger} aria-expanded={open} aria-controls={panelId} aria-label={t("open")}>
         {open ? <X size={22} aria-hidden="true" /> : <MessageCircle size={22} aria-hidden="true" />}
         <span className={styles.triggerCopy}>
           <span className={styles.triggerName}>{t("title")}</span>

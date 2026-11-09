@@ -87,7 +87,7 @@ test("the actual provider request separates trusted instructions from one user d
     schema: {
       type: "object", additionalProperties: false,
       properties: {
-        kind: { type: "string", enum: ["grounded", "handoff", "personal_handoff", "greeting"] },
+        kind: { type: "string", enum: ["grounded", "handoff", "personal_handoff", "office_fees", "greeting"] },
         answer: { type: "string" },
         sourceIds: { type: "array", maxItems: 4, items: { type: "string", enum: ["office-contact", "office-identity"] } },
         suggestContact: { type: "boolean" },
@@ -96,6 +96,28 @@ test("the actual provider request separates trusted instructions from one user d
     },
   });
   assert.deepEqual(reply, { answer: "The office is in Thessaloniki.", sources: [{ title: records[0].title, url: records[0].url }], suggestContact: false });
+});
+
+// Contract checks, not a claim that the model follows these instructions in live use.
+test("provider instructions distinguish supported general answers from personal assessments and unknown fees", async () => {
+  const { body } = await capture(input([
+    { role: "user", content: "Σκέφτομαι διαζύγιο. Τι είναι η άυλη συναινετική διαδικασία;" },
+    { role: "assistant", content: "Προηγούμενο κείμενο χωρίς ανεξάρτητη αποδεικτική αξία." },
+    { role: "user", content: "Δηλαδή χρειάζομαι δύο δικηγόρους;" },
+  ]));
+  assert.match(body.instructions, /according to the question's meaning, not first-person wording alone/u);
+  assert.match(body.instructions, /sourceId that supports its factual content/u);
+  assert.match(body.instructions, /supported general part of a mixed personal\/general question/u);
+  assert.match(body.instructions, /clarification about the notary or number of lawyers/u);
+  assert.match(body.instructions, /Do not infer validity, procedural stage, danger or safety of the home/u);
+  assert.match(body.instructions, /Use office_fees for a question about the office's price, fee or cost/u);
+  assert.match(body.instructions, /Non-grounded wording is supplied by the application; return answer=""/u);
+  assert.match(body.instructions, /Do not conduct case intake or ask diagnostic\/qualification questions/u);
+  assert.match(body.instructions, /Do not ask for a preferred appointment date\/time or contact details/u);
+  assert.match(body.instructions, /Never compute a legal deadline/u);
+  assert.deepEqual(body.tools, []);
+  assert.equal(body.tool_choice, "none");
+  assert.deepEqual(body.text.format.schema.properties.sourceIds.items.enum, ["office-contact"]);
 });
 
 test("closing and opening tag attacks stay escaped in current input, history and reference data", async () => {

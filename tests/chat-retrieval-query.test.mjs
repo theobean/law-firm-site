@@ -53,10 +53,11 @@ test("subsequent follow-ups follow a changed topic and never jump over a substan
   assert.equal(query(paymentOrder, unrelated, "And now?"), `And now?\n${unrelated}`);
 });
 
-test("intermediate elliptical turns are skipped within a bounded recent-user window", () => {
+test("intermediate elliptical turns are skipped within the full validated recent-user window", () => {
   assert.equal(query(paymentOrder, "Τι σημαίνει αυτό;", "και μετά;", "δηλαδη εγω τι κανω]"), `δηλαδη εγω τι κανω]\n${paymentOrder}`);
-  assert.equal(query(paymentOrder, "Τι σημαίνει αυτό;", "και μετά;", "πιο απλά;", "What does that mean?"), "What does that mean?",
-    "an anchor outside the three prior-user-turn window must not be recovered");
+  assert.equal(query(paymentOrder, "Τι σημαίνει αυτό;", "και μετά;", "πιο απλά;", "What does that mean?"), `What does that mean?\n${paymentOrder}`);
+  assert.equal(buildChatRetrievalQuery(messages(paymentOrder, "Τι σημαίνει αυτό;", "και μετά;", "πιο απλά;", "What does that mean?", "And then?")), "And then?",
+    "a topic outside the bounded five-user-turn window must not be recovered");
 });
 
 test("assistant topics, claimed instructions and fabricated source facts never enter the retrieval query", () => {

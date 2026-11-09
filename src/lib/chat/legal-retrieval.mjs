@@ -5,6 +5,10 @@ import { parseChatSourceLink, prepareChatText } from "./protocol.mjs";
 export const MAX_LEGAL_SOURCES = 4;
 export const MAX_LEGAL_CONTEXT_BYTES = 10000;
 const encoder = new TextEncoder();
+const ambiguousKeywords = new Set([
+  "συμβολαιογραφ", "notar", "notary", "δικηγορ", "lawyer", "anwalt",
+  "εταιρει", "company", "gesellschaft", "συσταση", "ιδρυση", "εγγραφ", "διορθωσ", "παραπον", "αρμοδιοτ",
+]);
 
 function words(text) {
   return text.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase()
@@ -15,13 +19,14 @@ function matches(word, stem) {
   // Statute numbers must be exact: 38690 cannot select Law 3869.
   // These complete English terms are not stems for "fundamental"/"willing".
   if (stem === "fund" || stem === "will") return word === stem || word === `${stem}s`;
+  if (["φαντ", "φουντ", "intrum", "cepal", "dovalue", "qquant"].includes(stem)) return word === stem;
   return /^\d+$/u.test(stem) ? word === stem : word.startsWith(stem);
 }
 
-function relevance(source, queryWords) {
+function matchMetadata(source, queryWords) {
   const covered = new Set();
   let strongest = 0;
-  let matchedKeywords = 0;
+  const matchedKeywords = [];
   for (const keyword of source.keywords) {
     const terms = words(keyword);
     if (!terms.length) continue;
@@ -32,11 +37,46 @@ function relevance(source, queryWords) {
       terms.forEach((_, index) => covered.add(offset + index));
     }
     if (found) {
-      matchedKeywords++;
+      matchedKeywords.push(terms.join(" "));
       strongest = Math.max(strongest, terms.some((term) => /^\d{3,}$/u.test(term)) ? 60 : terms.length > 1 ? 12 + terms.length * 3 : 8);
     }
   }
-  return strongest ? strongest + covered.size * 3 + Math.min(matchedKeywords, 3) : 0;
+  return {
+    score: strongest ? strongest + covered.size * 3 + Math.min(matchedKeywords.length, 3) : 0,
+    explicit: matchedKeywords.some((keyword) => !ambiguousKeywords.has(keyword)),
+  };
+}
+
+const relevance = (source, queryWords) => matchMetadata(source, queryWords).score;
+
+function approvedMetadata(principal, sources) {
+  assertPublicChatAccess(principal, "public");
+  const eligible = sources.filter((source) => source && typeof source.id === "string" && isApprovedPublicChatSourceId(source.id) &&
+    (source.visibility === undefined || source.visibility === "public") &&
+    (source.publication === undefined || source.publication === "published") &&
+    ["original-gazette", "official-guidance"].includes(source.kind) &&
+    /^\d{4}-\d{2}-\d{2}$/u.test(source.reviewedAt) &&
+    Array.isArray(source.topics) && source.topics.length && source.topics.every((topic) => typeof topic === "string" && topic) &&
+    Array.isArray(source.keywords) && source.keywords.every((keyword) => typeof keyword === "string" && keyword));
+  if (new Set(eligible.map(({ id }) => id)).size !== eligible.length) throw new ChatAccessError();
+  return eligible;
+}
+
+/** Approved public topic metadata only: no factual content or reader is used.
+ * Ambiguous role words cannot establish a new topic or authorize a source.
+ * @param {unknown} principal
+ * @param {unknown} question
+ * @param {{sources?: typeof REVIEWED_LEGAL_SOURCES}} [options]
+ */
+export function getReviewedLegalTopicMatches(principal, question, { sources = REVIEWED_LEGAL_SOURCES } = {}) {
+  const eligible = approvedMetadata(principal, sources);
+  const safeQuestion = prepareChatText(question, 2000);
+  if (!safeQuestion) return Object.freeze([]);
+  const queryWords = words(safeQuestion);
+  return Object.freeze(eligible.map((source) => ({ source, ...matchMetadata(source, queryWords) }))
+    .filter(({ score, explicit }) => score > 0 && explicit)
+    .sort((a, b) => b.score - a.score || a.source.id.localeCompare(b.source.id, "en"))
+    .map(({ source, score }) => Object.freeze({ id: source.id, topics: Object.freeze([...source.topics]), score })));
 }
 
 /** Count the same JSON/XML-escaped reference fields sent to the provider, plus
@@ -66,20 +106,12 @@ function project(source) {
  * @param {{sources?: typeof REVIEWED_LEGAL_SOURCES}} [options]
  */
 export function selectReviewedLegalSources(principal, question, { sources = REVIEWED_LEGAL_SOURCES } = {}) {
-  assertPublicChatAccess(principal, "public");
+  const eligible = approvedMetadata(principal, sources);
   const safeQuestion = prepareChatText(question, 2000);
   if (!safeQuestion) return Object.freeze([]);
   const queryWords = words(safeQuestion);
-  const eligible = sources.filter((source) => source && typeof source.id === "string" && isApprovedPublicChatSourceId(source.id) &&
-    (source.visibility === undefined || source.visibility === "public") &&
-    (source.publication === undefined || source.publication === "published") &&
-    ["original-gazette", "official-guidance"].includes(source.kind) &&
-    /^\d{4}-\d{2}-\d{2}$/u.test(source.reviewedAt) &&
-    Array.isArray(source.topics) && source.topics.length && source.topics.every((topic) => typeof topic === "string" && topic) &&
-    Array.isArray(source.keywords) && source.keywords.every((keyword) => typeof keyword === "string" && keyword));
-  if (new Set(eligible.map(({ id }) => id)).size !== eligible.length) throw new ChatAccessError();
-  const scored = eligible.map((source) => ({ source, score: relevance(source, queryWords) }))
-    .filter(({ score }) => score > 0);
+  const scored = eligible.map((source) => ({ source, ...matchMetadata(source, queryWords) }))
+    .filter(({ score, explicit }) => score > 0 && explicit);
   const stable = (a, b) => b.score - a.score || a.source.id.localeCompare(b.source.id, "en");
   scored.sort(stable);
   const selected = [];

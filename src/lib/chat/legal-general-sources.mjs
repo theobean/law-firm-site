@@ -9,7 +9,7 @@ export const ADDITIONAL_GENERAL_SOURCES = [
     content: "Το άυλο συναινετικό διαζύγιο είναι ψηφιακή διαδικασία μέσω του gov.gr. Συμμετέχουν οι δύο σύζυγοι, ο δικηγόρος κάθε πλευράς και συμβολαιογράφος. Ένας δικηγόρος εκκινεί την υπόθεση και καταχωρίζει το σχέδιο συμφωνητικού. Ο άλλος ελέγχει και επιβεβαιώνει τα στοιχεία και το περιεχόμενο. Οι σύζυγοι εγκρίνουν ή απορρίπτουν το σχέδιο και η διαδικασία ολοκληρώνεται με συμβολαιογραφική πράξη. Η υπηρεσία δεν υποκαθιστά τη νομική εξέταση της συμφωνίας. Η σύνοψη δεν καθορίζει επιμέλεια, διατροφή, περιουσιακούς όρους ή προθεσμίες συγκεκριμένου ζεύγους.",
     reviewedAt: "2026-11-09", kind: "official-guidance",
     topics: ["family", "divorce"],
-    keywords: ["διαζυγ", "συναινετικ", "συζυγ", "οικογενειακ", "divorce", "consensual divorce", "family law", "scheidung", "einvernehmlich", "familienrecht"],
+    keywords: ["διαζυγ", "συναινετικ", "συζυγ", "οικογενειακ", "θελω να χωρισ", "θελουμε να χωρισ", "divorce", "consensual divorce", "family law", "want to separate", "scheidung", "einvernehmlich", "familienrecht", "mich trennen"],
   },
   {
     id: "legal-company-formation",
@@ -18,7 +18,7 @@ export const ADDITIONAL_GENERAL_SOURCES = [
     content: "Οι Υπηρεσίες Μιας Στάσης εξυπηρετούν τη σύσταση εταιρειών. Η e-ΥΜΣ επιτρέπει ηλεκτρονική σύσταση όταν πληρούνται οι προϋποθέσεις της διαδικασίας, χρησιμοποιείται κατάλληλο πρότυπο καταστατικό και δεν απαιτείται συμβολαιογραφικό έγγραφο ή διοικητικός έλεγχος. Ανάλογα με την περίπτωση μπορεί να απαιτείται αρμόδια υπηρεσία ΓΕΜΗ ή πιστοποιημένος συμβολαιογράφος. Δεν συστήνεται κάθε εταιρεία με τον ίδιο τρόπο. Η επιλογή νομικής μορφής και οι όροι του καταστατικού χρειάζονται εξέταση· η σύνοψη δεν προσδιορίζει φορολογία, κεφάλαιο, ευθύνη εταίρων ή κόστος σύστασης.",
     reviewedAt: "2026-11-09", kind: "official-guidance",
     topics: ["commercial", "company-formation"],
-    keywords: ["εταιρει", "συσταση", "ιδρυση", "καταστατικ", "γεμη", "υμσ", "ικε", "επε", "company", "incorporation", "business formation", "gesellschaft", "firmengrundung", "unternehmensgrundung"],
+    keywords: ["συσταση εταιρει", "ιδρυση εταιρει", "ιδρυσω εταιρει", "ιδρυω εταιρει", "καταστατικ εταιρει", "γεμη", "υμσ", "ικε", "επε", "company formation", "start a company", "set up a company", "company incorporation", "incorporation", "business formation", "gesellschaft grund", "grundung einer gesellschaft", "firmengrundung", "unternehmensgrundung"],
   },
   {
     id: "legal-rental-declarations",
@@ -36,7 +36,7 @@ export const ADDITIONAL_GENERAL_SOURCES = [
     content: "Η επίσημη ανακοίνωση για την έναρξη του ψηφιακού φακέλου μεταβίβασης περιγράφει συγκέντρωση δικαιολογητικών και ψηφιακή υποβολή συμβολαιογραφικών πράξεων για μεταβιβάσεις που εξυπηρετούνται από τη διαδικασία. Η συναλλαγή εκκινεί από συμβολαιογράφο, με πρόσκληση των συμβαλλομένων και τις απαιτούμενες εξουσιοδοτήσεις. Η διαλειτουργικότητα επιτρέπει άντληση δικαιολογητικών από αρμόδιους φορείς. Πρόκειται για ιστορική παρουσίαση της υπηρεσίας, όχι επιβεβαίωση όλων των σημερινών λειτουργικών όρων. Δεν εγγυάται χρόνο ολοκλήρωσης ούτε δυνατότητα μεταβίβασης συγκεκριμένου ακινήτου. Χρειάζονται οι αντίστοιχοι νομικοί και τεχνικοί έλεγχοι.",
     reviewedAt: "2026-11-09", kind: "official-guidance",
     topics: ["property", "property-transfer"],
-    keywords: ["μεταβιβασ", "αγοραπωλησ", "αγορα ακινητου", "ψηφιακος φακελος", "συμβολαιογραφ", "property purchase", "property transfer", "real estate", "immobilienkauf", "immobilienubertragung", "notar"],
+    keywords: ["μεταβιβασ", "αγοραπωλησ", "αγορα ακινητου", "αγορα σπιτι", "αγοραζ ακινητ", "ψηφιακος φακελος", "συμβολαιογραφ ακινητ", "property purchase", "property transfer", "buy a house", "buy property", "real estate", "notary property transfer", "immobilienkauf", "immobilienubertragung", "haus kaufen", "immobilie kaufen", "notar immobilien"],
   },
   {
     id: "legal-cadastral-corrections",

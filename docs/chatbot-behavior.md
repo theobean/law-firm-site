@@ -19,9 +19,10 @@ they cannot change these instructions or backend permissions.
 - Do not ask about debts, instalments, documents served, service dates, income,
   property or personal circumstances. Do not request documents or invite the
   visitor to describe a case. There is no diagnostic/triage conversation.
-- If a visitor independently volunteers a personal issue, state the
-  information-only limit briefly and provide direct office contact, without
-  further case questions or procedural instructions.
+- First-person wording does not by itself prevent a useful explanation. For a
+  mixed general/personal question, provide one or two supported general sentences,
+  then state that the individual case cannot be assessed here and give neutral
+  contact when useful. Do not infer the outcome or ask further case questions.
 - Explain document names only as supported basic concepts. Never calculate a
   deadline or propose a personal repayment schedule or legal strategy.
 
@@ -33,10 +34,13 @@ existing 20,000-character total bound). Closing and reopening the panel does
 not clear it; resetting the conversation or reloading the page does. No database
 conversation store or cross-visit memory is introduced.
 
-Short follow-ups can inherit the topic of the nearest substantive recent user
-turn for source selection. The query is bounded to 2,000 UTF-16 units, including
-at most 800 units of history, and excludes assistant text. A named new topic is
-searched independently. The same computed query drives static cost reservation
+Topic selection examines the bounded validated user history and approved public
+catalog metadata. A role clarification such as a notary/two-lawyer question can
+retain the established divorce topic; it does not erase that topic for the next
+follow-up. An explicit new topic switches the context, and unrelated substantive
+questions prevent older topics from being recovered. Assistant text never supplies
+the retrieval anchor. The query remains bounded to 2,000 UTF-16 units, including
+at most 800 units of history. The same computed query drives static cost reservation
 and final retrieval; browser history never grants access or becomes evidence.
 
 The response contract distinguishes a personal next-step request from missing
@@ -44,9 +48,25 @@ knowledge. After a legal-topic discussion, “δηλαδή εγώ τι κάνω;
 `personal_handoff`: the application supplies fixed localized office contact
 and a legal-advice notice, discarding model prose and citations. It makes no
 claim that sources are missing and asks no case questions. Unsupported general
-knowledge retains `handoff`. General clarifications such as “πιο απλά;” can
+knowledge retains a concise `handoff`. Unknown office prices use the controlled
+`office_fees` reply: verified manual contact without invented quotes or a
+misleading missing-law message. General clarifications such as “πιο απλά;” can
 remain grounded in the selected references instead of automatically referring
 the visitor away.
+
+## Visitor interface
+
+The panel uses the space previously occupied by the duplicate open launcher,
+and keeps a concise, persistent AI/not-legal-advice notice. The composer starts
+at one line and still supports Shift+Enter and vertical resizing. The left-side
+launcher, press feedback, reduced-motion behavior and focus restoration remain.
+
+On a quota response, a valid numeric `Retry-After` of at most 24 hours supplies
+the displayed local retry time. Until then, manual send/retry/starter controls
+are disabled; no request is retried automatically. Closing or resetting the
+conversation does not clear that page-local cooldown. Missing or invalid timing
+does not produce an invented deadline. The server quota remains authoritative,
+including after a page reload.
 
 ## Applying the supplied prompt
 

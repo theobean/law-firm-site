@@ -142,7 +142,23 @@ const initialMetadata = {
       "διαχειριστ",
       "διαχειριση απαιτησ",
       "credit purchaser",
-      "kreditdienstleist"
+      "kreditdienstleist",
+      "φαντ",
+      "φουντ",
+      "εταιρει διαχειρισ",
+      "διαχειρισ απαιτη",
+      "διαχειρισ δανει",
+      "debt management company",
+      "servicing company",
+      "loan servicing",
+      "kreditkaufer",
+      "forderungsdienstleist",
+      "intrum",
+      "cepal",
+      "dovalue",
+      "qquant",
+      "το δανει μου πουλη",
+      "αγορασ το δανει"
     ]
   ],
   "legal-payment-order": [
