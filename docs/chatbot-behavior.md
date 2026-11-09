@@ -21,6 +21,9 @@ they cannot change these instructions or backend permissions.
   Responses also requests low text verbosity while retaining the structured
   output schema and full validation. This is a generation preference, not a
   word-count guarantee or a reason to omit necessary qualifications.
+  Short style examples illustrate role clarifications and simplification only;
+  their facts may be used only when selected references support the full claim.
+  They do not grant knowledge or replace source-ID validation.
 - For routine definitions and role clarifications, omit repeated disclaimers,
   contact details and workflow descriptions, and set `suggestContact=false`.
   Give verified contact when requested or needed for individual review, normally
