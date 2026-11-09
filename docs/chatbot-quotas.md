@@ -38,7 +38,7 @@ of `chat_quota.reserve` and `chat_quota.release`. They receive no direct table
 read/write, schema creation, temporary-table, role-management or administrative
 permissions. Runtime roles are not schema owners and inherit no owner role.
 
-The two functions use a fixed search path, qualified objects and validated
+The three permitted call signatures use a fixed search path, qualified objects and validated
 parameters under a separate non-login owner. Public execution is revoked.
 `session_user` selects the provisioned namespace; the environment parameter must
 match that mapping. The model receives neither a connection string nor any SQL
@@ -51,6 +51,13 @@ is mandatory, positive and calculated on the server before database admission.
 The installation removes the old six-argument overload, so an older caller
 cannot bypass the financial guard. Runtime roles cannot directly read, alter or
 reset `chat_quota.money_budgets`.
+
+The two-argument `release(environment, lease_uuid)` retains the full financial
+charge when usage is unknown. The three-argument overload additionally accepts
+only a server-calculated settled cost bounded by that new lease's original
+reservation. It can return unused money once, for an unexpired lease in the
+same UTC day. Legacy NULL metadata, expiry and cross-day completion never
+refund money. Neither overload refunds subject, network or global abuse units.
 
 Use the helper's generated scoped runtime URL as the Vercel Secret
 `CHAT_DATABASE_URL`, limited to the intended environment/branch. An automatically
@@ -162,10 +169,16 @@ model, tier, prices and review dates are checked and updated. See
 [chatbot-security.md](chatbot-security.md) for the pinned price/FX policy and
 primary references.
 
-These are conservative API-usage reservations, not measured billing counts or
-a guarantee of the final tax/card/FX invoice. Unused headroom, context/provider
-failures, cancellation and lost responses never refund an accepted reservation.
-Lease release affects concurrency only. There is no automatic top-up or paid
+These are conservative API-usage estimates, not a guarantee of the final
+tax/card/FX invoice. A completed, validated reply with consistent usage from the
+pinned default-tier model may settle its new reservation using the reported
+input and entire output counts, the same prices/ECB method and 10% margin.
+Only an application-owned no-provider snapshot reports zero usage. Unknown or
+invalid usage, context/provider/validation failure, cancellation and lost
+responses retain the full charge. Older reservations are not reconstructed or
+reduced from dashboard totals. Lease cleanup and any eligible financial delta
+commit atomically once; an ambiguous cleanup timeout is never retried.
+There is no automatic top-up or paid
 upgrade. The cap covers this proxy's active namespace/environment; another
 active environment needs a shared allowance or an explicitly allocated separate
 budget before activation, rather than silently duplicating a site-wide promise.
@@ -175,7 +188,8 @@ budget before activation, rather than silently duplicating a site-wide promise.
 Before database admission, preparation counts every UTF-8 byte of the serialized
 static provider payload, including instructions, authorized static context,
 history and schema, plus 4096 framing units and 1800 generated-token allowance.
-The route adds 12,000 units of article headroom, capped at 64,000, and reserves
+The route adds 24,000 units of bounded article headroom for both reference text
+and literal evidence choices, capped at 64,000 total units, and reserves
 once before any live CMS read. Exhausted visitors cannot trigger that reader.
 After retrieval, the exact serialized final request cost must fit the reserved
 envelope and the 64,000-unit ceiling, or fail with 413 before a provider call.
@@ -186,7 +200,7 @@ limits do not control the reservation.
 The prepared request is frozen, process-local and single-use. After admission,
 the provider sends its exact captured body with `max_output_tokens: 1800`.
 Reasoning/non-visible generation is included in that output limit. Successful
-reservations are not refunded after context/preparation/provider failure, cancellation or lost
+abuse reservations are not refunded after context/preparation/provider failure, cancellation or lost
 responses, preventing error/retry loops from bypassing token or EUR budgets.
 
 Each admitted call owns a UUID lease counted across its subject, network and
@@ -217,7 +231,8 @@ or privileges.
 test database. Administrative fixture access remains separate from the scoped
 runtime credential. The suite uses isolated test roles/namespaces for concurrent
 subject/network/global admission, token spikes, daily token and EUR limits,
-UTC monetary rollover, lease ownership, no refunds and permission denials.
+UTC monetary rollover, lease ownership, bounded monetary settlement, unknown-cost
+forfeiture, unchanged abuse counters and permission denials.
 Authenticated identities appear only as dormant-policy fixtures. It never calls an LLM or
 reads another application's records. Pipe a credential manager's in-memory JSON
 object with `adminUrl`, `runtimeUrl` and `designatedTestDatabase: true` to stdin;

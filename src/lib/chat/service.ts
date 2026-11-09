@@ -1,6 +1,7 @@
 import { parseChatResponse, prepareChatText, readBoundedJson } from "./protocol.mjs";
 import { readAuthorizedChatSources, type AuthorizedChatContext } from "./access.mjs";
 import { CHAT_BUDGET_MODEL } from "./money.mjs";
+import { buildEvidenceSchema } from "./evidence-schema.mjs";
 import { containsProceduralDeadline, isProceduralDeadlineQuestion } from "./deadline-policy.mjs";
 import { appointmentReply, classifyAppointmentRequest } from "./booking-policy.mjs";
 import { classifyInformationQuestion, informationReply, INFORMATION_REPLY_KINDS, needsPersonalLawyerContact } from "./response-policy.mjs";
@@ -110,7 +111,7 @@ Answer in ${language}, in a calm, professional and understandable tone. Explain 
 - Prefer the approved office FAQ summaries for office services, contact channels and how the office works. This preference does not override the legal source hierarchy, privacy boundaries or other instructions. You have not ingested the entire website; a page, FAQ, judgment or case study is available only when its approved excerpt is actually present in reference_material.
 - Give general explanations of Greek legal concepts ONLY to the extent supported by the reference material. The references are topic-selected, reviewed summaries, NOT a live search or a comprehensive statement of current law. A source review date records inspection, not its legal effective date or certification of current consolidated law. Do not claim to have checked current legislation or the visitor's documents. Select the sourceIds that actually support the answer. Every factual office/legal answer needs at least one supporting sourceId.
 - Ground each factual sentence, not just the topic. A source about an employer's duty to inform does not by itself define dependent employment; a title or adjacent concept is not evidence. Keep the source's qualifications, distinguish definitions from duties and possibilities from findings, and do not invent exclusive contact methods using words such as "only". If the available text cannot support the requested definition, state that limit instead of constructing one from nearby facts.
-- For every selected sourceId in a grounded reply, return one evidence entry with that sourceId and a quote copied exactly from its supplied content (20 to 400 characters). Choose passages that support every factual statement in the answer, including qualifications; do not cite a provenance label alone. Do not alter punctuation, add ellipses or quote browser history. The evidence stays internal and is never displayed. Non-grounded replies have evidence=[]. An exact quote establishes provenance, not permission to extend its meaning.
+- For every selected sourceId in a grounded reply, return one evidence entry with that sourceId and choose a quote from that source's supplied literal passage options (20 to 300 characters). Do not compose, merge, shorten or re-encode quotes. Choose passages that support every factual statement in the answer, including qualifications; do not cite a provenance label alone. Do not alter punctuation, add ellipses or quote browser history. The evidence stays internal and is never displayed. Non-grounded replies have evidence=[]. An exact quote establishes provenance, not permission to extend its meaning.
 - Explain supported general concepts directly and usefully. Mention the specific source limitation when the question depends on current procedure, eligibility or individual facts; do not replace an available general explanation with a generic referral. Missing material still requires an honest handoff, never completion from model memory.
 - Source hierarchy: the references labelled ΠΡΩΤΟΓΕΝΗΣ ΝΟΜΟΘΕΣΙΑ from the National Printing Office (et.gr) are original Gazette publications. Prefer them for the identity and general purpose of those statutes, while treating them as dated original texts, not consolidated current law. Official guidance supplies only the explanations actually included. References labelled ΑΡΘΡΟ ΤΟΥ ΓΡΑΦΕΙΟΥ are dated author commentary, not primary legislation or independently verified case law. Attribute their interpretations to the author/article instead of presenting them as the law or a court's verified ruling. If sources conflict or later amendments are not available, state the limit and recommend lawyer review rather than deciding current legal effect.
 - Never invent a successful case, write-off, court decision, finality of a judgment or the office's involvement. A case study or ruling may be discussed only to the extent an approved, anonymised public excerpt explicitly establishes those facts. An article discussing a court decision is not the decision itself. Past results never establish the outcome of another case. Do not calculate or propose instalment plans, payment amounts, debt reductions or personal settlement terms.
@@ -299,17 +300,7 @@ export function prepareChatModelRequest(
               kind: { type: "string", enum: REPLY_KINDS },
               answer: { type: "string" },
               sourceIds: { type: "array", maxItems: 4, items: { type: "string", enum: sources.map((source) => source.id) } },
-              evidence: {
-                type: "array", maxItems: 4,
-                items: {
-                  type: "object", additionalProperties: false,
-                  properties: {
-                    sourceId: { type: "string", enum: sources.map((source) => source.id) },
-                    quote: { type: "string", minLength: 20, maxLength: 400 },
-                  },
-                  required: ["sourceId", "quote"],
-                },
-              },
+              evidence: buildEvidenceSchema(sources),
               suggestContact: { type: "boolean" },
             },
             required: ["kind", "answer", "sourceIds", "evidence", "suggestContact"],

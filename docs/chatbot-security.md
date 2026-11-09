@@ -39,7 +39,11 @@ Network and global limits therefore remain necessary.
 The server then calculates the bounded token and EUR reservation, and shared
 Neon admission happens before live article lookup or a model call. All visitors
 still receive public context only. After admission, every outcome releases its
-owned concurrency lease but does not refund abuse or monetary reservations.
+owned concurrency lease. Abuse reservations are never refunded. A new monetary
+reservation may settle once from consistent completed provider usage after reply
+validation, or to zero for a server-owned no-provider reply; unknown/error usage,
+old metadata, expiry and UTC rollover retain the full financial charge. Dashboard
+totals never select a refund. See `chatbot-quotas.md` for the exact boundaries.
 
 ## Five-euro global daily API-usage reservation
 

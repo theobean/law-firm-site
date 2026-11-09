@@ -51,9 +51,13 @@ they cannot change these instructions or backend permissions.
   visitor's particular document, entry, entitlement or outcome. Do not invent
   exclusive contact rules or current procedural guarantees.
 
-Grounded replies require internal exact-substring evidence for each selected
-source ID, in addition to the existing source/schema checks. Evidence is not
-displayed. Matching a source quote establishes provenance, not semantic
+Grounded generation selects internal evidence from finite literal passage
+choices of 20–300 characters. Each nested schema branch binds its quote choices
+to one authorized source ID; full source content is retained, with all excerpt
+text covered by the choices. The separate parser retains its 20–400-character
+exact-substring boundary and single-layer transport handling, in addition to
+the source/schema checks. Evidence is not displayed. Matching a source quote
+establishes provenance, not semantic
 entailment, complete claim coverage or current legal accuracy; the wording
 still needs representative live review. See [content boundaries](chatbot-content.md)
 for the evidence limits and corrected source definitions.
@@ -230,7 +234,10 @@ on 9 November 2026. It exposed wrong office-hours routing, lost general-topic
 follow-ups, definition/qualification problems and unsuitable generic handoffs.
 The current changes address those findings; the baseline is not a live pass
 for the revised version. Offline retrieval fixtures likewise measure selection,
-not model-answer quality. A revised 30-question live run has not yet been
-recorded for these changes. Future-only settlement permits only normal admitted
+not model-answer quality. A subsequent frozen `8ff68b4` attempt stopped at Q10
+with an evidence-quote validation error; that partial run predates constrained
+passage generation and is not a completed evaluation. A revised 30-question
+live run has not yet been recorded for these changes. Future-only settlement
+permits only normal admitted
 requests under the unchanged cap; it neither resets older charges nor makes the
 baseline a pass for the revised version.

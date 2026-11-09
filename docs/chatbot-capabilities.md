@@ -18,13 +18,21 @@ answer is screened for recognized procedural deadlines. A match replaces the
 entire answer with fixed refusal/contact wording; no partial answer is displayed.
 Quoted, attributed, historical and caveated deadlines have no exemption.
 Non-grounded kinds discard model prose. The final answer uses the React text
-renderer. A grounded reply needs one 20–400-character exact content quote for
+renderer. The generation schema pairs each authorized source ID with its own
+finite enum of literal 20–300-character passages through nested `anyOf` objects;
+it does not ask the model to compose an exact quote. Passage choices cover the
+complete supplied excerpt, with sentence/word boundaries and overlapping short
+tails; the full reference content is retained. Sources, choices and enum text
+are bounded, and their entire serialized size remains part of quota admission
+and the unchanged final 64K request check.
+
+Independently, the parser requires one 20–400-character exact content quote for
 every selected source, without duplicate, missing, unknown or unselected IDs.
 Quotes match the immutable authorized source snapshot literally or after one
 layer of the prompt's three XML transport entities (`&amp;`, `&lt;`, `&gt;`),
 with the same length bounds. No arbitrary HTML decoding, recursive decoding or
-fuzzy matching is permitted. Quotes are never
-forwarded to the visitor. Missing or invented evidence fails closed with `502`,
+fuzzy matching is permitted. Quotes are never forwarded to the visitor.
+Missing or invented evidence fails closed with `502`,
 without an extra model retry. This verifies source provenance, not semantic
 entailment of every paraphrase. Structured output can still contain factual
 mistakes; see the official [structured-output limitations](https://developers.openai.com/api/docs/guides/structured-outputs).

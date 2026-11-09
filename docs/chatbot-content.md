@@ -99,14 +99,28 @@ model evaluation remains necessary before public activation. See the
 [OpenAI prompt formatting guidance](https://developers.openai.com/api/docs/guides/prompt-engineering#message-formatting-with-markdown-and-xml).
 
 Grounded provider output also contains internal evidence: one entry for each
-selected source ID, with a quote of 20–400 characters. After normalizing text,
-the parser requires each quote to be an exact substring of that selected source,
+selected source ID. Generation uses a nested `anyOf`: each branch pairs one
+authorized source ID with a finite enum of that source's literal passages.
+Choices are 20–300 characters, prefer sentence/word boundaries and overlap a
+short final tail. They cover the complete excerpt without rewriting it; the
+full original source also remains in the reference data. The model chooses a
+passage rather than composing, merging or re-encoding a quote. There are at most
+12 sources, 64 choices per source and 90,000 evidence-enum characters; unsuitable
+or oversized sources fail closed rather than losing facts. The schema uses
+required fields and closed objects within the documented
+[Structured Outputs subset](https://developers.openai.com/api/docs/guides/structured-outputs).
+
+The independent parser retains its 20–400-character quote boundary. After
+normalizing text, it requires an exact substring of that selected source,
 either literally or after interpreting one layer of the prompt's `&amp;`,
 `&lt;` and `&gt;` transport entities. It does not decode arbitrary HTML entities,
 recursively decode, fold whitespace or approximate punctuation; a decoded match
 must still contain 20–400 characters. This is transport-format handling, not
-HTML sanitization. The parser rejects unknown/repeated evidence IDs and requires every selected ID to be
-represented. Missing, invented or mismatched evidence fails before rendering.
+HTML sanitization. The parser rejects unknown/repeated evidence IDs and requires
+every selected ID to be represented. Missing, invented or mismatched evidence
+fails before rendering. The full serialized schema, including all quote enums,
+counts toward admission and the unchanged final 64K request ceiling; bounded
+article headroom does not exempt the final request-size check.
 The model is instructed to choose passages supporting every factual sentence,
 including qualifications, and not a provenance label alone. The backend check
 establishes quote provenance; it does **not** prove that the quote entails the

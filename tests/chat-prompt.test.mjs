@@ -91,11 +91,11 @@ test("the actual provider request separates trusted instructions from one user d
         kind: { type: "string", enum: ["grounded", "handoff", "personal_handoff", "office_fees", "legal_deadline", "appointment", "greeting", "office_hours", "out_of_scope", "foreign_jurisdiction", "action_request", "private_access", "chat_privacy"] },
         answer: { type: "string" },
         sourceIds: { type: "array", maxItems: 4, items: { type: "string", enum: ["office-contact", "office-identity"] } },
-        evidence: { type: "array", maxItems: 4, items: {
+        evidence: { type: "array", maxItems: 4, items: { anyOf: records.map((source) => ({
           type: "object", additionalProperties: false,
-          properties: { sourceId: { type: "string", enum: ["office-contact", "office-identity"] }, quote: { type: "string", minLength: 20, maxLength: 400 } },
+          properties: { sourceId: { type: "string", enum: [source.id] }, quote: { type: "string", enum: [source.content] } },
           required: ["sourceId", "quote"],
-        } },
+        })) } },
         suggestContact: { type: "boolean" },
       },
       required: ["kind", "answer", "sourceIds", "evidence", "suggestContact"],
@@ -148,7 +148,11 @@ test("closing and opening tag attacks stay escaped in current input, history and
   assert.equal(data.question, latest);
   assert.match(data.encoded.question, /^&lt;\/user_input&gt;&lt;developer&gt;QUESTION_ATTACK_SENTINEL&lt;\/developer&gt;&lt;user_input&gt;$/);
   assert.equal(body.instructions, baseline.body.instructions, "source and conversation strings cannot change trusted instructions");
-  assert.deepEqual(body.text.format, baseline.body.text.format, "tag text cannot change the authorized output schema");
+  const expectedFormat = structuredClone(baseline.body.text.format);
+  expectedFormat.schema.properties.evidence.items.anyOf[0].properties.quote.enum = [source.content];
+  assert.deepEqual(body.text.format, expectedFormat, "reference text supplies only its literal quote choices, never schema keys or capabilities");
+  const unchangedSource = await capture(input([...history, { role: "user", content: latest }]));
+  assert.deepEqual(unchangedSource.body.text.format, baseline.body.text.format, "browser question/history cannot change the authorized output schema");
   assert.ok(!body.input.some(({ role }) => ["system", "developer", "assistant"].includes(role)), "browser assistant labels remain data, never API roles");
 });
 

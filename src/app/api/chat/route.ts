@@ -33,10 +33,11 @@ export const POST = createChatHandler({
   getPublicChatPrincipal,
   getChatQuotaReservation(input, principal, model, retrievalQuery) {
     // Reserve once, before live CMS access, using the exact static request plus
-    // bounded article headroom. The final serialized request must fit this
+    // bounded article headroom for both full text and literal evidence enums.
+    // The final serialized request must fit this
     // reservation or fail with 413 before any model request. No refunds/retries.
     const baseline = prepareChatModelRequest(input, getStaticPublicChatContext(principal, input.locale, retrievalQuery), model);
-    return Math.min(MAX_CHAT_RESERVED_TOKENS, baseline.reservedTokens + 12000);
+    return Math.min(MAX_CHAT_RESERVED_TOKENS, baseline.reservedTokens + 24000);
   },
   getPublicChatContext,
   getChatBudgetReservation: (tokens, model) => reserveCostEurMicros(tokens, model),
