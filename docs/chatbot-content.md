@@ -181,17 +181,16 @@ dates, monetary thresholds and procedural deadlines are not imported as current
 law. A consultation draft is not treated as enacted legislation.
 
 No entry calculates personal statutory deadlines, monetary eligibility tests,
-specific remedies, predictions or guarantees. A dated Ministry guidance entry
-can explain conditional published instalment maximums for the extrajudicial
-mechanism; it never establishes the visitor's number of instalments, payment
-amount, write-off or eligibility. Questions beyond these limited
+specific remedies, predictions or guarantees. The assistant does not ask about
+instalments or documents served, collect case details or propose repayment
+plans. It provides basic explanations and office contact. Questions beyond these limited
 explanations need clarification or referral to the office. A user mentioning
 served documents or a pending auction should be directed promptly to the firm
 without computing a deadline in chat. Different languages do not change the
 jurisdiction to a different country.
 
 See [assistant behavior](chatbot-behavior.md) for the ΔικAIsis persona,
-appointment-request flow, urgent document handoff and the boundaries around
+basic information-only flow and the boundaries around
 court decisions and case studies.
 
 ## Maintaining the snapshot
