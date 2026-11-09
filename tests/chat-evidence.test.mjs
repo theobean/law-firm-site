@@ -23,7 +23,7 @@ test("a permitted citation without an exact substantive source passage is not en
   assert.ok(!Object.hasOwn(reply, "evidence"), "internal evidence never becomes a browser response field");
 });
 
-test("evidence cannot cite another source, miss one selected source or duplicate its attribution", () => {
+test("evidence cannot cite another source, miss one selected source or duplicate the same passage", () => {
   fails(() => parseChatReply({ ...valid(), evidence: [{ sourceId: sources[1].id, quote: sources[1].content }] }, sources));
   fails(() => parseChatReply({ ...valid(), sourceIds: sources.map(s => s.id) }, sources));
   fails(() => parseChatReply({ ...valid(), evidence: [valid().evidence[0], valid().evidence[0]] }, sources));
@@ -31,6 +31,21 @@ test("evidence cannot cite another source, miss one selected source or duplicate
   fails(() => parseChatReply({ ...valid(), evidence: [{ sourceId: sources[0].id, quote: "x".repeat(401) }] }, [{ ...sources[0], content: "x".repeat(500) }]));
   const all = parseChatReply({ ...valid(), sourceIds: sources.map(s => s.id), evidence: sources.map(s => ({ sourceId: s.id, quote: s.content })) }, sources);
   assert.equal(all.sources.length, 2);
+});
+
+test("distinct passages from one selected source can cover its definition and qualification without weakening coverage", () => {
+  const definition = "The office publishes A & B as general service information.";
+  const qualification = "A published service does not guarantee acceptance or any outcome.";
+  const record = { ...sources[1], content: `${definition} ${qualification}` };
+  const evidence = [definition, qualification].map((quote) => ({ sourceId: record.id, quote }));
+  const item = { ...quotedReply(record, definition), evidence };
+  assert.equal(parseChatReply(item, [record]).sources.length, 1);
+  fails(() => parseChatReply({ ...item, evidence: [evidence[0], { sourceId: record.id, quote: escapePrompt(definition) }] }, [record]));
+  fails(() => parseChatReply({ ...item, evidence: [...evidence, evidence[1]] }, [record]));
+  fails(() => parseChatReply({ ...item, sourceIds: [record.id, sources[0].id] }, [record, sources[0]]));
+  fails(() => parseChatReply({ ...item, evidence: [...evidence, { sourceId: "private-client-file", quote: definition }] }, [record]));
+  fails(() => parseChatReply({ ...item, evidence: [evidence[0], { sourceId: record.id, quote: "An invented qualification is still rejected here." }] }, [record]));
+  fails(() => parseChatReply({ ...item, evidence: Array.from({ length: 5 }, () => evidence[0]) }, [record]));
 });
 
 test("normalization preserves copied source text but does not permit approximate or invented quotes", () => {

@@ -18,16 +18,20 @@ answer is screened for recognized procedural deadlines. A match replaces the
 entire answer with fixed refusal/contact wording; no partial answer is displayed.
 Quoted, attributed, historical and caveated deadlines have no exemption.
 Non-grounded kinds discard model prose. The final answer uses the React text
-renderer. The generation schema pairs each authorized source ID with its own
-finite enum of literal 20–300-character passages through nested `anyOf` objects;
-it does not ask the model to compose an exact quote. Passage choices cover the
-complete supplied excerpt, with sentence/word boundaries and overlapping short
-tails; the full reference content is retained. Sources, choices and enum text
+renderer. The generation schema uses a flat enum of passage-ID strings.
+Immutable backend bindings map each ID to its authorized source and a literal
+20–300-character passage. Model reference data carries all ordered labelled
+passages, covering complete excerpts with sentence/word boundaries and
+overlapping short tails. The full original stays in the backend snapshot, with
+no duplicate content field in model data. The model selects IDs rather than
+composing quotes; only IDs owned by that snapshot can resolve. Sources, choices and enum text
 are bounded, and their entire serialized size remains part of quota admission
 and the unchanged final 64K request check.
 
-Independently, the parser requires one 20–400-character exact content quote for
-every selected source, without duplicate, missing, unknown or unselected IDs.
+Independently, the parser requires at least one 20–400-character exact content
+quote for every selected source, with up to four distinct source/quote pairs
+in total. Multiple passages per source are allowed; repeated canonical pairs,
+missing coverage and unknown or unselected IDs are rejected.
 Quotes match the immutable authorized source snapshot literally or after one
 layer of the prompt's three XML transport entities (`&amp;`, `&lt;`, `&gt;`),
 with the same length bounds. No arbitrary HTML decoding, recursive decoding or

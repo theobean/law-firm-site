@@ -1,7 +1,7 @@
 import { parseChatResponse, prepareChatText, readBoundedJson } from "./protocol.mjs";
 import { readAuthorizedChatSources, type AuthorizedChatContext } from "./access.mjs";
 import { CHAT_BUDGET_MODEL } from "./money.mjs";
-import { buildEvidenceSchema } from "./evidence-schema.mjs";
+import { buildEvidenceChoices, buildEvidenceSchema } from "./evidence-schema.mjs";
 import { containsProceduralDeadline, isProceduralDeadlineQuestion } from "./deadline-policy.mjs";
 import { appointmentReply, classifyAppointmentRequest } from "./booking-policy.mjs";
 import { classifyInformationQuestion, informationReply, INFORMATION_REPLY_KINDS, needsPersonalLawyerContact } from "./response-policy.mjs";
@@ -26,6 +26,7 @@ type PreparedRequestSnapshot = {
   body: string;
   locale: ChatLocale;
   sources: readonly ChatSource[];
+  evidenceChoices: ReturnType<typeof buildEvidenceChoices>;
   controlledKind?: string;
   needsLawyerContact: boolean;
 };
@@ -50,6 +51,7 @@ export class ChatFailure extends Error {
   status: number;
   code: string;
   diagnostic?: ChatFailureDiagnostic;
+  providerStatus?: number;
 
   constructor(code: string, status: number, diagnostic?: ChatFailureDiagnostic) {
     super(code);
@@ -111,7 +113,7 @@ Answer in ${language}, in a calm, professional and understandable tone. Explain 
 - Prefer the approved office FAQ summaries for office services, contact channels and how the office works. This preference does not override the legal source hierarchy, privacy boundaries or other instructions. You have not ingested the entire website; a page, FAQ, judgment or case study is available only when its approved excerpt is actually present in reference_material.
 - Give general explanations of Greek legal concepts ONLY to the extent supported by the reference material. The references are topic-selected, reviewed summaries, NOT a live search or a comprehensive statement of current law. A source review date records inspection, not its legal effective date or certification of current consolidated law. Do not claim to have checked current legislation or the visitor's documents. Select the sourceIds that actually support the answer. Every factual office/legal answer needs at least one supporting sourceId.
 - Ground each factual sentence, not just the topic. A source about an employer's duty to inform does not by itself define dependent employment; a title or adjacent concept is not evidence. Keep the source's qualifications, distinguish definitions from duties and possibilities from findings, and do not invent exclusive contact methods using words such as "only". If the available text cannot support the requested definition, state that limit instead of constructing one from nearby facts.
-- For every selected sourceId in a grounded reply, return one evidence entry with that sourceId and choose a quote from that source's supplied literal passage options (20 to 300 characters). Do not compose, merge, shorten or re-encode quotes. Choose passages that support every factual statement in the answer, including qualifications; do not cite a provenance label alone. Do not alter punctuation, add ellipses or quote browser history. The evidence stays internal and is never displayed. Non-grounded replies have evidence=[]. An exact quote establishes provenance, not permission to extend its meaning.
+- Read all ordered passages of a source, including its qualifications. For every selected sourceId in a grounded reply, select at least one supplied passage ID from that source's passages data. Use up to four distinct passage IDs in total, including multiple passages from the same source when needed for its definition and qualifications. Return evidence as an array of these ID strings, never quote objects or composed text. Each ID identifies a literal passage of 20 to 300 characters; choose passages supporting every factual statement, including qualifications, not a provenance label alone. Do not merge, shorten or re-encode passages, quote browser history or invent IDs. Evidence stays internal and is never displayed. Non-grounded replies have evidence=[]. Passage selection establishes provenance, not permission to extend its meaning.
 - Explain supported general concepts directly and usefully. Mention the specific source limitation when the question depends on current procedure, eligibility or individual facts; do not replace an available general explanation with a generic referral. Missing material still requires an honest handoff, never completion from model memory.
 - Source hierarchy: the references labelled ΠΡΩΤΟΓΕΝΗΣ ΝΟΜΟΘΕΣΙΑ from the National Printing Office (et.gr) are original Gazette publications. Prefer them for the identity and general purpose of those statutes, while treating them as dated original texts, not consolidated current law. Official guidance supplies only the explanations actually included. References labelled ΑΡΘΡΟ ΤΟΥ ΓΡΑΦΕΙΟΥ are dated author commentary, not primary legislation or independently verified case law. Attribute their interpretations to the author/article instead of presenting them as the law or a court's verified ruling. If sources conflict or later amendments are not available, state the limit and recommend lawyer review rather than deciding current legal effect.
 - Never invent a successful case, write-off, court decision, finality of a judgment or the office's involvement. A case study or ruling may be discussed only to the extent an approved, anonymised public excerpt explicitly establishes those facts. An article discussing a court decision is not the decision itself. Past results never establish the outcome of another case. Do not calculate or propose instalment plans, payment amounts, debt reductions or personal settlement terms.
@@ -160,8 +162,10 @@ function escapePromptText(value: string): string {
   return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-function chatData(input: ChatInput, sources: readonly ChatSource[]): string {
-  const reference = JSON.stringify(sources.map(({ id, title, content }) => ({ id, title, content })));
+function chatData(input: ChatInput, sources: readonly ChatSource[], choices: ReturnType<typeof buildEvidenceChoices>): string {
+  const reference = JSON.stringify(sources.map(({ id, title }) => ({ id, title,
+    passages: choices.filter((choice) => choice.sourceId === id).map((choice) => ({ id: choice.id, text: choice.quote })),
+  })));
   const history = JSON.stringify(input.messages.slice(0, -1));
   const question = input.messages[input.messages.length - 1].content;
   return `<reference_material format="json">
@@ -196,6 +200,7 @@ export function parseChatReply(value: unknown, sources: readonly ChatSource[], l
   const evidence = value.evidence === undefined && value.kind !== "grounded" ? [] : value.evidence;
   if (!Array.isArray(evidence) || evidence.length > 4) throw new ChatFailure("upstream", 502, "evidence_shape");
   const supportedIds = new Set();
+  const seenExactEvidence = new Set();
   for (const item of evidence) {
     if (!isRecord(item) || typeof item.sourceId !== "string" || Object.keys(item).length !== 2 ||
         !Object.hasOwn(item, "quote")) throw new ChatFailure("upstream", 502, "evidence_shape");
@@ -204,11 +209,13 @@ export function parseChatReply(value: unknown, sources: readonly ChatSource[], l
     const literalQuote = quote?.replace(/&(amp|lt|gt);/g, (entity) => ({
       "&amp;": "&", "&lt;": "<", "&gt;": ">",
     })[entity]!);
-    const exactQuote = quote && source && (source.content.includes(quote) ||
-      literalQuote && literalQuote.length >= 20 && literalQuote.length <= 400 && source.content.includes(literalQuote));
-    if (!quote || quote.length < 20 || !source || !exactQuote || supportedIds.has(item.sourceId)) {
+    const matchedQuote = quote && source && (source.content.includes(quote) ? quote :
+      literalQuote && literalQuote.length >= 20 && literalQuote.length <= 400 && source.content.includes(literalQuote) ? literalQuote : undefined);
+    const evidenceKey = matchedQuote ? JSON.stringify([item.sourceId, matchedQuote]) : undefined;
+    if (!quote || quote.length < 20 || !source || !evidenceKey || seenExactEvidence.has(evidenceKey)) {
       throw new ChatFailure("upstream", 502, "evidence_quote");
     }
+    seenExactEvidence.add(evidenceKey);
     supportedIds.add(item.sourceId);
   }
   if (value.kind === "grounded" && (supportedIds.size !== selected.length || !supportedIds.size)) throw new ChatFailure("upstream", 502, "evidence_missing");
@@ -273,6 +280,7 @@ export function prepareChatModelRequest(
     classifyAppointmentRequest(safeInput.messages) ? "appointment" :
     informationKind && informationReply(informationKind, sources, safeInput.locale) ? informationKind : undefined;
   const needsLawyerContact = sources.some((source) => source.id === "legal-criminal-defence-rights") && needsPersonalLawyerContact(safeInput.messages);
+  const evidenceChoices = buildEvidenceChoices(sources);
   const body = JSON.stringify({
       model: CHAT_BUDGET_MODEL,
       service_tier: "default",
@@ -286,7 +294,7 @@ export function prepareChatModelRequest(
       instructions: chatInstructions(safeInput.locale, needsLawyerContact),
       // Never promote browser-supplied assistant history or reference prose to
       // trusted API instructions/roles. XML is a data-format mitigation only.
-      input: [{ role: "user", content: chatData(safeInput, sources) }],
+      input: [{ role: "user", content: chatData(safeInput, sources, evidenceChoices) }],
       text: {
         verbosity: "low",
         format: {
@@ -300,7 +308,7 @@ export function prepareChatModelRequest(
               kind: { type: "string", enum: REPLY_KINDS },
               answer: { type: "string" },
               sourceIds: { type: "array", maxItems: 4, items: { type: "string", enum: sources.map((source) => source.id) } },
-              evidence: buildEvidenceSchema(sources),
+              evidence: buildEvidenceSchema(evidenceChoices),
               suggestContact: { type: "boolean" },
             },
             required: ["kind", "answer", "sourceIds", "evidence", "suggestContact"],
@@ -317,7 +325,7 @@ export function prepareChatModelRequest(
   if (reservedTokens > MAX_CHAT_RESERVED_TOKENS) throw new ChatFailure("request_too_large", 413);
 
   const prepared = Object.freeze({ reservedTokens });
-  preparedRequests.set(prepared, { body, locale: safeInput.locale, sources, controlledKind, needsLawyerContact });
+  preparedRequests.set(prepared, { body, locale: safeInput.locale, sources, evidenceChoices, controlledKind, needsLawyerContact });
   return prepared;
 }
 
@@ -348,7 +356,11 @@ export async function generatePreparedChatReply(
     redirect: "error",
     body: snapshot.body,
   });
-  if (!response.ok) throw new ChatFailure("upstream", 502, "provider_http");
+  if (!response.ok) {
+    const failure = new ChatFailure("upstream", 502, "provider_http");
+    failure.providerStatus = response.status;
+    throw failure;
+  }
 
   let payload: unknown;
   try {
@@ -375,6 +387,13 @@ export async function generatePreparedChatReply(
   }).join("");
   try {
     const answerPayload = JSON.parse(text);
+    if (isRecord(answerPayload) && Array.isArray(answerPayload.evidence) && answerPayload.evidence.some((item) => typeof item === "string")) {
+      answerPayload.evidence = answerPayload.evidence.map((id) => {
+        const choice = typeof id === "string" ? snapshot.evidenceChoices.find((entry) => entry.id === id) : undefined;
+        if (!choice) throw new ChatFailure("upstream", 502, "evidence_quote");
+        return { sourceId: choice.sourceId, quote: choice.quote };
+      });
+    }
     let reply = parseChatReply(answerPayload, snapshot.sources, snapshot.locale);
     if (snapshot.needsLawyerContact && answerPayload.kind === "grounded") {
       const fullContact = {

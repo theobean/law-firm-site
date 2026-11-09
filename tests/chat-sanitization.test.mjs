@@ -132,7 +132,7 @@ test("the LLM boundary forwards normalized whitelisted message fields only", asy
   } });
   assert.deepEqual(forwarded.input, [{ role: "user", content: [
     '<reference_material format="json">',
-    JSON.stringify(sources.map(({ id, title, content }) => ({ id, title, content }))),
+    JSON.stringify(sources.map(({ id, title, content }) => ({ id, title, passages: [{ id: `${id}:p1`, text: content }] }))),
     "</reference_material>", "",
     '<conversation_history format="json">', "[]", "</conversation_history>", "",
     "<user_input>", "café\nquestion", "</user_input>",

@@ -30,7 +30,7 @@ test("reserves the full exact serialized request, protocol headroom and all gene
   assert.equal(body.max_output_tokens, 1800);
   assert.equal(body.store, false);
   assert.ok(!body.instructions.includes("The office is in Thessaloniki."));
-  assert.ok(body.input[0].content.includes('"content":"The office is in Thessaloniki."'));
+  assert.ok(body.input[0].content.includes('"passages":[{"id":"office-contact:p1","text":"The office is in Thessaloniki."}]'));
   assert.deepEqual(body.text.format.schema.properties.sourceIds.items.enum, ["office-contact"]);
   assert.ok(prepared.reservedTokens < MAX_CHAT_RESERVED_TOKENS);
 });

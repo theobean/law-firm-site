@@ -54,7 +54,7 @@ export const POST = createChatHandler({
     if (error instanceof ChatFailure) {
       // Fixed stage labels only: no message, history, quote, identifier, key or
       // provider payload is logged or exposed in the public error response.
-      if (error.diagnostic) console.warn("chatbot_failure", error.diagnostic);
+      if (error.diagnostic) console.warn("chatbot_failure", error.diagnostic, error.providerStatus ?? "");
       return { code: error.code, status: error.status };
     }
     if (error instanceof Error && error.message === "request_too_large") {

@@ -5,10 +5,11 @@ export const MAX_EVIDENCE_PASSAGE_CHARACTERS = 300;
 export const MIN_EVIDENCE_PASSAGE_CHARACTERS = 20;
 export const MAX_EVIDENCE_SOURCES = 12;
 export const MAX_EVIDENCE_PASSAGES_PER_SOURCE = 64;
-export const MAX_EVIDENCE_ENUM_CHARACTERS = 90000;
+export const MAX_EVIDENCE_CHOICE_CHARACTERS = 90000;
+export const MAX_EVIDENCE_ENUM_CHARACTERS = 15000;
 
 /** Exact passages only: source content is never rewritten or shortened. The
- * request keeps the full source alongside these generation-time choices.
+ * server keeps the full source; model data carries every ordered passage.
  * Prefer sentence endings, then word boundaries, within the character ceiling.
  * A short final tail overlaps the preceding text instead of being discarded.
  * @param {string} content
@@ -18,7 +19,7 @@ export function evidencePassages(content) {
   if (typeof content !== "string" || prepareChatText(content, 6000) !== content || content.length < MIN_EVIDENCE_PASSAGE_CHARACTERS) {
     throw new Error("invalid_evidence_source");
   }
-  const passages = new Set();
+  const passages = [];
   let start = 0;
   while (start < content.length) {
     while (start < content.length && /\s/u.test(content[start])) start++;
@@ -47,38 +48,38 @@ export function evidencePassages(content) {
     if (passage.length < MIN_EVIDENCE_PASSAGE_CHARACTERS || passage.length > MAX_EVIDENCE_PASSAGE_CHARACTERS) {
       throw new Error("invalid_evidence_passage");
     }
-    passages.add(passage);
-    if (passages.size > MAX_EVIDENCE_PASSAGES_PER_SOURCE) throw new Error("evidence_schema_too_large");
+    passages.push(passage);
+    if (passages.length > MAX_EVIDENCE_PASSAGES_PER_SOURCE) throw new Error("evidence_schema_too_large");
     start = end;
   }
-  if (!passages.size) throw new Error("invalid_evidence_source");
-  return Object.freeze([...passages]);
+  if (!passages.length) throw new Error("invalid_evidence_source");
+  return Object.freeze(passages);
 }
 
-/** Nested anyOf pairs each quote enum with its own authorized source ID.
- * Strict output cannot invent a quote or attach another source's passage.
- * Bounds leave room below the provider's aggregate enum/string limits; the
- * complete serialized request is independently subject to the 64K byte guard.
- * This constrains provenance, not semantic entailment of the model's answer.
+/** Immutable server-owned IDs bind source and passage before generation.
+ * Full content stays on the server; passage choices are model data, never
+ * schema keys/instructions.
+ * The complete serialized request independently retains its 64K byte guard.
  * @param {readonly {id: string, content: string}[]} sources
  */
-export function buildEvidenceSchema(sources) {
+export function buildEvidenceChoices(sources) {
   if (!Array.isArray(sources) || !sources.length || sources.length > MAX_EVIDENCE_SOURCES ||
       new Set(sources.map((source) => source?.id)).size !== sources.length) throw new Error("invalid_evidence_sources");
-  let enumCharacters = 0;
-  const anyOf = sources.map((source) => {
+  let passageCharacters = 0;
+  const choices = sources.flatMap((source) => {
     if (!source || !isApprovedPublicChatSourceId(source.id)) throw new Error("invalid_evidence_source");
     const quotes = evidencePassages(source.content);
-    enumCharacters += source.id.length + quotes.reduce((total, quote) => total + quote.length, 0);
-    if (enumCharacters > MAX_EVIDENCE_ENUM_CHARACTERS) throw new Error("evidence_schema_too_large");
-    return {
-      type: "object", additionalProperties: false,
-      properties: {
-        sourceId: { type: "string", enum: [source.id] },
-        quote: { type: "string", enum: [...quotes] },
-      },
-      required: ["sourceId", "quote"],
-    };
+    passageCharacters += quotes.reduce((total, quote) => total + quote.length, 0);
+    if (passageCharacters > MAX_EVIDENCE_CHOICE_CHARACTERS) throw new Error("evidence_schema_too_large");
+    return quotes.map((quote, index) => Object.freeze({ id: `${source.id}:p${index + 1}`, sourceId: source.id, quote }));
   });
-  return { type: "array", maxItems: 4, items: { anyOf } };
+  if (choices.reduce((total, choice) => total + choice.id.length, 0) > MAX_EVIDENCE_ENUM_CHARACTERS) throw new Error("evidence_schema_too_large");
+  return Object.freeze(choices);
+}
+
+/** A portable flat enum contains IDs only; the backend resolves their meaning.
+ * @param {ReturnType<typeof buildEvidenceChoices>} choices
+ */
+export function buildEvidenceSchema(choices) {
+  return { type: "array", maxItems: 4, items: { type: "string", enum: choices.map((choice) => choice.id) } };
 }

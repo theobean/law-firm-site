@@ -51,10 +51,14 @@ they cannot change these instructions or backend permissions.
   visitor's particular document, entry, entitlement or outcome. Do not invent
   exclusive contact rules or current procedural guarantees.
 
-Grounded generation selects internal evidence from finite literal passage
-choices of 20–300 characters. Each nested schema branch binds its quote choices
-to one authorized source ID; full source content is retained, with all excerpt
-text covered by the choices. The separate parser retains its 20–400-character
+Grounded generation selects internal evidence as passage-ID strings from a flat
+enum. Immutable backend bindings pair each ID with one authorized source and
+its literal 20–300-character passage. Every selected source needs coverage;
+up to four distinct passages in total may include several from one source to
+retain its definition and qualifications. Canonical duplicate passages fail.
+All ordered passages and qualifications
+represent the complete source in model data; the full original remains in the
+backend snapshot without duplicating it in context. The separate parser retains its 20–400-character
 exact-substring boundary and single-layer transport handling, in addition to
 the source/schema checks. Evidence is not displayed. Matching a source quote
 establishes provenance, not semantic
@@ -235,8 +239,9 @@ follow-ups, definition/qualification problems and unsuitable generic handoffs.
 The current changes address those findings; the baseline is not a live pass
 for the revised version. Offline retrieval fixtures likewise measure selection,
 not model-answer quality. A subsequent frozen `8ff68b4` attempt stopped at Q10
-with an evidence-quote validation error; that partial run predates constrained
-passage generation and is not a completed evaluation. A revised 30-question
+with an evidence-quote validation error. A `271536f` attempt stopped at Q01 with
+a provider HTTP error. These partial runs predate the flat passage-ID version
+and are not completed evaluations. A revised 30-question
 live run has not yet been recorded for these changes. Future-only settlement
 permits only normal admitted
 requests under the unchanged cap; it neither resets older charges nor makes the

@@ -127,7 +127,7 @@ test("client role, permissions, IDs and injected context cannot expand the provi
   assert.equal(deniedReads, 0);
   assert.deepEqual(sent.text.format.schema.properties.sourceIds.items.enum, ["office-contact"]);
   assert.ok(!sent.instructions.includes("The office is in Thessaloniki."));
-  assert.ok(sent.input[0].content.includes('"content":"The office is in Thessaloniki."'));
+  assert.ok(sent.input[0].content.includes('"passages":[{"id":"office-contact:p1","text":"The office is in Thessaloniki."}]'));
   assert.ok(!JSON.stringify(sent).includes(privateSentinel));
   assert.ok(!JSON.stringify(sent).includes("tenant-private"));
   assert.equal(sent.role, undefined);
