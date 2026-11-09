@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { test } from "node:test";
 import { parseChatReply, generateChatReply } from "../src/lib/chat/service.ts";
 import { createAuthorizedChatContext, getPublicChatPrincipal } from "../src/lib/chat/access.mjs";
@@ -9,6 +10,8 @@ const sources = [
 ];
 const valid = () => ({ kind: "grounded", answer: "The office is in Thessaloniki.", sourceIds: [sources[0].id], evidence: [{ sourceId: sources[0].id, quote: "The office is in Thessaloniki." }], suggestContact: false });
 const fails = (fn) => assert.throws(fn, error => error.code === "upstream" && error.status === 502);
+const escapePrompt = (value) => value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const quotedReply = (source, quote) => ({ ...valid(), sourceIds: [source.id], evidence: [{ sourceId: source.id, quote }] });
 
 test("a permitted citation without an exact substantive source passage is not enough", () => {
   for (const evidence of [undefined, [], null, [{ sourceId: sources[0].id, quote: "The office guarantees success in every legal case." }], [{ sourceId: sources[0].id, quote: "Thessaloniki" }]]) {
@@ -35,6 +38,54 @@ test("normalization preserves copied source text but does not permit approximate
   const item = { ...valid(), answer: record.content, evidence: [{ sourceId: record.id, quote: record.content.normalize("NFD") }] };
   assert.equal(parseChatReply(item, [record]).answer, record.content);
   fails(() => parseChatReply({ ...item, evidence: [{ sourceId: record.id, quote: record.content.replace("εξυπηρετεί", "εγγυάται") }] }, [record]));
+});
+
+test("actual Greek office-service titles accept original or once-escaped prompt evidence", () => {
+  const messages = JSON.parse(readFileSync(new URL("../messages/el.json", import.meta.url), "utf8"));
+  const record = { ...sources[1], content: `Κύρια εξειδίκευση του γραφείου: ${messages.practiceAreas.areas.banking.title} και ${messages.practiceAreas.areas.extrajudicial.title}. Δημοσιευμένοι τομείς: ${Object.values(messages.practiceAreas.areas).map((area) => area.title).join("; ")}. Η αναφορά υπηρεσίας δεν συνεπάγεται αποδοχή συγκεκριμένης υπόθεσης ή εγγύηση αποτελέσματος.` };
+  const quote = record.content.split(". ")[1] + ".";
+  assert.ok(quote.includes("&") && quote.includes("Εργατικό Δίκαιο") && quote.includes("Κληρονομικό Δίκαιο"));
+  for (const text of [quote, escapePrompt(quote), escapePrompt(quote).normalize("NFD")]) {
+    const reply = parseChatReply({ ...quotedReply(record, text), answer: "Στους δημοσιευμένους τομείς περιλαμβάνονται το Κληρονομικό και το Εργατικό Δίκαιο." }, [record], "el");
+    assert.equal(reply.sources.length, 1);
+    assert.ok(!Object.hasOwn(reply, "evidence"));
+  }
+});
+
+test("evidence handles only one XML transport layer while preserving literal entities and quotation marks", () => {
+  for (const content of [
+    'The published title is "A & B"; its examples use C < D and E > F.',
+    'The published title is "A &amp; B"; that entity text is literal.',
+  ]) {
+    const record = { ...sources[1], content };
+    for (const quote of [content, escapePrompt(content)]) {
+      assert.equal(parseChatReply(quotedReply(record, quote), [record]).sources.length, 1);
+    }
+  }
+  const record = { ...sources[1], content: 'The published title is "A & B"; its examples use C < D and E > F.' };
+  for (const quote of [
+    escapePrompt(escapePrompt(record.content)),
+    record.content.replace("&", "&#38;"),
+    record.content.replace("&", "&#x26;"),
+    record.content.replace("&", "&copy;"),
+    record.content.replace('"A & B"', "“A & B”"),
+    record.content.replace("examples use", "examples  use"),
+    record.content.replace("published title", "guaranteed outcome"),
+  ]) fails(() => parseChatReply(quotedReply(record, quote), [record]));
+  fails(() => parseChatReply({ ...quotedReply(record, escapePrompt(record.content)), sourceIds: ["private-client-file"] }, [record]));
+});
+
+test("transport evidence cannot match partial entity fragments or bypass quote length bounds", () => {
+  const record = { ...sources[1], content: "& This published phrase is a literal source passage." };
+  const fragment = escapePrompt(record.content).slice(1);
+  assert.ok(fragment.startsWith("amp;") && fragment.length >= 20);
+  fails(() => parseChatReply(quotedReply(record, fragment), [record]));
+  const short = { ...sources[1], content: "A & B < C > D" };
+  assert.ok(escapePrompt(short.content).length >= 20 && short.content.length < 20);
+  fails(() => parseChatReply(quotedReply(short, escapePrompt(short.content)), [short]));
+  const long = { ...sources[1], content: "A & B ".repeat(65) };
+  assert.ok(long.content.length <= 400 && escapePrompt(long.content).length > 400);
+  fails(() => parseChatReply(quotedReply(long, escapePrompt(long.content)), [long]));
 });
 
 test("real provider output must supply evidence; no retry or second model call repairs a missing quote", async () => {

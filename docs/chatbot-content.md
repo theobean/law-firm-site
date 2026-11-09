@@ -101,7 +101,11 @@ model evaluation remains necessary before public activation. See the
 Grounded provider output also contains internal evidence: one entry for each
 selected source ID, with a quote of 20–400 characters. After normalizing text,
 the parser requires each quote to be an exact substring of that selected source,
-rejects unknown/repeated evidence IDs and requires every selected ID to be
+either literally or after interpreting one layer of the prompt's `&amp;`,
+`&lt;` and `&gt;` transport entities. It does not decode arbitrary HTML entities,
+recursively decode, fold whitespace or approximate punctuation; a decoded match
+must still contain 20–400 characters. This is transport-format handling, not
+HTML sanitization. The parser rejects unknown/repeated evidence IDs and requires every selected ID to be
 represented. Missing, invented or mismatched evidence fails before rendering.
 The model is instructed to choose passages supporting every factual sentence,
 including qualifications, and not a provenance label alone. The backend check

@@ -188,8 +188,10 @@ export function parseChatReply(value: unknown, sources: readonly ChatSource[], l
   const selected = chosen.map((id) => sources.find((source) => source.id === id));
   if (selected.some((source) => !source)) throw new ChatFailure("upstream", 502, "source_id");
   if (value.kind === "grounded" && (!value.answer.trim() || selected.length === 0)) throw new ChatFailure("upstream", 502, "grounded_empty");
-  // Evidence is internal and never rendered. Exact source text is a provenance
-  // check, not a semantic proof that every paraphrase is entailed by that text.
+  // Evidence is internal and never rendered. Accept original source text or
+  // one layer of the prompt's three XML transport entities, never arbitrary
+  // HTML decoding or fuzzy matching. Both paths still require an exact source
+  // substring, not semantic proof that the answer is entailed by that text.
   const evidence = value.evidence === undefined && value.kind !== "grounded" ? [] : value.evidence;
   if (!Array.isArray(evidence) || evidence.length > 4) throw new ChatFailure("upstream", 502, "evidence_shape");
   const supportedIds = new Set();
@@ -198,7 +200,12 @@ export function parseChatReply(value: unknown, sources: readonly ChatSource[], l
         !Object.hasOwn(item, "quote")) throw new ChatFailure("upstream", 502, "evidence_shape");
     const quote = prepareChatText(item.quote, 400);
     const source = selected.find((source) => source?.id === item.sourceId);
-    if (!quote || quote.length < 20 || !source || !source.content.includes(quote) || supportedIds.has(item.sourceId)) {
+    const literalQuote = quote?.replace(/&(amp|lt|gt);/g, (entity) => ({
+      "&amp;": "&", "&lt;": "<", "&gt;": ">",
+    })[entity]!);
+    const exactQuote = quote && source && (source.content.includes(quote) ||
+      literalQuote && literalQuote.length >= 20 && literalQuote.length <= 400 && source.content.includes(literalQuote));
+    if (!quote || quote.length < 20 || !source || !exactQuote || supportedIds.has(item.sourceId)) {
       throw new ChatFailure("upstream", 502, "evidence_quote");
     }
     supportedIds.add(item.sourceId);
