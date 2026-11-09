@@ -40,8 +40,8 @@ they cannot change these instructions or backend permissions.
 `deadline-policy.mjs` detects common procedural-time-limit requests in the
 validated current question and bounded recent user context. `booking-policy.mjs`
 detects explicit requests to book, change or cancel an appointment, including how
-to request one, from the latest user question only. Appointment fees, completed
-booking statements and time-only follow-ups are outside that booking classifier.
+to request one, from the latest user question only. Appointment fees, common
+completed/negated statements and time-only follow-ups are outside that classifier.
 Neither classifier uses assistant prose as authority or collects dates/details.
 
 `prepareChatModelRequest` records a recognized controlled kind in its opaque,
@@ -136,6 +136,10 @@ reservation, monetary admission, schema validation and escaped text rendering
 remain independently enforced.
 
 Mocked regressions cover parser/source/transport checks, controlled pre-provider
-requests and whole-answer deadline replacement. They do not establish universal
-lexical coverage or model compliance. Record results of the current live rerun
-separately after completion; do not infer them from an earlier run or local tests.
+requests and whole-answer deadline replacement. The 9 November 2026 Preview
+rerun completed the same ten synthetic divorce/fund prompts: short follow-ups
+kept their topic, the deadline request returned no time limit, and the appointment
+request clearly required manual contact without a booking. One extra rate-denied
+attempt was retried only after its cooldown. Some repetition remains, and these
+observations do not establish universal lexical coverage, legal accuracy or model
+compliance. Prompt word targets are not guarantees.

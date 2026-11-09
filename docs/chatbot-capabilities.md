@@ -55,6 +55,8 @@ cancellations and availability checks are unavailable, then gives manual office
 contact. Recognizing an intent grants no action capability and does not send a
 message or collect appointment details. A model-selected controlled kind uses
 the same application wording after source-ID validation.
+There is no general output detector for every fabricated booking claim; the
+absence of an action capability does not certify arbitrary model wording.
 
 The deadline request/output guards are bounded lexical rules, not a calculator
 or semantic safety proof. They reject common numeric, spelled-out and dated
@@ -63,8 +65,9 @@ as deadlines. Untested phrasing may escape detection or be conservatively
 referred. The prompt separately requests brief, direct answers and shorter
 clarifications, without repeated contact/disclaimer paragraphs. Its word targets
 are not a backend truncation rule; whole-response validation and the existing
-generation/size ceilings remain in place. Local tests and earlier live answers
-do not establish that the current live rerun has passed.
+generation/size ceilings remain in place. The observed Preview regression cases
+are recorded in the behavior document; neither those replies nor local tests
+establish semantic compliance for arbitrary future questions.
 
 ## Deployment credentials
 
