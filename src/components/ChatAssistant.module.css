@@ -61,6 +61,7 @@
 .heading p { margin: 3px 0 0; font-size: 10px; color: #ffffffa8; line-height: 1.5; }
 .iconButton { display: flex; flex-shrink: 0; align-items: center; justify-content: center; width: 30px; height: 34px; border: 0; border-radius: 4px; background: transparent; color: #ffffffb8; }
 .iconButton:hover { background: #ffffff14; color: #fff; }
+.disclaimer { flex-shrink: 0; margin: 0; padding: 10px 14px; border-bottom: 1px solid #e8ddc7; background: #fbf8f1; color: #5e512f; font-size: 12px; line-height: 1.65; }
 
 .intro { min-height: 180px; flex: 1; overflow-y: auto; padding: 24px; overscroll-behavior: contain; }
 .eyebrow { display: block; font-size: 10px; font-weight: 600; line-height: 1.6; letter-spacing: .08em; text-transform: uppercase; color: #8b631e; }

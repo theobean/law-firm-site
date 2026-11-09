@@ -1,21 +1,24 @@
 # Chatbot content scope
 
-`src/lib/chat/knowledge.ts` supplies a small, curated snapshot to the assistant.
+`src/lib/chat/knowledge.ts` combines reviewed legal summaries and office facts
+with relevant excerpts from registered, published articles by the lawyer.
 The initial sources were inspected on **8 November 2026**; the Katseli-law
-introduction was added and checked on **9 November 2026**. The assistant does not browse the
-web at runtime, and a citation is not evidence of real-time legal verification.
+introduction, National Printing Office originals and public article registry
+were checked on **9 November 2026**. The assistant does not perform open-web
+research at runtime. A dated source is not proof of current consolidated law.
 
 ## Server-enforced access boundary
 
-The chatbot uses a source-controlled public snapshot. It performs no database,
-Sanity, case-file, contact-list or private-document queries to fetch AI context. The public endpoint
+The chatbot uses a source-controlled public catalog and one bounded, tokenless
+read of explicitly registered, published Sanity articles. It performs no
+case-file, contact-list or private-document queries. The public endpoint
 always receives the server-issued `public` principal, with `chat:read:public`
 permission. HTTP headers, request-body roles, conversation roles, IDs and model
 instructions cannot create another principal or widen the scope.
 Optional OIDC verification selects a request/token quota tier only; it does not
 replace this public data principal or enable private case access. Neon Postgres holds
 quota counters, not legal context. See [quota configuration](chatbot-quotas.md).
-The model has no executable API/database tools; see the
+The CMS read is performed by server code, not by an executable model tool; see the
 [capability policy and human-approval requirements](chatbot-capabilities.md).
 
 `src/lib/chat/access.mjs` implements default-deny source access before content
@@ -27,6 +30,15 @@ sent to the model. The projected snapshot is frozen, and the provider accepts on
 an opaque context authorized in that server process. A raw array, copied object
 or JSON-shaped context fails with `403` before any model call. The knowledge
 module also has a Next.js `server-only` import guard.
+
+`article-catalog.mjs` fixes each allowed article's source ID, Sanity document ID,
+slug and author reference. `articles.mjs` checks the server-issued principal
+before network access. Its fixed public dataset query enforces those bindings,
+article type, published perspective, publication date and draft/version
+exclusion before content is returned. No CMS credential is provided. Returned
+records are checked again, and only projected plain text is used; notes, images,
+HTML and private records are never requested. Request text cannot supply a CMS
+query, host, dataset, token, document ID or slug.
 
 | Principal / resource | Access |
 | --- | --- |
@@ -65,8 +77,8 @@ Reference/history JSON is serialized before XML text escaping. Every dynamic
 text value escapes `&`, `<` and `>` in that order, so visitor-supplied closing
 tags cannot structurally close a block and pre-encoded entities remain literal
 after one decoding pass. Tag names and attributes are fixed application text.
-Quota reservation includes the final escaped, serialized provider payload;
-escaping expansion cannot bypass the request budget.
+The exact final escaped, serialized provider payload must fit the quota envelope
+reserved before live article access; escaping expansion cannot bypass that budget.
 
 These boundaries help distinguish instructions from data. They do not guarantee
 that a model will resist semantic prompt injection or answer correctly. Server
@@ -104,6 +116,34 @@ and the general subject against [AADE circular E.2041/2025](https://aade.gr/egky
 These sources do not authorize this summary to decide present-day admission,
 new applications, residence protection, payment terms or an individual case.
 
+Two additional primary references use the National Printing Office originals:
+
+- [Ν. 3869/2010, ΦΕΚ Α΄ 130/03.08.2010](https://api.et.gr/apiLAW/1/2010/3869/pdf).
+- [Ν. 4738/2020, ΦΕΚ Α΄ 207/27.10.2020](https://api.et.gr/apiLAW/1/2020/4738/pdf).
+
+These are initial gazette publications, not consolidated texts including later
+amendments. They support the statute's identity and general subject. The prompt
+prioritizes these primary references for those facts and distinguishes official
+guidance from dated author commentary. An article's legal interpretation must
+be attributed to its author; it cannot establish an independently verified
+court ruling or current statutory effect.
+
+## Published office articles
+
+The registry contains the 13 public articles attributed to Ioannis Papaioannou
+at review time. Greek source text can support answers in any of the three chat
+languages. Canonical article links use `/el/blog/{registered-slug}`.
+The server reads only the registered public article text, then selects relevant
+bounded passages across each article rather than always taking its beginning.
+At most two article excerpts enter one prompt, within the pre-reserved request
+envelope and the exact final serialized-request size check. Lookup failure contributes no article context; it
+does not enable answers from model memory. The model receives dated excerpts
+labelled as office commentary, never a claim that all current law was searched.
+
+The dialogue displays a permanent notice stating that LEXI's answers are general
+information and do not constitute legal advice. Source checks remain internal;
+the visitor interface does not show a source list.
+
 Sources are the Ministry of Economy and Finance, Bank of Greece, European
 e-Justice Portal / European Judicial Network, Ministry of Justice, Hellenic Labour
 Inspectorate, Hellenic Cadastre and AADE. The payment-order entry uses only the
@@ -125,7 +165,8 @@ the wording and record the new review date. Avoid importing complete webpages:
 they may include outdated rules, unrelated material or unsupported promises.
 Keep user case facts, uploaded documents and conversation logs out of this file.
 New source IDs must be explicitly approved in the access policy as well as the
-catalog. Publishing/editing data alone does not expand the allowlist. The public
+catalog. A new office article additionally needs an exact document/slug/author
+registry binding; publishing/editing CMS data alone does not expand access. The public
 classifications are trusted, reviewed application configuration; the policy is
 not a classifier that can discover confidential prose mislabeled as public by a
 developer.

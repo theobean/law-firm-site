@@ -218,7 +218,7 @@ export default function ChatAssistant() {
   return (
     <aside className={styles.container} style={containerStyle} aria-label={t("regionLabel")}>
       {open && (
-        <section ref={panelRef} tabIndex={-1} id={panelId} role="dialog" aria-label={t("title")} className={styles.panel}>
+        <section ref={panelRef} tabIndex={-1} id={panelId} role="dialog" aria-label={t("title")} aria-describedby={`${panelId}-disclaimer`} className={styles.panel}>
           <header className={styles.header}>
             <span className={styles.brandIcon} aria-hidden="true"><MessageCircle size={22} /></span>
             <div className={styles.heading}>
@@ -234,6 +234,8 @@ export default function ChatAssistant() {
               <X size={20} />
             </button>
           </header>
+
+          <p id={`${panelId}-disclaimer`} className={styles.disclaimer}>{t("legalDisclaimer")}</p>
 
           {!activated ? (
             <div className={styles.intro}>

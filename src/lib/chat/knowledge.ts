@@ -1,5 +1,6 @@
 import "server-only";
-import { assertPublicChatAccess, createAuthorizedChatContext } from "./access.mjs";
+import { assertPublicChatAccess, createAuthorizedChatContext, readAuthorizedChatSources } from "./access.mjs";
+import { getPublicArticleSources } from "./articles.mjs";
 import el from "../../../messages/el.json";
 import en from "../../../messages/en.json";
 import de from "../../../messages/de.json";
@@ -20,6 +21,20 @@ const officeOrigin = "https://ioannispapaioannou.lawyer";
  * deadlines, eligibility decisions and case-specific remedies out of this data.
  */
 const legalKnowledge: readonly KnowledgeSource[] = [
+  {
+    id: "legislation-3869-2010",
+    title: "Εθνικό Τυπογραφείο — Ν. 3869/2010, ΦΕΚ Α΄ 130/03.08.2010",
+    url: "https://api.et.gr/apiLAW/1/2010/3869/pdf",
+    content:
+      "ΠΡΩΤΟΓΕΝΗΣ ΝΟΜΟΘΕΣΙΑ — ΑΡΧΙΚΟ ΔΗΜΟΣΙΕΥΜΕΝΟ ΦΕΚ. Ο Ν. 3869/2010 δημοσιεύθηκε στο ΦΕΚ Α΄ 130 της 03.08.2010, με τίτλο «Ρύθμιση των οφειλών υπερχρεωμένων φυσικών προσώπων και άλλες διατάξεις». Θεσπίστηκε πλαίσιο δικαστικής ρύθμισης οφειλών και απαλλαγής υπερχρεωμένων φυσικών προσώπων υπό τις νόμιμες προϋποθέσεις. Το αρχικό ΦΕΚ δεν είναι ενοποιημένο κείμενο με τις μεταγενέστερες τροποποιήσεις. Η παρούσα σύνοψη δεν τεκμηριώνει σημερινή δυνατότητα νέας αίτησης, επιλεξιμότητα, προστασία κατοικίας, προθεσμίες ή συγκεκριμένες ενέργειες για υπόθεση.",
+  },
+  {
+    id: "legislation-4738-2020",
+    title: "Εθνικό Τυπογραφείο — Ν. 4738/2020, ΦΕΚ Α΄ 207/27.10.2020",
+    url: "https://api.et.gr/apiLAW/1/2020/4738/pdf",
+    content:
+      "ΠΡΩΤΟΓΕΝΗΣ ΝΟΜΟΘΕΣΙΑ — ΑΡΧΙΚΟ ΔΗΜΟΣΙΕΥΜΕΝΟ ΦΕΚ. Ο Ν. 4738/2020 δημοσιεύθηκε στο ΦΕΚ Α΄ 207 της 27.10.2020, με τίτλο «Ρύθμιση οφειλών και παροχή δεύτερης ευκαιρίας και άλλες διατάξεις». Περιλαμβάνει διατάξεις για τον εξωδικαστικό μηχανισμό ρύθμισης οφειλών, την πρόληψη της αφερεγγυότητας και την πτώχευση. Το αρχικό κείμενο περιγράφει διαδικασία εξωδικαστικής ρύθμισης με χρηματοδοτικούς φορείς, Δημόσιο και φορείς κοινωνικής ασφάλισης και ηλεκτρονική πλατφόρμα. Δεν είναι ενοποιημένο κείμενο με μεταγενέστερες τροποποιήσεις ούτε επαρκεί για σημερινά κριτήρια υπαγωγής, ποσά, δόσεις, αναστολή μέτρων ή προθεσμίες.",
+  },
   {
     // Reviewed 2026-11-09; a general explanation, not current eligibility advice.
     id: "legal-katseli-law",
@@ -86,7 +101,7 @@ const legalKnowledge: readonly KnowledgeSource[] = [
   },
 ];
 
-export function getPublicChatContext(principal: unknown, locale: "el" | "en" | "de") {
+export function getStaticPublicChatContext(principal: unknown, locale: "el" | "en" | "de") {
   assertPublicChatAccess(principal, "public");
   const messages = translations[locale];
   const page = (path: string) => `${officeOrigin}/${locale}${path}`;
@@ -138,5 +153,20 @@ export function getPublicChatContext(principal: unknown, locale: "el" | "en" | "
     visibility: "public",
     publication: "published",
     load: () => ({ ...load(), visibility: "public", publication: "published" }),
+  })));
+}
+
+export async function getPublicChatContext(principal: unknown, locale: "el" | "en" | "de", question = "") {
+  const baseline = getStaticPublicChatContext(principal, locale);
+  // The caller reserves a shared quota lease before entering this live reader.
+  // The reader also authorizes before its published-only, tokenless CMS query.
+  const articleSources = await getPublicArticleSources(principal, question);
+  return createAuthorizedChatContext(principal, "public", [
+    ...readAuthorizedChatSources(baseline), ...articleSources,
+  ].map((source) => ({
+    id: source.id,
+    visibility: "public",
+    publication: "published",
+    load: () => ({ ...source, visibility: "public", publication: "published" }),
   })));
 }

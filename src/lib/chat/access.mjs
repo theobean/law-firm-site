@@ -1,4 +1,5 @@
 import { parseChatSourceLink, prepareChatText } from "./protocol.mjs";
+import { APPROVED_OFFICE_ARTICLES } from "./article-catalog.mjs";
 
 /** @typedef {Readonly<{id: string, title: string, url: string, content: string}>} AuthorizedChatSource */
 /** @typedef {Readonly<{kind: "public-chat-context"}>} AuthorizedChatContext */
@@ -16,6 +17,8 @@ const APPROVED_PUBLIC_SOURCE_IDS = new Set([
   "office-identity", "office-contact", "office-appointments", "office-services", "office-nationwide",
   "legal-katseli-law", "legal-debt-settlement", "legal-banking-code", "legal-credit-servicers", "legal-payment-order",
   "legal-mediation", "legal-labor-disputes", "legal-land-registry", "legal-inheritance-tax",
+  "legislation-3869-2010", "legislation-4738-2020",
+  ...APPROVED_OFFICE_ARTICLES.map(({ sourceId }) => sourceId),
 ]);
 
 /** @type {WeakMap<object, readonly AuthorizedChatSource[]>} */

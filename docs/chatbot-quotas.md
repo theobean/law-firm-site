@@ -1,8 +1,10 @@
 # Chat rate limits, identities and quotas
 
 The only production model route, `POST /api/chat`, resolves a server-verified
-quota identity, authorizes public context, prepares an immutable model request,
-atomically reserves its cost in Neon Postgres, and then sends that exact request.
+quota identity, authorizes static public context and reserves a conservative
+request envelope in Neon Postgres before live article retrieval. It then prepares
+an immutable final request, checks that its exact cost fits the reservation,
+and sends that captured request.
 There is no in-memory admission fallback. Authentication affects quotas only;
 the AI context remains public-only.
 
@@ -86,7 +88,7 @@ still receive only the existing approved public context.
 | Reserved token-unit capacity / refill per minute | 100,000 | 300,000 |
 | Requests per UTC day | 30 | 300 |
 | Reserved token units per UTC day | 500,000 | 5,000,000 |
-| Active model requests | 1 | 2 |
+| Active chatbot requests (article lookup and model work) | 1 | 2 |
 
 | Shared budget | Per network | Global |
 | --- | ---: | ---: |
@@ -94,7 +96,7 @@ still receive only the existing approved public context.
 | Reserved token-unit capacity / refill per minute | 500,000 | 1,000,000 |
 | Requests per UTC day | No separate daily request cap | 1,000 |
 | Reserved token units per UTC day | 5,000,000 | 10,000,000 |
-| Active model requests | 3 | 8 |
+| Active chatbot requests (article lookup and model work) | 3 | 8 |
 
 The policy is source-controlled in `src/lib/chat/quota.mjs`. Token buckets refill
 continuously; the minute figures are capacities/refill rates, not fixed-window
@@ -108,18 +110,21 @@ not a fresh budget. See PostgreSQL's
 
 ## Token spikes and leases
 
-Before database admission, preparation counts every UTF-8 byte of the full serialized
-provider payload, including system instructions, public context, conversation
-history and JSON schema. It reserves that count plus 4096 framing units and the
-full 1800 generated-token allowance. These conservative units deliberately differ
-from exact tokenizer/billing counts. Requests above 64,000 reserved units fail
-with 413 before a provider call. Client-supplied costs, models and output limits
-do not control this reservation.
+Before database admission, preparation counts every UTF-8 byte of the serialized
+static provider payload, including instructions, authorized static context,
+history and schema, plus 4096 framing units and 1800 generated-token allowance.
+The route adds 12,000 units of article headroom, capped at 64,000, and reserves
+once before any live CMS read. Exhausted visitors cannot trigger that reader.
+After retrieval, the exact serialized final request cost must fit the reserved
+envelope and the 64,000-unit ceiling, or fail with 413 before a provider call.
+These conservative abuse units include retained headroom and deliberately
+differ from tokenizer/billing counts. Client-supplied costs, models and output
+limits do not control the reservation.
 
 The prepared request is frozen, process-local and single-use. After admission,
 the provider sends its exact captured body with `max_output_tokens: 1800`.
 Reasoning/non-visible generation is included in that output limit. Successful
-reservations are not refunded after provider failure, cancellation or lost
+reservations are not refunded after context/preparation/provider failure, cancellation or lost
 responses, preventing error/retry loops from bypassing budgets.
 
 Each admitted call owns a UUID lease counted across its subject, network and

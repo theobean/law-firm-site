@@ -11,7 +11,8 @@
  * parseChatInput: (value: unknown) => ChatInput,
  * resolveQuotaIdentity: (request: Request) => Promise<QuotaIdentity>,
  * getPublicChatPrincipal: () => unknown,
- * getPublicChatContext: (principal: unknown, locale: ChatInput["locale"]) => AuthorizedChatContext,
+ * getChatQuotaReservation: (input: ChatInput, principal: unknown, model?: string) => number,
+ * getPublicChatContext: (principal: unknown, locale: ChatInput["locale"], question: string) => AuthorizedChatContext | Promise<AuthorizedChatContext>,
  * prepareChatModelRequest: (input: ChatInput, context: AuthorizedChatContext, model?: string) => PreparedChatModelRequest,
  * reserveChatQuota: (identity: QuotaIdentity, reservedTokens: number) => Promise<{release: () => Promise<void>}>,
  * generatePreparedChatReply: (prepared: PreparedChatModelRequest, options: {apiKey: string, signal: AbortSignal}) => Promise<ChatReply>,
@@ -47,11 +48,17 @@ export function createChatHandler(dependencies) {
 
       // Quota identity cannot change the public context permission.
       const principal = dependencies.getPublicChatPrincipal();
-      const context = dependencies.getPublicChatContext(principal, input.locale);
-      const prepared = dependencies.prepareChatModelRequest(input, context, dependencies.env.OPENAI_CHAT_MODEL?.trim());
-      // Atomic shared admission must authorize this exact snapshot and cost.
-      const lease = await dependencies.reserveChatQuota(identity, prepared.reservedTokens);
+      const model = dependencies.env.OPENAI_CHAT_MODEL?.trim();
+      const reservedTokens = dependencies.getChatQuotaReservation(input, principal, model);
+      if (!Number.isInteger(reservedTokens) || reservedTokens < 1 || reservedTokens > 64000) {
+        throw new Error("Invalid chat quota reservation");
+      }
+      // Shared admission bounds both context retrieval and the provider request.
+      const lease = await dependencies.reserveChatQuota(identity, reservedTokens);
       try {
+        const context = await dependencies.getPublicChatContext(principal, input.locale, input.messages[input.messages.length - 1].content);
+        const prepared = dependencies.prepareChatModelRequest(input, context, model);
+        if (prepared.reservedTokens > reservedTokens) return failure("request_too_large", 413);
         const reply = await dependencies.generatePreparedChatReply(prepared, { apiKey, signal: request.signal });
         return Response.json(reply, { headers: { "Cache-Control": "no-store" } });
       } finally {

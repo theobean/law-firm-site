@@ -28,6 +28,7 @@ function harness(overrides = {}) {
   const principal = Object.freeze({ role: "public" });
   const context = Object.freeze({ kind: "public-chat-context" });
   const prepared = Object.freeze({ reservedTokens: 27001 });
+  const reservationTokens = prepared.reservedTokens + 12000;
   const reply = { answer: "Public office information.", sources: [], suggestContact: false };
   const state = { charged: 0, released: 0, generated: 0 };
   const env = { CHATBOT_ENABLED: "true", OPENAI_API_KEY: "test-only-key", OPENAI_CHAT_MODEL: " configured-model " };
@@ -38,46 +39,152 @@ function harness(overrides = {}) {
     parseChatInput(value) { events.push("parse"); return parseChatInput(value); },
     async resolveQuotaIdentity(req) { events.push("identity"); assert.ok(req instanceof Request); return identity; },
     getPublicChatPrincipal() { events.push("principal"); return principal; },
+    getChatQuotaReservation(input, actualPrincipal, model) {
+      events.push("bound"); assert.equal(actualPrincipal, principal); assert.equal(input.consent, true); assert.equal(model, "configured-model");
+      return reservationTokens;
+    },
     getPublicChatContext(actualPrincipal, locale) { events.push("context"); assert.equal(actualPrincipal, principal); assert.equal(locale, "el"); return context; },
     prepareChatModelRequest(input, actualContext, model) { events.push("prepare"); assert.equal(actualContext, context); assert.deepEqual(input, validBody()); assert.equal(model, "configured-model"); return prepared; },
     async reserveChatQuota(actualIdentity, cost) {
-      events.push("reserve"); assert.equal(actualIdentity, identity); assert.equal(cost, prepared.reservedTokens);
+      events.push("reserve"); assert.equal(actualIdentity, identity); assert.equal(cost, reservationTokens);
       state.charged += cost;
       return { async release() { events.push("release"); state.released += 1; } };
     },
     async generatePreparedChatReply(actualPrepared, options) {
       events.push("model"); state.generated += 1; assert.equal(actualPrepared, prepared);
       assert.equal(options.apiKey, "test-only-key"); assert.ok(options.signal instanceof AbortSignal);
-      assert.equal(state.charged, prepared.reservedTokens, "cost must be reserved before a model call");
+      assert.equal(state.charged, reservationTokens, "bounded cost must be reserved before a model call");
       return reply;
     },
     classifyKnownError,
     ...overrides,
   };
-  return { handler: createChatHandler(dependencies), dependencies, events, identity, principal, context, prepared, reply, state, env };
+  return { handler: createChatHandler(dependencies), dependencies, events, identity, principal, context, prepared, reservationTokens, reply, state, env };
 }
 
-test("API admission reserves the exact prepared snapshot cost before its sole model call", async () => {
+test("API admission reserves one bounded cost before context retrieval and its sole model call", async () => {
   const h = harness();
   const response = await h.handler(request());
   assert.equal(response.status, 200);
   assert.equal(response.headers.get("cache-control"), "no-store");
   assert.deepEqual(await response.json(), h.reply);
-  assert.deepEqual(h.events, ["origin", "read", "parse", "identity", "principal", "context", "prepare", "reserve", "model", "release"]);
+  assert.deepEqual(h.events, ["origin", "read", "parse", "identity", "principal", "bound", "reserve", "context", "prepare", "model", "release"]);
   assert.equal(h.state.generated, 1);
   assert.equal(h.state.released, 1);
-  assert.equal(h.state.charged, h.prepared.reservedTokens);
+  assert.equal(h.state.charged, h.reservationTokens);
 });
 
-test("quota denial returns 429 and database Retry-After without entering the model or cleanup", async () => {
-  const h = harness({ reserveChatQuota: async () => { throw new QuotaError("rate_limit", 429, 61); } });
+test("quota precedes asynchronous context loading, which receives the final question and locale before preparation", async () => {
+  const h = harness();
+  const input = {
+    locale: "en", consent: true,
+    messages: [
+      { role: "user", content: "What services do you offer?" },
+      { role: "assistant", content: "We can explain the office's services." },
+      { role: "user", content: "How can I arrange an appointment?" },
+    ],
+  };
+  let resolveContext;
+  const contextReady = new Promise((resolve) => { resolveContext = resolve; });
+  let enteredContext;
+  const contextEntered = new Promise((resolve) => { enteredContext = resolve; });
+  let contextArguments;
+  h.dependencies.getChatQuotaReservation = (actualInput, actualPrincipal, model) => {
+    h.events.push("bound");
+    assert.deepEqual(actualInput, input);
+    assert.equal(actualPrincipal, h.principal);
+    assert.equal(model, "configured-model");
+    return h.reservationTokens;
+  };
+  h.dependencies.getPublicChatContext = async (...args) => {
+    h.events.push("context");
+    contextArguments = args;
+    enteredContext();
+    const context = await contextReady;
+    h.events.push("context-ready");
+    return context;
+  };
+  h.dependencies.prepareChatModelRequest = (actualInput, actualContext, model) => {
+    h.events.push("prepare");
+    assert.deepEqual(actualInput, input);
+    assert.equal(actualContext, h.context);
+    assert.equal(model, "configured-model");
+    return h.prepared;
+  };
+
+  const responsePromise = h.handler(request({ body: JSON.stringify(input) }));
+  try {
+    await contextEntered;
+    assert.equal(contextArguments[0], h.principal);
+    assert.deepEqual(contextArguments.slice(1), ["en", input.messages.at(-1).content]);
+    assert.deepEqual(h.events, ["origin", "read", "parse", "identity", "principal", "bound", "reserve", "context"]);
+    assert.deepEqual(h.state, { charged: h.reservationTokens, released: 0, generated: 0 });
+  } finally {
+    resolveContext(h.context);
+  }
+  const response = await responsePromise;
+  assert.equal(response.status, 200);
+  assert.deepEqual(await response.json(), h.reply);
+  assert.deepEqual(h.events, ["origin", "read", "parse", "identity", "principal", "bound", "reserve", "context", "context-ready", "prepare", "model", "release"]);
+  assert.equal(h.state.generated, 1);
+  assert.equal(h.state.charged, h.reservationTokens);
+  assert.equal(h.state.released, 1);
+});
+
+test("rejected asynchronous context fails closed and releases its lease without refunding admission", async () => {
+  const h = harness();
+  h.dependencies.getPublicChatContext = async () => {
+    h.events.push("context");
+    await Promise.resolve();
+    throw new Error("private context retrieval details");
+  };
+
+  const response = await h.handler(request());
+  assert.equal(response.status, 502);
+  assert.deepEqual(await response.json(), { error: "upstream" });
+  assert.deepEqual(h.events, ["origin", "read", "parse", "identity", "principal", "bound", "reserve", "context", "release"]);
+  assert.deepEqual(h.state, { charged: h.reservationTokens, released: 1, generated: 0 });
+});
+
+test("quota denial returns 429 and database Retry-After without loading CMS context or calling the model", async () => {
+  const h = harness();
+  h.dependencies.reserveChatQuota = async () => {
+    h.events.push("reserve");
+    throw new QuotaError("rate_limit", 429, 61);
+  };
   const response = await h.handler(request());
   assert.equal(response.status, 429);
   assert.equal(response.headers.get("retry-after"), "61");
   assert.deepEqual(await response.json(), { error: "rate_limit" });
+  assert.deepEqual(h.events, ["origin", "read", "parse", "identity", "principal", "bound", "reserve"]);
   assert.equal(h.state.generated, 0);
   assert.equal(h.state.released, 0);
   assert.equal(h.state.charged, 0);
+});
+
+test("a prepared snapshot one token above its reservation fails with 413 and releases the lease", async () => {
+  const h = harness();
+  h.dependencies.prepareChatModelRequest = () => {
+    h.events.push("prepare");
+    return Object.freeze({ reservedTokens: h.reservationTokens + 1 });
+  };
+  const response = await h.handler(request());
+  assert.equal(response.status, 413);
+  assert.deepEqual(await response.json(), { error: "request_too_large" });
+  assert.deepEqual(h.events, ["origin", "read", "parse", "identity", "principal", "bound", "reserve", "context", "prepare", "release"]);
+  assert.deepEqual(h.state, { charged: h.reservationTokens, released: 1, generated: 0 });
+});
+
+test("invalid reservation bounds fail closed before quota, CMS context or provider work", async () => {
+  for (const bound of [0, -1, 1.5, 64001, NaN, Infinity, "39001", undefined]) {
+    const h = harness();
+    h.dependencies.getChatQuotaReservation = () => { h.events.push("bound"); return bound; };
+    const response = await h.handler(request());
+    assert.equal(response.status, 502);
+    assert.deepEqual(await response.json(), { error: "upstream" });
+    assert.deepEqual(h.events, ["origin", "read", "parse", "identity", "principal", "bound"]);
+    assert.deepEqual(h.state, { charged: 0, released: 0, generated: 0 });
+  }
 });
 
 test("database outage fails closed with 503 instead of falling through to a model request", async () => {
@@ -94,17 +201,21 @@ test("bad authentication exits with 401 before context loading, database reserva
   const response = await h.handler(request());
   assert.equal(response.status, 401);
   assert.deepEqual(await response.json(), { error: "unauthorized" });
-  for (const event of ["principal", "context", "prepare", "reserve", "model", "release"]) assert.ok(!h.events.includes(event));
+  for (const event of ["principal", "bound", "context", "prepare", "reserve", "model", "release"]) assert.ok(!h.events.includes(event));
 });
 
 test("provider failures still release concurrency exactly once and retain reserved abuse cost", async () => {
-  const h = harness({ generatePreparedChatReply: async () => { throw new ChatFailure("upstream", 502); } });
+  const h = harness();
+  h.dependencies.generatePreparedChatReply = async () => {
+    h.events.push("model"); h.state.generated += 1;
+    throw new ChatFailure("upstream", 502);
+  };
   const response = await h.handler(request());
   assert.equal(response.status, 502);
   assert.deepEqual(await response.json(), { error: "upstream" });
   assert.equal(h.state.released, 1);
-  assert.equal(h.state.charged, h.prepared.reservedTokens, "failure must not refund a reserved operation");
-  assert.deepEqual(h.events.slice(-2), ["reserve", "release"]);
+  assert.equal(h.state.charged, h.reservationTokens, "failure must not refund a reserved operation");
+  assert.deepEqual(h.events.slice(-2), ["model", "release"]);
 });
 
 test("client cancellation passes its signal through and releases the lease without a refund", async () => {
@@ -128,7 +239,7 @@ test("client cancellation passes its signal through and releases the lease witho
   assert.equal(response.status, 502);
   assert.deepEqual(await response.json(), { error: "upstream" });
   assert.equal(h.state.released, 1);
-  assert.equal(h.state.charged, h.prepared.reservedTokens);
+  assert.equal(h.state.charged, h.reservationTokens);
 });
 
 test("asynchronous or synchronous release failures cannot replace an answer or refund counters", async () => {
@@ -138,7 +249,7 @@ test("asynchronous or synchronous release failures cannot replace an answer or r
     const response = await h.handler(request());
     assert.equal(response.status, 200);
     assert.deepEqual(await response.json(), h.reply);
-    assert.equal(h.state.charged, h.prepared.reservedTokens);
+    assert.equal(h.state.charged, h.reservationTokens);
   }
 });
 
@@ -175,16 +286,17 @@ test("invalid input and oversized bodies are rejected before identity, context, 
 });
 
 test("access/preparation failures and unexpected errors do not leak details or call the model", async () => {
-  for (const [overrides, status, code] of [
-    [{ getPublicChatContext() { throw new ChatAccessError(); } }, 403, "forbidden"],
-    [{ prepareChatModelRequest() { throw new ChatFailure("request_too_large", 413); } }, 413, "request_too_large"],
-    [{ reserveChatQuota: async () => { throw new Error("private upstream credential detail"); } }, 502, "upstream"],
+  for (const [overrides, status, code, reserved] of [
+    [{ getPublicChatContext() { throw new ChatAccessError(); } }, 403, "forbidden", true],
+    [{ prepareChatModelRequest() { throw new ChatFailure("request_too_large", 413); } }, 413, "request_too_large", true],
+    [{ reserveChatQuota: async () => { throw new Error("private upstream credential detail"); } }, 502, "upstream", false],
   ]) {
     const h = harness(overrides);
     const response = await h.handler(request());
     assert.equal(response.status, status);
     assert.deepEqual(await response.json(), { error: code });
     assert.equal(h.state.generated, 0);
-    assert.equal(h.state.released, 0);
+    assert.equal(h.state.released, reserved ? 1 : 0);
+    assert.equal(h.state.charged, reserved ? h.reservationTokens : 0);
   }
 });
