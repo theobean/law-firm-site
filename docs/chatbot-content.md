@@ -1,11 +1,14 @@
 # Chatbot content scope
 
-`src/lib/chat/knowledge.ts` combines reviewed legal summaries and office facts
-with relevant excerpts from registered, published articles by the lawyer.
+`src/lib/chat/knowledge.ts` combines office facts, topic-selected reviewed legal
+summaries and relevant excerpts from registered, published articles by the lawyer.
 The initial sources were inspected on **8 November 2026**; the Katseli-law
 introduction, National Printing Office originals and public article registry
 were checked on **9 November 2026**. The assistant does not perform open-web
 research at runtime. A dated source is not proof of current consolidated law.
+The broader banking and general-practice catalog was inspected on the same date.
+Exact URLs, classifications, limitations and question examples are recorded in
+[the source review](chatbot-source-review.md).
 
 ## Server-enforced access boundary
 
@@ -15,9 +18,10 @@ case-file, contact-list or private-document queries. The public endpoint
 always receives the server-issued `public` principal, with `chat:read:public`
 permission. HTTP headers, request-body roles, conversation roles, IDs and model
 instructions cannot create another principal or widen the scope.
-Optional OIDC verification selects a request/token quota tier only; it does not
-replace this public data principal or enable private case access. Neon Postgres holds
-quota counters, not legal context. See [quota configuration](chatbot-quotas.md).
+Visitors do not have accounts or login. Turnstile and a signed browser cookie
+select an anonymous quota identity; they do not replace this public data principal
+or enable private case access. Neon Postgres holds quota counters, not legal
+context. See [quota configuration](chatbot-quotas.md).
 The CMS read is performed by server code, not by an executable model tool; see the
 [capability policy and human-approval requirements](chatbot-capabilities.md).
 
@@ -102,12 +106,30 @@ confidentiality statement. It has no booking calendar, matter-management access,
 case-status access or authority to accept an engagement. Fees and free initial
 consultations are not specified in the curated data.
 
-## General information
+## General information and selection
 
-Nine entries provide brief, paraphrased explanations of the Katseli law, debt settlement, the
-banking Code of Conduct, credit servicers, the Greek national payment-order
-procedure, mediation, labor disputes, land-registry records and inheritance-tax
-declarations. Each entry carries its exact supporting primary-source URL.
+The reviewed catalog in `legal-catalog.mjs`, `legal-banking-sources.mjs` and
+`legal-general-sources.mjs` includes official explanations of banking/debt tools,
+enforcement, consumer disputes, property, inheritance, family, employment,
+companies, tax, criminal rights, access to public documents and data protection.
+Each entry fixes its exact source URL, review date, source type and multilingual
+retrieval keywords. Excerpts are paraphrases, not complete copied webpages.
+
+`legal-retrieval.mjs` checks the server-issued public principal and the independent
+ID allowlist before ranking metadata or loading content. It selects at most four
+whole legal excerpts within 10,000 UTF-8 bytes of serialized/escaped reference and
+source-ID data. Greek accent/inflection and English/German vocabulary are covered
+by explicit terms; topic diversity and matching original Gazette references are
+preferred. Selection does not treat a matching keyword as evidence of an answer.
+Unrelated or empty queries supply no legal excerpts, and missing material still
+requires a handoff. The five office entries remain available.
+
+The route computes its exact static reservation using the same current question
+and selection as the final context. Only after shared quota/monetary admission
+does the existing bounded office-article reader run. The final serialized request
+must still fit the reservation. Expanding the source catalog does not send the
+entire legal library in every question, introduce a vector database or enable an
+open-web/model-selected reader.
 
 The Katseli-law entry covers only the purpose of Law 3869/2010 and conditional
 debt discharge. The common name was checked against the
@@ -116,10 +138,12 @@ and the general subject against [AADE circular E.2041/2025](https://aade.gr/egky
 These sources do not authorize this summary to decide present-day admission,
 new applications, residence protection, payment terms or an individual case.
 
-Two additional primary references use the National Printing Office originals:
+Four primary references use National Printing Office originals:
 
 - [Ν. 3869/2010, ΦΕΚ Α΄ 130/03.08.2010](https://api.et.gr/apiLAW/1/2010/3869/pdf).
 - [Ν. 4738/2020, ΦΕΚ Α΄ 207/27.10.2020](https://api.et.gr/apiLAW/1/2020/4738/pdf).
+- [Ν. 5072/2023, ΦΕΚ Α΄ 198/04.12.2023](https://api.et.gr/apiLAW/1/2023/5072/pdf).
+- [Ν. 4619/2019, ΦΕΚ Α΄ 95/11.06.2019](https://api.et.gr/apiLAW/1/2019/4619/pdf).
 
 These are initial gazette publications, not consolidated texts including later
 amendments. They support the statute's identity and general subject. The prompt
@@ -144,11 +168,13 @@ The dialogue displays a permanent notice stating that LEXI's answers are general
 information and do not constitute legal advice. Source checks remain internal;
 the visitor interface does not show a source list.
 
-Sources are the Ministry of Economy and Finance, Bank of Greece, European
-e-Justice Portal / European Judicial Network, Ministry of Justice, Hellenic Labour
-Inspectorate, Hellenic Cadastre and AADE. The payment-order entry uses only the
-general nature of the national procedure described on e-Justice; procedural
-details on that page may be older and are not incorporated.
+Sources include the Ministry of Economy and Finance, Bank of Greece and its
+Central Credit Register, European Commission/e-Justice, Mitos, Ministry of
+Justice, Ministry of Labour, Hellenic Labour Inspectorate, Hellenic Cadastre,
+AADE, GEMI, Consumer Ombudsman and Hellenic Data Protection Authority. Dated
+procedural pages support stable definitions only; old court names, implementation
+dates, monetary thresholds and procedural deadlines are not imported as current
+law. A consultation draft is not treated as enacted legislation.
 
 No entry supplies statutory deadlines, monetary thresholds, eligibility tests,
 specific remedies, predictions or guarantees. Questions beyond these limited
@@ -170,3 +196,9 @@ registry binding; publishing/editing CMS data alone does not expand access. The 
 classifications are trusted, reviewed application configuration; the policy is
 not a classifier that can discover confidential prose mislabeled as public by a
 developer.
+
+Updating a source requires reviewing the underlying body and its date, preserving
+the distinction between an original Gazette, official guidance and author
+commentary, and running the retrieval/source tests. Updating only `reviewedAt`
+does not refresh or verify the legal substance. No scheduled legal update or
+runtime guarantee of current law is configured.

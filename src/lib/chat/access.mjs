@@ -18,8 +18,26 @@ const APPROVED_PUBLIC_SOURCE_IDS = new Set([
   "legal-katseli-law", "legal-debt-settlement", "legal-banking-code", "legal-credit-servicers", "legal-payment-order",
   "legal-mediation", "legal-labor-disputes", "legal-land-registry", "legal-inheritance-tax",
   "legislation-3869-2010", "legislation-4738-2020",
+  "legislation-5072-2023", "legislation-4619-2019", "legal-enforcement-concepts",
+  "legal-bilateral-settlement", "legal-banking-code-process", "legal-bank-transparency",
+  "legal-credit-report", "legal-bank-complaints", "legal-debt-certificate", "legal-early-warning",
+  "legal-debt-support", "legal-consumer-complaints",
+  "legal-consensual-divorce", "legal-company-formation", "legal-rental-declarations",
+  "legal-property-transfer", "legal-cadastral-corrections", "legal-consumer-ombudsman",
+  "legal-tax-administrative-appeal", "legal-criminal-defence-rights", "legal-legal-aid",
+  "legal-data-access", "legal-public-documents", "legal-cross-border-inheritance",
+  "legal-employment-terms", "legal-workplace-harassment", "legal-electronic-auctions",
   ...APPROVED_OFFICE_ARTICLES.map(({ sourceId }) => sourceId),
 ]);
+
+/** Metadata membership only. Callers must still verify the public principal
+ * before selecting content; catalog membership alone never grants access.
+ * @param {unknown} id
+ * @returns {boolean}
+ */
+export function isApprovedPublicChatSourceId(id) {
+  return typeof id === "string" && APPROVED_PUBLIC_SOURCE_IDS.has(id);
+}
 
 /** @type {WeakMap<object, readonly AuthorizedChatSource[]>} */
 const authorizedContexts = new WeakMap();
