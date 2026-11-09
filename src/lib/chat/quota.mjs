@@ -13,9 +13,11 @@ export const CHAT_QUOTA_POLICY = Object.freeze({
   maxReservedTokens: 64000,
 });
 
-export const RESERVE_CHAT_QUOTA_SQL = "SELECT allowed, retry_after, policy_version FROM chat_quota.reserve($1::text, $2::text, $3::text, $4::text, $5::bigint, $6::uuid)";
+export const CHAT_MONEY_BUDGET_EUR_MICROS = 5000000;
+export const RESERVE_CHAT_QUOTA_SQL = "SELECT allowed, retry_after, policy_version, money_policy_version FROM chat_quota.reserve($1::text, $2::text, $3::text, $4::text, $5::bigint, $6::uuid, $7::bigint)";
 export const RELEASE_CHAT_QUOTA_SQL = "SELECT chat_quota.release($1::text, $2::uuid) AS released";
 const POLICY_VERSION = 1;
+const MONEY_POLICY_VERSION = 1;
 const RESERVE_TIMEOUT_MS = 5000;
 const RELEASE_TIMEOUT_MS = 3000;
 
@@ -123,12 +125,18 @@ function quotaQuery(config, suppliedQuery) {
  * Redis, in-memory fallback or caller-chosen SQL/policy/namespace.
  * @param {{tier: "anonymous" | "authenticated", subjectKey: string, networkKey: string}} identity
  * @param {number} reservedTokens
- * @param {{env?: Record<string, string | undefined>, query?: QuotaQuery}} [options]
+ * @param {{env?: Record<string, string | undefined>, query?: QuotaQuery, reservedCostEurMicros?: number}} [options]
  * @returns {Promise<{release: () => Promise<void>}>}
  */
 export async function reserveChatQuota(identity, reservedTokens, options = {}) {
   if (!Number.isSafeInteger(reservedTokens) || reservedTokens < 1 || reservedTokens > CHAT_QUOTA_POLICY.maxReservedTokens) {
     throw new QuotaError("request_too_large", 413);
+  }
+  const moneyCost = options.reservedCostEurMicros;
+  if (!Number.isSafeInteger(moneyCost) || moneyCost < 1 || moneyCost > CHAT_MONEY_BUDGET_EUR_MICROS) {
+    // A missing/invalid server-calculated cost must never bypass the financial
+    // guard or silently reserve zero. HTTP request data cannot choose this cost.
+    throw new QuotaError("unavailable", 503);
   }
   if (!identity || !["anonymous", "authenticated"].includes(identity.tier) ||
       typeof identity.subjectKey !== "string" || typeof identity.networkKey !== "string" ||
@@ -139,12 +147,13 @@ export async function reserveChatQuota(identity, reservedTokens, options = {}) {
   const query = quotaQuery(config, options.query);
   const leaseId = randomUUID();
   const result = await query(RESERVE_CHAT_QUOTA_SQL, [
-    config.environment, identity.tier, identity.subjectKey, identity.networkKey, reservedTokens, leaseId,
+    config.environment, identity.tier, identity.subjectKey, identity.networkKey, reservedTokens, leaseId, moneyCost,
   ], RESERVE_TIMEOUT_MS);
   if (!Array.isArray(result) || result.length !== 1 || !isRecord(result[0])) throw new QuotaError("unavailable", 503);
   const row = result[0];
-  if (Object.keys(row).length !== 3 || typeof row.allowed !== "boolean" ||
+  if (Object.keys(row).length !== 4 || typeof row.allowed !== "boolean" ||
       !Number.isInteger(row.retry_after) || row.policy_version !== POLICY_VERSION ||
+      row.money_policy_version !== MONEY_POLICY_VERSION ||
       row.retry_after < 0 || row.retry_after > 86400 ||
       (row.allowed && row.retry_after !== 0) || (!row.allowed && row.retry_after < 1)) {
     throw new QuotaError("unavailable", 503);

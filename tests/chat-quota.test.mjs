@@ -1,16 +1,19 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { CHAT_QUOTA_POLICY, QuotaError, reserveChatQuota } from "../src/lib/chat/quota.mjs";
+import { CHAT_MONEY_BUDGET_EUR_MICROS, CHAT_QUOTA_POLICY, QuotaError, reserveChatQuota as actualReserveChatQuota } from "../src/lib/chat/quota.mjs";
 
 const databaseUrl = (role = "chat_quota_preview") => `postgresql://${role}:test-only-password@ep-test-123456.us-east-1.aws.neon.tech/chatbot?sslmode=require`;
 const env = { CHAT_DATABASE_URL: databaseUrl(), VERCEL_ENV: "preview" };
 const anonymous = { tier: "anonymous", subjectKey: "a".repeat(64), networkKey: "b".repeat(64) };
 const authenticated = { ...anonymous, tier: "authenticated", subjectKey: "c".repeat(64) };
-const allowed = () => [{ allowed: true, retry_after: 0, policy_version: 1 }];
+const allowed = () => [{ allowed: true, retry_after: 0, policy_version: 1, money_policy_version: 1 }];
 const quotaError = (code, status) => (error) => error instanceof QuotaError && error.code === code && error.status === status;
 const uuid = /^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/;
-const reserveSql = /^SELECT allowed, retry_after, policy_version FROM chat_quota\.reserve\(\$1::text, \$2::text, \$3::text, \$4::text, \$5::bigint, \$6::uuid\)$/;
+const reserveSql = /^SELECT allowed, retry_after, policy_version, money_policy_version FROM chat_quota\.reserve\(\$1::text, \$2::text, \$3::text, \$4::text, \$5::bigint, \$6::uuid, \$7::bigint\)$/;
 const releaseSql = /^SELECT chat_quota\.release\(\$1::text, \$2::uuid\) AS released$/;
+// Most adapter tests use the same positive server-calculated money fixture.
+// Missing/malformed values below deliberately call the real export directly.
+const reserveChatQuota = (identity, units, options = {}) => actualReserveChatQuota(identity, units, { reservedCostEurMicros: 1000, ...options });
 
 // Real adapter boundary tests, not a JavaScript copy of SQL admission.
 // scripts/test-chat-neon.mjs opts into actual database/concurrency checks.
@@ -22,7 +25,8 @@ test("the Neon adapter binds fixed SQL with pseudonyms and a unique lease", asyn
   assert.equal(calls.length, 1);
   assert.match(calls[0].sql, reserveSql);
   assert.deepEqual(calls[0].params.slice(0, 5), ["preview", "anonymous", anonymous.subjectKey, anonymous.networkKey, 25000]);
-  assert.equal(calls[0].params.length, 6);
+  assert.equal(calls[0].params.length, 7);
+  assert.equal(calls[0].params[6], 1000);
   assert.match(calls[0].params[5], uuid);
   for (const text of ["127.0.0.1", "PRIVATE_TENANT_SENTINEL", "test-only-password", anonymous.subjectKey, anonymous.networkKey]) {
     assert.ok(!calls[0].sql.includes(text), "data and credentials never enter SQL text");
@@ -84,7 +88,7 @@ test("release binds only its owned environment and UUID, is idempotent and expos
 test("database denials preserve Retry-After and cannot return a releasable lease", async () => {
   let calls = 0;
   await assert.rejects(reserveChatQuota(anonymous, 32000, {
-    env, query: async () => { calls += 1; return [{ allowed: false, retry_after: 7462, policy_version: 1 }]; },
+    env, query: async () => { calls += 1; return [{ allowed: false, retry_after: 7462, policy_version: 1, money_policy_version: 1 }]; },
   }), (error) => quotaError("rate_limit", 429)(error) && error.retryAfter === 7462);
   assert.equal(calls, 1);
 });
@@ -125,13 +129,33 @@ test("invalid costs and forged identities cannot become SQL parameters or bypass
   assert.equal(calls, 0);
 });
 
+test("a positive integer monetary reservation is mandatory and cannot exceed the fixed five-euro ceiling", async () => {
+  assert.equal(CHAT_MONEY_BUDGET_EUR_MICROS, 5000000);
+  let calls = 0;
+  const query = async () => { calls++; return allowed(); };
+  for (const cost of [undefined, null, 0, -1, 5000001, NaN, Infinity, 1.5, "1000", 1000n]) {
+    await assert.rejects(actualReserveChatQuota(anonymous, 1, { env, query, reservedCostEurMicros: cost }), quotaError("unavailable", 503));
+  }
+  await assert.rejects(actualReserveChatQuota(anonymous, 1, { env, query }), quotaError("unavailable", 503));
+  assert.equal(calls, 0);
+  const parameters = [];
+  for (const cost of [1, 5000000]) {
+    await actualReserveChatQuota(anonymous, 1, { env, reservedCostEurMicros: cost, query: async (_sql, values) => { parameters.push(values); return allowed(); } });
+  }
+  assert.deepEqual(parameters.map((values) => values[6]), [1, 5000000]);
+});
+
 test("SQL failures and malformed or version-mismatched rows fail closed without detail leakage", async () => {
   const invalid = [null, {}, [], [null], [[]], [{}], [...allowed(), ...allowed()],
-    [{ allowed: 1, retry_after: 0, policy_version: 1 }], [{ allowed: true, retry_after: "0", policy_version: 1 }],
-    [{ allowed: true, retry_after: 1, policy_version: 1 }], [{ allowed: false, retry_after: 0, policy_version: 1 }],
-    [{ allowed: false, retry_after: 86401, policy_version: 1 }], [{ allowed: false, retry_after: 1.5, policy_version: 1 }],
-    [{ allowed: true, retry_after: 0, policy_version: 2 }], [{ allowed: true, retry_after: 0, policy_version: "1" }],
-    [{ allowed: true, retry_after: 0, policy_version: 1, privateDetail: "unexpected" }],
+    [{ allowed: 1, retry_after: 0, policy_version: 1, money_policy_version: 1 }], [{ allowed: true, retry_after: "0", policy_version: 1, money_policy_version: 1 }],
+    [{ allowed: true, retry_after: 1, policy_version: 1, money_policy_version: 1 }], [{ allowed: false, retry_after: 0, policy_version: 1, money_policy_version: 1 }],
+    [{ allowed: false, retry_after: 86401, policy_version: 1, money_policy_version: 1 }], [{ allowed: false, retry_after: 1.5, policy_version: 1, money_policy_version: 1 }],
+    [{ allowed: true, retry_after: 0, policy_version: 2, money_policy_version: 1 }], [{ allowed: true, retry_after: 0, policy_version: "1", money_policy_version: 1 }],
+    [{ allowed: true, retry_after: 0, policy_version: 1, money_policy_version: 1, privateDetail: "unexpected" }],
+    [{ allowed: true, retry_after: 0, policy_version: 1 }],
+    [{ allowed: true, retry_after: 0, policy_version: 1, money_policy_version: 0 }],
+    [{ allowed: true, retry_after: 0, policy_version: 1, money_policy_version: 2 }],
+    [{ allowed: true, retry_after: 0, policy_version: 1, money_policy_version: "1" }],
   ];
   for (const rows of invalid) await assert.rejects(reserveChatQuota(anonymous, 1, { env, query: async () => rows }), quotaError("unavailable", 503));
   await assert.rejects(reserveChatQuota(anonymous, 1, { env, query: async () => { throw new Error("PRIVATE_DATABASE_DETAIL_SENTINEL"); } }),

@@ -22,6 +22,18 @@ CREATE TABLE IF NOT EXISTS chat_quota.role_bindings (
     REFERENCES chat_quota.namespaces(namespace, environment) ON DELETE CASCADE
 );
 
+-- A separately seeded financial guard is never created or reset by a runtime
+-- request. Integer micro-euros avoid currency rounding at the daily ceiling.
+CREATE TABLE IF NOT EXISTS chat_quota.money_budgets (
+  namespace text NOT NULL,
+  environment text NOT NULL,
+  day bigint NOT NULL CHECK (day >= 0),
+  reserved_eur_micros bigint NOT NULL CHECK (reserved_eur_micros >= 0 AND reserved_eur_micros <= 5000000),
+  PRIMARY KEY (namespace, environment),
+  FOREIGN KEY (namespace, environment)
+    REFERENCES chat_quota.namespaces(namespace, environment) ON DELETE CASCADE
+);
+
 CREATE TABLE IF NOT EXISTS chat_quota.buckets (
   namespace text NOT NULL,
   environment text NOT NULL,
@@ -63,14 +75,26 @@ CREATE INDEX IF NOT EXISTS chat_quota_leases_subject
 CREATE INDEX IF NOT EXISTS chat_quota_leases_network
   ON chat_quota.leases(namespace, environment, network, expires_at);
 
+-- The legacy entry point has no financial argument. Remove its permissions and
+-- signature so an old application cannot bypass the mandatory monetary guard.
+DO $legacy_reserve$
+BEGIN
+  IF pg_catalog.to_regprocedure('chat_quota.reserve(text,text,text,text,bigint,uuid)') IS NOT NULL THEN
+    REVOKE ALL ON FUNCTION chat_quota.reserve(text, text, text, text, bigint, uuid) FROM PUBLIC;
+    DROP FUNCTION chat_quota.reserve(text, text, text, text, bigint, uuid);
+  END IF;
+END;
+$legacy_reserve$;
+
 CREATE OR REPLACE FUNCTION chat_quota.reserve(
   p_environment text,
   p_tier text,
   p_subject text,
   p_network text,
   p_cost bigint,
-  p_lease_id uuid
-) RETURNS TABLE(allowed boolean, retry_after integer, policy_version integer)
+  p_lease_id uuid,
+  p_money_cost_eur_micros bigint
+) RETURNS TABLE(allowed boolean, retry_after integer, policy_version integer, money_policy_version integer)
 LANGUAGE plpgsql
 SECURITY DEFINER
 VOLATILE
@@ -83,6 +107,8 @@ DECLARE
   v_environment text;
   v_policy integer;
   v_bucket chat_quota.buckets%ROWTYPE;
+  v_money chat_quota.money_budgets%ROWTYPE;
+  v_money_reserved bigint;
   v_found boolean;
   v_now timestamptz;
   v_day bigint;
@@ -107,7 +133,8 @@ BEGIN
       p_tier NOT IN ('anonymous', 'authenticated') OR
       p_subject IS NULL OR p_subject !~ '^[a-f0-9]{64}$' OR
       p_network IS NULL OR p_network !~ '^[a-f0-9]{64}$' OR
-      p_cost IS NULL OR p_cost < 1 OR p_cost > 64000 OR p_lease_id IS NULL THEN
+      p_cost IS NULL OR p_cost < 1 OR p_cost > 64000 OR p_lease_id IS NULL OR
+      p_money_cost_eur_micros IS NULL OR p_money_cost_eur_micros < 1 OR p_money_cost_eur_micros > 5000000 THEN
     RAISE EXCEPTION USING ERRCODE = '22023', MESSAGE = 'quota_invalid_request';
   END IF;
 
@@ -137,13 +164,31 @@ BEGIN
     RAISE EXCEPTION USING ERRCODE = '55000', MESSAGE = 'quota_state_unavailable';
   END IF;
 
-  -- Read the database clock AFTER acquiring the serialization guard and global
-  -- row. A transaction-start timestamp could be stale after waiting for a lock.
+  SELECT m.* INTO v_money FROM chat_quota.money_budgets AS m
+    WHERE m.namespace = v_namespace AND m.environment = v_environment
+    FOR UPDATE;
+  IF NOT FOUND THEN
+    RAISE EXCEPTION USING ERRCODE = '55000', MESSAGE = 'quota_state_unavailable';
+  END IF;
+  -- Read the database clock AFTER acquiring the guard, global and money rows.
+  -- A transaction-start timestamp could be stale after waiting for a lock.
   v_now := pg_catalog.clock_timestamp();
   v_day := pg_catalog.floor(EXTRACT(epoch FROM v_now) / 86400)::bigint;
   v_next_day := pg_catalog.to_timestamp(((v_day + 1) * 86400)::double precision);
   IF v_bucket.updated_at > v_now OR v_bucket.day > v_day THEN
     RAISE EXCEPTION USING ERRCODE = '55000', MESSAGE = 'quota_state_unavailable';
+  END IF;
+
+  IF v_money.day IS NULL OR v_money.reserved_eur_micros IS NULL OR
+      v_money.day < 0 OR v_money.day > v_day OR
+      v_money.reserved_eur_micros < 0 OR v_money.reserved_eur_micros > 5000000 THEN
+    RAISE EXCEPTION USING ERRCODE = '55000', MESSAGE = 'quota_state_unavailable';
+  END IF;
+  -- Yesterday's spend is logically zero only after the UTC day changes. A new
+  -- day's state is persisted only when every admission scope allows this call.
+  v_money_reserved := CASE WHEN v_money.day = v_day THEN v_money.reserved_eur_micros ELSE 0 END;
+  IF v_money_reserved + p_money_cost_eur_micros > 5000000 THEN
+    v_retry := GREATEST(v_retry, EXTRACT(epoch FROM (v_next_day - v_now)));
   END IF;
 
   IF EXISTS (
@@ -249,11 +294,15 @@ BEGIN
   END LOOP;
 
   IF v_retry > 0 THEN
-    RETURN QUERY SELECT false, GREATEST(1, LEAST(86400, pg_catalog.ceil(v_retry)::integer)), 1;
+    RETURN QUERY SELECT false, GREATEST(1, LEAST(86400, pg_catalog.ceil(v_retry)::integer)), 1, 1;
     RETURN;
   END IF;
 
-  -- All three admission decisions precede every counter insertion/update.
+  -- Financial and all three abuse admission decisions precede every counter
+  -- insertion/update. Errors and lease release never refund this reservation.
+  UPDATE chat_quota.money_budgets AS m
+    SET day = v_day, reserved_eur_micros = v_money_reserved + p_money_cost_eur_micros
+    WHERE m.namespace = v_namespace AND m.environment = v_environment;
   FOR i IN 1..3 LOOP
     INSERT INTO chat_quota.buckets AS b
       (namespace, environment, scope_key, requests, tokens, updated_at, day, day_requests, day_tokens)
@@ -266,7 +315,7 @@ BEGIN
   END LOOP;
   INSERT INTO chat_quota.leases(namespace, environment, lease_id, tier, subject, network, expires_at)
     VALUES (v_namespace, v_environment, p_lease_id, p_tier, p_subject, p_network, v_now + interval '60 seconds');
-  RETURN QUERY SELECT true, 0, 1;
+  RETURN QUERY SELECT true, 0, 1, 1;
 END;
 $reserve$;
 

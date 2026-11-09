@@ -58,12 +58,13 @@ npm run dev
 | `SANITY_API_TOKEN` | Μόνο για βοηθητικά scripts συντήρησης του CMS· δεν χρειάζεται στο δημόσιο runtime. |
 | `CHATBOT_ENABLED` | Ο βοηθός εμφανίζεται και το `/api/chat` ενεργοποιείται μόνο με την ακριβή τιμή `true`. Προεπιλογή: απενεργοποιημένος. Αλλαγή χρειάζεται νέο build. |
 | `OPENAI_API_KEY` | Ιδιωτικό server-side κλειδί OpenAI API για τον ψηφιακό βοηθό. Ποτέ με πρόθεμα `NEXT_PUBLIC_`. |
-| `OPENAI_CHAT_MODEL` | Προαιρετικό μοντέλο Responses με structured outputs και reasoning effort `low`. Προεπιλογή: `gpt-5.4-mini`. |
+| `OPENAI_CHAT_MODEL` | Επιτρέπεται μόνο `gpt-5.4-mini` ή `gpt-5.4-mini-2026-03-17`, με επίλυση στο συγκεκριμένο snapshot και standard tier για τον έλεγχο κόστους. |
 | `CHAT_DATABASE_URL` | Ιδιωτικό Neon Postgres URL του περιορισμένου runtime ρόλου, με TLS. Ο ρόλος καλεί μόνο τις συναρτήσεις quotas. Ποτέ owner/admin URL. |
 | `CHAT_RATE_LIMIT_SECRET` | Ιδιωτικό σταθερό μυστικό 32+ χαρακτήρων για HMAC αναγνωριστικά, κοινό σε όλα τα instances. |
-| `CHAT_AUTH_ISSUER` | Προαιρετικός HTTPS issuer του παρόχου OpenID Connect. Μαζί με τα δύο επόμενα. |
-| `CHAT_AUTH_AUDIENCE` | Αναμενόμενο audience του JWT access token για το chat API. |
-| `CHAT_AUTH_JWKS_URL` | Σταθερό HTTPS JWKS endpoint για επαλήθευση υπογραφών RS256/ES256. |
+| `CHAT_TURNSTILE_ENABLED` / `NEXT_PUBLIC_CHAT_TURNSTILE_ENABLED` | Ορίζονται και τα δύο σε `true` για προστασία σε server και browser. Απαιτείται νέο build. |
+| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Δημόσιο site key του Turnstile widget. |
+| `CHAT_TURNSTILE_SECRET_KEY` | Ιδιωτικό κλειδί Siteverify, μόνο στον server. |
+| `CHAT_TURNSTILE_HOSTNAMES` | Ακριβή επιτρεπόμενα hostnames με κόμμα, χωρίς wildcards/URLs. |
 
 Πρόσθεσε τις server-side μεταβλητές τοπικά μόνο όταν χρειάζεσαι τις αντίστοιχες διασυνδέσεις. Οι μεταβλητές `NEXT_PUBLIC_*` ενσωματώνονται στον κώδικα του browser κατά το build· δεν πρέπει να περιέχουν ιδιωτικά API keys ή secrets.
 
@@ -122,10 +123,14 @@ GitHub, κώδικα browser, μηνύματα ή `NEXT_PUBLIC_*`. Ξεκίνα 
 server-side έγκριση εξουσιοδοτημένου ανθρώπου πριν ενεργοποιηθούν· δεν υπάρχει
 τέτοια δυνατότητα ενεργειών σήμερα. Δες [capabilities και least privilege](docs/chatbot-capabilities.md).
 
-Ο τρέχων βοηθός του browser λειτουργεί ανώνυμα. Το backend μπορεί να επαληθεύσει
-Bearer access tokens όταν ρυθμιστούν και οι τρεις `CHAT_AUTH_*` μεταβλητές και
-συνδεθεί ο client με πραγματικό πάροχο σύνδεσης. Δεν δημιουργείται αυτόματα login
-portal. Η επαλήθευση αλλάζει μόνο quota, όχι πρόσβαση σε ιδιωτικά δεδομένα.
+Η LEXI λειτουργεί χωρίς εγγραφή ή login. Με ενεργό Turnstile, κάθε ερώτηση
+επαληθεύεται στον server και ένα υπογεγραμμένο cookie 24 ωρών διατηρεί το
+ανώνυμο όριο του browser ακόμη και όταν αλλάζει η IP. Παραμένουν κοινά όρια
+δικτύου και συνολικής κατανάλωσης. Το χρηματικό όριο είναι 5€ ανά UTC ημέρα
+στο ενεργό namespace/environment, με συντηρητική κράτηση πριν από την OpenAI,
+ελεγμένη ισοτιμία ΕΚΤ και περιθώριο ασφαλείας. Δεν είναι μέτρηση τιμολογίου,
+φόρων ή τραπεζικών προμηθειών. Δες [ρύθμιση ασφάλειας και απαιτούμενο έλεγχο
+τιμών πριν τις 9 Δεκεμβρίου 2026](docs/chatbot-security.md).
 
 Η συνομιλία αρχίζει μετά από ρητή επιλογή του επισκέπτη. Στην OpenAI αποστέλλεται
 το ερώτημα, έως οκτώ πρόσφατα μηνύματα και η επιλεγμένη βάση πηγών. Ο κώδικας

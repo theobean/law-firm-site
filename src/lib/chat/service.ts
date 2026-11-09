@@ -1,5 +1,6 @@
 import { parseChatResponse, prepareChatText, readBoundedJson } from "./protocol.mjs";
 import { readAuthorizedChatSources, type AuthorizedChatContext } from "./access.mjs";
+import { CHAT_BUDGET_MODEL } from "./money.mjs";
 
 export type ChatLocale = "el" | "en" | "de";
 export type ChatMessage = { role: "user" | "assistant"; content: string };
@@ -163,11 +164,13 @@ export function prepareChatModelRequest(
   context: AuthorizedChatContext,
   model?: string,
 ): PreparedChatModelRequest {
+  if (model && ![CHAT_BUDGET_MODEL, "gpt-5.4-mini"].includes(model)) throw new ChatFailure("unavailable", 503);
   const sources = readAuthorizedChatSources(context);
   // Validate at the provider boundary as well as at the HTTP entry point.
   const safeInput = parseChatInput(input);
   const body = JSON.stringify({
-      model: model || "gpt-5.4-mini",
+      model: CHAT_BUDGET_MODEL,
+      service_tier: "default",
       store: false,
       max_output_tokens: MAX_CHAT_OUTPUT_TOKENS,
       reasoning: { effort: "low" },

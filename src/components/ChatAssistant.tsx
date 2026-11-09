@@ -6,6 +6,7 @@ import { ArrowRight, LoaderCircle, MessageCircle, Phone, RotateCcw, Send, Shield
 import { Link } from "@/navigation";
 import { parseChatResponse, readBoundedJson } from "@/lib/chat/protocol.mjs";
 import ChatText from "./ChatText";
+import useChatVerification from "./useChatVerification";
 import styles from "./ChatAssistant.module.css";
 
 type ChatMessage = {
@@ -17,6 +18,8 @@ type ChatMessage = {
 type ChatError = "unavailable" | "unauthorized" | "rate_limit" | "invalid_request" | "request_too_large" | "forbidden" | "upstream";
 const MAX_MESSAGE_LENGTH = 1200;
 const ERROR_CODES = new Set<ChatError>(["unavailable", "unauthorized", "rate_limit", "invalid_request", "request_too_large", "forbidden", "upstream"]);
+const VERIFICATION_ENABLED = process.env.NEXT_PUBLIC_CHAT_TURNSTILE_ENABLED === "true";
+const VERIFICATION_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? "";
 
 export default function ChatAssistant() {
   const t = useTranslations("chat");
@@ -41,6 +44,16 @@ export default function ChatAssistant() {
   const sequenceRef = useRef(0);
   const typingFrameRef = useRef<number | null>(null);
   const followReplyRef = useRef(true);
+  const verification = useChatVerification({
+    enabled: VERIFICATION_ENABLED,
+    active: activated && open,
+    siteKey: VERIFICATION_SITE_KEY,
+    locale,
+  });
+  const verificationBlocked = VERIFICATION_ENABLED && verification.status !== "ready";
+  const verificationMessage = verification.status === "loading" || verification.status === "checking" || verification.status === "interactive"
+    || verification.status === "failed" || verification.status === "expired" || verification.status === "unavailable"
+    ? verification.status : null;
 
   useEffect(() => {
     const overlays = document.getElementById("site-bottom-overlays");
@@ -61,17 +74,16 @@ export default function ChatAssistant() {
 
   useEffect(() => {
     if (!open) return;
-    if (activated && !loading) inputRef.current?.focus();
+    if (activated && !loading && !verificationBlocked) inputRef.current?.focus();
     else panelRef.current?.focus({ preventScroll: true });
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        setOpen(false);
-        triggerRef.current?.focus();
+        closePanel();
       }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [open, activated, loading]);
+  }, [open, activated, loading, verificationBlocked]);
 
   useEffect(() => {
     const log = logRef.current;
@@ -122,6 +134,7 @@ export default function ChatAssistant() {
   }
 
   function closePanel() {
+    if (VERIFICATION_ENABLED) controllerRef.current?.abort();
     setOpen(false);
     triggerRef.current?.focus();
   }
@@ -136,12 +149,13 @@ export default function ChatAssistant() {
     setError(null);
     setFailedQuestion("");
     setLoading(false);
+    if (VERIFICATION_ENABLED) verification.reset();
     inputRef.current?.focus();
   }
 
   async function sendQuestion(question: string) {
     const content = question.trim();
-    if (!activated || requestPendingRef.current || !content || content.length > MAX_MESSAGE_LENGTH) return;
+    if (!activated || requestPendingRef.current || verificationBlocked || !content || content.length > MAX_MESSAGE_LENGTH) return;
     finishTyping();
     requestPendingRef.current = true;
     const controller = new AbortController();
@@ -161,7 +175,13 @@ export default function ChatAssistant() {
     setError(null);
     setFailedQuestion("");
 
+    let tokenObtained = false;
+    let requestSent = false;
     try {
+      const turnstileToken = await verification.verify(controller.signal);
+      tokenObtained = VERIFICATION_ENABLED;
+      if (controller.signal.aborted || controllerRef.current !== controller) return;
+      requestSent = true;
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -169,11 +189,13 @@ export default function ChatAssistant() {
           locale,
           consent: true,
           messages: requestMessages,
+          ...(turnstileToken ? { turnstileToken } : {}),
         }),
         signal: controller.signal,
       });
       const data = await readBoundedJson(response).catch(() => null);
       if (controllerRef.current !== controller) return;
+      if (controller.signal.aborted) throw new DOMException("Chat request cancelled", "AbortError");
       const reply = parseChatResponse(data);
       if (!response.ok || !reply) {
         const receivedError = data && typeof data === "object" && "error" in data ? data.error : null;
@@ -194,13 +216,16 @@ export default function ChatAssistant() {
       }]);
       animateReply(replyId, reply.answer);
     } catch {
-      if (controller.signal.aborted || controllerRef.current !== controller) return;
+      if (controllerRef.current !== controller) return;
       setMessages(history.slice(0, -1));
       setDraft(content);
+      if (controller.signal.aborted) return;
       setFailedQuestion(content);
-      setError("upstream");
+      // Verification failures have their own accessible notice and retry control.
+      if (requestSent) setError("upstream");
     } finally {
       if (controllerRef.current === controller) {
+        if (tokenObtained) verification.reset();
         controllerRef.current = null;
         requestPendingRef.current = false;
         setLoading(false);
@@ -266,7 +291,7 @@ export default function ChatAssistant() {
                 {messages.length === 0 && (
                   <div className={styles.starters}>
                     {["starterOffice", "starterLegal", "starterAppointment"].map((key) => (
-                      <button key={key} type="button" onClick={() => void sendQuestion(t(key))} disabled={loading}>
+                      <button key={key} type="button" onClick={() => void sendQuestion(t(key))} disabled={loading || verificationBlocked}>
                         {t(key)} <ArrowRight size={14} aria-hidden="true" />
                       </button>
                     ))}
@@ -286,17 +311,35 @@ export default function ChatAssistant() {
                     {typingReply?.id !== message.id && message.suggestContact && <Link href="/contact" className={styles.messageContact}>{t("contactOffice")} <ArrowRight size={13} aria-hidden="true" /></Link>}
                   </div>
                 ))}
-                {loading && <p className={styles.loading}><LoaderCircle size={15} className={styles.spinner} aria-hidden="true" />{t("thinking")}</p>}
+                {loading && (!VERIFICATION_ENABLED || (verification.status !== "checking" && verification.status !== "interactive")) && <p className={styles.loading}><LoaderCircle size={15} className={styles.spinner} aria-hidden="true" />{t("thinking")}</p>}
                 {error && (
                   <div className={styles.error} role="alert">
-                    <p>{t(`errors.${error}`)}</p>
+                    <p>{t(VERIFICATION_ENABLED && error === "unauthorized" ? "verification.failed" : `errors.${error}`)}</p>
                     <div>
-                      <button type="button" onClick={() => void sendQuestion(failedQuestion)}>{t("retry")}</button>
+                      <button type="button" onClick={() => void sendQuestion(failedQuestion)} disabled={loading || verificationBlocked}>{t("retry")}</button>
                       <Link href="/contact">{t("contactOffice")}</Link>
                     </div>
                   </div>
                 )}
               </div>
+
+              {VERIFICATION_ENABLED && (
+                <div className={`${styles.verification} ${verificationMessage ? "" : styles.verificationIdle}`} role="group" aria-label={t("verification.label")}>
+                  {verificationMessage && (
+                    <p id={`${inputId}-verification`} className={styles.verificationStatus} role="status" aria-live="polite">
+                      {(verification.status === "loading" || verification.status === "checking") && <LoaderCircle size={14} className={styles.spinner} aria-hidden="true" />}
+                      {t(`verification.${verificationMessage}`)}
+                    </p>
+                  )}
+                  <div ref={verification.hostRef} className={styles.verificationWidget} />
+                  {(verification.status === "failed" || verification.status === "expired" || verification.status === "unavailable") && (
+                    <div className={styles.verificationActions}>
+                      {VERIFICATION_SITE_KEY && verification.status !== "unavailable" && <button type="button" onClick={() => { setError(null); verification.retry(); }} disabled={loading}>{t("verification.retry")}</button>}
+                      <Link href="/contact">{t("contactOffice")}</Link>
+                    </div>
+                  )}
+                </div>
+              )}
 
               <form onSubmit={onSubmit} className={styles.composer}>
                 <label className={styles.srOnly} htmlFor={inputId}>{t("inputLabel")}</label>
@@ -315,11 +358,11 @@ export default function ChatAssistant() {
                     placeholder={t("placeholder")}
                     maxLength={MAX_MESSAGE_LENGTH}
                     rows={2}
-                    disabled={loading}
+                    disabled={loading || (VERIFICATION_ENABLED && verification.status === "unavailable")}
                     autoComplete="off"
-                    aria-describedby={`${inputId}-hint`}
+                    aria-describedby={`${inputId}-hint${VERIFICATION_ENABLED && verificationMessage ? ` ${inputId}-verification` : ""}`}
                   />
-                  <button type="submit" disabled={loading || !draft.trim()} aria-label={t("send")} title={t("send")}>
+                  <button type="submit" disabled={loading || verificationBlocked || !draft.trim()} aria-label={t("send")} title={t("send")}>
                     {loading ? <LoaderCircle size={18} className={styles.spinner} /> : <Send size={18} />}
                   </button>
                 </div>

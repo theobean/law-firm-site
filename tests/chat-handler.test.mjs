@@ -5,6 +5,7 @@ import { ChatFailure, parseChatInput } from "../src/lib/chat/service.ts";
 import { ChatAccessError } from "../src/lib/chat/access.mjs";
 import { QuotaError } from "../src/lib/chat/quota.mjs";
 import { QuotaIdentityError } from "../src/lib/chat/identity.mjs";
+import { TurnstileError } from "../src/lib/chat/turnstile.mjs";
 import { isSameOrigin, readChatBody } from "../src/lib/chat/security.ts";
 
 const validBody = () => ({ locale: "el", consent: true, messages: [{ role: "user", content: "Office information?" }] });
@@ -15,7 +16,7 @@ const request = (options = {}) => new Request("https://site.example/api/chat", {
 
 function classifyKnownError(error) {
   if (error instanceof ChatAccessError) return { code: "forbidden", status: 403 };
-  if (error instanceof QuotaIdentityError || error instanceof ChatFailure) return { code: error.code, status: error.status };
+  if (error instanceof QuotaIdentityError || error instanceof ChatFailure || error instanceof TurnstileError) return { code: error.code, status: error.status };
   if (error instanceof QuotaError) return { code: error.code, status: error.status, retryAfter: error.retryAfter };
   if (error instanceof Error && error.message === "invalid_request") return { code: "invalid_request", status: 400 };
   if (error instanceof Error && error.message === "request_too_large") return { code: "request_too_large", status: 413 };
@@ -25,10 +26,12 @@ function classifyKnownError(error) {
 function harness(overrides = {}) {
   const events = [];
   const identity = Object.freeze({ tier: "anonymous", subjectKey: "a".repeat(64), networkKey: "b".repeat(64) });
+  const visitor = Object.freeze({ proof: "server-owned-test-visitor" });
   const principal = Object.freeze({ role: "public" });
   const context = Object.freeze({ kind: "public-chat-context" });
   const prepared = Object.freeze({ reservedTokens: 27001 });
   const reservationTokens = prepared.reservedTokens + 12000;
+  const reservationCostEurMicros = 187500;
   const reply = { answer: "Public office information.", sources: [], suggestContact: false };
   const state = { charged: 0, released: 0, generated: 0 };
   const env = { CHATBOT_ENABLED: "true", OPENAI_API_KEY: "test-only-key", OPENAI_CHAT_MODEL: " configured-model " };
@@ -37,16 +40,21 @@ function harness(overrides = {}) {
     isSameOrigin(req) { events.push("origin"); return isSameOrigin(req); },
     async readChatBody(req) { events.push("read"); return readChatBody(req); },
     parseChatInput(value) { events.push("parse"); return parseChatInput(value); },
-    async resolveQuotaIdentity(req) { events.push("identity"); assert.ok(req instanceof Request); return identity; },
+    async getChatVisitor(req, rawBody) { events.push("visitor"); assert.ok(req instanceof Request); assert.ok(rawBody && typeof rawBody === "object"); return { visitor }; },
+    async resolveQuotaIdentity(req, actualVisitor) { events.push("identity"); assert.ok(req instanceof Request); assert.equal(actualVisitor, visitor); return identity; },
     getPublicChatPrincipal() { events.push("principal"); return principal; },
     getChatQuotaReservation(input, actualPrincipal, model) {
       events.push("bound"); assert.equal(actualPrincipal, principal); assert.equal(input.consent, true); assert.equal(model, "configured-model");
       return reservationTokens;
     },
+    async getChatBudgetReservation(tokens, model) {
+      events.push("budget"); assert.equal(tokens, reservationTokens); assert.equal(model, "configured-model");
+      return reservationCostEurMicros;
+    },
     getPublicChatContext(actualPrincipal, locale) { events.push("context"); assert.equal(actualPrincipal, principal); assert.equal(locale, "el"); return context; },
     prepareChatModelRequest(input, actualContext, model) { events.push("prepare"); assert.equal(actualContext, context); assert.deepEqual(input, validBody()); assert.equal(model, "configured-model"); return prepared; },
-    async reserveChatQuota(actualIdentity, cost) {
-      events.push("reserve"); assert.equal(actualIdentity, identity); assert.equal(cost, reservationTokens);
+    async reserveChatQuota(actualIdentity, cost, actualCostEurMicros) {
+      events.push("reserve"); assert.equal(actualIdentity, identity); assert.equal(cost, reservationTokens); assert.equal(actualCostEurMicros, reservationCostEurMicros);
       state.charged += cost;
       return { async release() { events.push("release"); state.released += 1; } };
     },
@@ -59,7 +67,7 @@ function harness(overrides = {}) {
     classifyKnownError,
     ...overrides,
   };
-  return { handler: createChatHandler(dependencies), dependencies, events, identity, principal, context, prepared, reservationTokens, reply, state, env };
+  return { handler: createChatHandler(dependencies), dependencies, events, visitor, identity, principal, context, prepared, reservationTokens, reservationCostEurMicros, reply, state, env };
 }
 
 test("API admission reserves one bounded cost before context retrieval and its sole model call", async () => {
@@ -68,7 +76,7 @@ test("API admission reserves one bounded cost before context retrieval and its s
   assert.equal(response.status, 200);
   assert.equal(response.headers.get("cache-control"), "no-store");
   assert.deepEqual(await response.json(), h.reply);
-  assert.deepEqual(h.events, ["origin", "read", "parse", "identity", "principal", "bound", "reserve", "context", "prepare", "model", "release"]);
+  assert.deepEqual(h.events, ["origin", "read", "parse", "visitor", "identity", "principal", "bound", "budget", "reserve", "context", "prepare", "model", "release"]);
   assert.equal(h.state.generated, 1);
   assert.equal(h.state.released, 1);
   assert.equal(h.state.charged, h.reservationTokens);
@@ -117,7 +125,7 @@ test("quota precedes asynchronous context loading, which receives the final ques
     await contextEntered;
     assert.equal(contextArguments[0], h.principal);
     assert.deepEqual(contextArguments.slice(1), ["en", input.messages.at(-1).content]);
-    assert.deepEqual(h.events, ["origin", "read", "parse", "identity", "principal", "bound", "reserve", "context"]);
+    assert.deepEqual(h.events, ["origin", "read", "parse", "visitor", "identity", "principal", "bound", "budget", "reserve", "context"]);
     assert.deepEqual(h.state, { charged: h.reservationTokens, released: 0, generated: 0 });
   } finally {
     resolveContext(h.context);
@@ -125,7 +133,7 @@ test("quota precedes asynchronous context loading, which receives the final ques
   const response = await responsePromise;
   assert.equal(response.status, 200);
   assert.deepEqual(await response.json(), h.reply);
-  assert.deepEqual(h.events, ["origin", "read", "parse", "identity", "principal", "bound", "reserve", "context", "context-ready", "prepare", "model", "release"]);
+  assert.deepEqual(h.events, ["origin", "read", "parse", "visitor", "identity", "principal", "bound", "budget", "reserve", "context", "context-ready", "prepare", "model", "release"]);
   assert.equal(h.state.generated, 1);
   assert.equal(h.state.charged, h.reservationTokens);
   assert.equal(h.state.released, 1);
@@ -142,7 +150,7 @@ test("rejected asynchronous context fails closed and releases its lease without 
   const response = await h.handler(request());
   assert.equal(response.status, 502);
   assert.deepEqual(await response.json(), { error: "upstream" });
-  assert.deepEqual(h.events, ["origin", "read", "parse", "identity", "principal", "bound", "reserve", "context", "release"]);
+  assert.deepEqual(h.events, ["origin", "read", "parse", "visitor", "identity", "principal", "bound", "budget", "reserve", "context", "release"]);
   assert.deepEqual(h.state, { charged: h.reservationTokens, released: 1, generated: 0 });
 });
 
@@ -156,10 +164,156 @@ test("quota denial returns 429 and database Retry-After without loading CMS cont
   assert.equal(response.status, 429);
   assert.equal(response.headers.get("retry-after"), "61");
   assert.deepEqual(await response.json(), { error: "rate_limit" });
-  assert.deepEqual(h.events, ["origin", "read", "parse", "identity", "principal", "bound", "reserve"]);
+  assert.deepEqual(h.events, ["origin", "read", "parse", "visitor", "identity", "principal", "bound", "budget", "reserve"]);
   assert.equal(h.state.generated, 0);
   assert.equal(h.state.released, 0);
   assert.equal(h.state.charged, 0);
+});
+
+test("the gateway receives the single raw-body snapshot and only its owned visitor reaches identity", async () => {
+  const h = harness();
+  const token = "test-single-use-turnstile-token";
+  const cookieHeader = "__Host-lexi_visitor=signed-test-cookie; Path=/; HttpOnly; Secure; SameSite=Strict";
+  let rawSnapshot;
+  h.dependencies.readChatBody = async (req) => {
+    h.events.push("read");
+    rawSnapshot = await readChatBody(req);
+    return rawSnapshot;
+  };
+  h.dependencies.parseChatInput = (rawBody) => {
+    h.events.push("parse");
+    assert.equal(rawBody, rawSnapshot);
+    return parseChatInput(rawBody);
+  };
+  h.dependencies.getChatVisitor = async (req, rawBody) => {
+    h.events.push("visitor");
+    assert.ok(req.bodyUsed, "verification must not read the request body a second time");
+    assert.equal(rawBody, rawSnapshot);
+    assert.equal(rawBody.turnstileToken, token);
+    return { visitor: h.visitor, cookieHeader };
+  };
+  const response = await h.handler(request({ body: JSON.stringify({ ...validBody(), turnstileToken: token, visitor: { proof: "attacker-supplied" } }) }));
+  assert.equal(response.status, 200);
+  assert.equal(response.headers.get("set-cookie"), cookieHeader);
+  assert.equal(response.headers.get("cache-control"), "no-store");
+  assert.deepEqual(await response.json(), h.reply, "neither proof nor token may enter the public reply");
+  assert.equal(h.events.filter((event) => event === "read").length, 1);
+  assert.equal(h.events.filter((event) => event === "parse").length, 1);
+  assert.equal(h.events.filter((event) => event === "visitor").length, 1);
+});
+
+test("token rejection precedes identity, monetary pricing, quota, context and provider even with a cookie or Bearer header", async () => {
+  for (const code of ["unauthorized", "unavailable"]) {
+    const h = harness();
+    h.dependencies.getChatVisitor = async (req, rawBody) => {
+      h.events.push("visitor");
+      assert.equal(req.headers.get("authorization"), "Bearer test-authorization");
+      assert.equal(req.headers.get("cookie"), "__Host-lexi_visitor=existing-browser-cookie");
+      assert.equal(rawBody.turnstileToken, "rejected-token");
+      throw new TurnstileError(code);
+    };
+    const response = await h.handler(request({
+      headers: { origin: "https://site.example", "content-type": "application/json", authorization: "Bearer test-authorization", cookie: "__Host-lexi_visitor=existing-browser-cookie" },
+      body: JSON.stringify({ ...validBody(), turnstileToken: "rejected-token" }),
+    }));
+    assert.equal(response.status, code === "unauthorized" ? 401 : 503);
+    assert.equal(response.headers.get("cache-control"), "no-store");
+    assert.equal(response.headers.get("set-cookie"), null);
+    assert.deepEqual(await response.json(), { error: code });
+    assert.deepEqual(h.events, ["origin", "read", "parse", "visitor"]);
+    assert.deepEqual(h.state, { charged: 0, released: 0, generated: 0 });
+  }
+});
+
+test("verified browser cookies survive quota denial with Retry-After and all later failure paths", async () => {
+  const cookieHeader = "__Host-lexi_visitor=signed-test-cookie; Path=/; HttpOnly; Secure; SameSite=Strict";
+  for (const [overrides, status, code] of [
+    [{ resolveQuotaIdentity: async () => { throw new QuotaIdentityError("unauthorized"); } }, 401, "unauthorized"],
+    [{ getChatBudgetReservation: async () => { throw new QuotaError("unavailable", 503); } }, 503, "unavailable"],
+    [{ reserveChatQuota: async () => { throw new QuotaError("rate_limit", 429, 61); } }, 429, "rate_limit"],
+    [{ reserveChatQuota: async () => { throw new QuotaError("unavailable", 503); } }, 503, "unavailable"],
+    [{ getPublicChatContext: async () => { throw new ChatAccessError(); } }, 403, "forbidden"],
+    [{ prepareChatModelRequest: () => ({ reservedTokens: 64001 }) }, 413, "request_too_large"],
+    [{ generatePreparedChatReply: async () => { throw new ChatFailure("upstream", 502); } }, 502, "upstream"],
+    [{ getChatQuotaReservation: () => NaN }, 502, "upstream"],
+  ]) {
+    const h = harness(overrides);
+    h.dependencies.getChatVisitor = async () => ({ visitor: h.visitor, cookieHeader });
+    const response = await h.handler(request());
+    assert.equal(response.status, status);
+    assert.equal(response.headers.get("set-cookie"), cookieHeader);
+    assert.equal(response.headers.get("cache-control"), "no-store");
+    assert.equal(response.headers.get("retry-after"), status === 429 ? "61" : null);
+    assert.deepEqual(await response.json(), { error: code });
+  }
+});
+
+test("disabled verification can return a null visitor without issuing a browser cookie", async () => {
+  const h = harness();
+  h.dependencies.getChatVisitor = async () => ({ visitor: null });
+  h.dependencies.resolveQuotaIdentity = async (_request, visitor) => {
+    assert.equal(visitor, null);
+    return h.identity;
+  };
+  const response = await h.handler(request());
+  assert.equal(response.status, 200);
+  assert.equal(response.headers.get("set-cookie"), null);
+  assert.equal(h.state.generated, 1);
+});
+
+test("asynchronous monetary pricing completes before its exact EUR-micros cost reaches shared admission", async () => {
+  const h = harness();
+  let resolvePrice;
+  const priceReady = new Promise((resolve) => { resolvePrice = resolve; });
+  let enteredPricing;
+  const pricingEntered = new Promise((resolve) => { enteredPricing = resolve; });
+  const reservedCostEurMicros = 246813;
+  h.dependencies.getChatBudgetReservation = async (tokens, model) => {
+    h.events.push("budget");
+    assert.equal(tokens, h.reservationTokens);
+    assert.equal(model, "configured-model");
+    enteredPricing();
+    return priceReady;
+  };
+  h.dependencies.reserveChatQuota = async (identity, tokens, cost) => {
+    h.events.push("reserve");
+    assert.equal(identity, h.identity);
+    assert.equal(tokens, h.reservationTokens);
+    assert.equal(cost, reservedCostEurMicros);
+    h.state.charged += tokens;
+    return { async release() { h.events.push("release"); h.state.released += 1; } };
+  };
+  const responsePromise = h.handler(request());
+  try {
+    await pricingEntered;
+    assert.deepEqual(h.events, ["origin", "read", "parse", "visitor", "identity", "principal", "bound", "budget"]);
+    assert.deepEqual(h.state, { charged: 0, released: 0, generated: 0 });
+  } finally {
+    resolvePrice(reservedCostEurMicros);
+  }
+  const response = await responsePromise;
+  assert.equal(response.status, 200);
+  assert.equal(h.state.generated, 1);
+  assert.equal(h.state.released, 1);
+});
+
+test("missing or invalid monetary pricing fails closed before database, context or provider work", async () => {
+  for (const cost of [0, -1, 1.5, Number.MAX_SAFE_INTEGER + 1, NaN, Infinity, "187500", undefined]) {
+    const h = harness();
+    h.dependencies.getChatBudgetReservation = async () => { h.events.push("budget"); return cost; };
+    const response = await h.handler(request());
+    assert.equal(response.status, 502);
+    assert.deepEqual(await response.json(), { error: "upstream" });
+    assert.deepEqual(h.events, ["origin", "read", "parse", "visitor", "identity", "principal", "bound", "budget"]);
+    assert.deepEqual(h.state, { charged: 0, released: 0, generated: 0 });
+  }
+  const h = harness();
+  h.dependencies.getChatBudgetReservation = async () => { h.events.push("budget"); throw new QuotaError("unavailable", 503); };
+  const response = await h.handler(request());
+  assert.equal(response.status, 503);
+  assert.deepEqual(await response.json(), { error: "unavailable" });
+  assert.deepEqual(h.events, ["origin", "read", "parse", "visitor", "identity", "principal", "bound", "budget"]);
+  assert.deepEqual(h.state, { charged: 0, released: 0, generated: 0 });
 });
 
 test("a prepared snapshot one token above its reservation fails with 413 and releases the lease", async () => {
@@ -171,7 +325,7 @@ test("a prepared snapshot one token above its reservation fails with 413 and rel
   const response = await h.handler(request());
   assert.equal(response.status, 413);
   assert.deepEqual(await response.json(), { error: "request_too_large" });
-  assert.deepEqual(h.events, ["origin", "read", "parse", "identity", "principal", "bound", "reserve", "context", "prepare", "release"]);
+  assert.deepEqual(h.events, ["origin", "read", "parse", "visitor", "identity", "principal", "bound", "budget", "reserve", "context", "prepare", "release"]);
   assert.deepEqual(h.state, { charged: h.reservationTokens, released: 1, generated: 0 });
 });
 
@@ -182,7 +336,7 @@ test("invalid reservation bounds fail closed before quota, CMS context or provid
     const response = await h.handler(request());
     assert.equal(response.status, 502);
     assert.deepEqual(await response.json(), { error: "upstream" });
-    assert.deepEqual(h.events, ["origin", "read", "parse", "identity", "principal", "bound"]);
+    assert.deepEqual(h.events, ["origin", "read", "parse", "visitor", "identity", "principal", "bound"]);
     assert.deepEqual(h.state, { charged: 0, released: 0, generated: 0 });
   }
 });

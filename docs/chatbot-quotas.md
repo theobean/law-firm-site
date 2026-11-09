@@ -1,18 +1,20 @@
 # Chat rate limits, identities and quotas
 
-The only production model route, `POST /api/chat`, resolves a server-verified
-quota identity, authorizes static public context and reserves a conservative
-request envelope in Neon Postgres before live article retrieval. It then prepares
-an immutable final request, checks that its exact cost fits the reservation,
-and sends that captured request.
-There is no in-memory admission fallback. Authentication affects quotas only;
-the AI context remains public-only.
+The only production model route, `POST /api/chat`, verifies a fresh Turnstile
+token for every question and resolves a signed anonymous browser identity.
+It authorizes static public context and reserves conservative token units and
+EUR cost together in Neon Postgres before live article retrieval. It then
+prepares an immutable final request, checks that its exact token-unit cost fits
+the reservation, and sends that captured request. LEXI has no visitor accounts,
+registration or login. The AI context remains public-only, and there is no
+in-memory admission fallback.
 
 ## Configuration
 
 Set a server-only `CHAT_DATABASE_URL` for the SQL-created runtime role and a
 stable private `CHAT_RATE_LIMIT_SECRET` of at least 32 characters. Keep that
-secret across instances and redeployments; rotating it changes identity hashes.
+secret across instances and redeployments; rotating it invalidates signed
+visitor cookies and changes identity hashes.
 Do not store an owner/admin database URL in deployment variables, application browser code, source control
 or logs. The connection requires a Neon Postgres hostname and TLS. `VERCEL_ENV`
 must match the environment provisioned for that database role.
@@ -20,7 +22,11 @@ must match the environment provisioned for that database role.
 The quota namespace is provisioned in the database and bound to the login role.
 A client-supplied namespace, SQL parameter or request cannot widen it. Use a
 separate runtime role and namespace for preview, production and development.
-The public context principal and OIDC identity verification remain independent.
+Enable both `CHAT_TURNSTILE_ENABLED=true` and
+`NEXT_PUBLIC_CHAT_TURNSTILE_ENABLED=true`, with the public site key, private
+Siteverify secret and exact allowed hostnames described in
+[chatbot-security.md](chatbot-security.md). Public variables require a rebuild.
+The public context principal remains independent of the quota identity.
 
 ### Least-privilege database access
 
@@ -37,6 +43,14 @@ parameters under a separate non-login owner. Public execution is revoked.
 `session_user` selects the provisioned namespace; the environment parameter must
 match that mapping. The model receives neither a connection string nor any SQL
 or database tool. This database stores quota metadata only.
+
+The only admission signature is the seven-argument
+`chat_quota.reserve(environment, tier, subject_hmac, network_hmac,
+reserved_token_units, lease_uuid, reserved_eur_micros)`. The monetary argument
+is mandatory, positive and calculated on the server before database admission.
+The installation removes the old six-argument overload, so an older caller
+cannot bypass the financial guard. Runtime roles cannot directly read, alter or
+reset `chat_quota.money_budgets`.
 
 Use the helper's generated scoped runtime URL as the Vercel Secret
 `CHAT_DATABASE_URL`, limited to the intended environment/branch. An automatically
@@ -58,39 +72,52 @@ shared abuse budgets are not exact OpenAI billing counts; datastore restoration
 or administrative counter changes can affect enforcement. Keep edge/WAF
 controls for HTTP floods and invalid-token traffic.
 
-## Verified identities
+## Verified anonymous identities
 
-Without Authorization, the anonymous identity uses the Vercel-owned client IP
-header. Native IPv6 is grouped by /64; IPv4-mapped IPv6 shares the IPv4 bucket.
-Other hosting platforms use a shared conservative network bucket until a trusted
-adapter is implemented. User-controlled forwarding, user-ID and role headers are
-not identity evidence. Only stable HMAC pseudonyms enter Postgres, not raw IPs or
-account subjects.
+Cloudflare's script loads only after the visitor starts the optional assistant.
+Every question obtains a fresh single-use token. The server checks it with the
+fixed Siteverify endpoint, exact hostname allowlist and `lexi_chat` action before
+identity resolution, pricing, database admission or live context/provider work.
+A valid browser cookie or Bearer header never bypasses this check. Invalid
+tokens return 401; verifier/configuration failures return 503.
 
-For authenticated API clients, configure all of `CHAT_AUTH_ISSUER`,
-`CHAT_AUTH_AUDIENCE`, `CHAT_AUTH_JWKS_URL`. The server verifies a JWT Bearer token
-using the configured JWKS, RS256/ES256 signature, issuer, audience, subject and
-expiry. It does not decode unsigned claims to choose a tier. Invalid tokens return
-401; incomplete configuration or verifier infrastructure failure returns 503.
-An invalid token never falls back to another tier. The identity is based on
-verified issuer+subject, so refreshing a token does not reset the user's quota.
+After successful verification, the server validates an existing
+`__Host-lexi-visitor` cookie or creates one using a random 32-byte nonce and
+HMAC-SHA256 signature over its nonce and expiry. The cookie is host-only,
+`Secure`, `HttpOnly`, `SameSite=Lax`, `Path=/`, and expires after 24 hours without
+sliding refresh. It contains no account or hardware ID. Only a process-owned
+proof derived from that validated cookie selects the anonymous subject HMAC;
+request-supplied visitor IDs and copied JSON objects cannot choose it. A new
+cookie is attached even if a later quota or provider step rejects the request.
 
-The browser widget currently submits anonymous requests. Connecting a real login
-provider and sending its access token is a separate client integration; these
-settings do not create users, sessions or a sign-in UI. Authenticated requests
-still receive only the existing approved public context.
+Changing VPN/IP preserves the browser's subject quota while the cookie remains
+valid. Deleting it, using private browsing/another profile, or waiting for its
+expiry can create a new subject after a fresh challenge. This is anonymous
+browser continuity, not an unbreakable per-person allowance.
+
+Network limits still use the Vercel-owned client IP header independently of the
+cookie subject. Native IPv6 is grouped by /64; IPv4-mapped IPv6 shares the IPv4
+bucket. Other hosting platforms use a shared conservative network bucket until
+a trusted adapter is implemented. User-controlled forwarding, user-ID and role
+headers are not identity evidence. Only stable HMAC pseudonyms enter Postgres,
+not raw IPs, cookie nonces, Turnstile tokens or messages.
+
+The older JWT/OIDC identity code and authenticated quota policy remain dormant
+for compatibility and isolated tests. The active Turnstile path always selects
+the anonymous tier; that unused code does not create users, enable login or
+grant private-context access.
 
 ## Default policy
 
-| Budget | Anonymous | Authenticated |
-| --- | ---: | ---: |
-| Request bucket capacity / refill per minute | 6 | 20 |
-| Reserved token-unit capacity / refill per minute | 100,000 | 300,000 |
-| Requests per UTC day | 30 | 300 |
-| Reserved token units per UTC day | 500,000 | 5,000,000 |
-| Active chatbot requests (article lookup and model work) | 1 | 2 |
+| Budget | Anonymous browser |
+| --- | ---: |
+| Request bucket capacity / refill per minute | 6 |
+| Reserved token-unit capacity / refill per minute | 100,000 |
+| Requests per UTC day | 30 |
+| Reserved token units per UTC day | 500,000 |
+| Active chatbot requests (article lookup and model work) | 1 |
 
-| Shared budget | Per network | Global |
+| Shared abuse budget | Per network | Global within namespace/environment |
 | --- | ---: | ---: |
 | Request bucket capacity / refill per minute | 30 | 60 |
 | Reserved token-unit capacity / refill per minute | 500,000 | 1,000,000 |
@@ -102,11 +129,46 @@ The policy is source-controlled in `src/lib/chat/quota.mjs`. Token buckets refil
 continuously; the minute figures are capacities/refill rates, not fixed-window
 resets. All scopes must admit a request. Denial returns 429 and the actual maximum
 blocking `Retry-After` in seconds. A SQL function locks the namespace's seeded
-guard row and checks subject, network and global budgets before charging any
-of them. All three scopes update in the same database transaction. Database
-time is read after acquiring the lock, and missing global state is an error,
-not a fresh budget. See PostgreSQL's
+guard row and checks subject, network, global and monetary budgets before
+charging any of them. All scopes update in the same database transaction.
+Database time is read after acquiring the locks, and missing global or monetary
+state is an error, not a fresh budget. See PostgreSQL's
 [row-locking documentation](https://www.postgresql.org/docs/current/explicit-locking.html).
+
+## Five-euro daily financial reservation
+
+`chat_quota.money_budgets` enforces a ceiling of **5,000,000 integer EUR
+millionths (€5) per UTC day for each provisioned namespace/environment**. Every
+accepted operation charges its full server-calculated reservation in the same
+transaction as the abuse counters and concurrency lease. Exhaustion returns
+429 with a `Retry-After` that includes the time to the next UTC day. A cookie
+reset, new browser, changed network or different application instance cannot
+reset this shared allowance. Missing, corrupt or future-dated monetary state
+fails closed with 503; runtime requests never seed or repair it.
+
+The price card allows only `gpt-5.4-mini-2026-03-17` on `service_tier: default`;
+the explicitly configured `gpt-5.4-mini` alias resolves to that snapshot. Other
+models fail closed. The reviewed standard prices are $0.75 per million input
+tokens and $4.50 per million output tokens. The calculation reserves the full
+conservative input envelope and all 1,800 maximum generated tokens, ignores
+cached-input discounts, converts using the dated ECB USD-per-EUR reference
+rate, rounds upward and adds a further 10% margin. ECB metadata may be cached
+for six hours while no more than seven days old. Invalid, unavailable or stale
+FX prevents database admission and provider calls.
+
+The price card was reviewed on **9 November 2026** and expires at **00:00 UTC
+on 9 December 2026**. The expired card blocks new model calls until the official
+model, tier, prices and review dates are checked and updated. See
+[chatbot-security.md](chatbot-security.md) for the pinned price/FX policy and
+primary references.
+
+These are conservative API-usage reservations, not measured billing counts or
+a guarantee of the final tax/card/FX invoice. Unused headroom, context/provider
+failures, cancellation and lost responses never refund an accepted reservation.
+Lease release affects concurrency only. There is no automatic top-up or paid
+upgrade. The cap covers this proxy's active namespace/environment; another
+active environment needs a shared allowance or an explicitly allocated separate
+budget before activation, rather than silently duplicating a site-wide promise.
 
 ## Token spikes and leases
 
@@ -125,7 +187,7 @@ The prepared request is frozen, process-local and single-use. After admission,
 the provider sends its exact captured body with `max_output_tokens: 1800`.
 Reasoning/non-visible generation is included in that output limit. Successful
 reservations are not refunded after context/preparation/provider failure, cancellation or lost
-responses, preventing error/retry loops from bypassing budgets.
+responses, preventing error/retry loops from bypassing token or EUR budgets.
 
 Each admitted call owns a UUID lease counted across its subject, network and
 global scope for 60 seconds, longer than the 30-second provider deadline.
@@ -142,17 +204,21 @@ or raw JWTs.
 
 ## Validation
 
-`npm run test:chat` uses local signed JWTs and mocked HTTP responses, with no
-OpenAI or database credentials required. It validates signature/claims handling,
-stable identity grouping, frozen request costs, spike limits, transport failure
-handling and parameterized SQL function contracts. Mocks do not prove database
-atomicity or privileges.
+`npm run test:chat` uses mocked HTTP responses and local signing fixtures, with
+no OpenAI or database credentials required. It validates Turnstile failure and
+replay handling, signed-cookie ownership/expiry, stable anonymous and network
+grouping, frozen request costs, conservative EUR/FX calculations, expired price
+cards, spike limits, cookie-bearing error responses and the mandatory
+seven-argument SQL contract. Local JWT tests cover the dormant identity path;
+they do not imply a visitor login feature. Mocks do not prove database atomicity
+or privileges.
 
 `npm run test:chat:neon -- --run` separately validates the actual SQL in a designated
 test database. Administrative fixture access remains separate from the scoped
 runtime credential. The suite uses isolated test roles/namespaces for concurrent
-anonymous/authenticated/network/global admission, token spikes, daily limits,
-lease ownership, no refunds and permission denials. It never calls an LLM or
+subject/network/global admission, token spikes, daily token and EUR limits,
+UTC monetary rollover, lease ownership, no refunds and permission denials.
+Authenticated identities appear only as dormant-policy fixtures. It never calls an LLM or
 reads another application's records. Pipe a credential manager's in-memory JSON
 object with `adminUrl`, `runtimeUrl` and `designatedTestDatabase: true` to stdin;
 never place credentials in command arguments, files or chat. Input is limited to

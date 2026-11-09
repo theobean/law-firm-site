@@ -43,9 +43,10 @@ test("the provider request explicitly disables every tool capability", async () 
   await generateChatReply(input(), context(), mock.options);
   assertOnlyModelRequest(mock);
   assert.deepEqual(Object.keys(mock.requests[0].body).sort(), [
-    "model", "store", "max_output_tokens", "reasoning", "instructions", "input", "text", "tools", "tool_choice",
+    "model", "service_tier", "store", "max_output_tokens", "reasoning", "instructions", "input", "text", "tools", "tool_choice",
   ].sort());
   assert.equal(mock.requests[0].body.functions, undefined);
+  assert.equal(mock.requests[0].body.service_tier, "default");
   assert.equal(mock.requests[0].body.actions, undefined);
 });
 

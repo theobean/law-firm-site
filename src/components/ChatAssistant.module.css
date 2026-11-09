@@ -96,6 +96,14 @@
 .error p { margin: 0; font-size: 11px; line-height: 1.8; }
 .error div { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; }
 .error button, .error a { border: 0; padding: 3px 0; background: transparent; color: #74322e; font-size: 10px; text-decoration: underline; text-underline-offset: 3px; }
+.verification { flex: 0 0 auto; padding: 10px 14px; border-top: 1px solid #e5e9eb; background: #fbf8f1; }
+.verificationIdle { padding: 0 14px; border-top: 0; }
+.verificationStatus { display: flex; align-items: flex-start; gap: 8px; margin: 0; color: #5e512f; font-size: 11px; line-height: 1.65; }
+.verificationStatus svg { flex: 0 0 auto; margin-top: 2px; }
+.verificationWidget { max-width: 100%; }
+.verificationWidget:not(:empty) { margin-top: 6px; }
+.verificationActions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 7px; }
+.verificationActions button, .verificationActions a { border: 0; padding: 3px 0; background: transparent; color: #77551a; font-size: 10px; line-height: 1.6; text-decoration: underline; text-underline-offset: 3px; }
 
 .composer { flex: 0 0 auto; padding: 13px 14px 10px; border-top: 1px solid #e5e9eb; background: #fff; }
 .inputRow { display: flex; align-items: flex-end; gap: 9px; }

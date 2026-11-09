@@ -1,9 +1,10 @@
 import { createHmac } from "node:crypto";
 import { isIP } from "node:net";
 import { createRemoteJWKSet, jwtVerify } from "jose";
+import { readVerifiedVisitor } from "./visitor.mjs";
 
 /** @typedef {{tier: "anonymous" | "authenticated", subjectKey: string, networkKey: string}} QuotaIdentity */
-/** @typedef {{env?: Record<string, string | undefined>, verifyToken?: (token: string, policy: object) => Promise<unknown>}} TrustedIdentityOptions */
+/** @typedef {{env?: Record<string, string | undefined>, visitor?: unknown, now?: number, verifyToken?: (token: string, policy: object) => Promise<unknown>}} TrustedIdentityOptions */
 
 export class QuotaIdentityError extends Error {
   /** @param {"unauthorized" | "unavailable"} code */
@@ -89,6 +90,15 @@ export async function resolveQuotaIdentity(request, options = {}) {
   if (typeof secret !== "string" || secret.length < 32 || secret.length > 1024 || secret !== secret.trim()) {
     throw new QuotaIdentityError("unavailable");
   }
+  const network = requestNetwork(request, env);
+  const networkKey = pseudonym(secret, "network", [network]);
+  if (env.CHAT_TURNSTILE_ENABLED === "true") {
+    const visitorId = readVerifiedVisitor(options.visitor, { env, now: options.now });
+    if (!visitorId) throw new QuotaIdentityError("unauthorized");
+    // A browser proof changes the anonymous quota key, never its tier or public
+    // context permissions. VPN changes still share this browser's subject quota.
+    return Object.freeze({ tier: "anonymous", subjectKey: pseudonym(secret, "anonymous-visitor", [visitorId]), networkKey });
+  }
   const issuer = env.CHAT_AUTH_ISSUER?.trim() || "";
   const audience = env.CHAT_AUTH_AUDIENCE?.trim() || "";
   const jwksUrl = env.CHAT_AUTH_JWKS_URL?.trim() || "";
@@ -99,8 +109,6 @@ export async function resolveQuotaIdentity(request, options = {}) {
     httpsUrl(jwksUrl);
     if (issuer.length > 2048 || jwksUrl.length > 2048 || audience.length > 500) throw new QuotaIdentityError("unavailable");
   }
-  const network = requestNetwork(request, env);
-  const networkKey = pseudonym(secret, "network", [network]);
   const authorization = request.headers.get("authorization");
   if (authorization === null) {
     return Object.freeze({ tier: "anonymous", subjectKey: pseudonym(secret, "anonymous", [network]), networkKey });

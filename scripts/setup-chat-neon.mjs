@@ -78,7 +78,8 @@ function settings(options) {
  *   roleName: string,
  *   namespace: string,
  *   environment: string,
- *   policyVersion: 1
+ *   policyVersion: 1,
+ *   moneyPolicyVersion: 1
  * }>} Secret-bearing result: transfer runtimeUrl to the secret manager in memory;
  * never print or serialize the result to a file, log, test output or chat.
  */
@@ -190,16 +191,19 @@ export async function provisionChatQuota(options) {
     );
     if (seeded.rows.length === 1) {
       await client.query(
-        "WITH clock AS (SELECT pg_catalog.clock_timestamp() AS now) " +
+        "WITH clock AS MATERIALIZED (SELECT pg_catalog.clock_timestamp() AS now), seeded_global AS (" +
         "INSERT INTO chat_quota.buckets(namespace, environment, scope_key, requests, tokens, updated_at, day, day_requests, day_tokens) " +
-        "SELECT $1, $2, 'global', 60, 1000000, clock.now, pg_catalog.floor(EXTRACT(epoch FROM clock.now) / 86400)::bigint, 0, 0 FROM clock",
+        "SELECT $1, $2, 'global', 60, 1000000, clock.now, pg_catalog.floor(EXTRACT(epoch FROM clock.now) / 86400)::bigint, 0, 0 FROM clock RETURNING namespace) " +
+        "INSERT INTO chat_quota.money_budgets(namespace, environment, day, reserved_eur_micros) " +
+        "SELECT $1, $2, pg_catalog.floor(EXTRACT(epoch FROM clock.now) / 86400)::bigint, 0 FROM clock",
         [config.namespace, config.environment],
       );
     } else {
       const state = await client.query(
         "SELECT 1 FROM chat_quota.namespaces AS n JOIN chat_quota.buckets AS b " +
         "ON b.namespace = n.namespace AND b.environment = n.environment AND b.scope_key = 'global' " +
-        "WHERE n.namespace = $1 AND n.environment = $2 AND n.policy_version = 1 FOR UPDATE OF n, b",
+        "JOIN chat_quota.money_budgets AS m ON m.namespace = n.namespace AND m.environment = n.environment " +
+        "WHERE n.namespace = $1 AND n.environment = $2 AND n.policy_version = 1 FOR UPDATE OF n, b, m",
         [config.namespace, config.environment],
       );
       if (state.rows.length !== 1) throw new Error("missing_seeded_global_state");
@@ -211,7 +215,7 @@ export async function provisionChatQuota(options) {
     );
     stage = "runtime_grants";
     await client.query("GRANT USAGE ON SCHEMA chat_quota TO " + identifier(config.roleName));
-    await client.query("GRANT EXECUTE ON FUNCTION chat_quota.reserve(text, text, text, text, bigint, uuid), " +
+    await client.query("GRANT EXECUTE ON FUNCTION chat_quota.reserve(text, text, text, text, bigint, uuid, bigint), " +
       "chat_quota.release(text, uuid) TO " + identifier(config.roleName));
     await client.query("RESET ROLE");
 
@@ -222,8 +226,11 @@ export async function provisionChatQuota(options) {
       "pg_catalog.has_database_privilege($1, $2, 'CREATE,TEMP') AS database_write, " +
       "pg_catalog.has_schema_privilege($1, 'chat_quota', 'USAGE') AS schema_usage, " +
       "pg_catalog.has_schema_privilege($1, 'chat_quota', 'CREATE') AS schema_create, " +
-      "pg_catalog.has_function_privilege($1, 'chat_quota.reserve(text,text,text,text,bigint,uuid)', 'EXECUTE') AS reserve, " +
+      "pg_catalog.has_function_privilege($1, 'chat_quota.reserve(text,text,text,text,bigint,uuid,bigint)', 'EXECUTE') AS reserve, " +
       "pg_catalog.has_function_privilege($1, 'chat_quota.release(text,uuid)', 'EXECUTE') AS release, " +
+      "pg_catalog.to_regprocedure('chat_quota.reserve(text,text,text,text,bigint,uuid)') IS NULL AS legacy_reserve_absent, " +
+      "(SELECT pg_catalog.count(*)::integer FROM pg_catalog.pg_proc AS p JOIN pg_catalog.pg_namespace AS n ON n.oid = p.pronamespace " +
+      "WHERE n.nspname = 'chat_quota' AND pg_catalog.has_function_privilege($1, p.oid, 'EXECUTE')) AS executable_functions, " +
       "EXISTS (SELECT 1 FROM pg_catalog.pg_class AS c JOIN pg_catalog.pg_namespace AS n ON n.oid = c.relnamespace " +
       "WHERE n.nspname = 'chat_quota' AND c.relkind IN ('r','p','v','m','S','f') " +
       "AND pg_catalog.has_table_privilege($1, c.oid, 'SELECT,INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES,TRIGGER')) AS table_access, " +
@@ -234,7 +241,8 @@ export async function provisionChatQuota(options) {
     const rights = permissions.rows[0];
     if (!rights || rights.connect !== true || rights.schema_usage !== true || rights.reserve !== true ||
         rights.release !== true || rights.database_write !== false || rights.schema_create !== false ||
-        rights.table_access !== false || rights.memberships !== false) throw new Error("runtime_privilege_verification_failed");
+        rights.table_access !== false || rights.memberships !== false || rights.legacy_reserve_absent !== true ||
+        rights.executable_functions !== 2) throw new Error("runtime_privilege_verification_failed");
     stage = "commit";
     await client.query("COMMIT");
     transaction = false;
@@ -250,6 +258,7 @@ export async function provisionChatQuota(options) {
       namespace: config.namespace,
       environment: config.environment,
       policyVersion: 1,
+      moneyPolicyVersion: 1,
     };
   } catch (error) {
     const sqlState = error && typeof error === "object" &&

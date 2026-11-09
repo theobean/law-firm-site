@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { generateKeyPair, jwtVerify, SignJWT } from "jose";
 import { QuotaIdentityError, resolveQuotaIdentity } from "../src/lib/chat/identity.mjs";
+import { createVisitorCookie, readVisitorCookie } from "../src/lib/chat/visitor.mjs";
 
 const env = { VERCEL: "1", CHAT_RATE_LIMIT_SECRET: "test-only-shared-hmac-secret-at-least-32-characters" };
 const authenticatedEnv = { ...env, CHAT_AUTH_ISSUER: "https://issuer.example/", CHAT_AUTH_AUDIENCE: "law-firm-chat", CHAT_AUTH_JWKS_URL: "https://issuer.example/.well-known/jwks.json" };
@@ -18,6 +19,56 @@ const token = async (options = {}) => {
 const verifyWith = (key) => (jwt, policy) => jwtVerify(jwt, key, policy);
 const unauthorized = (error) => error instanceof QuotaIdentityError && error.code === "unauthorized" && error.status === 401;
 const unavailable = (error) => error instanceof QuotaIdentityError && error.code === "unavailable" && error.status === 503;
+
+test("verified anonymous visitor identity survives VPN changes and persisted browser reloads", async () => {
+  const visitorEnv = { ...env, CHAT_TURNSTILE_ENABLED: "true" };
+  const { visitor, header } = createVisitorCookie({ env: visitorEnv });
+  const first = await resolveQuotaIdentity(request(), { env: visitorEnv, visitor });
+  const vpnRequest = request({ "x-vercel-forwarded-for": "198.51.100.2", cookie: header.split(";", 1)[0] });
+  const restoredVisitor = readVisitorCookie(vpnRequest, { env: visitorEnv });
+  const next = await resolveQuotaIdentity(vpnRequest, { env: visitorEnv, visitor: restoredVisitor });
+  assert.equal(first.tier, "anonymous");
+  assert.equal(next.tier, "anonymous");
+  assert.equal(first.subjectKey, next.subjectKey);
+  assert.notEqual(first.networkKey, next.networkKey, "the aggregate network quota must still follow the trusted hosting IP");
+  assert.notEqual(first.subjectKey, first.networkKey);
+  assert.match(first.subjectKey, /^[0-9a-f]{64}$/);
+  const otherVisitor = createVisitorCookie({ env: visitorEnv }).visitor;
+  const other = await resolveQuotaIdentity(request(), { env: visitorEnv, visitor: otherVisitor });
+  assert.notEqual(first.subjectKey, other.subjectKey);
+  assert.equal(first.networkKey, other.networkKey, "separate browser profiles still share their aggregate network quota");
+});
+
+test("enabled protection requires an owned visitor proof and bearer tokens cannot bypass it", async () => {
+  const visitorEnv = { ...authenticatedEnv, CHAT_TURNSTILE_ENABLED: "true" };
+  const { visitor, header } = createVisitorCookie({ env: visitorEnv });
+  for (const forged of [undefined, null, {}, { ...visitor }, JSON.parse(JSON.stringify(visitor)), { nonce: "selected-by-client" }]) {
+    await assert.rejects(resolveQuotaIdentity(request({ cookie: header.split(";", 1)[0] }), { env: visitorEnv, visitor: forged }), unauthorized);
+  }
+  const bearer = `Bearer ${await token()}`;
+  await assert.rejects(resolveQuotaIdentity(request({ authorization: bearer }), {
+    env: visitorEnv, verifyToken: async () => assert.fail("OIDC must not bypass the anonymous protection"),
+  }), unauthorized);
+  const identity = await resolveQuotaIdentity(request({ authorization: bearer }), {
+    env: visitorEnv, visitor, verifyToken: async () => assert.fail("anonymous chat must not log in visitors"),
+  });
+  assert.equal(identity.tier, "anonymous");
+});
+
+test("only the strict flag enables visitor quotas and expired or differently signed proof is rejected", async () => {
+  const now = Date.now();
+  const visitorEnv = { ...env, CHAT_TURNSTILE_ENABLED: "true" };
+  const { visitor } = createVisitorCookie({ env: visitorEnv, now });
+  await assert.rejects(resolveQuotaIdentity(request(), { env: visitorEnv, visitor, now: now + 86400000 }), unauthorized);
+  await assert.rejects(resolveQuotaIdentity(request(), {
+    env: { ...visitorEnv, CHAT_RATE_LIMIT_SECRET: "different-test-only-secret-at-least-32-characters" }, visitor,
+  }), unauthorized);
+  const fallback = await resolveQuotaIdentity(request(), { env });
+  for (const flag of [undefined, "false", "1", "TRUE"]) {
+    const actual = await resolveQuotaIdentity(request(), { env: { ...env, CHAT_TURNSTILE_ENABLED: flag }, visitor });
+    assert.deepEqual(actual, fallback);
+  }
+});
 
 test("anonymous identities are stable shared-secret pseudonyms and cannot be selected by client role headers", async () => {
   const first = await resolveQuotaIdentity(request(), { env });

@@ -59,7 +59,7 @@ test("the reserved snapshot cannot change after preparation or through a fake pr
     const sent = JSON.parse(options.body);
     assert.match(sent.input[0].content, /<user_input>\nWhere is the office\?\n<\/user_input>$/);
     assert.ok(!sent.input[0].content.includes("Changed after the reservation"));
-    assert.equal(sent.model, "gpt-5.4-mini");
+    assert.equal(sent.model, "gpt-5.4-mini-2026-03-17");
     return response();
   } };
   for (const fake of [null, {}, { ...prepared }, JSON.parse(JSON.stringify(prepared)), { reservedTokens: 0 }, Object.create(prepared)]) {
