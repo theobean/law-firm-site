@@ -11,6 +11,7 @@ const quotaError = (code, status) => (error) => error instanceof QuotaError && e
 const uuid = /^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/;
 const reserveSql = /^SELECT allowed, retry_after, policy_version, money_policy_version FROM chat_quota\.reserve\(\$1::text, \$2::text, \$3::text, \$4::text, \$5::bigint, \$6::uuid, \$7::bigint\)$/;
 const releaseSql = /^SELECT chat_quota\.release\(\$1::text, \$2::uuid\) AS released$/;
+const settleSql = /^SELECT chat_quota\.release\(\$1::text, \$2::uuid, \$3::bigint\) AS released$/;
 // Most adapter tests use the same positive server-calculated money fixture.
 // Missing/malformed values below deliberately call the real export directly.
 const reserveChatQuota = (identity, units, options = {}) => actualReserveChatQuota(identity, units, { reservedCostEurMicros: 1000, ...options });
@@ -69,7 +70,7 @@ test("database roles own namespaces and clients cannot replace stable identity k
   assert.equal(calls.at(-1).params[0], "preview");
 });
 
-test("release binds only its owned environment and UUID, is idempotent and exposes no refund statement", async () => {
+test("unknown-cost release binds only its owned environment and UUID and is idempotent", async () => {
   const calls = [];
   const query = async (sql, params) => { calls.push({ sql, params }); return sql.includes(".reserve(") ? allowed() : [{ released: 1 }]; };
   const one = await reserveChatQuota(anonymous, 32000, { env, query });
@@ -83,6 +84,74 @@ test("release binds only its owned environment and UUID, is idempotent and expos
   assert.ok(!/UPDATE|INSERT|DELETE|refund/i.test(calls[2].sql));
   await two.release();
   assert.deepEqual(calls.at(-1).params, ["preview", calls[1].params[5]]);
+});
+
+test("known monetary usage, including zero and the full reservation, uses only the owned settlement overload", async () => {
+  for (const actualCost of [0, 1, 417, 1000]) {
+    const calls = [];
+    const lease = await reserveChatQuota(anonymous, 32000, {
+      env, query: async (sql, params) => { calls.push({ sql, params }); return sql.includes(".reserve(") ? allowed() : [{ released: 1 }]; },
+    });
+    await lease.release(actualCost);
+    assert.equal(calls.length, 2);
+    assert.match(calls[1].sql, settleSql);
+    assert.deepEqual(calls[1].params, ["preview", calls[0].params[5], actualCost]);
+    assert.equal(calls[0].params[4], 32000, "settlement never changes the admitted token reservation");
+    assert.equal(calls[0].params[6], 1000, "the worst-case monetary charge is reserved first");
+    assert.ok(!/UPDATE|INSERT|DELETE/i.test(calls[1].sql), "the adapter can call only the owned SQL function");
+  }
+});
+
+test("missing or malformed local usage safely releases with its full original monetary charge", async () => {
+  for (const invalid of [undefined, null, -1, 1001, Number.MAX_SAFE_INTEGER, NaN, Infinity, -Infinity, 0.1, "0", "417", 0n, true, [], {}, Symbol("cost")]) {
+    const calls = [];
+    const lease = await reserveChatQuota(anonymous, 20000, {
+      env, query: async (sql, params) => { calls.push({ sql, params }); return sql.includes(".reserve(") ? allowed() : [{ released: 1 }]; },
+    });
+    await lease.release(invalid);
+    assert.equal(calls.length, 2);
+    assert.match(calls[1].sql, releaseSql);
+    assert.deepEqual(calls[1].params, ["preview", calls[0].params[5]]);
+  }
+});
+
+test("the first release fixes settlement once and later calls cannot change, repeat or refund it", async () => {
+  for (const firstCost of [undefined, 0, 417, 1001]) {
+    const calls = [];
+    const lease = await reserveChatQuota(anonymous, 20000, {
+      env, query: async (sql, params) => { calls.push({ sql, params }); return sql.includes(".reserve(") ? allowed() : [{ released: 0 }]; },
+    });
+    const first = lease.release(firstCost);
+    const duplicate = lease.release(firstCost === 0 ? 1000 : 0);
+    assert.equal(first, duplicate, "concurrent callers share the first finalization");
+    await Promise.all([first, duplicate]);
+    await lease.release(0);
+    assert.equal(calls.length, 2);
+    const known = firstCost === 0 || firstCost === 417;
+    assert.match(calls[1].sql, known ? settleSql : releaseSql);
+    assert.deepEqual(calls[1].params, known ? ["preview", calls[0].params[5], firstCost] : ["preview", calls[0].params[5]]);
+  }
+});
+
+test("settlement errors are sanitized and never retried or changed to a zero-cost release", async () => {
+  for (const outcome of [new Error("PRIVATE_SETTLEMENT_DETAIL_SENTINEL"), [], [{ released: 2 }], [{ released: true }], [{ released: 1, refund: 583 }]]) {
+    const calls = [];
+    const lease = await reserveChatQuota(anonymous, 20000, {
+      env, query: async (sql, params) => {
+        calls.push({ sql, params });
+        if (sql.includes(".reserve(")) return allowed();
+        if (outcome instanceof Error) throw outcome;
+        return outcome;
+      },
+    });
+    const first = lease.release(417);
+    await assert.rejects(first, error => quotaError("unavailable", 503)(error) && !error.message.includes("PRIVATE_SETTLEMENT_DETAIL_SENTINEL"));
+    assert.equal(lease.release(0), first);
+    await assert.rejects(lease.release(), quotaError("unavailable", 503));
+    assert.equal(calls.length, 2);
+    assert.match(calls[1].sql, settleSql);
+    assert.deepEqual(calls[1].params, ["preview", calls[0].params[5], 417]);
+  }
 });
 
 test("database denials preserve Retry-After and cannot return a releasable lease", async () => {

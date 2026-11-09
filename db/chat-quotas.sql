@@ -1,6 +1,6 @@
 -- Install only in a dedicated quota database, as the NOLOGIN chat_quota_owner.
 -- scripts/setup-chat-neon.mjs creates the owner/schema and grants runtime access.
--- Runtime connections receive only the two explicitly granted function calls.
+-- Runtime connections receive only the three explicitly granted function calls.
 -- The login-to-namespace binding and the initial global bucket are provisioned
 -- separately; neither function can initialize a missing global abuse budget.
 
@@ -67,6 +67,29 @@ CREATE TABLE IF NOT EXISTS chat_quota.leases (
   FOREIGN KEY (namespace, environment)
     REFERENCES chat_quota.namespaces(namespace, environment) ON DELETE CASCADE
 );
+
+-- Future-only settlement metadata. Existing leases deliberately remain NULL:
+-- their historic financial reservation cannot be reconstructed or refunded.
+-- ADD COLUMN preserves every existing namespace, counter, lease and balance.
+ALTER TABLE chat_quota.leases
+  ADD COLUMN IF NOT EXISTS money_reserved_eur_micros bigint,
+  ADD COLUMN IF NOT EXISTS money_day bigint;
+DO $lease_money_columns$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_constraint AS c
+    WHERE c.conrelid = 'chat_quota.leases'::pg_catalog.regclass
+      AND c.conname = 'chat_quota_leases_money_reservation'
+  ) THEN
+    ALTER TABLE chat_quota.leases
+      ADD CONSTRAINT chat_quota_leases_money_reservation CHECK (
+        (money_reserved_eur_micros IS NULL AND money_day IS NULL) OR
+        (money_reserved_eur_micros IS NOT NULL AND money_day IS NOT NULL AND
+          money_reserved_eur_micros BETWEEN 1 AND 5000000 AND money_day >= 0)
+      );
+  END IF;
+END;
+$lease_money_columns$;
 
 CREATE INDEX IF NOT EXISTS chat_quota_leases_expiry
   ON chat_quota.leases(namespace, environment, expires_at);
@@ -299,7 +322,8 @@ BEGIN
   END IF;
 
   -- Financial and all three abuse admission decisions precede every counter
-  -- insertion/update. Errors and lease release never refund this reservation.
+  -- insertion/update. Unknown/error usage and ordinary release retain the full
+  -- reservation. Only bounded settlement of this exact live lease can refund.
   UPDATE chat_quota.money_budgets AS m
     SET day = v_day, reserved_eur_micros = v_money_reserved + p_money_cost_eur_micros
     WHERE m.namespace = v_namespace AND m.environment = v_environment;
@@ -313,13 +337,19 @@ BEGIN
       requests = EXCLUDED.requests, tokens = EXCLUDED.tokens, updated_at = EXCLUDED.updated_at,
       day = EXCLUDED.day, day_requests = EXCLUDED.day_requests, day_tokens = EXCLUDED.day_tokens;
   END LOOP;
-  INSERT INTO chat_quota.leases(namespace, environment, lease_id, tier, subject, network, expires_at)
-    VALUES (v_namespace, v_environment, p_lease_id, p_tier, p_subject, p_network, v_now + interval '60 seconds');
+  INSERT INTO chat_quota.leases(namespace, environment, lease_id, tier, subject, network, expires_at,
+      money_reserved_eur_micros, money_day)
+    VALUES (v_namespace, v_environment, p_lease_id, p_tier, p_subject, p_network,
+      v_now + interval '60 seconds', p_money_cost_eur_micros, v_day);
   RETURN QUERY SELECT true, 0, 1, 1;
 END;
 $reserve$;
 
-CREATE OR REPLACE FUNCTION chat_quota.release(p_environment text, p_lease_id uuid)
+CREATE OR REPLACE FUNCTION chat_quota.release(
+  p_environment text,
+  p_lease_id uuid,
+  p_actual_cost_eur_micros bigint
+)
 RETURNS integer
 LANGUAGE plpgsql
 SECURITY DEFINER
@@ -333,11 +363,16 @@ DECLARE
   v_environment text;
   v_policy integer;
   v_global chat_quota.buckets%ROWTYPE;
+  v_money chat_quota.money_budgets%ROWTYPE;
+  v_lease chat_quota.leases%ROWTYPE;
+  v_found boolean;
   v_now timestamptz;
   v_day bigint;
+  v_refund bigint := 0;
   v_removed integer;
 BEGIN
-  IF p_environment IS NULL OR p_lease_id IS NULL THEN
+  IF p_environment IS NULL OR p_lease_id IS NULL OR p_actual_cost_eur_micros < 0 OR
+      p_actual_cost_eur_micros > 5000000 THEN
     RAISE EXCEPTION USING ERRCODE = '22023', MESSAGE = 'quota_invalid_request';
   END IF;
   SELECT b.namespace, b.environment INTO v_namespace, v_environment
@@ -358,23 +393,89 @@ BEGIN
   IF NOT FOUND THEN
     RAISE EXCEPTION USING ERRCODE = '55000', MESSAGE = 'quota_state_unavailable';
   END IF;
+  SELECT m.* INTO v_money FROM chat_quota.money_budgets AS m
+    WHERE m.namespace = v_namespace AND m.environment = v_environment
+    FOR UPDATE;
+  IF NOT FOUND THEN
+    RAISE EXCEPTION USING ERRCODE = '55000', MESSAGE = 'quota_state_unavailable';
+  END IF;
+  -- The random UUID is an internal capability. The login binding fixes its
+  -- namespace; no caller-supplied subject, namespace or refund balance is used.
+  SELECT l.* INTO v_lease FROM chat_quota.leases AS l
+    WHERE l.namespace = v_namespace AND l.environment = v_environment AND l.lease_id = p_lease_id
+    FOR UPDATE;
+  v_found := FOUND;
+  -- Use the clock only after namespace -> global -> money -> exact lease locks.
   v_now := pg_catalog.clock_timestamp();
   v_day := pg_catalog.floor(EXTRACT(epoch FROM v_now) / 86400)::bigint;
-  IF v_global.updated_at > v_now OR v_global.day > v_day OR
+  IF v_global.updated_at IS NULL OR NOT pg_catalog.isfinite(v_global.updated_at) OR
+      v_global.updated_at > v_now OR v_global.day IS NULL OR v_global.day < 0 OR v_global.day > v_day OR
       v_global.requests IS NULL OR v_global.tokens IS NULL OR
+      v_global.day_requests IS NULL OR v_global.day_tokens IS NULL OR
       v_global.requests < 0 OR v_global.requests > 60 OR v_global.tokens < 0 OR v_global.tokens > 1000000 OR
       v_global.day_requests < 0 OR v_global.day_requests > 1000 OR
       v_global.day_tokens < 0 OR v_global.day_tokens > 10000000 THEN
     RAISE EXCEPTION USING ERRCODE = '55000', MESSAGE = 'quota_state_unavailable';
   END IF;
-  -- The UUID is a random per-request capability held only by its backend
-  -- closure. Deletion cannot refund budgets or affect another namespace.
+  IF v_money.day IS NULL OR v_money.day < 0 OR v_money.day > v_day OR
+      v_money.reserved_eur_micros IS NULL OR v_money.reserved_eur_micros < 0 OR
+      v_money.reserved_eur_micros > 5000000 THEN
+    RAISE EXCEPTION USING ERRCODE = '55000', MESSAGE = 'quota_state_unavailable';
+  END IF;
+  IF NOT v_found THEN
+    RETURN 0;
+  END IF;
+  IF v_lease.expires_at IS NULL OR NOT pg_catalog.isfinite(v_lease.expires_at) OR
+      v_lease.expires_at > v_now + interval '60 seconds' OR
+      (v_lease.money_reserved_eur_micros IS NULL) <> (v_lease.money_day IS NULL) OR
+      (v_lease.money_reserved_eur_micros IS NOT NULL AND
+        (v_lease.money_reserved_eur_micros < 1 OR v_lease.money_reserved_eur_micros > 5000000 OR
+          v_lease.money_day < 0 OR v_lease.money_day > v_day)) THEN
+    RAISE EXCEPTION USING ERRCODE = '55000', MESSAGE = 'quota_state_unavailable';
+  END IF;
+  IF v_lease.money_reserved_eur_micros IS NOT NULL AND
+      p_actual_cost_eur_micros > v_lease.money_reserved_eur_micros THEN
+    RAISE EXCEPTION USING ERRCODE = '22023', MESSAGE = 'quota_invalid_request';
+  END IF;
+  -- NULL usage, legacy NULL metadata, expiry and UTC rollover all forfeit the
+  -- reservation. In particular an old request can never reduce a new day's
+  -- budget. Zero is accepted only as a trusted backend no-provider settlement.
+  IF p_actual_cost_eur_micros IS NOT NULL AND v_lease.money_reserved_eur_micros IS NOT NULL AND
+      v_lease.expires_at > v_now AND v_lease.money_day = v_day AND v_money.day = v_day THEN
+    IF v_money.reserved_eur_micros < v_lease.money_reserved_eur_micros THEN
+      RAISE EXCEPTION USING ERRCODE = '55000', MESSAGE = 'quota_state_unavailable';
+    END IF;
+    v_refund := v_lease.money_reserved_eur_micros - p_actual_cost_eur_micros;
+  END IF;
+  -- DELETE and the bounded refund commit together once. Replays cannot refund
+  -- again. No subject, network or global abuse bucket is ever refunded.
   DELETE FROM chat_quota.leases AS l
     WHERE l.namespace = v_namespace AND l.environment = v_environment AND l.lease_id = p_lease_id;
   GET DIAGNOSTICS v_removed = ROW_COUNT;
+  IF v_removed <> 1 THEN
+    RAISE EXCEPTION USING ERRCODE = '55000', MESSAGE = 'quota_state_unavailable';
+  END IF;
+  IF v_refund > 0 THEN
+    UPDATE chat_quota.money_budgets AS m
+      SET reserved_eur_micros = v_money.reserved_eur_micros - v_refund
+      WHERE m.namespace = v_namespace AND m.environment = v_environment;
+  END IF;
   RETURN LEAST(1, v_removed);
 END;
 $release$;
+
+-- Backward-compatible release keeps the full charge for unknown/error usage.
+CREATE OR REPLACE FUNCTION chat_quota.release(p_environment text, p_lease_id uuid)
+RETURNS integer
+LANGUAGE sql
+SECURITY DEFINER
+VOLATILE
+PARALLEL UNSAFE
+SET search_path = pg_catalog, pg_temp
+SET lock_timeout = '2s'
+AS $release_unknown$
+  SELECT chat_quota.release(p_environment, p_lease_id, NULL::bigint);
+$release_unknown$;
 
 REVOKE ALL ON SCHEMA chat_quota FROM PUBLIC;
 REVOKE ALL ON ALL TABLES IN SCHEMA chat_quota FROM PUBLIC;

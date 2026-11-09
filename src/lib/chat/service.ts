@@ -19,6 +19,7 @@ export const MAX_CHAT_OUTPUT_TOKENS = 1800;
 export const CHAT_TOKEN_FRAMING_ALLOWANCE = 4096;
 export const MAX_CHAT_RESERVED_TOKENS = 64000;
 export type PreparedChatModelRequest = Readonly<{ reservedTokens: number }>;
+export type ChatMeasuredUsage = Readonly<{ inputTokens: number; outputTokens: number }>;
 
 type PreparedRequestSnapshot = {
   body: string;
@@ -321,7 +322,7 @@ export function prepareChatModelRequest(
  */
 export async function generatePreparedChatReply(
   prepared: PreparedChatModelRequest,
-  options: { apiKey: string; fetcher?: typeof fetch; signal?: AbortSignal },
+  options: { apiKey: string; fetcher?: typeof fetch; signal?: AbortSignal; onUsage?: (usage: ChatMeasuredUsage) => void },
 ): Promise<ChatReply> {
   const snapshot = prepared && typeof prepared === "object" ? preparedRequests.get(prepared) : undefined;
   if (!snapshot) throw new ChatFailure("forbidden", 403);
@@ -329,7 +330,9 @@ export async function generatePreparedChatReply(
   // These snapshots still pass the handler's identity, admission, authorized
   // context and exact budget checks. They have no provider/tool side effects.
   if (snapshot.controlledKind) {
-    return parseChatReply({ kind: snapshot.controlledKind, answer: "", sourceIds: [], suggestContact: true }, snapshot.sources, snapshot.locale);
+    const reply = parseChatReply({ kind: snapshot.controlledKind, answer: "", sourceIds: [], suggestContact: true }, snapshot.sources, snapshot.locale);
+    options.onUsage?.(Object.freeze({ inputTokens: 0, outputTokens: 0 }));
+    return reply;
   }
   const response = await (options.fetcher ?? fetch)("https://api.openai.com/v1/responses", {
     method: "POST",
@@ -367,9 +370,9 @@ export async function generatePreparedChatReply(
     });
   }).join("");
   try {
-    const payload = JSON.parse(text);
-    const reply = parseChatReply(payload, snapshot.sources, snapshot.locale);
-    if (snapshot.needsLawyerContact && payload.kind === "grounded") {
+    const answerPayload = JSON.parse(text);
+    let reply = parseChatReply(answerPayload, snapshot.sources, snapshot.locale);
+    if (snapshot.needsLawyerContact && answerPayload.kind === "grounded") {
       const fullContact = {
         el: "Για τη συγκεκριμένη κλήση, επικοινωνήστε άμεσα με δικηγόρο στο +30 2310 545 261 ή μέσω της σελίδας επικοινωνίας.",
         en: "For this police call, contact a lawyer promptly at +30 2310 545 261 or through the contact page.",
@@ -384,7 +387,20 @@ export async function generatePreparedChatReply(
       const alreadyQualified = reply.answer.endsWith(fullContact) || reply.answer.endsWith(shortContact);
       const withContact = parseChatResponse({ ...reply, answer: alreadyQualified ? reply.answer : `${reply.answer}\n\n${contact}`, suggestContact: true });
       if (!withContact) throw new ChatFailure("upstream", 502);
-      return withContact;
+      reply = withContact;
+    }
+    // Only this completed, validated, server-issued provider result can report
+    // usage. Missing/inconsistent usage preserves the full reservation. Output
+    // tokens include reasoning; cached input discounts are deliberately ignored.
+    const usage = payload.usage;
+    if (payload.model === CHAT_BUDGET_MODEL && payload.service_tier === "default" && isRecord(usage) &&
+        Number.isSafeInteger(usage.input_tokens) && Number.isSafeInteger(usage.output_tokens) &&
+        Number.isSafeInteger(usage.total_tokens) && typeof usage.input_tokens === "number" &&
+        typeof usage.output_tokens === "number" && usage.input_tokens > 0 &&
+        usage.input_tokens <= prepared.reservedTokens - MAX_CHAT_OUTPUT_TOKENS &&
+        usage.output_tokens > 0 && usage.output_tokens <= MAX_CHAT_OUTPUT_TOKENS &&
+        usage.total_tokens === usage.input_tokens + usage.output_tokens) {
+      options.onUsage?.(Object.freeze({ inputTokens: usage.input_tokens, outputTokens: usage.output_tokens }));
     }
     return reply;
   } catch {
@@ -395,7 +411,7 @@ export async function generatePreparedChatReply(
 export async function generateChatReply(
   input: ChatInput,
   context: AuthorizedChatContext,
-  options: { apiKey: string; model?: string; fetcher?: typeof fetch; signal?: AbortSignal },
+  options: { apiKey: string; model?: string; fetcher?: typeof fetch; signal?: AbortSignal; onUsage?: (usage: ChatMeasuredUsage) => void },
 ): Promise<ChatReply> {
   const prepared = prepareChatModelRequest(input, context, options.model);
   return generatePreparedChatReply(prepared, options);

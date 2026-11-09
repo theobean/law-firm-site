@@ -16,6 +16,7 @@ export const CHAT_QUOTA_POLICY = Object.freeze({
 export const CHAT_MONEY_BUDGET_EUR_MICROS = 5000000;
 export const RESERVE_CHAT_QUOTA_SQL = "SELECT allowed, retry_after, policy_version, money_policy_version FROM chat_quota.reserve($1::text, $2::text, $3::text, $4::text, $5::bigint, $6::uuid, $7::bigint)";
 export const RELEASE_CHAT_QUOTA_SQL = "SELECT chat_quota.release($1::text, $2::uuid) AS released";
+export const SETTLE_CHAT_QUOTA_SQL = "SELECT chat_quota.release($1::text, $2::uuid, $3::bigint) AS released";
 const POLICY_VERSION = 1;
 const MONEY_POLICY_VERSION = 1;
 const RESERVE_TIMEOUT_MS = 5000;
@@ -121,12 +122,13 @@ function quotaQuery(config, suppliedQuery) {
 /**
  * Reserve worst-case units atomically in PostgreSQL before calling the LLM.
  * The database controls namespace, policy, time and all three admission scopes.
- * No successful reservation is refunded on errors/cancellation. There is no
- * Redis, in-memory fallback or caller-chosen SQL/policy/namespace.
+ * Request/token reservations are never refunded. A trusted, bounded final cost
+ * can settle only the monetary reservation; unknown usage keeps its full charge.
+ * There is no Redis, in-memory fallback or caller-chosen SQL/policy/namespace.
  * @param {{tier: "anonymous" | "authenticated", subjectKey: string, networkKey: string}} identity
  * @param {number} reservedTokens
  * @param {{env?: Record<string, string | undefined>, query?: QuotaQuery, reservedCostEurMicros?: number}} [options]
- * @returns {Promise<{release: () => Promise<void>}>}
+ * @returns {Promise<{release: (actualCostEurMicros?: number) => Promise<void>}>}
  */
 export async function reserveChatQuota(identity, reservedTokens, options = {}) {
   if (!Number.isSafeInteger(reservedTokens) || reservedTokens < 1 || reservedTokens > CHAT_QUOTA_POLICY.maxReservedTokens) {
@@ -162,9 +164,16 @@ export async function reserveChatQuota(identity, reservedTokens, options = {}) {
 
   /** @type {Promise<void> | undefined} */
   let releasePromise;
-  return Object.freeze({ release() {
+  return Object.freeze({ release(actualCostEurMicros) {
     if (!releasePromise) releasePromise = (async () => {
-      const released = await query(RELEASE_CHAT_QUOTA_SQL, [config.environment, leaseId], RELEASE_TIMEOUT_MS);
+      // Only server-observed usage may reach this adapter. Invalid local values
+      // safely forfeit the monetary reservation instead of throwing before the
+      // owned lease is released. The first call wins, including unknown usage;
+      // an ambiguous SQL outcome is never retried with a different cost.
+      const knownCost = typeof actualCostEurMicros === "number" &&
+        Number.isSafeInteger(actualCostEurMicros) && actualCostEurMicros >= 0 && actualCostEurMicros <= moneyCost;
+      const released = await query(knownCost ? SETTLE_CHAT_QUOTA_SQL : RELEASE_CHAT_QUOTA_SQL,
+        knownCost ? [config.environment, leaseId, actualCostEurMicros] : [config.environment, leaseId], RELEASE_TIMEOUT_MS);
       if (!Array.isArray(released) || released.length !== 1 || !isRecord(released[0]) ||
           Object.keys(released[0]).length !== 1 || ![0, 1].includes(released[0].released)) {
         throw new QuotaError("unavailable", 503);

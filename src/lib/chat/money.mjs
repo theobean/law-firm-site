@@ -105,3 +105,26 @@ export async function reserveCostEurMicros(reservedTokens, model = CHAT_BUDGET_M
     return Number(eurMicros);
   } catch { throw new MonetaryBudgetError(); }
 }
+
+/** Conservative charge from a completed provider result, never from browser
+ * fields or the dashboard. Same prices/FX/margin as admission; no cache discount.
+ * Zero is reserved for application-controlled replies that made no API call.
+ * Unknown/error cases must keep the original reservation instead.
+ * @param {{inputTokens: number, outputTokens: number}} usage
+ * @param {string | undefined} [model]
+ * @param {{fetcher?: typeof fetch, now?: number | (() => number)}} [options]
+ */
+export async function usageCostEurMicros(usage, model = CHAT_BUDGET_MODEL, options = {}) {
+  try {
+    const nowMs = typeof options.now === "function" ? options.now() : options.now ?? Date.now();
+    if (typeof nowMs !== "number" || !Number.isFinite(nowMs) || nowMs < priceStart || nowMs >= priceExpiry ||
+        !usage || !Number.isSafeInteger(usage.inputTokens) || !Number.isSafeInteger(usage.outputTokens) ||
+        usage.inputTokens < 0 || usage.inputTokens > 62200 || usage.outputTokens < 0 || usage.outputTokens > 1800 ||
+        (usage.inputTokens === 0 && usage.outputTokens !== 0) ||
+        ![CHAT_BUDGET_MODEL, "gpt-5.4-mini"].includes(model)) throw new MonetaryBudgetError();
+    if (usage.inputTokens === 0 && usage.outputTokens === 0) return 0;
+    const fx = await exchangeRate(options.fetcher ?? fetch, nowMs);
+    const usdMicros = ceilDivide(BigInt(usage.inputTokens) * 75n + BigInt(usage.outputTokens) * 450n, 100n);
+    return Number(ceilDivide(usdMicros * 1000000n * 110n, fx.rateMillionths * 100n));
+  } catch { throw new MonetaryBudgetError(); }
+}

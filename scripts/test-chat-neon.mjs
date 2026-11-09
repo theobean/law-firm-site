@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { createHash, randomBytes, randomUUID } from "node:crypto";
 import { pathToFileURL } from "node:url";
 import { Client, neon } from "@neondatabase/serverless";
-import { CHAT_QUOTA_POLICY, QuotaError, RELEASE_CHAT_QUOTA_SQL, RESERVE_CHAT_QUOTA_SQL, reserveChatQuota } from "../src/lib/chat/quota.mjs";
+import { CHAT_QUOTA_POLICY, QuotaError, RELEASE_CHAT_QUOTA_SQL, RESERVE_CHAT_QUOTA_SQL, SETTLE_CHAT_QUOTA_SQL, reserveChatQuota } from "../src/lib/chat/quota.mjs";
 import { provisionChatQuota } from "./setup-chat-neon.mjs";
 
 const digest = (value) => createHash("sha256").update(value).digest("hex");
@@ -208,7 +208,7 @@ export async function cleanupNeonTestFixtures(options) {
       removedNamespaces += removed.rowCount;
       if (existing.get(fixture.roleName)) {
         check = "fixture_cleanup_privileges";
-        await client.query(`REVOKE EXECUTE ON FUNCTION chat_quota.reserve(text, text, text, text, bigint, uuid, bigint), chat_quota.release(text, uuid) FROM ${role}`);
+        await client.query(`REVOKE EXECUTE ON FUNCTION chat_quota.reserve(text, text, text, text, bigint, uuid, bigint), chat_quota.release(text, uuid), chat_quota.release(text, uuid, bigint) FROM ${role}`);
         await client.query(`REVOKE USAGE ON SCHEMA chat_quota FROM ${role}`);
       }
       await client.query("RESET ROLE");
@@ -264,21 +264,22 @@ export async function verifyNeonRuntimePermissions(runtimeUrl) {
       has_schema_privilege(current_user, 'chat_quota', 'USAGE') AS quota_usage,
       has_function_privilege(current_user, 'chat_quota.reserve(text,text,text,text,bigint,uuid,bigint)', 'EXECUTE') AS reserve_execute,
       has_function_privilege(current_user, 'chat_quota.release(text,uuid)', 'EXECUTE') AS release_execute,
+      has_function_privilege(current_user, 'chat_quota.release(text,uuid,bigint)', 'EXECUTE') AS settle_execute,
       to_regprocedure('chat_quota.reserve(text,text,text,text,bigint,uuid)') IS NULL AS legacy_reserve_absent`);
     assert.equal(privileges.length, 1);
     for (const flag of ["database_create", "database_temp", "public_create", "quota_create"]) assert.equal(privileges[0][flag], false);
-    for (const flag of ["quota_usage", "reserve_execute", "release_execute", "legacy_reserve_absent"]) assert.equal(privileges[0][flag], true);
+    for (const flag of ["quota_usage", "reserve_execute", "release_execute", "settle_execute", "legacy_reserve_absent"]) assert.equal(privileges[0][flag], true);
     check = "runtime_function_allowlist";
     const functions = await runtime.query(`SELECT p.proname, p.pronargs::int AS arguments FROM pg_catalog.pg_proc p
       JOIN pg_catalog.pg_namespace n ON n.oid = p.pronamespace
-      WHERE n.nspname = 'chat_quota' AND has_function_privilege(current_user, p.oid, 'EXECUTE') ORDER BY p.proname`);
-    assert.deepEqual(functions, [{ proname: "release", arguments: 2 }, { proname: "reserve", arguments: 7 }]);
+      WHERE n.nspname = 'chat_quota' AND has_function_privilege(current_user, p.oid, 'EXECUTE') ORDER BY p.proname, p.pronargs`);
+    assert.deepEqual(functions, [{ proname: "release", arguments: 2 }, { proname: "release", arguments: 3 }, { proname: "reserve", arguments: 7 }]);
     const boundaries = await runtime.query(`SELECT p.proname, p.prosecdef,
       p.proowner <> (SELECT oid FROM pg_catalog.pg_roles WHERE rolname = current_user) AS separate_owner,
       'search_path=pg_catalog, pg_temp' = ANY(p.proconfig) AS fixed_search_path
       FROM pg_catalog.pg_proc p JOIN pg_catalog.pg_namespace n ON n.oid = p.pronamespace
       WHERE n.nspname = 'chat_quota' AND p.proname IN ('reserve', 'release') ORDER BY p.proname`);
-    assert.equal(boundaries.length, 2);
+    assert.equal(boundaries.length, 3);
     for (const boundary of boundaries) {
       assert.equal(boundary.prosecdef, true);
       assert.equal(boundary.separate_owner, true);
@@ -336,6 +337,8 @@ export async function runNeonQuotaIntegration(options) {
     sqlValidationFailedClosed: false, invalidStateFailedClosed: false,
     monetaryAdmitted: 0, monetaryDenialDidNotCharge: false, monetaryRolloverVerified: false,
     monetaryMissingAndFutureStateFailedClosed: false, monetaryConstraintsVerified: false,
+    monetarySettlementVerified: false, monetaryConcurrentSettlementVerified: false,
+    monetaryForfeitureVerified: false, monetarySettlementBoundsVerified: false,
     runtimePermissionsVerified: false, cleanedNamespaces: 0, cleanedRoles: 0,
   };
   let admin;
@@ -424,7 +427,7 @@ export async function runNeonQuotaIntegration(options) {
         reservedCostEurMicros,
         query: async (text, params) => {
           if (text === RESERVE_CHAT_QUOTA_SQL) scenario.reservations.push({ who, cost, moneyCost: params[6], leaseId: params[5] });
-          else assert.equal(text, RELEASE_CHAT_QUOTA_SQL);
+          else assert.ok(text === RELEASE_CHAT_QUOTA_SQL || text === SETTLE_CHAT_QUOTA_SQL);
           return runtime.query(text, params);
         },
       });
@@ -483,6 +486,91 @@ export async function runNeonQuotaIntegration(options) {
     assert.deepEqual(rolloverState, [{ reserved_eur_micros: "12345", current_utc_day: true }]);
     stats.monetaryRolloverVerified = true;
 
+    check = "monetary_owned_settlement";
+    await reset(primary);
+    const measured = await primary.reserve(identity("authenticated"), 100, {}, 100000);
+    const measuredId = primary.reservations[0].leaseId;
+    const metadata = await admin.query(`SELECT money_reserved_eur_micros::text,
+      money_day = floor(extract(epoch FROM clock_timestamp()) / 86400)::bigint AS current_utc_day
+      FROM chat_quota.leases WHERE namespace = $1 AND environment = $2 AND lease_id = $3::uuid`,
+    [primary.namespace, ENVIRONMENT, measuredId]);
+    assert.deepEqual(metadata, [{ money_reserved_eur_micros: "100000", current_utc_day: true }]);
+    const measuredBuckets = (await snapshots(primary)).buckets;
+    await measured.release(25000);
+    assert.equal((await snapshots(primary)).money[0].reserved_eur_micros, "25000");
+    assert.deepEqual((await snapshots(primary)).buckets, measuredBuckets, "settlement never refunds abuse counters");
+    assert.deepEqual(await primary.query(SETTLE_CHAT_QUOTA_SQL, [ENVIRONMENT, measuredId, 0]), [{ released: 0 }]);
+    assert.equal((await snapshots(primary)).money[0].reserved_eur_micros, "25000", "a replay cannot refund again");
+    assert.deepEqual(await leases(primary), []);
+    await reset(primary);
+    const noProvider = await primary.reserve(identity("anonymous"), 100, {}, 100000);
+    const noProviderBuckets = (await snapshots(primary)).buckets;
+    await noProvider.release(0);
+    assert.equal((await snapshots(primary)).money[0].reserved_eur_micros, "0", "trusted zero usage may settle a new reservation");
+    assert.deepEqual((await snapshots(primary)).buckets, noProviderBuckets);
+    stats.monetarySettlementVerified = true;
+
+    check = "monetary_concurrent_settlement";
+    await reset(primary);
+    const concurrentOne = await primary.reserve(identity("authenticated"), 100, {}, 100000);
+    const concurrentTwo = await primary.reserve(identity("authenticated"), 100, {}, 100000);
+    const concurrentBuckets = (await snapshots(primary)).buckets;
+    await Promise.all([concurrentOne.release(10000), concurrentTwo.release(20000)]);
+    assert.equal((await snapshots(primary)).money[0].reserved_eur_micros, "30000");
+    assert.deepEqual((await snapshots(primary)).buckets, concurrentBuckets);
+    assert.deepEqual(await leases(primary), []);
+    await reset(primary);
+    await primary.reserve(identity("anonymous"), 100, {}, 100000);
+    const competingId = primary.reservations[0].leaseId;
+    const competing = await Promise.all([25000, 0].map((actual) =>
+      primary.query(SETTLE_CHAT_QUOTA_SQL, [ENVIRONMENT, competingId, actual])));
+    assert.deepEqual(competing.flat().map(({ released }) => released).sort(), [0, 1]);
+    assert.ok(["0", "25000"].includes((await snapshots(primary)).money[0].reserved_eur_micros));
+    assert.deepEqual(await leases(primary), []);
+    stats.monetaryConcurrentSettlementVerified = true;
+
+    check = "monetary_settlement_forfeiture";
+    for (const variant of ["unknown", "null", "expired", "legacy", "prior_day", "prior_budget_day"]) {
+      await reset(primary);
+      const unmeasured = await primary.reserve(identity("anonymous"), 100, {}, 100000);
+      const unmeasuredId = primary.reservations[0].leaseId;
+      if (variant === "expired") {
+        await admin.query(`UPDATE chat_quota.leases SET expires_at = clock_timestamp() - interval '1 second'
+          WHERE namespace = $1 AND environment = $2 AND lease_id = $3::uuid`, [primary.namespace, ENVIRONMENT, unmeasuredId]);
+      } else if (variant === "legacy") {
+        await admin.query(`UPDATE chat_quota.leases SET money_reserved_eur_micros = NULL, money_day = NULL
+          WHERE namespace = $1 AND environment = $2 AND lease_id = $3::uuid`, [primary.namespace, ENVIRONMENT, unmeasuredId]);
+      } else if (variant === "prior_day" || variant === "prior_budget_day") {
+        await admin.query(`UPDATE chat_quota.leases SET money_day = money_day - 1
+          WHERE namespace = $1 AND environment = $2 AND lease_id = $3::uuid`, [primary.namespace, ENVIRONMENT, unmeasuredId]);
+        if (variant === "prior_budget_day") await admin.query(`UPDATE chat_quota.money_budgets SET day = day - 1
+          WHERE namespace = $1 AND environment = $2`, [primary.namespace, ENVIRONMENT]);
+      }
+      const forfeited = await snapshots(primary);
+      if (variant === "unknown") await unmeasured.release();
+      else if (variant === "null") await primary.query(SETTLE_CHAT_QUOTA_SQL, [ENVIRONMENT, unmeasuredId, null]);
+      else await unmeasured.release(0);
+      assert.deepEqual(await snapshots(primary), forfeited, `${variant} usage retains its full financial charge and all abuse counters`);
+      assert.deepEqual(await leases(primary), []);
+    }
+    stats.monetaryForfeitureVerified = true;
+
+    check = "monetary_settlement_bounds";
+    await reset(primary);
+    const bounded = await primary.reserve(identity("anonymous"), 100, {}, 100000);
+    const boundedId = primary.reservations[0].leaseId;
+    const boundedBefore = await snapshots(primary);
+    for (const invalidActual of [-1, 100001, 5000001]) {
+      await assert.rejects(primary.query(SETTLE_CHAT_QUOTA_SQL, [ENVIRONMENT, boundedId, invalidActual]),
+        (error) => error?.code === "22023");
+      assert.deepEqual(await snapshots(primary), boundedBefore);
+      assert.deepEqual(await leases(primary), [{ lease_id: boundedId }]);
+    }
+    await expectPermissionDenied(primary.query, SETTLE_CHAT_QUOTA_SQL, ["production", boundedId, 0]);
+    await bounded.release();
+    assert.deepEqual(await snapshots(primary), boundedBefore);
+    stats.monetarySettlementBoundsVerified = true;
+
     check = "token_spike";
     await reset(primary);
     const spike = await primary.reserve(identity("anonymous"), 64000);
@@ -531,6 +619,9 @@ export async function runNeonQuotaIntegration(options) {
     const otherLeaseId = other.reservations[0].leaseId;
     const cannotReleaseOther = await primary.query(RELEASE_CHAT_QUOTA_SQL, [ENVIRONMENT, otherLeaseId]);
     assert.equal(cannotReleaseOther[0].released, 0);
+    const otherMoneyBefore = (await snapshots(other)).money;
+    assert.deepEqual(await primary.query(SETTLE_CHAT_QUOTA_SQL, [ENVIRONMENT, otherLeaseId, 0]), [{ released: 0 }]);
+    assert.deepEqual((await snapshots(other)).money, otherMoneyBefore, "a foreign namespace lease cannot receive a refund");
     assert.equal((await leases(other))[0].lease_id, otherLeaseId);
     await Promise.all([firstNamespace.release(), secondNamespace.release()]);
     stats.namespaceIsolationVerified = true;
@@ -683,12 +774,14 @@ const CLI_BOOLEAN_STATS = Object.freeze([
   "tokenSpikeBlocked", "namespaceIsolationVerified", "expiredLeasePruned", "ownedReleasePreservedOtherLease",
   "releaseDidNotRefundBudgets", "sqlValidationFailedClosed", "invalidStateFailedClosed", "runtimePermissionsVerified",
   "monetaryDenialDidNotCharge", "monetaryRolloverVerified", "monetaryMissingAndFutureStateFailedClosed", "monetaryConstraintsVerified",
+  "monetarySettlementVerified", "monetaryConcurrentSettlementVerified", "monetaryForfeitureVerified", "monetarySettlementBoundsVerified",
 ]);
 const CLI_CHECKS = new Set([
   "cli_arguments_invalid", "cli_production_disabled", "cli_input_required", "cli_input_timeout", "cli_input_too_large", "cli_input_invalid", "integration_failed",
   "explicit_test_opt_in", "deployed_runtime_permissions", "isolated_fixture_provisioning", "anonymous_concurrency", "authenticated_concurrency",
   "shared_network_concurrency", "global_concurrency", "token_spike", "daily_caps", "namespace_isolation", "expired_leases",
   "monetary_concurrency", "monetary_denial_without_charges", "monetary_utc_rollover", "monetary_missing_and_future_state_failed_closed", "monetary_constraints",
+  "monetary_owned_settlement", "monetary_concurrent_settlement", "monetary_settlement_forfeiture", "monetary_settlement_bounds",
   "owned_release_without_refunds", "sql_validation_and_environment_binding", "missing_global_budget_failed_closed", "future_state_failed_closed",
   "isolated_runtime_permissions", "isolated_fixture_cleanup", "runtime_connection", "runtime_role_flags", "runtime_admin_memberships",
   "runtime_schema_and_temp_permissions", "runtime_function_allowlist", "public_execute_revoked", "runtime_direct_table_access_denied",

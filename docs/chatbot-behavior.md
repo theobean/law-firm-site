@@ -81,7 +81,9 @@ the other recognized information kinds. When the final
 snapshot is consumed, a recognized request returns fixed localized wording
 without calling OpenAI. Normal identity/security checks, shared quota admission,
 authorized context and the exact request-size check still apply. A public article
-read may already have occurred; accepted reservations are not refunded.
+read may already have occurred. Request/token reservations are not refunded;
+only the monetary reservation of an eligible new owned lease can be settled
+using the future-only rules below.
 
 The appointment reply starts with the inability to book, change, cancel or check
 availability, then gives the office phone number for manual arrangements. No
@@ -186,6 +188,38 @@ remain stable. All model tools stay disabled. Source selection, exact request
 reservation, monetary admission, schema validation and escaped text rendering
 remain independently enforced.
 
+## Future-only monetary settlement
+
+Every admitted request still reserves the full conservative request envelope
+and EUR upper bound before context/provider work. The model remains pinned to
+`gpt-5.4-mini-2026-03-17`, default tier, without executable tools. Only a completed
+provider response with a valid final chat reply can supply usage to the server's
+internal settlement path. The provider metadata must match that model/tier and
+contain bounded safe-integer input/output counts with a consistent total. Output
+usage includes reasoning; cached-input discounts are deliberately ignored.
+
+The charge uses the existing reviewed input/output prices, a freshness-validated
+ECB reference conversion,
+10% margin and upward rounding in USD then EUR. Its result must be between zero
+and the request's original reserved EUR amount; otherwise the full reservation
+is kept. Zero is available only when the server-owned prepared snapshot returned
+an application-controlled reply without making a provider call. A model-selected
+controlled kind after a real call is still provider-backed usage. Chat text,
+browser fields and dashboard totals cannot provide usage or select a refund.
+
+The exact lease is released once. Only new leases with recorded monetary
+reservation metadata, still unexpired on their original current UTC monetary
+day, can return the unused portion. Unknown usage, errors, legacy leases,
+expiry and day rollover keep the full financial charge. A settlement timeout is
+not retried: its atomic database call may have committed once or retained the
+full reservation. Request/token abuse buckets are never refunded; removing the
+owned concurrency lease is separate.
+
+Existing ledger charges are preserved. In particular, the dashboard's observed
+`$0.41` total is not a settlement input and does not justify clearing older
+reservations. The shared €5/day ceiling remains unchanged. This is conservative
+API-usage accounting, not a promise of the final tax/card/FX invoice amount.
+
 Mocked regressions cover parser/source/transport checks, controlled pre-provider
 requests, evidence provenance, contextual retrieval and whole-answer deadline
 replacement. They do not prove model compliance or semantic support for every
@@ -196,6 +230,7 @@ on 9 November 2026. It exposed wrong office-hours routing, lost general-topic
 follow-ups, definition/qualification problems and unsuitable generic handoffs.
 The current changes address those findings; the baseline is not a live pass
 for the revised version. Offline retrieval fixtures likewise measure selection,
-not model-answer quality. A new 30-question live run is pending the normal
-00:00 UTC 10 November monetary-day rollover; no increase or bypass of the
-existing €5 daily budget is authorized by that pending test.
+not model-answer quality. A revised 30-question live run has not yet been
+recorded for these changes. Future-only settlement permits only normal admitted
+requests under the unchanged cap; it neither resets older charges nor makes the
+baseline a pass for the revised version.

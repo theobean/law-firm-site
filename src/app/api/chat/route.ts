@@ -7,7 +7,7 @@ import { QuotaError, reserveChatQuota } from "@/lib/chat/quota.mjs";
 import { createChatHandler } from "@/lib/chat/handler.mjs";
 import { createVisitorCookie, readVisitorCookie, VisitorCookieError } from "@/lib/chat/visitor.mjs";
 import { TurnstileError, verifyTurnstileToken } from "@/lib/chat/turnstile.mjs";
-import { MonetaryBudgetError, reserveCostEurMicros } from "@/lib/chat/money.mjs";
+import { MonetaryBudgetError, reserveCostEurMicros, usageCostEurMicros } from "@/lib/chat/money.mjs";
 
 export const runtime = "nodejs";
 // Includes bounded Turnstile/ECB checks, quota admission, public-article lookup,
@@ -40,6 +40,7 @@ export const POST = createChatHandler({
   },
   getPublicChatContext,
   getChatBudgetReservation: (tokens, model) => reserveCostEurMicros(tokens, model),
+  getChatBudgetSettlement: (usage, model) => usageCostEurMicros(usage, model),
   prepareChatModelRequest,
   reserveChatQuota: (identity, tokens, cost) => reserveChatQuota(identity, tokens, { reservedCostEurMicros: cost }),
   generatePreparedChatReply,

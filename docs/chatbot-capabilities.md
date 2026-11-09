@@ -31,7 +31,7 @@ mistakes; see the official [structured-output limitations](https://developers.op
 | Model context | Approved office/legal summaries, reviewed original et.gr gazettes and up to two registered public article excerpts | Case files, private CMS/database records, arbitrary URLs or documents |
 | Model tools | None | Functions, MCP, browsing, shell, file search and write actions |
 | Chat backend | Fixed Turnstile verification, ECB metadata and tokenless published-article reads; at most one bounded model request, or a controlled pre-provider reply | Model-chosen destinations or API credentials in context |
-| Quota backend | Two parameterized SQL function calls reserving counters and releasing owned leases | Direct table access, model-selected SQL, private case data or database administration |
+| Quota backend | Parameterized reservation and owned-lease release/settlement calls | Direct table access, model-selected SQL, private case data or database administration |
 | Visitor interface | Text questions, progressively revealed answers, direct-contact links | Sending messages, confirming bookings, accepting cases, payments, filing or deleting records |
 
 Source IDs and URLs remain validated in the backend and response parser; the
@@ -51,7 +51,8 @@ sources. It records recognized deadline, appointment or information-policy inten
 precedence. Consuming that snapshot can return fixed localized text without an
 OpenAI call, while preserving identity/security checks, quota admission, context
 authorization and exact size validation. CMS lookup may already have occurred;
-the existing accepted reservation is not refunded. Forged or replayed prepared
+request/token reservations remain charged. An eligible new monetary lease can
+settle to zero only for this server-owned no-provider path. Forged or replayed prepared
 handles cannot invoke this branch.
 
 Deadline detection uses the current user question and bounded user history.
@@ -92,6 +93,39 @@ generation/size ceilings remain in place. The observed Preview regression cases
 are recorded in the behavior document; neither those replies nor local tests
 establish semantic compliance for arbitrary future questions.
 
+## Usage accounting boundary
+
+The full conservative EUR amount is reserved before work. After a successful
+displayable reply, the service may report frozen usage internally from the
+completed provider response's metadata. The handler does not accept usage,
+prices, FX or monetary amounts from HTTP input or model-generated answer text.
+Usage must match the pinned model/default tier, fit the request/output bounds
+and have consistent integer totals. Cached input is charged at the reviewed
+standard input rate; output includes reasoning. Missing or inconsistent metadata,
+provider/validation errors and unknown pricing keep the full reservation.
+
+The existing reviewed price card, ECB conversion, 10% margin and upward USD/EUR
+rounding remain in use. A final cost outside the original reservation's bounds
+does not authorize a larger charge or extra credit. Accounting is not included
+in the visitor response. A model-selected handoff or other controlled reply
+after a real call cannot impersonate the zero-use server-controlled branch.
+
+The runtime can settle only its random, server-held owned lease through a
+parameterized function. The database binds namespace/environment and locks the
+guard, money row and exact lease before deciding eligibility with its own clock.
+Only newly recorded, unexpired, same-UTC-day monetary reservations can return
+their unused portion. Legacy metadata, unknown usage, expired and cross-day
+leases forfeit the full amount. Lease deletion and monetary settlement are one
+atomic operation; replays or ambiguous outcomes are not retried for credit.
+Subject/network/global request and token buckets are never refunded.
+
+No historical ledger amount is recalculated or cleared. Dashboard totals,
+including the observed `$0.41`, are not usage evidence for a request. The €5/day
+ceiling and the distinctions between API-usage estimates and the eventual
+tax/card/FX invoice remain unchanged. Source/schema/answer validation still
+precedes publication of measured usage; this accounting path grants no model
+tool or visitor action capability.
+
 ## Deployment credentials
 
 Use a service account and restrict its key to Responses creation, keeping files,
@@ -107,7 +141,8 @@ prompts, browser code, logs and source control. See official
 
 Neon Postgres needs controlled writes to reserve budgets and release leases.
 Provision a dedicated Free quota database. Deploy only a SQL-created runtime
-role with connection/schema usage and execution of the two quota functions,
+role with connection/schema usage and execution of reservation plus the
+unknown-usage and bounded-settlement release signatures,
 with no table read/write, schema creation, temporary-table or administration
 rights. The database binds its login role to one namespace/environment. The
 non-login function owner and setup administrator are separate from the

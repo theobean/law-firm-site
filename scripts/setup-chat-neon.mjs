@@ -216,7 +216,7 @@ export async function provisionChatQuota(options) {
     stage = "runtime_grants";
     await client.query("GRANT USAGE ON SCHEMA chat_quota TO " + identifier(config.roleName));
     await client.query("GRANT EXECUTE ON FUNCTION chat_quota.reserve(text, text, text, text, bigint, uuid, bigint), " +
-      "chat_quota.release(text, uuid) TO " + identifier(config.roleName));
+      "chat_quota.release(text, uuid), chat_quota.release(text, uuid, bigint) TO " + identifier(config.roleName));
     await client.query("RESET ROLE");
 
     stage = "privilege_verification";
@@ -228,6 +228,7 @@ export async function provisionChatQuota(options) {
       "pg_catalog.has_schema_privilege($1, 'chat_quota', 'CREATE') AS schema_create, " +
       "pg_catalog.has_function_privilege($1, 'chat_quota.reserve(text,text,text,text,bigint,uuid,bigint)', 'EXECUTE') AS reserve, " +
       "pg_catalog.has_function_privilege($1, 'chat_quota.release(text,uuid)', 'EXECUTE') AS release, " +
+      "pg_catalog.has_function_privilege($1, 'chat_quota.release(text,uuid,bigint)', 'EXECUTE') AS settle, " +
       "pg_catalog.to_regprocedure('chat_quota.reserve(text,text,text,text,bigint,uuid)') IS NULL AS legacy_reserve_absent, " +
       "(SELECT pg_catalog.count(*)::integer FROM pg_catalog.pg_proc AS p JOIN pg_catalog.pg_namespace AS n ON n.oid = p.pronamespace " +
       "WHERE n.nspname = 'chat_quota' AND pg_catalog.has_function_privilege($1, p.oid, 'EXECUTE')) AS executable_functions, " +
@@ -240,9 +241,9 @@ export async function provisionChatQuota(options) {
     );
     const rights = permissions.rows[0];
     if (!rights || rights.connect !== true || rights.schema_usage !== true || rights.reserve !== true ||
-        rights.release !== true || rights.database_write !== false || rights.schema_create !== false ||
+        rights.release !== true || rights.settle !== true || rights.database_write !== false || rights.schema_create !== false ||
         rights.table_access !== false || rights.memberships !== false || rights.legacy_reserve_absent !== true ||
-        rights.executable_functions !== 2) throw new Error("runtime_privilege_verification_failed");
+        rights.executable_functions !== 3) throw new Error("runtime_privilege_verification_failed");
     stage = "commit";
     await client.query("COMMIT");
     transaction = false;

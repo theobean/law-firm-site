@@ -16,10 +16,11 @@ import { buildChatRetrievalQuery } from "./retrieval-query.mjs";
  * getPublicChatPrincipal: () => unknown,
  * getChatQuotaReservation: (input: ChatInput, principal: unknown, model: string | undefined, retrievalQuery: string) => number,
  * getChatBudgetReservation: (reservedTokens: number, model?: string) => Promise<number>,
+ * getChatBudgetSettlement?: (usage: import("./service").ChatMeasuredUsage, model?: string) => Promise<number>,
  * getPublicChatContext: (principal: unknown, locale: ChatInput["locale"], question: string) => AuthorizedChatContext | Promise<AuthorizedChatContext>,
  * prepareChatModelRequest: (input: ChatInput, context: AuthorizedChatContext, model?: string) => PreparedChatModelRequest,
- * reserveChatQuota: (identity: QuotaIdentity, reservedTokens: number, reservedCostEurMicros: number) => Promise<{release: () => Promise<void>}>,
- * generatePreparedChatReply: (prepared: PreparedChatModelRequest, options: {apiKey: string, signal: AbortSignal}) => Promise<ChatReply>,
+ * reserveChatQuota: (identity: QuotaIdentity, reservedTokens: number, reservedCostEurMicros: number) => Promise<{release: (actualCostEurMicros?: number) => Promise<void>}>,
+ * generatePreparedChatReply: (prepared: PreparedChatModelRequest, options: {apiKey: string, signal: AbortSignal, onUsage: (usage: import("./service").ChatMeasuredUsage) => void}) => Promise<ChatReply>,
  * classifyKnownError: (error: unknown) => KnownChatError | null,
  * }} ChatHandlerDependencies */
 
@@ -73,16 +74,28 @@ export function createChatHandler(dependencies) {
       }
       // Shared admission bounds both context retrieval and the provider request.
       const lease = await dependencies.reserveChatQuota(identity, reservedTokens, reservedCostEurMicros);
+      let settledCost;
       try {
         const context = await dependencies.getPublicChatContext(principal, input.locale, retrievalQuery);
         const prepared = dependencies.prepareChatModelRequest(input, context, model);
         if (prepared.reservedTokens > reservedTokens) return failure("request_too_large", 413, undefined, cookieHeader);
-        const reply = await dependencies.generatePreparedChatReply(prepared, { apiKey, signal: request.signal });
-        return Response.json(reply, { headers: { "Cache-Control": "no-store", ...(cookieHeader ? { "Set-Cookie": cookieHeader } : {}) } });
+        let measuredUsage;
+        const reply = await dependencies.generatePreparedChatReply(prepared, { apiKey, signal: request.signal,
+          onUsage(usage) { measuredUsage = usage; },
+        });
+        const result = Response.json(reply, { headers: { "Cache-Control": "no-store", ...(cookieHeader ? { "Set-Cookie": cookieHeader } : {}) } });
+        if (measuredUsage && dependencies.getChatBudgetSettlement) {
+          try {
+            const cost = await dependencies.getChatBudgetSettlement(measuredUsage, model);
+            if (Number.isSafeInteger(cost) && cost >= 0 && cost <= reservedCostEurMicros) settledCost = cost;
+          } catch { /* Unknown pricing/FX keeps the full conservative charge. */ }
+        }
+        return result;
       } finally {
-        // Release concurrency only; the store does not refund abuse budgets.
+        // Settle only a successful server-measured call. Unknown/error/timeout
+        // retains its full financial reservation; abuse budgets never refund.
         // Cleanup failure cannot replace a successful answer or provider error.
-        try { await lease.release(); } catch { /* Lease expires in the shared database. */ }
+        try { await lease.release(settledCost); } catch { /* Lease expires; reservation remains charged. */ }
       }
     } catch (error) {
       // Classification returns only stable public codes, never upstream detail.
