@@ -7,11 +7,18 @@
 CREATE TABLE IF NOT EXISTS chat_quota.namespaces (
   namespace text NOT NULL CHECK (namespace ~ '^[a-zA-Z0-9][a-zA-Z0-9-]{0,63}$'),
   environment text NOT NULL CHECK (environment IN ('development', 'preview', 'production')),
-  policy_version integer NOT NULL CHECK (policy_version = 1),
+  policy_version integer NOT NULL CHECK (policy_version IN (1, 2)),
   created_at timestamptz NOT NULL DEFAULT pg_catalog.clock_timestamp()
     CHECK (pg_catalog.isfinite(created_at)),
   PRIMARY KEY (namespace, environment)
 );
+
+-- Backward-compatible installation never activates an existing namespace.
+-- Runtime roles cannot change this owner-only version selector.
+ALTER TABLE chat_quota.namespaces
+  DROP CONSTRAINT IF EXISTS namespaces_policy_version_check;
+ALTER TABLE chat_quota.namespaces
+  ADD CONSTRAINT namespaces_policy_version_check CHECK (policy_version IN (1, 2));
 
 CREATE TABLE IF NOT EXISTS chat_quota.role_bindings (
   login_role name PRIMARY KEY,
@@ -177,7 +184,7 @@ BEGIN
     FROM chat_quota.namespaces AS n
     WHERE n.namespace = v_namespace AND n.environment = v_environment
     FOR UPDATE;
-  IF NOT FOUND OR v_policy IS DISTINCT FROM 1 THEN
+  IF NOT FOUND OR v_policy IS NULL OR v_policy NOT IN (1, 2) THEN
     RAISE EXCEPTION USING ERRCODE = '55000', MESSAGE = 'quota_state_unavailable';
   END IF;
   SELECT b.* INTO v_bucket FROM chat_quota.buckets AS b
@@ -249,14 +256,23 @@ BEGIN
   DELETE FROM chat_quota.buckets AS b USING expired AS e
     WHERE b.namespace = v_namespace AND b.environment = v_environment AND b.scope_key = e.scope_key;
 
-  -- These constants are the version-1 application policy. The caller cannot
-  -- provide rates, ceilings, lease duration, namespace or an alternative policy.
+  -- The stored namespace policy selects fixed, server-owned abuse limits.
+  -- Policy 1 stays identical for every namespace that has not been activated.
+  -- The caller cannot provide rates, ceilings, lease duration or namespace.
   v_keys := ARRAY['global', 'subject:' || p_tier || ':' || p_subject, 'network:' || p_network];
-  v_rpm := ARRAY[60, CASE WHEN p_tier = 'authenticated' THEN 20 ELSE 6 END, 30];
-  v_tpm := ARRAY[1000000::bigint, CASE WHEN p_tier = 'authenticated' THEN 300000 ELSE 100000 END, 500000];
-  v_rpd := ARRAY[1000, CASE WHEN p_tier = 'authenticated' THEN 300 ELSE 30 END, 0];
-  v_tpd := ARRAY[10000000::bigint, CASE WHEN p_tier = 'authenticated' THEN 5000000 ELSE 500000 END, 5000000];
-  v_concurrency := ARRAY[8, CASE WHEN p_tier = 'authenticated' THEN 2 ELSE 1 END, 3];
+  IF v_policy = 2 THEN
+    v_rpm := ARRAY[60, CASE WHEN p_tier = 'authenticated' THEN 20 ELSE 6 END, 30];
+    v_tpm := ARRAY[1000000::bigint, CASE WHEN p_tier = 'authenticated' THEN 300000 ELSE 400000 END, 1000000];
+    v_rpd := ARRAY[1000, CASE WHEN p_tier = 'authenticated' THEN 300 ELSE 30 END, 0];
+    v_tpd := ARRAY[10000000::bigint, CASE WHEN p_tier = 'authenticated' THEN 5000000 ELSE 2000000 END, 5000000];
+    v_concurrency := ARRAY[8, CASE WHEN p_tier = 'authenticated' THEN 2 ELSE 1 END, 3];
+  ELSE
+    v_rpm := ARRAY[60, CASE WHEN p_tier = 'authenticated' THEN 20 ELSE 6 END, 30];
+    v_tpm := ARRAY[1000000::bigint, CASE WHEN p_tier = 'authenticated' THEN 300000 ELSE 100000 END, 500000];
+    v_rpd := ARRAY[1000, CASE WHEN p_tier = 'authenticated' THEN 300 ELSE 30 END, 0];
+    v_tpd := ARRAY[10000000::bigint, CASE WHEN p_tier = 'authenticated' THEN 5000000 ELSE 500000 END, 5000000];
+    v_concurrency := ARRAY[8, CASE WHEN p_tier = 'authenticated' THEN 2 ELSE 1 END, 3];
+  END IF;
 
   -- Fixed lock order: global, subject, network, always under the namespace guard.
   FOR i IN 1..3 LOOP
@@ -317,7 +333,7 @@ BEGIN
   END LOOP;
 
   IF v_retry > 0 THEN
-    RETURN QUERY SELECT false, GREATEST(1, LEAST(86400, pg_catalog.ceil(v_retry)::integer)), 1, 1;
+    RETURN QUERY SELECT false, GREATEST(1, LEAST(86400, pg_catalog.ceil(v_retry)::integer)), v_policy, 1;
     RETURN;
   END IF;
 
@@ -341,7 +357,7 @@ BEGIN
       money_reserved_eur_micros, money_day)
     VALUES (v_namespace, v_environment, p_lease_id, p_tier, p_subject, p_network,
       v_now + interval '60 seconds', p_money_cost_eur_micros, v_day);
-  RETURN QUERY SELECT true, 0, 1, 1;
+  RETURN QUERY SELECT true, 0, v_policy, 1;
 END;
 $reserve$;
 
@@ -384,7 +400,7 @@ BEGIN
   END IF;
   SELECT n.policy_version INTO v_policy FROM chat_quota.namespaces AS n
     WHERE n.namespace = v_namespace AND n.environment = v_environment FOR UPDATE;
-  IF NOT FOUND OR v_policy IS DISTINCT FROM 1 THEN
+  IF NOT FOUND OR v_policy IS NULL OR v_policy NOT IN (1, 2) THEN
     RAISE EXCEPTION USING ERRCODE = '55000', MESSAGE = 'quota_state_unavailable';
   END IF;
   SELECT b.* INTO v_global FROM chat_quota.buckets AS b

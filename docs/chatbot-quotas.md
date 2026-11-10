@@ -119,20 +119,32 @@ grant private-context access.
 | Budget | Anonymous browser |
 | --- | ---: |
 | Request bucket capacity / refill per minute | 6 |
-| Reserved token-unit capacity / refill per minute | 100,000 |
+| Reserved token-unit capacity / refill per minute | 400,000 |
 | Requests per UTC day | 30 |
-| Reserved token units per UTC day | 500,000 |
+| Reserved token units per UTC day | 2,000,000 |
 | Active chatbot requests (article lookup and model work) | 1 |
 
 | Shared abuse budget | Per network | Global within namespace/environment |
 | --- | ---: | ---: |
 | Request bucket capacity / refill per minute | 30 | 60 |
-| Reserved token-unit capacity / refill per minute | 500,000 | 1,000,000 |
+| Reserved token-unit capacity / refill per minute | 1,000,000 | 1,000,000 |
 | Requests per UTC day | No separate daily request cap | 1,000 |
 | Reserved token units per UTC day | 5,000,000 | 10,000,000 |
 | Active chatbot requests (article lookup and model work) | 3 | 8 |
 
-The policy is source-controlled in `src/lib/chat/quota.mjs`. Token buckets refill
+These are abuse policy 2 limits, source-controlled in `src/lib/chat/quota.mjs`
+and enforced by SQL. Thirty maximum-size 64,000-unit requests reserve 1,920,000
+units, within the anonymous daily unit allowance. The separate thirty-request
+daily cap, shared limits and €5 financial allowance still apply.
+
+During the Preview rollout, the adapter accepts the known abuse policy versions
+1 and 2 only, and requires money policy 1 for both. A database still on policy 1
+continues to enforce its stricter anonymous 100,000-unit minute / 500,000-unit
+daily and network 500,000-unit minute limits until the SQL migration is applied.
+Unknown abuse versions and missing/mismatched money versions fail closed with
+503. Neither compatibility path bypasses the mandatory EUR reservation.
+
+Token buckets refill
 continuously; the minute figures are capacities/refill rates, not fixed-window
 resets. All scopes must admit a request. Denial returns 429 and the actual maximum
 blocking `Retry-After` in seconds. A SQL function locks the namespace's seeded

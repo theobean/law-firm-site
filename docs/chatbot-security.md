@@ -45,6 +45,15 @@ validation, or to zero for a server-owned no-provider reply; unknown/error usage
 old metadata, expiry and UTC rollover retain the full financial charge. Dashboard
 totals never select a refund. See `chatbot-quotas.md` for the exact boundaries.
 
+Abuse policy 2 permits each anonymous browser 6 requests / 400,000 reserved units
+per minute, 30 requests / 2,000,000 reserved units per UTC day and one active
+request. Shared network limits are 30 requests / 1,000,000 units per minute,
+5,000,000 units per UTC day and three active requests. Namespace-wide limits
+remain 60 requests / 1,000,000 units per minute, 1,000 requests / 10,000,000 units
+per UTC day and eight active requests. During Preview rollout, known abuse policy
+1 responses remain accepted with their stricter SQL limits; both versions require
+money policy 1 and the same €5 daily financial guard. Unknown versions fail closed.
+
 ## Five-euro global daily API-usage reservation
 
 `chat_quota.money_budgets` holds one shared financial allowance per provisioned
@@ -64,8 +73,10 @@ rounded upward with a further 10% margin. ECB metadata may be cached for six
 hours while no more than seven days old; unavailable/stale/invalid FX blocks calls.
 
 This is a conservative API-usage reservation, not measured spend or a guarantee
-of the final tax/card/FX invoice. Failed requests and unused answer headroom
-remain charged to the internal allowance, so actual API spend can be lower.
+of the final tax/card/FX invoice. A completed, validated response can return its
+unused monetary reservation once from consistent provider usage. Failed requests
+or unknown usage retain the full financial charge; abuse units remain charged
+in every case. Actual API spend can therefore be lower than the internal charge.
 It covers this proxy's active namespace/environment only. Another active
 environment must share an allowance or use an explicitly allocated separate
 budget before activation; Preview and production must not silently each promise

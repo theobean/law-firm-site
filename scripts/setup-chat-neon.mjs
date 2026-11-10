@@ -19,11 +19,13 @@ function settings(options) {
     throw new Error("dedicated_quota_database_required");
   }
   const environment = options.environment ?? "preview";
+  const policyVersion = options.policyVersion ?? 1;
   const namespace = options.namespace ?? "law-firm-site-chat";
   const roleName = options.roleName ?? "chat_quota_" + environment;
   const runtimePassword = options.runtimePassword ?? randomBytes(32).toString("base64url");
   const roleMatch = typeof roleName === "string" ? RUNTIME_ROLE.exec(roleName) : null;
-  if (!ENVIRONMENTS.has(environment) || typeof namespace !== "string" ||
+  if (!ENVIRONMENTS.has(environment) || ![1, 2].includes(policyVersion) ||
+      (policyVersion === 2 && environment !== "preview") || typeof namespace !== "string" ||
       !/^[a-zA-Z0-9][a-zA-Z0-9-]{0,63}$/.test(namespace) ||
       !roleMatch || roleMatch[1] !== environment ||
       typeof runtimePassword !== "string" || !/^[a-zA-Z0-9_-]{32,128}$/.test(runtimePassword) ||
@@ -57,7 +59,7 @@ function settings(options) {
   } catch {
     throw new Error("invalid_chat_quota_setup_configuration");
   }
-  return { environment, namespace, roleName, runtimePassword, adminUrl };
+  return { environment, namespace, roleName, runtimePassword, adminUrl, policyVersion };
 }
 
 /**
@@ -71,14 +73,15 @@ function settings(options) {
  *   roleName?: string,
  *   namespace?: string,
  *   environment?: "development" | "preview" | "production",
- *   dedicatedDatabase: true
+ *   dedicatedDatabase: true,
+ *   policyVersion?: 1 | 2
  * }} options
  * @returns {Promise<{
  *   runtimeUrl: string,
  *   roleName: string,
  *   namespace: string,
  *   environment: string,
- *   policyVersion: 1,
+ *   policyVersion: 1 | 2,
  *   moneyPolicyVersion: 1
  * }>} Secret-bearing result: transfer runtimeUrl to the secret manager in memory;
  * never print or serialize the result to a file, log, test output or chat.
@@ -184,11 +187,14 @@ export async function provisionChatQuota(options) {
     await client.query(migration);
 
     stage = "seed_namespace";
+    // New namespaces default to policy 1; an explicit Preview-only policy 2 is
+    // useful for isolated verification. Existing namespaces retain their policy.
     const seeded = await client.query(
-      "INSERT INTO chat_quota.namespaces(namespace, environment, policy_version) VALUES ($1, $2, 1) " +
+      "INSERT INTO chat_quota.namespaces(namespace, environment, policy_version) VALUES ($1, $2, $3) " +
       "ON CONFLICT (namespace, environment) DO NOTHING RETURNING namespace",
-      [config.namespace, config.environment],
+      [config.namespace, config.environment, config.policyVersion],
     );
+    let installedPolicyVersion = config.policyVersion;
     if (seeded.rows.length === 1) {
       await client.query(
         "WITH clock AS MATERIALIZED (SELECT pg_catalog.clock_timestamp() AS now), seeded_global AS (" +
@@ -200,13 +206,14 @@ export async function provisionChatQuota(options) {
       );
     } else {
       const state = await client.query(
-        "SELECT 1 FROM chat_quota.namespaces AS n JOIN chat_quota.buckets AS b " +
+        "SELECT n.policy_version FROM chat_quota.namespaces AS n JOIN chat_quota.buckets AS b " +
         "ON b.namespace = n.namespace AND b.environment = n.environment AND b.scope_key = 'global' " +
         "JOIN chat_quota.money_budgets AS m ON m.namespace = n.namespace AND m.environment = n.environment " +
-        "WHERE n.namespace = $1 AND n.environment = $2 AND n.policy_version = 1 FOR UPDATE OF n, b, m",
+        "WHERE n.namespace = $1 AND n.environment = $2 AND n.policy_version IN (1, 2) FOR UPDATE OF n, b, m",
         [config.namespace, config.environment],
       );
       if (state.rows.length !== 1) throw new Error("missing_seeded_global_state");
+      installedPolicyVersion = state.rows[0].policy_version;
     }
     stage = "role_binding";
     await client.query(
@@ -258,7 +265,7 @@ export async function provisionChatQuota(options) {
       roleName: config.roleName,
       namespace: config.namespace,
       environment: config.environment,
-      policyVersion: 1,
+      policyVersion: installedPolicyVersion,
       moneyPolicyVersion: 1,
     };
   } catch (error) {

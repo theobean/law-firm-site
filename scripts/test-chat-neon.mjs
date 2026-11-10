@@ -415,10 +415,12 @@ export async function runNeonQuotaIntegration(options) {
       const configured = await provisionChatQuota({
         adminUrl: options.adminUrl, runtimePassword: randomBytes(32).toString("base64url"),
         roleName, namespace, environment: ENVIRONMENT, dedicatedDatabase: true,
+        policyVersion: label === "a" ? 2 : 1,
       });
       assert.equal(configured.roleName, roleName);
       assert.equal(configured.namespace, namespace);
       assert.equal(configured.environment, ENVIRONMENT);
+      assert.equal(configured.policyVersion, label === "a" ? 2 : 1);
       const runtime = connection(configured.runtimeUrl, true);
       scenario.query = runtime.query;
       scenario.env = { CHAT_DATABASE_URL: configured.runtimeUrl, VERCEL_ENV: ENVIRONMENT };
@@ -573,11 +575,19 @@ export async function runNeonQuotaIntegration(options) {
 
     check = "token_spike";
     await reset(primary);
-    const spike = await primary.reserve(identity("anonymous"), 64000);
-    await spike.release();
+    for (let index = 0; index < 6; index += 1) {
+      const spike = await primary.reserve(identity("anonymous"), 64000);
+      await spike.release();
+    }
     const spikeBefore = await snapshots(primary);
     await assert.rejects(primary.reserve(identity("anonymous"), 64000), denied);
-    assert.deepEqual(await snapshots(primary), spikeBefore, "denied spikes cannot charge any scope");
+    assert.deepEqual(await snapshots(primary), spikeBefore, "policy 2 still denies a seventh immediate maximum request without charging any scope");
+    await reset(other);
+    const legacySpike = await other.reserve(identity("anonymous"), 64000);
+    await legacySpike.release();
+    const legacyBefore = await snapshots(other);
+    await assert.rejects(other.reserve(identity("anonymous"), 64000), denied);
+    assert.deepEqual(await snapshots(other), legacyBefore, "policy 1 retains its original 100000 token minute ceiling");
     stats.tokenSpikeBlocked = true;
 
     check = "daily_caps";

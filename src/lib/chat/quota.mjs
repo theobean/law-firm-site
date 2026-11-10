@@ -5,9 +5,9 @@ import { neon } from "@neondatabase/serverless";
  * SQL owns the matching policy. A policy change must update its version too.
  */
 export const CHAT_QUOTA_POLICY = Object.freeze({
-  anonymous: Object.freeze({ requestsPerMinute: 6, tokensPerMinute: 100000, requestsPerDay: 30, tokensPerDay: 500000, concurrency: 1 }),
+  anonymous: Object.freeze({ requestsPerMinute: 6, tokensPerMinute: 400000, requestsPerDay: 30, tokensPerDay: 2000000, concurrency: 1 }),
   authenticated: Object.freeze({ requestsPerMinute: 20, tokensPerMinute: 300000, requestsPerDay: 300, tokensPerDay: 5000000, concurrency: 2 }),
-  network: Object.freeze({ requestsPerMinute: 30, tokensPerMinute: 500000, requestsPerDay: 0, tokensPerDay: 5000000, concurrency: 3 }),
+  network: Object.freeze({ requestsPerMinute: 30, tokensPerMinute: 1000000, requestsPerDay: 0, tokensPerDay: 5000000, concurrency: 3 }),
   global: Object.freeze({ requestsPerMinute: 60, tokensPerMinute: 1000000, requestsPerDay: 1000, tokensPerDay: 10000000, concurrency: 8 }),
   leaseMilliseconds: 60000,
   maxReservedTokens: 64000,
@@ -17,7 +17,10 @@ export const CHAT_MONEY_BUDGET_EUR_MICROS = 5000000;
 export const RESERVE_CHAT_QUOTA_SQL = "SELECT allowed, retry_after, policy_version, money_policy_version FROM chat_quota.reserve($1::text, $2::text, $3::text, $4::text, $5::bigint, $6::uuid, $7::bigint)";
 export const RELEASE_CHAT_QUOTA_SQL = "SELECT chat_quota.release($1::text, $2::uuid) AS released";
 export const SETTLE_CHAT_QUOTA_SQL = "SELECT chat_quota.release($1::text, $2::uuid, $3::bigint) AS released";
-const POLICY_VERSION = 1;
+// Policy 2 raises anonymous/network abuse-unit allowances. Accept the known
+// policy 1 response while Preview rolls out; SQL still owns every admission.
+// Both versions require the same mandatory money guard and settlement contract.
+const SUPPORTED_POLICY_VERSIONS = Object.freeze([1, 2]);
 const MONEY_POLICY_VERSION = 1;
 const RESERVE_TIMEOUT_MS = 5000;
 const RELEASE_TIMEOUT_MS = 3000;
@@ -154,7 +157,7 @@ export async function reserveChatQuota(identity, reservedTokens, options = {}) {
   if (!Array.isArray(result) || result.length !== 1 || !isRecord(result[0])) throw new QuotaError("unavailable", 503);
   const row = result[0];
   if (Object.keys(row).length !== 4 || typeof row.allowed !== "boolean" ||
-      !Number.isInteger(row.retry_after) || row.policy_version !== POLICY_VERSION ||
+      !Number.isInteger(row.retry_after) || !SUPPORTED_POLICY_VERSIONS.includes(row.policy_version) ||
       row.money_policy_version !== MONEY_POLICY_VERSION ||
       row.retry_after < 0 || row.retry_after > 86400 ||
       (row.allowed && row.retry_after !== 0) || (!row.allowed && row.retry_after < 1)) {

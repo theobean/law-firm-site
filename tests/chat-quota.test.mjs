@@ -6,7 +6,7 @@ const databaseUrl = (role = "chat_quota_preview") => `postgresql://${role}:test-
 const env = { CHAT_DATABASE_URL: databaseUrl(), VERCEL_ENV: "preview" };
 const anonymous = { tier: "anonymous", subjectKey: "a".repeat(64), networkKey: "b".repeat(64) };
 const authenticated = { ...anonymous, tier: "authenticated", subjectKey: "c".repeat(64) };
-const allowed = () => [{ allowed: true, retry_after: 0, policy_version: 1, money_policy_version: 1 }];
+const allowed = (policyVersion = 2) => [{ allowed: true, retry_after: 0, policy_version: policyVersion, money_policy_version: 1 }];
 const quotaError = (code, status) => (error) => error instanceof QuotaError && error.code === code && error.status === status;
 const uuid = /^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/;
 const reserveSql = /^SELECT allowed, retry_after, policy_version, money_policy_version FROM chat_quota\.reserve\(\$1::text, \$2::text, \$3::text, \$4::text, \$5::bigint, \$6::uuid, \$7::bigint\)$/;
@@ -38,11 +38,11 @@ test("the Neon adapter binds fixed SQL with pseudonyms and a unique lease", asyn
   assert.deepEqual(Object.keys(lease), ["release"]);
 });
 
-test("all anonymous, authenticated, network and global quota policies remain unchanged", async () => {
+test("policy 2 raises anonymous and network units while keeping all other limits", async () => {
   assert.deepEqual(CHAT_QUOTA_POLICY, {
-    anonymous: { requestsPerMinute: 6, tokensPerMinute: 100000, requestsPerDay: 30, tokensPerDay: 500000, concurrency: 1 },
+    anonymous: { requestsPerMinute: 6, tokensPerMinute: 400000, requestsPerDay: 30, tokensPerDay: 2000000, concurrency: 1 },
     authenticated: { requestsPerMinute: 20, tokensPerMinute: 300000, requestsPerDay: 300, tokensPerDay: 5000000, concurrency: 2 },
-    network: { requestsPerMinute: 30, tokensPerMinute: 500000, requestsPerDay: 0, tokensPerDay: 5000000, concurrency: 3 },
+    network: { requestsPerMinute: 30, tokensPerMinute: 1000000, requestsPerDay: 0, tokensPerDay: 5000000, concurrency: 3 },
     global: { requestsPerMinute: 60, tokensPerMinute: 1000000, requestsPerDay: 1000, tokensPerDay: 10000000, concurrency: 8 },
     leaseMilliseconds: 60000, maxReservedTokens: 64000,
   });
@@ -53,6 +53,35 @@ test("all anonymous, authenticated, network and global quota policies remain unc
   assert.equal(calls[0].sql, calls[1].sql);
   assert.deepEqual(calls[0].params.slice(0, 5), ["preview", "anonymous", anonymous.subjectKey, anonymous.networkKey, 20000]);
   assert.deepEqual(calls[1].params.slice(0, 5), ["preview", "authenticated", authenticated.subjectKey, anonymous.networkKey, 20000]);
+});
+
+test("the anonymous daily unit allowance fits all thirty maximum-size requests", () => {
+  const dailyMaximum = CHAT_QUOTA_POLICY.anonymous.requestsPerDay * CHAT_QUOTA_POLICY.maxReservedTokens;
+  assert.equal(dailyMaximum, 1920000);
+  assert.ok(dailyMaximum <= CHAT_QUOTA_POLICY.anonymous.tokensPerDay);
+  assert.ok(CHAT_QUOTA_POLICY.anonymous.requestsPerMinute * CHAT_QUOTA_POLICY.maxReservedTokens <=
+    CHAT_QUOTA_POLICY.anonymous.tokensPerMinute, "one full request bucket also fits the minute unit capacity");
+});
+
+test("known abuse policies 1 and 2 both require money policy 1 during rollout", async () => {
+  for (const policyVersion of [1, 2]) {
+    const calls = [];
+    const lease = await reserveChatQuota(anonymous, 64000, {
+      env, query: async (sql, params) => { calls.push({ sql, params }); return allowed(policyVersion); },
+    });
+    assert.deepEqual(Object.keys(lease), ["release"]);
+    assert.equal(calls.length, 1);
+    assert.match(calls[0].sql, reserveSql);
+    assert.equal(calls[0].params[6], 1000, "both accepted versions reserve the mandatory positive cost");
+    for (const moneyPolicyVersion of [undefined, null, 0, 2, "1"]) {
+      await assert.rejects(reserveChatQuota(anonymous, 1, {
+        env, query: async () => [{ ...allowed(policyVersion)[0], money_policy_version: moneyPolicyVersion }],
+      }), quotaError("unavailable", 503));
+    }
+    await assert.rejects(reserveChatQuota(anonymous, 64000, {
+      env, query: async () => [{ allowed: false, retry_after: 7462, policy_version: policyVersion, money_policy_version: 1 }],
+    }), error => quotaError("rate_limit", 429)(error) && error.retryAfter === 7462);
+  }
 });
 
 test("database roles own namespaces and clients cannot replace stable identity keys", async () => {
@@ -219,7 +248,9 @@ test("SQL failures and malformed or version-mismatched rows fail closed without 
     [{ allowed: 1, retry_after: 0, policy_version: 1, money_policy_version: 1 }], [{ allowed: true, retry_after: "0", policy_version: 1, money_policy_version: 1 }],
     [{ allowed: true, retry_after: 1, policy_version: 1, money_policy_version: 1 }], [{ allowed: false, retry_after: 0, policy_version: 1, money_policy_version: 1 }],
     [{ allowed: false, retry_after: 86401, policy_version: 1, money_policy_version: 1 }], [{ allowed: false, retry_after: 1.5, policy_version: 1, money_policy_version: 1 }],
-    [{ allowed: true, retry_after: 0, policy_version: 2, money_policy_version: 1 }], [{ allowed: true, retry_after: 0, policy_version: "1", money_policy_version: 1 }],
+    [{ allowed: true, retry_after: 0, policy_version: 3, money_policy_version: 1 }], [{ allowed: true, retry_after: 0, policy_version: 0, money_policy_version: 1 }],
+    [{ allowed: false, retry_after: 1, policy_version: 3, money_policy_version: 1 }],
+    [{ allowed: true, retry_after: 0, policy_version: "1", money_policy_version: 1 }], [{ allowed: true, retry_after: 0, policy_version: "2", money_policy_version: 1 }],
     [{ allowed: true, retry_after: 0, policy_version: 1, money_policy_version: 1, privateDetail: "unexpected" }],
     [{ allowed: true, retry_after: 0, policy_version: 1 }],
     [{ allowed: true, retry_after: 0, policy_version: 1, money_policy_version: 0 }],
