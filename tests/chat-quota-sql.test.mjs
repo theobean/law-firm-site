@@ -8,14 +8,23 @@ const readSql = async (path) => (await readFile(new URL(path, import.meta.url), 
 const sql = await readSql("../db/chat-quotas.sql");
 const install = await readSql("../db/migrations/20261110_01_quota_policy_v2_functions.sql");
 const activate = await readSql("../db/migrations/20261110_02_preview_quota_policy_v2.sql");
+const admissionInstall = await readSql("../db/migrations/20261110_03_admission_control.sql");
 const reserve = sql.slice(sql.indexOf("CREATE OR REPLACE FUNCTION chat_quota.reserve("), sql.indexOf("CREATE OR REPLACE FUNCTION chat_quota.release("));
 const release = sql.slice(sql.indexOf("CREATE OR REPLACE FUNCTION chat_quota.release("), sql.indexOf("-- Backward-compatible release keeps"));
 
 // The staged UI migration is a second delivery path for these exact functions.
 // Prevent a fresh installation and an existing database from silently diverging.
-test("the staged compatibility migration installs the canonical SQL functions", () => {
-  assert.equal(install.split("  EXECUTE $reserve_ddl$\n")[1]?.split("$reserve_ddl$;")[0], reserve);
+function withoutAdmissionControl(definition) {
+  return definition.replace("  v_admission_enabled boolean;\n", "")
+    .replace("SELECT n.policy_version, n.admission_enabled INTO v_policy, v_admission_enabled", "SELECT n.policy_version INTO v_policy")
+    .replace(/  -- Check under the same row lock[\s\S]*?  END IF;\n/, "");
+}
+
+test("legacy and admission-control migrations preserve their reviewed canonical function contracts", () => {
+  assert.equal(install.split("  EXECUTE $reserve_ddl$\n")[1]?.split("$reserve_ddl$;")[0], withoutAdmissionControl(reserve));
   assert.equal(install.split("  EXECUTE $release_ddl$\n")[1]?.split("$release_ddl$;")[0], release);
+  assert.equal(admissionInstall.split("  EXECUTE $reserve_ddl$\n")[1]?.split("$reserve_ddl$;")[0], reserve);
+  assert.equal(admissionInstall.split("  EXECUTE $release_ddl$\n")[1]?.split("$release_ddl$;")[0], release);
 });
 
 test("SQL policy 2 matches the client while policy 1 retains every legacy rate", () => {
@@ -42,7 +51,7 @@ test("SQL policy 2 matches the client while policy 1 retains every legacy rate",
 });
 
 function unchangedContract(definition) {
-  return definition
+  return withoutAdmissionControl(definition)
     .replace(/  v_keys := ARRAY\[.*?  -- Fixed lock order:/s, "  -- Fixed lock order:")
     .replace(/IF NOT FOUND OR v_policy (?:IS DISTINCT FROM 1|IS NULL OR v_policy NOT IN \(1, 2\)) THEN/g, "IF policy_is_unsupported THEN")
     .replace(/\)\), (?:1|v_policy), 1;/g, ")), POLICY, 1;")
@@ -56,6 +65,14 @@ test("abuse policy selection leaves the existing monetary, settlement, ownership
   const digest = (value) => createHash("sha256").update(unchangedContract(value)).digest("hex");
   assert.equal(digest(reserve), "86f7f6548f97041f27955073264e12a9868027f31a14e13464eec4d436d899e9");
   assert.equal(digest(release), "969e29a78f9ac3508bff0d26dca24421a5385914e6c7cdaecb666ff95511a464");
+});
+
+test("owner admission control blocks stale and queued callers under the shared guard without disabling release", () => {
+  assert.match(reserve, /SELECT n\.policy_version, n\.admission_enabled INTO v_policy, v_admission_enabled[\s\S]*?FOR UPDATE;[\s\S]*?IF v_admission_enabled IS DISTINCT FROM true THEN[\s\S]*?quota_admission_disabled[\s\S]*?SELECT b\.\* INTO v_bucket/);
+  assert.doesNotMatch(release, /admission_enabled|admission_frozen_at/);
+  assert.match(admissionInstall, /v_function_security_after IS DISTINCT FROM v_function_security_before/);
+  assert.match(admissionInstall, /v_after IS DISTINCT FROM v_before/);
+  assert.doesNotMatch(admissionInstall.replace(/  EXECUTE \$reserve_ddl\$[\s\S]*?\$reserve_ddl\$;/, "").replace(/  EXECUTE \$release_ddl\$[\s\S]*?\$release_ddl\$;/, "").replace(/--[^\n]*/g, ""), /^\s*(?:UPDATE|INSERT|DELETE|TRUNCATE|GRANT|REVOKE|CREATE ROLE|ALTER ROLE)\b/im);
 });
 
 test("compatibility installation cannot activate namespaces, create missing functions or change runtime permissions", () => {

@@ -22,6 +22,12 @@ must match the environment provisioned for that database role.
 The quota namespace is provisioned in the database and bound to the login role.
 A client-supplied namespace, SQL parameter or request cannot widen it. Use a
 separate runtime role and namespace for preview, production and development.
+New Production namespaces are provisioned with admission disabled. The reviewed
+[Production cutover](chatbot-production-rollout.md) freezes all old Preview
+deployments, drains their leases and carries their final same-UTC-day monetary
+charge before enabling Production policy 2, preserving one €5 daily allowance.
+The owner-only admission switch is checked inside the existing namespace row
+lock; release/settlement remains available while a namespace is frozen.
 Enable both `CHAT_TURNSTILE_ENABLED=true` and
 `NEXT_PUBLIC_CHAT_TURNSTILE_ENABLED=true`, with the public site key, private
 Siteverify secret and exact allowed hostnames described in

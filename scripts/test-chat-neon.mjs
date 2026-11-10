@@ -340,6 +340,7 @@ export async function runNeonQuotaIntegration(options) {
     monetarySettlementVerified: false, monetaryConcurrentSettlementVerified: false,
     monetaryForfeitureVerified: false, monetarySettlementBoundsVerified: false,
     runtimePermissionsVerified: false, cleanedNamespaces: 0, cleanedRoles: 0,
+    queuedAdmissionFreezeVerified: false,
   };
   let admin;
   const assertOwned = (scenario) => assert.ok(owned.includes(scenario) && TEST_ROLE.test(scenario.roleName) && TEST_NAMESPACE.test(scenario.namespace));
@@ -422,6 +423,7 @@ export async function runNeonQuotaIntegration(options) {
       assert.equal(configured.environment, ENVIRONMENT);
       assert.equal(configured.policyVersion, label === "a" ? 2 : 1);
       const runtime = connection(configured.runtimeUrl, true);
+      scenario.runtimeUrl = configured.runtimeUrl;
       scenario.query = runtime.query;
       scenario.env = { CHAT_DATABASE_URL: configured.runtimeUrl, VERCEL_ENV: ENVIRONMENT };
       scenario.reserve = (who, cost = 1, extraEnv = {}, reservedCostEurMicros = 1000) => reserveChatQuota(who, cost, {
@@ -435,6 +437,71 @@ export async function runNeonQuotaIntegration(options) {
       });
     }
     const [primary, other] = owned;
+
+    check = "queued_admission_freeze";
+    assertOwned(primary);
+    await reset(primary);
+    const freezeBefore = await snapshots(primary);
+    const freezeOwner = new Client({ connectionString: options.adminUrl, connectionTimeoutMillis: 10000,
+      query_timeout: 10000, application_name: "chat-quota-isolated-freeze-owner" });
+    const freezeWaiter = new Client({ connectionString: primary.runtimeUrl, connectionTimeoutMillis: 10000,
+      query_timeout: 10000, application_name: "chat-quota-isolated-freeze-waiter" });
+    freezeOwner.on("error", () => {});
+    freezeWaiter.on("error", () => {});
+    let freezeTransaction = false;
+    let freezeWaiterTransaction = false;
+    let waiterOutcome;
+    const freezeLease = randomUUID();
+    try {
+      await Promise.all([freezeOwner.connect(), freezeWaiter.connect()]);
+      await freezeOwner.query("BEGIN");
+      freezeTransaction = true;
+      await freezeWaiter.query("BEGIN");
+      freezeWaiterTransaction = true;
+      // Neon pooler endpoints pin a backend only for a transaction. Read both
+      // PIDs after BEGIN so the lock diagnostic observes these exact sessions.
+      const ownerPid = (await freezeOwner.query("SELECT pg_catalog.pg_backend_pid() AS pid")).rows[0].pid;
+      const waiterPid = (await freezeWaiter.query("SELECT pg_catalog.pg_backend_pid() AS pid")).rows[0].pid;
+      await freezeOwner.query("SET LOCAL ROLE chat_quota_owner");
+      await freezeOwner.query("SELECT 1 FROM chat_quota.namespaces WHERE namespace = $1 AND environment = $2 FOR UPDATE",
+        [primary.namespace, ENVIRONMENT]);
+      // Capture a terminal outcome immediately so no raw driver rejection can
+      // escape while this independently connected caller is queued on the lock.
+      waiterOutcome = freezeWaiter.query(RESERVE_CHAT_QUOTA_SQL,
+        [ENVIRONMENT, "anonymous", digest("freeze-subject"), digest("freeze-network"), 1, freezeLease, 1000])
+        .then((result) => ({ allowed: result.rows[0]?.allowed }),
+          (error) => ({ code: sqlState(error), message: error?.message === "quota_admission_disabled" ? "disabled" : "other" }));
+      let blocked = false;
+      const waitUntil = Date.now() + 2000;
+      do {
+        const state = await freezeOwner.query("SELECT $1::integer = ANY(pg_catalog.pg_blocking_pids($2::integer)) AS blocked",
+          [ownerPid, waiterPid]);
+        blocked = state.rows[0]?.blocked === true;
+        if (!blocked) await new Promise((resolve) => setTimeout(resolve, 25));
+      } while (!blocked && Date.now() < waitUntil);
+      assert.equal(blocked, true, "the runtime must actually be queued on this namespace guard before freezing it");
+      await freezeOwner.query("UPDATE chat_quota.namespaces SET admission_enabled = false, admission_frozen_at = pg_catalog.clock_timestamp() " +
+        "WHERE namespace = $1 AND environment = $2", [primary.namespace, ENVIRONMENT]);
+      await freezeOwner.query("COMMIT");
+      freezeTransaction = false;
+      assert.deepEqual(await waiterOutcome, { code: "55000", message: "disabled" },
+        "a caller that began before freeze must read the disabled guard after acquiring its lock");
+      await freezeWaiter.query("ROLLBACK");
+      freezeWaiterTransaction = false;
+      assert.deepEqual(await snapshots(primary), freezeBefore, "queued rejection must not charge any budget");
+      stats.queuedAdmissionFreezeVerified = true;
+    } finally {
+      if (freezeTransaction) { try { await freezeOwner.query("ROLLBACK"); } catch { /* Sanitized outer failure owns reporting. */ } }
+      if (waiterOutcome) await waiterOutcome;
+      if (freezeWaiterTransaction) { try { await freezeWaiter.query("ROLLBACK"); } catch { /* Closing the isolated connection also rolls back. */ } }
+      // Only generated, owned test fixtures may be restored. No deployed
+      // namespace is unfrozen, and an unexpectedly admitted lease stays scoped.
+      try { await freezeWaiter.query(RELEASE_CHAT_QUOTA_SQL, [ENVIRONMENT, freezeLease]); } catch { /* Cleanup below removes the isolated fixture. */ }
+      await Promise.allSettled([freezeOwner.end(), freezeWaiter.end()]);
+      assertOwned(primary);
+      await admin.query("UPDATE chat_quota.namespaces SET admission_enabled = true, admission_frozen_at = NULL " +
+        "WHERE namespace = $1 AND environment = $2", [primary.namespace, ENVIRONMENT]);
+    }
 
     check = "anonymous_concurrency";
     stats.anonymousAdmitted = await race(primary, Array.from({ length: 8 }, () => identity("anonymous")), 1);
@@ -793,7 +860,7 @@ const CLI_CHECKS = new Set([
   "monetary_concurrency", "monetary_denial_without_charges", "monetary_utc_rollover", "monetary_missing_and_future_state_failed_closed", "monetary_constraints",
   "monetary_owned_settlement", "monetary_concurrent_settlement", "monetary_settlement_forfeiture", "monetary_settlement_bounds",
   "owned_release_without_refunds", "sql_validation_and_environment_binding", "missing_global_budget_failed_closed", "future_state_failed_closed",
-  "isolated_runtime_permissions", "isolated_fixture_cleanup", "runtime_connection", "runtime_role_flags", "runtime_admin_memberships",
+  "queued_admission_freeze", "isolated_runtime_permissions", "isolated_fixture_cleanup", "runtime_connection", "runtime_role_flags", "runtime_admin_memberships",
   "runtime_schema_and_temp_permissions", "runtime_function_allowlist", "public_execute_revoked", "runtime_direct_table_access_denied",
   "fixture_inspection", "fixture_cleanup_input", "fixture_cleanup_connection", "fixture_database_guard", "fixture_role_guard",
   "fixture_cleanup_namespace", "fixture_cleanup_privileges", "fixture_cleanup_role", "fixture_cleanup_commit",

@@ -20,6 +20,27 @@ ALTER TABLE chat_quota.namespaces
 ALTER TABLE chat_quota.namespaces
   ADD CONSTRAINT namespaces_policy_version_check CHECK (policy_version IN (1, 2));
 
+-- Owner-controlled admission switch. Existing installations remain enabled;
+-- newly provisioned Production namespaces start frozen until budget cutover.
+ALTER TABLE chat_quota.namespaces
+  ADD COLUMN IF NOT EXISTS admission_enabled boolean NOT NULL DEFAULT true,
+  ADD COLUMN IF NOT EXISTS admission_frozen_at timestamptz;
+DO $admission_columns$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_constraint AS c
+    WHERE c.conrelid = 'chat_quota.namespaces'::pg_catalog.regclass
+      AND c.conname = 'chat_quota_namespace_admission_state'
+  ) THEN
+    ALTER TABLE chat_quota.namespaces
+      ADD CONSTRAINT chat_quota_namespace_admission_state CHECK (
+        (admission_enabled AND admission_frozen_at IS NULL) OR
+        (NOT admission_enabled AND admission_frozen_at IS NOT NULL AND pg_catalog.isfinite(admission_frozen_at))
+      );
+  END IF;
+END;
+$admission_columns$;
+
 CREATE TABLE IF NOT EXISTS chat_quota.role_bindings (
   login_role name PRIMARY KEY,
   role_oid oid NOT NULL UNIQUE,
@@ -136,6 +157,7 @@ DECLARE
   v_namespace text;
   v_environment text;
   v_policy integer;
+  v_admission_enabled boolean;
   v_bucket chat_quota.buckets%ROWTYPE;
   v_money chat_quota.money_budgets%ROWTYPE;
   v_money_reserved bigint;
@@ -180,12 +202,17 @@ BEGIN
 
   -- Every admission and release uses this same pre-seeded guard first. No
   -- identity-controlled key can choose a different lock or a different budget.
-  SELECT n.policy_version INTO v_policy
+  SELECT n.policy_version, n.admission_enabled INTO v_policy, v_admission_enabled
     FROM chat_quota.namespaces AS n
     WHERE n.namespace = v_namespace AND n.environment = v_environment
     FOR UPDATE;
   IF NOT FOUND OR v_policy IS NULL OR v_policy NOT IN (1, 2) THEN
     RAISE EXCEPTION USING ERRCODE = '55000', MESSAGE = 'quota_state_unavailable';
+  END IF;
+  -- Check under the same row lock used by owner freeze/activation. An older
+  -- deployed caller or a call already waiting for this lock cannot bypass it.
+  IF v_admission_enabled IS DISTINCT FROM true THEN
+    RAISE EXCEPTION USING ERRCODE = '55000', MESSAGE = 'quota_admission_disabled';
   END IF;
   SELECT b.* INTO v_bucket FROM chat_quota.buckets AS b
     WHERE b.namespace = v_namespace AND b.environment = v_environment AND b.scope_key = 'global'
