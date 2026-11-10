@@ -9,7 +9,8 @@ import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
 import UrgentCTABar from "@/components/UrgentCTABar";
 import ScrollToTop from "@/components/ScrollToTop";
-import { Analytics } from "@vercel/analytics/next";
+import ChatAssistant from "@/components/ChatAssistant";
+import ConsentAnalytics from "@/components/ConsentAnalytics";
 import "../globals.css";
 
 const inter = Inter({ subsets: ["latin", "greek"], variable: "--font-inter" });
@@ -197,13 +198,14 @@ export default async function LocaleLayout({
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />
-          <div className="fixed inset-x-0 bottom-0 z-50 flex flex-col">
+          <div id="site-bottom-overlays" className="fixed inset-x-0 bottom-0 z-50 flex flex-col">
             <UrgentCTABar />
             <CookieBanner />
           </div>
           <ScrollToTop />
+          {process.env.CHATBOT_ENABLED === "true" && <ChatAssistant />}
         </NextIntlClientProvider>
-        <Analytics />
+        <ConsentAnalytics />
       </body>
     </html>
   );

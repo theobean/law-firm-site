@@ -5,6 +5,7 @@ import { buildPageMeta } from "@/lib/seo";
 import { MapPin, Phone, Mail, Clock, ChevronRight } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 import ScrollReveal from "@/components/ScrollReveal";
+import ExternalEmbed from "@/components/ExternalEmbed";
 
 export async function generateMetadata({
   params,
@@ -78,15 +79,11 @@ export default function ContactPage() {
             {/* Google Maps embed */}
             <ScrollReveal direction="up" delay={0.5}>
               <div className="hidden md:block mt-10 rounded-sm overflow-hidden h-64">
-                <iframe
+                <ExternalEmbed
                   src={`https://maps.google.com/maps?cid=10350029232005631470&output=embed&hl=${locale}`}
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
                   title={tCommon("mapTitle")}
+                  provider="Google Maps"
+                  sourceUrl="https://maps.google.com/?cid=10350029232005631470"
                 />
               </div>
             </ScrollReveal>

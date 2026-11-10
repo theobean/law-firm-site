@@ -1,0 +1,106 @@
+import { buildChatRetrievalQuery } from "./retrieval-query.mjs";
+
+/** @typedef {import("./service").ChatInput} ChatInput */
+/** @typedef {import("./service").ChatReply} ChatReply */
+/** @typedef {import("./service").PreparedChatModelRequest} PreparedChatModelRequest */
+/** @typedef {import("./access.mjs").AuthorizedChatContext} AuthorizedChatContext */
+/** @typedef {import("./identity.mjs").QuotaIdentity} QuotaIdentity */
+/** @typedef {{code: string, status: number, retryAfter?: number}} KnownChatError */
+/** @typedef {{
+ * env: Record<string, string | undefined>,
+ * isSameOrigin: (request: Request) => boolean,
+ * readChatBody: (request: Request) => Promise<unknown>,
+ * parseChatInput: (value: unknown) => ChatInput,
+ * getChatVisitor: (request: Request, rawBody: unknown) => Promise<{visitor: unknown, cookieHeader?: string}>,
+ * resolveQuotaIdentity: (request: Request, visitor?: unknown) => Promise<QuotaIdentity>,
+ * getPublicChatPrincipal: () => unknown,
+ * getChatQuotaReservation: (input: ChatInput, principal: unknown, model: string | undefined, retrievalQuery: string) => number,
+ * getChatBudgetReservation: (reservedTokens: number, model?: string) => Promise<number>,
+ * getChatBudgetSettlement?: (usage: import("./service").ChatMeasuredUsage, model?: string) => Promise<number>,
+ * getPublicChatContext: (principal: unknown, locale: ChatInput["locale"], question: string) => AuthorizedChatContext | Promise<AuthorizedChatContext>,
+ * prepareChatModelRequest: (input: ChatInput, context: AuthorizedChatContext, model?: string) => PreparedChatModelRequest,
+ * reserveChatQuota: (identity: QuotaIdentity, reservedTokens: number, reservedCostEurMicros: number) => Promise<{release: (actualCostEurMicros?: number) => Promise<void>}>,
+ * generatePreparedChatReply: (prepared: PreparedChatModelRequest, options: {apiKey: string, signal: AbortSignal, onUsage: (usage: import("./service").ChatMeasuredUsage) => void}) => Promise<ChatReply>,
+ * classifyKnownError: (error: unknown) => KnownChatError | null,
+ * }} ChatHandlerDependencies */
+
+/** @param {string} error @param {number} status @param {number} [retryAfter] @param {string} [cookieHeader] */
+function failure(error, status, retryAfter, cookieHeader) {
+  return Response.json({ error }, {
+    status,
+    headers: {
+      "Cache-Control": "no-store",
+      ...(retryAfter ? { "Retry-After": String(retryAfter) } : {}),
+      ...(cookieHeader ? { "Set-Cookie": cookieHeader } : {}),
+    },
+  });
+}
+
+/** Server dependencies are bound by the route module, never supplied by a
+ * request. Keeping this flow separate permits admission tests in-process,
+ * without a server, provider credentials or external network calls.
+ * @param {ChatHandlerDependencies} dependencies
+ * @returns {(request: Request) => Promise<Response>}
+ */
+export function createChatHandler(dependencies) {
+  return async function handleChat(request) {
+    if (!dependencies.isSameOrigin(request)) return failure("forbidden", 403);
+    if (dependencies.env.CHATBOT_ENABLED !== "true") return failure("unavailable", 503);
+    let cookieHeader;
+    try {
+      const rawBody = await dependencies.readChatBody(request);
+      const input = dependencies.parseChatInput(rawBody);
+      const apiKey = dependencies.env.OPENAI_API_KEY?.trim();
+      if (!apiKey) return failure("unavailable", 503);
+      // The gateway verifies every submitted token before resolving identity or
+      // touching shared quotas. Only its server-owned proof reaches identity.
+      const visitorResult = await dependencies.getChatVisitor(request, rawBody);
+      cookieHeader = visitorResult.cookieHeader;
+      const identity = await dependencies.resolveQuotaIdentity(request, visitorResult.visitor);
+
+      // Quota identity cannot change the public context permission.
+      const principal = dependencies.getPublicChatPrincipal();
+      const model = dependencies.env.OPENAI_CHAT_MODEL?.trim();
+      // Resolve a follow-up's bounded user-only search context once, so static
+      // pricing and post-admission article retrieval cannot select different data.
+      const retrievalQuery = buildChatRetrievalQuery(input.messages);
+      const reservedTokens = dependencies.getChatQuotaReservation(input, principal, model, retrievalQuery);
+      if (!Number.isInteger(reservedTokens) || reservedTokens < 1 || reservedTokens > 64000) {
+        throw new Error("Invalid chat quota reservation");
+      }
+      const reservedCostEurMicros = await dependencies.getChatBudgetReservation(reservedTokens, model);
+      if (!Number.isSafeInteger(reservedCostEurMicros) || reservedCostEurMicros < 1) {
+        throw new Error("Invalid chat budget reservation");
+      }
+      // Shared admission bounds both context retrieval and the provider request.
+      const lease = await dependencies.reserveChatQuota(identity, reservedTokens, reservedCostEurMicros);
+      let settledCost;
+      try {
+        const context = await dependencies.getPublicChatContext(principal, input.locale, retrievalQuery);
+        const prepared = dependencies.prepareChatModelRequest(input, context, model);
+        if (prepared.reservedTokens > reservedTokens) return failure("request_too_large", 413, undefined, cookieHeader);
+        let measuredUsage;
+        const reply = await dependencies.generatePreparedChatReply(prepared, { apiKey, signal: request.signal,
+          onUsage(usage) { measuredUsage = usage; },
+        });
+        const result = Response.json(reply, { headers: { "Cache-Control": "no-store", ...(cookieHeader ? { "Set-Cookie": cookieHeader } : {}) } });
+        if (measuredUsage && dependencies.getChatBudgetSettlement) {
+          try {
+            const cost = await dependencies.getChatBudgetSettlement(measuredUsage, model);
+            if (Number.isSafeInteger(cost) && cost >= 0 && cost <= reservedCostEurMicros) settledCost = cost;
+          } catch { /* Unknown pricing/FX keeps the full conservative charge. */ }
+        }
+        return result;
+      } finally {
+        // Settle only a successful server-measured call. Unknown/error/timeout
+        // retains its full financial reservation; abuse budgets never refund.
+        // Cleanup failure cannot replace a successful answer or provider error.
+        try { await lease.release(settledCost); } catch { /* Lease expires; reservation remains charged. */ }
+      }
+    } catch (error) {
+      // Classification returns only stable public codes, never upstream detail.
+      const known = dependencies.classifyKnownError(error);
+      return known ? failure(known.code, known.status, known.retryAfter, cookieHeader) : failure("upstream", 502, undefined, cookieHeader);
+    }
+  };
+}
