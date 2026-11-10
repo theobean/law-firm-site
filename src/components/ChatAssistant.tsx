@@ -272,7 +272,10 @@ export default function ChatAssistant() {
           <header className={styles.header}>
             <span className={styles.brandIcon} aria-hidden="true"><MessageCircle size={22} /></span>
             <div className={styles.heading}>
-              <h2>{t("title")}</h2>
+              <div className={styles.titleRow}>
+                <h2>{t("title")}</h2>
+                <span className={styles.betaBadge}>{t("betaLabel")}</span>
+              </div>
               <p>{t("subtitle")}</p>
             </div>
             {activated && (
@@ -296,7 +299,6 @@ export default function ChatAssistant() {
                 <ShieldCheck size={19} aria-hidden="true" />
                 <p>{t("privacyNotice")}</p>
               </div>
-              <p className={styles.processingNotice}>{t("processingNotice")} <Link href="/privacy">{t("privacyLink")}</Link></p>
               <button type="button" onClick={() => setActivated(true)} className={styles.startButton}>
                 {t("start")} <ArrowRight size={17} aria-hidden="true" />
               </button>
@@ -403,8 +405,14 @@ export default function ChatAssistant() {
           )}
 
           <footer className={styles.footer}>
-            <a href="tel:+302310545261"><Phone size={12} aria-hidden="true" />2310 545 261</a>
-            <span>{t("footerNotice")}</span>
+            <div className={styles.footerContact}>
+              <a href="tel:+302310545261"><Phone size={12} aria-hidden="true" />2310 545 261</a>
+              <span>{t("footerNotice")}</span>
+            </div>
+            <div className={styles.footerMeta}>
+              <Link href="/privacy">{t("privacyLink")}</Link>
+              <a href="https://www.syncweb.gr/" target="_blank" rel="noopener noreferrer">{t("createdBy")}</a>
+            </div>
           </footer>
         </section>
       )}
