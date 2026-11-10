@@ -417,7 +417,7 @@ export default function ChatAssistant() {
         </section>
       )}
 
-      <button ref={triggerRef} hidden={open} type="button" onClick={() => setOpen(true)} className={styles.trigger} aria-expanded={open} aria-controls={panelId} aria-label={t("open")}>
+      <button ref={triggerRef} data-chat-launcher hidden={open} type="button" onClick={() => setOpen(true)} className={styles.trigger} aria-expanded={open} aria-controls={panelId} aria-label={t("open")}>
         {open ? <X size={22} aria-hidden="true" /> : <MessageCircle size={22} aria-hidden="true" />}
         <span className={styles.triggerCopy}>
           <span className={styles.triggerName}>{t("title")}</span>

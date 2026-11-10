@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations, useLocale } from "next-intl";
+import { useEffect, useState } from "react";
 import { Link } from "@/navigation";
 import { Scale, MapPin, Phone, Mail, Clock, ChevronRight } from "lucide-react";
 import { openCookieSettings } from "./CookieBanner";
@@ -8,9 +9,29 @@ import { openCookieSettings } from "./CookieBanner";
 export default function Footer() {
   const t = useTranslations();
   const locale = useLocale();
+  const [bottomClearance, setBottomClearance] = useState(96);
+
+  useEffect(() => {
+    const overlays = document.getElementById("site-bottom-overlays");
+    const launcher = document.querySelector<HTMLElement>("[data-chat-launcher]");
+    let launcherHeight = 60;
+    const update = () => {
+      const height = launcher?.getBoundingClientRect().height ?? 0;
+      // Keep the closed launcher's footprint when the conversation panel is open.
+      if (height > 0) launcherHeight = height;
+      const overlayHeight = overlays?.getBoundingClientRect().height ?? 0;
+      const controlsHeight = Math.max(launcherHeight + 20, 44 + 24);
+      setBottomClearance(Math.ceil(overlayHeight + controlsHeight + 16));
+    };
+    update();
+    const observer = new ResizeObserver(update);
+    if (overlays) observer.observe(overlays);
+    if (launcher) observer.observe(launcher);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <footer className="grain relative overflow-hidden bg-primary text-white">
+    <footer className="grain relative overflow-hidden bg-primary text-white" style={{ paddingBottom: bottomClearance }}>
       <div className="max-w-6xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Logo & tagline */}
@@ -150,7 +171,7 @@ export default function Footer() {
         <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-2 text-white/40 text-xs">
           <span>© {new Date().getFullYear()} {t("about.name")}. {t("footer.rights")}</span>
           <a href="https://www.syncweb.gr/" target="_blank" rel="noopener noreferrer" className="transition-colors">Made by <span className="text-white">Sync</span><span className="text-accent">.</span>™</a>
-          <div className="flex gap-4">
+          <div className="flex max-w-full flex-wrap justify-center gap-x-4 gap-y-2">
             <Link href={`/privacy`} className="hover:text-accent transition-colors">{t("footer.privacy")}</Link>
             <Link href={`/terms`} className="hover:text-accent transition-colors">{t("footer.terms")}</Link>
             <button onClick={openCookieSettings} className="hover:text-accent transition-colors">{t("cookies.settings")}</button>
