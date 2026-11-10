@@ -139,6 +139,26 @@ and source lists stay internal and are not visitor-facing citations.
 
 ## Office information
 
+Three reviewed source-bound general briefs supplement ordinary generation for
+explicit harassment definitions, AADE/DED appeal-payment effects and general
+suspect rights. They use the existing approved cards, not additional sources.
+Each requires the authorized context and a pinned exact URL/full projected-text
+digest. A source change invalidates the brief until the wording and digest are
+reviewed together; no model output or user-supplied source can select the brief.
+All source permissions, request-size and shared admission checks remain in use.
+
+Tax continuation uses only an AADE/DED appeal anchor retained in the existing
+bounded user-only query, with conservative destination/topic exclusions. The
+briefs preserve the material qualifications that model paraphrases omitted in
+the completed f43 evaluation: purpose or effect, conditional/temporary tax
+effects versus approval, and translation only when Greek is insufficiently
+understood. Immediate lawyer contact is stated once, with the verified office
+phone only for recognized personal police calls; other rights replies retain
+the source's conditional call/detention qualification. This is a narrow
+information path, not personal intake, legal advice or comprehensive coverage.
+The new wording still requires its own live evaluation; previous frozen-run
+grades do not establish a pass for these changes.
+
 Six entries cover the firm's identity, published contact information, requests
 for appointments, published practice areas, nationwide coverage and a selected
 FAQ summary about case duration and office follow-up channels. Localized

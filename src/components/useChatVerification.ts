@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { failedChatVerificationStatus } from "@/lib/chat/verification-feedback.mjs";
 
 type VerificationStatus = "idle" | "loading" | "ready" | "checking" | "interactive" | "failed" | "expired" | "unavailable";
 type TurnstileOptions = {
@@ -178,10 +179,16 @@ export default function useChatVerification({ enabled, active, siteKey, locale }
 
   async function verify(signal: AbortSignal): Promise<string | undefined> {
     if (!enabled) return undefined;
-    const widget = widgetRef.current;
-    if (!active || !siteKey || !widget) throw new Error("Security check unavailable");
     if (signal.aborted) throw abortError();
-    if (pendingRef.current) throw new Error("Security check already pending");
+    const widget = widgetRef.current;
+    if (!active || !siteKey || !widget) {
+      reportFailure();
+      throw new Error("Security check unavailable");
+    }
+    if (pendingRef.current) {
+      reportFailure();
+      throw new Error("Security check already pending");
+    }
 
     return new Promise<string>((resolve, reject) => {
       const finish = (token?: string, error?: Error) => {
@@ -216,6 +223,10 @@ export default function useChatVerification({ enabled, active, siteKey, locale }
     });
   }
 
+  function reportFailure() {
+    setStatus((current) => failedChatVerificationStatus(current));
+  }
+
   function reset() {
     pendingRef.current?.reject(abortError());
     const widget = widgetRef.current;
@@ -234,5 +245,5 @@ export default function useChatVerification({ enabled, active, siteKey, locale }
     setAttempt((value) => value + 1);
   }
 
-  return { hostRef, status, verify, reset, retry };
+  return { hostRef, status, verify, reset, retry, reportFailure };
 }

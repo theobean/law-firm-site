@@ -6,6 +6,7 @@ import { qualifyPoliceContactAnswer } from "./contact-output.mjs";
 import { containsProceduralDeadline, isProceduralDeadlineQuestion } from "./deadline-policy.mjs";
 import { appointmentReply, classifyAppointmentRequest } from "./booking-policy.mjs";
 import { classifyInformationQuestion, informationReply, INFORMATION_REPLY_KINDS, needsPersonalLawyerContact } from "./response-policy.mjs";
+import { getReviewedGeneralBrief } from "./general-briefs.mjs";
 
 export type ChatLocale = "el" | "en" | "de";
 export type ChatMessage = { role: "user" | "assistant"; content: string };
@@ -29,6 +30,7 @@ type PreparedRequestSnapshot = {
   sources: readonly ChatSource[];
   evidenceChoices: ReturnType<typeof buildEvidenceChoices>;
   controlledKind?: string;
+  controlledReply?: ChatReply;
   needsLawyerContact: boolean;
 };
 
@@ -284,6 +286,15 @@ export function prepareChatModelRequest(
   const controlledKind = isProceduralDeadlineQuestion(safeInput.messages) ? "legal_deadline" :
     classifyAppointmentRequest(safeInput.messages) ? "appointment" :
     informationKind && informationReply(informationKind, sources, safeInput.locale) ? informationKind : undefined;
+  // A few reviewed explanations need their legal qualifications preserved
+  // verbatim. They are authorized application data, never a provider kind or
+  // browser-supplied answer, and keep the existing higher-priority boundaries.
+  const reviewedBrief = controlledKind ? null : getReviewedGeneralBrief(safeInput, context);
+  const controlledReply = reviewedBrief ? Object.freeze({
+    ...reviewedBrief,
+    sources: reviewedBrief.sources.map((source) => Object.freeze({ ...source })),
+  }) : undefined;
+  if (controlledReply) Object.freeze(controlledReply.sources);
   const needsLawyerContact = sources.some((source) => source.id === "legal-criminal-defence-rights") && needsPersonalLawyerContact(safeInput.messages);
   const evidenceChoices = buildEvidenceChoices(sources);
   const body = JSON.stringify({
@@ -330,7 +341,7 @@ export function prepareChatModelRequest(
   if (reservedTokens > MAX_CHAT_RESERVED_TOKENS) throw new ChatFailure("request_too_large", 413);
 
   const prepared = Object.freeze({ reservedTokens });
-  preparedRequests.set(prepared, { body, locale: safeInput.locale, sources, evidenceChoices, controlledKind, needsLawyerContact });
+  preparedRequests.set(prepared, { body, locale: safeInput.locale, sources, evidenceChoices, controlledKind, controlledReply, needsLawyerContact });
   return prepared;
 }
 
@@ -348,6 +359,12 @@ export async function generatePreparedChatReply(
   // context and exact budget checks. They have no provider/tool side effects.
   if (snapshot.controlledKind) {
     const reply = parseChatReply({ kind: snapshot.controlledKind, answer: "", sourceIds: [], suggestContact: true }, snapshot.sources, snapshot.locale);
+    options.onUsage?.(Object.freeze({ inputTokens: 0, outputTokens: 0 }));
+    return reply;
+  }
+  if (snapshot.controlledReply) {
+    const reply = parseChatResponse(snapshot.controlledReply);
+    if (!reply) throw new ChatFailure("upstream", 502, "reply_contract");
     options.onUsage?.(Object.freeze({ inputTokens: 0, outputTokens: 0 }));
     return reply;
   }

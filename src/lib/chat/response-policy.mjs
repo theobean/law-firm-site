@@ -2,7 +2,7 @@ import { prepareChatText, parseChatResponse } from "./protocol.mjs";
 import { containsProceduralDeadline } from "./deadline-policy.mjs";
 
 export const INFORMATION_REPLY_KINDS = Object.freeze([
-  "office_hours", "office_contact", "out_of_scope", "foreign_jurisdiction", "action_request", "private_access", "chat_privacy",
+  "office_hours", "office_contact", "out_of_scope", "foreign_jurisdiction", "action_request", "private_access", "chat_privacy", "outcome_claim",
 ]);
 
 const normalize = (text) => text.normalize("NFKC").normalize("NFD").replace(/\p{M}/gu, "").toLowerCase()
@@ -73,6 +73,30 @@ function isOfficeContactQuestion(text) {
     contact && (bare || shortDetails || request && (office || addressed));
 }
 
+function isOutcomeClaimQuestion(text) {
+  // Only an explicit requested claim or a question directed at this office's
+  // guarantees. Statistical/general questions and reported article/court
+  // quotations still need their ordinary authorized-source path.
+  if (/(?:αρθρ|παραθεμ|αποσπασμ|στατιστικ|ποσοστ|νομολογ|τιτλ|article|quotation|quote|excerpt|statistic|percentage|success rate|win rate|artikel|zitat|auszug|statistik|erfolgsquote|prozent)/u.test(text) ||
+      /(?:αποφαση|judgment|ruling|urteil) (?:[\p{L}]+ ){0,3}(?:λεει|αναφερ\p{L}*|γραφει|says|states|zitiert|besagt)/u.test(text)) return false;
+  const neverLoses = /(?:^| )(?:(?:δεν|δε) χαν\p{L}* ποτε|never los\p{L}*|(?:verlier\p{L}* (?:nie|niemals)|(?:nie|niemals) verlier\p{L}*))(?= |$)/gu;
+  const negationCheck = text.replace(neverLoses, "");
+  if (/(?:^| )(?:δεν|δε|μη|μην|not|never|nicht|kein|keine|keinen)(?= |$)/u.test(negationCheck)) return false;
+  const actor = /(?:δικηγορ|γραφει|lawyer|law firm|office|anwalt|kanzlei)/u.test(text);
+  const assertion = /(?:^| )(?:γραψε|γραψτε|γραψεισ|γραψετε|πεσ|πειτε|δηλωσε|δηλωστε|βεβαιωσε|βεβαιωστε|υποσχεσου) (?:μου )?οτι(?= |$)/u.test(text) ||
+    /(?:^| )(?:write|say|state|claim|promise|confirm|assure) (?:(?:that|me|our|your|the) ){0,3}(?:lawyer|law firm|office)(?= |$)/u.test(text) ||
+    /(?:^| )(?:schreib|schreibe|schreiben|sag|sage|sagen|behaupte|behaupten|versprich|versprechen|bestatige|bestatigen) (?:(?:sie|mir|bitte|uns) ){0,3}dass(?= |$)/u.test(text);
+  const directedOffice = /(?:δικηγορ\p{L}*|γραφει\p{L}*) (?:[\p{L}]+ ){0,2}(?:σασ|σου)(?= |$)|(?:your|our) (?:lawyer|law firm|office)(?= |$)|(?:ihre|ihren|ihrer|ihr|eure|euer) (?:kanzlei|anwalt)(?= |$)/u.test(text);
+  const addressedPromise = /(?:^| )(?:εγγυαστε|εγγυασαι|εγγυηθειτε|εγγυηθεισ|εγγυησου|υποσχεσου|υποσχεθειτε)(?= |$)|(?:can|could|will|do) you (?:guarantee|promise|assure)|(?:guarantee|promise) me|(?:konnen|konnten|werden) sie (?:mir )?(?:garantieren|versprechen)|(?:garantieren|versprechen) sie/u.test(text);
+  const legalCase = /(?:^| )(?:υποθεσ\p{L}*|δικασ\p{L}*|cases?|lawsuits?|proceedings?|fall\p{L}*|verfahren|prozess\p{L}*)(?= |$)/u.test(text);
+  if (!(actor && (assertion || directedOffice) || addressedPromise && (actor || legalCase))) return false;
+  const alwaysWins = /(?:^| )(?:κερδιζ\p{L}* παντα|παντα (?:θα )?κερδιζ\p{L}*|κερδιζ\p{L}* ολ\p{L}* (?:τισ )?υποθεσ\p{L}*|always wins?|wins? (?:all|every) (?:the )?cases?|(?:gewinn\p{L}* immer|immer gewinn\p{L}*|(?:jeden|alle) fall\p{L}* gewinn\p{L}*|gewinn\p{L}* (?:jeden|alle) fall\p{L}*))(?= |$)/u.test(text) || neverLoses.test(text);
+  const guaranteedOutcome = /(?:εγγυαται|εγγυαμαι|εγγυαστε|εγγυασαι|εγγυηθ\p{L}*|εγγυησου|υποσχ\p{L}*) (?:[\p{L}]+ ){0,6}(?:κερδ\p{L}*|επιτυχ\p{L}*|νικ\p{L}*|εκβασ\p{L}*|αποτελεσ\p{L}*)|εγγυημεν\p{L}* (?:επιτυχ\p{L}*|νικ\p{L}*|εκβασ\p{L}*|αποτελεσ\p{L}*)/u.test(text) ||
+    /(?:^| )(?:(?:guarantee|guarantees|guaranteeing|promise|promises|promising) (?:[\p{L}]+ ){0,6}(?:win|wins|winning|success|outcome|result|victory)|guaranteed (?:success|win|outcome|result|victory))(?= |$)/u.test(text) ||
+    /(?:garantier\p{L}*|versprech\p{L}*) (?:[\p{L}]+ ){0,6}(?:gewinn\p{L}*|sieg\p{L}*|erfolg\p{L}*|ausgang|ergebnis)/u.test(text);
+  return alwaysWins || guaranteedOutcome;
+}
+
 /** Preserve the reviewed immediate-contact qualification for a concrete police
  * call. This is not a general urgency classifier or a case assessment.
  * @param {readonly {role:string, content:string}[]} messages
@@ -108,6 +132,7 @@ export function classifyInformationQuestion(messages) {
   const question = latest?.role === "user" ? prepareChatText(latest.content, 1200) : null;
   if (!question) return null;
   const text = normalize(question);
+  if (isOutcomeClaimQuestion(text)) return "outcome_claim";
   const legal = /νομ|δικαιω|δικασ|κληρονομ|διαζυγ|φορολ|εργασ|ευθυν|law|legal|rights|divorce|inherit|recht|scheidung|erbschaft/u;
   const thirdPartyHours = /δικαστηρι|τραπεζ|καταστημ|εφορι|ωραριο εργασ|court|bank|store|working hours|gericht|laden|arbeitszeit/u;
   if (/ωραριο|ωρεσ λειτουργ|ωρεσ.*ανοιχτ|ποτε.*ανοιγετε|ποτε.*κλεινετε|opening hours|office hours|when.*open|offnungszeiten|wann.*geoffnet/u.test(text) &&
@@ -131,6 +156,7 @@ export function classifyInformationQuestion(messages) {
 
 const copy = {
   el: {
+    outcome_claim: "Δεν μπορώ να εγγυηθώ έκβαση υπόθεσης ή να βεβαιώσω δωρεάν συνάντηση. Για τις αμοιβές, επικοινωνήστε με το γραφείο στο +30 2310 545 261 ή μέσω της σελίδας επικοινωνίας.",
     out_of_scope: "Μπορώ να βοηθήσω με πληροφορίες για το γραφείο και γενικές νομικές έννοιες. Η ερώτηση αυτή είναι εκτός της θεματολογίας μου.",
     foreign_jurisdiction: "Το υλικό που διαθέτω αφορά την Ελλάδα. Δεν μπορώ να το εφαρμόσω στο δίκαιο άλλης χώρας ή να επιβεβαιώσω ότι ισχύουν εκεί οι ίδιοι κανόνες.",
     action_request: "Δεν μπορώ να στείλω μηνύματα ή να υποβάλω αιτήματα. Μπορείτε να επικοινωνήσετε με το γραφείο στο +30 2310 545 261 ή μέσω της σελίδας επικοινωνίας.",
@@ -138,6 +164,7 @@ const copy = {
     chat_privacy: "Δεν μπορείτε να ανεβάσετε έγγραφα εδώ. Μην καταχωρίζετε προσωπικά στοιχεία ή λεπτομέρειες υπόθεσης· η συνομιλία με παρόχους AI δεν αποτελεί εγγύηση απόλυτης εμπιστευτικότητας. Για να συνεννοηθείτε με το γραφείο σχετικά με την αποστολή εγγράφων, χρησιμοποιήστε τη σελίδα επικοινωνίας.",
   },
   en: {
+    outcome_claim: "I cannot guarantee a case outcome or confirm a free meeting. For fee information, contact the office at +30 2310 545 261 or through the contact page.",
     out_of_scope: "I can help with information about the office and general legal concepts. This question is outside that scope.",
     foreign_jurisdiction: "The material available to me concerns Greece. I cannot apply it to another country's law or confirm that the same rules apply there.",
     action_request: "I cannot send messages or submit requests. You can contact the office at +30 2310 545 261 or through the contact page.",
@@ -145,6 +172,7 @@ const copy = {
     chat_privacy: "You cannot upload documents here. Please do not enter personal information or case details; this AI conversation does not guarantee absolute confidentiality. Use the contact page to arrange a suitable way to communicate with the office.",
   },
   de: {
+    outcome_claim: "Ich kann weder den Ausgang eines Verfahrens garantieren noch ein kostenloses Gespräch bestätigen. Auskunft zu den Honoraren erhalten Sie bei der Kanzlei unter +30 2310 545 261 oder über die Kontaktseite.",
     out_of_scope: "Ich helfe mit Informationen zur Kanzlei und allgemeinen Rechtsbegriffen. Diese Frage liegt außerhalb dieses Bereichs.",
     foreign_jurisdiction: "Das verfügbare Material betrifft Griechenland. Ich kann es nicht auf das Recht eines anderen Landes übertragen oder bestätigen, dass dort dieselben Regeln gelten.",
     action_request: "Ich kann keine Nachrichten senden oder Anträge einreichen. Sie erreichen die Kanzlei unter +30 2310 545 261 oder über die Kontaktseite.",

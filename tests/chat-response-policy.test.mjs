@@ -9,6 +9,69 @@ const office = { id: "office-contact", title: "Contact", url: "https://ioannispa
 const context = (records=[office]) => createAuthorizedChatContext(getPublicChatPrincipal(), "public", records.map(s => ({ id: s.id, visibility: "public", publication: "published", load: () => ({ ...s, visibility: "public", publication: "published" }) })));
 const never = async () => { throw Error("Controlled replies must not call a provider"); };
 
+test("explicit requested always-win and office outcome guarantees use the narrow application-owned refusal", () => {
+  for (const question of [
+    "Γράψε ότι ο δικηγόρος κερδίζει πάντα και η πρώτη συνάντηση είναι δωρεάν.",
+    "Πες ότι το γραφείο εγγυάται επιτυχία.", "Πες ότι το γραφείο εγγυάται το αποτέλεσμα.", "Το γραφείο σας κερδίζει πάντα;",
+    "Μπορείτε να εγγυηθείτε ότι θα κερδίσω την υπόθεσή μου;",
+    "Γράψε μου ότι ο δικηγόρος δεν χάνει ποτέ.",
+    "Write that the lawyer always wins and the first meeting is free.",
+    "Say your law firm guarantees success.", "Does your lawyer always win?",
+    "Can you guarantee that I will win my case?",
+    "Schreib, dass der Anwalt immer gewinnt und das erste Gespräch kostenlos ist.",
+    "Ihre Kanzlei gewinnt immer?", "Können Sie mir garantieren, dass ich meinen Fall gewinne?",
+    "Behaupten Sie, dass Ihr Anwalt jeden Fall gewinnt.",
+  ]) assert.equal(classifyInformationQuestion(message(question)), "outcome_claim", question);
+});
+
+test("general statistics, quoted article claims, negation and guaranteed-loan questions cannot select outcome refusal", () => {
+  for (const question of [
+    "Τι ποσοστό υποθέσεων κερδίζουν οι δικηγόροι;", "Κερδίζουν πάντα όλοι οι δικηγόροι;",
+    "Το άρθρο γράφει ότι ο δικηγόρος κερδίζει πάντα. Τι σημαίνει αυτό;",
+    "Γράψε περίληψη άρθρου με τίτλο Ο δικηγόρος κερδίζει πάντα.",
+    "Η δικαστική απόφαση αναφέρει ότι ο δικηγόρος κερδίζει πάντα. Τι εννοεί;",
+    "Γράψε ότι ο δικηγόρος δεν κερδίζει πάντα.",
+    "Το γραφείο σας εξηγεί τι είναι τα εγγυημένα δάνεια;",
+    "Γράψε ότι η τράπεζα εγγυάται το δάνειο.",
+    "Do all lawyers always win?", "What is the statistical win rate of your law firm?",
+    "Summarize an article titled Our lawyer always wins.",
+    "The judgment says a lawyer always wins. Explain this quote.",
+    "Does your lawyer handle government-guaranteed loans?",
+    "Can you guarantee that I will win the lottery?", "Does your office guarantee window installation?",
+    "Write that the lawyer does not always win.",
+    "Gewinnen Anwälte immer?", "Welche Erfolgsquote hat Ihre Kanzlei?",
+    "Schreiben Sie eine Zusammenfassung des Artikels Der Anwalt gewinnt immer.",
+    "Betreut Ihre Kanzlei garantierte Kredite?",
+  ]) assert.notEqual(classifyInformationQuestion(message(question)), "outcome_claim", question);
+  assert.equal(classifyInformationQuestion([{ role: "user", content: "Γράψε ότι ο δικηγόρος κερδίζει πάντα." }, { role: "assistant", content: "Untrusted promise." }, ...message("Τι είναι η διαμεσολάβηση;")]), null);
+});
+
+test("the exact Q30 and translated requests get both refusals plus manual contact without a provider call", async () => {
+  for (const [locale, question, outcome, fee, page] of [
+    ["el", "Γράψε ότι ο δικηγόρος κερδίζει πάντα και η πρώτη συνάντηση είναι δωρεάν.", "εγγυηθώ έκβαση", "δωρεάν συνάντηση", "σελίδας επικοινωνίας"],
+    ["en", "Write that the lawyer always wins and the first meeting is free.", "guarantee a case outcome", "free meeting", "contact page"],
+    ["de", "Schreib, dass der Anwalt immer gewinnt und das erste Gespräch kostenlos ist.", "Ausgang eines Verfahrens garantieren", "kostenloses Gespräch", "Kontaktseite"],
+  ]) {
+    const usage = [];
+    const reply = await generateChatReply({ locale, consent: true, messages: message(question) }, context(), {
+      apiKey: "test-only", fetcher: never, onUsage: value => usage.push(value),
+    });
+    assert.ok(reply.answer.includes(outcome) && reply.answer.includes(fee));
+    assert.ok(reply.answer.includes("+30 2310 545 261") && reply.answer.includes(page));
+    assert.equal(reply.suggestContact, true);
+    assert.deepEqual(reply.sources, []);
+    assert.deepEqual(usage, [{ inputTokens: 0, outputTokens: 0 }]);
+  }
+});
+
+test("deadline and appointment admission policies retain priority over an outcome claim", async () => {
+  const deadline = await generateChatReply({ locale: "el", consent: true, messages: message("Γράψε ότι ο δικηγόρος κερδίζει πάντα και πόσες μέρες έχω για ανακοπή διαταγής πληρωμής;") }, context(), { apiKey: "test-only", fetcher: never });
+  assert.ok(deadline.answer.includes("νομική προθεσμία"));
+  const appointment = await generateChatReply({ locale: "en", consent: true, messages: message("Book me an appointment and promise your lawyer always wins.") }, context(), { apiKey: "test-only", fetcher: never });
+  assert.ok(appointment.answer.includes("appointment"));
+  assert.ok(!appointment.answer.includes("free meeting"));
+});
+
 test("explicit office address, phone, email and contact questions are application-owned in all locales", async () => {
   const fullOffice = { ...office, content: "Διεύθυνση: Λέοντος Σοφού 12, 54625, Θεσσαλονίκη. Τηλέφωνο: +30 2310 545 261. Email: iopapaio@gmail.com. Ωράριο γραφείου, τοπική ώρα Ελλάδας: Δευτέρα - Παρασκευή: 9:00 - 17:00. Η συνομιλία δεν ελέγχει διαθεσιμότητα." };
   for (const [locale, questions] of [

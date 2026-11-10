@@ -6,6 +6,7 @@ import { ArrowRight, LoaderCircle, MessageCircle, Phone, RotateCcw, Send, Shield
 import { Link } from "@/navigation";
 import { parseChatResponse, readBoundedJson } from "@/lib/chat/protocol.mjs";
 import { chatRetryDeadline, isChatCoolingDown } from "@/lib/chat/retry-after.mjs";
+import { classifyChatSubmissionFailure } from "@/lib/chat/verification-feedback.mjs";
 import ChatText from "./ChatText";
 import useChatVerification from "./useChatVerification";
 import styles from "./ChatAssistant.module.css";
@@ -235,14 +236,18 @@ export default function ChatAssistant() {
         suggestContact: reply.suggestContact,
       }]);
       animateReply(replyId, reply.answer);
-    } catch {
-      if (controllerRef.current !== controller) return;
+    } catch (failure) {
+      const feedback = classifyChatSubmissionFailure({ current: controllerRef.current === controller,
+        aborted: controller.signal.aborted, requestSent, verificationEnabled: VERIFICATION_ENABLED, error: failure });
+      if (feedback === "stale") return;
       setMessages(history.slice(0, -1));
       setDraft(content);
-      if (controller.signal.aborted) return;
+      if (feedback === "cancelled") return;
       setFailedQuestion(content);
-      // Verification failures have their own accessible notice and retry control.
-      if (requestSent) setError("upstream");
+      // Even an early verification rejection must expose its accessible notice
+      // and manual retry control; the hook may still have reported "ready".
+      if (feedback === "verification") verification.reportFailure();
+      else setError("upstream");
     } finally {
       if (controllerRef.current === controller) {
         if (tokenObtained) verification.reset();

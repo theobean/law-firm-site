@@ -95,6 +95,32 @@ third-party contacts remain outside this policy, even when the office is
 mentioned. Hours keep precedence. The contact reply is manual and offers the
 contact-page link; it submits nothing and cannot check message delivery.
 
+`general-briefs.mjs` supplies three narrowly matched, reviewed general replies:
+workplace-harassment definitions, effects of an AADE/DED administrative appeal,
+and general suspect rights. It first requires the opaque authorized context,
+then an exact source ID, URL and SHA-256 of the complete projected source text,
+including its provenance/review date. Missing data or a changed URL, text or
+review date disables that brief. The source and curated EL/EN/DE wording must be reviewed
+together before a binding changes.
+
+These are application-owned replies stored in the private prepared snapshot,
+not model-selectable reply kinds. Deadline, appointment and existing information
+policies keep priority. Definitions must be asked explicitly; decisions,
+amounts, deadlines, negated requests and unknown destinations defer to the
+ordinary authorized path. Tax effects additionally require an actual AADE/DED
+appeal anchor retained by the existing bounded user-only retrieval query;
+mere AADE membership, rental questions or assistant text cannot supply it.
+The lexical scope checks are conservative, not universal jurisdiction detection.
+
+The fixed wording preserves purpose-or-effect in harassment, conditional or
+temporary tax effects and filing-versus-approval, and the language-comprehension
+condition for interpretation/translation. Recognized personal police calls get
+one verified phone/contact-page direction. Other general-rights replies keep
+one conditional immediate-lawyer direction for a specific call or detention;
+no new arrest classifier or personal finding is introduced. They neither assess
+a case nor perform an action. The separate `outcome_claim` information policy
+rejects requested office success guarantees and unsupported free-meeting claims.
+
 `prepareChatModelRequest` records a recognized controlled kind in its opaque,
 single-use snapshot; deadlines take precedence, followed by appointments and
 the other recognized information kinds. When the final

@@ -41,6 +41,16 @@ without an extra model retry. This verifies source provenance, not semantic
 entailment of every paraphrase. Structured output can still contain factual
 mistakes; see the official [structured-output limitations](https://developers.openai.com/api/docs/guides/structured-outputs).
 
+Three application-owned general briefs may replace generation only after an
+authorized source matches its reviewed ID, exact URL and full-text digest, and
+a narrow current/general-question scope check succeeds. They are stored in the
+private prepared snapshot and are absent from the provider's reply-kind enum.
+They preserve harassment, tax-effect and suspect-right qualifications without
+tools, private data, case assessment or a new action. All admission/size checks
+still apply; a valid no-provider snapshot reports zero provider usage through
+the existing future-only settlement path. Source changes or unknown scope
+disable the reviewed brief rather than extending its authority.
+
 | Component | Permitted access | Unavailable through chat |
 | --- | --- | --- |
 | Model context | Approved office/legal summaries, reviewed original et.gr gazettes and up to two registered public article excerpts | Case files, private CMS/database records, arbitrary URLs or documents |
