@@ -106,11 +106,19 @@
     "termsTitle": "Terms of Use"
   },
   "cookies": {
-    "message": "We use necessary cookies for the website and, when you start ΔικAIsis, chat security. Statistics cookies load only with your explicit consent. You can change your choice via Cookie Settings.",
+    "label": "Cookie preferences",
+    "message": "We use necessary cookies for the website to function correctly. Optional statistics cookies are enabled only with your consent. You can change your choice via Cookie Settings.",
     "accept": "Accept",
     "reject": "Essential only",
     "learnMore": "Learn more",
-    "settings": "Cookie Settings"
+    "settings": "Cookie Settings",
+    "storageError": "Your choice could not be saved. Optional statistics remain disabled. Please check your browser's storage settings."
+  },
+  "externalContent": {
+    "notice": "Loading {provider} shares connection information with the provider, which may use cookies.",
+    "load": "Load {provider}",
+    "close": "Close {provider} content",
+    "openExternal": "Open on the provider's website"
   },
   "notFound": {
     "title": "Page not found",
@@ -362,7 +370,7 @@
     "privacySection3Title": "3. Using ΔικAIsis",
     "privacySection3": "ΔικAIsis is optional and does not require an account. When you send a question, your message and recent chat history are sent to OpenAI to generate an answer. Starting a conversation also activates Cloudflare Turnstile, which uses your IP address and browser signals to prevent automated abuse. Neon separately stores pseudonymised security and usage records, without chat text or raw IP addresses. Do not enter sensitive data or case documents. You can always contact the office directly without using ΔικAIsis.",
     "privacySection4Title": "4. Cookies and third-party services",
-    "privacySection4": "The website is hosted on Vercel and uses technical data for operation, security and visitor statistics. Optional Google Analytics cookies are activated with your consent. ΔικAIsis uses a 24-hour security cookie for usage limits. You can change your preference in Cookie Settings; you may need to reload the page for services that have already loaded. Google Maps and embedded YouTube or Facebook videos may receive connection information and use their own cookies when loaded. The providers' privacy notices also apply to their processing.",
+    "privacySection4": "The website is hosted on Vercel. Optional Google Analytics and Vercel Analytics statistics are enabled with your consent. ΔικAIsis uses a 24-hour security cookie for usage limits. You can change your preference in Cookie Settings; withdrawal stops statistics collection and may reload the page. Google Maps and embedded YouTube or Facebook videos load only when you choose to load them. They may then receive connection information and use their own cookies. The providers' privacy notices also apply to their processing.",
     "privacySection5Title": "5. How long data is kept",
     "privacySection5": "We keep contact and case information for as long as needed to assist you and meet our legal obligations. ΔικAIsis's chat history remains temporarily in the memory of the open tab and is removed when you start a new conversation or reload the page; the website does not save it in a chat database. OpenAI may retain data for abuse monitoring in accordance with the service's policies and settings. Gradual deletion of old visitor and network counters may begin around 24–48 hours after their last use and finish later. These records do not expire with the cookie.",
     "privacySection6Title": "6. Your rights and choices",

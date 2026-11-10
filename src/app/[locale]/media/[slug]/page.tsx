@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { ArrowLeft, Calendar, Tv } from "lucide-react";
 import { getYouTubeId, getThumbnailUrl, getEmbedUrl, getFacebookEmbedUrl, getVideoType } from "@/lib/youtube";
 import { siteUrl as SITE, ogDefaults } from "@/lib/seo";
+import ExternalEmbed from "@/components/ExternalEmbed";
 
 export const dynamic = "force-dynamic";
 
@@ -84,12 +85,12 @@ export default async function InterviewPage({ params }: { params: Promise<{ slug
       <div className="max-w-4xl mx-auto px-6 py-12">
         {embedUrl ? (
           <div className="relative aspect-video bg-black rounded-sm overflow-hidden shadow-xl">
-            <iframe
+            <ExternalEmbed
               src={embedUrl}
               title={iv.title}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="w-full h-full"
+              provider={videoType === "youtube" ? "YouTube" : "Facebook"}
+              sourceUrl={iv.youtubeUrl}
+              video
             />
           </div>
         ) : (

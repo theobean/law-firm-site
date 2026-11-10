@@ -10,7 +10,7 @@ import CookieBanner from "@/components/CookieBanner";
 import UrgentCTABar from "@/components/UrgentCTABar";
 import ScrollToTop from "@/components/ScrollToTop";
 import ChatAssistant from "@/components/ChatAssistant";
-import { Analytics } from "@vercel/analytics/next";
+import ConsentAnalytics from "@/components/ConsentAnalytics";
 import "../globals.css";
 
 const inter = Inter({ subsets: ["latin", "greek"], variable: "--font-inter" });
@@ -205,7 +205,7 @@ export default async function LocaleLayout({
           <ScrollToTop />
           {process.env.CHATBOT_ENABLED === "true" && <ChatAssistant />}
         </NextIntlClientProvider>
-        <Analytics />
+        <ConsentAnalytics />
       </body>
     </html>
   );

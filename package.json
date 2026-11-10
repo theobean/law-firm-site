@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "test:chat": "node --experimental-strip-types --test tests/chat*.test.mjs",
+    "test:consent": "node --test tests/cookie-consent.test.mjs",
     "test:chat:neon": "node scripts/test-chat-neon.mjs"
   },
   "dependencies": {

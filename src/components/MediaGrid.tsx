@@ -1,14 +1,15 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Play, Tv, Calendar } from "lucide-react";
+import { Tv, Calendar } from "lucide-react";
 import {
-  getYouTubeId, getThumbnailUrl, getEmbedUrl,
+  getYouTubeId, getEmbedUrl,
   getFacebookEmbedUrl, getVideoType,
 } from "@/lib/youtube";
 import { useTranslations } from "next-intl";
 import { Link } from "@/navigation";
 import ShareButtons from "@/components/ShareButtons";
+import ExternalEmbed from "@/components/ExternalEmbed";
 
 interface Interview {
   _id: string;
@@ -20,31 +21,13 @@ interface Interview {
   description?: string;
 }
 
-function FacebookPlaceholder({ onPlay }: { onPlay: () => void }) {
-  return (
-    <button
-      onClick={onPlay}
-      aria-label="Αναπαραγωγή"
-      className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[#1877F2]/10 hover:bg-[#1877F2]/20 transition-colors duration-300 group"
-    >
-      {/* Facebook "f" logo */}
-      <span className="text-[#1877F2] font-extrabold text-4xl leading-none select-none">f</span>
-      <span className="w-14 h-14 rounded-full bg-accent/90 hover:bg-accent flex items-center justify-center shadow-lg shadow-black/50 transition-all duration-200 hover:scale-110 group-hover:scale-105">
-        <Play size={26} className="text-white ml-1" fill="white" />
-      </span>
-    </button>
-  );
-}
-
 function InterviewCard({ interview, locale }: { interview: Interview; locale: string }) {
   const t = useTranslations("media");
-  const [playing, setPlaying] = useState(false);
   const [visible, setVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   const videoType = getVideoType(interview.youtubeUrl);
   const ytId = videoType === "youtube" ? getYouTubeId(interview.youtubeUrl) : null;
-  const thumbnail = ytId ? getThumbnailUrl(ytId) : null;
   const embedUrl = videoType === "youtube" && ytId
     ? getEmbedUrl(ytId)
     : videoType === "facebook"
@@ -77,35 +60,15 @@ function InterviewCard({ interview, locale }: { interview: Interview; locale: st
     >
       {/* Video / Thumbnail */}
       <div className="relative aspect-video bg-black overflow-hidden">
-        {playing && embedUrl ? (
-          <iframe
+        {embedUrl ? (
+          <ExternalEmbed
             src={embedUrl}
             title={interview.title}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            className="w-full h-full"
+            provider={videoType === "youtube" ? "YouTube" : "Facebook"}
+            sourceUrl={interview.youtubeUrl}
+            video
+            compact
           />
-        ) : thumbnail ? (
-          <>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={thumbnail}
-              alt={interview.title}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-300" />
-            <button
-              onClick={() => setPlaying(true)}
-              aria-label="Αναπαραγωγή"
-              className="absolute inset-0 flex items-center justify-center"
-            >
-              <span className="w-16 h-16 rounded-full bg-accent/90 hover:bg-accent flex items-center justify-center shadow-lg shadow-black/50 transition-all duration-200 hover:scale-110 group-hover:scale-105">
-                <Play size={28} className="text-white ml-1" fill="white" />
-              </span>
-            </button>
-          </>
-        ) : videoType === "facebook" ? (
-          <FacebookPlaceholder onPlay={() => setPlaying(true)} />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-primary/80">
             <Tv size={40} className="text-white/20" />
