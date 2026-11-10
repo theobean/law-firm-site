@@ -202,7 +202,7 @@ export default async function LocaleLayout({
             <UrgentCTABar />
             <CookieBanner />
           </div>
-          <ScrollToTop hasChatAssistant={process.env.CHATBOT_ENABLED === "true"} />
+          <ScrollToTop />
           {process.env.CHATBOT_ENABLED === "true" && <ChatAssistant />}
         </NextIntlClientProvider>
         <Analytics />
