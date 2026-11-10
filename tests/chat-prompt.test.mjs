@@ -88,7 +88,7 @@ test("the actual provider request separates trusted instructions from one user d
     schema: {
       type: "object", additionalProperties: false,
       properties: {
-        kind: { type: "string", enum: ["grounded", "handoff", "personal_handoff", "office_fees", "legal_deadline", "appointment", "greeting", "office_hours", "out_of_scope", "foreign_jurisdiction", "action_request", "private_access", "chat_privacy"] },
+        kind: { type: "string", enum: ["grounded", "handoff", "personal_handoff", "office_fees", "legal_deadline", "appointment", "greeting"] },
         answer: { type: "string" },
         sourceIds: { type: "array", maxItems: 4, items: { type: "string", enum: ["office-contact", "office-identity"] } },
         evidence: { type: "array", maxItems: 4, items: { type: "string", enum: records.map((source) => `${source.id}:p1`) } },

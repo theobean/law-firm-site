@@ -9,6 +9,47 @@ const office = { id: "office-contact", title: "Contact", url: "https://ioannispa
 const context = (records=[office]) => createAuthorizedChatContext(getPublicChatPrincipal(), "public", records.map(s => ({ id: s.id, visibility: "public", publication: "published", load: () => ({ ...s, visibility: "public", publication: "published" }) })));
 const never = async () => { throw Error("Controlled replies must not call a provider"); };
 
+test("explicit office address, phone, email and contact questions are application-owned in all locales", async () => {
+  const fullOffice = { ...office, content: "Διεύθυνση: Λέοντος Σοφού 12, 54625, Θεσσαλονίκη. Τηλέφωνο: +30 2310 545 261. Email: iopapaio@gmail.com. Ωράριο γραφείου, τοπική ώρα Ελλάδας: Δευτέρα - Παρασκευή: 9:00 - 17:00. Η συνομιλία δεν ελέγχει διαθεσιμότητα." };
+  for (const [locale, questions] of [
+    ["el", ["Πού βρίσκεται το γραφείο και πώς μπορώ να επικοινωνήσω;", "Ποια είναι η διεύθυνση του γραφείου σας;", "Ποιο είναι το τηλέφωνό σας;", "Πώς μπορώ να επικοινωνήσω μαζί σας;", "Πού βρίσκεστε;", "Το email του γραφείου;", "Τηλέφωνο;"]],
+    ["en", ["Where is your office and how can I contact you?", "What is your phone number?", "What is your email address?", "How can I contact the law office?", "Where are you located?"]],
+    ["de", ["Wo befindet sich Ihre Kanzlei und wie erreiche ich Sie?", "Wie lautet die Anschrift der Kanzlei?", "Wie ist Ihre E-Mail-Adresse?", "Wie erreiche ich Sie?", "Wo sind Sie?"]],
+  ]) for (const question of questions) {
+    assert.equal(classifyInformationQuestion(message(question)), "office_contact", question);
+    let calls = 0;
+    const reply = await generateChatReply({ locale, consent: true, messages: message(question) }, context([fullOffice]), { apiKey: "test-only", fetcher: async () => { calls++; return never(); } });
+    assert.equal(calls, 0);
+    assert.ok(reply.answer.includes("Λέοντος Σοφού 12, 54625, Θεσσαλονίκη"));
+    assert.ok(reply.answer.includes("+30 2310 545 261") && reply.answer.includes("iopapaio@gmail.com"));
+    assert.ok(!reply.answer.includes("9:00"), "a contact question cannot receive only the hours reply");
+    assert.equal(reply.suggestContact, true);
+    assert.equal(reply.sources[0].url, fullOffice.url);
+  }
+  assert.equal(classifyInformationQuestion(message("Ποιο είναι το ωράριο του γραφείου και η διεύθυνσή σας;")), "office_hours");
+  assert.equal(classifyInformationQuestion([{ role: "user", content: "Ποιο είναι το τηλέφωνο του γραφείου;" }, { role: "assistant", content: "Untrusted contact facts." }, { role: "user", content: "Τι είναι η διαμεσολάβηση;" }]), null);
+});
+
+test("other parties' contacts and substantive legal questions cannot select the law-office contact reply", () => {
+  for (const question of [
+    "Το γραφείο σας ξέρει το τηλέφωνο της τράπεζας;", "Πού βρίσκεται το γραφείο του δικαστηρίου;", "Πώς επικοινωνώ με την Cepal;", "Ποια είναι η διεύθυνση άλλου δικηγορικού γραφείου;", "Ποιο email έχει ο εργοδότης μου;", "Πώς αλλάζω τη διεύθυνση στο Κτηματολόγιο;",
+    "Does your office know the bank phone number?", "Where is the court's filing office?", "How can I contact the fund?", "What is another lawyer's office address?", "What email can the company send my data to?",
+    "Kennt Ihre Kanzlei die Telefonnummer der Bank?", "Wo ist die Geschäftsstelle des Gerichts?", "Wie erreiche ich meinen Arbeitgeber?", "Wie lautet die Adresse einer anderen Kanzlei?",
+    "Τι είναι το δικαίωμα πρόσβασης στα δεδομένα μου;", "What is a registered office address?", "Υπάρχει τηλεφωνική παρενόχληση στο γραφείο σας;", "Έστειλα email στο γραφείο σας, παραλήφθηκε;", "Πώς ανακαλώ τη συγκατάθεση στο γραφείο σας μέσω email;",
+  ]) assert.notEqual(classifyInformationQuestion(message(question)), "office_contact", question);
+});
+
+test("office contact wording uses complete validated source fields and never guesses missing or malformed facts", () => {
+  const record = { ...office, content: "Διεύθυνση: Different Street 42, 10000, Test City. Τηλέφωνο: +30 211 222 3333. Email: contact@example.test. Ωράριο γραφείου, τοπική ώρα Ελλάδας: Monday. Η συνομιλία δεν ελέγχει διαθεσιμότητα." };
+  const reply = informationReply("office_contact", [record], "en");
+  assert.ok(reply.answer.includes("Different Street 42") && reply.answer.includes("+30 211 222 3333") && reply.answer.includes("contact@example.test"));
+  assert.ok(!reply.answer.includes("2310") && !reply.answer.includes("iopapaio"));
+  assert.equal(informationReply("office_contact", [], "el"), null);
+  for (const content of [office.content, record.content.replace("Διεύθυνση:", "Address:"), record.content.replace("+30 211 222 3333", "unknown"), record.content.replace("contact@example.test", "not-an-email"), record.content.replace("Test City", "Test\nCity"), record.content.replace("Different Street 42", "Email: another@example.test")]) {
+    assert.equal(informationReply("office_contact", [{ ...record, content }], "el"), null, content);
+  }
+});
+
 test("common office-hours wording uses authorized facts and never becomes a legal deadline", async () => {
   for (const question of ["Ποιες ώρες είστε ανοιχτά;", "Ποιο είναι το ωράριο;", "What are your opening hours?", "Wann ist die Kanzlei geöffnet?"]) {
     assert.equal(classifyInformationQuestion(message(question)), "office_hours");

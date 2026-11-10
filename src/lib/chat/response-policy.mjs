@@ -2,7 +2,7 @@ import { prepareChatText, parseChatResponse } from "./protocol.mjs";
 import { containsProceduralDeadline } from "./deadline-policy.mjs";
 
 export const INFORMATION_REPLY_KINDS = Object.freeze([
-  "office_hours", "out_of_scope", "foreign_jurisdiction", "action_request", "private_access", "chat_privacy",
+  "office_hours", "office_contact", "out_of_scope", "foreign_jurisdiction", "action_request", "private_access", "chat_privacy",
 ]);
 
 const normalize = (text) => text.normalize("NFKC").normalize("NFD").replace(/\p{M}/gu, "").toLowerCase()
@@ -54,6 +54,23 @@ function isOtherPersonsConversation(text) {
     /(?:^| )(?:chat|conversation) (?:[\p{L}]+ ){0,2}with (?!(?:you|ai|the ai|an ai|chatbot|the chatbot|this assistant)(?: |$))[\p{L}]+/u.test(text) ||
     /(?:^| )(?:gesprach|chat|unterhaltung) (?:[\p{L}]+ ){0,2}mit (?!(?:dir|ihnen|ki|der ki|dem chatbot|diesem chatbot)(?: |$))[\p{L}]+/u.test(text) ||
     /(?:^| )(?:lawyer|company|employer|anwalt|firma) (?:s )?(?:chat|conversation|gesprach)(?= |$)/u.test(text);
+}
+
+function isOfficeContactQuestion(text) {
+  // Conservative current-question scope: an office mention cannot turn a
+  // bank/court/company's contact details into this law office's details.
+  if (/(?:τραπεζ|δικαστηρι|κτηματολογ|αστυνομ|εφορι|ααδε|εργοδοτ|προμηθευτ|εταιρει|εταιρι|καταστημ|fund|servicer|cepal|dovalue|intrum|bank|court|police|employer|supplier|company|store|land registry|gericht|finanzamt|behord|arbeitgeber|unternehmen|lieferant)/u.test(text) ||
+      /(?:αλλου|αλλησ|other|another|anderen|andere) (?:[\p{L}]+ ){0,2}(?:γραφει|δικηγο|office|lawyer|kanzlei|anwalt)/u.test(text) ||
+      /registered office|statutory seat|εταιρικ.*εδρ|καταστατικ.*εδρ|συγκαταθε|παρενοχλ|δικαιω|καταγγελ/u.test(text)) return false;
+  const contact = /διευθυν|τοποθεσι|τηλεφων|email|e mail|επικοινων|address|location|phone|telephone|contact|adresse|anschrift|telefon|kontakt|erreich/u.test(text);
+  const office = /γραφει|παπαιωανν|papaioann|office|law firm|kanzlei/u.test(text);
+  const addressed = /(?:^| )(?:σασ|σου|εσασ|εσενα|your|you|ihre|ihrer|ihr|sie|euch|dir)(?= |$)/u.test(text);
+  const location = /που (?:βρισκεστε|ειστε|στεγαζεστε)|που.*(?:βρισκ|γραφει)|where (?:are you|is your)|where.*(?:office|located|based)|wo.*(?:kanzlei|befind|sind sie)/u.test(text);
+  const bare = /^(?:(?:ποιο ειναι το|ποια ειναι η|ποιο το|what is the|what s the|wie lautet die) )?(?:τηλεφωνο|email|e mail|διευθυνση|στοιχεια επικοινωνιασ|phone number|email address|contact details|adresse|anschrift|telefonnummer)(?: σασ)?$/u.test(text);
+  const request = /^(?:που|πωσ|ποια|ποιο|τι|εχετε|where|what|how|which|do you have|wo|wie|welche|haben sie)(?= |$)|(?:δωσε|δωστε|πες|πειτε|γραψε|θελω|χρειαζομαι|give me|tell me|show me|i need|i want|nennen|gib|geben|mochte|brauche)/u.test(text);
+  const shortDetails = /^(?:(?:το|η|τα) )?(?:email|e mail|τηλεφωνο|διευθυνση|στοιχεια επικοινωνιασ)(?: (?:του γραφειου|σασ|σου))?$/u.test(text);
+  return location && (office || addressed || /που (?:βρισκεστε|ειστε|στεγαζεστε)|where are you|wo sind sie/u.test(text)) ||
+    contact && (bare || shortDetails || request && (office || addressed));
 }
 
 /** Preserve the reviewed immediate-contact qualification for a concrete police
@@ -108,6 +125,7 @@ export function classifyInformationQuestion(messages) {
   if (foreignCountry && legal.test(text) && !greekContext &&
       /ισχυ|δικαιο|εκει|νομο|appl|there|law|dort|gilt|recht/u.test(text)) return "foreign_jurisdiction";
   if (!legal.test(text) && /συνταγη|recipe|rezept/u.test(text) && /πιτσα|παστιτσι|μουσακ|φαγητ|pizza|cook|kochen|pasta/u.test(text)) return "out_of_scope";
+  if (isOfficeContactQuestion(text)) return "office_contact";
   return null;
 }
 
@@ -135,13 +153,29 @@ const copy = {
   },
 };
 
-/** The hours are read from the one authorized office-contact fact, not from
+/** Office details are read from the one authorized office-contact fact, not from
  * model prose. Missing or changed framing fails closed rather than guessing.
  * @param {string} kind
  * @param {readonly {id:string,title:string,url:string,content:string}[]} sources
  * @param {"el"|"en"|"de"} locale
  */
 export function informationReply(kind, sources, locale) {
+  if (kind === "office_contact") {
+    const source = sources.find((source) => source.id === "office-contact");
+    const fields = source && /^Διεύθυνση: ([^\n]{3,320})\. Τηλέφωνο: ([^\n]{7,40})\. Email: ([^\s]{3,254})\. Ωράριο γραφείου,/u.exec(source.content);
+    if (!source || !fields) return null;
+    const [, address, phone, email] = fields;
+    if (prepareChatText(address, 320) !== address || address.length < 5 || /Διεύθυνση:|Τηλέφωνο:|Email:|Ωράριο/u.test(address) ||
+        !/^\+[0-9][0-9 ()-]{5,38}$/u.test(phone) || !/^[0-9]{7,15}$/u.test(phone.replace(/\D/gu, "")) ||
+        !/^[A-Za-z0-9][A-Za-z0-9._%+-]{0,63}@(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z]{2,63}$/u.test(email) || email.includes("..") ||
+        containsProceduralDeadline(address)) return null;
+    const answer = {
+      el: `Το γραφείο βρίσκεται στη ${address}. Τηλέφωνο: ${phone}. Email: ${email}.`,
+      en: `The office is at ${address}. Phone: ${phone}. Email: ${email}.`,
+      de: `Die Kanzlei befindet sich in ${address}. Telefon: ${phone}. E-Mail: ${email}.`,
+    }[locale];
+    return parseChatResponse({ answer, sources: [{ title: source.title, url: source.url }], suggestContact: true });
+  }
   if (kind === "office_hours") {
     const source = sources.find((source) => source.id === "office-contact");
     const hours = source && /Ωράριο γραφείου, τοπική ώρα Ελλάδας: ([^\n]{1,160})\. Η συνομιλία/u.exec(source.content)?.[1];

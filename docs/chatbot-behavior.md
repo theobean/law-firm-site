@@ -76,12 +76,24 @@ completed/negated statements and time-only follow-ups are outside that classifie
 Neither classifier uses assistant prose as authority or collects dates/details.
 
 `response-policy.mjs` adds bounded current-question classification for office
-hours, this chat's uploads/confidentiality, requests to send or submit something,
+hours and explicit office address/phone/email/contact questions, this chat's
+uploads/confidentiality, requests to send or submit something,
 client-file access, unrelated topics and applying Greek materials abroad. These
 are scoped lexical patterns, not a general intent or legal classifier. Recognized
 patterns receive application-owned wording; ambiguous cases remain subject to
-authorized context and the model's validated reply kind. An intent does not
+authorized context and the model's validated public reply kind. Internal
+information-policy kinds are absent from the provider's schema and a provider
+attempt to return one fails closed; only a server-classified snapshot can use
+them. An intent does not
 grant a tool, file reader, calendar or other action.
+
+The office-contact policy reads address, phone and email from the complete,
+validated Greek-framed `office-contact` source, retaining the published values
+and source link. Missing or malformed fields produce no controlled reply;
+the application does not fill gaps with guessed contact details. Explicit
+third-party contacts remain outside this policy, even when the office is
+mentioned. Hours keep precedence. The contact reply is manual and offers the
+contact-page link; it submits nothing and cannot check message delivery.
 
 `prepareChatModelRequest` records a recognized controlled kind in its opaque,
 single-use snapshot; deadlines take precedence, followed by appointments and

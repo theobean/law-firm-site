@@ -33,7 +33,10 @@ type PreparedRequestSnapshot = {
 };
 
 const preparedRequests = new WeakMap<object, PreparedRequestSnapshot>();
-const REPLY_KINDS: readonly string[] = Object.freeze(["grounded", "handoff", "personal_handoff", "office_fees", "legal_deadline", "appointment", "greeting", ...INFORMATION_REPLY_KINDS]);
+// Information-policy kinds belong to validated backend intent snapshots. The
+// provider cannot choose one and replace the answer to a different question.
+const PROVIDER_REPLY_KINDS: readonly string[] = Object.freeze(["grounded", "handoff", "personal_handoff", "office_fees", "legal_deadline", "appointment", "greeting"]);
+const REPLY_KINDS: readonly string[] = Object.freeze([...PROVIDER_REPLY_KINDS, ...INFORMATION_REPLY_KINDS]);
 
 function deadlineReply(locale: ChatLocale): ChatReply {
   const answer = {
@@ -44,7 +47,7 @@ function deadlineReply(locale: ChatLocale): ChatReply {
   return { answer, sources: [], suggestContact: true };
 }
 
-type ChatFailureDiagnostic = "reply_shape" | "source_id" | "grounded_empty" | "evidence_shape" |
+type ChatFailureDiagnostic = "reply_shape" | "reply_kind" | "source_id" | "grounded_empty" | "evidence_shape" |
   "evidence_quote" | "evidence_missing" | "reply_contract" | "provider_http" | "provider_payload" |
   "provider_output_limit" | "provider_incomplete" | "provider_item" | "reply_json";
 
@@ -119,7 +122,7 @@ Answer in ${language}, in a calm, professional and understandable tone. Explain 
 - Source hierarchy: the references labelled ΠΡΩΤΟΓΕΝΗΣ ΝΟΜΟΘΕΣΙΑ from the National Printing Office (et.gr) are original Gazette publications. Prefer them for the identity and general purpose of those statutes, while treating them as dated original texts, not consolidated current law. Official guidance supplies only the explanations actually included. References labelled ΑΡΘΡΟ ΤΟΥ ΓΡΑΦΕΙΟΥ are dated author commentary, not primary legislation or independently verified case law. Attribute their interpretations to the author/article instead of presenting them as the law or a court's verified ruling. If sources conflict or later amendments are not available, state the limit and recommend lawyer review rather than deciding current legal effect.
 - Never invent a successful case, write-off, court decision, finality of a judgment or the office's involvement. A case study or ruling may be discussed only to the extent an approved, anonymised public excerpt explicitly establishes those facts. An article discussing a court decision is not the decision itself. Past results never establish the outcome of another case. Do not calculate or propose instalment plans, payment amounts, debt reductions or personal settlement terms.
 - Never give a numeric, spelled-out, dated or calculated procedural/legal deadline. This also forbids repeating a deadline from an office article or other reference, quoting it, presenting it as historical information, or adding a caveat after it. Select legal_deadline instead; its wording is supplied by the application. This restriction does not prevent verified office opening hours or identifying a statute by number/year.
-- Classify the reply kind according to the question's meaning, not first-person wording alone. A grounded reply MUST select at least one sourceId that supports its factual content. Use grounded for a supported general explanation, including the supported general part of a mixed personal/general question. If no useful supported general explanation is available and the visitor requests an individual outcome, assessment or next step, use personal_handoff and suggestContact=true. Use handoff for an unsupported general question. Use office_fees for unknown office prices; never estimate a fee. Use legal_deadline for procedural time limits, office_hours for verified office hours and appointment for requests to book, change or cancel an appointment or ask how to request one. Use out_of_scope for unrelated requests, foreign_jurisdiction for applying these Greek materials to another country's law, action_request for asking you to submit/send something, private_access for requests for client files and chat_privacy for uploads/confidentiality of this chat. Greetings use greeting. Non-grounded wording is supplied by the application; return answer="", an empty sourceIds list, evidence=[] and suggestContact=true except for greetings, unrelated topics and foreign-law scope. Do not answer legal questions from model memory or invent statutory articles, court decisions, rights, eligibility criteria, amounts, or time limits.
+- Classify the reply kind according to the question's meaning, not first-person wording alone. A grounded reply MUST select at least one sourceId that supports its factual content. Use grounded for supported office facts or a supported general explanation, including the supported general part of a mixed personal/general question. If no useful supported general explanation is available and the visitor requests an individual outcome, assessment or next step, use personal_handoff and suggestContact=true. Use handoff for an unsupported general question. Use office_fees for unknown office prices; never estimate a fee. Use legal_deadline for procedural time limits and appointment for requests to book, change or cancel an appointment or ask how to request one. Greetings use greeting. Select only a kind in the supplied schema; internal information-policy kinds are not provider choices. Non-grounded wording is supplied by the application; return answer="", an empty sourceIds list, evidence=[] and suggestContact=true except for greetings. Do not answer legal questions from model memory or invent statutory articles, court decisions, rights, eligibility criteria, amounts, or time limits.
 - A personal description does not by itself require a referral-only reply. When references support a useful general explanation, give one or two supported sentences with kind=grounded, then briefly distinguish that information from an assessment of the visitor's case and give neutral verified office contact when useful. Do not answer the individual outcome or suggest a course of action. If nothing relevant is supported, use personal_handoff without further case questions. Never compute a legal deadline, predict a court outcome, promise protection or give a definitive personal legal conclusion. Do not propose a strategy or imply that a strong defence always exists.
 - When a visitor has stated a plan to create a company, a follow-up asking whether one business form is better than another requests an individual choice. Use personal_handoff without asking for financial details. Supported definitions of a business form or its formation service remain general information.
 - Do not begin with an unqualified "yes" or "no" when asked whether this visitor's particular entry, document, entitlement or outcome is valid or achievable. Explain only the supported general possibility and explicitly leave the individual conclusion to a lawyer. For a cadastral error, saying that correction procedures exist generally does not establish that this entry can be corrected.
@@ -307,7 +310,7 @@ export function prepareChatModelRequest(
             type: "object",
             additionalProperties: false,
             properties: {
-              kind: { type: "string", enum: REPLY_KINDS },
+              kind: { type: "string", enum: PROVIDER_REPLY_KINDS },
               answer: { type: "string" },
               sourceIds: { type: "array", maxItems: 4, items: { type: "string", enum: sources.map((source) => source.id) } },
               evidence: buildEvidenceSchema(evidenceChoices),
@@ -389,6 +392,9 @@ export async function generatePreparedChatReply(
   }).join("");
   try {
     const answerPayload = JSON.parse(text);
+    if (!isRecord(answerPayload) || typeof answerPayload.kind !== "string" || !PROVIDER_REPLY_KINDS.includes(answerPayload.kind)) {
+      throw new ChatFailure("upstream", 502, "reply_kind");
+    }
     if (isRecord(answerPayload) && Array.isArray(answerPayload.evidence) && answerPayload.evidence.some((item) => typeof item === "string")) {
       answerPayload.evidence = answerPayload.evidence.map((id) => {
         const choice = typeof id === "string" ? snapshot.evidenceChoices.find((entry) => entry.id === id) : undefined;

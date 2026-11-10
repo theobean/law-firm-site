@@ -146,6 +146,15 @@ fields are selected explicitly from `messages/el.json`, `messages/en.json` and
 `messages/de.json`. Canonical office URLs use
 `https://ioannispapaioannou.lawyer/{locale}/…`.
 
+Explicit current questions about this office's address, phone, email or contact
+channels can use application-owned wording without a model call. It extracts
+the complete address/phone/email fields from the authorized `office-contact`
+record's fixed framing and validates them before use; missing or malformed
+fields are not guessed. Third-party bank/court/fund/company contacts and
+substantive legal questions do not inherit these office facts. The separate
+office-hours policy keeps precedence. Manual contact and its page link grant
+no appointment, message-sending or case-access capability.
+
 The full FAQ and marketing copy are deliberately not ingested. Office FAQ facts
 have priority only for office information, not over legal-source or privacy
 boundaries. In particular,
