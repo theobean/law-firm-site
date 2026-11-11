@@ -1,5 +1,4 @@
 const cadastreCertificates = "https://www.ktimatologio.gr/pliroforiako-yliko/ktimatologio-se-leitourgia/21";
-const supremeCourtDecision = "https://www.areiospagos.gr/nomologia/apofaseis_DISPLAY.asp?apof=1523_2022&cd=AK11ITV6JE8ZM12LTQBU20ONE49BBV";
 
 type DepositGuide = {
   title: string;
@@ -54,7 +53,6 @@ export const depositGuides: Record<"el" | "en" | "de", DepositGuide> = {
           "Διαβάστε τι δεσμεύεται να κάνει κάθε πλευρά, πότε οφείλεται το ποσό και τι ισχύει αν ο έλεγχος τίτλων αποκαλύψει πρόβλημα. Ζητήστε να ελεγχθεί το ίδιο το κείμενο πριν υπογράψετε ή πληρώσετε.",
           "Αν πρόκειται για προσύμφωνο που δεσμεύει τα μέρη να συνάψουν σύμβαση μεταβίβασης ακινήτου, απαιτείται συμβολαιογραφικό έγγραφο. Το αν η συμφωνία έχει αυτό το περιεχόμενο κρίνεται από τους όρους της.",
         ],
-        source: { href: supremeCourtDecision, label: "Άρειος Πάγος 1523/2022 για τον τύπο του προσυμφώνου" },
       },
     ],
     contactTitle: "Σας έχουν δώσει ημερομηνία για την προκαταβολή;",
@@ -96,7 +94,6 @@ export const depositGuides: Record<"el" | "en" | "de", DepositGuide> = {
           "Read what each side is agreeing to, when the deposit is due and what the agreement says if the title check reveals a problem. Have the wording reviewed before you sign or pay.",
           "Greek law requires a notarial document for a preliminary agreement that binds the parties to enter into a property transfer. Whether the draft amounts to that kind of agreement depends on its terms.",
         ],
-        source: { href: supremeCourtDecision, label: "Greek Supreme Court decision 1523/2022 on preliminary agreements" },
       },
     ],
     contactTitle: "Has the seller given you a deadline for the deposit?",
@@ -138,7 +135,6 @@ export const depositGuides: Record<"el" | "en" | "de", DepositGuide> = {
           "Lesen Sie, wozu sich jede Seite verpflichtet, wann die Anzahlung fällig ist und was bei einem Problem mit dem Eigentumstitel gilt. Lassen Sie den Wortlaut prüfen, bevor Sie unterschreiben oder zahlen.",
           "Nach griechischem Recht ist für einen Vorvertrag, der die Parteien zum Abschluss eines Vertrags über die Übertragung einer Immobilie verpflichtet, eine notarielle Urkunde erforderlich. Ob der Entwurf als solcher Vorvertrag einzuordnen ist, hängt von seinem Inhalt ab.",
         ],
-        source: { href: supremeCourtDecision, label: "Urteil 1523/2022 des griechischen Obersten Gerichtshofs zur Form des Vorvertrags" },
       },
     ],
     contactTitle: "Hat der Verkäufer eine Frist für die Anzahlung gesetzt?",
