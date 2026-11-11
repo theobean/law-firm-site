@@ -1,6 +1,7 @@
 import { createHash, timingSafeEqual } from "node:crypto";
 import { readTrafficCounts, trafficDay, type TrafficCount } from "@/lib/traffic";
 import { readTrafficBounce } from "@/lib/traffic-bounce";
+import { readTrafficSources } from "@/lib/traffic-sources";
 import { trafficFilters, trafficReport } from "@/lib/traffic-dashboard/report";
 import { renderDashboard, renderDashboardNotice } from "@/lib/traffic-dashboard/render";
 
@@ -78,15 +79,16 @@ export async function GET(request: Request) {
     });
   }
   try {
-    const [{ firstRecordedDay, rows }, bounce] = await Promise.all([
+    const [{ firstRecordedDay, rows }, bounce, sources] = await Promise.all([
       readTrafficCounts(filters.previousFrom, filters.to),
       download ? undefined : readTrafficBounce(filters).catch(() => undefined),
+      download ? undefined : readTrafficSources(filters).catch(() => undefined),
     ]);
     const report = trafficReport(filters, firstRecordedDay, rows);
     if (download) {
       return csvResponse(report.detailRows, filters.day || filters.from, filters.day || filters.to);
     }
-    return new Response(renderDashboard(report, today, invalidRange, bounce), { headers: dashboardHeaders });
+    return new Response(renderDashboard(report, today, invalidRange, bounce, sources), { headers: dashboardHeaders });
   } catch {
     return new Response(renderDashboardNotice("Τα στατιστικά δεν είναι διαθέσιμα αυτή τη στιγμή."), {
       status: 503,

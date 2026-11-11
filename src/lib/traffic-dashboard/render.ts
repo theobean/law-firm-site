@@ -1,5 +1,6 @@
 import type { TrafficLocale } from "../traffic";
 import type { TrafficBounceSummary } from "../traffic-bounce";
+import type { TrafficSource, TrafficSourceTotal } from "../traffic-sources";
 import { trafficPeriods, type TrafficReport } from "./report";
 import { dashboardStyles } from "./styles";
 
@@ -10,6 +11,14 @@ const languages: Record<TrafficLocale, string> = {
   de: "Γερμανικά",
 };
 const languageCodes: Record<TrafficLocale, string> = { el: "EL", en: "EN", de: "DE" };
+const sourceLabels: Record<TrafficSource, string> = {
+  google: "Google",
+  search: "Άλλες μηχανές αναζήτησης",
+  social: "Κοινωνικά δίκτυα",
+  direct: "Απευθείας ή άγνωστη",
+  referral: "Άλλοι ιστότοποι",
+  internal: "Εσωτερικές φορτώσεις",
+};
 const escaped: Record<string, string> = {
   "&": "&amp;",
   "<": "&lt;",
@@ -219,6 +228,39 @@ function renderLanguages(report: TrafficReport) {
   </section>`;
 }
 
+function renderSources(sources?: TrafficSourceTotal[]) {
+  const acquisition = (sources ?? [])
+    .filter(row => row.source !== "internal" && row.entries > 0)
+    .sort((a, b) => b.entries - a.entries || sourceLabels[a.source].localeCompare(sourceLabels[b.source], "el-GR"));
+  const total = acquisition.reduce((sum, row) => sum + row.entries, 0);
+  const internal = sources?.find(row => row.source === "internal")?.entries ?? 0;
+  const empty = sources === undefined
+    ? "Δεν υπάρχει διαθέσιμη μέτρηση πηγών για αυτή την επιλογή."
+    : internal > 0 ? "Δεν καταγράφηκαν είσοδοι από εξωτερική ή άγνωστη πηγή."
+      : "Δεν καταγράφηκαν μετρήσιμες είσοδοι για αυτή την επιλογή.";
+
+  return `
+  <section id="sources" class="card" aria-labelledby="sources-title" aria-describedby="source-method">
+    <h2 id="sources-title">Πηγές εισόδων</h2>
+    <p class="caption source-caption">Μετρήσιμες είσοδοι από τον browser</p>
+    ${total > 0 ? `
+      <dl class="source-list">${acquisition.map(({ source, entries }) => {
+        const share = entries / total;
+        return `<div class="language-row" data-source="${escape(source)}">
+          <dt>${sourceLabels[source]}</dt>
+          <dd class="number"><strong>${number.format(entries)}</strong> · ${percentage.format(share)}</dd>
+          <dd class="meter" aria-hidden="true"><span style="--share:${100 * share}%"></span></dd>
+        </div>`;
+      }).join("")}</dl>
+      <p class="caption source-caption">Σύνολο εισόδων · ${number.format(total)}</p>`
+      : `<p class="empty">${empty}</p>`}
+    ${internal > 0 ? `
+      <dl class="source-internal"><div class="language-row" data-source="internal">
+        <dt>${sourceLabels.internal}</dt><dd class="number"><strong>${number.format(internal)}</strong></dd>
+      </div></dl>` : ""}
+  </section>`;
+}
+
 function renderPages(report: TrafficReport) {
   const { pages, filters } = report;
   const hasComparison = pages.some(row => row.previousTotal !== null);
@@ -257,7 +299,13 @@ function renderPages(report: TrafficReport) {
   </section>`;
 }
 
-export function renderDashboard(report: TrafficReport, today: string, invalidRange = false, bounce?: TrafficBounceSummary) {
+export function renderDashboard(
+  report: TrafficReport,
+  today: string,
+  invalidRange = false,
+  bounce?: TrafficBounceSummary,
+  sources?: TrafficSourceTotal[],
+) {
   const { filters, firstRecordedDay, previousTotal } = report;
   const query = filterQuery(filters);
   query.set("format", "csv");
@@ -280,10 +328,11 @@ export function renderDashboard(report: TrafficReport, today: string, invalidRan
     ${renderSummary(report, bounce)}
     ${comparison ? `<p class="caption">${escape(comparison)}</p>` : ""}
     ${renderDaily(report, today)}
-    <div class="columns">${renderLanguages(report)}${renderPages(report)}</div>
+    <div class="columns"><div class="sidebar">${renderSources(sources)}${renderLanguages(report)}</div>${renderPages(report)}</div>
     <div class="caption method">
       <p>Μετράμε τις φορτώσεις και τις εσωτερικές μεταβάσεις σε δημόσιες σελίδες. Μια επαναφόρτωση μπορεί να προσθέσει μία προβολή.</p>
       <p id="bounce-method">Το ποσοστό εγκατάλειψης αφορά τις μετρήσιμες εισόδους από φόρτωση σελίδας στον browser. Μια είσοδος έχει συνέχεια όταν ο επισκέπτης ανοίγει δεύτερη, διαφορετική σελίδα με εσωτερική πλοήγηση πριν από νέα πλήρη φόρτωση.</p>
+      <p id="source-method">Κάθε είσοδος αποδίδεται στην πρώτη σελίδα, στην ημέρα και στη γλώσσα της. «Απευθείας ή άγνωστη» σημαίνει ότι ο browser δεν έστειλε πηγή. Οι εσωτερικές φορτώσεις, όπως οι επαναφορτώσεις, εμφανίζονται χωριστά. Φιλτράρουμε γνωστά bots και ο ίδιος επισκέπτης μπορεί να μετρηθεί περισσότερες φορές.</p>
     </div>`,
     filters.day ? displayDate(filters.day) : dateLabel(filters.from, filters.to),
     exportUrl,
