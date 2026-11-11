@@ -131,6 +131,7 @@ export const dashboardStyles = `
   }
   @media (max-width: 23rem) {
     .wrap, main { width: calc(100% - 1.15rem); }
+    .controls { grid-template-columns: minmax(0, 1fr); }
     table { font-size: .78rem; }
     th, td { padding-inline: .26rem; }
     .day-filter button { flex: 1; }
