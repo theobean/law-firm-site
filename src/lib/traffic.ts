@@ -67,13 +67,25 @@ export async function recordTrafficRequest(pathname: string, day: string) {
   }
 }
 
-export async function readTrafficCounts(from: string, to: string): Promise<TrafficCount[]> {
+export async function readTrafficCounts(from: string, to: string): Promise<{
+  firstRecordedDay: string | null;
+  rows: TrafficCount[];
+}> {
   const connection = process.env.TRAFFIC_READ_DATABASE_URL;
   if (!connection) throw new Error("traffic_database_unavailable");
-  const rows = await neon(connection).query(
-    "SELECT day::text, locale, page, hits::text FROM site_traffic.daily_counts WHERE day BETWEEN $1::date AND $2::date ORDER BY day, locale, page",
+  const result = await neon(connection).query(
+    `WITH coverage AS (
+       SELECT MIN(day)::text AS first_recorded_day FROM site_traffic.daily_counts
+     )
+     SELECT counts.day::text AS day, counts.locale, counts.page, counts.hits::text AS hits, coverage.first_recorded_day
+     FROM coverage
+     LEFT JOIN site_traffic.daily_counts AS counts ON counts.day BETWEEN $1::date AND $2::date
+     ORDER BY counts.day, counts.locale, counts.page`,
     [from, to],
     { fetchOptions: { signal: AbortSignal.timeout(5000) } },
   );
-  return rows.map(({ day, locale, page, hits }) => ({ day, locale, page, count: Number(hits) }));
+  return {
+    firstRecordedDay: result[0]?.first_recorded_day ?? null,
+    rows: result.flatMap(({ day, locale, page, hits }) => day ? [{ day, locale, page, count: Number(hits) }] : []),
+  };
 }
