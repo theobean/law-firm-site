@@ -1,4 +1,8 @@
-export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.ioannispapaioannou.lawyer";
+import { routing } from "@/i18n/routing";
+
+export const siteUrl = new URL(
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.ioannispapaioannou.lawyer",
+).origin;
 
 const ogLocaleMap: Record<string, string> = { el: "el_GR", en: "en_US", de: "de_DE" };
 
@@ -10,8 +14,13 @@ const siteNames: Record<string, string> = {
   de: "Papaioannou & Partner",
 };
 
-function cleanPath(path: string) {
-  return path === "" ? "" : path.startsWith("/") ? path : `/${path}`;
+export function localizedPageUrl(locale: string, path: string) {
+  const trimmedPath = path.replace(/^\/+|\/+$/g, "");
+  return new URL(`/${locale}${trimmedPath ? `/${trimmedPath}` : ""}`, siteUrl).href;
+}
+
+export function contentPagePath(collection: "blog" | "decisions" | "media", slug: string) {
+  return `/${collection}/${encodeURIComponent(slug)}`;
 }
 
 /**
@@ -30,16 +39,13 @@ export function ogDefaults(locale: string) {
 }
 
 export function buildPageMeta(locale: string, path: string) {
-  const p = cleanPath(path);
-  const canonical = `${siteUrl}/${locale}${p}`;
+  const canonical = localizedPageUrl(locale, path);
   return {
     alternates: {
       canonical,
       languages: {
-        el: `${siteUrl}/el${p}`,
-        en: `${siteUrl}/en${p}`,
-        de: `${siteUrl}/de${p}`,
-        "x-default": `${siteUrl}/el${p}`,
+        ...Object.fromEntries(routing.locales.map((language) => [language, localizedPageUrl(language, path)])),
+        "x-default": localizedPageUrl(routing.defaultLocale, path),
       },
     },
     openGraph: {

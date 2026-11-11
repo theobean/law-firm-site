@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useId } from "react";
 import { Plus, Minus } from "lucide-react";
 
 interface FaqItem {
@@ -19,7 +19,7 @@ function AccordionItem({
   onClick: () => void;
   delay: number;
 }) {
-  const contentRef = useRef<HTMLDivElement>(null);
+  const id = useId();
   const [visible, setVisible] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -50,13 +50,17 @@ function AccordionItem({
       }`}
     >
       <button
+        type="button"
+        id={`${id}-question`}
+        aria-expanded={isOpen}
+        aria-controls={`${id}-answer`}
         onClick={onClick}
-        className="w-full flex items-center justify-between px-6 py-5 text-left gap-4"
+        className="w-full flex items-center justify-between px-6 py-5 text-left gap-4 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-primary"
       >
         <span className={`font-semibold text-lg pr-2 transition-colors duration-200 ${isOpen ? "text-accent" : "text-primary"}`}>
           {item.q}
         </span>
-        <span className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300 ${
+        <span aria-hidden="true" className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300 ${
           isOpen ? "bg-accent text-white rotate-0" : "bg-primary/10 text-primary"
         }`}>
           {isOpen ? <Minus size={14} /> : <Plus size={14} />}
@@ -65,10 +69,14 @@ function AccordionItem({
 
       {/* Smooth height animation with grid trick */}
       <div
+        id={`${id}-answer`}
+        role="region"
+        aria-labelledby={`${id}-question`}
+        aria-hidden={!isOpen}
         className="grid transition-all duration-300 ease-in-out"
         style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
       >
-        <div ref={contentRef} className="overflow-hidden">
+        <div className="overflow-hidden">
           <div className="px-6 pb-6 border-t border-accent/20">
             <p className="pt-4 text-gray-600 leading-relaxed">{item.a}</p>
           </div>

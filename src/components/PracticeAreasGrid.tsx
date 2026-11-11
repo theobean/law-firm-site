@@ -1,4 +1,4 @@
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Link } from "@/navigation";
 import { Banknote, Handshake, ShieldCheck, Briefcase, Building, HardHat, Landmark, ScrollText, Calculator, ArrowRight } from "lucide-react";
 
@@ -22,7 +22,7 @@ interface Props {
 
 export default function PracticeAreasGrid({ preview = false }: Props) {
   const t = useTranslations("practiceAreas");
-  const locale = useLocale();
+  const tNav = useTranslations("nav");
 
   const areas = preview ? areaKeys.slice(0, 5) : areaKeys;
 
@@ -56,7 +56,7 @@ export default function PracticeAreasGrid({ preview = false }: Props) {
                   <Icon className="text-accent" size={22} />
                 </div>
                 <h3 className="text-white font-bold text-lg mb-2 border-b border-accent pb-2 inline-block">
-                  {t(`areas.${key}.title`)}
+                  {preview && key === "realEstate" ? tNav("realEstatePurchase") : t(`areas.${key}.title`)}
                 </h3>
                 <p className="text-white/60 text-sm mt-3 leading-relaxed">
                   {t(`areas.${key}.desc`)}

@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { Link } from "@/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
-import { Menu, X, Scale, ChevronDown, ChevronRight, FileText, Tv, BookOpen, Gavel, Handshake, Landmark } from "lucide-react";
+import { Menu, X, Scale, ChevronDown, ChevronRight, FileText, Tv, BookOpen, Gavel, Handshake, Landmark, Home } from "lucide-react";
 
 const localeConfig = {
   el: { flag: "/flags/gr.svg", label: "ΕΛ" },
@@ -77,11 +77,13 @@ type SubLink = { href: string; label: string; subLinks?: SubLink[] };
 // Literal strings so the JIT compiler picks them up.
 const FLY_GROUP = ["group/f0", "group/f1", "group/f2", "group/f3"];
 const FLY_SHOW = [
-  "group-hover/f0:opacity-100 group-hover/f0:translate-x-0 group-hover/f0:pointer-events-auto",
-  "group-hover/f1:opacity-100 group-hover/f1:translate-x-0 group-hover/f1:pointer-events-auto",
-  "group-hover/f2:opacity-100 group-hover/f2:translate-x-0 group-hover/f2:pointer-events-auto",
-  "group-hover/f3:opacity-100 group-hover/f3:translate-x-0 group-hover/f3:pointer-events-auto",
+  "group-hover/f0:block group-focus-within/f0:block",
+  "group-hover/f1:block group-focus-within/f1:block",
+  "group-hover/f2:block group-focus-within/f2:block",
+  "group-hover/f3:block group-focus-within/f3:block",
 ];
+// Leave room for all three nested panels to open to the right.
+const FLYOUT_PANEL = "absolute left-full top-0 hidden w-32 rounded-sm border border-white/10 bg-primary shadow-xl min-[1440px]:w-40 min-[1600px]:w-44";
 
 // Recursive item for the mobile accordion. Collapsed by default so deep trees stay
 // compact: the label stays a navigable link, a chevron toggles the children.
@@ -137,7 +139,7 @@ function FlyoutNode({
 }) {
   const localed = `/${locale}${item.href}`;
   const active = item.subLinks ? pathname.startsWith(localed) : pathname === localed;
-  const cls = `flex items-center px-4 py-2.5 text-sm font-medium transition-colors ${
+  const cls = `flex items-center px-3 py-2.5 text-sm font-medium transition-colors ${
     active ? "text-accent bg-accent/10" : "text-white/80 hover:text-accent hover:bg-white/5"
   }`;
 
@@ -156,7 +158,7 @@ function FlyoutNode({
         {item.label}
         <ChevronRight size={12} className="ml-auto shrink-0 opacity-60" />
       </Link>
-      <div className={`absolute left-full top-0 w-44 bg-primary border border-white/10 shadow-xl rounded-sm opacity-0 -translate-x-1 pointer-events-none transition-all duration-150 ${FLY_SHOW[d]}`}>
+      <div className={`${FLYOUT_PANEL} ${FLY_SHOW[d]}`}>
         {item.subLinks.map((s) => (
           <FlyoutNode key={`${s.href}-${s.label}`} item={s} depth={depth + 1} pathname={pathname} locale={locale} onNavigate={onNavigate} />
         ))}
@@ -182,7 +184,10 @@ export default function Navbar() {
   function switchLocale(target: string) {
     document.cookie = `locale-pref=${target}; max-age=${60 * 60 * 24 * 30}; path=/; samesite=lax`;
     const newPath = pathname.replace(`/${locale}`, `/${target}`);
-    router.push(newPath);
+    const contactDetails = pathname === `/${locale}/contact`
+      ? window.location.search + window.location.hash
+      : "";
+    router.push(newPath + contactDetails);
   }
 
   // Rendered BEFORE the Services/Updates dropdowns
@@ -223,11 +228,12 @@ export default function Navbar() {
 
   const servicesLinks = [
     { href: `/practice-areas/banking`, label: tNav("bankingLaw"), icon: Landmark, subLinks: bankingSubLinks },
+    { href: `/practice-areas/realEstate`, label: tNav("realEstatePurchase"), icon: Home, subLinks: null },
     { href: `/pleistariasmos`, label: tNav("pleistariasmos"), icon: Gavel, subLinks: null },
     { href: `/exodikastikos`, label: tNav("exodikastikos"), icon: Handshake, subLinks: null },
   ] as { href: string; label: string; icon: typeof Gavel; subLinks: SubLink[] | null }[];
 
-  const servicesActiveHrefs = [`/practice-areas/banking`, `/banks`, `/funds`, `/pleistariasmos`, `/exodikastikos`];
+  const servicesActiveHrefs = [...servicesLinks.map(({ href }) => href), `/banks`, `/funds`];
   const isServicesActive = servicesActiveHrefs.some((h) => pathname.startsWith(`/${locale}${h}`) || pathname.startsWith(h));
 
   const updatesLinks = [
@@ -256,7 +262,7 @@ export default function Navbar() {
   return (
     <header className="grain sticky top-0 z-50 bg-primary shadow-md relative overflow-visible">
       {/* Top bar */}
-      <div className="bg-primary/90 border-b border-white/10 text-white/60 text-sm hidden md:block">
+      <div className="bg-primary/90 border-b border-white/10 text-white/60 text-sm hidden xl:block">
         <div className="max-w-6xl mx-auto px-6 py-2 flex justify-between">
           <span>+30 2310 545 261</span>
           <span>iopapaio@gmail.com</span>
@@ -290,7 +296,7 @@ export default function Navbar() {
         )}
 
         {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-4 lg:gap-6">
+        <div className="hidden items-center gap-6 xl:flex">
           {links.map((l) => (
             <Link
               key={l.href}
@@ -306,10 +312,18 @@ export default function Navbar() {
             className="relative"
             onMouseEnter={handleServicesMouseEnter}
             onMouseLeave={handleServicesMouseLeave}
+            onBlur={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget)) setServicesDropdownOpen(false);
+            }}
           >
-            <button className={`flex items-center gap-1 text-sm font-medium whitespace-nowrap transition-colors ${
+            <button
+              type="button"
+              aria-expanded={servicesDropdownOpen}
+              onClick={() => setServicesDropdownOpen(true)}
+              className={`flex items-center gap-1 text-sm font-medium whitespace-nowrap transition-colors ${
               isServicesActive ? "text-accent" : "text-white/80 hover:text-accent"
-            }`}>
+              }`}
+            >
               {tNav("services")}
               <ChevronDown
                 size={13}
@@ -317,8 +331,8 @@ export default function Navbar() {
               />
             </button>
 
-            <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-primary border border-white/10 shadow-xl rounded-sm transition-all duration-150 ${
-              servicesDropdownOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-1 pointer-events-none"
+            <div className={`absolute top-full right-0 mt-2 w-48 bg-primary border border-white/10 shadow-xl rounded-sm ${
+              servicesDropdownOpen ? "block" : "hidden"
             }`}>
               {servicesLinks.map(({ href, label, icon: Icon, subLinks }) => {
                 const itemClass = `flex items-center gap-2.5 px-4 py-3 text-sm font-medium transition-colors ${
@@ -348,7 +362,7 @@ export default function Navbar() {
                       {label}
                       <ChevronRight size={12} className="ml-auto shrink-0 opacity-60" />
                     </Link>
-                    <div className="absolute left-full top-0 w-44 bg-primary border border-white/10 shadow-xl rounded-sm opacity-0 -translate-x-1 pointer-events-none transition-all duration-150 group-hover/f0:opacity-100 group-hover/f0:translate-x-0 group-hover/f0:pointer-events-auto">
+                    <div className={`${FLYOUT_PANEL} ${FLY_SHOW[0]}`}>
                       {subLinks.map((sub) => (
                         <FlyoutNode
                           key={`${sub.href}-${sub.label}`}
@@ -417,7 +431,7 @@ export default function Navbar() {
         </div>
 
         {/* Mobile right: language dropdown + hamburger */}
-        <div className="md:hidden flex items-center gap-3 shrink-0">
+        <div className="xl:hidden flex items-center gap-3 shrink-0">
           <LangDropdown switchLocale={switchLocale} />
           <button
             onClick={() => setOpen(!open)}
@@ -431,7 +445,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div
-        className={`md:hidden bg-primary border-t border-white/10 transition-all duration-300 ease-in-out ${
+        className={`xl:hidden bg-primary border-t border-white/10 transition-all duration-300 ease-in-out ${
           open ? "max-h-[85vh] opacity-100 overflow-y-auto" : "max-h-0 opacity-0 overflow-hidden"
         }`}
       >

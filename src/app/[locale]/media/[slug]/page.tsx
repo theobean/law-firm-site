@@ -4,21 +4,22 @@ import { Link } from "@/navigation";
 import type { Metadata } from "next";
 import { ArrowLeft, Calendar, Tv } from "lucide-react";
 import { getYouTubeId, getThumbnailUrl, getEmbedUrl, getFacebookEmbedUrl, getVideoType } from "@/lib/youtube";
-import { siteUrl as SITE, ogDefaults } from "@/lib/seo";
+import { contentPagePath, localizedPageUrl, ogDefaults, siteUrl } from "@/lib/seo";
+import { routing } from "@/i18n/routing";
 import ExternalEmbed from "@/components/ExternalEmbed";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string; locale: string }> }): Promise<Metadata> {
   try {
-    const { slug, locale } = await params;
+    const { slug } = await params;
     const iv = await getInterviewBySlug(slug);
     if (!iv) return {};
-    const pageUrl = `${SITE}/${locale}/media/${slug}`;
+    const pageUrl = localizedPageUrl(routing.defaultLocale, contentPagePath("media", slug));
     const ytId = getYouTubeId(iv.youtubeUrl);
-    const ogImage = ytId ? getThumbnailUrl(ytId) : `${SITE}/δικηγορος.jpg`;
+    const ogImage = ytId ? getThumbnailUrl(ytId) : `${siteUrl}/δικηγορος.jpg`;
     const year = iv.date ? new Date(iv.date).getFullYear() : null;
-    const lawyerLabel = locale === "de" ? "Rechtsanwalt Ioannis Papaioannou" : locale === "en" ? "Lawyer Ioannis Papaioannou" : "Δικηγόρος Ιωάννης Παπαϊωάννου";
+    const lawyerLabel = "Δικηγόρος Ιωάννης Παπαϊωάννου";
     // Word-boundary truncation to avoid cutting mid-word
     const truncate = (s: string, n: number) => {
       if (s.length <= n) return s;
@@ -35,7 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     return {
       title: iv.title, description,
       alternates: { canonical: pageUrl },
-      openGraph: { ...ogDefaults(locale), title: iv.title, description, url: pageUrl, type: "video.other", images: [{ url: ogImage, width: 1280, height: 720, alt: iv.title }] },
+      openGraph: { ...ogDefaults(routing.defaultLocale), alternateLocale: [], title: iv.title, description, url: pageUrl, type: "video.other", images: [{ url: ogImage, width: 1280, height: 720, alt: iv.title }] },
       twitter: { card: "summary_large_image", title: iv.title, description, images: [ogImage] },
     };
   } catch { return {}; }

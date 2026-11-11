@@ -21,7 +21,7 @@ export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Already on a locale path (/el, /en, /de) — let next-intl handle it
-  const hasLocale = /^\/(el|en|de)(\/|$)/.test(pathname);
+  const hasLocale = /^\/(?:el|en|de)(?:\/|$)/.test(pathname);
 
   // User has manually chosen a language — respect it, skip geo
   const pref = request.cookies.get(PREF_COOKIE)?.value;
