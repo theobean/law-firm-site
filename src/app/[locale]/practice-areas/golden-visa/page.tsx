@@ -11,7 +11,6 @@ import { Link } from "@/navigation";
 const realEstatePath = "/practice-areas/realEstate";
 const pagePath = "/practice-areas/golden-visa";
 const depositGuidePath = "/blog/prokatavoli-agora-akinitou";
-const ministryGuidance = "https://diavgeia.gov.gr/doc/%CE%A8%CE%A3%CE%99746%CE%9C%CE%94%CE%98%CE%9F-%CE%94%CE%A7%CE%9C";
 
 const content = {
   en: {
@@ -24,7 +23,6 @@ const content = {
     rulesTitle: "Which Golden Visa rules apply to the property?",
     standardPurchase: "For a standard purchase in the Thessaloniki regional unit or Attica, the minimum is €800,000 for one property. If it is already built or has a building permit, it must have at least 120 m² of main-use space. A flat advertised as 120 m² may fall short if the figure includes a storage room or parking space. Check the area in the deed and building documents before you rely on the listing.",
     specialPurchase: "The €250,000 minimum applies to specific cases, such as a qualifying change of use to residential or the restoration or reconstruction of a listed building. If the seller offers you a property on that basis, ask for the supporting documents. Where the change of use is still in progress, check who will complete it and what the agreement says if it is delayed. The change must be complete before the permit application is submitted.",
-    officialRules: "Ministry guidance on investor residence permits",
     checksTitle: "What we check before you commit",
     checks: [
       {
@@ -72,7 +70,6 @@ const content = {
     rulesTitle: "Welche Voraussetzungen gelten für die Immobilie?",
     standardPurchase: "Beim regulären Immobilienkauf in der Regionaleinheit Thessaloniki oder in Attika beträgt die Mindestinvestition 800.000 € für eine einzelne Immobilie. Bei einem bereits errichteten Objekt oder einer erteilten Baugenehmigung sind mindestens 120 m² Hauptnutzfläche erforderlich. Die Flächenangabe im Inserat kann auch einen Abstellraum oder Stellplatz enthalten. Maßgeblich ist, welche Fläche sich aus der Urkunde und den Bauunterlagen ergibt.",
     specialPurchase: "Der Mindestbetrag von 250.000 € gilt für besondere Fälle, etwa eine Umnutzung zu Wohnraum, die die gesetzlichen Voraussetzungen erfüllt, oder die Sanierung oder den Wiederaufbau eines denkmalgeschützten Gebäudes. Beruft sich der Verkäufer darauf, bitten Sie ihn um die entsprechenden Nachweise. Bei einer laufenden Umnutzung ist zu klären, wer sie abschließt und was der Vertrag bei einer Verzögerung vorsieht. Die Umnutzung muss vor dem Antrag auf die Aufenthaltserlaubnis abgeschlossen sein.",
-    officialRules: "Hinweise des Ministeriums zur Aufenthaltserlaubnis für Investoren",
     checksTitle: "Was wir vor Ihrer Entscheidung prüfen",
     checks: [
       {
@@ -120,7 +117,6 @@ const content = {
     rulesTitle: "Ποιες προϋποθέσεις ισχύουν για το ακίνητο;",
     standardPurchase: "Στη συνήθη αγορά στην Περιφερειακή Ενότητα Θεσσαλονίκης ή στην Αττική, το ελάχιστο τίμημα είναι 800.000 € για ένα ακίνητο. Αν είναι δομημένο ή έχει εκδοθεί οικοδομική άδεια, απαιτούνται τουλάχιστον 120 τ.μ. κύριων χώρων. Ένα διαμέρισμα που εμφανίζεται στην αγγελία ως 120 τ.μ. μπορεί να υπολείπεται αν στο εμβαδόν περιλαμβάνεται αποθήκη ή θέση στάθμευσης. Πριν βασιστείτε στην αγγελία, δείτε τι προκύπτει από τον τίτλο και τα οικοδομικά έγγραφα.",
     specialPurchase: "Το ελάχιστο τίμημα των 250.000 € αφορά ειδικές περιπτώσεις, όπως αλλαγή χρήσης σε κατοικία που πληροί τις νόμιμες προϋποθέσεις ή αγορά διατηρητέου προς αποκατάσταση ή ανακατασκευή. Αν ο πωλητής επικαλείται μία από αυτές τις περιπτώσεις, ζητήστε τα αντίστοιχα έγγραφα. Αν η αλλαγή χρήσης εκκρεμεί, έχει σημασία ποιος την αναλαμβάνει και τι προβλέπει η συμφωνία αν καθυστερήσει. Η αλλαγή πρέπει να έχει ολοκληρωθεί πριν υποβληθεί η αίτηση άδειας διαμονής.",
-    officialRules: "Εγκύκλιος του Υπουργείου για την άδεια διαμονής επενδυτή",
     checksTitle: "Τι ελέγχουμε πριν δεσμευτείτε",
     checks: [
       {
@@ -212,12 +208,6 @@ export default async function GoldenVisaPropertyPage({ params }: Props) {
           </h2>
           <p className="mt-5 leading-relaxed text-gray-700">{page.standardPurchase}</p>
           <p className="mt-3 leading-relaxed text-gray-700">{page.specialPurchase}</p>
-          <a
-            href={ministryGuidance}
-            className="mt-4 inline-block font-semibold text-primary underline underline-offset-4 hover:decoration-accent"
-          >
-            {page.officialRules}
-          </a>
         </section>
 
         <section>
