@@ -393,6 +393,8 @@
     "propertyDeadline": "Termin für Anzahlung oder Unterzeichnung (optional)",
     "calendar": {
       "choose": "Datum auswählen",
+      "month": "Monat",
+      "year": "Jahr",
       "previousMonth": "Vorheriger Monat",
       "nextMonth": "Nächster Monat",
       "today": "Heute",

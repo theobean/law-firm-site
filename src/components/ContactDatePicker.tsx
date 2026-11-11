@@ -1,4 +1,4 @@
-import { CalendarDays, ChevronLeft, ChevronRight } from "lucide-react";
+import { CalendarDays, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 
@@ -40,7 +40,9 @@ function calendarWeeks(date: Date) {
   return weeks;
 }
 
-const navigationClass = "grid h-10 w-10 shrink-0 place-items-center rounded-sm hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-accent";
+const navigationClass = "grid h-10 w-7 shrink-0 place-items-center rounded-sm hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-accent max-[359px]:hidden sm:w-9";
+const selectClass = "h-10 w-full appearance-none rounded-sm border border-white/20 bg-white/10 pl-1.5 pr-5 text-sm font-semibold text-white hover:bg-white/15 focus-visible:outline-2 focus-visible:outline-accent [color-scheme:dark] sm:pl-2";
+const selectIconClass = "pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-accent";
 const actionClass = "min-h-10 rounded-sm px-2 text-sm font-medium hover:bg-accent/10 focus-visible:outline-2 focus-visible:outline-primary disabled:opacity-45 disabled:hover:bg-transparent";
 
 export default function ContactDatePicker({
@@ -65,6 +67,9 @@ export default function ContactDatePicker({
   const todayKey = dateKey(today);
   const monthId = `${id}-month`;
   const panelId = `${id}-calendar`;
+  const activeYear = activeDate?.getFullYear() ?? today.getFullYear();
+  const firstYear = Math.min(today.getFullYear() - 100, activeYear);
+  const lastYear = Math.max(today.getFullYear() + 50, activeYear);
 
   useEffect(() => {
     if (activeDate && shouldFocusDay.current) {
@@ -105,6 +110,7 @@ export default function ContactDatePicker({
   const weekDayShort = new Intl.DateTimeFormat(dateLocale, { weekday: "short" });
   const weekDayLong = new Intl.DateTimeFormat(dateLocale, { weekday: "long" });
   const fullDate = new Intl.DateTimeFormat(dateLocale, { dateStyle: "full" });
+  const monthName = new Intl.DateTimeFormat(dateLocale, { month: "long" });
 
   return (
     <div onKeyDown={(event) => {
@@ -144,9 +150,40 @@ export default function ContactDatePicker({
             <button type="button" aria-label={t("previousMonth")} className={navigationClass} onClick={() => setActiveDate(addMonths(activeDate, -1))}>
               <ChevronLeft size={18} aria-hidden="true" />
             </button>
-            <p id={monthId} aria-live="polite" className="text-center font-playfair text-base font-bold sm:text-lg">
+            <p id={monthId} aria-live="polite" className="sr-only">
               {new Intl.DateTimeFormat(dateLocale, { month: "long", year: "numeric" }).format(activeDate)}
             </p>
+            <div className="flex min-w-0 flex-1 items-center justify-center gap-1.5 sm:gap-2">
+              <div className="relative min-w-0 flex-1 sm:max-w-40">
+                <select
+                  aria-label={t("month")}
+                  value={activeDate.getMonth() + 1}
+                  onChange={event => setActiveDate(addMonths(activeDate, Number(event.target.value) - 1 - activeDate.getMonth()))}
+                  className={selectClass}
+                >
+                  {Array.from({ length: 12 }, (_, month) => (
+                    <option key={month} value={month + 1} className="bg-primary text-white">
+                      {monthName.format(new Date(activeYear, month, 1))}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown size={12} aria-hidden="true" className={selectIconClass} />
+              </div>
+              <div className="relative w-[3.75rem] shrink-0 sm:w-[4.5rem]">
+                <select
+                  aria-label={t("year")}
+                  value={activeYear}
+                  onChange={event => setActiveDate(addMonths(activeDate, (Number(event.target.value) - activeYear) * 12))}
+                  className={selectClass}
+                >
+                  {Array.from({ length: lastYear - firstYear + 1 }, (_, offset) => {
+                    const year = firstYear + offset;
+                    return <option key={year} value={year} className="bg-primary text-white">{year}</option>;
+                  })}
+                </select>
+                <ChevronDown size={12} aria-hidden="true" className={selectIconClass} />
+              </div>
+            </div>
             <button type="button" aria-label={t("nextMonth")} className={navigationClass} onClick={() => setActiveDate(addMonths(activeDate, 1))}>
               <ChevronRight size={18} aria-hidden="true" />
             </button>
