@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Building2, ClipboardCheck, FileSearch } from "lucide-react";
 import FaqAccordion from "@/components/FaqAccordion";
 import { routing } from "@/i18n/routing";
 import { buildPageMeta } from "@/lib/seo";
@@ -11,16 +12,23 @@ import { Link } from "@/navigation";
 const realEstatePath = "/practice-areas/realEstate";
 const pagePath = "/practice-areas/golden-visa";
 const depositGuidePath = "/blog/prokatavoli-agora-akinitou";
+const checkIcons = [FileSearch, Building2, ClipboardCheck];
+// Thessaloniki waterfront photograph by K, https://www.pexels.com/photo/37845038/
+const waterfrontPhoto = "/thessaloniki-waterfront.webp";
 
 const content = {
   en: {
     seoTitle: "Golden Visa Property Due Diligence in Thessaloniki | Papaioannou",
     description: "Buying property in Thessaloniki, Greece, for a Golden Visa? Have a lawyer review the title, property documents and deposit terms before you pay or sign.",
-    title: "Golden Visa in Thessaloniki: legal checks before buying property",
+    title: "Golden Visa in Thessaloniki",
+    titleDetail: "Legal checks before buying property",
     intro: "Has a seller offered you a property in Thessaloniki as suitable for Greece’s Golden Visa? If you are buying from abroad, we can start with the title and any draft agreement you have received. We check the property documents and the terms of the purchase before you pay a deposit or sign.",
     back: "All legal services",
     contact: "Request a legal property review",
+    photoAlt: "Aerial view of Thessaloniki’s waterfront and apartment buildings",
     rulesTitle: "Which Golden Visa rules apply to the property?",
+    standardTitle: "Standard property purchase",
+    specialTitle: "Special cases",
     standardPurchase: "For a standard purchase in the Thessaloniki regional unit or Attica, the minimum is €800,000 for one property. If it is already built or has a building permit, it must have at least 120 m² of main-use space. A flat advertised as 120 m² may fall short if the figure includes a storage room or parking space. Check the area in the deed and building documents before you rely on the listing.",
     specialPurchase: "The €250,000 minimum applies to specific cases, such as a qualifying change of use to residential or the restoration or reconstruction of a listed building. If the seller offers you a property on that basis, ask for the supporting documents. Where the change of use is still in progress, check who will complete it and what the agreement says if it is delayed. The change must be complete before the permit application is submitted.",
     checksTitle: "What we check before you commit",
@@ -63,11 +71,15 @@ const content = {
   de: {
     seoTitle: "Golden Visa: Immobilienprüfung in Thessaloniki | Papaioannou",
     description: "Immobilienkauf in Thessaloniki für ein Golden Visa in Griechenland. Wir prüfen Eigentumsurkunden, Unterlagen und Anzahlungsbedingungen vor dem Kauf.",
-    title: "Golden Visa in Thessaloniki: rechtliche Prüfung vor dem Immobilienkauf",
+    title: "Golden Visa in Thessaloniki",
+    titleDetail: "Rechtliche Prüfung vor dem Immobilienkauf",
     intro: "Hat Ihnen ein Verkäufer in Thessaloniki eine Immobilie angeboten, die für das griechische Golden Visa geeignet sein soll? Wenn Sie aus dem Ausland kaufen, können wir mit der Eigentumsurkunde und dem Vertragsentwurf beginnen, den Sie erhalten haben. Wir prüfen die Unterlagen und die Kaufbedingungen, bevor Sie eine Anzahlung leisten oder unterschreiben.",
     back: "Alle Rechtsgebiete",
     contact: "Rechtliche Immobilienprüfung anfragen",
+    photoAlt: "Luftaufnahme der Uferpromenade und Wohnhäuser von Thessaloniki",
     rulesTitle: "Welche Voraussetzungen gelten für die Immobilie?",
+    standardTitle: "Regulärer Immobilienkauf",
+    specialTitle: "Sonderfälle",
     standardPurchase: "Beim regulären Immobilienkauf in der Regionaleinheit Thessaloniki oder in Attika beträgt die Mindestinvestition 800.000 € für eine einzelne Immobilie. Bei einem bereits errichteten Objekt oder einer erteilten Baugenehmigung sind mindestens 120 m² Hauptnutzfläche erforderlich. Die Flächenangabe im Inserat kann auch einen Abstellraum oder Stellplatz enthalten. Maßgeblich ist, welche Fläche sich aus der Urkunde und den Bauunterlagen ergibt.",
     specialPurchase: "Der Mindestbetrag von 250.000 € gilt für besondere Fälle, etwa eine Umnutzung zu Wohnraum, die die gesetzlichen Voraussetzungen erfüllt, oder die Sanierung oder den Wiederaufbau eines denkmalgeschützten Gebäudes. Beruft sich der Verkäufer darauf, bitten Sie ihn um die entsprechenden Nachweise. Bei einer laufenden Umnutzung ist zu klären, wer sie abschließt und was der Vertrag bei einer Verzögerung vorsieht. Die Umnutzung muss vor dem Antrag auf die Aufenthaltserlaubnis abgeschlossen sein.",
     checksTitle: "Was wir vor Ihrer Entscheidung prüfen",
@@ -110,11 +122,15 @@ const content = {
   el: {
     seoTitle: "Έλεγχος ακινήτου για Golden Visa στη Θεσσαλονίκη | Παπαϊωάννου",
     description: "Αγορά ακινήτου στη Θεσσαλονίκη για Golden Visa. Ελέγχουμε τίτλους, έγγραφα του ακινήτου και όρους προκαταβολής πριν πληρώσετε ή υπογράψετε.",
-    title: "Golden Visa στη Θεσσαλονίκη: νομικός έλεγχος πριν από την αγορά",
+    title: "Golden Visa στη Θεσσαλονίκη",
+    titleDetail: "Νομικός έλεγχος πριν από την αγορά",
     intro: "Σας πρότεινε ο πωλητής ακίνητο στη Θεσσαλονίκη ως κατάλληλο για Golden Visa; Αν αγοράζετε από το εξωτερικό, μπορούμε να ξεκινήσουμε από τον τίτλο του πωλητή και το σχέδιο συμφωνίας που έχετε στα χέρια σας. Ελέγχουμε τα έγγραφα του ακινήτου και τους όρους της αγοράς πριν δώσετε προκαταβολή ή υπογράψετε.",
     back: "Όλες οι νομικές υπηρεσίες",
     contact: "Ζητήστε νομικό έλεγχο ακινήτου",
+    photoAlt: "Πανοραμική άποψη της παραλίας και των πολυκατοικιών της Θεσσαλονίκης",
     rulesTitle: "Ποιες προϋποθέσεις ισχύουν για το ακίνητο;",
+    standardTitle: "Γενικός κανόνας",
+    specialTitle: "Ειδικές περιπτώσεις",
     standardPurchase: "Στη συνήθη αγορά στην Περιφερειακή Ενότητα Θεσσαλονίκης ή στην Αττική, το ελάχιστο τίμημα είναι 800.000 € για ένα ακίνητο. Αν είναι δομημένο ή έχει εκδοθεί οικοδομική άδεια, απαιτούνται τουλάχιστον 120 τ.μ. κύριων χώρων. Ένα διαμέρισμα που εμφανίζεται στην αγγελία ως 120 τ.μ. μπορεί να υπολείπεται αν στο εμβαδόν περιλαμβάνεται αποθήκη ή θέση στάθμευσης. Πριν βασιστείτε στην αγγελία, δείτε τι προκύπτει από τον τίτλο και τα οικοδομικά έγγραφα.",
     specialPurchase: "Το ελάχιστο τίμημα των 250.000 € αφορά ειδικές περιπτώσεις, όπως αλλαγή χρήσης σε κατοικία που πληροί τις νόμιμες προϋποθέσεις ή αγορά διατηρητέου προς αποκατάσταση ή ανακατασκευή. Αν ο πωλητής επικαλείται μία από αυτές τις περιπτώσεις, ζητήστε τα αντίστοιχα έγγραφα. Αν η αλλαγή χρήσης εκκρεμεί, έχει σημασία ποιος την αναλαμβάνει και τι προβλέπει η συμφωνία αν καθυστερήσει. Η αλλαγή πρέπει να έχει ολοκληρωθεί πριν υποβληθεί η αίτηση άδειας διαμονής.",
     checksTitle: "Τι ελέγχουμε πριν δεσμευτείτε",
@@ -180,81 +196,129 @@ export default async function GoldenVisaPropertyPage({ params }: Props) {
 
   return (
     <div className="bg-white">
-      <section className="bg-primary py-16 text-white md:py-24">
-        <div className="mx-auto max-w-4xl px-6">
+      <section className="border-b border-accent/40 bg-primary bg-linear-to-br from-primary via-primary to-[#194352] py-10 text-white md:py-14 lg:py-16">
+        <div className="mx-auto max-w-6xl px-6">
           <Link
             href="/practice-areas"
-            className="mb-6 inline-flex items-center gap-2 text-sm text-white/75 transition-colors hover:text-accent"
+            className="mb-7 inline-flex items-center gap-2 text-sm text-white/80 transition-colors hover:text-white hover:underline hover:underline-offset-4 lg:mb-8"
           >
             <ArrowLeft size={16} aria-hidden="true" /> {page.back}
           </Link>
-          <div className="border-l-4 border-accent pl-5 md:pl-6">
-            <h1 className="font-playfair text-3xl font-bold md:text-5xl">{page.title}</h1>
-            <p className="mt-4 max-w-3xl text-lg leading-relaxed text-white/85">{page.intro}</p>
+          <div className="grid items-center gap-8 lg:grid-cols-[1.12fr_1fr] lg:gap-12">
+            <div>
+              <div className="mb-5 h-0.5 w-12 bg-accent" aria-hidden="true" />
+              <h1 className="max-w-xl font-playfair tracking-tight">
+                <span className="block text-3xl leading-[1.12] font-bold sm:text-4xl xl:text-[2.75rem]">{page.title}</span>{" "}
+                <span className="mt-2 block text-xl leading-snug font-semibold text-white/90 sm:text-2xl">{page.titleDetail}</span>
+              </h1>
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 lg:text-lg">{page.intro}</p>
+              <Link
+                href={propertyContactHref("golden-visa")}
+                className="mt-7 inline-flex items-center gap-2 rounded-sm bg-accent px-5 py-3 font-semibold text-primary transition-colors hover:bg-[#d8a94d]"
+              >
+                {page.contact} <ArrowRight size={18} className="shrink-0" aria-hidden="true" />
+              </Link>
+            </div>
+            <div className="rounded-sm border border-white/20 bg-white/5 p-1.5 shadow-xl">
+              <div className="relative aspect-video overflow-hidden rounded-xs bg-primary lg:aspect-[5/4]">
+                <Image
+                  src={waterfrontPhoto}
+                  alt={page.photoAlt}
+                  fill
+                  loading="eager"
+                  fetchPriority="high"
+                  sizes="(min-width: 1152px) 488px, (min-width: 1024px) 43vw, calc(100vw - 60px)"
+                  className="object-cover object-[42%_50%]"
+                />
+              </div>
+            </div>
           </div>
-          <Link
-            href={propertyContactHref("golden-visa")}
-            className="mt-8 inline-flex items-center gap-2 rounded-sm bg-accent px-5 py-3 font-semibold text-primary transition-colors hover:bg-accent/90"
-          >
-            {page.contact} <ArrowRight size={18} className="shrink-0" aria-hidden="true" />
-          </Link>
         </div>
       </section>
 
-      <div className="mx-auto max-w-4xl space-y-12 px-6 py-14 md:py-16">
-        <section>
-          <h2 className="border-l-4 border-accent pl-4 font-playfair text-2xl font-bold text-primary">
+      <section className="border-b border-primary/10 bg-[#f7f5ef] py-12 md:py-16">
+        <div className="mx-auto max-w-6xl px-6">
+          <h2 className="max-w-3xl text-balance font-playfair text-2xl font-bold text-primary sm:text-3xl">
             {page.rulesTitle}
           </h2>
-          <p className="mt-5 leading-relaxed text-gray-700">{page.standardPurchase}</p>
-          <p className="mt-3 leading-relaxed text-gray-700">{page.specialPurchase}</p>
-        </section>
+          <div className="mt-7 grid gap-4 md:grid-cols-2 md:gap-5">
+            <div className="rounded-sm border border-primary/10 border-t-2 border-t-accent bg-white p-5 shadow-sm md:p-7">
+              <h3 className="font-playfair text-xl font-semibold text-primary">{page.standardTitle}</h3>
+              <p className="mt-3 leading-relaxed text-gray-700">{page.standardPurchase}</p>
+            </div>
+            <div className="rounded-sm border border-primary/10 border-t-2 border-t-accent bg-white p-5 shadow-sm md:p-7">
+              <h3 className="font-playfair text-xl font-semibold text-primary">{page.specialTitle}</h3>
+              <p className="mt-3 leading-relaxed text-gray-700">{page.specialPurchase}</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <section>
-          <h2 className="border-l-4 border-accent pl-4 font-playfair text-2xl font-bold text-primary">
+      <section className="py-12 md:py-16">
+        <div className="mx-auto max-w-6xl px-6">
+          <h2 className="max-w-3xl text-balance font-playfair text-2xl font-bold text-primary sm:text-3xl">
             {page.checksTitle}
           </h2>
-          <div className="mt-5 divide-y divide-gray-200">
-            {page.checks.map(({ title, text }) => (
-              <div className="py-5" key={title}>
-                <h3 className="font-playfair text-xl font-semibold text-primary">{title}</h3>
-                <p className="mt-2 leading-relaxed text-gray-700">{text}</p>
-              </div>
-            ))}
+          <div className="mt-7 grid gap-4 lg:grid-cols-3 lg:gap-5">
+            {page.checks.map(({ title, text }, index) => {
+              const Icon = checkIcons[index] ?? FileSearch;
+              return (
+                <div className="rounded-sm border border-primary/10 p-5 shadow-sm md:p-6" key={title}>
+                  <div className="mb-4 flex size-10 items-center justify-center rounded-sm bg-accent/15 text-primary">
+                    <Icon size={20} strokeWidth={1.7} aria-hidden="true" />
+                  </div>
+                  <h3 className="font-playfair text-xl leading-tight font-semibold text-primary">{title}</h3>
+                  <p className="mt-3 leading-relaxed text-gray-700">{text}</p>
+                </div>
+              );
+            })}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section>
-          <h2 className="border-l-4 border-accent pl-4 font-playfair text-2xl font-bold text-primary">
-            {page.signingTitle}
-          </h2>
-          <p className="mt-5 leading-relaxed text-gray-700">{page.signing}</p>
-        </section>
+      <div className="border-y border-primary/10 bg-[#f4f7f7] py-12 md:py-16">
+        <div className="mx-auto grid max-w-6xl items-start gap-8 px-6 lg:grid-cols-[1.1fr_1fr] lg:gap-12">
+          <section className="lg:pt-4">
+            <h2 className="max-w-xl text-balance font-playfair text-2xl font-bold text-primary sm:text-3xl">
+              {page.signingTitle}
+            </h2>
+            <p className="mt-4 leading-relaxed text-gray-700">{page.signing}</p>
+            <Link
+              href={depositGuidePath}
+              className="mt-5 inline-flex items-center gap-2 font-semibold text-primary underline underline-offset-4 hover:decoration-accent"
+            >
+              {page.depositGuide} <ArrowRight size={16} className="shrink-0" aria-hidden="true" />
+            </Link>
+          </section>
+          <section className="rounded-sm border-t-2 border-accent bg-primary p-5 text-white shadow-md sm:p-7">
+            <h2 className="font-playfair text-2xl font-bold">{page.preparationTitle}</h2>
+            <p className="mt-3 leading-relaxed text-white/85">{page.preparation}</p>
+            <Link
+              href={propertyContactHref("golden-visa")}
+              className="mt-5 inline-flex items-center gap-2 font-semibold text-white underline decoration-accent underline-offset-4 hover:text-[#f4d398]"
+            >
+              {page.contact} <ArrowRight size={16} className="shrink-0" aria-hidden="true" />
+            </Link>
+          </section>
+        </div>
+      </div>
 
-        <section className="rounded-sm border border-primary/10 bg-primary/5 p-5 md:p-7">
-          <h2 className="font-playfair text-2xl font-bold text-primary">{page.preparationTitle}</h2>
-          <p className="mt-3 leading-relaxed text-gray-700">{page.preparation}</p>
-          <Link
-            href={depositGuidePath}
-            className="mt-5 inline-flex items-center gap-2 font-semibold text-primary underline underline-offset-4 hover:decoration-accent"
-          >
-            {page.depositGuide} <ArrowRight size={16} className="shrink-0" aria-hidden="true" />
-          </Link>
-        </section>
-
-        <section>
-          <h2 className="mb-6 border-l-4 border-accent pl-4 font-playfair text-2xl font-bold text-primary">
+      <section className="py-12 md:py-16">
+        <div className="mx-auto grid max-w-6xl gap-6 px-6 lg:grid-cols-[0.7fr_1.5fr] lg:gap-12">
+          <h2 className="max-w-sm text-balance font-playfair text-2xl font-bold text-primary sm:text-3xl">
             {page.questionsTitle}
           </h2>
-          <FaqAccordion items={page.questions} />
-          <Link
-            href={realEstatePath}
-            className="mt-5 inline-flex items-center gap-2 font-semibold text-primary underline underline-offset-4 hover:decoration-accent"
-          >
-            {page.purchaseService} <ArrowRight size={16} className="shrink-0" aria-hidden="true" />
-          </Link>
-        </section>
-      </div>
+          <div className="[&_button[aria-expanded=true]>span:first-child]:text-primary">
+            <FaqAccordion items={page.questions} />
+            <Link
+              href={realEstatePath}
+              className="mt-6 inline-flex items-center gap-2 font-semibold text-primary underline underline-offset-4 hover:decoration-accent"
+            >
+              {page.purchaseService} <ArrowRight size={16} className="shrink-0" aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

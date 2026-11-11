@@ -77,10 +77,10 @@ type SubLink = { href: string; label: string; subLinks?: SubLink[] };
 // Literal strings so the JIT compiler picks them up.
 const FLY_GROUP = ["group/f0", "group/f1", "group/f2", "group/f3"];
 const FLY_SHOW = [
-  "group-hover/f0:opacity-100 group-hover/f0:translate-x-0 group-hover/f0:pointer-events-auto",
-  "group-hover/f1:opacity-100 group-hover/f1:translate-x-0 group-hover/f1:pointer-events-auto",
-  "group-hover/f2:opacity-100 group-hover/f2:translate-x-0 group-hover/f2:pointer-events-auto",
-  "group-hover/f3:opacity-100 group-hover/f3:translate-x-0 group-hover/f3:pointer-events-auto",
+  "group-hover/f0:block group-focus-within/f0:block",
+  "group-hover/f1:block group-focus-within/f1:block",
+  "group-hover/f2:block group-focus-within/f2:block",
+  "group-hover/f3:block group-focus-within/f3:block",
 ];
 
 // Recursive item for the mobile accordion. Collapsed by default so deep trees stay
@@ -154,9 +154,9 @@ function FlyoutNode({
     <div className={`relative ${FLY_GROUP[d]} border-b border-white/5 last:border-0`}>
       <Link href={item.href} onClick={onNavigate} className={cls}>
         {item.label}
-        <ChevronRight size={12} className="ml-auto shrink-0 opacity-60" />
+        <ChevronRight size={12} className="ml-auto shrink-0 rotate-180 opacity-60" />
       </Link>
-      <div className={`absolute left-full top-0 w-44 bg-primary border border-white/10 shadow-xl rounded-sm opacity-0 -translate-x-1 pointer-events-none transition-all duration-150 ${FLY_SHOW[d]}`}>
+      <div className={`absolute right-full top-0 hidden w-44 rounded-sm border border-white/10 bg-primary shadow-xl ${FLY_SHOW[d]}`}>
         {item.subLinks.map((s) => (
           <FlyoutNode key={`${s.href}-${s.label}`} item={s} depth={depth + 1} pathname={pathname} locale={locale} onNavigate={onNavigate} />
         ))}
@@ -261,7 +261,7 @@ export default function Navbar() {
   return (
     <header className="grain sticky top-0 z-50 bg-primary shadow-md relative overflow-visible">
       {/* Top bar */}
-      <div className="bg-primary/90 border-b border-white/10 text-white/60 text-sm hidden md:block">
+      <div className="bg-primary/90 border-b border-white/10 text-white/60 text-sm hidden xl:block">
         <div className="max-w-6xl mx-auto px-6 py-2 flex justify-between">
           <span>+30 2310 545 261</span>
           <span>iopapaio@gmail.com</span>
@@ -295,7 +295,7 @@ export default function Navbar() {
         )}
 
         {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-4 lg:gap-6">
+        <div className="hidden items-center gap-6 xl:flex">
           {links.map((l) => (
             <Link
               key={l.href}
@@ -311,10 +311,18 @@ export default function Navbar() {
             className="relative"
             onMouseEnter={handleServicesMouseEnter}
             onMouseLeave={handleServicesMouseLeave}
+            onBlur={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget)) setServicesDropdownOpen(false);
+            }}
           >
-            <button className={`flex items-center gap-1 text-sm font-medium whitespace-nowrap transition-colors ${
+            <button
+              type="button"
+              aria-expanded={servicesDropdownOpen}
+              onClick={() => setServicesDropdownOpen(true)}
+              className={`flex items-center gap-1 text-sm font-medium whitespace-nowrap transition-colors ${
               isServicesActive ? "text-accent" : "text-white/80 hover:text-accent"
-            }`}>
+              }`}
+            >
               {tNav("services")}
               <ChevronDown
                 size={13}
@@ -322,8 +330,8 @@ export default function Navbar() {
               />
             </button>
 
-            <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-primary border border-white/10 shadow-xl rounded-sm transition-all duration-150 ${
-              servicesDropdownOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-1 pointer-events-none"
+            <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-primary border border-white/10 shadow-xl rounded-sm ${
+              servicesDropdownOpen ? "block" : "hidden"
             }`}>
               {servicesLinks.map(({ href, label, icon: Icon, subLinks }) => {
                 const itemClass = `flex items-center gap-2.5 px-4 py-3 text-sm font-medium transition-colors ${
@@ -351,9 +359,9 @@ export default function Navbar() {
                     >
                       <Icon size={13} className="shrink-0 opacity-70" />
                       {label}
-                      <ChevronRight size={12} className="ml-auto shrink-0 opacity-60" />
+                      <ChevronRight size={12} className="ml-auto shrink-0 rotate-180 opacity-60" />
                     </Link>
-                    <div className="absolute left-full top-0 w-44 bg-primary border border-white/10 shadow-xl rounded-sm opacity-0 -translate-x-1 pointer-events-none transition-all duration-150 group-hover/f0:opacity-100 group-hover/f0:translate-x-0 group-hover/f0:pointer-events-auto">
+                    <div className={`absolute right-full top-0 hidden w-44 rounded-sm border border-white/10 bg-primary shadow-xl ${FLY_SHOW[0]}`}>
                       {subLinks.map((sub) => (
                         <FlyoutNode
                           key={`${sub.href}-${sub.label}`}
@@ -422,7 +430,7 @@ export default function Navbar() {
         </div>
 
         {/* Mobile right: language dropdown + hamburger */}
-        <div className="md:hidden flex items-center gap-3 shrink-0">
+        <div className="xl:hidden flex items-center gap-3 shrink-0">
           <LangDropdown switchLocale={switchLocale} />
           <button
             onClick={() => setOpen(!open)}
@@ -436,7 +444,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div
-        className={`md:hidden bg-primary border-t border-white/10 transition-all duration-300 ease-in-out ${
+        className={`xl:hidden bg-primary border-t border-white/10 transition-all duration-300 ease-in-out ${
           open ? "max-h-[85vh] opacity-100 overflow-y-auto" : "max-h-0 opacity-0 overflow-hidden"
         }`}
       >
