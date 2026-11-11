@@ -110,7 +110,7 @@ export default function ContactDatePicker({
   const weekDayShort = new Intl.DateTimeFormat(dateLocale, { weekday: "short" });
   const weekDayLong = new Intl.DateTimeFormat(dateLocale, { weekday: "long" });
   const fullDate = new Intl.DateTimeFormat(dateLocale, { dateStyle: "full" });
-  const monthName = new Intl.DateTimeFormat(dateLocale, { month: "long" });
+  const monthAndYear = new Intl.DateTimeFormat(dateLocale, { month: "long", year: "numeric" });
 
   return (
     <div onKeyDown={(event) => {
@@ -151,7 +151,7 @@ export default function ContactDatePicker({
               <ChevronLeft size={18} aria-hidden="true" />
             </button>
             <p id={monthId} aria-live="polite" className="sr-only">
-              {new Intl.DateTimeFormat(dateLocale, { month: "long", year: "numeric" }).format(activeDate)}
+              {monthAndYear.format(activeDate)}
             </p>
             <div className="flex min-w-0 flex-1 items-center justify-center gap-1.5 sm:gap-2">
               <div className="relative min-w-0 flex-1 sm:max-w-40">
@@ -163,13 +163,13 @@ export default function ContactDatePicker({
                 >
                   {Array.from({ length: 12 }, (_, month) => (
                     <option key={month} value={month + 1} className="bg-primary text-white">
-                      {monthName.format(new Date(activeYear, month, 1))}
+                      {monthAndYear.formatToParts(new Date(activeYear, month, 1)).find(part => part.type === "month")?.value}
                     </option>
                   ))}
                 </select>
                 <ChevronDown size={12} aria-hidden="true" className={selectIconClass} />
               </div>
-              <div className="relative w-[3.75rem] shrink-0 sm:w-[4.5rem]">
+              <div className="relative w-[4.25rem] shrink-0 sm:w-[4.5rem]">
                 <select
                   aria-label={t("year")}
                   value={activeYear}
