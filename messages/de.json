@@ -32,6 +32,7 @@
     "bankingLaw": "Bankrecht",
     "funds": "NPL-Fonds",
     "realEstatePurchase": "Immobilienkauf und Titelprüfung",
+    "goldenVisa": "Golden Visa",
     "banks": "Banken",
     "individuals": "Privatpersonen",
     "businesses": "Unternehmen",
@@ -293,6 +294,10 @@
           "Erklärungen und Korrekturen im Nationalen Kataster",
           "Ersitzungs- und Besitzklagen"
         ]
+      },
+      "golden-visa": {
+        "title": "Golden Visa",
+        "desc": "Rechtliche Prüfung der Immobilie und der Kaufbedingungen vor der Anzahlung."
       },
       "labor": {
         "title": "Arbeitsrecht",

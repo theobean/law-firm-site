@@ -1,8 +1,8 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/navigation";
-import { Banknote, Handshake, ShieldCheck, Briefcase, Building, HardHat, Landmark, ScrollText, Calculator, ArrowRight } from "lucide-react";
+import { Banknote, Handshake, ShieldCheck, Briefcase, Building, FileCheck, HardHat, Landmark, ScrollText, Calculator, ArrowRight } from "lucide-react";
 
-const areaKeys = ["banking", "extrajudicial", "criminal", "commercial", "realEstate", "administrative", "inheritance", "tax", "labor"] as const;
+const areaKeys = ["banking", "extrajudicial", "criminal", "commercial", "realEstate", "golden-visa", "administrative", "inheritance", "tax", "labor"] as const;
 
 const icons = {
   banking: Banknote,
@@ -10,6 +10,7 @@ const icons = {
   criminal: ShieldCheck,
   commercial: Briefcase,
   realEstate: Building,
+  "golden-visa": FileCheck,
   administrative: Landmark,
   inheritance: ScrollText,
   tax: Calculator,
@@ -24,7 +25,7 @@ export default function PracticeAreasGrid({ preview = false }: Props) {
   const t = useTranslations("practiceAreas");
   const tNav = useTranslations("nav");
 
-  const areas = preview ? areaKeys.slice(0, 5) : areaKeys;
+  const areas = preview ? areaKeys.slice(0, 6) : areaKeys;
 
   return (
     <section className="py-20 bg-white">

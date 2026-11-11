@@ -45,8 +45,8 @@ export function proxy(request: NextRequest) {
 
   const response = intlMiddleware(request);
 
-  // Property pages declare their language alternates on the canonical domain in HTML.
-  if (localePrefix && /^\/practice-areas\/realEstate(?:\/|$)/.test(pathname.slice(localePrefix.length))) {
+  // Property and Golden Visa pages declare their language alternates on the canonical domain in HTML.
+  if (localePrefix && /^\/practice-areas\/(?:realEstate(?:\/|$)|golden-visa$)/.test(pathname.slice(localePrefix.length))) {
     response.headers.delete("Link");
   }
 

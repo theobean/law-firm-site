@@ -39,6 +39,11 @@ const baseHeaders = [
 const nextConfig: NextConfig = {
   async redirects() {
     return [
+      {
+        source: "/:locale(el|en|de)/practice-areas/realEstate/golden-visa-property",
+        destination: "/:locale/practice-areas/golden-visa",
+        permanent: true,
+      },
       // WordPress post ID URLs: /?p=123
       { source: "/", has: [{ type: "query", key: "p" }], destination: "/el", permanent: true },
       // WordPress page ID URLs: /?page_id=123

@@ -6,6 +6,7 @@
     "services": "Services",
     "bankingLaw": "Banking Law",
     "realEstatePurchase": "Property Purchase and Title Checks",
+    "goldenVisa": "Golden Visa",
     "funds": "NPL Funds",
     "banks": "Banks",
     "individuals": "Individuals",
@@ -293,6 +294,10 @@
           "Declarations and corrections in the National Cadastre",
           "Adverse possession and possessory cases"
         ]
+      },
+      "golden-visa": {
+        "title": "Golden Visa",
+        "desc": "Legal review of the property and purchase terms before you pay a deposit."
       },
       "labor": {
         "title": "Labor Law",

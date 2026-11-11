@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { Link } from "@/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
-import { Menu, X, Scale, ChevronDown, ChevronRight, FileText, Tv, BookOpen, Gavel, Handshake, Landmark, Home } from "lucide-react";
+import { Menu, X, Scale, ChevronDown, ChevronRight, FileText, FileCheck, Tv, BookOpen, Gavel, Handshake, Landmark, Home } from "lucide-react";
 
 const localeConfig = {
   el: { flag: "/flags/gr.svg", label: "ΕΛ" },
@@ -227,6 +227,7 @@ export default function Navbar() {
   const servicesLinks = [
     { href: `/practice-areas/banking`, label: tNav("bankingLaw"), icon: Landmark, subLinks: bankingSubLinks },
     { href: `/practice-areas/realEstate`, label: tNav("realEstatePurchase"), icon: Home, subLinks: null },
+    { href: `/practice-areas/golden-visa`, label: tNav("goldenVisa"), icon: FileCheck, subLinks: null },
     { href: `/pleistariasmos`, label: tNav("pleistariasmos"), icon: Gavel, subLinks: null },
     { href: `/exodikastikos`, label: tNav("exodikastikos"), icon: Handshake, subLinks: null },
   ] as { href: string; label: string; icon: typeof Gavel; subLinks: SubLink[] | null }[];

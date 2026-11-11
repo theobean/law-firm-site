@@ -289,7 +289,7 @@ export default function PracticeAreaDetailPage({
               {t("areas.realEstate.purchase.depositGuideLink")} <ArrowRight size={16} className="shrink-0" aria-hidden="true" />
             </Link>
             <Link
-              href="/practice-areas/realEstate/golden-visa-property"
+              href="/practice-areas/golden-visa"
               className="inline-flex items-center justify-between gap-2 rounded-sm border border-accent/50 bg-amber-50 px-5 py-4 font-semibold text-primary transition-colors hover:bg-amber-100"
             >
               {t("areas.realEstate.purchase.goldenVisaLink")} <ArrowRight size={16} className="shrink-0" aria-hidden="true" />
