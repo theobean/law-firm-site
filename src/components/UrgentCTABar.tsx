@@ -13,6 +13,7 @@ const propertyRoutes: Partial<Record<string, PropertyContactSource>> = {
   "/practice-areas/realEstate": "thessaloniki",
   "/practice-areas/realEstate/agora-akinitou-athina": "athens",
   "/practice-areas/realEstate/agora-neodmitou": "new-build",
+  "/practice-areas/realEstate/golden-visa-property": "golden-visa",
   "/blog/agora-akiniton-vimata": "purchase-guide",
   "/blog/prokatavoli-agora-akinitou": "deposit-guide",
 };

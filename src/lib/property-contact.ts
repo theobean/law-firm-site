@@ -6,6 +6,7 @@ const propertyContactSources = [
   "new-build",
   "purchase-guide",
   "deposit-guide",
+  "golden-visa",
 ] as const;
 
 export type PropertyContactSource = (typeof propertyContactSources)[number];
