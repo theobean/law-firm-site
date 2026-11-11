@@ -391,6 +391,13 @@
     "propertyTopic": "Buying a property",
     "propertyArea": "Property area (optional)",
     "propertyDeadline": "Deposit or signing date (optional)",
+    "calendar": {
+      "choose": "Choose a date",
+      "previousMonth": "Previous month",
+      "nextMonth": "Next month",
+      "today": "Today",
+      "clear": "Clear"
+    },
     "sendError": "We could not confirm that your message was sent. Please try again or call +30 2310 545 261.",
     "name": "Full Name",
     "email": "Email",
