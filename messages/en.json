@@ -228,11 +228,11 @@
       "realEstate": {
         "title": "Real Estate Law",
         "desc": "Title, encumbrance and contract checks before you buy.",
-        "longDesc": "If you have found a house, apartment or plot, our firm can review the property and support you from the initial title search through registration of the deed.",
+        "longDesc": "If you have found a house, apartment or plot, our firm can review the property and support you from the initial title search through registration of the deed. From our Thessaloniki office, we also assist buyers in Athens and throughout Greece.",
         "approach": "We explain what the checks uncovered, what needs clarification and what should be resolved before you proceed.",
         "purchase": {
           "seoTitle": "Real Estate Lawyer in Thessaloniki | Papaioannou",
-          "seoDescription": "Legal support for property buyers in Thessaloniki. We review title, encumbrances, deposit terms and the draft deed, and support you through registration.",
+          "seoDescription": "Thessaloniki law firm for property purchases, title checks and contract review. We assist buyers in Athens and throughout Greece.",
           "heading": "Lawyer for buying property in Thessaloniki",
           "stepsTitle": "How we review a property purchase",
           "steps": [
@@ -252,6 +252,9 @@
           "reviewTitle": "What you learn from the review",
           "documentsTitle": "What to have ready when you contact us",
           "documentsText": "Tell us the property address and any proposed deposit or signing date. If available, have the cadastral reference (KAEK), the seller's title deed or the draft agreement to hand.",
+          "coverageTitle": "Legal support for property purchases throughout Greece",
+          "coverageText": "If the property is outside Thessaloniki, tell us which municipality it is in, which documents you have and when you plan to sign. At the first discussion, we can clarify which steps can be handled remotely and whether local coordination is needed.",
+          "athensLink": "Buying property and checking title in Athens",
           "questionsTitle": "Questions about legal property checks",
           "questions": [
             {

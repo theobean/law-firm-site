@@ -23,7 +23,7 @@ const translations: Record<"el" | "en" | "de", GuideTranslation> = {
   el: {
     title: "Αγορά ακινήτου στην Ελλάδα σε 7 βήματα",
     excerpt: "Τι να ελέγξετε πριν δώσετε προκαταβολή, ποια έγγραφα θα χρειαστείτε και πώς προχωρά η αγορά από τον έλεγχο τίτλων έως την καταχώριση του συμβολαίου.",
-    serviceLabel: "Νομικός έλεγχος ακινήτου στη Θεσσαλονίκη",
+    serviceLabel: "Νομικός έλεγχος για αγορά ακινήτου στην Ελλάδα",
     serviceCta: "Ζητήστε νομικό έλεγχο ακινήτου",
     sections: [
       {
@@ -66,7 +66,7 @@ const translations: Record<"el" | "en" | "de", GuideTranslation> = {
   en: {
     title: "Buying property in Greece in 7 steps",
     excerpt: "What to check before paying a deposit, which documents to gather, and how a purchase moves from title review to registration of the deed.",
-    serviceLabel: "Legal property checks in Thessaloniki",
+    serviceLabel: "Legal checks when buying property in Greece",
     serviceCta: "Request a legal property check",
     sections: [
       {
@@ -109,7 +109,7 @@ const translations: Record<"el" | "en" | "de", GuideTranslation> = {
   de: {
     title: "Immobilienkauf in Griechenland in 7 Schritten",
     excerpt: "Was Sie vor einer Anzahlung prüfen sollten, welche Unterlagen Sie benötigen und wie der Kauf von der Eigentumsprüfung bis zur Eintragung abläuft.",
-    serviceLabel: "Rechtliche Immobilienprüfung in Thessaloniki",
+    serviceLabel: "Rechtliche Prüfung beim Immobilienkauf in Griechenland",
     serviceCta: "Rechtliche Immobilienprüfung anfragen",
     sections: [
       {

@@ -247,6 +247,23 @@ export default function PracticeAreaDetailPage({
         </div>
 
         {isRealEstate && (
+          <section className="mt-12 rounded-sm border border-gray-200 bg-gray-50 p-5 sm:p-7">
+            <h2 className="text-2xl font-playfair font-bold text-primary">
+              {t("areas.realEstate.purchase.coverageTitle")}
+            </h2>
+            <p className="mt-3 leading-relaxed text-gray-700">
+              {t("areas.realEstate.purchase.coverageText")}
+            </p>
+            <Link
+              href="/practice-areas/realEstate/agora-akinitou-athina"
+              className="mt-4 inline-flex items-center gap-2 font-semibold text-primary underline underline-offset-4 hover:decoration-accent"
+            >
+              {t("areas.realEstate.purchase.athensLink")} <ArrowRight size={16} className="shrink-0" aria-hidden="true" />
+            </Link>
+          </section>
+        )}
+
+        {isRealEstate && (
           <section className="mt-12">
             <h2 className="mb-3 border-l-4 border-accent pl-4 text-2xl font-playfair font-bold text-primary">
               {t("areas.realEstate.purchase.questionsTitle")}

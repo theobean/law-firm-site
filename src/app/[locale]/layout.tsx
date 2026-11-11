@@ -148,7 +148,11 @@ export default async function LocaleLayout({
       opens: "09:00",
       closes: "17:00",
     },
-    areaServed: { "@type": "City", name: "Θεσσαλονίκη" },
+    areaServed: [
+      { "@type": "City", name: "Θεσσαλονίκη" },
+      { "@type": "City", name: "Αθήνα" },
+      { "@type": "Country", name: "Ελλάδα" },
+    ],
     knowsLanguage: ["el", "en", "de"],
     founder: {
       "@type": "Person",

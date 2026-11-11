@@ -7,6 +7,7 @@ const staticPaths = [
   "",
   "/about",
   "/practice-areas",
+  "/practice-areas/realEstate/agora-akinitou-athina",
   "/practice-areas/realEstate/agora-neodmitou",
   "/blog",
   "/faq",
