@@ -1,4 +1,5 @@
 import type { TrafficLocale } from "../traffic";
+import type { TrafficBounceSummary } from "../traffic-bounce";
 import { trafficPeriods, type TrafficReport } from "./report";
 import { dashboardStyles } from "./styles";
 
@@ -111,7 +112,7 @@ function renderFilters(report: TrafficReport, today: string) {
   </form>`;
 }
 
-function renderSummary(report: TrafficReport) {
+function renderSummary(report: TrafficReport, bounce?: TrafficBounceSummary) {
   const { filters, total, previousTotal, average, recordedDays, activeDays, activePages, peak } = report;
   const hasCoverage = filters.day
     ? report.daily.some(row => row.day === filters.day && row.recorded)
@@ -122,6 +123,12 @@ function renderSummary(report: TrafficReport) {
   const averageNote = filters.day
     ? "Για την επιλεγμένη ημέρα"
     : `${number.format(recordedDays)} ημέρες μέτρησης · ${number.format(activeDays)} με αιτήματα`;
+  const hasBounceRate = bounce && bounce.entries > 0;
+  const bounced = hasBounceRate ? bounce.entries - bounce.continued : 0;
+  const bounceRate = hasBounceRate ? percentage.format(bounced / bounce.entries) : "—";
+  const bounceNote = hasBounceRate
+    ? `${number.format(bounced)} από ${number.format(bounce.entries)} εισόδους`
+    : bounce ? "Καμία μετρήσιμη είσοδος" : "Χωρίς διαθέσιμη μέτρηση";
 
   return `
   <section class="summary" aria-label="Σύνοψη επισκεψιμότητας">
@@ -133,6 +140,10 @@ function renderSummary(report: TrafficReport) {
       <p class="total number">${hasCoverage ? number.format(activePages) : "—"}</p><p class="kpi-note">Ξεχωριστά ανά γλώσσα</p></div>
     <div class="card kpi" data-kpi="peak"><p class="kpi-label">Υψηλότερη ημερήσια κίνηση</p>
       <p class="total number">${peak ? number.format(peak.total) : "—"}</p><p class="kpi-note">${peak ? displayDate(peak.day) : "Χωρίς καταγεγραμμένα αιτήματα"}</p></div>
+    <div class="card kpi kpi-bounce" data-kpi="bounce" aria-describedby="bounce-method">
+      <p class="kpi-label">Bounce rate</p>
+      <p class="total number">${bounceRate}</p><p class="kpi-note">${bounceNote}</p>
+    </div>
   </section>`;
 }
 
@@ -246,7 +257,7 @@ function renderPages(report: TrafficReport) {
   </section>`;
 }
 
-export function renderDashboard(report: TrafficReport, today: string, invalidRange = false) {
+export function renderDashboard(report: TrafficReport, today: string, invalidRange = false, bounce?: TrafficBounceSummary) {
   const { filters, firstRecordedDay, previousTotal } = report;
   const query = filterQuery(filters);
   query.set("format", "csv");
@@ -266,11 +277,14 @@ export function renderDashboard(report: TrafficReport, today: string, invalidRan
     ${renderFilters(report, today)}
     ${invalidRange ? '<p class="caption coverage" role="status">Το εύρος ημερομηνιών δεν είναι έγκυρο. Εμφανίζονται οι τελευταίες 30 ημέρες.</p>' : ""}
     ${coverage ? `<p class="caption coverage">${escape(coverage)}</p>` : ""}
-    ${renderSummary(report)}
+    ${renderSummary(report, bounce)}
     ${comparison ? `<p class="caption">${escape(comparison)}</p>` : ""}
     ${renderDaily(report, today)}
     <div class="columns">${renderLanguages(report)}${renderPages(report)}</div>
-    <p class="caption method">Μετράμε τις φορτώσεις και τις εσωτερικές μεταβάσεις σε δημόσιες σελίδες. Μια επαναφόρτωση μπορεί να προσθέσει μία προβολή.</p>`,
+    <div class="caption method">
+      <p>Μετράμε τις φορτώσεις και τις εσωτερικές μεταβάσεις σε δημόσιες σελίδες. Μια επαναφόρτωση μπορεί να προσθέσει μία προβολή.</p>
+      <p id="bounce-method">Το ποσοστό εγκατάλειψης αφορά τις μετρήσιμες εισόδους από φόρτωση σελίδας στον browser. Μια είσοδος έχει συνέχεια όταν ο επισκέπτης ανοίγει δεύτερη, διαφορετική σελίδα με εσωτερική πλοήγηση πριν από νέα πλήρη φόρτωση.</p>
+    </div>`,
     filters.day ? displayDate(filters.day) : dateLabel(filters.from, filters.to),
     exportUrl,
   );

@@ -1,7 +1,18 @@
 import { isBrowserTraffic, recordTrafficRequest, trafficDay, trafficRecordingEnabled } from "@/lib/traffic";
+import { recordTrafficBounce } from "@/lib/traffic-bounce";
 
-function emptyResponse(status: number) {
-  return new Response(null, { status, headers: { "Cache-Control": "no-store" } });
+function emptyResponse(status: number, receipt?: Record<string, string>) {
+  return new Response(null, { status, headers: { "Cache-Control": "no-store", ...receipt } });
+}
+
+function validPath(pathname: string | null) {
+  return pathname !== null && pathname.length > 0 && pathname.length <= 403 && !/[?#]/.test(pathname);
+}
+
+function validEntryDay(day: string, today: string) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(day) || day.startsWith("0000-") || day > today) return false;
+  const time = Date.parse(`${day}T00:00:00Z`);
+  return Number.isFinite(time) && new Date(time).toISOString().slice(0, 10) === day;
 }
 
 export async function POST(request: Request) {
@@ -12,12 +23,24 @@ export async function POST(request: Request) {
     return emptyResponse(403);
   }
 
-  // Only the pathname is supplied. The existing writer checks it against the public site.
-  const pathname = headers.get("x-traffic-page");
-  if (!pathname || pathname.length > 403 || /[?#]/.test(pathname)) return emptyResponse(400);
+  const page = headers.get("x-traffic-page");
+  const entry = headers.get("x-traffic-entry");
+  const entryDay = headers.get("x-traffic-entry-day");
+  const today = trafficDay();
 
-  if (trafficRecordingEnabled() && isBrowserTraffic(headers)) {
-    await recordTrafficRequest(pathname, trafficDay());
+  if (page !== null) {
+    if (!validPath(page) || entry !== null || entryDay !== null) return emptyResponse(400);
+    if (trafficRecordingEnabled() && isBrowserTraffic(headers) && await recordTrafficRequest(page, today)) {
+      return emptyResponse(204, { "X-Traffic-Page-Recorded": "1" });
+    }
+  } else {
+    if (entry === null || !validPath(entry) || (entryDay !== null && !validEntryDay(entryDay, today))) {
+      return emptyResponse(400);
+    }
+    if (trafficRecordingEnabled() && isBrowserTraffic(headers)) {
+      const recorded = await recordTrafficBounce(entry, entryDay ?? today, entryDay !== null);
+      if (recorded && entryDay === null) return emptyResponse(204, { "X-Traffic-Entry-Day": today });
+    }
   }
   return emptyResponse(204);
 }

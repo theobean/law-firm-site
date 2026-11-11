@@ -51,9 +51,7 @@ export function canRecordTraffic(method: string, headers: Headers) {
   return isBrowserTraffic(headers);
 }
 
-export async function recordTrafficRequest(pathname: string, day: string) {
-  const connection = process.env.TRAFFIC_WRITE_DATABASE_URL;
-  if (!connection) return;
+export async function publicTrafficPage(pathname: string) {
   const route = /^\/(el|en|de)(\/.*)?$/.exec(pathname);
   if (!route) return;
   const locale = route[1] as TrafficLocale;
@@ -65,13 +63,27 @@ export async function recordTrafficRequest(pathname: string, day: string) {
       if (!/^\/(blog|decisions|media)\/[^/]+$/.test(path)) return;
       if (!(await publicContentPaths()).has("/" + locale + path)) return;
     }
+    return { locale, page: path || "/" };
+  } catch {
+    // The CMS can be unavailable. Skip unverified paths.
+  }
+}
+
+export async function recordTrafficRequest(pathname: string, day: string) {
+  const connection = process.env.TRAFFIC_WRITE_DATABASE_URL;
+  if (!connection) return false;
+  const page = await publicTrafficPage(pathname);
+  if (!page) return false;
+  try {
     await neon(connection).query(
       "SELECT site_traffic.record_request($1::date, $2::text, $3::text)",
-      [day, locale, path || "/"],
+      [day, page.locale, page.page],
       { fetchOptions: { signal: AbortSignal.timeout(2500) } },
     );
+    return true;
   } catch {
     // Reporting outages must not block the site. Avoid logging request details.
+    return false;
   }
 }
 
