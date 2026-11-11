@@ -30,6 +30,8 @@ const content = {
       "Τον τίτλο του πωλητή και τυχόν σχέδιο συμφωνίας που σας έδωσαν.",
       "Το ποσό που σας ζήτησαν για προκαταβολή και τυχόν ημερομηνία πληρωμής ή υπογραφής.",
     ],
+    feeTitle: "Αμοιβή για τον νομικό έλεγχο ακινήτου",
+    fee: "Για την αμοιβή έχει σημασία πόσο πίσω χρειάζεται να φτάσει η έρευνα στους τίτλους και αν υπάρχουν εγγραφές στο Κτηματολόγιο που χρειάζονται διερεύνηση. Στην εκτίμηση συνυπολογίζεται τυχόν έλεγχος του συμφωνητικού για την προκαταβολή ή του σχεδίου του συμβολαίου.",
     coordinationTitle: "Μένετε εκτός Αθήνας;",
     coordination: "Αν βρίσκεστε σε άλλη πόλη ή στο εξωτερικό, μπορούμε πρώτα να δούμε όσα έγγραφα έχετε. Θα σας πούμε τι λείπει από τον φάκελο και τι χρειάζεται να ζητήσουμε από τον πωλητή ή τον συμβολαιογράφο πριν οριστεί η υπογραφή.",
     representation: "Αν δυσκολεύεστε να έρθετε για την υπογραφή, πείτε μας από την πρώτη επικοινωνία. Θα εξετάσουμε με τον συμβολαιογράφο αν μπορείτε να εκπροσωπηθείτε με πληρεξούσιο και τι χρειάζεται να ετοιμάσετε.",
@@ -52,6 +54,8 @@ const content = {
       "The seller's deed and any draft agreement you were given.",
       "The amount of the deposit and the date you have been asked to pay or sign.",
     ],
+    feeTitle: "Legal fees for a property title check",
+    fee: "The fee depends on how far back the title search needs to go and whether any cadastral entries need further investigation. It also takes into account any review of the deposit agreement or draft deed.",
     coordinationTitle: "Based outside Athens?",
     coordination: "If you are in another city or abroad, we can start with the documents you already have. We will tell you what is missing and what we need to request from the seller or notary before a signing date is set.",
     representation: "Tell us early if you may have trouble attending the signing. We will check with the notary whether you can be represented under a power of attorney and what you need to prepare.",
@@ -74,6 +78,8 @@ const content = {
       "Die Urkunde des Verkäufers und einen etwaigen Vertragsentwurf.",
       "Die Höhe der Anzahlung und den Termin, bis zu dem Sie zahlen oder unterschreiben sollen.",
     ],
+    feeTitle: "Honorar für die rechtliche Prüfung der Immobilie",
+    fee: "Für das Honorar kommt es darauf an, wie weit die Prüfung der Eigentumstitel zurückreichen muss und ob Katastereinträge näher untersucht werden müssen. Auch eine etwaige Prüfung der Anzahlungsvereinbarung oder des Kaufvertragsentwurfs fließt in die Einschätzung ein.",
     coordinationTitle: "Sie wohnen außerhalb Athens?",
     coordination: "Wenn Sie in einer anderen Stadt oder im Ausland sind, können wir zuerst die Unterlagen prüfen, die Sie schon haben. Wir sagen Ihnen, was noch fehlt und welche Unterlagen wir vom Verkäufer oder Notar anfordern müssen, bevor ein Termin festgelegt wird.",
     representation: "Wenn Sie bei der Unterzeichnung möglicherweise nicht dabei sein können, sagen Sie uns früh Bescheid. Wir klären mit dem Notar, ob Sie sich mit einer Vollmacht vertreten lassen können und was Sie dafür vorbereiten müssen.",
@@ -146,6 +152,13 @@ export default async function AthensPropertyPurchasePage({ params }: Props) {
           <ul className="mt-3 list-disc space-y-2 pl-5 leading-relaxed text-gray-700">
             {page.checklist.map((item) => <li key={item}>{item}</li>)}
           </ul>
+        </section>
+
+        <section>
+          <h2 className="border-l-4 border-accent pl-4 font-playfair text-2xl font-bold text-primary">
+            {page.feeTitle}
+          </h2>
+          <p className="mt-5 leading-relaxed text-gray-700">{page.fee}</p>
         </section>
 
         <section>
