@@ -51,7 +51,7 @@ export const dashboardStyles = `
   .day-selection { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .45rem 1rem; background: #faf3e3; color: #5e4117; border: 1px solid #ecd9af; border-radius: .5rem; padding: .6rem .9rem; margin-top: .8rem; font-size: .88rem; }
   .day-selection a { color: #594018; font-weight: 700; }
   .coverage { color: #4c5e68; border-left: 3px solid #bd8e39; padding-left: .7rem; }
-  .summary { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .85rem; }
+  .summary { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .85rem; }
   .kpi { display: grid; gap: .35rem; align-content: start; }
   .kpi-label { font-weight: 670; font-size: .88rem; color: var(--muted); }
   .total { font-size: clamp(1.45rem, 3vw, 2.15rem); line-height: 1.05; color: var(--navy); font-weight: 790; letter-spacing: -.04em; }
@@ -108,8 +108,10 @@ export const dashboardStyles = `
   tr[data-recorded="false"] { color: var(--muted); }
   .secondary-number { display: block; font-size: .73rem; color: var(--muted); }
   .empty { padding-top: .8rem; color: var(--muted); font-size: .9rem; }
-  .method { padding: .25rem .2rem; }
+  .method { display: grid; gap: .4rem; padding: .25rem .2rem; }
   @media (max-width: 57rem) {
+    .summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .kpi-bounce { grid-column: 1 / -1; }
     .columns { grid-template-columns: minmax(0, 1fr); }
     .language-list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
     .language-row { gap: .3rem; }
@@ -122,7 +124,7 @@ export const dashboardStyles = `
     .controls button { grid-column: 1 / -1; }
     .page-filter { grid-column: 1 / -1; }
     .custom-range { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; }
-    .summary { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; }
+    .summary { gap: .65rem; }
     .plot-y, .bars { height: 8rem; }
     .plot-x span:nth-child(even) { display: none; }
     .plot-x span:last-child { display: inline; }

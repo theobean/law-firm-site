@@ -7,7 +7,10 @@ const ownerRole = "site_traffic_owner";
 const writerRole = "site_traffic_writer";
 const readerRole = "site_traffic_reader";
 const limitedRole = "NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS NOINHERIT";
-const migrationUrl = new URL("../db/site-traffic.sql", import.meta.url);
+const migrationUrls = [
+  new URL("../db/site-traffic.sql", import.meta.url),
+  new URL("../db/migrations/20261111_06_site_traffic_bounce.sql", import.meta.url),
+];
 
 function identifier(value) {
   return '"' + value.replaceAll('"', '""') + '"';
@@ -76,7 +79,7 @@ export async function provisionTrafficDatabase({ adminUrl, dedicatedDatabase, cr
   let client;
   let inTransaction = false;
   try {
-    const schema = await readFile(migrationUrl, "utf8");
+    const migrations = await Promise.all(migrationUrls.map(url => readFile(url, "utf8")));
     stage = "connect";
     client = new Client({
       connectionString: admin.href,
@@ -151,7 +154,7 @@ export async function provisionTrafficDatabase({ adminUrl, dedicatedDatabase, cr
     stage = "schema";
     await client.query(`CREATE SCHEMA site_traffic AUTHORIZATION ${ownerRole}`);
     await client.query(`SET LOCAL ROLE ${ownerRole}`);
-    await client.query(schema);
+    for (const migration of migrations) await client.query(migration);
 
     if (credentialsFile) {
       stage = "write_credentials";
