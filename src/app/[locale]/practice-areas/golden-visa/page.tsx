@@ -13,8 +13,8 @@ const realEstatePath = "/practice-areas/realEstate";
 const pagePath = "/practice-areas/golden-visa";
 const depositGuidePath = "/blog/prokatavoli-agora-akinitou";
 const checkIcons = [FileSearch, Building2, ClipboardCheck];
-// Thessaloniki waterfront photograph by K, https://www.pexels.com/photo/37845038/
-const waterfrontPhoto = "/thessaloniki-waterfront.webp";
+// White Tower photograph by Paolo Bici, https://www.pexels.com/photo/32200209/
+const waterfrontPhoto = "/thessaloniki-white-tower.jpg";
 
 const content = {
   en: {
@@ -25,7 +25,7 @@ const content = {
     intro: "Has a seller offered you a property in Thessaloniki as suitable for Greece’s Golden Visa? If you are buying from abroad, we can start with the title and any draft agreement you have received. We check the property documents and the terms of the purchase before you pay a deposit or sign.",
     back: "All legal services",
     contact: "Request a legal property review",
-    photoAlt: "Aerial view of Thessaloniki’s waterfront and apartment buildings",
+    photoAlt: "The White Tower beside Thessaloniki’s waterfront promenade",
     rulesTitle: "Which Golden Visa rules apply to the property?",
     standardTitle: "Standard property purchase",
     specialTitle: "Special cases",
@@ -76,7 +76,7 @@ const content = {
     intro: "Hat Ihnen ein Verkäufer in Thessaloniki eine Immobilie angeboten, die für das griechische Golden Visa geeignet sein soll? Wenn Sie aus dem Ausland kaufen, können wir mit der Eigentumsurkunde und dem Vertragsentwurf beginnen, den Sie erhalten haben. Wir prüfen die Unterlagen und die Kaufbedingungen, bevor Sie eine Anzahlung leisten oder unterschreiben.",
     back: "Alle Rechtsgebiete",
     contact: "Rechtliche Immobilienprüfung anfragen",
-    photoAlt: "Luftaufnahme der Uferpromenade und Wohnhäuser von Thessaloniki",
+    photoAlt: "Der Weiße Turm an der Uferpromenade von Thessaloniki",
     rulesTitle: "Welche Voraussetzungen gelten für die Immobilie?",
     standardTitle: "Regulärer Immobilienkauf",
     specialTitle: "Sonderfälle",
@@ -127,7 +127,7 @@ const content = {
     intro: "Σας πρότεινε ο πωλητής ακίνητο στη Θεσσαλονίκη ως κατάλληλο για Golden Visa; Αν αγοράζετε από το εξωτερικό, μπορούμε να ξεκινήσουμε από τον τίτλο του πωλητή και το σχέδιο συμφωνίας που έχετε στα χέρια σας. Ελέγχουμε τα έγγραφα του ακινήτου και τους όρους της αγοράς πριν δώσετε προκαταβολή ή υπογράψετε.",
     back: "Όλες οι νομικές υπηρεσίες",
     contact: "Ζητήστε νομικό έλεγχο ακινήτου",
-    photoAlt: "Πανοραμική άποψη της παραλίας και των πολυκατοικιών της Θεσσαλονίκης",
+    photoAlt: "Ο Λευκός Πύργος στην παραλία της Θεσσαλονίκης",
     rulesTitle: "Ποιες προϋποθέσεις ισχύουν για το ακίνητο;",
     standardTitle: "Γενικός κανόνας",
     specialTitle: "Ειδικές περιπτώσεις",
@@ -225,10 +225,11 @@ export default async function GoldenVisaPropertyPage({ params }: Props) {
                   src={waterfrontPhoto}
                   alt={page.photoAlt}
                   fill
+                  quality={90}
                   loading="eager"
                   fetchPriority="high"
                   sizes="(min-width: 1152px) 488px, (min-width: 1024px) 43vw, calc(100vw - 60px)"
-                  className="object-cover object-[42%_50%]"
+                  className="object-cover object-[center_18%] lg:object-center"
                 />
               </div>
             </div>
