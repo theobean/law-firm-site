@@ -279,6 +279,7 @@
             }
           ],
           "newBuildLink": "Buying a new-build property and reviewing the developer agreement",
+          "depositGuideLink": "What to check before paying a property deposit",
           "contactTitle": "Have you been given an agreement or a draft deed?",
           "ctaText": "Tell us what the seller has asked for and when you need to reply. If there is a draft agreement, have it to hand when you contact us.",
           "cta": "Request a legal property review"
@@ -387,6 +388,10 @@
   "contact": {
     "title": "Contact",
     "subtitle": "We are at your disposal for any legal matter.",
+    "propertyTopic": "Buying a property",
+    "propertyArea": "Property area (optional)",
+    "propertyDeadline": "Deposit or signing date (optional)",
+    "sendError": "We could not confirm that your message was sent. Please try again or call +30 2310 545 261.",
     "name": "Full Name",
     "email": "Email",
     "phone": "Phone",
@@ -1071,7 +1076,11 @@
   "urgentCta": {
     "text": "Have you been served with a payment order, seizure or auction notice?",
     "sub": "Do not wait. Deadlines in enforcement proceedings are short and critical.",
-    "cta": "Immediate file review"
+    "cta": "Immediate file review",
+    "close": "Close",
+    "propertyText": "Has the seller asked you for a deposit?",
+    "propertySub": "We review the deed and the terms before you commit.",
+    "propertyCta": "Request a title check"
   },
   "auctionBanner": {
     "heading": "Auction & Foreclosure Lawyer in Thessaloniki",

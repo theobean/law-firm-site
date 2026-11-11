@@ -13,6 +13,7 @@ import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { buildPageMeta, siteUrl, ogDefaults } from "@/lib/seo";
 import { getPropertyPurchaseGuide } from "./propertyPurchaseGuide";
+import { propertyContactHref } from "@/lib/property-contact";
 
 export const revalidate = 60;
 
@@ -245,7 +246,7 @@ export default async function ArticlePage({
               <p className="text-primary font-playfair font-semibold text-lg">{tAreas(`areas.${pillar}.title`)}</p>
             </div>
             <Link
-              href={`/practice-areas/${pillar}`}
+              href={guide ? propertyContactHref("purchase-guide") : `/practice-areas/${pillar}`}
               className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-5 py-3 rounded-sm transition-colors text-sm flex-shrink-0 self-start sm:self-auto"
             >
               {guide?.serviceCta ?? siloLabels[lang].view} <ArrowRight size={16} />

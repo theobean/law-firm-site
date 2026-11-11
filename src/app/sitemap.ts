@@ -10,6 +10,7 @@ const staticPaths = [
   "/practice-areas/realEstate/agora-akinitou-athina",
   "/practice-areas/realEstate/agora-neodmitou",
   "/blog",
+  "/blog/prokatavoli-agora-akinitou",
   "/faq",
   "/contact",
   "/media",

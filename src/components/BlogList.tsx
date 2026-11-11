@@ -105,15 +105,13 @@ function AnimatedCard({ article, locale, categoryLabels, index }: {
           )}
           <div className="p-5">
             <div className="flex items-center flex-wrap gap-2 text-white/50 text-xs mb-3">
-              <Calendar size={11} />
-              <span>
-                {article.publishedAt
-                  ? new Date(article.publishedAt).toLocaleDateString(
-                      locale === "el" ? "el-GR" : "en-US"
-                    )
-                  : ""}
-              </span>
-              <span>·</span>
+              {article.publishedAt && (
+                <>
+                  <Calendar size={11} />
+                  <span>{new Date(article.publishedAt).toLocaleDateString(locale === "el" ? "el-GR" : "en-US")}</span>
+                  <span>·</span>
+                </>
+              )}
               <Clock size={11} />
               <span>{readingTime(article.body)} {locale === "el" ? "λεπτά" : locale === "de" ? "Min." : "min"}</span>
               {article.category && categoryLabels[article.category] && (

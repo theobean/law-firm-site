@@ -1,11 +1,15 @@
-import { useTranslations, useLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { buildPageMeta } from "@/lib/seo";
+import { getPropertyContactSource } from "@/lib/property-contact";
 import { MapPin, Phone, Mail, Clock, ChevronRight } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
+import PropertyPhoneLink from "@/components/PropertyPhoneLink";
 import ScrollReveal from "@/components/ScrollReveal";
 import ExternalEmbed from "@/components/ExternalEmbed";
+
+const phoneHref = "tel:+302310545261";
+const phoneNumber = "+30 2310 545 261";
 
 export async function generateMetadata({
   params,
@@ -17,10 +21,26 @@ export async function generateMetadata({
   return { title: t("contactTitle"), description: t("contactDescription"), ...buildPageMeta(locale, "/contact") };
 }
 
-export default function ContactPage() {
-  const t = useTranslations("contact");
-  const tCommon = useTranslations("common");
-  const locale = useLocale();
+export default async function ContactPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const [{ locale }, query] = await Promise.all([params, searchParams]);
+  const [t, tCommon] = await Promise.all([
+    getTranslations({ locale, namespace: "contact" }),
+    getTranslations({ locale, namespace: "common" }),
+  ]);
+  const propertyPurchase = query.service === "property-purchase";
+  const source = propertyPurchase ? getPropertyContactSource(query.source) : undefined;
+  const contactCards = [
+    { icon: MapPin, label: t("address"), lines: [t("addressLine1"), t("addressLine2")], href: "https://maps.google.com/?cid=10350029232005631470", external: true },
+    ...(!propertyPurchase ? [{ icon: Phone, label: t("phone"), lines: [phoneNumber], href: phoneHref, external: false }] : []),
+    { icon: Mail, label: t("email"), lines: ["iopapaio@gmail.com"], href: "mailto:iopapaio@gmail.com", external: false },
+    { icon: Clock, label: t("hours"), lines: [t("hoursValue")], href: null, external: false },
+  ];
 
   return (
     <div className="bg-white">
@@ -40,12 +60,7 @@ export default function ContactPage() {
           {/* Contact info */}
           <div>
             <div className="space-y-8">
-              {[
-                { icon: MapPin, label: t("address"), lines: [t("addressLine1"), t("addressLine2")], href: "https://maps.google.com/?cid=10350029232005631470", external: true },
-                { icon: Phone, label: t("phone"), lines: ["+30 2310 545 261"], href: "tel:+302310545261", external: false },
-                { icon: Mail, label: t("email"), lines: ["iopapaio@gmail.com"], href: "mailto:iopapaio@gmail.com", external: false },
-                { icon: Clock, label: t("hours"), lines: [t("hoursValue")], href: null, external: false },
-              ].map(({ icon: Icon, label, lines, href, external }, i) => (
+              {contactCards.map(({ icon: Icon, label, lines, href, external }, i) => (
                 <ScrollReveal key={label} direction="left" delay={i * 0.12}>
                   <a
                     href={href ?? undefined}
@@ -90,9 +105,26 @@ export default function ContactPage() {
           </div>
 
           {/* Form */}
-          <ScrollReveal direction="right" delay={0.15}>
-            <ContactForm />
-          </ScrollReveal>
+          <div id="contact-form" className="scroll-mt-24 md:scroll-mt-36">
+            <ScrollReveal direction="right" delay={0.15}>
+              {propertyPurchase && (
+                <PropertyPhoneLink
+                  href={phoneHref}
+                  source={source}
+                  className="mb-5 inline-flex min-h-11 items-center gap-2 rounded-sm border border-accent/40 px-4 py-2 text-sm font-semibold text-primary hover:bg-accent/10"
+                >
+                  <Phone size={16} className="text-accent" aria-hidden="true" />
+                  <span className="sr-only">{t("phone")} </span>
+                  {phoneNumber}
+                </PropertyPhoneLink>
+              )}
+              <ContactForm
+                key={propertyPurchase ? "property-purchase" : "general"}
+                propertyPurchase={propertyPurchase}
+                source={source}
+              />
+            </ScrollReveal>
+          </div>
         </div>
       </section>
     </div>

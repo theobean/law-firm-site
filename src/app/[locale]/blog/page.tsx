@@ -3,6 +3,7 @@ import { getArticles } from "@/sanity/client";
 import BlogList from "@/components/BlogList";
 import type { Metadata } from "next";
 import { buildPageMeta } from "@/lib/seo";
+import { depositGuides } from "./prokatavoli-agora-akinitou/content";
 
 export const revalidate = 60;
 
@@ -21,6 +22,23 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
   const t = await getTranslations("blog");
   const tAreas = await getTranslations("practiceAreas");
   const articles = await getArticles();
+  const guide = depositGuides[locale === "en" || locale === "de" ? locale : "el"];
+  const depositGuide = {
+    _id: "property-deposit-guide",
+    title: guide.title,
+    excerpt: guide.description,
+    slug: { current: "prokatavoli-agora-akinitou" },
+    category: "realEstate",
+    body: [{
+      _type: "block",
+      children: [{ text: [
+        guide.intro,
+        ...guide.checklist,
+        ...guide.scenarios.flatMap(({ paragraphs }) => paragraphs),
+        guide.contactText,
+      ].join(" ") }],
+    }],
+  };
 
   const categoryKeys = [
     "banking",
@@ -51,7 +69,7 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
       </section>
 
       <section className="max-w-6xl mx-auto px-6 py-20">
-        <BlogList articles={articles} locale={locale} categoryLabels={categoryLabels} />
+        <BlogList articles={[depositGuide, ...articles]} locale={locale} categoryLabels={categoryLabels} />
       </section>
     </div>
   );

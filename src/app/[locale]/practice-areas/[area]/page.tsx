@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { buildPageMeta } from "@/lib/seo";
+import { propertyContactHref } from "@/lib/property-contact";
 import { Link } from "@/navigation";
 import { ArrowLeft, ArrowRight, Check, Banknote, Handshake, ShieldCheck, Briefcase, Home, Building2, BookOpen, Receipt, HardHat, Gavel } from "lucide-react";
 import { use } from "react";
@@ -116,7 +117,7 @@ export default function PracticeAreaDetailPage({
               <p className="text-white/70 text-xl mt-2">{t(`areas.${area}.desc`)}</p>
               {isRealEstate && (
                 <Link
-                  href="/contact"
+                  href={propertyContactHref("thessaloniki")}
                   className="mt-6 inline-flex items-center gap-2 rounded-sm bg-accent px-5 py-3 font-semibold text-primary transition-colors hover:bg-accent/90"
                 >
                   {contactLabel} <ArrowRight size={16} aria-hidden="true" />
@@ -274,12 +275,20 @@ export default function PracticeAreaDetailPage({
         )}
 
         {isRealEstate && (
-          <Link
-            href="/practice-areas/realEstate/agora-neodmitou"
-            className="mt-6 inline-flex items-center gap-2 rounded-sm border border-accent/50 bg-amber-50 px-5 py-4 font-semibold text-primary transition-colors hover:bg-amber-100"
-          >
-            {t("areas.realEstate.purchase.newBuildLink")} <ArrowRight size={16} className="shrink-0" aria-hidden="true" />
-          </Link>
+          <div className="mt-6 grid gap-3 sm:grid-cols-2">
+            <Link
+              href="/practice-areas/realEstate/agora-neodmitou"
+              className="inline-flex items-center justify-between gap-2 rounded-sm border border-accent/50 bg-amber-50 px-5 py-4 font-semibold text-primary transition-colors hover:bg-amber-100"
+            >
+              {t("areas.realEstate.purchase.newBuildLink")} <ArrowRight size={16} className="shrink-0" aria-hidden="true" />
+            </Link>
+            <Link
+              href="/blog/prokatavoli-agora-akinitou"
+              className="inline-flex items-center justify-between gap-2 rounded-sm border border-accent/50 bg-amber-50 px-5 py-4 font-semibold text-primary transition-colors hover:bg-amber-100"
+            >
+              {t("areas.realEstate.purchase.depositGuideLink")} <ArrowRight size={16} className="shrink-0" aria-hidden="true" />
+            </Link>
+          </div>
         )}
 
         <ScrollReveal direction="up" delay={0.1}>
@@ -294,7 +303,7 @@ export default function PracticeAreaDetailPage({
           </h2>
           <p className="text-white/70 mb-8">{isRealEstate ? t("areas.realEstate.purchase.ctaText") : t("ctaText")}</p>
           <Link
-            href={`/contact`}
+            href={isRealEstate ? propertyContactHref("thessaloniki") : "/contact"}
             className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-8 py-4 rounded-sm transition-colors"
           >
             {contactLabel} <ArrowRight size={18} />

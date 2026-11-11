@@ -279,6 +279,7 @@
             }
           ],
           "newBuildLink": "Neubau kaufen und Bauträgervertrag prüfen lassen",
+          "depositGuideLink": "Was Sie vor der Anzahlung beim Immobilienkauf prüfen sollten",
           "contactTitle": "Haben Sie eine Vereinbarung oder einen Vertragsentwurf erhalten?",
           "ctaText": "Sagen Sie uns, was der Verkäufer von Ihnen verlangt und bis wann Sie antworten sollen. Halten Sie einen vorhandenen Entwurf für das Gespräch bereit.",
           "cta": "Rechtliche Immobilienprüfung anfragen"
@@ -387,6 +388,10 @@
   "contact": {
     "title": "Kontakt",
     "subtitle": "Wir stehen Ihnen für jede rechtliche Angelegenheit zur Verfügung.",
+    "propertyTopic": "Immobilienkauf",
+    "propertyArea": "Ort oder Lage der Immobilie (optional)",
+    "propertyDeadline": "Termin für Anzahlung oder Unterzeichnung (optional)",
+    "sendError": "Der Versand konnte nicht bestätigt werden. Versuchen Sie es erneut oder rufen Sie +30 2310 545 261 an.",
     "name": "Vollständiger Name",
     "email": "E-Mail",
     "phone": "Telefon",
@@ -1071,7 +1076,11 @@
   "urgentCta": {
     "text": "Wurde Ihnen ein Mahnbescheid, eine Pfändung oder ein Versteigerungstermin zugestellt?",
     "sub": "Warten Sie nicht. Fristen im Vollstreckungsverfahren sind kurz und entscheidend.",
-    "cta": "Sofortige Aktenprüfung"
+    "cta": "Sofortige Aktenprüfung",
+    "close": "Schließen",
+    "propertyText": "Verlangt der Verkäufer eine Anzahlung?",
+    "propertySub": "Wir prüfen die Eigentumsurkunde und die Bedingungen, bevor Sie sich binden.",
+    "propertyCta": "Titelprüfung anfragen"
   },
   "auctionBanner": {
     "heading": "Anwalt für Zwangsversteigerungen in Thessaloniki",

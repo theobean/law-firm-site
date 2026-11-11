@@ -182,7 +182,10 @@ export default function Navbar() {
   function switchLocale(target: string) {
     document.cookie = `locale-pref=${target}; max-age=${60 * 60 * 24 * 30}; path=/; samesite=lax`;
     const newPath = pathname.replace(`/${locale}`, `/${target}`);
-    router.push(newPath);
+    const contactDetails = pathname === `/${locale}/contact`
+      ? window.location.search + window.location.hash
+      : "";
+    router.push(newPath + contactDetails);
   }
 
   // Rendered BEFORE the Services/Updates dropdowns

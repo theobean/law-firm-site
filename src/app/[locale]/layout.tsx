@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Inter, Jost } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
@@ -203,7 +204,9 @@ export default async function LocaleLayout({
           <main className="flex-1">{children}</main>
           <Footer />
           <div id="site-bottom-overlays" className="fixed inset-x-0 bottom-0 z-50 flex flex-col">
-            <UrgentCTABar />
+            <Suspense fallback={null}>
+              <UrgentCTABar />
+            </Suspense>
             <CookieBanner />
           </div>
           <ScrollToTop />

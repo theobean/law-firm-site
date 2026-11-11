@@ -4,6 +4,7 @@ import { hasLocale } from "next-intl";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { routing } from "@/i18n/routing";
 import { buildPageMeta } from "@/lib/seo";
+import { propertyContactHref } from "@/lib/property-contact";
 import { Link } from "@/navigation";
 
 const realEstatePath = "/practice-areas/realEstate";
@@ -117,7 +118,7 @@ export default async function AthensPropertyPurchasePage({ params }: Props) {
             <p className="mt-4 max-w-3xl text-lg leading-relaxed text-white/85">{page.intro}</p>
           </div>
           <Link
-            href="/contact"
+            href={propertyContactHref("athens")}
             className="mt-8 inline-flex items-center gap-2 rounded-sm bg-accent px-5 py-3 font-semibold text-primary transition-colors hover:bg-accent/90"
           >
             {page.contact} <ArrowRight size={18} className="shrink-0" aria-hidden="true" />

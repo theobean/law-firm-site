@@ -1,6 +1,7 @@
 import type { PortableTextBlock } from "@portabletext/react";
 
 const guideSlug = "agora-akiniton-vimata";
+const depositGuidePath = "/blog/prokatavoli-agora-akinitou";
 const propertyTransfer = "https://www.gov.gr/ipiresies/periousia-kai-phorologia/diakheirise-akinetes-periousias/metavivasi";
 const enfiaCertificate = "https://www.aade.gr/egkyrotita-oristikopoiisi-pistopoiitikoy-enfia";
 const transferTax = "https://www.gov.gr/el/sdg/residence/purchasing-and-selling-of-immovable-property/real-estate-transfer-tax";
@@ -42,6 +43,7 @@ const translations: Record<"el" | "en" | "de", GuideTranslation> = {
       {
         title: "4. Προσύμφωνο και προκαταβολή",
         text: "Αν σας ζητήσουν να υπογράψετε ή να καταβάλετε προκαταβολή, ζητήστε πρώτα να ελεγχθούν το έγγραφο, ο απαιτούμενος τύπος, οι προθεσμίες και οι όροι επιστροφής του ποσού. Διευκρινίστε τι προβλέπεται αν ο έλεγχος αναδείξει πρόβλημα ή αν η αγορά εξαρτάται από στεγαστικό δάνειο.",
+        link: { href: depositGuidePath, label: "Τι να ελέγξετε πριν δώσετε προκαταβολή" },
       },
       {
         title: "5. Φόρος μεταβίβασης και έξοδα αγοράς",
@@ -85,6 +87,7 @@ const translations: Record<"el" | "en" | "de", GuideTranslation> = {
       {
         title: "4. Review the preliminary agreement and deposit",
         text: "If you are asked to sign an agreement or pay a deposit, have the document, the required form, the deadlines and the refund terms reviewed first. Clarify what happens if a check reveals a problem or the purchase depends on a mortgage loan.",
+        link: { href: depositGuidePath, label: "What to check before paying a property deposit" },
       },
       {
         title: "5. Budget for transfer tax and purchase costs",
@@ -128,6 +131,7 @@ const translations: Record<"el" | "en" | "de", GuideTranslation> = {
       {
         title: "4. Vorvertrag und Anzahlung prüfen",
         text: "Wenn Sie eine Vereinbarung unterschreiben oder eine Anzahlung leisten sollen, lassen Sie vorab das Dokument, die erforderliche Form, die Fristen und die Rückzahlungsbedingungen prüfen. Klären Sie, was passiert, wenn bei der Prüfung ein Problem auftritt oder der Kauf von einer Finanzierung abhängt.",
+        link: { href: depositGuidePath, label: "Was Sie vor der Anzahlung beim Immobilienkauf prüfen sollten" },
       },
       {
         title: "5. Grunderwerbsteuer und Kaufnebenkosten einplanen",
@@ -159,7 +163,7 @@ export function getPropertyPurchaseGuide(slug: string, locale: string) {
   const body = sections.flatMap<PortableTextBlock>((section, index) => {
     const key = `guide-${index}`;
     const link = index === 0
-      ? { href: `/${lang}/practice-areas/realEstate`, label: serviceLabel }
+      ? { href: "/practice-areas/realEstate", label: serviceLabel }
       : section.link;
     const blocks: PortableTextBlock[] = [
       { _key: `${key}-heading`, _type: "block", style: "h2", children: [
@@ -171,11 +175,12 @@ export function getPropertyPurchaseGuide(slug: string, locale: string) {
     ];
 
     if (link) {
+      const href = link.href.startsWith("/") ? `/${lang}${link.href}` : link.href;
       blocks.push({
         _key: `${key}-link`,
         _type: "block",
         style: "normal",
-        markDefs: [{ _key: `${key}-href`, _type: "link", href: link.href }],
+        markDefs: [{ _key: `${key}-href`, _type: "link", href }],
         children: [{ _key: `${key}-link-text`, _type: "span", text: link.label, marks: [`${key}-href`] }],
       });
     }
