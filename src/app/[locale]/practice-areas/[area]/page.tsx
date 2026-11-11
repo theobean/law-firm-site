@@ -19,10 +19,24 @@ export async function generateMetadata({
   const { locale, area } = await params;
   if (!validAreas.includes(area as AreaKey)) return {};
   const t = await getTranslations({ locale, namespace: "practiceAreas" });
+  const meta = buildPageMeta(locale, `/practice-areas/${area}`);
+
+  if (area === "realEstate") {
+    const title = t("areas.realEstate.purchase.seoTitle");
+    const description = t("areas.realEstate.purchase.seoDescription");
+    return {
+      ...meta,
+      title: { absolute: title },
+      description,
+      openGraph: { ...meta.openGraph, title, description },
+      twitter: { card: "summary_large_image", title, description, images: meta.openGraph.images },
+    };
+  }
+
   return {
     title: t(`areas.${area}.title`),
     description: t(`areas.${area}.desc`),
-    ...buildPageMeta(locale, `/practice-areas/${area}`),
+    ...meta,
   };
 }
 
@@ -71,6 +85,11 @@ export default function PracticeAreaDetailPage({
   const Icon = icons[area as AreaKey];
 
   const servicesRaw = t.raw(`areas.${area}.services`) as string[];
+  const isRealEstate = area === "realEstate";
+  const purchaseSections = isRealEstate
+    ? (t.raw("areas.realEstate.purchase.steps") as { title: string; text: string }[])
+    : [];
+  const contactLabel = isRealEstate ? t("areas.realEstate.purchase.cta") : t("ctaTitle");
 
   return (
     <div className="bg-white">
@@ -88,9 +107,17 @@ export default function PracticeAreaDetailPage({
             </div>
             <div className="border-l-4 border-accent pl-6 md:border-l-0 md:pl-0">
               <h1 className="text-4xl md:text-5xl font-playfair font-bold">
-                {t(`areas.${area}.title`)}
+                {isRealEstate ? t("areas.realEstate.purchase.heading") : t(`areas.${area}.title`)}
               </h1>
               <p className="text-white/70 text-xl mt-2">{t(`areas.${area}.desc`)}</p>
+              {isRealEstate && (
+                <Link
+                  href="/contact"
+                  className="mt-6 inline-flex items-center gap-2 rounded-sm bg-accent px-5 py-3 font-semibold text-primary transition-colors hover:bg-accent/90"
+                >
+                  {contactLabel} <ArrowRight size={16} aria-hidden="true" />
+                </Link>
+              )}
             </div>
           </div>
         </div>
@@ -102,6 +129,22 @@ export default function PracticeAreaDetailPage({
             {t(`areas.${area}.longDesc`)}
           </p>
         </ScrollReveal>
+
+        {isRealEstate && (
+          <section className="mb-12">
+            <h2 className="mb-6 border-l-4 border-accent pl-4 text-2xl font-playfair font-bold text-primary">
+              {t("areas.realEstate.purchase.stepsTitle")}
+            </h2>
+            <ol className="grid gap-4 md:grid-cols-3">
+              {purchaseSections.map(({ title, text }) => (
+                <li key={title} className="rounded-sm border border-gray-200 bg-gray-50 p-5">
+                  <h3 className="mb-2 font-semibold text-primary">{title}</h3>
+                  <p className="leading-relaxed text-gray-700">{text}</p>
+                </li>
+              ))}
+            </ol>
+          </section>
+        )}
 
         {(area === "banking" || area === "extrajudicial") && (
           <ScrollReveal direction="up" delay={0.05}>
@@ -184,11 +227,30 @@ export default function PracticeAreaDetailPage({
 
           <ScrollReveal direction="right" delay={0.2}>
             <h2 className="text-2xl font-playfair font-bold text-primary mb-6 border-l-4 border-accent pl-4">
-              {t("approachTitle")}
+              {isRealEstate ? t("areas.realEstate.purchase.reviewTitle") : t("approachTitle")}
             </h2>
             <p className="text-gray-600 leading-relaxed">{t(`areas.${area}.approach`)}</p>
+            {isRealEstate && (
+              <>
+                <h3 className="mt-6 mb-2 font-semibold text-primary">
+                  {t("areas.realEstate.purchase.documentsTitle")}
+                </h3>
+                <p className="leading-relaxed text-gray-600">
+                  {t("areas.realEstate.purchase.documentsText")}
+                </p>
+              </>
+            )}
           </ScrollReveal>
         </div>
+
+        {isRealEstate && (
+          <Link
+            href="/practice-areas/realEstate/agora-neodmitou"
+            className="mt-10 inline-flex items-center gap-2 rounded-sm border border-accent/50 bg-amber-50 px-5 py-4 font-semibold text-primary transition-colors hover:bg-amber-100"
+          >
+            {t("areas.realEstate.purchase.newBuildLink")} <ArrowRight size={16} className="shrink-0" aria-hidden="true" />
+          </Link>
+        )}
 
         <ScrollReveal direction="up" delay={0.1}>
           <CategoryArticles category={area} locale={locale} />
@@ -198,14 +260,14 @@ export default function PracticeAreaDetailPage({
       <section className="bg-primary py-16">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <h2 className="text-3xl font-playfair font-bold text-white mb-4">
-            {t("ctaTitle")}
+            {isRealEstate ? t("areas.realEstate.purchase.contactTitle") : t("ctaTitle")}
           </h2>
-          <p className="text-white/70 mb-8">{t("ctaText")}</p>
+          <p className="text-white/70 mb-8">{isRealEstate ? t("areas.realEstate.purchase.ctaText") : t("ctaText")}</p>
           <Link
             href={`/contact`}
             className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-8 py-4 rounded-sm transition-colors"
           >
-            {t("ctaTitle")} <ArrowRight size={18} />
+            {contactLabel} <ArrowRight size={18} />
           </Link>
         </div>
       </section>

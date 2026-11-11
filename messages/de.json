@@ -31,6 +31,7 @@
     "services": "Leistungen",
     "bankingLaw": "Bankrecht",
     "funds": "NPL-Fonds",
+    "realEstatePurchase": "Immobilienkauf und Titelprüfung",
     "banks": "Banken",
     "individuals": "Privatpersonen",
     "businesses": "Unternehmen",
@@ -226,9 +227,36 @@
       },
       "realEstate": {
         "title": "Immobilienrecht",
-        "desc": "Immobilientransaktionen, Mietverträge und Grundbuchfragen.",
-        "longDesc": "Kauf oder Verkauf einer Immobilie ist eine der wichtigsten finanziellen Entscheidungen im Leben. Eine gründliche rechtliche Prüfung der Eigentumstitel und die korrekte Vertragsgestaltung sind unerlässlich, um zukünftige Probleme zu vermeiden.",
-        "approach": "Wir führen eine vollständige Titelprüfung im Grundbuch und Kataster durch, begleiten den gesamten Prozess bis zur Eintragung und stellen sicher, dass unser Mandant vollständig geschützt ist.",
+        "desc": "Prüfung von Eigentumstiteln, Belastungen und Kaufvertrag vor dem Erwerb.",
+        "longDesc": "Wenn Sie ein Haus, eine Wohnung oder ein Grundstück gefunden haben, prüfen wir die Immobilie rechtlich und begleiten Sie von der Titelprüfung bis zur Eintragung des Kaufvertrags.",
+        "approach": "Wir erläutern Ihnen die Ergebnisse der Prüfung, offene Fragen und die Punkte, die vor dem Kauf geklärt werden sollten.",
+        "purchase": {
+          "seoTitle": "Anwalt für Immobilienrecht in Thessaloniki | Papaioannou",
+          "seoDescription": "Rechtliche Begleitung beim Immobilienkauf in Thessaloniki. Wir prüfen Titel, Belastungen, Anzahlungsbedingungen und Vertragsentwurf und begleiten die Eintragung.",
+          "heading": "Anwalt für den Immobilienkauf in Thessaloniki",
+          "stepsTitle": "So läuft die rechtliche Prüfung ab",
+          "steps": [
+            {
+              "title": "Vor der Anzahlung",
+              "text": "Wir prüfen beim zuständigen Katasteramt, wer die Immobilie übertragen darf und ob Hypotheken, Hypothekenvormerkungen, Pfändungen oder Ansprüche eingetragen sind. Liegt ein Vertragsentwurf vor, prüfen wir die Anzahlungsbedingungen."
+            },
+            {
+              "title": "Vor der Unterzeichnung",
+              "text": "Wir prüfen die Beschreibung der Immobilie, den Kaufpreis, die Zahlungsbedingungen und die Punkte, die vor der Unterzeichnung geklärt werden müssen."
+            },
+            {
+              "title": "Nach der Unterzeichnung",
+              "text": "Wir begleiten die Eintragung des Kaufvertrags beim Katasteramt und informieren Sie über den Abschluss."
+            }
+          ],
+          "reviewTitle": "Was Sie aus der Prüfung erfahren",
+          "documentsTitle": "Was Sie für das erste Gespräch bereithalten können",
+          "documentsText": "Nennen Sie die Adresse der Immobilie und gegebenenfalls den geplanten Termin für Anzahlung oder Unterzeichnung. Halten Sie, soweit vorhanden, die Katasternummer (KAEK), den Eigentumstitel des Verkäufers oder den Vertragsentwurf bereit.",
+          "newBuildLink": "Neubau kaufen und Bauträgervertrag prüfen lassen",
+          "contactTitle": "Haben Sie eine Immobilie gefunden, die Sie kaufen möchten?",
+          "ctaText": "Teilen Sie uns mit, wie weit der Kauf fortgeschritten ist, damit wir die nötigen Prüfungen besprechen können.",
+          "cta": "Rechtliche Immobilienprüfung anfragen"
+        },
         "services": [
           "Eigentums- und Belastungsprüfungen",
           "Erstellung und Prüfung von Kaufverträgen",

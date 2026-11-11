@@ -11,9 +11,20 @@ import AuthorCard from "@/components/AuthorCard";
 import RelatedArticles from "@/components/RelatedArticles";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
-import { siteUrl, ogDefaults } from "@/lib/seo";
+import { buildPageMeta, siteUrl, ogDefaults } from "@/lib/seo";
+import { getPropertyPurchaseGuide } from "./propertyPurchaseGuide";
 
 export const revalidate = 60;
+
+async function getLocalizedArticle(slug: string, locale: string) {
+  const article = await getArticle(slug);
+  if (!article) return null;
+
+  // Keep the Sanity identity, author and publication metadata while previewing
+  // the translated guide without writes to the shared dataset.
+  const guide = getPropertyPurchaseGuide(slug, locale);
+  return { article: guide ? { ...article, ...guide.article } : article, guide };
+}
 
 // Normalises article body pasted from Word/PDF, where the whole text often
 // lands inside a single span with literal "\n" characters:
@@ -63,8 +74,9 @@ export async function generateMetadata({
   params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
   const { slug, locale } = await params;
-  const article = await getArticle(slug);
-  if (!article) return {};
+  const localized = await getLocalizedArticle(slug, locale);
+  if (!localized) return {};
+  const { article, guide } = localized;
 
   const articleUrl = `${siteUrl}/${locale}/blog/${slug}`;
   const metaTitle = article.seoTitle || article.title;
@@ -76,7 +88,9 @@ export async function generateMetadata({
   return {
     title: metaTitle,
     description,
-    alternates: { canonical: articleUrl },
+    alternates: guide
+      ? buildPageMeta(locale, `/blog/${slug}`).alternates
+      : { canonical: articleUrl },
     openGraph: {
       ...ogDefaults(locale),
       title: metaTitle,
@@ -101,9 +115,9 @@ export default async function ArticlePage({
   params: Promise<{ slug: string; locale: string }>;
 }) {
   const { slug, locale } = await params;
-  const article = await getArticle(slug);
-
-  if (!article) notFound();
+  const localized = await getLocalizedArticle(slug, locale);
+  if (!localized) notFound();
+  const { article, guide } = localized;
 
   const t = await getTranslations("blog");
 
@@ -169,7 +183,7 @@ export default async function ArticlePage({
               <span>
                 {article.publishedAt
                   ? new Date(article.publishedAt).toLocaleDateString(
-                      locale === "el" ? "el-GR" : "en-US"
+                      guide ? lang : locale === "el" ? "el-GR" : "en-US"
                     )
                   : ""}
               </span>
@@ -211,6 +225,15 @@ export default async function ArticlePage({
           {article.body && (
             <PortableText
               value={normalizeBody(article.body)}
+              components={guide ? {
+                block: {
+                  h2: ({ children }) => <h2 className="mt-8 mb-3 font-playfair text-2xl font-bold text-primary">{children}</h2>,
+                  normal: ({ children }) => <p className="mb-4 leading-relaxed text-gray-700">{children}</p>,
+                },
+                marks: {
+                  link: ({ children, value }) => <a href={value?.href} className="font-semibold text-primary underline underline-offset-4">{children}</a>,
+                },
+              } : undefined}
             />
           )}
         </div>
@@ -225,7 +248,7 @@ export default async function ArticlePage({
               href={`/practice-areas/${pillar}`}
               className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-5 py-3 rounded-sm transition-colors text-sm flex-shrink-0 self-start sm:self-auto"
             >
-              {siloLabels[lang].view} <ArrowRight size={16} />
+              {guide?.serviceCta ?? siloLabels[lang].view} <ArrowRight size={16} />
             </Link>
           </div>
         )}

@@ -5,6 +5,7 @@
     "practiceAreas": "Practice Areas",
     "services": "Services",
     "bankingLaw": "Banking Law",
+    "realEstatePurchase": "Property Purchase and Title Checks",
     "funds": "NPL Funds",
     "banks": "Banks",
     "individuals": "Individuals",
@@ -226,9 +227,36 @@
       },
       "realEstate": {
         "title": "Real Estate Law",
-        "desc": "Property transactions, leases and land registry matters.",
-        "longDesc": "Buying or selling property is one of the most important financial decisions in a person's life. A thorough legal review of titles and proper drafting of contracts are essential to avoid future problems.",
-        "approach": "We perform a full title check at the land registry and cadastre, monitor the entire process through to registration and ensure that our client is fully protected.",
+        "desc": "Title, encumbrance and contract checks before you buy.",
+        "longDesc": "If you have found a house, apartment or plot, our firm can review the property and support you from the initial title search through registration of the deed.",
+        "approach": "We explain what the checks uncovered, what needs clarification and what should be resolved before you proceed.",
+        "purchase": {
+          "seoTitle": "Real Estate Lawyer in Thessaloniki | Papaioannou",
+          "seoDescription": "Legal support for property buyers in Thessaloniki. We review title, encumbrances, deposit terms and the draft deed, and support you through registration.",
+          "heading": "Lawyer for buying property in Thessaloniki",
+          "stepsTitle": "How we review a property purchase",
+          "steps": [
+            {
+              "title": "Before you pay a deposit",
+              "text": "We check the relevant Cadastral Office records for the seller's right to transfer the property and for registered mortgages, mortgage prenotations, attachments or claims. If you have a draft agreement, we review its deposit terms."
+            },
+            {
+              "title": "Before you sign the deed",
+              "text": "We review the property description, purchase price, payment terms and any issues to resolve before signing."
+            },
+            {
+              "title": "After signing",
+              "text": "We follow up on registration of the deed with the Cadastre and let you know when it is complete."
+            }
+          ],
+          "reviewTitle": "What you learn from the review",
+          "documentsTitle": "What to have ready when you contact us",
+          "documentsText": "Tell us the property address and any proposed deposit or signing date. If available, have the cadastral reference (KAEK), the seller's title deed or the draft agreement to hand.",
+          "newBuildLink": "Buying a new-build property and reviewing the developer agreement",
+          "contactTitle": "Have you found a property you want to buy?",
+          "ctaText": "Tell us what stage you are at so we can discuss the checks you need.",
+          "cta": "Request a legal property review"
+        },
         "services": [
           "Title and encumbrance checks",
           "Drafting and reviewing purchase agreements",

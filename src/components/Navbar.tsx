@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { Link } from "@/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
-import { Menu, X, Scale, ChevronDown, ChevronRight, FileText, Tv, BookOpen, Gavel, Handshake, Landmark } from "lucide-react";
+import { Menu, X, Scale, ChevronDown, ChevronRight, FileText, Tv, BookOpen, Gavel, Handshake, Landmark, Home } from "lucide-react";
 
 const localeConfig = {
   el: { flag: "/flags/gr.svg", label: "ΕΛ" },
@@ -223,11 +223,12 @@ export default function Navbar() {
 
   const servicesLinks = [
     { href: `/practice-areas/banking`, label: tNav("bankingLaw"), icon: Landmark, subLinks: bankingSubLinks },
+    { href: `/practice-areas/realEstate`, label: tNav("realEstatePurchase"), icon: Home, subLinks: null },
     { href: `/pleistariasmos`, label: tNav("pleistariasmos"), icon: Gavel, subLinks: null },
     { href: `/exodikastikos`, label: tNav("exodikastikos"), icon: Handshake, subLinks: null },
   ] as { href: string; label: string; icon: typeof Gavel; subLinks: SubLink[] | null }[];
 
-  const servicesActiveHrefs = [`/practice-areas/banking`, `/banks`, `/funds`, `/pleistariasmos`, `/exodikastikos`];
+  const servicesActiveHrefs = [...servicesLinks.map(({ href }) => href), `/banks`, `/funds`];
   const isServicesActive = servicesActiveHrefs.some((h) => pathname.startsWith(`/${locale}${h}`) || pathname.startsWith(h));
 
   const updatesLinks = [
