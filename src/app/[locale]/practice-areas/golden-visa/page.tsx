@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
-import { ArrowLeft, ArrowRight, Building2, ClipboardCheck, FileSearch } from "lucide-react";
+import { ArrowDown, ArrowLeft, ArrowRight, Building2, CircleHelp, ClipboardCheck, FileSearch } from "lucide-react";
 import FaqAccordion from "@/components/FaqAccordion";
 import { routing } from "@/i18n/routing";
 import { buildPageMeta } from "@/lib/seo";
@@ -13,8 +12,12 @@ const realEstatePath = "/practice-areas/realEstate";
 const pagePath = "/practice-areas/golden-visa";
 const depositGuidePath = "/blog/prokatavoli-agora-akinitou";
 const checkIcons = [FileSearch, Building2, ClipboardCheck];
-// White Tower photograph by Paolo Bici, https://www.pexels.com/photo/32200209/
-const waterfrontPhoto = "/thessaloniki-white-tower.jpg";
+const sections = {
+  requirements: "golden-visa-requirements",
+  checks: "golden-visa-checks",
+  signing: "golden-visa-signing",
+  questions: "golden-visa-questions",
+};
 
 const content = {
   en: {
@@ -25,7 +28,13 @@ const content = {
     intro: "Has a seller offered you a property in Thessaloniki as suitable for Greece’s Golden Visa? If you are buying from abroad, we can start with the title and any draft agreement you have received. We check the property documents and the terms of the purchase before you pay a deposit or sign.",
     back: "All legal services",
     contact: "Request a legal property review",
-    photoAlt: "The White Tower beside Thessaloniki’s waterfront promenade",
+    contentsTitle: "What would you like to check?",
+    contents: {
+      requirements: "Property requirements",
+      checks: "Title and document checks",
+      signing: "Deposit and purchase deed",
+      questions: "Frequently asked questions",
+    },
     rulesTitle: "Which Golden Visa rules apply to the property?",
     standardTitle: "Standard property purchase",
     specialTitle: "Special cases",
@@ -76,7 +85,13 @@ const content = {
     intro: "Hat Ihnen ein Verkäufer in Thessaloniki eine Immobilie angeboten, die für das griechische Golden Visa geeignet sein soll? Wenn Sie aus dem Ausland kaufen, können wir mit der Eigentumsurkunde und dem Vertragsentwurf beginnen, den Sie erhalten haben. Wir prüfen die Unterlagen und die Kaufbedingungen, bevor Sie eine Anzahlung leisten oder unterschreiben.",
     back: "Alle Rechtsgebiete",
     contact: "Rechtliche Immobilienprüfung anfragen",
-    photoAlt: "Der Weiße Turm an der Uferpromenade von Thessaloniki",
+    contentsTitle: "Was möchten Sie prüfen?",
+    contents: {
+      requirements: "Voraussetzungen für die Immobilie",
+      checks: "Prüfung der Eigentumstitel und Unterlagen",
+      signing: "Anzahlung und Kaufvertrag",
+      questions: "Häufige Fragen",
+    },
     rulesTitle: "Welche Voraussetzungen gelten für die Immobilie?",
     standardTitle: "Regulärer Immobilienkauf",
     specialTitle: "Sonderfälle",
@@ -127,7 +142,13 @@ const content = {
     intro: "Σας πρότεινε ο πωλητής ακίνητο στη Θεσσαλονίκη ως κατάλληλο για Golden Visa; Αν αγοράζετε από το εξωτερικό, μπορούμε να ξεκινήσουμε από τον τίτλο του πωλητή και το σχέδιο συμφωνίας που έχετε στα χέρια σας. Ελέγχουμε τα έγγραφα του ακινήτου και τους όρους της αγοράς πριν δώσετε προκαταβολή ή υπογράψετε.",
     back: "Όλες οι νομικές υπηρεσίες",
     contact: "Ζητήστε νομικό έλεγχο ακινήτου",
-    photoAlt: "Ο Λευκός Πύργος στην παραλία της Θεσσαλονίκης",
+    contentsTitle: "Τι θέλετε να ελέγξετε;",
+    contents: {
+      requirements: "Προϋποθέσεις του ακινήτου",
+      checks: "Έλεγχος τίτλων και εγγράφων",
+      signing: "Προκαταβολή και συμβόλαιο",
+      questions: "Συχνές ερωτήσεις",
+    },
     rulesTitle: "Ποιες προϋποθέσεις ισχύουν για το ακίνητο;",
     standardTitle: "Γενικός κανόνας",
     specialTitle: "Ειδικές περιπτώσεις",
@@ -193,6 +214,12 @@ export default async function GoldenVisaPropertyPage({ params }: Props) {
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
   const page = content[locale];
+  const sectionLinks = [
+    { id: sections.requirements, label: page.contents.requirements, icon: Building2 },
+    { id: sections.checks, label: page.contents.checks, icon: FileSearch },
+    { id: sections.signing, label: page.contents.signing, icon: ClipboardCheck },
+    { id: sections.questions, label: page.contents.questions, icon: CircleHelp },
+  ];
 
   return (
     <div className="bg-white">
@@ -219,25 +246,35 @@ export default async function GoldenVisaPropertyPage({ params }: Props) {
                 {page.contact} <ArrowRight size={18} className="shrink-0" aria-hidden="true" />
               </Link>
             </div>
-            <div className="rounded-sm border border-white/20 bg-white/5 p-1.5 shadow-xl">
-              <div className="relative aspect-video overflow-hidden rounded-xs bg-primary lg:aspect-[5/4]">
-                <Image
-                  src={waterfrontPhoto}
-                  alt={page.photoAlt}
-                  fill
-                  quality={90}
-                  loading="eager"
-                  fetchPriority="high"
-                  sizes="(min-width: 1152px) 488px, (min-width: 1024px) 43vw, calc(100vw - 60px)"
-                  className="object-cover object-[center_18%] lg:object-center"
-                />
-              </div>
-            </div>
+            <nav
+              aria-labelledby="golden-visa-contents-title"
+              className="rounded-sm border-t-2 border-accent bg-[#f7f5ef] p-5 text-primary shadow-xl sm:p-7"
+            >
+              <h2 id="golden-visa-contents-title" className="font-playfair text-2xl font-bold">
+                {page.contentsTitle}
+              </h2>
+              <ul className="mt-3 divide-y divide-primary/10">
+                {sectionLinks.map(({ id, label, icon: Icon }) => (
+                  <li key={id}>
+                    <a
+                      href={`#${id}`}
+                      className="group flex min-h-13 items-center gap-3 rounded-sm px-1.5 py-2.5 font-semibold transition-colors hover:bg-primary/5 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-primary"
+                    >
+                      <span className="flex size-8 shrink-0 items-center justify-center rounded-sm bg-accent/15">
+                        <Icon size={17} strokeWidth={1.8} aria-hidden="true" />
+                      </span>
+                      <span className="flex-1 group-hover:underline group-hover:underline-offset-4">{label}</span>
+                      <ArrowDown size={16} className="shrink-0 text-primary/70" aria-hidden="true" />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
           </div>
         </div>
       </section>
 
-      <section className="border-b border-primary/10 bg-[#f7f5ef] py-12 md:py-16">
+      <section id={sections.requirements} className="scroll-mt-28 border-b border-primary/10 bg-[#f7f5ef] py-12 md:py-16">
         <div className="mx-auto max-w-6xl px-6">
           <h2 className="max-w-3xl text-balance font-playfair text-2xl font-bold text-primary sm:text-3xl">
             {page.rulesTitle}
@@ -255,7 +292,7 @@ export default async function GoldenVisaPropertyPage({ params }: Props) {
         </div>
       </section>
 
-      <section className="py-12 md:py-16">
+      <section id={sections.checks} className="scroll-mt-28 py-12 md:py-16">
         <div className="mx-auto max-w-6xl px-6">
           <h2 className="max-w-3xl text-balance font-playfair text-2xl font-bold text-primary sm:text-3xl">
             {page.checksTitle}
@@ -277,7 +314,7 @@ export default async function GoldenVisaPropertyPage({ params }: Props) {
         </div>
       </section>
 
-      <div className="border-y border-primary/10 bg-[#f4f7f7] py-12 md:py-16">
+      <div id={sections.signing} className="scroll-mt-28 border-y border-primary/10 bg-[#f4f7f7] py-12 md:py-16">
         <div className="mx-auto grid max-w-6xl items-start gap-8 px-6 lg:grid-cols-[1.1fr_1fr] lg:gap-12">
           <section className="lg:pt-4">
             <h2 className="max-w-xl text-balance font-playfair text-2xl font-bold text-primary sm:text-3xl">
@@ -304,7 +341,7 @@ export default async function GoldenVisaPropertyPage({ params }: Props) {
         </div>
       </div>
 
-      <section className="py-12 md:py-16">
+      <section id={sections.questions} className="scroll-mt-28 py-12 md:py-16">
         <div className="mx-auto grid max-w-6xl gap-6 px-6 lg:grid-cols-[0.7fr_1.5fr] lg:gap-12">
           <h2 className="max-w-sm text-balance font-playfair text-2xl font-bold text-primary sm:text-3xl">
             {page.questionsTitle}
