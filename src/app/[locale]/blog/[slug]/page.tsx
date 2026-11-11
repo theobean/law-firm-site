@@ -11,7 +11,8 @@ import AuthorCard from "@/components/AuthorCard";
 import RelatedArticles from "@/components/RelatedArticles";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
-import { buildPageMeta, siteUrl, ogDefaults } from "@/lib/seo";
+import { buildPageMeta, contentPagePath, localizedPageUrl, ogDefaults, siteUrl } from "@/lib/seo";
+import { routing } from "@/i18n/routing";
 import { getPropertyPurchaseGuide } from "./propertyPurchaseGuide";
 import { propertyContactHref } from "@/lib/property-contact";
 
@@ -79,7 +80,9 @@ export async function generateMetadata({
   if (!localized) return {};
   const { article, guide } = localized;
 
-  const articleUrl = `${siteUrl}/${locale}/blog/${slug}`;
+  const pagePath = contentPagePath("blog", slug);
+  const contentLocale = guide ? locale : routing.defaultLocale;
+  const articleUrl = localizedPageUrl(contentLocale, pagePath);
   const metaTitle = article.seoTitle || article.title;
   const description = article.seoDescription || article.excerpt || article.title;
   const ogImage = article.mainImage
@@ -90,10 +93,11 @@ export async function generateMetadata({
     title: metaTitle,
     description,
     alternates: guide
-      ? buildPageMeta(locale, `/blog/${slug}`).alternates
+      ? buildPageMeta(contentLocale, pagePath).alternates
       : { canonical: articleUrl },
     openGraph: {
-      ...ogDefaults(locale),
+      ...ogDefaults(contentLocale),
+      ...(!guide && { alternateLocale: [] }),
       title: metaTitle,
       description,
       url: articleUrl,
@@ -138,7 +142,8 @@ export default async function ArticlePage({
     de: { area: "Verwandtes Rechtsgebiet", view: "Zum Rechtsgebiet" },
   };
 
-  const articleUrl = `${siteUrl}/${locale}/blog/${slug}`;
+  const contentLocale = guide ? locale : routing.defaultLocale;
+  const articleUrl = localizedPageUrl(contentLocale, contentPagePath("blog", slug));
 
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -148,11 +153,11 @@ export default async function ArticlePage({
     description: article.seoDescription || article.excerpt || "",
     url: articleUrl,
     datePublished: article.publishedAt,
-    inLanguage: locale,
+    inLanguage: contentLocale,
     author: {
       "@type": "Person",
       name: article.author?.name || "Ιωάννης Παπαϊωάννου",
-      url: `${siteUrl}/${locale}/about`,
+      url: localizedPageUrl(contentLocale, "/about"),
     },
     publisher: {
       "@type": "LegalService",

@@ -5,6 +5,7 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { getMessages, getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
+import { siteUrl } from "@/lib/seo";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
@@ -20,8 +21,6 @@ const jost = Jost({
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-playfair",
 });
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.ioannispapaioannou.lawyer";
 
 export async function generateMetadata({
   params,

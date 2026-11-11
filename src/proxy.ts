@@ -21,12 +21,12 @@ export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Already on a locale path (/el, /en, /de) — let next-intl handle it
-  const localePrefix = /^\/(?:el|en|de)(?=\/|$)/.exec(pathname)?.[0];
+  const hasLocale = /^\/(?:el|en|de)(?:\/|$)/.test(pathname);
 
   // User has manually chosen a language — respect it, skip geo
   const pref = request.cookies.get(PREF_COOKIE)?.value;
 
-  if (!localePrefix && !pref) {
+  if (!hasLocale && !pref) {
     // First visit on a non-locale path — detect geo and redirect
     // Vercel sets x-vercel-ip-country on edge; request.geo was removed in newer Next.js types
     const country = request.headers.get("x-vercel-ip-country") ?? undefined;
@@ -43,14 +43,7 @@ export function proxy(request: NextRequest) {
     return res;
   }
 
-  const response = intlMiddleware(request);
-
-  // Property and Golden Visa pages declare their language alternates on the canonical domain in HTML.
-  if (localePrefix && /^\/practice-areas\/(?:realEstate(?:\/|$)|golden-visa$)/.test(pathname.slice(localePrefix.length))) {
-    response.headers.delete("Link");
-  }
-
-  return response;
+  return intlMiddleware(request);
 }
 
 export const config = {

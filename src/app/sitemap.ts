@@ -1,8 +1,11 @@
 import type { MetadataRoute } from "next";
-import { getArticles, getDecisions, getInterviews } from "@/sanity/client";
+import { getPropertyPurchaseGuide } from "@/app/[locale]/blog/[slug]/propertyPurchaseGuide";
+import { routing } from "@/i18n/routing";
+import { contentPagePath, localizedPageUrl } from "@/lib/seo";
+import { getSitemapDocuments } from "@/sanity/client";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.ioannispapaioannou.lawyer";
-const locales = ["el", "en", "de"] as const;
+export const revalidate = 3600;
+
 const staticPaths = [
   "",
   "/about",
@@ -15,8 +18,6 @@ const staticPaths = [
   "/contact",
   "/media",
   "/decisions",
-  "/privacy",
-  "/terms",
   "/pleistariasmos",
   "/exodikastikos",
   "/funds",
@@ -48,77 +49,41 @@ const practiceAreas = [
   "tax",
 ];
 
+const collections = {
+  article: "blog",
+  decision: "decisions",
+  interview: "media",
+} as const;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const now = new Date();
+  const paths = [...staticPaths, ...practiceAreas.map((area) => `/practice-areas/${area}`)];
+  const entries = new Map<string, MetadataRoute.Sitemap[number]>();
 
-  const staticEntries: MetadataRoute.Sitemap = locales.flatMap((locale) =>
-    staticPaths.map((path) => ({
-      url: `${siteUrl}/${locale}${path}`,
-      lastModified: now,
-      changeFrequency: "monthly" as const,
-      priority: path === "" ? 1.0 : 0.7,
-    }))
-  );
-
-  const areaEntries: MetadataRoute.Sitemap = locales.flatMap((locale) =>
-    practiceAreas.map((area) => ({
-      url: `${siteUrl}/${locale}/practice-areas/${area}`,
-      lastModified: now,
-      changeFrequency: "monthly" as const,
-      priority: 0.8,
-    }))
-  );
-
-  let articleEntries: MetadataRoute.Sitemap = [];
-  try {
-    const articles = await getArticles();
-    articleEntries = locales.flatMap((locale) =>
-      (articles ?? [])
-        .filter((a: { slug?: { current?: string } }) => a.slug?.current)
-        .map((article: { slug: { current: string }; publishedAt?: string }) => ({
-          url: `${siteUrl}/${locale}/blog/${article.slug.current}`,
-          lastModified: article.publishedAt ? new Date(article.publishedAt) : now,
-          changeFrequency: "monthly" as const,
-          priority: 0.6,
-        }))
-    );
-  } catch {
-    // Sanity unavailable — skip
+  for (const locale of routing.locales) {
+    for (const path of paths) {
+      const url = localizedPageUrl(locale, path);
+      entries.set(url, { url });
+    }
   }
 
-  let decisionEntries: MetadataRoute.Sitemap = [];
-  try {
-    const decisions = await getDecisions();
-    decisionEntries = locales.flatMap((locale) =>
-      (decisions ?? [])
-        .filter((d: { slug?: { current?: string } }) => d.slug?.current)
-        .map((d: { slug: { current: string }; date?: string }) => ({
-          url: `${siteUrl}/${locale}/decisions/${d.slug.current}`,
-          lastModified: d.date ? new Date(d.date) : now,
-          changeFrequency: "yearly" as const,
-          priority: 0.7,
-        }))
-    );
-  } catch {
-    // Sanity unavailable — skip
+  for (const { _type, slug, updatedAt } of await getSitemapDocuments()) {
+    if (!slug.trim() || slug === "." || slug === "..") continue;
+
+    const guide = _type === "article" && getPropertyPurchaseGuide(slug, routing.defaultLocale);
+    const locales = guide ? routing.locales : [routing.defaultLocale];
+    const path = contentPagePath(collections[_type], slug);
+    // The guide's translated content is maintained in code, not in the CMS.
+    const lastModified = !guide && updatedAt ? new Date(updatedAt) : undefined;
+
+    for (const locale of locales) {
+      const url = localizedPageUrl(locale, path);
+      if (entries.has(url)) continue;
+      entries.set(url, {
+        url,
+        ...(lastModified && Number.isFinite(lastModified.getTime()) ? { lastModified } : {}),
+      });
+    }
   }
 
-  let interviewEntries: MetadataRoute.Sitemap = [];
-  try {
-    const interviews = await getInterviews();
-    interviewEntries = locales.flatMap((locale) =>
-      (interviews ?? [])
-        .filter((i: { slug?: { current?: string } }) => i.slug?.current)
-        .map((i: { slug: { current: string }; date?: string }) => ({
-          url: `${siteUrl}/${locale}/media/${i.slug.current}`,
-          lastModified: i.date ? new Date(i.date) : now,
-          changeFrequency: "yearly" as const,
-          priority: 0.6,
-        }))
-    );
-  } catch {
-    // Sanity unavailable — skip
-  }
-
-  return [...staticEntries, ...areaEntries, ...articleEntries, ...decisionEntries, ...interviewEntries];
+  return [...entries.values()];
 }
