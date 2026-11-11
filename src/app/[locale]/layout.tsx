@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { getMessages, getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { siteUrl } from "@/lib/seo";
+import { trafficRecordingEnabled } from "@/lib/traffic";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
@@ -13,6 +14,7 @@ import UrgentCTABar from "@/components/UrgentCTABar";
 import ScrollToTop from "@/components/ScrollToTop";
 import ChatAssistant from "@/components/ChatAssistant";
 import ConsentAnalytics from "@/components/ConsentAnalytics";
+import TrafficNavigation from "@/components/TrafficNavigation";
 import "../globals.css";
 
 const inter = Inter({ subsets: ["latin", "greek"], variable: "--font-inter" });
@@ -212,6 +214,9 @@ export default async function LocaleLayout({
           {process.env.CHATBOT_ENABLED === "true" && <ChatAssistant />}
         </NextIntlClientProvider>
         <ConsentAnalytics />
+        {trafficRecordingEnabled() && (
+          <Suspense fallback={null}><TrafficNavigation /></Suspense>
+        )}
       </body>
     </html>
   );

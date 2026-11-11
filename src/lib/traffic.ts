@@ -26,8 +26,18 @@ function publicContentPaths() {
   return publicContentCatalog;
 }
 
+export function trafficRecordingEnabled() {
+  return process.env.VERCEL_ENV === "production" && Boolean(process.env.TRAFFIC_WRITE_DATABASE_URL);
+}
+
+export function isBrowserTraffic(headers: Headers) {
+  // The agent string is used only for this check. The counter never stores it.
+  const agent = headers.get("user-agent");
+  return Boolean(agent && !knownBot.test(agent));
+}
+
 export function canRecordTraffic(method: string, headers: Headers) {
-  if (process.env.VERCEL_ENV !== "production" || !process.env.TRAFFIC_WRITE_DATABASE_URL) return false;
+  if (!trafficRecordingEnabled()) return false;
   if (method !== "GET" || !headers.get("accept")?.includes("text/html")) return false;
   if (prefetchHeaders.some(header => headers.has(header))) return false;
   const purpose = (headers.get("purpose") ?? "") + " " + (headers.get("sec-purpose") ?? "");
@@ -38,9 +48,7 @@ export function canRecordTraffic(method: string, headers: Headers) {
   if (destination !== null && destination !== "document") return false;
   if (mode !== null && mode !== "navigate") return false;
 
-  // The agent string is used only for this check. The counter never stores it.
-  const agent = headers.get("user-agent");
-  return Boolean(agent && !knownBot.test(agent));
+  return isBrowserTraffic(headers);
 }
 
 export async function recordTrafficRequest(pathname: string, day: string) {
