@@ -79,8 +79,9 @@ export const dashboardStyles = `
   .details { margin-top: 1rem; border-top: 1px solid var(--line); padding-top: .75rem; }
   summary { color: var(--navy); cursor: pointer; font-size: .9rem; font-weight: 700; width: fit-content; }
   .columns { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 8fr); gap: 1rem; align-items: start; }
-  .language-list { display: grid; gap: .8rem; margin-top: .95rem; }
-  .language-row { display: grid; grid-template-columns: 1fr auto; gap: .35rem .5rem; font-size: .88rem; align-items: baseline; }
+  .sidebar { display: grid; gap: 1rem; min-width: 0; }
+  .language-list, .source-list { display: grid; gap: .8rem; margin-top: .95rem; }
+  .language-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .35rem .5rem; font-size: .88rem; align-items: baseline; }
   .language-row dt { font-weight: 700; }
   .language-row dd { color: var(--muted); white-space: nowrap; }
   .language-row strong { color: var(--ink); }
@@ -89,6 +90,9 @@ export const dashboardStyles = `
   .meter span { display: block; width: var(--share); height: 100%; border-radius: inherit; background: #215670; }
   .locale-en .meter span { background: #52796b; }
   .locale-de .meter span { background: #b47d22; }
+  .source-caption { margin-top: .35rem; }
+  .source-list + .source-caption { margin-top: .65rem; }
+  .source-internal { border-top: 1px solid var(--line); margin-top: .75rem; padding-top: .65rem; }
   .day-filter { display: flex; flex-wrap: wrap; gap: .5rem; align-items: end; }
   .day-filter input { width: auto; max-width: 100%; }
   .day-filter button { min-height: 2.7rem; }

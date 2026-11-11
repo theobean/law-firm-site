@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import { trafficSource } from "@/lib/traffic-source";
 
 // This survives layout remounts in the same document, such as a language change.
 let lastPathname: string | undefined;
@@ -27,7 +28,9 @@ export default function TrafficNavigation() {
     lastPathname = pathname;
     if (!entry) {
       // The server already counts the pageview. Register only the entry.
-      const day = sendTraffic({ "X-Traffic-Entry": pathname }).then(response =>
+      const [navigation] = performance.getEntriesByType("navigation") as PerformanceNavigationTiming[];
+      const source = trafficSource(document.referrer, window.location.hostname, navigation?.type);
+      const day = sendTraffic({ "X-Traffic-Entry": pathname, "X-Traffic-Source": source }).then(response =>
         response?.headers.get("X-Traffic-Entry-Day"),
       );
       entry = { pathname, day, continued: false };
