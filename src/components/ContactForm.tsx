@@ -1,9 +1,10 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { useId, useRef, useState } from "react";
 import { trackPropertyContact, type PropertyContactSource } from "@/lib/property-contact";
+import ContactDatePicker from "./ContactDatePicker";
 
 interface FormData {
   name: string;
@@ -28,7 +29,7 @@ export default function ContactForm({
   const fieldId = useId();
   const submissionLocked = useRef(false);
   const [status, setStatus] = useState<"idle" | "sending" | "error" | "success">("idle");
-  const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
+  const { control, register, handleSubmit, formState: { errors } } = useForm<FormData>();
 
   async function onSubmit(data: FormData) {
     if (submissionLocked.current) return;
@@ -123,12 +124,14 @@ export default function ContactForm({
             />
           </div>
           <div>
-            <label htmlFor={`${fieldId}-deadline`} className="block text-sm font-medium text-gray-700 mb-1">{t("propertyDeadline")}</label>
-            <input
-              id={`${fieldId}-deadline`}
-              {...register("propertyDeadline")}
-              type="date"
-              className={`${inputClassName} min-w-0`}
+            <label id={`${fieldId}-deadline-label`} htmlFor={`${fieldId}-deadline`} className="block text-sm font-medium text-gray-700 mb-1">{t("propertyDeadline")}</label>
+            <Controller
+              control={control}
+              name="propertyDeadline"
+              defaultValue=""
+              render={({ field }) => (
+                <ContactDatePicker id={`${fieldId}-deadline`} value={field.value ?? ""} onChange={field.onChange} />
+              )}
             />
           </div>
         </fieldset>

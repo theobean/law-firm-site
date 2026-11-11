@@ -391,6 +391,13 @@
     "propertyTopic": "Immobilienkauf",
     "propertyArea": "Ort oder Lage der Immobilie (optional)",
     "propertyDeadline": "Termin für Anzahlung oder Unterzeichnung (optional)",
+    "calendar": {
+      "choose": "Datum auswählen",
+      "previousMonth": "Vorheriger Monat",
+      "nextMonth": "Nächster Monat",
+      "today": "Heute",
+      "clear": "Löschen"
+    },
     "sendError": "Der Versand konnte nicht bestätigt werden. Versuchen Sie es erneut oder rufen Sie +30 2310 545 261 an.",
     "name": "Vollständiger Name",
     "email": "E-Mail",
