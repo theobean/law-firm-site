@@ -227,67 +227,67 @@
       },
       "realEstate": {
         "title": "Immobilienrecht",
-        "desc": "Prüfung von Eigentumstiteln, Belastungen und Kaufvertrag vor dem Erwerb.",
-        "longDesc": "Wenn Sie ein Haus, eine Wohnung oder ein Grundstück gefunden haben, prüfen wir die Immobilie rechtlich und begleiten Sie von der Titelprüfung bis zur Eintragung des Kaufvertrags. Von unserer Kanzlei in Thessaloniki aus unterstützen wir auch Käufer in Athen und in ganz Griechenland.",
-        "approach": "Wir erläutern Ihnen die Ergebnisse der Prüfung, offene Fragen und die Punkte, die vor dem Kauf geklärt werden sollten.",
+        "desc": "Wir prüfen Eigentumstitel, Anzahlungsbedingungen und Kaufvertrag.",
+        "longDesc": "Sie haben ein Haus, eine Wohnung oder ein Grundstück gefunden und sollen eine Anzahlung leisten? Wir prüfen zunächst, wer Ihnen die Immobilie verkaufen kann und was in den Urkunden steht. Liegt bereits ein Vertragsentwurf vor, gehen wir die Bedingungen vor der Unterzeichnung mit Ihnen durch. Von Thessaloniki aus prüfen wir auch Immobilien in Athen und im übrigen Griechenland.",
+        "approach": "Finden wir eine Belastung oder weicht der Vertragsentwurf von den Eigentumsurkunden ab, erklären wir Ihnen, was das für Ihren Kauf bedeutet und was vor der Unterschrift geklärt werden muss.",
         "purchase": {
           "seoTitle": "Anwalt für Immobilienrecht in Thessaloniki | Papaioannou",
-          "seoDescription": "Kanzlei in Thessaloniki für Immobilienkauf, Eigentumsprüfung und Vertragsprüfung. Wir unterstützen Käufer in Athen und in ganz Griechenland.",
+          "seoDescription": "Anwalt für den Immobilienkauf in Thessaloniki. Wir prüfen Eigentumstitel, Belastungen, Anzahlungsbedingungen und Kaufverträge in Athen und ganz Griechenland.",
           "heading": "Anwalt für den Immobilienkauf in Thessaloniki",
           "stepsTitle": "So läuft die rechtliche Prüfung ab",
           "steps": [
             {
               "title": "Vor der Anzahlung",
-              "text": "Wir prüfen beim zuständigen Katasteramt, wer die Immobilie übertragen darf und ob Hypotheken, Hypothekenvormerkungen, Pfändungen oder Ansprüche eingetragen sind. Liegt ein Entwurf für einen Vorvertrag oder eine Anzahlungsvereinbarung vor, prüfen wir die Zahlungspflichten und die Bedingungen für eine Rückzahlung."
+              "text": "Wir beginnen mit der Urkunde des Verkäufers und den Katastereinträgen. Wir suchen nach Hypotheken, Hypothekenvormerkungen, Pfändungen und eingetragenen Ansprüchen. In der Anzahlungsvereinbarung prüfen wir, was Sie zahlen sollen und wann Sie Ihr Geld zurückbekommen können, falls der Kauf scheitert."
             },
             {
-              "title": "Vor der Unterzeichnung",
-              "text": "Wir prüfen die Beschreibung der Immobilie, den Kaufpreis, die Zahlungsbedingungen und die Punkte, die vor der Unterzeichnung geklärt werden müssen."
+              "title": "Beim Entwurf des Kaufvertrags",
+              "text": "Wir vergleichen die Beschreibung der Immobilie mit den Urkunden. Wir prüfen, wie der Kaufpreis gezahlt werden soll und ob im Entwurf steht, was Sie mit dem Verkäufer vereinbart haben. Auf offene Punkte weisen wir vor der Unterschrift hin."
             },
             {
               "title": "Nach der Unterzeichnung",
-              "text": "Wir begleiten die Eintragung des Kaufvertrags beim Katasteramt und informieren Sie über den Abschluss."
+              "text": "Wir verfolgen den Antrag auf Eintragung beim Katasteramt. Sie erfahren von uns, wie das Verfahren ausgegangen ist und ob noch Unterlagen fehlen."
             }
           ],
-          "reviewTitle": "Was Sie aus der Prüfung erfahren",
-          "documentsTitle": "Was Sie für das erste Gespräch bereithalten können",
-          "documentsText": "Nennen Sie die Adresse der Immobilie und gegebenenfalls den geplanten Termin für Anzahlung oder Unterzeichnung. Halten Sie, soweit vorhanden, die Katasternummer (KAEK), den Eigentumstitel des Verkäufers oder den Vertragsentwurf bereit.",
+          "reviewTitle": "Was die Ergebnisse für Ihren Kauf bedeuten",
+          "documentsTitle": "Welche Unterlagen Sie bereithalten sollten",
+          "documentsText": "Halten Sie die Urkunde des Verkäufers, die Katasternummer (KAEK) und den Vertragsentwurf bereit, soweit sie vorliegen. Notieren Sie die Adresse und etwaige vereinbarte Termine für Anzahlung oder Unterzeichnung.",
           "coverageTitle": "Rechtliche Begleitung beim Immobilienkauf in ganz Griechenland",
-          "coverageText": "Liegt die Immobilie außerhalb von Thessaloniki, nennen Sie uns die Gemeinde, die vorhandenen Unterlagen und den geplanten Termin für die Unterzeichnung. Im ersten Gespräch klären wir, welche Schritte aus der Ferne möglich sind und ob eine Abstimmung vor Ort erforderlich ist.",
+          "coverageText": "Liegt die Immobilie außerhalb von Thessaloniki, nennen Sie uns die Gemeinde. So können wir das zuständige Katasteramt ermitteln. Wir besprechen, welche Unterlagen wir aus der Ferne prüfen können und ob eine Abstimmung mit einem Anwalt vor Ort nötig ist.",
           "athensLink": "Immobilienkauf und Eigentumsprüfung in Athen",
           "questionsTitle": "Häufige Fragen zur rechtlichen Immobilienprüfung",
           "questions": [
             {
-              "question": "Was umfasst die Prüfung der Eigentumstitel?",
-              "answer": "Wir prüfen die Urkunden und Katastereinträge, um festzustellen, wie der Verkäufer die Immobilie erworben hat und welche Rechte er überträgt. Gehören zu einer Wohnung ein Abstellraum oder ein Stellplatz, prüfen wir deren Beschreibung in den Urkunden und welche Rechte der Kauf umfasst."
+              "question": "Was erfahre ich bei der Prüfung der Eigentumstitel?",
+              "answer": "Wir prüfen, wie der Verkäufer die Immobilie erworben hat und was er Ihnen übertragen kann. Wird mit der Wohnung ein Abstellraum oder Stellplatz angeboten, prüfen wir, welches Recht dafür in den Urkunden steht."
             },
             {
-              "question": "Was passiert, wenn eine Hypothek oder eine andere Belastung eingetragen ist?",
-              "answer": "Wir prüfen, welches Recht der Eintrag betrifft, ob die Belastung geklärt werden kann und welche Unterlagen vor der Unterschrift erforderlich sind. Haben Sie bereits eine Anzahlung oder einen Termin vereinbart, prüfen wir die Bedingungen, denen Sie zugestimmt haben."
+              "question": "Der Verkäufer will die Hypothek löschen lassen. Was prüfen Sie?",
+              "answer": "Wir sehen nach, welches Recht von der Hypothek oder einem anderen Eintrag betroffen ist und welche Unterlagen für die Bereinigung nötig sind. Haben Sie eine Anzahlung vereinbart, prüfen wir, was die Vereinbarung vorsieht, solange die Belastung besteht."
             },
             {
-              "question": "Wie wird das Anwaltshonorar beim Immobilienkauf berechnet?",
-              "answer": "Das Honorar hängt vom Umfang des Auftrags ab. Teilen Sie uns für eine Kosteneinschätzung mit, ob Sie eine Titelprüfung, eine Prüfung des Vorvertrags oder Begleitung bis zur Unterzeichnung und Eintragung benötigen. Nennen Sie bekannte Belastungen oder offene Punkte, die eine weitere Prüfung erfordern können."
+              "question": "Was kostet ein Anwalt beim Immobilienkauf?",
+              "answer": "Für eine Kosteneinschätzung teilen Sie uns mit, ob wir die Eigentumstitel prüfen, den Vorvertrag durchgehen oder den Kauf bis zur Eintragung begleiten sollen. Bekannte Belastungen oder offene Fragen können zusätzliche Recherchen erfordern. Sagen Sie uns, wenn Ihnen bereits etwas dazu bekannt ist."
             },
             {
               "question": "Wie lange dauert eine rechtliche Immobilienprüfung?",
-              "answer": "Die Dauer hängt davon ab, ob die Urkunden und Einträge verfügbar sind und welche offenen Fragen geprüft werden müssen. Nennen Sie beim ersten Kontakt etwaige Fristen für Anzahlung oder Unterzeichnung, damit wir den Zeitrahmen einschätzen können."
+              "answer": "Das hängt davon ab, welche Urkunden vorliegen und ob wir beim Katasteramt weiter recherchieren müssen. Hat der Verkäufer eine Frist für die Anzahlung oder die Unterzeichnung gesetzt, nennen Sie uns das Datum beim ersten Kontakt."
             },
             {
-              "question": "Was prüfen Sie bei einem Kauf mit Immobilienkredit?",
-              "answer": "Wir prüfen, wie die Anzahlung und der Termin zur Unterzeichnung mit der Kreditzusage und der Auszahlung zusammenhängen. Außerdem prüfen wir die Regelungen für den Fall, dass sich die Finanzierung verzögert oder abgelehnt wird."
+              "question": "Der Verkäufer verlangt eine Anzahlung, bevor mein Kredit bewilligt ist. Worauf muss ich achten?",
+              "answer": "Wir prüfen, ob die Termine für Zahlung und Unterschrift zur Kreditzusage und Auszahlung passen. In der Vereinbarung sehen wir nach, was mit der Anzahlung passiert, wenn sich die Bank verspätet oder den Kredit ablehnt."
             }
           ],
           "newBuildLink": "Neubau kaufen und Bauträgervertrag prüfen lassen",
-          "contactTitle": "Haben Sie eine Immobilie gefunden, die Sie kaufen möchten?",
-          "ctaText": "Teilen Sie uns mit, wie weit der Kauf fortgeschritten ist, damit wir die nötigen Prüfungen besprechen können.",
+          "contactTitle": "Haben Sie eine Vereinbarung oder einen Vertragsentwurf erhalten?",
+          "ctaText": "Sagen Sie uns, was der Verkäufer von Ihnen verlangt und bis wann Sie antworten sollen. Halten Sie einen vorhandenen Entwurf für das Gespräch bereit.",
           "cta": "Rechtliche Immobilienprüfung anfragen"
         },
         "services": [
           "Eigentums- und Belastungsprüfungen",
           "Erstellung und Prüfung von Kaufverträgen",
           "Mietverträge (Wohn- und Gewerbemiete)",
-          "Mieter-Vermieter-Streitigkeiten, Räumungsklagen",
+          "Mietstreitigkeiten und Räumungsklagen",
           "Erklärungen und Korrekturen im Nationalen Kataster",
           "Ersitzungs- und Besitzklagen"
         ]
