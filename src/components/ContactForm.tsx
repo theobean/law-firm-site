@@ -2,7 +2,8 @@
 
 import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useId, useRef, useState } from "react";
+import { trackPropertyContact, type PropertyContactSource } from "@/lib/property-contact";
 
 interface FormData {
   name: string;
@@ -10,38 +11,73 @@ interface FormData {
   phone: string;
   message: string;
   botcheck: boolean;
+  propertyArea?: string;
+  propertyDeadline?: string;
 }
 
-export default function ContactForm() {
+const inputClassName = "w-full border border-gray-300 rounded-sm px-4 py-3 focus:outline-none focus:border-primary transition-colors";
+
+export default function ContactForm({
+  propertyPurchase = false,
+  source,
+}: {
+  propertyPurchase?: boolean;
+  source?: PropertyContactSource;
+}) {
   const t = useTranslations("contact");
-  const [submitted, setSubmitted] = useState(false);
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>();
+  const fieldId = useId();
+  const submissionLocked = useRef(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "error" | "success">("idle");
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
 
   async function onSubmit(data: FormData) {
+    if (submissionLocked.current) return;
+    submissionLocked.current = true;
+    setStatus("sending");
+
     // Web3Forms free plan only accepts browser calls — the access key is
     // public by design (NEXT_PUBLIC). Spam is handled by the botcheck
     // honeypot, which Web3Forms discards server-side.
-    const res = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({
-        access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
-        subject: `Νέο μήνυμα από ${data.name}`,
-        from_name: "Δικηγορικό Γραφείο Παπαϊωάννου — Φόρμα Επικοινωνίας",
-        name: data.name,
-        email: data.email,
-        phone: data.phone || "—",
-        message: data.message,
-        botcheck: data.botcheck,
-      }),
-    });
-    const result = await res.json();
-    if (result.success) setSubmitted(true);
+    const payload: Record<string, string | boolean | undefined> = {
+      access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
+      subject: propertyPurchase ? `Αγορά ακινήτου | Νέο αίτημα από ${data.name}` : `Νέο μήνυμα από ${data.name}`,
+      from_name: "Δικηγορικό Γραφείο Παπαϊωάννου — Φόρμα Επικοινωνίας",
+      name: data.name,
+      email: data.email,
+      phone: data.phone || "—",
+      message: data.message,
+      botcheck: data.botcheck,
+    };
+
+    if (propertyPurchase) {
+      payload["Θέμα"] = "Αγορά ακινήτου";
+      const propertyArea = data.propertyArea?.trim();
+      if (propertyArea) payload["Περιοχή ακινήτου"] = propertyArea;
+      if (data.propertyDeadline) payload["Ημερομηνία προκαταβολής ή υπογραφής"] = data.propertyDeadline;
+    }
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok || (await response.json()).success !== true) {
+        throw new Error("Web3Forms did not confirm the submission");
+      }
+    } catch {
+      submissionLocked.current = false;
+      setStatus("error");
+      return;
+    }
+
+    setStatus("success");
+    if (propertyPurchase && !data.botcheck) trackPropertyContact("generate_lead", source);
   }
 
-  if (submitted) {
+  if (status === "success") {
     return (
-      <div className="relative overflow-hidden bg-gradient-to-br from-primary to-primary/90 rounded-sm p-12 text-center shadow-xl">
+      <div role="status" className="relative overflow-hidden bg-gradient-to-br from-primary to-primary/90 rounded-sm p-12 text-center shadow-xl">
         <div className="absolute top-0 left-0 w-full h-1 bg-accent" />
         <div className="mx-auto w-20 h-20 rounded-full bg-accent/15 border-2 border-accent flex items-center justify-center mb-6">
           <svg className="w-10 h-10 text-accent" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
@@ -64,7 +100,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+    <form onSubmit={handleSubmit(onSubmit)} noValidate aria-busy={status === "sending"} className="space-y-5">
       {/* Honeypot — humans never see or fill this */}
       <input
         type="checkbox"
@@ -74,57 +110,101 @@ export default function ContactForm() {
         aria-hidden="true"
         {...register("botcheck")}
       />
+      {propertyPurchase && (
+        <fieldset className="space-y-4 rounded-sm border border-accent/30 bg-accent/5 px-4 pb-4">
+          <legend className="px-2 text-sm font-semibold text-primary">{t("propertyTopic")}</legend>
+          <div>
+            <label htmlFor={`${fieldId}-area`} className="block text-sm font-medium text-gray-700 mb-1">{t("propertyArea")}</label>
+            <input
+              id={`${fieldId}-area`}
+              {...register("propertyArea")}
+              maxLength={120}
+              className={inputClassName}
+            />
+          </div>
+          <div>
+            <label htmlFor={`${fieldId}-deadline`} className="block text-sm font-medium text-gray-700 mb-1">{t("propertyDeadline")}</label>
+            <input
+              id={`${fieldId}-deadline`}
+              {...register("propertyDeadline")}
+              type="date"
+              className={`${inputClassName} min-w-0`}
+            />
+          </div>
+        </fieldset>
+      )}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">{t("name")} *</label>
+        <label htmlFor={`${fieldId}-name`} className="block text-sm font-medium text-gray-700 mb-1">{t("name")} *</label>
         <input
+          id={`${fieldId}-name`}
           {...register("name", { required: t("required") })}
-          className="w-full border border-gray-300 rounded-sm px-4 py-3 focus:outline-none focus:border-primary transition-colors"
+          autoComplete="name"
+          required
+          aria-invalid={Boolean(errors.name)}
+          aria-describedby={errors.name ? `${fieldId}-name-error` : undefined}
+          className={inputClassName}
           placeholder={t("name")}
         />
-        {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>}
+        {errors.name && <p id={`${fieldId}-name-error`} className="text-red-700 text-xs mt-1">{errors.name.message}</p>}
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">{t("email")} *</label>
+        <label htmlFor={`${fieldId}-email`} className="block text-sm font-medium text-gray-700 mb-1">{t("email")} *</label>
         <input
+          id={`${fieldId}-email`}
           {...register("email", {
             required: t("required"),
             pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: t("invalidEmail") },
           })}
           type="email"
-          className="w-full border border-gray-300 rounded-sm px-4 py-3 focus:outline-none focus:border-primary transition-colors"
+          autoComplete="email"
+          required
+          aria-invalid={Boolean(errors.email)}
+          aria-describedby={errors.email ? `${fieldId}-email-error` : undefined}
+          className={inputClassName}
           placeholder="email@example.com"
         />
-        {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
+        {errors.email && <p id={`${fieldId}-email-error`} className="text-red-700 text-xs mt-1">{errors.email.message}</p>}
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">{t("phone")}</label>
+        <label htmlFor={`${fieldId}-phone`} className="block text-sm font-medium text-gray-700 mb-1">{t("phone")}</label>
         <input
+          id={`${fieldId}-phone`}
           {...register("phone")}
           type="tel"
-          className="w-full border border-gray-300 rounded-sm px-4 py-3 focus:outline-none focus:border-primary transition-colors"
+          autoComplete="tel"
+          className={inputClassName}
           placeholder="+30 69X XXX XXXX"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">{t("message")} *</label>
+        <label htmlFor={`${fieldId}-message`} className="block text-sm font-medium text-gray-700 mb-1">{t("message")} *</label>
         <textarea
+          id={`${fieldId}-message`}
           {...register("message", { required: t("required") })}
           rows={5}
-          className="w-full border border-gray-300 rounded-sm px-4 py-3 focus:outline-none focus:border-primary transition-colors resize-none"
+          required
+          aria-invalid={Boolean(errors.message)}
+          aria-describedby={errors.message ? `${fieldId}-message-error` : undefined}
+          className={`${inputClassName} resize-none`}
           placeholder={t("message")}
         />
-        {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message.message}</p>}
+        {errors.message && <p id={`${fieldId}-message-error`} className="text-red-700 text-xs mt-1">{errors.message.message}</p>}
       </div>
 
+      {status === "error" && (
+        <p role="alert" className="rounded-sm border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+          {t("sendError")}
+        </p>
+      )}
       <button
         type="submit"
-        disabled={isSubmitting}
+        disabled={status === "sending"}
         className="w-full bg-accent hover:bg-accent/90 disabled:opacity-60 text-white font-semibold py-4 rounded-sm transition-colors"
       >
-        {isSubmitting ? t("sending") : t("send")}
+        {status === "sending" ? t("sending") : t("send")}
       </button>
     </form>
   );

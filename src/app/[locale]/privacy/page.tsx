@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
+import { buildPageMeta } from "@/lib/seo";
 
 export async function generateMetadata({
   params,
@@ -10,7 +11,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "seo" });
-  return { title: t("privacyTitle"), robots: { index: false } };
+  return { ...buildPageMeta(locale, "/privacy"), title: t("privacyTitle"), robots: { index: false } };
 }
 
 export default function PrivacyPage() {

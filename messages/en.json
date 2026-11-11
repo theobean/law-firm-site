@@ -5,6 +5,7 @@
     "practiceAreas": "Practice Areas",
     "services": "Services",
     "bankingLaw": "Banking Law",
+    "realEstatePurchase": "Property Purchase and Title Checks",
     "funds": "NPL Funds",
     "banks": "Banks",
     "individuals": "Individuals",
@@ -226,14 +227,68 @@
       },
       "realEstate": {
         "title": "Real Estate Law",
-        "desc": "Property transactions, leases and land registry matters.",
-        "longDesc": "Buying or selling property is one of the most important financial decisions in a person's life. A thorough legal review of titles and proper drafting of contracts are essential to avoid future problems.",
-        "approach": "We perform a full title check at the land registry and cadastre, monitor the entire process through to registration and ensure that our client is fully protected.",
+        "desc": "Title checks and a review of your deposit terms and purchase deed.",
+        "longDesc": "Found a house, flat or plot and been asked for a deposit? Before you commit, we check who can sell it to you and what the deeds show. If you already have a draft agreement, we go through the terms before you sign. From our Thessaloniki office, we also handle legal checks on properties in Athens and elsewhere in Greece.",
+        "approach": "If we find an encumbrance or a difference between the title and the draft deed, we explain what it means for your purchase and what needs to be sorted out before you sign.",
+        "purchase": {
+          "seoTitle": "Property Purchase Lawyer in Thessaloniki, Greece | Papaioannou",
+          "seoDescription": "Buying property in Greece from abroad? Our Thessaloniki law office checks ownership, registered charges, deposit terms and the draft purchase deed.",
+          "heading": "Lawyer for buying property in Thessaloniki",
+          "stepsTitle": "How we review a property purchase",
+          "steps": [
+            {
+              "title": "Before you pay a deposit",
+              "text": "We start with the seller’s deed and the cadastral records. We look for mortgages, mortgage prenotations, attachments and claims. If there is a deposit agreement, we check what you agree to pay and when you can get your money back if the purchase falls through."
+            },
+            {
+              "title": "When you receive the draft deed",
+              "text": "We compare the property description with the title documents. We review how the price will be paid and check that the deed reflects what you agreed with the seller. We flag anything that needs attention before you sign."
+            },
+            {
+              "title": "After signing",
+              "text": "We follow up on the application to register the deed with the Cadastre. We tell you the outcome and whether anything else is needed."
+            }
+          ],
+          "reviewTitle": "What the findings mean for your purchase",
+          "documentsTitle": "Which documents to have ready",
+          "documentsText": "Have the seller’s deed, the cadastral reference (KAEK) and the draft agreement to hand if you have them. Make a note of the property address and any agreed date for the deposit or signing.",
+          "coverageTitle": "Buying property in Greece from abroad",
+          "coverageText": "You can contact us in English from wherever you live. Tell us where the property is, what the seller has sent you and when any deposit is due. We can discuss which checks can start remotely and whether a power of attorney could be used for signing. For properties outside Thessaloniki, the municipality helps us find the relevant Cadastral Office.",
+          "athensLink": "Buying property and checking title in Athens",
+          "questionsTitle": "Questions about legal property checks",
+          "questions": [
+            {
+              "question": "What will a property title check tell me?",
+              "answer": "We check how the seller acquired the property and exactly what they can transfer to you. If the seller offers a storage unit or parking space with the flat, we check what right the deeds record for each."
+            },
+            {
+              "question": "The seller says they’ll discharge the mortgage. What do you check?",
+              "answer": "We check which right is affected by the mortgage or any other entry and what paperwork is needed to resolve it. If you’ve agreed to a deposit, we read what the agreement says while the issue is still outstanding."
+            },
+            {
+              "question": "How much does a lawyer cost when buying property?",
+              "answer": "The fee depends on the scope of the review. It matters how many title documents need to be checked, whether earlier transfers need to be traced and whether any encumbrances require further investigation. The fee also depends on whether the work includes reviewing a preliminary agreement or a draft deed, or supporting the purchase through to registration."
+            },
+            {
+              "question": "How long does a legal property check take?",
+              "answer": "It depends on which deeds are available and whether we need to do further research at the Cadastre. If the seller has set a deadline for a deposit or signing, tell us when you get in touch."
+            },
+            {
+              "question": "The seller wants a deposit while I’m waiting for my mortgage. What should I check?",
+              "answer": "We see whether the payment and signing dates fit with the bank’s approval and release of the funds. We also check what happens to the deposit if the bank is late or declines the loan."
+            }
+          ],
+          "newBuildLink": "Buying a new-build property and reviewing the developer agreement",
+          "depositGuideLink": "What to check before paying a property deposit",
+          "contactTitle": "Have you been given an agreement or a draft deed?",
+          "ctaText": "Tell us what the seller has asked for and when you need to reply. If there is a draft agreement, have it to hand when you contact us.",
+          "cta": "Request a legal property review"
+        },
         "services": [
           "Title and encumbrance checks",
           "Drafting and reviewing purchase agreements",
           "Lease agreements (residential and commercial)",
-          "Tenant — landlord disputes, evictions",
+          "Disputes between landlords and tenants, including evictions",
           "Declarations and corrections in the National Cadastre",
           "Adverse possession and possessory cases"
         ]
@@ -333,6 +388,10 @@
   "contact": {
     "title": "Contact",
     "subtitle": "We are at your disposal for any legal matter.",
+    "propertyTopic": "Buying a property",
+    "propertyArea": "Property area (optional)",
+    "propertyDeadline": "Deposit or signing date (optional)",
+    "sendError": "We could not confirm that your message was sent. Please try again or call +30 2310 545 261.",
     "name": "Full Name",
     "email": "Email",
     "phone": "Phone",
@@ -1017,7 +1076,11 @@
   "urgentCta": {
     "text": "Have you been served with a payment order, seizure or auction notice?",
     "sub": "Do not wait. Deadlines in enforcement proceedings are short and critical.",
-    "cta": "Immediate file review"
+    "cta": "Immediate file review",
+    "close": "Close",
+    "propertyText": "Has the seller asked you for a deposit?",
+    "propertySub": "We review the deed and the terms before you commit.",
+    "propertyCta": "Request a title check"
   },
   "auctionBanner": {
     "heading": "Auction & Foreclosure Lawyer in Thessaloniki",

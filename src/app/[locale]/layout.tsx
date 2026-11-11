@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Inter, Jost } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { getMessages, getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
+import { siteUrl } from "@/lib/seo";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
@@ -19,8 +21,6 @@ const jost = Jost({
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-playfair",
 });
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.ioannispapaioannou.lawyer";
 
 export async function generateMetadata({
   params,
@@ -148,7 +148,11 @@ export default async function LocaleLayout({
       opens: "09:00",
       closes: "17:00",
     },
-    areaServed: { "@type": "City", name: "Θεσσαλονίκη" },
+    areaServed: [
+      { "@type": "City", name: "Θεσσαλονίκη" },
+      { "@type": "City", name: "Αθήνα" },
+      { "@type": "Country", name: "Ελλάδα" },
+    ],
     knowsLanguage: ["el", "en", "de"],
     founder: {
       "@type": "Person",
@@ -199,7 +203,9 @@ export default async function LocaleLayout({
           <main className="flex-1">{children}</main>
           <Footer />
           <div id="site-bottom-overlays" className="fixed inset-x-0 bottom-0 z-50 flex flex-col">
-            <UrgentCTABar />
+            <Suspense fallback={null}>
+              <UrgentCTABar />
+            </Suspense>
             <CookieBanner />
           </div>
           <ScrollToTop />

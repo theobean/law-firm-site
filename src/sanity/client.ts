@@ -7,6 +7,24 @@ export const client = createClient({ projectId, dataset, apiVersion: "2024-01-01
 
 const authorProjection = `author->{name, role, bio, image}`;
 
+type SitemapDocument = {
+  _type: "article" | "decision" | "interview";
+  slug: string;
+  updatedAt?: string;
+};
+
+export function getSitemapDocuments() {
+  return client.fetch<SitemapDocument[]>(
+    `*[_type in ["article", "decision", "interview"] && defined(slug.current) && slug.current != ""] | order(_type asc, slug.current asc) {
+      _type,
+      "slug": slug.current,
+      "updatedAt": _updatedAt
+    }`,
+    {},
+    { perspective: "published" }
+  );
+}
+
 export async function getArticles() {
   return client.fetch(
     `*[_type == "article"] | order(publishedAt desc) {

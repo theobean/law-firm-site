@@ -31,6 +31,7 @@
     "services": "Leistungen",
     "bankingLaw": "Bankrecht",
     "funds": "NPL-Fonds",
+    "realEstatePurchase": "Immobilienkauf und Titelprüfung",
     "banks": "Banken",
     "individuals": "Privatpersonen",
     "businesses": "Unternehmen",
@@ -226,14 +227,68 @@
       },
       "realEstate": {
         "title": "Immobilienrecht",
-        "desc": "Immobilientransaktionen, Mietverträge und Grundbuchfragen.",
-        "longDesc": "Kauf oder Verkauf einer Immobilie ist eine der wichtigsten finanziellen Entscheidungen im Leben. Eine gründliche rechtliche Prüfung der Eigentumstitel und die korrekte Vertragsgestaltung sind unerlässlich, um zukünftige Probleme zu vermeiden.",
-        "approach": "Wir führen eine vollständige Titelprüfung im Grundbuch und Kataster durch, begleiten den gesamten Prozess bis zur Eintragung und stellen sicher, dass unser Mandant vollständig geschützt ist.",
+        "desc": "Wir prüfen Eigentumstitel, Anzahlungsbedingungen und Kaufvertrag.",
+        "longDesc": "Sie haben ein Haus, eine Wohnung oder ein Grundstück gefunden und sollen eine Anzahlung leisten? Wir prüfen zunächst, wer Ihnen die Immobilie verkaufen kann und was in den Urkunden steht. Liegt bereits ein Vertragsentwurf vor, gehen wir die Bedingungen vor der Unterzeichnung mit Ihnen durch. Von Thessaloniki aus prüfen wir auch Immobilien in Athen und im übrigen Griechenland.",
+        "approach": "Finden wir eine Belastung oder weicht der Vertragsentwurf von den Eigentumsurkunden ab, erklären wir Ihnen, was das für Ihren Kauf bedeutet und was vor der Unterschrift geklärt werden muss.",
+        "purchase": {
+          "seoTitle": "Anwalt für den Immobilienkauf in Thessaloniki | Papaioannou",
+          "seoDescription": "Immobilienkauf in Griechenland aus dem Ausland. Unsere Kanzlei in Thessaloniki prüft Eigentumstitel, Belastungen, Anzahlungsbedingungen und Kaufverträge.",
+          "heading": "Anwalt für den Immobilienkauf in Thessaloniki",
+          "stepsTitle": "So läuft die rechtliche Prüfung ab",
+          "steps": [
+            {
+              "title": "Vor der Anzahlung",
+              "text": "Wir beginnen mit der Urkunde des Verkäufers und den Katastereinträgen. Wir suchen nach Hypotheken, Hypothekenvormerkungen, Pfändungen und eingetragenen Ansprüchen. In der Anzahlungsvereinbarung prüfen wir, was Sie zahlen sollen und wann Sie Ihr Geld zurückbekommen können, falls der Kauf scheitert."
+            },
+            {
+              "title": "Beim Entwurf des Kaufvertrags",
+              "text": "Wir vergleichen die Beschreibung der Immobilie mit den Urkunden. Wir prüfen, wie der Kaufpreis gezahlt werden soll und ob im Entwurf steht, was Sie mit dem Verkäufer vereinbart haben. Auf offene Punkte weisen wir vor der Unterschrift hin."
+            },
+            {
+              "title": "Nach der Unterzeichnung",
+              "text": "Wir verfolgen den Antrag auf Eintragung beim Katasteramt. Sie erfahren von uns, wie das Verfahren ausgegangen ist und ob noch Unterlagen fehlen."
+            }
+          ],
+          "reviewTitle": "Was die Ergebnisse für Ihren Kauf bedeuten",
+          "documentsTitle": "Welche Unterlagen Sie bereithalten sollten",
+          "documentsText": "Halten Sie die Urkunde des Verkäufers, die Katasternummer (KAEK) und den Vertragsentwurf bereit, soweit sie vorliegen. Notieren Sie die Adresse und etwaige vereinbarte Termine für Anzahlung oder Unterzeichnung.",
+          "coverageTitle": "Immobilienkauf in Griechenland aus dem Ausland",
+          "coverageText": "Sie können uns auf Deutsch kontaktieren. Teilen Sie uns mit, wo die Immobilie liegt, welche Unterlagen Sie vom Verkäufer erhalten haben und wann eine Anzahlung fällig ist. Wir besprechen, welche Prüfungen bereits aus der Ferne möglich sind und ob eine Vertretung per Vollmacht bei der Unterzeichnung infrage kommt. Bei Immobilien außerhalb von Thessaloniki hilft uns die Gemeindeangabe, das zuständige Katasteramt zu finden.",
+          "athensLink": "Immobilienkauf und Eigentumsprüfung in Athen",
+          "questionsTitle": "Häufige Fragen zur rechtlichen Immobilienprüfung",
+          "questions": [
+            {
+              "question": "Was erfahre ich bei der Prüfung der Eigentumstitel?",
+              "answer": "Wir prüfen, wie der Verkäufer die Immobilie erworben hat und was er Ihnen übertragen kann. Wird mit der Wohnung ein Abstellraum oder Stellplatz angeboten, prüfen wir, welches Recht dafür in den Urkunden steht."
+            },
+            {
+              "question": "Der Verkäufer will die Hypothek löschen lassen. Was prüfen Sie?",
+              "answer": "Wir sehen nach, welches Recht von der Hypothek oder einem anderen Eintrag betroffen ist und welche Unterlagen für die Bereinigung nötig sind. Haben Sie eine Anzahlung vereinbart, prüfen wir, was die Vereinbarung vorsieht, solange die Belastung besteht."
+            },
+            {
+              "question": "Was kostet ein Anwalt beim Immobilienkauf?",
+              "answer": "Das Honorar hängt vom Umfang der Prüfung ab. Entscheidend ist, wie viele Eigentumsurkunden geprüft werden müssen, ob frühere Übertragungen nachvollzogen werden müssen und ob Belastungen weitere Nachforschungen erfordern. Zum Umfang des Auftrags kann auch die Prüfung eines Vorvertrags oder Kaufvertragsentwurfs oder die Begleitung bis zur Eintragung gehören."
+            },
+            {
+              "question": "Wie lange dauert eine rechtliche Immobilienprüfung?",
+              "answer": "Das hängt davon ab, welche Urkunden vorliegen und ob wir beim Katasteramt weiter recherchieren müssen. Hat der Verkäufer eine Frist für die Anzahlung oder die Unterzeichnung gesetzt, nennen Sie uns das Datum beim ersten Kontakt."
+            },
+            {
+              "question": "Der Verkäufer verlangt eine Anzahlung, bevor mein Kredit bewilligt ist. Worauf muss ich achten?",
+              "answer": "Wir prüfen, ob die Termine für Zahlung und Unterschrift zur Kreditzusage und Auszahlung passen. In der Vereinbarung sehen wir nach, was mit der Anzahlung passiert, wenn sich die Bank verspätet oder den Kredit ablehnt."
+            }
+          ],
+          "newBuildLink": "Neubau kaufen und Bauträgervertrag prüfen lassen",
+          "depositGuideLink": "Was Sie vor der Anzahlung beim Immobilienkauf prüfen sollten",
+          "contactTitle": "Haben Sie eine Vereinbarung oder einen Vertragsentwurf erhalten?",
+          "ctaText": "Sagen Sie uns, was der Verkäufer von Ihnen verlangt und bis wann Sie antworten sollen. Halten Sie einen vorhandenen Entwurf für das Gespräch bereit.",
+          "cta": "Rechtliche Immobilienprüfung anfragen"
+        },
         "services": [
           "Eigentums- und Belastungsprüfungen",
           "Erstellung und Prüfung von Kaufverträgen",
           "Mietverträge (Wohn- und Gewerbemiete)",
-          "Mieter-Vermieter-Streitigkeiten, Räumungsklagen",
+          "Mietstreitigkeiten und Räumungsklagen",
           "Erklärungen und Korrekturen im Nationalen Kataster",
           "Ersitzungs- und Besitzklagen"
         ]
@@ -333,6 +388,10 @@
   "contact": {
     "title": "Kontakt",
     "subtitle": "Wir stehen Ihnen für jede rechtliche Angelegenheit zur Verfügung.",
+    "propertyTopic": "Immobilienkauf",
+    "propertyArea": "Ort oder Lage der Immobilie (optional)",
+    "propertyDeadline": "Termin für Anzahlung oder Unterzeichnung (optional)",
+    "sendError": "Der Versand konnte nicht bestätigt werden. Versuchen Sie es erneut oder rufen Sie +30 2310 545 261 an.",
     "name": "Vollständiger Name",
     "email": "E-Mail",
     "phone": "Telefon",
@@ -1017,7 +1076,11 @@
   "urgentCta": {
     "text": "Wurde Ihnen ein Mahnbescheid, eine Pfändung oder ein Versteigerungstermin zugestellt?",
     "sub": "Warten Sie nicht. Fristen im Vollstreckungsverfahren sind kurz und entscheidend.",
-    "cta": "Sofortige Aktenprüfung"
+    "cta": "Sofortige Aktenprüfung",
+    "close": "Schließen",
+    "propertyText": "Verlangt der Verkäufer eine Anzahlung?",
+    "propertySub": "Wir prüfen die Eigentumsurkunde und die Bedingungen, bevor Sie sich binden.",
+    "propertyCta": "Titelprüfung anfragen"
   },
   "auctionBanner": {
     "heading": "Anwalt für Zwangsversteigerungen in Thessaloniki",
