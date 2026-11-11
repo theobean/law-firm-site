@@ -270,7 +270,7 @@ export function renderDashboard(report: TrafficReport, today: string, invalidRan
     ${comparison ? `<p class="caption">${escape(comparison)}</p>` : ""}
     ${renderDaily(report, today)}
     <div class="columns">${renderLanguages(report)}${renderPages(report)}</div>
-    <p class="caption method">Μετράμε αιτήματα για δημόσιες σελίδες. Μια επαναφόρτωση μπορεί να προσθέσει ένα αίτημα.</p>`,
+    <p class="caption method">Μετράμε τις φορτώσεις και τις εσωτερικές μεταβάσεις σε δημόσιες σελίδες. Μια επαναφόρτωση μπορεί να προσθέσει μία προβολή.</p>`,
     filters.day ? displayDate(filters.day) : dateLabel(filters.from, filters.to),
     exportUrl,
   );
