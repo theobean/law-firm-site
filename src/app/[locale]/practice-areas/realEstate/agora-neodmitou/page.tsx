@@ -3,6 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import FaqAccordion from "@/components/FaqAccordion";
 import { routing } from "@/i18n/routing";
 import { buildPageMeta } from "@/lib/seo";
 import { Link } from "@/navigation";
@@ -212,17 +213,10 @@ export default async function NewBuildPurchasePage({ params }: Props) {
         </section>
 
         <section>
-          <h2 className="border-l-4 border-accent pl-4 font-playfair text-2xl font-bold text-primary">
+          <h2 className="mb-6 border-l-4 border-accent pl-4 font-playfair text-2xl font-bold text-primary">
             {page.questionsTitle}
           </h2>
-          <div className="mt-5 divide-y divide-gray-200">
-            {page.questions.map(({ title, text }) => (
-              <div key={title} className="py-5">
-                <h3 className="font-playfair text-xl font-semibold text-primary">{title}</h3>
-                <p className="mt-2 leading-relaxed text-gray-700">{text}</p>
-              </div>
-            ))}
-          </div>
+          <FaqAccordion items={page.questions.map(({ title, text }) => ({ q: title, a: text }))} />
         </section>
 
         <section className="flex flex-col items-start gap-5 border-t border-gray-200 pt-8 sm:flex-row sm:gap-7">

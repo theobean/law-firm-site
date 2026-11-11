@@ -8,6 +8,7 @@ import { ArrowLeft, ArrowRight, Check, Banknote, Handshake, ShieldCheck, Briefca
 import { use } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 import CategoryArticles from "@/components/CategoryArticles";
+import FaqAccordion from "@/components/FaqAccordion";
 
 export const revalidate = 60;
 
@@ -265,17 +266,10 @@ export default function PracticeAreaDetailPage({
 
         {isRealEstate && (
           <section className="mt-12">
-            <h2 className="mb-3 border-l-4 border-accent pl-4 text-2xl font-playfair font-bold text-primary">
+            <h2 className="mb-6 border-l-4 border-accent pl-4 text-2xl font-playfair font-bold text-primary">
               {t("areas.realEstate.purchase.questionsTitle")}
             </h2>
-            <div className="divide-y divide-gray-200">
-              {purchaseQuestions.map(({ question, answer }) => (
-                <div key={question} className="py-5">
-                  <h3 className="mb-2 font-semibold text-primary">{question}</h3>
-                  <p className="leading-relaxed text-gray-700">{answer}</p>
-                </div>
-              ))}
-            </div>
+            <FaqAccordion items={purchaseQuestions.map(({ question, answer }) => ({ q: question, a: answer }))} />
           </section>
         )}
 
