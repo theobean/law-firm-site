@@ -1,6 +1,7 @@
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
-import { NextRequest, NextResponse } from "next/server";
+import { type NextFetchEvent, NextRequest, NextResponse } from "next/server";
+import { canRecordTraffic, recordTrafficRequest, trafficDay } from "./lib/traffic";
 
 const intlMiddleware = createMiddleware(routing);
 
@@ -17,7 +18,7 @@ function geoLocale(country: string | undefined): "el" | "en" | "de" {
   return "en";
 }
 
-export function proxy(request: NextRequest) {
+export function proxy(request: NextRequest, event: NextFetchEvent) {
   const { pathname } = request.nextUrl;
 
   // Already on a locale path (/el, /en, /de) — let next-intl handle it
@@ -43,9 +44,13 @@ export function proxy(request: NextRequest) {
     return res;
   }
 
-  return intlMiddleware(request);
+  const response = intlMiddleware(request);
+  if (hasLocale && response.status < 300 && canRecordTraffic(request.method, request.headers)) {
+    event.waitUntil(recordTrafficRequest(pathname, trafficDay()));
+  }
+  return response;
 }
 
 export const config = {
-  matcher: ["/((?!_next|.*\\.|studio|api).*)"],
+  matcher: ["/((?!_next|.*\\.|studio|api|private(?:/|$)).*)"],
 };
