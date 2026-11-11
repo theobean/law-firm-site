@@ -35,6 +35,21 @@ const content = {
     ],
     preparationTitle: "Τι να έχετε για την πρώτη επικοινωνία",
     preparation: "Αναφέρετε ποιο ακίνητο σας ενδιαφέρει και αν έχει οριστεί ημερομηνία προκαταβολής ή υπογραφής. Αν τα έχετε, κρατήστε διαθέσιμα το σχέδιο συμφωνίας, την κάτοψη, τις προδιαγραφές και το χρονοδιάγραμμα πληρωμών ή παράδοσης.",
+    questionsTitle: "Συχνές ερωτήσεις για την αγορά νεόδμητου",
+    questions: [
+      {
+        title: "Τι να ελέγξω πριν πληρώσω για την κράτηση νεόδμητου;",
+        text: "Ζητήστε γραπτώς ποιος εισπράττει το ποσό, ποιο διαμέρισμα αφορά, για πόσο ισχύει η κράτηση και αν το ποσό συμψηφίζεται με το τίμημα. Ελέγξτε αν προβλέπεται επιστροφή όταν ο έλεγχος τίτλων αναδείξει πρόβλημα ή όταν δεν εγκριθεί το δάνειο από το οποίο εξαρτάται η αγορά.",
+      },
+      {
+        title: "Ποιος υπογράφει όταν ο εργολάβος και ο ιδιοκτήτης του οικοπέδου είναι διαφορετικά πρόσωπα;",
+        text: "Η απάντηση εξαρτάται από τους τίτλους και τις συμφωνίες για τη συγκεκριμένη ιδιοκτησία. Ζητήστε να ελεγχθούν το εργολαβικό και τυχόν πληρεξούσιο, ώστε να είναι σαφές ποιος μπορεί να υπογράψει τη μεταβίβαση και ποιος αναλαμβάνει την ολοκλήρωση και την παράδοση του διαμερίσματος.",
+      },
+      {
+        title: "Τι ελέγχει ο μηχανικός σε ένα υπό κατασκευή διαμέρισμα;",
+        text: "Ο μηχανικός εξετάζει την οικοδομική άδεια, τις κατόψεις και τις τεχνικές προδιαγραφές και μπορεί να ελέγξει την πρόοδο στο έργο. Ο δικηγόρος εξετάζει τους τίτλους και τι δεσμεύεται να παραδώσει ο πωλητής. Αν ο τεχνικός έλεγχος δείξει διαφορά, ζητήστε να αποτυπωθεί η συμφωνημένη λύση στο σχέδιο του συμβολαίου πριν υπογράψετε.",
+      },
+    ],
     lawyer: "Λαμπρινή Παπαϊωάννου",
     role: "Δικηγόρος Παρ’ Εφέταις",
     biography: "Η Λαμπρινή Παπαϊωάννου αναλαμβάνει τον νομικό έλεγχο τίτλων και εργολαβικών συμβολαίων για αγοραστές σε νέες κατασκευές.",
@@ -64,6 +79,21 @@ const content = {
     ],
     preparationTitle: "What to have ready for the first discussion",
     preparation: "Tell us which property you are considering and whether a deposit or signing date has been set. If available, have the draft agreement, floor plan, specifications and payment or handover schedule to hand.",
+    questionsTitle: "Common questions about buying a new-build property",
+    questions: [
+      {
+        title: "What should I check before paying to reserve a new-build property?",
+        text: "Ask for written confirmation of who receives the money, which flat it reserves, when the reservation expires and whether the amount counts towards the purchase price. Check whether the terms provide for a refund if the title search reveals a problem or if the mortgage you need is declined.",
+      },
+      {
+        title: "Who signs if the developer and the landowner are different parties?",
+        text: "That depends on the title documents and agreements for the particular property. Have the development agreement and any power of attorney reviewed to clarify who can sign the transfer deed and who is responsible for completing and handing over the flat.",
+      },
+      {
+        title: "What does an engineer check when a flat is still under construction?",
+        text: "An engineer reviews the building permit, floor plans and technical specifications and can check progress on site. A lawyer reviews title and the seller’s contractual obligations. If the technical review finds a discrepancy, ask for the agreed solution to be recorded in the draft agreement before you sign.",
+      },
+    ],
     lawyer: "Lampriní Papaioannou",
     role: "Attorney at the Court of Appeal",
     biography: "Lampriní Papaioannou reviews titles and developer agreements for buyers of newly built and off-plan properties.",
@@ -93,6 +123,21 @@ const content = {
     ],
     preparationTitle: "Unterlagen für das erste Gespräch",
     preparation: "Teilen Sie uns mit, für welche Immobilie Sie sich interessieren und ob bereits ein Termin für die Anzahlung oder die Unterzeichnung vereinbart wurde. Halten Sie, soweit vorhanden, den Vertragsentwurf, den Grundriss, die Baubeschreibung und den Zahlungs- oder Übergabeplan bereit.",
+    questionsTitle: "Häufige Fragen zum Kauf einer Neubauimmobilie",
+    questions: [
+      {
+        title: "Was sollte ich vor der Zahlung eines Reservierungsbetrags prüfen?",
+        text: "Lassen Sie sich schriftlich bestätigen, wer die Zahlung erhält, für welche Wohnung die Reservierung gilt, wann sie endet und ob der Betrag auf den Kaufpreis angerechnet wird. Prüfen Sie, ob eine Rückzahlung vorgesehen ist, wenn die Titelprüfung ein Problem aufzeigt oder die benötigte Finanzierung abgelehnt wird.",
+      },
+      {
+        title: "Wer unterschreibt, wenn Bauträger und Grundstückseigentümer verschieden sind?",
+        text: "Das hängt von den Eigentumsnachweisen und Vereinbarungen für die konkrete Immobilie ab. Lassen Sie den Vertrag über das Bauvorhaben und eine etwaige Vollmacht prüfen. So lässt sich klären, wer die Übertragung unterzeichnen kann und wer für die Fertigstellung und Übergabe der Wohnung verantwortlich ist.",
+      },
+      {
+        title: "Was prüft ein Ingenieur bei einer Wohnung, die noch im Bau ist?",
+        text: "Ein Ingenieur prüft die Baugenehmigung, die Grundrisse und die technischen Spezifikationen und kann den Baufortschritt vor Ort beurteilen. Ein Anwalt prüft die Eigentumstitel und die vertraglichen Pflichten des Verkäufers. Zeigt die technische Prüfung eine Abweichung, lassen Sie die vereinbarte Lösung vor der Unterzeichnung im Vertragsentwurf festhalten.",
+      },
+    ],
     lawyer: "Lampriní Papaioannou",
     role: "Rechtsanwältin am Berufungsgericht",
     biography: "Lampriní Papaioannou prüft Eigentumstitel und Bauträgerverträge für Käufer neuer oder noch im Bau befindlicher Immobilien.",
@@ -164,6 +209,20 @@ export default async function NewBuildPurchasePage({ params }: Props) {
         <section className="rounded-sm border border-primary/10 bg-primary/5 p-5 md:p-7">
           <h2 className="font-playfair text-2xl font-bold text-primary">{page.preparationTitle}</h2>
           <p className="mt-3 leading-relaxed text-gray-700">{page.preparation}</p>
+        </section>
+
+        <section>
+          <h2 className="border-l-4 border-accent pl-4 font-playfair text-2xl font-bold text-primary">
+            {page.questionsTitle}
+          </h2>
+          <div className="mt-5 divide-y divide-gray-200">
+            {page.questions.map(({ title, text }) => (
+              <div key={title} className="py-5">
+                <h3 className="font-playfair text-xl font-semibold text-primary">{title}</h3>
+                <p className="mt-2 leading-relaxed text-gray-700">{text}</p>
+              </div>
+            ))}
+          </div>
         </section>
 
         <section className="flex flex-col items-start gap-5 border-t border-gray-200 pt-8 sm:flex-row sm:gap-7">

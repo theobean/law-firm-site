@@ -89,6 +89,9 @@ export default function PracticeAreaDetailPage({
   const purchaseSections = isRealEstate
     ? (t.raw("areas.realEstate.purchase.steps") as { title: string; text: string }[])
     : [];
+  const purchaseQuestions = isRealEstate
+    ? (t.raw("areas.realEstate.purchase.questions") as { question: string; answer: string }[])
+    : [];
   const contactLabel = isRealEstate ? t("areas.realEstate.purchase.cta") : t("ctaTitle");
 
   return (
@@ -244,9 +247,25 @@ export default function PracticeAreaDetailPage({
         </div>
 
         {isRealEstate && (
+          <section className="mt-12">
+            <h2 className="mb-3 border-l-4 border-accent pl-4 text-2xl font-playfair font-bold text-primary">
+              {t("areas.realEstate.purchase.questionsTitle")}
+            </h2>
+            <div className="divide-y divide-gray-200">
+              {purchaseQuestions.map(({ question, answer }) => (
+                <div key={question} className="py-5">
+                  <h3 className="mb-2 font-semibold text-primary">{question}</h3>
+                  <p className="leading-relaxed text-gray-700">{answer}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {isRealEstate && (
           <Link
             href="/practice-areas/realEstate/agora-neodmitou"
-            className="mt-10 inline-flex items-center gap-2 rounded-sm border border-accent/50 bg-amber-50 px-5 py-4 font-semibold text-primary transition-colors hover:bg-amber-100"
+            className="mt-6 inline-flex items-center gap-2 rounded-sm border border-accent/50 bg-amber-50 px-5 py-4 font-semibold text-primary transition-colors hover:bg-amber-100"
           >
             {t("areas.realEstate.purchase.newBuildLink")} <ArrowRight size={16} className="shrink-0" aria-hidden="true" />
           </Link>

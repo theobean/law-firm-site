@@ -238,7 +238,7 @@
           "steps": [
             {
               "title": "Before you pay a deposit",
-              "text": "We check the relevant Cadastral Office records for the seller's right to transfer the property and for registered mortgages, mortgage prenotations, attachments or claims. If you have a draft agreement, we review its deposit terms."
+              "text": "We check the relevant Cadastral Office records for the seller's right to transfer the property and for registered mortgages, mortgage prenotations, attachments or claims. If you have a draft preliminary or deposit agreement, we check what you agree to pay and when the deposit can be returned."
             },
             {
               "title": "Before you sign the deed",
@@ -252,6 +252,29 @@
           "reviewTitle": "What you learn from the review",
           "documentsTitle": "What to have ready when you contact us",
           "documentsText": "Tell us the property address and any proposed deposit or signing date. If available, have the cadastral reference (KAEK), the seller's title deed or the draft agreement to hand.",
+          "questionsTitle": "Questions about legal property checks",
+          "questions": [
+            {
+              "question": "What does a property title check cover?",
+              "answer": "We examine deeds and cadastral records to establish how the seller acquired the property and which rights they are transferring. If a flat comes with a storage unit or parking space, we check how they are described in the deeds and which rights come with the purchase."
+            },
+            {
+              "question": "What if the search finds a mortgage or another encumbrance?",
+              "answer": "We check which right the entry affects, whether it can be resolved, and which documents are needed before signing. If you have already agreed to a deposit or a signing date, we review the terms you accepted."
+            },
+            {
+              "question": "How is the lawyer's fee for a property purchase calculated?",
+              "answer": "The fee depends on the work involved. For an estimate, tell us whether you need a title check, a review of a preliminary agreement or support through signing and registration. Mention any known encumbrances or outstanding issues that may need additional investigation."
+            },
+            {
+              "question": "How long does a legal property check take?",
+              "answer": "Timing depends on the availability of deeds and records and on any issues that need to be investigated. Let us know at first contact if you have a deadline for paying a deposit or signing so we can assess the timetable."
+            },
+            {
+              "question": "What do you check if I am buying with a mortgage?",
+              "answer": "We review how the deposit and signing date relate to loan approval and release of the funds. We also check what the terms say if financing is delayed or refused."
+            }
+          ],
           "newBuildLink": "Buying a new-build property and reviewing the developer agreement",
           "contactTitle": "Have you found a property you want to buy?",
           "ctaText": "Tell us what stage you are at so we can discuss the checks you need.",

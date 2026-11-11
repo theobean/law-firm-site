@@ -238,7 +238,7 @@
           "steps": [
             {
               "title": "Vor der Anzahlung",
-              "text": "Wir prüfen beim zuständigen Katasteramt, wer die Immobilie übertragen darf und ob Hypotheken, Hypothekenvormerkungen, Pfändungen oder Ansprüche eingetragen sind. Liegt ein Vertragsentwurf vor, prüfen wir die Anzahlungsbedingungen."
+              "text": "Wir prüfen beim zuständigen Katasteramt, wer die Immobilie übertragen darf und ob Hypotheken, Hypothekenvormerkungen, Pfändungen oder Ansprüche eingetragen sind. Liegt ein Entwurf für einen Vorvertrag oder eine Anzahlungsvereinbarung vor, prüfen wir die Zahlungspflichten und die Bedingungen für eine Rückzahlung."
             },
             {
               "title": "Vor der Unterzeichnung",
@@ -252,6 +252,29 @@
           "reviewTitle": "Was Sie aus der Prüfung erfahren",
           "documentsTitle": "Was Sie für das erste Gespräch bereithalten können",
           "documentsText": "Nennen Sie die Adresse der Immobilie und gegebenenfalls den geplanten Termin für Anzahlung oder Unterzeichnung. Halten Sie, soweit vorhanden, die Katasternummer (KAEK), den Eigentumstitel des Verkäufers oder den Vertragsentwurf bereit.",
+          "questionsTitle": "Häufige Fragen zur rechtlichen Immobilienprüfung",
+          "questions": [
+            {
+              "question": "Was umfasst die Prüfung der Eigentumstitel?",
+              "answer": "Wir prüfen die Urkunden und Katastereinträge, um festzustellen, wie der Verkäufer die Immobilie erworben hat und welche Rechte er überträgt. Gehören zu einer Wohnung ein Abstellraum oder ein Stellplatz, prüfen wir deren Beschreibung in den Urkunden und welche Rechte der Kauf umfasst."
+            },
+            {
+              "question": "Was passiert, wenn eine Hypothek oder eine andere Belastung eingetragen ist?",
+              "answer": "Wir prüfen, welches Recht der Eintrag betrifft, ob die Belastung geklärt werden kann und welche Unterlagen vor der Unterschrift erforderlich sind. Haben Sie bereits eine Anzahlung oder einen Termin vereinbart, prüfen wir die Bedingungen, denen Sie zugestimmt haben."
+            },
+            {
+              "question": "Wie wird das Anwaltshonorar beim Immobilienkauf berechnet?",
+              "answer": "Das Honorar hängt vom Umfang des Auftrags ab. Teilen Sie uns für eine Kosteneinschätzung mit, ob Sie eine Titelprüfung, eine Prüfung des Vorvertrags oder Begleitung bis zur Unterzeichnung und Eintragung benötigen. Nennen Sie bekannte Belastungen oder offene Punkte, die eine weitere Prüfung erfordern können."
+            },
+            {
+              "question": "Wie lange dauert eine rechtliche Immobilienprüfung?",
+              "answer": "Die Dauer hängt davon ab, ob die Urkunden und Einträge verfügbar sind und welche offenen Fragen geprüft werden müssen. Nennen Sie beim ersten Kontakt etwaige Fristen für Anzahlung oder Unterzeichnung, damit wir den Zeitrahmen einschätzen können."
+            },
+            {
+              "question": "Was prüfen Sie bei einem Kauf mit Immobilienkredit?",
+              "answer": "Wir prüfen, wie die Anzahlung und der Termin zur Unterzeichnung mit der Kreditzusage und der Auszahlung zusammenhängen. Außerdem prüfen wir die Regelungen für den Fall, dass sich die Finanzierung verzögert oder abgelehnt wird."
+            }
+          ],
           "newBuildLink": "Neubau kaufen und Bauträgervertrag prüfen lassen",
           "contactTitle": "Haben Sie eine Immobilie gefunden, die Sie kaufen möchten?",
           "ctaText": "Teilen Sie uns mit, wie weit der Kauf fortgeschritten ist, damit wir die nötigen Prüfungen besprechen können.",
