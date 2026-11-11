@@ -37,7 +37,7 @@ export default async function ContactPage({
   const source = propertyPurchase ? getPropertyContactSource(query.source) : undefined;
   const contactCards = [
     { icon: MapPin, label: t("address"), lines: [t("addressLine1"), t("addressLine2")], href: "https://maps.google.com/?cid=10350029232005631470", external: true },
-    ...(!propertyPurchase ? [{ icon: Phone, label: t("phone"), lines: [phoneNumber], href: phoneHref, external: false }] : []),
+    { icon: Phone, label: t("phone"), lines: [phoneNumber], href: phoneHref, external: false },
     { icon: Mail, label: t("email"), lines: ["iopapaio@gmail.com"], href: "mailto:iopapaio@gmail.com", external: false },
     { icon: Clock, label: t("hours"), lines: [t("hoursValue")], href: null, external: false },
   ];
@@ -60,22 +60,18 @@ export default async function ContactPage({
           {/* Contact info */}
           <div>
             <div className="space-y-8">
-              {contactCards.map(({ icon: Icon, label, lines, href, external }, i) => (
-                <ScrollReveal key={label} direction="left" delay={i * 0.12}>
-                  <a
-                    href={href ?? undefined}
-                    target={external ? "_blank" : undefined}
-                    rel={external ? "noopener noreferrer" : undefined}
-                    className={`flex gap-4 group items-center rounded-sm px-4 py-3 transition-all duration-150 ${
-                      href
-                        ? `bg-gray-50 hover:bg-white active:bg-gray-50
-                           border border-gray-200 hover:border-accent/40 active:border-accent/20
-                           shadow-[0_3px_0_0_rgba(0,0,0,0.08)] hover:shadow-[0_3px_0_0_rgba(200,146,42,0.2)]
-                           active:shadow-none active:translate-y-[3px]
-                           cursor-pointer`
-                        : "cursor-default"
-                    }`}
-                  >
+              {contactCards.map(({ icon: Icon, label, lines, href, external }, i) => {
+                const className = `flex gap-4 group items-center rounded-sm px-4 py-3 transition-all duration-150 ${
+                  href
+                    ? `bg-gray-50 hover:bg-white active:bg-gray-50
+                       border border-gray-200 hover:border-accent/40 active:border-accent/20
+                       shadow-[0_3px_0_0_rgba(0,0,0,0.08)] hover:shadow-[0_3px_0_0_rgba(200,146,42,0.2)]
+                       active:shadow-none active:translate-y-[3px]
+                       cursor-pointer`
+                    : "cursor-default"
+                }`;
+                const content = (
+                  <>
                     <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
                       <Icon className="text-accent" size={18} />
                     </div>
@@ -86,9 +82,28 @@ export default async function ContactPage({
                       ))}
                     </div>
                     {href && <ChevronRight size={16} className="text-gray-300 group-hover:text-accent flex-shrink-0 transition-colors" />}
-                  </a>
-                </ScrollReveal>
-              ))}
+                  </>
+                );
+
+                return (
+                  <ScrollReveal key={label} direction="left" delay={i * 0.12}>
+                    {propertyPurchase && href === phoneHref ? (
+                      <PropertyPhoneLink href={href} source={source} className={className}>
+                        {content}
+                      </PropertyPhoneLink>
+                    ) : (
+                      <a
+                        href={href ?? undefined}
+                        target={external ? "_blank" : undefined}
+                        rel={external ? "noopener noreferrer" : undefined}
+                        className={className}
+                      >
+                        {content}
+                      </a>
+                    )}
+                  </ScrollReveal>
+                );
+              })}
             </div>
 
             {/* Google Maps embed */}
@@ -107,17 +122,6 @@ export default async function ContactPage({
           {/* Form */}
           <div id="contact-form" className="scroll-mt-24 md:scroll-mt-36">
             <ScrollReveal direction="right" delay={0.15}>
-              {propertyPurchase && (
-                <PropertyPhoneLink
-                  href={phoneHref}
-                  source={source}
-                  className="mb-5 inline-flex min-h-11 items-center gap-2 rounded-sm border border-accent/40 px-4 py-2 text-sm font-semibold text-primary hover:bg-accent/10"
-                >
-                  <Phone size={16} className="text-accent" aria-hidden="true" />
-                  <span className="sr-only">{t("phone")} </span>
-                  {phoneNumber}
-                </PropertyPhoneLink>
-              )}
               <ContactForm
                 key={propertyPurchase ? "property-purchase" : "general"}
                 propertyPurchase={propertyPurchase}
