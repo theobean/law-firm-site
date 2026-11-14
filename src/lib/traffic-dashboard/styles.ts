@@ -30,7 +30,7 @@ export const dashboardStyles = `
   .caption { color: var(--muted); font-size: .875rem; }
   .section-heading { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: start; gap: .65rem 1.25rem; }
   .section-heading p { margin-top: .3rem; }
-  .controls { display: grid; gap: .85rem; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 2fr) auto; align-items: end; }
+  .controls { display: grid; gap: .85rem; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 2fr); align-items: end; }
   label { display: grid; min-width: 0; gap: .35rem; font-size: .84rem; font-weight: 680; }
   select, input[type="date"], button, .button { font: inherit; min-width: 0; min-height: 2.7rem; border-radius: .4rem; padding: .53rem .65rem; }
   select, input[type="date"] { width: 100%; color: var(--navy); border: 1px solid #b6c5cd; background: white; font-size: .9rem; }
@@ -48,6 +48,9 @@ export const dashboardStyles = `
   @supports selector(:has(option:checked)) {
     .controls:not(:has(option[value="custom"]:checked)) .custom-range { display: none; }
   }
+  .filter-actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .55rem 1rem; }
+  .traffic-filter { display: inline-flex; align-items: center; gap: .5rem; min-height: 2.7rem; cursor: pointer; }
+  .traffic-filter input { flex: none; width: 1.05rem; height: 1.05rem; margin: 0; accent-color: var(--navy); }
   .day-selection { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .45rem 1rem; background: #faf3e3; color: #5e4117; border: 1px solid #ecd9af; border-radius: .5rem; padding: .6rem .9rem; margin-top: .8rem; font-size: .88rem; }
   .day-selection a { color: #594018; font-weight: 700; }
   .coverage { color: #4c5e68; border-left: 3px solid #bd8e39; padding-left: .7rem; }
@@ -127,7 +130,7 @@ export const dashboardStyles = `
     .hero .wrap { flex-wrap: wrap; gap: .85rem; }
     .hero .export { min-height: 2.4rem; }
     .controls { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; }
-    .controls button { grid-column: 1 / -1; }
+    .filter-actions button { width: 100%; }
     .page-filter { grid-column: 1 / -1; }
     .custom-range { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; }
     .summary { gap: .65rem; }

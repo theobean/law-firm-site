@@ -15,6 +15,7 @@ export type TrafficFilters = {
   lang: TrafficLocale | "";
   page: string;
   day: string;
+  unclassifiedOnly: boolean;
 };
 
 type DailyTraffic = {
@@ -99,6 +100,7 @@ export function trafficFilters(today: string, params: URLSearchParams): TrafficF
     lang: locales.find(locale => locale === params.get("lang")) ?? "",
     page: publicPage(params.get("page")),
     day: days.includes(requestedDay) ? requestedDay : "",
+    unclassifiedOnly: params.get("traffic") === "unclassified",
   };
 }
 
@@ -143,10 +145,19 @@ export function trafficReport(filters: TrafficFilters, firstRecordedDay: string 
     return entry;
   }
 
-  for (const row of rows) {
-    if (filters.lang && row.locale !== filters.lang) continue;
-    if (row.day >= filters.previousFrom && row.day <= filters.to) pageOptions.add(row.page);
-    if (filters.page && row.page !== filters.page) continue;
+  for (const storedRow of rows) {
+    if (filters.lang && storedRow.locale !== filters.lang) continue;
+    if (storedRow.day >= filters.previousFrom && storedRow.day <= filters.to) pageOptions.add(storedRow.page);
+    if (filters.page && storedRow.page !== filters.page) continue;
+
+    // Keep the original buckets intact and use the selected count throughout the report.
+    const row = filters.unclassifiedOnly ? {
+      ...storedRow,
+      count: storedRow.count - (storedRow.prefetchRequests ?? 0) - (storedRow.suspectedBotRequests ?? 0),
+      prefetchRequests: 0,
+      suspectedBotRequests: 0,
+    } : storedRow;
+    if (row.count === 0) continue;
 
     const current = currentDays.get(row.day);
     if (current?.recorded) {
