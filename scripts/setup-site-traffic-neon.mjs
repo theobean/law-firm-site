@@ -11,6 +11,7 @@ const migrationUrls = [
   new URL("../db/site-traffic.sql", import.meta.url),
   new URL("../db/migrations/20261111_06_site_traffic_bounce.sql", import.meta.url),
   new URL("../db/migrations/20261111_07_site_traffic_sources.sql", import.meta.url),
+  new URL("../db/migrations/20261114_08_site_traffic_request_kinds.sql", import.meta.url),
 ];
 
 function identifier(value) {

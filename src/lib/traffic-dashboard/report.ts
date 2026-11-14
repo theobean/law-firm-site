@@ -38,6 +38,7 @@ export type TrafficReport = {
   pageOptions: string[];
   daily: DailyTraffic[];
   total: number;
+  requestKinds: { prefetch: number; suspected_bot: number; unclassified: number };
   average: number | null;
   recordedDays: number;
   activeDays: number;
@@ -130,6 +131,8 @@ export function trafficReport(filters: TrafficFilters, firstRecordedDay: string 
   const languageCounts = emptyCounts();
   const previousLanguageCounts = emptyCounts();
   const detailRows: TrafficCount[] = [];
+  let prefetch = 0;
+  let suspectedBots = 0;
 
   function pageTotal(row: TrafficCount) {
     const key = `${row.locale}:${row.page}`;
@@ -151,6 +154,8 @@ export function trafficReport(filters: TrafficFilters, firstRecordedDay: string 
       current.total += row.count;
       if (!filters.day || filters.day === row.day) {
         detailRows.push(row);
+        prefetch += row.prefetchRequests ?? 0;
+        suspectedBots += row.suspectedBotRequests ?? 0;
         languageCounts[row.locale] += row.count;
         pageTotal(row).total += row.count;
       }
@@ -181,6 +186,7 @@ export function trafficReport(filters: TrafficFilters, firstRecordedDay: string 
     pageOptions: [...pageOptions].sort(),
     daily,
     total,
+    requestKinds: { prefetch, suspected_bot: suspectedBots, unclassified: total - prefetch - suspectedBots },
     average: recordedDays ? total / recordedDays : null,
     recordedDays,
     activeDays: active.length,

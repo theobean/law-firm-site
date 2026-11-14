@@ -37,6 +37,8 @@ const baseHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Keep the App Router's prefetch headers visible to the traffic classifier.
+  skipProxyUrlNormalize: true,
   async redirects() {
     return [
       // WordPress post ID URLs: /?p=123

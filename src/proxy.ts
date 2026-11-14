@@ -1,7 +1,7 @@
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
 import { type NextFetchEvent, NextRequest, NextResponse } from "next/server";
-import { canRecordTraffic, recordTrafficRequest, trafficDay } from "./lib/traffic";
+import { recordTrafficRequest, trafficDay, trafficRequestKind } from "./lib/traffic";
 
 const intlMiddleware = createMiddleware(routing);
 
@@ -45,8 +45,9 @@ export function proxy(request: NextRequest, event: NextFetchEvent) {
   }
 
   const response = intlMiddleware(request);
-  if (hasLocale && response.status < 300 && canRecordTraffic(request.method, request.headers)) {
-    event.waitUntil(recordTrafficRequest(pathname, trafficDay()));
+  if (hasLocale && response.status < 300) {
+    const kind = trafficRequestKind(request.method, request.headers);
+    if (kind) event.waitUntil(recordTrafficRequest(pathname, trafficDay(), kind));
   }
   return response;
 }

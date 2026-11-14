@@ -23,7 +23,7 @@ export default function PrivacyPage() {
         title={t("privacyTitle")}
         intro={t("privacyIntro")}
         lastUpdatedLabel={t("lastUpdated")}
-        lastUpdatedDate="11/11/2026"
+        lastUpdatedDate="14/11/2026"
         sections={[
           { title: t("privacySection1Title"), body: t("privacySection1") },
           { title: t("privacySection2Title"), body: t("privacySection2") },
