@@ -92,6 +92,7 @@ function filterQuery(filters: TrafficReport["filters"], day = filters.day) {
   }
   if (filters.lang) query.set("lang", filters.lang);
   if (filters.page) query.set("page", filters.page);
+  if (filters.unclassifiedOnly) query.set("traffic", "unclassified");
   if (day) query.set("day", day);
   return query;
 }
@@ -114,14 +115,18 @@ function renderFilters(report: TrafficReport, today: string) {
     : pageOptions;
   return `
   <form class="card controls" action="${basePath}" method="get" aria-label="Φίλτρα επισκεψιμότητας">
+    ${filters.day ? `<input type="hidden" name="day" value="${escape(filters.day)}">` : ""}
     <label>Περίοδος <select name="period">${trafficPeriods.map(days => option(String(days), `Τελευταίες ${days} ημέρες`, filters.period)).join("")}${option("custom", "Προσαρμοσμένο εύρος", filters.period)}</select></label>
     <label>Γλώσσα <select name="lang">${option("", "Όλες οι γλώσσες", filters.lang)}${Object.entries(languages).map(([code, name]) => option(code, name, filters.lang)).join("")}</select></label>
     <label class="page-filter">Σελίδα <select name="page">${option("", "Όλες οι σελίδες", filters.page)}${options.map(page => option(page, page, filters.page)).join("")}</select></label>
-    <button type="submit">Εφαρμογή</button>
     <div class="custom-range">
       <label>Από <input name="from" type="date" value="${escape(filters.from)}" max="${escape(today)}"></label>
       <label>Έως <input name="to" type="date" value="${escape(filters.to)}" max="${escape(today)}"></label>
       <p class="caption">Διάλεξε ημερομηνίες και πάτησε «Εφαρμογή».</p>
+    </div>
+    <div class="filter-actions">
+      <label class="traffic-filter"><input type="checkbox" name="traffic" value="unclassified"${filters.unclassifiedOnly ? " checked" : ""}> Χωρίς προφορτώσεις και πιθανά bots</label>
+      <button type="submit">Εφαρμογή</button>
     </div>
   </form>`;
 }
@@ -146,7 +151,7 @@ function renderSummary(report: TrafficReport, bounce?: TrafficBounceSummary) {
 
   return `
   <section class="summary" aria-label="Σύνοψη επισκεψιμότητας">
-    <div class="card kpi" data-kpi="total"><p class="kpi-label">Αιτήματα σελίδας</p>
+    <div class="card kpi" data-kpi="total"><p class="kpi-label">${filters.unclassifiedOnly ? "Αταξινόμητα αιτήματα" : "Αιτήματα σελίδας"}</p>
       <p class="total number">${hasCoverage ? number.format(total) : "—"}</p><p class="kpi-note">${totalNote}</p></div>
     <div class="card kpi" data-kpi="average"><p class="kpi-label">Μέσος όρος ανά ημέρα</p>
       <p class="total number">${average === null ? "—" : number.format(average)}</p><p class="kpi-note">${averageNote}</p></div>
@@ -347,8 +352,9 @@ export function renderDashboard(
     ${renderFilters(report, today)}
     ${invalidRange ? '<p class="caption coverage" role="status">Το εύρος ημερομηνιών δεν είναι έγκυρο. Εμφανίζονται οι τελευταίες 30 ημέρες.</p>' : ""}
     ${coverage ? `<p class="caption coverage">${escape(coverage)}</p>` : ""}
+    ${filters.unclassifiedOnly ? '<p class="caption coverage">Εμφανίζονται μόνο αταξινόμητα αιτήματα, μαζί με τις παλιότερες καταγραφές. Στο σύνολο μπορεί να περιλαμβάνονται και bots. Οι πηγές εισόδων και το bounce rate υπολογίζονται από τις μετρήσιμες εισόδους.</p>' : ""}
     ${renderSummary(report, bounce)}
-    ${renderRequestKinds(report)}
+    ${filters.unclassifiedOnly ? "" : renderRequestKinds(report)}
     ${comparison ? `<p class="caption">${escape(comparison)}</p>` : ""}
     ${renderDaily(report, today)}
     <div class="columns"><div class="sidebar">${renderSources(sources)}${renderLanguages(report)}</div>${renderPages(report)}</div>
