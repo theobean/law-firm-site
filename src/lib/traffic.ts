@@ -2,12 +2,21 @@ import { neon } from "@neondatabase/serverless";
 import { getPublicContentPages, publicStaticPaths } from "./public-pages";
 
 export type TrafficLocale = "el" | "en" | "de";
-export type TrafficCount = { day: string; locale: TrafficLocale; page: string; count: number };
+export type TrafficCount = {
+  day: string;
+  locale: TrafficLocale;
+  page: string;
+  count: number;
+  prefetchRequests: number;
+  suspectedBotRequests: number;
+};
+type TrafficKind = "prefetch" | "suspected_bot" | "unclassified";
 
 const dateFormat = new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Athens", dateStyle: "short" });
 const staticPages = new Set<string>([...publicStaticPaths, "/privacy", "/terms"]);
 const knownBot = /bot|crawler|spider|slurp|headless|lighthouse|preview|curl|wget|python|facebookexternalhit|chatgpt-user|claude-user|perplexity-user/i;
-const prefetchHeaders = ["rsc", "next-router-prefetch", "next-router-segment-prefetch", "x-middleware-prefetch", "x-nextjs-data"];
+const knownCrawler = /\b(?:googlebot|bingbot|duckduckbot|applebot)\b/i;
+const prefetchHeaders = ["next-router-prefetch", "next-router-segment-prefetch", "x-middleware-prefetch"];
 
 let publicContentCatalog: Promise<Set<string>> | undefined;
 let publicContentExpiresAt = 0;
@@ -36,19 +45,23 @@ export function isBrowserTraffic(headers: Headers) {
   return Boolean(agent && !knownBot.test(agent));
 }
 
-export function canRecordTraffic(method: string, headers: Headers) {
-  if (!trafficRecordingEnabled()) return false;
-  if (method !== "GET" || !headers.get("accept")?.includes("text/html")) return false;
-  if (prefetchHeaders.some(header => headers.has(header))) return false;
-  const purpose = (headers.get("purpose") ?? "") + " " + (headers.get("sec-purpose") ?? "");
-  if (/prefetch|prerender/i.test(purpose)) return false;
+export function trafficRequestKind(method: string, headers: Headers): TrafficKind | undefined {
+  if (!trafficRecordingEnabled() || method !== "GET") return;
+  const prefetchPurpose = ["sec-purpose", "purpose"].some(name =>
+    headers.get(name)?.split(";", 1)[0].trim().toLowerCase() === "prefetch",
+  );
+  if (prefetchPurpose || prefetchHeaders.some(header => headers.has(header))) return "prefetch";
 
+  // Ordinary App Router fetches may accompany the existing page navigation beacon.
+  if (headers.has("rsc") || headers.has("x-nextjs-data")) return;
+  if (knownCrawler.test(headers.get("user-agent") ?? "")) return "suspected_bot";
+  if (!headers.get("accept")?.includes("text/html")) return;
   const destination = headers.get("sec-fetch-dest");
   const mode = headers.get("sec-fetch-mode");
-  if (destination !== null && destination !== "document") return false;
-  if (mode !== null && mode !== "navigate") return false;
+  if (destination !== null && destination !== "document") return;
+  if (mode !== null && mode !== "navigate") return;
 
-  return isBrowserTraffic(headers);
+  return "unclassified";
 }
 
 export async function publicTrafficPage(pathname: string) {
@@ -69,15 +82,15 @@ export async function publicTrafficPage(pathname: string) {
   }
 }
 
-export async function recordTrafficRequest(pathname: string, day: string) {
+export async function recordTrafficRequest(pathname: string, day: string, kind: TrafficKind) {
   const connection = process.env.TRAFFIC_WRITE_DATABASE_URL;
   if (!connection) return false;
   const page = await publicTrafficPage(pathname);
   if (!page) return false;
   try {
     await neon(connection).query(
-      "SELECT site_traffic.record_request($1::date, $2::text, $3::text)",
-      [day, page.locale, page.page],
+      "SELECT site_traffic.record_request($1::date, $2::text, $3::text, $4::text)",
+      [day, page.locale, page.page, kind],
       { fetchOptions: { signal: AbortSignal.timeout(2500) } },
     );
     return true;
@@ -97,7 +110,9 @@ export async function readTrafficCounts(from: string, to: string): Promise<{
     `WITH coverage AS (
        SELECT MIN(day)::text AS first_recorded_day FROM site_traffic.daily_counts
      )
-     SELECT counts.day::text AS day, counts.locale, counts.page, counts.hits::text AS hits, coverage.first_recorded_day
+     SELECT counts.day::text AS day, counts.locale, counts.page, counts.hits::text AS hits,
+            counts.prefetch_requests::text AS prefetch_requests,
+            counts.suspected_bot_requests::text AS suspected_bot_requests, coverage.first_recorded_day
      FROM coverage
      LEFT JOIN site_traffic.daily_counts AS counts ON counts.day BETWEEN $1::date AND $2::date
      ORDER BY counts.day, counts.locale, counts.page`,
@@ -106,6 +121,10 @@ export async function readTrafficCounts(from: string, to: string): Promise<{
   );
   return {
     firstRecordedDay: result[0]?.first_recorded_day ?? null,
-    rows: result.flatMap(({ day, locale, page, hits }) => day ? [{ day, locale, page, count: Number(hits) }] : []),
+    rows: result.flatMap(({ day, locale, page, hits, prefetch_requests, suspected_bot_requests }) => day ? [{
+      day, locale, page, count: Number(hits),
+      prefetchRequests: Number(prefetch_requests ?? 0),
+      suspectedBotRequests: Number(suspected_bot_requests ?? 0),
+    }] : []),
   };
 }

@@ -36,8 +36,11 @@ function csvField(value: string | number) {
 
 function csvResponse(rows: TrafficCount[], from: string, to: string) {
   const lines = [
-    "date,language,page,requests",
-    ...rows.map(row => [row.day, row.locale, row.page, row.count].map(csvField).join(",")),
+    "date,language,page,requests,prefetch_requests,suspected_bot_requests,unclassified_requests",
+    ...rows.map(row => [
+      row.day, row.locale, row.page, row.count, row.prefetchRequests, row.suspectedBotRequests,
+      row.count - row.prefetchRequests - row.suspectedBotRequests,
+    ].map(csvField).join(",")),
   ];
   return new Response("\uFEFF" + lines.join("\r\n") + "\r\n", {
     headers: {

@@ -19,6 +19,11 @@ const sourceLabels: Record<TrafficSource, string> = {
   referral: "Άλλοι ιστότοποι",
   internal: "Εσωτερικές φορτώσεις",
 };
+const requestKindLabels = {
+  prefetch: "Προφόρτωση (prefetch)",
+  suspected_bot: "Πιθανά bots",
+  unclassified: "Αταξινόμητα",
+} as const;
 const escaped: Record<string, string> = {
   "&": "&amp;",
   "<": "&lt;",
@@ -211,6 +216,23 @@ function renderDaily(report: TrafficReport, today: string) {
   </section>`;
 }
 
+function renderRequestKinds(report: TrafficReport) {
+  const { requestKinds, recordedDays, total } = report;
+  return `
+  <section id="request-kinds" class="card" aria-labelledby="request-kinds-title" aria-describedby="request-kinds-method">
+    <h2 id="request-kinds-title">Ταξινόμηση αιτημάτων</h2>
+    <dl class="request-kinds-list">${(Object.keys(requestKindLabels) as (keyof typeof requestKindLabels)[]).map(kind => {
+      const count = requestKinds[kind];
+      const share = total > 0 ? ` · ${percentage.format(count / total)}` : "";
+      return `<div class="language-row" data-request-kind="${kind}">
+        <dt>${requestKindLabels[kind]}</dt>
+        <dd class="number">${recordedDays > 0 ? `<strong>${number.format(count)}</strong>${share}` : "—"}</dd>
+      </div>`;
+    }).join("")}</dl>
+    <p id="request-kinds-method" class="caption request-kinds-method">Τα αταξινόμητα αιτήματα περιλαμβάνουν τις παλιότερες καταγραφές και μπορεί να προέρχονται από ανθρώπους ή bots. Η ένδειξη «Πιθανά bots» βασίζεται στο δηλωμένο User-Agent.</p>
+  </section>`;
+}
+
 function renderLanguages(report: TrafficReport) {
   const hasCoverage = report.recordedDays > 0;
   return `
@@ -326,13 +348,14 @@ export function renderDashboard(
     ${invalidRange ? '<p class="caption coverage" role="status">Το εύρος ημερομηνιών δεν είναι έγκυρο. Εμφανίζονται οι τελευταίες 30 ημέρες.</p>' : ""}
     ${coverage ? `<p class="caption coverage">${escape(coverage)}</p>` : ""}
     ${renderSummary(report, bounce)}
+    ${renderRequestKinds(report)}
     ${comparison ? `<p class="caption">${escape(comparison)}</p>` : ""}
     ${renderDaily(report, today)}
     <div class="columns"><div class="sidebar">${renderSources(sources)}${renderLanguages(report)}</div>${renderPages(report)}</div>
     <div class="caption method">
-      <p>Μετράμε τις φορτώσεις και τις εσωτερικές μεταβάσεις σε δημόσιες σελίδες. Μια επαναφόρτωση μπορεί να προσθέσει μία προβολή.</p>
+      <p>Τα σύνολα αιτημάτων περιλαμβάνουν φορτώσεις, προφορτώσεις και καταγεγραμμένες εσωτερικές μεταβάσεις σε δημόσιες σελίδες. Μια επαναφόρτωση μπορεί να προσθέσει νέο αίτημα.</p>
       <p id="bounce-method">Το ποσοστό εγκατάλειψης αφορά τις μετρήσιμες εισόδους από φόρτωση σελίδας στον browser. Μια είσοδος έχει συνέχεια όταν ο επισκέπτης ανοίγει δεύτερη, διαφορετική σελίδα με εσωτερική πλοήγηση πριν από νέα πλήρη φόρτωση.</p>
-      <p id="source-method">Κάθε είσοδος αποδίδεται στην πρώτη σελίδα, στην ημέρα και στη γλώσσα της. «Απευθείας ή άγνωστη» σημαίνει ότι ο browser δεν έστειλε πηγή. Οι εσωτερικές φορτώσεις, όπως οι επαναφορτώσεις, εμφανίζονται χωριστά. Φιλτράρουμε γνωστά bots και ο ίδιος επισκέπτης μπορεί να μετρηθεί περισσότερες φορές.</p>
+      <p id="source-method">Κάθε είσοδος αποδίδεται στην πρώτη σελίδα, στην ημέρα και στη γλώσσα της. «Απευθείας ή άγνωστη» σημαίνει ότι ο browser δεν έστειλε πηγή. Οι εσωτερικές φορτώσεις, όπως οι επαναφορτώσεις, εμφανίζονται χωριστά. Στις μετρήσεις εισόδων φιλτράρουμε γνωστά bots και ο ίδιος επισκέπτης μπορεί να μετρηθεί περισσότερες φορές.</p>
     </div>`,
     filters.day ? displayDate(filters.day) : dateLabel(filters.from, filters.to),
     exportUrl,

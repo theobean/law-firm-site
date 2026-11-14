@@ -80,6 +80,8 @@ export const dashboardStyles = `
   summary { color: var(--navy); cursor: pointer; font-size: .9rem; font-weight: 700; width: fit-content; }
   .columns { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 8fr); gap: 1rem; align-items: start; }
   .sidebar { display: grid; gap: 1rem; min-width: 0; }
+  .request-kinds-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .65rem 1.25rem; margin-block: .8rem .55rem; }
+  .request-kinds-method { max-width: 74ch; }
   .language-list, .source-list { display: grid; gap: .8rem; margin-top: .95rem; }
   .language-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .35rem .5rem; font-size: .88rem; align-items: baseline; }
   .language-row dt { font-weight: 700; }
@@ -133,6 +135,7 @@ export const dashboardStyles = `
     .plot-x span:nth-child(even) { display: none; }
     .plot-x span:last-child { display: inline; }
     .language-list { grid-template-columns: minmax(0, 1fr); gap: .7rem; }
+    .request-kinds-list { grid-template-columns: minmax(0, 1fr); }
     .rank { display: none; }
   }
   @media (max-width: 23rem) {

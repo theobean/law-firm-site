@@ -20,7 +20,10 @@ function validEntryDay(day: string, today: string) {
 export async function POST(request: Request) {
   const { headers } = request;
   const fetchSite = headers.get("sec-fetch-site");
-  if (headers.get("origin") !== new URL(request.url).origin ||
+  const url = new URL(request.url);
+  // With raw Proxy URLs, Next may use its bind hostname in request.url.
+  const origin = `${url.protocol}//${headers.get("host") ?? url.host}`;
+  if (headers.get("origin") !== origin ||
       (fetchSite !== null && fetchSite !== "same-origin")) {
     return emptyResponse(403);
   }
@@ -33,7 +36,7 @@ export async function POST(request: Request) {
 
   if (page !== null) {
     if (!validPath(page) || entry !== null || entryDay !== null || source !== null) return emptyResponse(400);
-    if (trafficRecordingEnabled() && isBrowserTraffic(headers) && await recordTrafficRequest(page, today)) {
+    if (trafficRecordingEnabled() && isBrowserTraffic(headers) && await recordTrafficRequest(page, today, "unclassified")) {
       return emptyResponse(204, { "X-Traffic-Page-Recorded": "1" });
     }
   } else {
