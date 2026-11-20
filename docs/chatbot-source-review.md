@@ -65,11 +65,15 @@ service fields remain in `messages/{locale}.json`).
 | office-property-new-build | [New-build property purchase](https://ioannispapaioannou.lawyer/el/practice-areas/realEstate/agora-neodmitou) | Office services |
 | office-property-deposit-guide | [Property deposit guide](https://ioannispapaioannou.lawyer/el/blog/prokatavoli-agora-akinitou) | Office commentary |
 | office-article-d1fca9c5-06ac-4185-a2fd-6b00f82589bb | [Seven-step purchase guide](https://ioannispapaioannou.lawyer/el/blog/agora-akiniton-vimata) | Shared local office commentary; supersedes the old CMS body |
+| office-article-c4e74aa2-11ea-4c19-9714-6c38d53d3d93 | [Property titles and Cadastre](https://ioannispapaioannou.lawyer/el/blog/akiniti-periousia-ellada-elegchos-titlon) | Office commentary, published 14 November 2026; no named-author attribution |
 
 The office CTA/form language is not included as an intake instruction. The
 deposit article's notarial-form assertion is excluded from this excerpt pending
 separate official-source review. No fee amount, deadline, automatic refund,
 contract validity or guaranteed result is inferred from these publications.
+The new CMS article has no author reference. Only that exact published
+document/slug is approved with a null author; the older named-author bindings
+remain enforced. Its closing intake paragraph and CTA are excluded from context.
 
 - Original gazettes establish statute identity and the original published subject. They do not incorporate subsequent amendments. Guidance and office commentary do not silently upgrade them into current consolidated law.
 - Law 4354/2015 is retrieved for an explicit historical-statute question; it does not replace the later Law 5072/2023 reference in a general servicer question.

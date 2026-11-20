@@ -33,7 +33,7 @@ test("the reviewed legal catalog has immutable metadata and independently approv
     assert.ok(source.topics.length > 0 && source.keywords.length > 0);
     assert.equal(new URL(source.url).protocol, "https:");
   }
-  assert.equal(APPROVED_OFFICE_ARTICLES.length, 12, "the canonical property guide is now site-owned; other reviewed CMS bindings remain separate");
+  assert.equal(APPROVED_OFFICE_ARTICLES.length, 13, "the site-owned guide is separate from twelve named-author articles and the newly reviewed firm article");
 });
 
 test("Greek case, accents and inflection find the same Katseli guidance and original Gazette", () => {

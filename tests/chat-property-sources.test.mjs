@@ -182,7 +182,9 @@ test("the real knowledge pipeline combines property and official context within 
   globalThis.fetch = async () => Response.json({ result: APPROVED_OFFICE_ARTICLES.map((binding) => ({
     _id: binding.documentId, slug: binding.slug, authorId: binding.authorId,
     title: "Ακίνητο και αγορά", excerpt: "Ενημερωτικό άρθρο.",
-    content: "Το γραφείο περιγράφει γενικά την αγορά ακινήτου.", publishedAt: "2026-06-01T12:00:00Z",
+    content: binding.authorId === null
+      ? "Το γραφείο περιγράφει γενικά την αγορά ακινήτου.\n\nΑν εξετάζετε αγορά στη Θεσσαλονίκη, επικοινωνήστε με το γραφείο.\n\nΝομικός έλεγχος για αγορά ακινήτου"
+      : "Το γραφείο περιγράφει γενικά την αγορά ακινήτου.", publishedAt: "2026-06-01T12:00:00Z",
   })) });
   try {
     let sawFullSourceEnvelope = false;

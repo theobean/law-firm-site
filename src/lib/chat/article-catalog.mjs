@@ -2,6 +2,8 @@
 // 2026-11-09. Publishing another CMS record does not expand this allowlist.
 // The property-purchase guide is now a shared local publication (2026-11-20),
 // selected by property-sources.mjs. Its obsolete CMS body is not fetched here.
+// The title/Cadastre article below was inspected on 2026-11-20. Its absent
+// author reference is an exact exception, never a fallback for other records.
 const authorId = "df47781a-7dd9-4200-85f6-49c7d105c1e7";
 
 export const APPROVED_OFFICE_ARTICLES = Object.freeze([
@@ -17,6 +19,7 @@ export const APPROVED_OFFICE_ARTICLES = Object.freeze([
   ["f8fda791-5bec-471d-a11f-795729542dbc", "agorase-to-xreos-moy-fund-ti-allazei-gia-mena"],
   ["8ab3c0dd-1d6c-406c-9d89-e05fc1b64b3a", "katasxethike-o-logariasmos-moy-ti-kano-tora"],
   ["55616cf5-79f0-48a0-bdb2-576fbd338c76", "ti-einai-i-anakopi-kai-pote-prepei-na-tin-kano"],
-].map(([documentId, slug]) => Object.freeze({
-  sourceId: `office-article-${documentId}`, documentId, slug, authorId,
+  ["c4e74aa2-11ea-4c19-9714-6c38d53d3d93", "akiniti-periousia-ellada-elegchos-titlon", null],
+].map(([documentId, slug, articleAuthorId = authorId]) => Object.freeze({
+  sourceId: `office-article-${documentId}`, documentId, slug, authorId: articleAuthorId,
 })));

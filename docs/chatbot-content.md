@@ -198,7 +198,8 @@ they do not become official legal authority. Existing official property,
 Cadastre and AADE excerpts retain their separate classifications.
 
 The purchase guide's old Sanity body is no longer in the CMS reader's approved
-bindings (twelve other articles remain). Its original source ID now resolves to
+bindings (thirteen other articles remain, including the property article
+published on 14 November). Its original source ID now resolves to
 the shared, source-controlled public guide snapshot instead. Changes to that
 shared content update both rendered guide prose and chatbot excerpts in the
 same deployment; there is no duplicate chatbot summary to forget to update.
@@ -208,6 +209,13 @@ Updating a CMS body alone does not replace this local guide.
 Withdrawing that local chatbot publication requires removing its approved
 source/card in code; unpublishing the CMS record alone does not revoke it and
 can leave the guide's website URL unavailable.
+
+The separately published article `akiniti-periousia-ellada-elegchos-titlon`
+uses its own exact document/slug binding and an explicit null author reference.
+It is labelled as an office article without attributing it to an individual;
+the twelve older CMS records retain their named-author checks. The reviewed
+closing intake paragraph/CTA is excluded before excerpt selection, with a fixed
+paragraph boundary that fails closed if the article changes that boundary.
 
 Property metadata resolves explicit purchase topics and bounded dependent
 follow-ups in Greek, English and German. A bare deposit or place name cannot

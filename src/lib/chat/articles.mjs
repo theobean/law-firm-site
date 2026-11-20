@@ -7,13 +7,18 @@ const catalog = new Map(APPROVED_OFFICE_ARTICLES.map((article) => [article.docum
 const maxResponseBytes = 512 * 1024;
 const maxArticleCharacters = 100_000;
 const requestTimeoutMs = 3000;
+const reviewedPropertyArticleId = "c4e74aa2-11ea-4c19-9714-6c38d53d3d93";
+const propertyIntakeStart = "Αν εξετάζετε αγορά στη Θεσσαλονίκη";
+const propertyClosingCta = "Νομικός έλεγχος για αγορά ακινήτου";
 
 // The identity, slug and author must match the SAME approved binding, before
 // fetching any content. Parameters and endpoint are application-owned constants.
 const query = `*[
   _type == "article" && !(_id in path("drafts.**")) && !(_id in path("versions.**")) &&
   defined(publishedAt) && dateTime(publishedAt) <= dateTime($now) && _id in $approved[].documentId &&
-  count($approved[documentId == ^._id && slug == ^.slug.current && authorId == ^.author._ref]) > 0
+  count($approved[documentId == ^._id && slug == ^.slug.current &&
+    ((authorId == null && !defined(^.author._ref)) ||
+      (authorId != null && authorId == ^.author._ref))]) > 0
 ] | order(_id asc) {
   _id, "slug": slug.current, publishedAt, "authorId": author._ref,
   title, excerpt, "content": pt::text(body)
@@ -36,6 +41,10 @@ const topicTerms = [
   [["ανακοπ", "objection", "payment order", "zahlungsbefehl", "widerspruch"], ["ανακοπ", "διαταγ", "πληρωμ"]],
   [["κατασχ", "seiz", "garnish", "pfand", "bank account", "bankkonto", "λογαριασ"], ["κατασχ", "λογαριασ"]],
   [["ακινητ", "property", "real estate", "immobil", "αγορα"], ["ακινητ", "αγορα"]],
+  [["bare ownership", "usufruct", "ψιλη κυριοτ", "επικαρπ", "niessbrauch", "niesbrauch", "nacktes eigentum"], ["ψιλ", "κυριοτητ", "επικαρπ"]],
+  [["title deed", "title check", "eigentumstitel", "τιτλ"], ["τιτλ", "κτηματολογ"]],
+  [["parking", "σταθμευσ", "stellplatz"], ["σταθμευσ", "διαμερισ"]],
+  [["storage room", "storage unit", "αποθηκ", "abstellraum", "keller"], ["αποθηκ", "διαμερισ"]],
   [["εταιρ", "company", "business", "corporat", "gesellschaft", "unternehmen", "ιδρυσ"], ["εταιρ", "ιδρυσ"]],
 ];
 
@@ -89,6 +98,21 @@ function bestExcerpt(content, terms) {
   return best;
 }
 
+function reviewedArticleContent(binding, content) {
+  if (binding.documentId !== reviewedPropertyArticleId) return content;
+  // This exact publication ends with a separate intake paragraph and contact
+  // CTA. Strip them BEFORE ranking so a relevant request cannot retrieve intake
+  // wording. A moved/duplicated/missing boundary requires a new content review.
+  const paragraphs = content.split(/\n[ \t]*\n/u);
+  const intake = paragraphs.at(-2);
+  if (paragraphs.length < 3 || !intake?.startsWith(propertyIntakeStart) ||
+      paragraphs.at(-1) !== propertyClosingCta ||
+      content.split(propertyIntakeStart).length !== 2) throw new Error("invalid_articles");
+  const reviewed = paragraphs.slice(0, -2).join("\n\n").trim();
+  if (!reviewed) throw new Error("invalid_articles");
+  return reviewed;
+}
+
 function validateArticles(payload, nowMs) {
   if (!payload || typeof payload !== "object" || !Array.isArray(payload.result) ||
       payload.result.length > APPROVED_OFFICE_ARTICLES.length) throw new Error("invalid_articles");
@@ -106,9 +130,10 @@ function validateArticles(payload, nowMs) {
       throw new Error("invalid_articles");
     }
     const title = prepareChatText(record.title, 200);
-    const content = prepareChatText(record.content, maxArticleCharacters);
+    const preparedContent = prepareChatText(record.content, maxArticleCharacters);
     const excerpt = record.excerpt == null || record.excerpt === "" ? "" : prepareChatText(record.excerpt, 2000);
-    if (!title || !content || excerpt === null) throw new Error("invalid_articles");
+    if (!title || !preparedContent || excerpt === null) throw new Error("invalid_articles");
+    const content = reviewedArticleContent(binding, preparedContent);
     seen.add(record._id);
     return { binding, title, content, excerpt, publishedAt: record.publishedAt };
   });
@@ -172,7 +197,7 @@ export async function getPublicArticleSources(principal, question, { fetcher = f
         title,
         url: `https://ioannispapaioannou.lawyer/el/blog/${binding.slug}`,
         content: clipText(
-          `ΑΡΘΡΟ ΤΟΥ ΓΡΑΦΕΙΟΥ — του δικηγόρου Ιωάννη Παπαϊωάννου. Δημοσίευση ${publishedAt.slice(0, 10)}. Απόσπασμα σχολιασμού/άποψης του συντάκτη, όχι επίσημο κείμενο νόμου ή επαλήθευση του ισχύοντος δικαίου.\n${excerpt}`,
+          `${binding.authorId === null ? "ΑΡΘΡΟ ΤΟΥ ΓΡΑΦΕΙΟΥ — δημοσιευμένο ενημερωτικό κείμενο." : "ΑΡΘΡΟ ΤΟΥ ΓΡΑΦΕΙΟΥ — του δικηγόρου Ιωάννη Παπαϊωάννου."} Δημοσίευση ${publishedAt.slice(0, 10)}. Απόσπασμα σχολιασμού/άποψης του συντάκτη, όχι επίσημο κείμενο νόμου ή επαλήθευση του ισχύοντος δικαίου.\n${excerpt}`,
           1500, 3000,
         ),
       }));
