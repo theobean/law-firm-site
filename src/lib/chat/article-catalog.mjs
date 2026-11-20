@@ -1,5 +1,7 @@
 // Public article identity bindings inspected through Sanity's tokenless API on
 // 2026-11-09. Publishing another CMS record does not expand this allowlist.
+// The property-purchase guide is now a shared local publication (2026-11-20),
+// selected by property-sources.mjs. Its obsolete CMS body is not fetched here.
 const authorId = "df47781a-7dd9-4200-85f6-49c7d105c1e7";
 
 export const APPROVED_OFFICE_ARTICLES = Object.freeze([
@@ -8,7 +10,6 @@ export const APPROVED_OFFICE_ARTICLES = Object.freeze([
   ["5nMwddj4PAYYyyF46JZjJ2", "olap-6-2026-nomos-katseli-atomiki-energeia-daneiolithpti"],
   ["e7fe758b-2926-442c-ab49-1d854e2376fe", "o-pleistiriasmos-einai-i-kalyteri-doyleia-poy-ekanan-pote-ta-funds-mexri-na-ton-stamatiseis"],
   ["8be4ab3d-45cf-44aa-b670-08d6b41159fc", "giati-kaneis-den-prepei-na-paradidetai-os-leia-sta-funds"],
-  ["d1fca9c5-06ac-4185-a2fd-6b00f82589bb", "agora-akiniton-vimata"],
   ["75b17d53-1a02-4661-89f1-0ae221fd0fac", "idrysi-etaireias-stin-ellada-ti-prepei-na-gnorizete-prin-ksekinisete"],
   ["b15b6f02-28e8-491f-8be5-5b47c718005f", "eksodikastikos-mixanismos-rythmisis-ofeilon-pos-leitoyrgei-kai-poion-afora"],
   ["8004ddad-2e71-404a-af83-32bbf55ccbf8", "pote-mporo-na-stamatiso-enan-pleistiriasmo"],

@@ -16,6 +16,8 @@ const PUBLIC_PRINCIPAL = Object.freeze({
 const APPROVED_PUBLIC_SOURCE_IDS = new Set([
   "office-identity", "office-contact", "office-appointments", "office-services", "office-nationwide",
   "office-faq-guidance", "legislation-4354-2015",
+  "office-property-services", "office-property-athens", "office-property-new-build",
+  "office-property-deposit-guide", "office-article-d1fca9c5-06ac-4185-a2fd-6b00f82589bb",
   "legal-katseli-law", "legal-debt-settlement", "legal-banking-code", "legal-credit-servicers", "legal-payment-order",
   "legal-mediation", "legal-labor-disputes", "legal-land-registry", "legal-inheritance-tax", "legal-inheritance-renunciation",
   "legislation-3869-2010", "legislation-4738-2020",

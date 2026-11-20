@@ -50,6 +50,27 @@ Source inspection is not certification of current consolidated legislation. The 
 
 ## Boundaries found during review
 
+### Public property content reviewed on 20 November 2026
+
+These selections are published office information/commentary, not additional
+official legal sources or a certification of current law. Source dates record
+inspection/selection, not legal effective dates. Their approved localized prose
+is shared with the website through `src/lib/property-content.mjs` (the main
+service fields remain in `messages/{locale}.json`).
+
+| Source ID | Public page | Classification |
+| --- | --- | --- |
+| office-property-services | [Property purchase and title checks](https://ioannispapaioannou.lawyer/el/practice-areas/realEstate) | Office services |
+| office-property-athens | [Property purchase in Athens](https://ioannispapaioannou.lawyer/el/practice-areas/realEstate/agora-akinitou-athina) | Office services |
+| office-property-new-build | [New-build property purchase](https://ioannispapaioannou.lawyer/el/practice-areas/realEstate/agora-neodmitou) | Office services |
+| office-property-deposit-guide | [Property deposit guide](https://ioannispapaioannou.lawyer/el/blog/prokatavoli-agora-akinitou) | Office commentary |
+| office-article-d1fca9c5-06ac-4185-a2fd-6b00f82589bb | [Seven-step purchase guide](https://ioannispapaioannou.lawyer/el/blog/agora-akiniton-vimata) | Shared local office commentary; supersedes the old CMS body |
+
+The office CTA/form language is not included as an intake instruction. The
+deposit article's notarial-form assertion is excluded from this excerpt pending
+separate official-source review. No fee amount, deadline, automatic refund,
+contract validity or guaranteed result is inferred from these publications.
+
 - Original gazettes establish statute identity and the original published subject. They do not incorporate subsequent amendments. Guidance and office commentary do not silently upgrade them into current consolidated law.
 - Law 4354/2015 is retrieved for an explicit historical-statute question; it does not replace the later Law 5072/2023 reference in a general servicer question.
 - Some official procedural pages retain old court names, code references, transitional dates or implementation announcements. Their excerpts retain stable general concepts only; they do not supply current filing instructions, statutory deadlines or thresholds.

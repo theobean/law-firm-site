@@ -2,6 +2,7 @@ import "server-only";
 import { assertPublicChatAccess, createAuthorizedChatContext, readAuthorizedChatSources } from "./access.mjs";
 import { getPublicArticleSources } from "./articles.mjs";
 import { selectReviewedLegalSources } from "./legal-retrieval.mjs";
+import { getPublicPropertySources } from "./property-sources.mjs";
 import el from "../../../messages/el.json";
 import en from "../../../messages/en.json";
 import de from "../../../messages/de.json";
@@ -68,6 +69,7 @@ export function getStaticPublicChatContext(principal: unknown, locale: "el" | "e
   const readers = [
     ...Object.entries(officeLoaders).map(([id, load]) => ({ id, load })),
     ...selectReviewedLegalSources(principal, question).map((source) => ({ id: source.id, load: () => source })),
+    ...getPublicPropertySources(principal, locale, question).map((source) => ({ id: source.id, load: () => source })),
   ];
   return createAuthorizedChatContext(principal, "public", readers.map(({ id, load }) => ({
     id,
@@ -79,11 +81,15 @@ export function getStaticPublicChatContext(principal: unknown, locale: "el" | "e
 
 export async function getPublicChatContext(principal: unknown, locale: "el" | "en" | "de", question = "") {
   const baseline = getStaticPublicChatContext(principal, locale, question);
+  const staticSources = readAuthorizedChatSources(baseline);
   // The caller reserves a shared quota lease before entering this live reader.
   // The reader also authorizes before its published-only, tokenless CMS query.
-  const articleSources = await getPublicArticleSources(principal, question);
+  // Keep the existing provider evidence limit of twelve sources. New local
+  // property cards participate in static pricing before any live CMS reader.
+  const remainingSources = Math.max(0, 12 - staticSources.length);
+  const articleSources = remainingSources ? (await getPublicArticleSources(principal, question)).slice(0, remainingSources) : [];
   return createAuthorizedChatContext(principal, "public", [
-    ...readAuthorizedChatSources(baseline), ...articleSources,
+    ...staticSources, ...articleSources,
   ].map((source) => ({
     id: source.id,
     visibility: "public",

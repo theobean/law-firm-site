@@ -1,6 +1,7 @@
 import { prepareChatText } from "./protocol.mjs";
 import { getPublicChatPrincipal } from "./access.mjs";
 import { getReviewedLegalTopicHints, getReviewedLegalTopicMatches } from "./legal-retrieval.mjs";
+import { getPropertyTopicHints, getPropertyTopicMatches } from "./property-topics.mjs";
 
 export const MAX_RETRIEVAL_QUERY_LENGTH = 2000;
 export const MAX_RETRIEVAL_HISTORY_LENGTH = 800;
@@ -112,11 +113,15 @@ export function buildChatRetrievalQuery(messages) {
   const topicCache = new Map();
   const hintCache = new Map();
   const topics = (text) => {
-    if (!topicCache.has(text)) topicCache.set(text, getReviewedLegalTopicMatches(principal, text));
+    if (!topicCache.has(text)) topicCache.set(text, [
+      ...getReviewedLegalTopicMatches(principal, text), ...getPropertyTopicMatches(principal, text),
+    ]);
     return topicCache.get(text);
   };
   const hintedTopics = (text) => {
-    if (!hintCache.has(text)) hintCache.set(text, new Set(getReviewedLegalTopicHints(principal, text).flatMap(({ topics }) => topics)));
+    if (!hintCache.has(text)) hintCache.set(text, new Set([
+      ...getReviewedLegalTopicHints(principal, text), ...getPropertyTopicHints(principal, text),
+    ].flatMap(({ topics }) => topics)));
     return hintCache.get(text);
   };
   // Canonical current topics always win, even after "and/και/und". A bare

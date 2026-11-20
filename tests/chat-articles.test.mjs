@@ -20,8 +20,10 @@ const read = (records, question = "Τι είναι ο νόμος Κατσέλη;
   getPublicArticleSources(principal, question, { now, fetcher: async () => Response.json({ result: records }) });
 
 test("the reviewed article registry has immutable exact identity bindings", () => {
-  assert.equal(APPROVED_OFFICE_ARTICLES.length, 13);
-  assert.equal(new Set(APPROVED_OFFICE_ARTICLES.map(({ documentId }) => documentId)).size, 13);
+  assert.equal(APPROVED_OFFICE_ARTICLES.length, 12);
+  assert.equal(new Set(APPROVED_OFFICE_ARTICLES.map(({ documentId }) => documentId)).size, 12);
+  assert.ok(!APPROVED_OFFICE_ARTICLES.some(({ slug }) => slug === "agora-akiniton-vimata"),
+    "the site-owned property guide must not keep a second, stale CMS reader");
   assert.ok(Object.isFrozen(APPROVED_OFFICE_ARTICLES));
   for (const binding of APPROVED_OFFICE_ARTICLES) {
     assert.ok(Object.isFrozen(binding));
@@ -97,16 +99,34 @@ test("rejects unknown, swapped, draft, future and malformed records as a whole",
 });
 
 test("finds a relevant late paragraph in an older article across the entire approved corpus", async () => {
+  const lastIndex = APPROVED_OFFICE_ARTICLES.length - 1;
   const records = APPROVED_OFFICE_ARTICLES.map((_, index) => fixture(index, {
     title: "Δημοσιευμένος σχολιασμός", excerpt: "", content: "Άσχετη εισαγωγή χωρίς το συγκεκριμένο θέμα.",
-    publishedAt: index === 12 ? "2025-01-01T00:00:00Z" : "2026-06-01T00:00:00Z",
+    publishedAt: index === lastIndex ? "2025-01-01T00:00:00Z" : "2026-06-01T00:00:00Z",
   }));
-  records[12].content = "Γενική εισαγωγή χωρίς το συγκεκριμένο θέμα. ".repeat(300) +
+  records[lastIndex].content = "Γενική εισαγωγή χωρίς το συγκεκριμένο θέμα. ".repeat(300) +
     "\n\nLATE_PARAGRAPH Ο νόμος Κατσέλη (3869/2010) εξετάζεται στο τελευταίο μέρος του άρθρου.";
   const result = await read(records, "ΚΑΤΣΕΛΗ 3869");
   assert.equal(result.length, 1);
-  assert.equal(result[0].id, APPROVED_OFFICE_ARTICLES[12].sourceId);
+  assert.equal(result[0].id, APPROVED_OFFICE_ARTICLES[lastIndex].sourceId);
   assert.match(result[0].content, /LATE_PARAGRAPH/);
+});
+
+test("excludes the site-owned property guide before CMS reads and rejects stale copies returned by a reader", async () => {
+  const retiredGuide = {
+    _id: "d1fca9c5-06ac-4185-a2fd-6b00f82589bb", slug: "agora-akiniton-vimata",
+    authorId: "df47781a-7dd9-4200-85f6-49c7d105c1e7", publishedAt: "2026-06-01T12:00:00Z",
+    title: "Αγορά ακινήτου", excerpt: "Παλιά έκδοση", content: "STALE_CMS_PROPERTY_GUIDE αγορά ακινήτου.",
+  };
+  let approved;
+  const result = await getPublicArticleSources(principal, "Αγορά ακινήτου", {
+    now, fetcher: async (url) => {
+      approved = JSON.parse(new URL(url).searchParams.get("$approved"));
+      return Response.json({ result: [retiredGuide] });
+    },
+  });
+  assert.ok(!approved.some(({ documentId, slug }) => documentId === retiredGuide._id || slug === retiredGuide.slug));
+  assert.deepEqual(result, [], "an outdated body cannot bypass the canonical local guide through the CMS result");
 });
 
 test("retrieval tolerates Greek accents and inflection and English or German topic words", async () => {

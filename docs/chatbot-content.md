@@ -185,6 +185,46 @@ consultations are not specified in the curated data.
 
 ## General information and selection
 
+### Property pages and shared guide content (20 November 2026)
+
+The current property purchase services, Athens purchase page, new-build page,
+deposit guide and seven-step purchase guide have explicit public source IDs.
+`property-sources.mjs` selects only reviewed fields from the same localized
+`property-content.mjs` objects used by the website, plus the main property's
+published fields in the existing translations. It excludes contact/intake CTAs,
+calendars, broad promises and the deposit guide's unreviewed notarial-form rule.
+These are office-service descriptions and informational office commentary;
+they do not become official legal authority. Existing official property,
+Cadastre and AADE excerpts retain their separate classifications.
+
+The purchase guide's old Sanity body is no longer in the CMS reader's approved
+bindings (twelve other articles remain). Its original source ID now resolves to
+the shared, source-controlled public guide snapshot instead. Changes to that
+shared content update both rendered guide prose and chatbot excerpts in the
+same deployment; there is no duplicate chatbot summary to forget to update.
+The guide's CMS identity/publication metadata still controls its website route;
+the chatbot's local public snapshot is approved separately in source control.
+Updating a CMS body alone does not replace this local guide.
+Withdrawing that local chatbot publication requires removing its approved
+source/card in code; unpublishing the CMS record alone does not revoke it and
+can leave the guide's website URL unavailable.
+
+Property metadata resolves explicit purchase topics and bounded dependent
+follow-ups in Greek, English and German. A bare deposit or place name cannot
+establish a property purchase. Assistant history cannot establish a topic, and
+an explicit new legal subject replaces the previous subject. No visitor text
+can supply a source ID, URL, reader or permission.
+
+At most two complete property cards are selected within 10,000 escaped JSON/XML
+bytes including IDs. The combined context remains at most twelve sources;
+static property content participates in pre-provider quota pricing and leaves
+only the remaining slots for the existing bounded CMS reader. Source texts
+retain complete selected paragraphs rather than truncating qualifications.
+The assistant still provides basic information only: it cannot evaluate an
+individual title/agreement, decide whether a deposit is refundable, collect
+documents or personal transaction details, book appointments or promise fees,
+timelines or a safe outcome. Manual contact-page links remain available.
+
 The reviewed catalog in `legal-catalog.mjs`, `legal-banking-sources.mjs` and
 `legal-general-sources.mjs` includes official explanations of banking/debt tools,
 enforcement, consumer disputes, property, inheritance, family, employment,
