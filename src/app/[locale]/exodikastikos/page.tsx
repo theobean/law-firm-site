@@ -224,6 +224,8 @@ export default function ExodikastikosPage({
             </Link>
           </div>
         </ScrollReveal>
+
+        <CategoryArticles category="extrajudicial" locale={locale} />
       </section>
 
       <section className="bg-primary py-16">
@@ -240,10 +242,6 @@ export default function ExodikastikosPage({
           </Link>
         </div>
       </section>
-
-      <div className="max-w-4xl mx-auto px-6 pb-16 empty:hidden">
-        <CategoryArticles category="extrajudicial" locale={locale} />
-      </div>
     </div>
   );
 }
