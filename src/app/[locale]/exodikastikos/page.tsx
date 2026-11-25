@@ -5,6 +5,7 @@ import { Link } from "@/navigation";
 import { buildPageMeta } from "@/lib/seo";
 import { ArrowRight, Check, AlertTriangle, Clock, Gavel, Building2 } from "lucide-react";
 import { use } from "react";
+import CategoryArticles from "@/components/CategoryArticles";
 import ScrollReveal from "@/components/ScrollReveal";
 import FaqAccordion from "@/components/FaqAccordion";
 
@@ -239,6 +240,10 @@ export default function ExodikastikosPage({
           </Link>
         </div>
       </section>
+
+      <div className="max-w-4xl mx-auto px-6 pb-16 empty:hidden">
+        <CategoryArticles category="extrajudicial" locale={locale} />
+      </div>
     </div>
   );
 }

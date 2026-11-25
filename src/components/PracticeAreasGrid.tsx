@@ -23,6 +23,7 @@ interface Props {
 export default function PracticeAreasGrid({ preview = false }: Props) {
   const t = useTranslations("practiceAreas");
   const tNav = useTranslations("nav");
+  const tExodikastikos = useTranslations("exodikastikos");
 
   const areas = preview ? areaKeys.slice(0, 5) : areaKeys;
 
@@ -46,20 +47,25 @@ export default function PracticeAreasGrid({ preview = false }: Props) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {areas.map((key) => {
             const Icon = icons[key];
+            const isOutOfCourt = key === "extrajudicial";
+            let title = t(`areas.${key}.title`);
+            if (isOutOfCourt) title = tNav("exodikastikos");
+            else if (preview && key === "realEstate") title = tNav("realEstatePurchase");
+
             return (
               <Link
                 key={key}
-                href={preview && key === "extrajudicial" ? "/exodikastikos" : `/practice-areas/${key}`}
+                href={isOutOfCourt ? "/exodikastikos" : `/practice-areas/${key}`}
                 className="group bg-primary hover:bg-primary/90 p-8 rounded-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
               >
                 <div className="mb-5 flex items-center justify-center w-12 h-12 rounded-sm bg-accent/15 border border-accent/30 group-hover:bg-accent/25 transition-colors">
                   <Icon className="text-accent" size={22} />
                 </div>
                 <h3 className="text-white font-bold text-lg mb-2 border-b border-accent pb-2 inline-block">
-                  {preview && key === "realEstate" ? tNav("realEstatePurchase") : t(`areas.${key}.title`)}
+                  {title}
                 </h3>
                 <p className="text-white/60 text-sm mt-3 leading-relaxed">
-                  {t(`areas.${key}.desc`)}
+                  {isOutOfCourt ? tExodikastikos("heroSubtitle") : t(`areas.${key}.desc`)}
                 </p>
                 <p className="text-accent text-xs mt-4 inline-flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                   {t("viewAll")} <ArrowRight size={12} />
