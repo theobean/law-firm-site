@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import { ArrowLeft, Calendar, Landmark, Download, Eye } from "lucide-react";
 import DecisionImageViewer from "@/components/DecisionImageViewer";
 import ShareButtons from "@/components/ShareButtons";
-import { contentPagePath, localizedPageUrl, ogDefaults, siteUrl } from "@/lib/seo";
+import { contentPagePath, localizedPageUrl, ogDefaults } from "@/lib/seo";
 import { routing } from "@/i18n/routing";
 
 export const dynamic = "force-dynamic";
@@ -16,13 +16,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const decision = await getDecisionBySlug(slug);
     if (!decision) return {};
     const pageUrl = localizedPageUrl(routing.defaultLocale, contentPagePath("decisions", slug));
-    const ogImage = decision.images?.[0]?.url ?? `${siteUrl}/δικηγορος.jpg`;
+    const openGraphDefaults = ogDefaults(routing.defaultLocale);
     const description = (decision.description ?? "").slice(0, 160) || decision.title;
     return {
       title: decision.title, description,
       alternates: { canonical: pageUrl },
-      openGraph: { ...ogDefaults(routing.defaultLocale), alternateLocale: [], title: decision.title, description, url: pageUrl, type: "article", images: [{ url: ogImage, width: 1200, height: 630, alt: decision.title }] },
-      twitter: { card: "summary_large_image", title: decision.title, description, images: [ogImage] },
+      openGraph: { ...openGraphDefaults, alternateLocale: [], title: decision.title, description, url: pageUrl, type: "article" },
+      twitter: { card: "summary_large_image", title: decision.title, description, images: openGraphDefaults.images },
     };
   } catch { return {}; }
 }

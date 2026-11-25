@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       card: "summary_large_image",
       title: guide.title,
       description: guide.description,
-      images: ["/δικηγορος.jpg"],
+      images: meta.openGraph.images,
     },
   };
 }

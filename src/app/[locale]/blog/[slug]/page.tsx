@@ -85,9 +85,7 @@ export async function generateMetadata({
   const articleUrl = localizedPageUrl(contentLocale, pagePath);
   const metaTitle = article.seoTitle || article.title;
   const description = article.seoDescription || article.excerpt || article.title;
-  const ogImage = article.mainImage
-    ? urlFor(article.mainImage).width(1200).height(630).url()
-    : `${siteUrl}/δικηγορος.jpg`;
+  const openGraphDefaults = ogDefaults(contentLocale);
 
   return {
     title: metaTitle,
@@ -96,20 +94,19 @@ export async function generateMetadata({
       ? buildPageMeta(contentLocale, pagePath).alternates
       : { canonical: articleUrl },
     openGraph: {
-      ...ogDefaults(contentLocale),
+      ...openGraphDefaults,
       ...(!guide && { alternateLocale: [] }),
       title: metaTitle,
       description,
       url: articleUrl,
       type: "article",
       publishedTime: article.publishedAt,
-      images: [{ url: ogImage, width: 1200, height: 630, alt: article.title }],
     },
     twitter: {
       card: "summary_large_image",
       title: article.title,
       description,
-      images: [ogImage],
+      images: openGraphDefaults.images,
     },
   };
 }

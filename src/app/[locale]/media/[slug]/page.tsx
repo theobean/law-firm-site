@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import { Link } from "@/navigation";
 import type { Metadata } from "next";
 import { ArrowLeft, Calendar, Tv } from "lucide-react";
-import { getYouTubeId, getThumbnailUrl, getEmbedUrl, getFacebookEmbedUrl, getVideoType } from "@/lib/youtube";
-import { contentPagePath, localizedPageUrl, ogDefaults, siteUrl } from "@/lib/seo";
+import { getYouTubeId, getEmbedUrl, getFacebookEmbedUrl, getVideoType } from "@/lib/youtube";
+import { contentPagePath, localizedPageUrl, ogDefaults } from "@/lib/seo";
 import { routing } from "@/i18n/routing";
 import ExternalEmbed from "@/components/ExternalEmbed";
 
@@ -16,8 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const iv = await getInterviewBySlug(slug);
     if (!iv) return {};
     const pageUrl = localizedPageUrl(routing.defaultLocale, contentPagePath("media", slug));
-    const ytId = getYouTubeId(iv.youtubeUrl);
-    const ogImage = ytId ? getThumbnailUrl(ytId) : `${siteUrl}/δικηγορος.jpg`;
+    const openGraphDefaults = ogDefaults(routing.defaultLocale);
     const year = iv.date ? new Date(iv.date).getFullYear() : null;
     const lawyerLabel = "Δικηγόρος Ιωάννης Παπαϊωάννου";
     // Word-boundary truncation to avoid cutting mid-word
@@ -36,8 +35,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     return {
       title: iv.title, description,
       alternates: { canonical: pageUrl },
-      openGraph: { ...ogDefaults(routing.defaultLocale), alternateLocale: [], title: iv.title, description, url: pageUrl, type: "video.other", images: [{ url: ogImage, width: 1280, height: 720, alt: iv.title }] },
-      twitter: { card: "summary_large_image", title: iv.title, description, images: [ogImage] },
+      openGraph: { ...openGraphDefaults, alternateLocale: [], title: iv.title, description, url: pageUrl, type: "video.other" },
+      twitter: { card: "summary_large_image", title: iv.title, description, images: openGraphDefaults.images },
     };
   } catch { return {}; }
 }

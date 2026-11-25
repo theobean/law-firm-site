@@ -4,6 +4,12 @@ export const siteUrl = new URL(
   process.env.NEXT_PUBLIC_SITE_URL || "https://www.ioannispapaioannou.lawyer",
 ).origin;
 
+// On previews, serve the image from the same deployment while keeping page URLs canonical.
+const shareImageOrigin = process.env.VERCEL_ENV === "preview" && process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : siteUrl;
+const shareImageUrl = new URL("/og-law-firm.png", shareImageOrigin).href;
+
 const ogLocaleMap: Record<string, string> = { el: "el_GR", en: "en_US", de: "de_DE" };
 
 // must mirror seo.siteName in messages/*.json — buildPageMeta is sync, so we
@@ -29,12 +35,14 @@ export function contentPagePath(collection: "blog" | "decisions" | "media", slug
  * entirely). Spread this into any page-level openGraph object.
  */
 export function ogDefaults(locale: string) {
+  const siteName = siteNames[locale] ?? siteNames.el;
   return {
-    siteName: siteNames[locale] ?? siteNames.el,
+    siteName,
     locale: ogLocaleMap[locale] ?? "el_GR",
     alternateLocale: Object.entries(ogLocaleMap)
       .filter(([k]) => k !== locale)
       .map(([, v]) => v),
+    images: [{ url: shareImageUrl, width: 1200, height: 630, type: "image/png", alt: siteName }],
   };
 }
 
@@ -52,7 +60,6 @@ export function buildPageMeta(locale: string, path: string) {
       ...ogDefaults(locale),
       type: "website" as const,
       url: canonical,
-      images: [{ url: "/δικηγορος.jpg", width: 1200, height: 1232 }],
     },
   };
 }

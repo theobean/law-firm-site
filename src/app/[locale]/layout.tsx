@@ -5,7 +5,7 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { getMessages, getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-import { siteUrl } from "@/lib/seo";
+import { ogDefaults, siteUrl } from "@/lib/seo";
 import { trafficRecordingEnabled } from "@/lib/traffic";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -33,11 +33,7 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "seo" });
   const isEl = locale === "el";
 
-  const ogLocaleMap: Record<string, string> = { el: "el_GR", en: "en_US", de: "de_DE" };
-  const ogLocale = ogLocaleMap[locale] ?? "el_GR";
-  const ogAlternateLocale = Object.entries(ogLocaleMap)
-    .filter(([k]) => k !== locale)
-    .map(([, v]) => v);
+  const openGraphDefaults = ogDefaults(locale);
 
   return {
     metadataBase: new URL(siteUrl),
@@ -48,19 +44,16 @@ export async function generateMetadata({
     description: t("defaultDescription"),
     ...(isEl && { authors: [{ name: "Ιωάννης Παπαϊωάννου" }] }),
     openGraph: {
+      ...openGraphDefaults,
       type: "website",
-      locale: ogLocale,
-      alternateLocale: ogAlternateLocale,
-      siteName: t("siteName"),
       title: t("defaultTitle"),
       description: t("defaultDescription"),
-      images: [{ url: "/δικηγορος.jpg", width: 1200, height: 1232, alt: t("siteName") }],
     },
     twitter: {
       card: "summary_large_image",
       title: t("defaultTitle"),
       description: t("defaultDescription"),
-      images: ["/δικηγορος.jpg"],
+      images: openGraphDefaults.images,
     },
     robots: {
       index: true,
