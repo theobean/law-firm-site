@@ -11,7 +11,6 @@ import ScrollReveal from "@/components/ScrollReveal";
 import FaqAccordion from "@/components/FaqAccordion";
 
 const applicationTopics = ["eligibility", "review", "offer"] as const;
-const applicationGuideUrl = "https://www.gov.gr/el/services/1000992/exodikastikos-mekhanismos-ruthmises-opheilon";
 const offerAnalysisHref = contentPagePath(
   "blog",
   "dieksodos-i-pagida-oi-nees-tropopoiiseis-ston-eksodikastiko-mixanismo-kai-o-kindynos-gia-toys-daneioliptes",
@@ -92,11 +91,6 @@ export default function ExodikastikosPage({
                 </h3>
                 <div>
                   <p className="leading-relaxed text-gray-700">{t(`beforeApplying.${topic}.answer`)}</p>
-                  {topic === "eligibility" && (
-                    <a href={applicationGuideUrl} className="mt-2 inline-block text-sm font-semibold text-primary underline decoration-accent underline-offset-4">
-                      {t("beforeApplying.eligibility.source")}
-                    </a>
-                  )}
                   {topic === "offer" && (
                     <Link
                       href={offerAnalysisHref}
