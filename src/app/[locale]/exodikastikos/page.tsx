@@ -84,17 +84,15 @@ export default function ExodikastikosPage({
             <h2 id="before-applying-title" className="border-l-4 border-accent pl-4 font-playfair text-2xl font-bold text-primary">
               {t("beforeApplying.title")}
             </h2>
-            {locale === routing.defaultLocale && (
-              <Link
-                href="/exodikastikos/odigos"
-                className="group inline-flex min-h-12 w-full items-center justify-between gap-5 rounded-sm bg-primary px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:w-fit sm:gap-6"
-              >
-                <span>Διαβάστε τον οδηγό του εξωδικαστικού</span>
-                <span aria-hidden="true" className="flex size-8 shrink-0 items-center justify-center rounded-full bg-white/10 text-accent transition-colors group-hover:bg-white/20">
-                  <ArrowRight size={17} />
-                </span>
-              </Link>
-            )}
+            <Link
+              href="/exodikastikos/odigos"
+              className="group inline-flex min-h-12 w-full items-center justify-between gap-5 rounded-sm bg-primary px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:w-fit sm:gap-6"
+            >
+              <span>{t("beforeApplying.guideButton")}</span>
+              <span aria-hidden="true" className="flex size-8 shrink-0 items-center justify-center rounded-full bg-white/10 text-accent transition-colors group-hover:bg-white/20">
+                <ArrowRight size={17} />
+              </span>
+            </Link>
           </div>
           <div className="mt-2 divide-y divide-primary/10">
             {applicationTopics.map((topic) => (

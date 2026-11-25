@@ -17,6 +17,7 @@ const staticPaths = [
   "/decisions",
   "/pleistariasmos",
   "/exodikastikos",
+  "/exodikastikos/odigos",
   "/funds",
   "/funds/dovalue",
   "/funds/intrum",
@@ -53,7 +54,7 @@ const collections = {
 export const publicStaticPaths = [...staticPaths, ...practiceAreas.map(area => "/practice-areas/" + area)];
 
 export async function getPublicContentPages() {
-  const cmsPages = (await getSitemapDocuments()).flatMap(({ _type, slug, updatedAt }) => {
+  return (await getSitemapDocuments()).flatMap(({ _type, slug, updatedAt }) => {
     if (!slug.trim() || slug === "." || slug === "..") return [];
     const guide = _type === "article" && getPropertyPurchaseGuide(slug, routing.defaultLocale);
     return [{
@@ -63,8 +64,4 @@ export async function getPublicContentPages() {
       lastModified: !guide && updatedAt ? new Date(updatedAt) : undefined,
     }];
   });
-  return [
-    { locales: [routing.defaultLocale], path: "/exodikastikos/odigos", lastModified: undefined },
-    ...cmsPages,
-  ];
 }

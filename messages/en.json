@@ -1200,6 +1200,7 @@
   "exodikastikos": {
     "beforeApplying": {
       "title": "Before you apply",
+      "guideButton": "Read the debt settlement guide",
       "eligibility": {
         "question": "Who can apply?",
         "answer": "Individuals, self-employed professionals and businesses can apply if their total debts to banks, credit servicers, the State or social security bodies exceed €5,000 and they meet the other legal requirements."

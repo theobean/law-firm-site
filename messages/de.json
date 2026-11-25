@@ -1204,6 +1204,7 @@
   "exodikastikos": {
     "beforeApplying": {
       "title": "Vor der Antragstellung",
+      "guideButton": "Leitfaden zur Schuldenregulierung lesen",
       "eligibility": {
         "question": "Wer kann einen Antrag stellen?",
         "answer": "Privatpersonen, Selbstständige und Unternehmen können einen Antrag stellen, wenn ihre Schulden bei Banken, Kreditdienstleistern, dem Staat oder Sozialversicherungsträgern insgesamt 5.000 € übersteigen und die weiteren gesetzlichen Voraussetzungen erfüllt sind."
