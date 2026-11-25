@@ -80,9 +80,22 @@ export default function ExodikastikosPage({
           aria-labelledby="before-applying-title"
           className="mb-12 rounded-sm border border-primary/10 bg-primary/[0.03] px-5 pt-6 sm:px-8 sm:pt-8"
         >
-          <h2 id="before-applying-title" className="border-l-4 border-accent pl-4 font-playfair text-2xl font-bold text-primary">
-            {t("beforeApplying.title")}
-          </h2>
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <h2 id="before-applying-title" className="border-l-4 border-accent pl-4 font-playfair text-2xl font-bold text-primary">
+              {t("beforeApplying.title")}
+            </h2>
+            {locale === routing.defaultLocale && (
+              <Link
+                href="/exodikastikos/odigos"
+                className="group inline-flex min-h-12 w-full items-center justify-between gap-5 rounded-sm bg-primary px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:w-fit sm:gap-6"
+              >
+                <span>Διαβάστε τον οδηγό του εξωδικαστικού</span>
+                <span aria-hidden="true" className="flex size-8 shrink-0 items-center justify-center rounded-full bg-white/10 text-accent transition-colors group-hover:bg-white/20">
+                  <ArrowRight size={17} />
+                </span>
+              </Link>
+            )}
+          </div>
           <div className="mt-2 divide-y divide-primary/10">
             {applicationTopics.map((topic) => (
               <div key={topic} className="grid gap-2 py-5 sm:grid-cols-[minmax(0,12rem)_minmax(0,1fr)] sm:gap-6">
@@ -104,16 +117,6 @@ export default function ExodikastikosPage({
               </div>
             ))}
           </div>
-          {locale === routing.defaultLocale && (
-            <div className="border-t border-primary/10 py-5">
-              <Link
-                href="/exodikastikos/odigos"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-primary underline decoration-accent underline-offset-4"
-              >
-                Οδηγός εξωδικαστικού μηχανισμού <ArrowRight size={14} className="shrink-0" aria-hidden="true" />
-              </Link>
-            </div>
-          )}
         </section>
 
         <ScrollReveal direction="up" delay={0}>
