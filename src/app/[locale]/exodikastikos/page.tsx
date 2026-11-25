@@ -104,6 +104,16 @@ export default function ExodikastikosPage({
               </div>
             ))}
           </div>
+          {locale === routing.defaultLocale && (
+            <div className="border-t border-primary/10 py-5">
+              <Link
+                href="/exodikastikos/odigos"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-primary underline decoration-accent underline-offset-4"
+              >
+                Οδηγός εξωδικαστικού μηχανισμού <ArrowRight size={14} className="shrink-0" aria-hidden="true" />
+              </Link>
+            </div>
+          )}
         </section>
 
         <ScrollReveal direction="up" delay={0}>
