@@ -35,7 +35,6 @@ const staticPaths = [
 ];
 const practiceAreas = [
   "banking",
-  "extrajudicial",
   "criminal",
   "commercial",
   "realEstate",
