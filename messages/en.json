@@ -1198,6 +1198,23 @@
     "ctaButton": "Book a consultation"
   },
   "exodikastikos": {
+    "beforeApplying": {
+      "title": "Before you apply",
+      "eligibility": {
+        "question": "Who can apply?",
+        "answer": "Individuals, self-employed professionals and businesses can apply if their total debts to banks, credit servicers, the State or social security bodies exceed €5,000 and they meet the other legal requirements.",
+        "source": "Eligibility and application on gov.gr"
+      },
+      "review": {
+        "question": "What do we check before filing?",
+        "answer": "We check who can demand payment, whether any transfer of the claim is documented and how the outstanding balance was calculated. We review interest, charges and any limitation issues, along with the monthly payment you can sustain given your income and expenses."
+      },
+      "offer": {
+        "question": "What if the settlement offer is unsuitable?",
+        "answer": "You can reject it. Before you decide, we review the total cost, the implications for your assets and which disputed debts the agreement covers. If you default on the settlement, financial creditors can use the agreement to pursue enforcement. Depending on the case, we assess direct negotiations or the available legal steps.",
+        "article": "Read our analysis of what accepting an offer means (in Greek)"
+      }
+    },
     "seoTitle": "Out-of-Court Debt Settlement Mechanism – Lawyer Thessaloniki",
     "seoDescription": "Settle debts to banks, funds and the State with a single application, through the out-of-court mechanism (Law 4738/2020). Conditions, instalments, debt write-off and protection from foreclosure. Thessaloniki. Call: +30 2310 545 261.",
     "heroCity": "Thessaloniki · 12 Leontos Sofou St.",

@@ -1202,6 +1202,23 @@
     "ctaButton": "Sofortige Aktenprüfung"
   },
   "exodikastikos": {
+    "beforeApplying": {
+      "title": "Vor der Antragstellung",
+      "eligibility": {
+        "question": "Wer kann einen Antrag stellen?",
+        "answer": "Privatpersonen, Selbstständige und Unternehmen können einen Antrag stellen, wenn ihre Schulden bei Banken, Kreditdienstleistern, dem Staat oder Sozialversicherungsträgern insgesamt 5.000 € übersteigen und die weiteren gesetzlichen Voraussetzungen erfüllt sind.",
+        "source": "Voraussetzungen und Antrag auf gov.gr"
+      },
+      "review": {
+        "question": "Was prüfen wir vor der Antragstellung?",
+        "answer": "Wir prüfen, wer die Zahlung verlangen darf, ob eine Abtretung der Forderung belegt ist und wie der offene Betrag berechnet wurde. Wir prüfen Zinsen, Gebühren und eine mögliche Verjährung sowie die Frage, welche Monatsrate Sie mit Ihrem Einkommen und Ihren Ausgaben dauerhaft tragen können."
+      },
+      "offer": {
+        "question": "Was tun bei einem ungünstigen Angebot?",
+        "answer": "Sie können das Angebot ablehnen. Vor Ihrer Entscheidung prüfen wir die Gesamtkosten, die Folgen für Ihr Vermögen und welche strittigen Forderungen die Vereinbarung erfasst. Wenn die vereinbarte Regelung nicht eingehalten wird, können Finanzgläubiger die Vereinbarung zur Zwangsvollstreckung nutzen. Je nach Fall prüfen wir direkte Verhandlungen oder die verfügbaren rechtlichen Schritte.",
+        "article": "Lesen Sie unsere Analyse zu den Folgen der Annahme (auf Griechisch)"
+      }
+    },
     "seoTitle": "Außergerichtlicher Mechanismus zur Schuldenregulierung – Anwalt Thessaloniki",
     "seoDescription": "Schulden bei Banken, Fonds und dem Staat mit einem einzigen Antrag regeln, über den außergerichtlichen Mechanismus (Gesetz 4738/2020). Voraussetzungen, Raten, Schuldenerlass und Schutz vor Zwangsversteigerung. Thessaloniki. Tel: +30 2310 545 261.",
     "heroCity": "Thessaloniki · Leontos Sofou 12",

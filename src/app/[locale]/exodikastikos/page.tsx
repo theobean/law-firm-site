@@ -2,12 +2,20 @@ import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { Link } from "@/navigation";
-import { buildPageMeta } from "@/lib/seo";
+import { routing } from "@/i18n/routing";
+import { buildPageMeta, contentPagePath } from "@/lib/seo";
 import { ArrowRight, Check, AlertTriangle, Clock, Gavel, Building2 } from "lucide-react";
 import { use } from "react";
 import CategoryArticles from "@/components/CategoryArticles";
 import ScrollReveal from "@/components/ScrollReveal";
 import FaqAccordion from "@/components/FaqAccordion";
+
+const applicationTopics = ["eligibility", "review", "offer"] as const;
+const applicationGuideUrl = "https://www.gov.gr/el/services/1000992/exodikastikos-mekhanismos-ruthmises-opheilon";
+const offerAnalysisHref = contentPagePath(
+  "blog",
+  "dieksodos-i-pagida-oi-nees-tropopoiiseis-ston-eksodikastiko-mixanismo-kai-o-kindynos-gia-toys-daneioliptes",
+);
 
 export async function generateMetadata({
   params,
@@ -69,6 +77,41 @@ export default function ExodikastikosPage({
       </section>
 
       <section className="max-w-4xl mx-auto px-6 py-16">
+        <section
+          aria-labelledby="before-applying-title"
+          className="mb-12 rounded-sm border border-primary/10 bg-primary/[0.03] px-5 pt-6 sm:px-8 sm:pt-8"
+        >
+          <h2 id="before-applying-title" className="border-l-4 border-accent pl-4 font-playfair text-2xl font-bold text-primary">
+            {t("beforeApplying.title")}
+          </h2>
+          <div className="mt-2 divide-y divide-primary/10">
+            {applicationTopics.map((topic) => (
+              <div key={topic} className="grid gap-2 py-5 sm:grid-cols-[minmax(0,12rem)_minmax(0,1fr)] sm:gap-6">
+                <h3 className="font-playfair text-lg font-semibold leading-snug text-primary">
+                  {t(`beforeApplying.${topic}.question`)}
+                </h3>
+                <div>
+                  <p className="leading-relaxed text-gray-700">{t(`beforeApplying.${topic}.answer`)}</p>
+                  {topic === "eligibility" && (
+                    <a href={applicationGuideUrl} className="mt-2 inline-block text-sm font-semibold text-primary underline decoration-accent underline-offset-4">
+                      {t("beforeApplying.eligibility.source")}
+                    </a>
+                  )}
+                  {topic === "offer" && (
+                    <Link
+                      href={offerAnalysisHref}
+                      locale={routing.defaultLocale}
+                      className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-primary underline decoration-accent underline-offset-4"
+                    >
+                      {t("beforeApplying.offer.article")} <ArrowRight size={14} className="shrink-0" aria-hidden="true" />
+                    </Link>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <ScrollReveal direction="up" delay={0}>
           <p className="text-gray-700 text-lg leading-relaxed mb-12">
             {t("intro")}
