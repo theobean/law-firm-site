@@ -135,6 +135,9 @@ export default async function ArticlePage({
   const pillarAreas = ["banking", "extrajudicial", "criminal", "commercial", "realEstate", "administrative", "inheritance", "tax", "labor"];
   const pillar = article.category && pillarAreas.includes(article.category) ? article.category : null;
   const tAreas = pillar ? await getTranslations("practiceAreas") : null;
+  const isOutOfCourtArticle = pillar === "extrajudicial";
+  const pillarHref = isOutOfCourtArticle ? "/exodikastikos" : `/practice-areas/${pillar}`;
+  const tNav = isOutOfCourtArticle ? await getTranslations("nav") : null;
   const lang = locale === "de" || locale === "en" ? locale : "el";
   const siloLabels: Record<string, { area: string; view: string }> = {
     el: { area: "Σχετικός τομέας δικαίου", view: "Δείτε τον τομέα" },
@@ -251,10 +254,10 @@ export default async function ArticlePage({
               <p className="text-primary font-playfair font-semibold text-lg">{tAreas(`areas.${pillar}.title`)}</p>
             </div>
             <Link
-              href={guide ? propertyContactHref("purchase-guide") : `/practice-areas/${pillar}`}
+              href={guide ? propertyContactHref("purchase-guide") : pillarHref}
               className="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-white font-semibold px-5 py-3 rounded-sm transition-colors text-sm flex-shrink-0 self-start sm:self-auto"
             >
-              {guide?.serviceCta ?? siloLabels[lang].view} <ArrowRight size={16} />
+              {guide?.serviceCta ?? tNav?.("exodikastikos") ?? siloLabels[lang].view} <ArrowRight size={16} />
             </Link>
           </div>
         )}
