@@ -10,6 +10,7 @@ import { use } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 import CategoryArticles from "@/components/CategoryArticles";
 import FaqAccordion from "@/components/FaqAccordion";
+import PropertyLegalGuide from "@/components/PropertyLegalGuide";
 
 export const revalidate = 60;
 
@@ -134,6 +135,15 @@ export default function PracticeAreaDetailPage({
             {t(`areas.${area}.longDesc`)}
           </p>
         </ScrollReveal>
+
+        {isRealEstate && locale === "el" && (
+          <p className="-mt-7 mb-10">
+            <a href="#odigos-akiniton" className="inline-flex items-center gap-2 font-semibold text-primary underline underline-offset-4 hover:decoration-accent">
+              <BookOpen size={17} aria-hidden="true" />
+              Οδηγός για φόρους μεταβίβασης, τίτλους και μισθώσεις
+            </a>
+          </p>
+        )}
 
         {isRealEstate && (
           <section className="mb-12">
@@ -264,6 +274,8 @@ export default function PracticeAreaDetailPage({
             </Link>
           </section>
         )}
+
+        {isRealEstate && locale === "el" && <PropertyLegalGuide />}
 
         {isRealEstate && (
           <section className="mt-12">
