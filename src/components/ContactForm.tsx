@@ -3,7 +3,8 @@
 import { Controller, useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { useId, useRef, useState } from "react";
-import { trackPropertyContact, type PropertyContactSource } from "@/lib/property-contact";
+import { trackContactEvent } from "@/lib/contact-analytics";
+import type { PropertyContactSource } from "@/lib/property-contact";
 import ContactDatePicker from "./ContactDatePicker";
 
 interface FormData {
@@ -73,7 +74,9 @@ export default function ContactForm({
     }
 
     setStatus("success");
-    if (propertyPurchase && !data.botcheck) trackPropertyContact("generate_lead", source);
+    if (!data.botcheck) {
+      trackContactEvent("generate_lead", propertyPurchase ? source ?? "contact" : undefined);
+    }
   }
 
   if (status === "success") {

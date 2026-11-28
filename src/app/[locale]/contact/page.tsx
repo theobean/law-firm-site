@@ -4,7 +4,6 @@ import { buildPageMeta } from "@/lib/seo";
 import { getPropertyContactSource } from "@/lib/property-contact";
 import { MapPin, Phone, Mail, Clock, ChevronRight } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
-import PropertyPhoneLink from "@/components/PropertyPhoneLink";
 import ScrollReveal from "@/components/ScrollReveal";
 import ExternalEmbed from "@/components/ExternalEmbed";
 
@@ -87,20 +86,15 @@ export default async function ContactPage({
 
                 return (
                   <ScrollReveal key={label} direction="left" delay={i * 0.12}>
-                    {propertyPurchase && href === phoneHref ? (
-                      <PropertyPhoneLink href={href} source={source} className={className}>
-                        {content}
-                      </PropertyPhoneLink>
-                    ) : (
-                      <a
-                        href={href ?? undefined}
-                        target={external ? "_blank" : undefined}
-                        rel={external ? "noopener noreferrer" : undefined}
-                        className={className}
-                      >
-                        {content}
-                      </a>
-                    )}
+                    <a
+                      href={href ?? undefined}
+                      target={external ? "_blank" : undefined}
+                      rel={external ? "noopener noreferrer" : undefined}
+                      className={className}
+                      data-property-contact-source={propertyPurchase && href && !external ? source ?? "contact" : undefined}
+                    >
+                      {content}
+                    </a>
                   </ScrollReveal>
                 );
               })}
